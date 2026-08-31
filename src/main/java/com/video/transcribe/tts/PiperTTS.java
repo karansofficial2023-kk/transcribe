@@ -15,10 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.video.transcribe.config.AppConfig;
 
-/**
- * Piper TTS - reads paths from application.properties
- */
-public class PiperTTS {
+public class PiperTTS implements TTSProvider {
     
     private static final Logger logger = LoggerFactory.getLogger(PiperTTS.class);
     
@@ -32,7 +29,6 @@ public class PiperTTS {
         this.modelPath = config.getPiperModel();
         this.configPath = config.getPiperModelConfig();
         this.timeoutMinutes = 10;
-        
         verifyPiper();
     }
     
@@ -48,9 +44,19 @@ public class PiperTTS {
         }
     }
     
-    /**
-     * Synthesize text to speech
-     */
+    @Override
+    public String getName() { return "Piper-TTS"; }
+    
+    @Override
+    public boolean isAvailable() {
+        try {
+            ProcessBuilder pb = new ProcessBuilder(piperPath, "--help");
+            Process p = pb.start();
+            return p.waitFor(5, TimeUnit.SECONDS);
+        } catch (Exception e) { return false; }
+    }
+    
+    @Override
     public Path synthesize(String text, Path outputPath) throws Exception {
         Path tempText = Files.createTempFile("piper_input_", ".txt");
         Files.writeString(tempText, text);
@@ -59,12 +65,10 @@ public class PiperTTS {
         command.add(piperPath);
         command.add("--model");
         command.add(modelPath);
-        
         if (configPath != null && !configPath.isEmpty()) {
             command.add("--config");
             command.add(configPath);
         }
-        
         command.add("--output_file");
         command.add(outputPath.toString());
         
@@ -72,11 +76,10 @@ public class PiperTTS {
         pb.redirectInput(tempText.toFile());
         pb.redirectErrorStream(true);
         
-        logger.info("Synthesizing TTS: {} chars → {}", text.length(), outputPath);
+        logger.info("Piper TTS: {} chars → {}", text.length(), outputPath);
         long start = System.currentTimeMillis();
         
         Process process = pb.start();
-        
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -91,23 +94,17 @@ public class PiperTTS {
             process.destroyForcibly();
             throw new IOException("Piper TTS timed out");
         }
-        
         if (process.exitValue() != 0) {
-            throw new IOException("Piper TTS failed with code: " + process.exitValue());
+            throw new IOException("Piper TTS failed: " + process.exitValue());
         }
         
-        logger.info("TTS done in {} ms: {} ({} bytes)", 
-            System.currentTimeMillis() - start, outputPath, Files.size(outputPath));
-        
+        logger.info("Piper done in {} ms", System.currentTimeMillis() - start);
         return outputPath;
     }
     
-    /**
-     * Batch synthesize long text
-     */
+    @Override
     public Path synthesizeLongText(String text, Path outputDir, String baseName) throws Exception {
         String[] sentences = text.split("(?<=[.!?])\\s+");
-        
         List<Path> chunkFiles = new ArrayList<>();
         StringBuilder currentChunk = new StringBuilder();
         int chunkIndex = 0;
@@ -117,7 +114,6 @@ public class PiperTTS {
                 Path chunkPath = Paths.get(outputDir.toString(), baseName + "_tts_" + chunkIndex + ".wav");
                 synthesize(currentChunk.toString().trim(), chunkPath);
                 chunkFiles.add(chunkPath);
-                
                 currentChunk = new StringBuilder();
                 chunkIndex++;
             }
@@ -130,7 +126,7 @@ public class PiperTTS {
             chunkFiles.add(chunkPath);
         }
         
-        return concatenateWavFiles(chunkFiles, Paths.get(outputDir.toString(), baseName + "_full.wav"));
+        return concatenateWavFiles(chunkFiles, Paths.get(outputDir.toString(), baseName + "_audio.wav"));
     }
     
     private Path concatenateWavFiles(List<Path> files, Path output) throws Exception {
@@ -142,23 +138,15 @@ public class PiperTTS {
         Files.writeString(listFile, list.toString());
         
         ProcessBuilder pb = new ProcessBuilder(
-            "ffmpeg",
-            "-f", "concat",
-            "-safe", "0",
-            "-i", listFile.toString(),
-            "-c", "copy",
-            "-y",
-            output.toString()
+            "ffmpeg", "-f", "concat", "-safe", "0", "-i", listFile.toString(),
+            "-c", "copy", "-y", output.toString()
         );
-        
         pb.redirectErrorStream(true);
         Process process = pb.start();
         process.waitFor(5, TimeUnit.MINUTES);
         
         Files.deleteIfExists(listFile);
-        for (Path f : files) {
-            Files.deleteIfExists(f);
-        }
+        for (Path f : files) Files.deleteIfExists(f);
         
         return output;
     }
