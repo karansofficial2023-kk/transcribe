@@ -72,7 +72,8 @@ public class TranscribeApplication {
 
 		// Interactive console
 		System.out.println("\n" + "=".repeat(60));
-		System.out.println("  VIDEO PROCESSING QUEUE STARTED");
+		System.out.println("  AUDIO-ONLY PROCESSING QUEUE STARTED");
+		System.out.println("  Flow: Video → Transcript → Paraphrase → TTS Audio");
 		System.out.println("  Mode: " + (config.isSequential() ? "ONE BY ONE" : "PARALLEL"));
 		System.out.println("  GPU: " + config.getWhisperDevice().toUpperCase());
 		System.out.println("=".repeat(60));

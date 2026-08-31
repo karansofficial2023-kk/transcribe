@@ -3,41 +3,36 @@ package com.video.transcribe.queue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.video.transcribe.VideoRephrasePipeline;
-import com.video.transcribe.VideoRephrasePipeline.PipelineResult;
+import com.video.transcribe.VideoParaphrasePipeline;
+import com.video.transcribe.VideoParaphrasePipeline.PipelineResult;
 import com.video.transcribe.config.AppConfig;
 import com.video.transcribe.queue.VideoQueue.QueueItem;
-import com.video.transcribe.queue.VideoQueue.VideoStatus;
 
 /**
  * Worker that processes videos ONE BY ONE from the queue
- * Windows GPU compatible
+ * Audio-only: Transcribe → Paraphrase → TTS (NO video creation)
  */
 public class QueueWorker implements Runnable {
     
     private static final Logger logger = LoggerFactory.getLogger(QueueWorker.class);
     
     private final VideoQueue queue;
-    private final VideoRephrasePipeline pipeline;
+    private final VideoParaphrasePipeline pipeline;
     private final String language;
     private final String style;
     private volatile boolean running = true;
     private volatile boolean paused = false;
     
-    /**
-     * Constructor - takes AppConfig, creates pipeline internally
-     */
     public QueueWorker(VideoQueue queue, AppConfig config) {
         this.queue = queue;
-        this.pipeline = new VideoRephrasePipeline(config);
+        this.pipeline = new VideoParaphrasePipeline(config);
         this.language = config.getLanguage();
-        this.style = config.getRephraseStyle();
+        this.style = config.getParaphraseStyle();
     }
     
-    @SuppressWarnings("unused")
-	@Override
+    @Override
     public void run() {
-        logger.info("Queue worker started - processing ONE BY ONE");
+        logger.info("Queue worker started - processing ONE BY ONE (Audio-only mode)");
         
         while (running) {
             try {
@@ -47,7 +42,6 @@ public class QueueWorker implements Runnable {
                 }
                 
                 QueueItem item = queue.take();
-                VideoStatus status = queue.getVideoStatus(item.getId());
                 
                 logger.info("╔════════════════════════════════════════════════════╗");
                 logger.info("║ STARTING: {}", padRight(item.getSource().getFileName(), 40) + " ║");
@@ -72,7 +66,7 @@ public class QueueWorker implements Runnable {
                         logger.info("╔════════════════════════════════════════════════════╗");
                         logger.info("║ ✓ COMPLETED: {}", padRight(item.getSource().getFileName(), 36) + " ║");
                         logger.info("║ Time: {}", padRight(formatDuration(duration), 41) + " ║");
-                        logger.info("║ Output: {}", padRight(result.finalVideo.toString(), 38) + " ║");
+                        logger.info("║ Audio: {}", padRight(result.audioOutput.toString(), 39) + " ║");
                         logger.info("╚════════════════════════════════════════════════════╝");
                     } else {
                         queue.markFailed(item.getId(), result.error);

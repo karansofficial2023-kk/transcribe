@@ -31,22 +31,23 @@ public class OllamaClient {
     public OllamaClient(AppConfig config) {
         this.baseUrl = config.getOllamaUrl();
         this.model = config.getOllamaModel();
+        // FIX: Much longer timeouts for LLM generation
         this.httpClient = new OkHttpClient.Builder()
-            .connectTimeout(30, TimeUnit.SECONDS)
-            .writeTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(300, TimeUnit.SECONDS)
+            .readTimeout(600, TimeUnit.SECONDS)
             .build();
         
         logger.info("Ollama client configured: URL={}, Model={}", baseUrl, model);
     }
     
     /**
-     * Rephrase video transcript
+     * Paraphrase video transcript
      */
-    public String rephraseTranscript(String originalText, String style) throws IOException {
+    public String paraphraseTranscript(String originalText, String style) throws IOException {
         
         String systemPrompt = """
-            You are a professional video script rephraser. Rewrite the transcript 
+            You are a professional video script paraphraser. Rewrite the transcript 
             while preserving EXACT same meaning, facts, and educational value.
             
             Rules:
@@ -54,16 +55,16 @@ public class OllamaClient {
             2. Change sentence structure and vocabulary significantly
             3. Maintain the same tone and style
             4. Keep similar length
-            5. Output ONLY the rephrased text, no explanations
+            5. Output ONLY the paraphrased text, no explanations
             """;
         
         String userPrompt = String.format("""
-            Rephrase the following video transcript. %s
+            Paraphrase the following video transcript. %s
             
             ORIGINAL TRANSCRIPT:
             %s
             
-            REPHRASED VERSION:
+            PARAPHRASED VERSION:
             """, style != null ? "Style: " + style : "", originalText);
         
         return generate(systemPrompt, userPrompt);
@@ -80,7 +81,7 @@ public class OllamaClient {
         requestBody.addProperty("prompt", userPrompt);
         requestBody.addProperty("stream", false);
         requestBody.addProperty("temperature", 0.7);
-        requestBody.addProperty("num_predict", 4000);
+        requestBody.addProperty("num_predict", 8000);
         
         RequestBody body = RequestBody.create(
             requestBody.toString(),
@@ -92,7 +93,7 @@ public class OllamaClient {
             .post(body)
             .build();
         
-        logger.info("Sending request to Ollama ({})", model);
+        logger.info("Sending request to Ollama ({}) - expecting up to 10 min", model);
         long start = System.currentTimeMillis();
         
         try (Response response = httpClient.newCall(request).execute()) {
@@ -115,11 +116,16 @@ public class OllamaClient {
      */
     public boolean isAvailable() {
         try {
+            OkHttpClient healthClient = new OkHttpClient.Builder()
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(5, TimeUnit.SECONDS)
+                .build();
+                
             Request request = new Request.Builder()
                 .url(baseUrl)
                 .build();
             
-            try (Response response = httpClient.newCall(request).execute()) {
+            try (Response response = healthClient.newCall(request).execute()) {
                 return response.isSuccessful();
             }
         } catch (Exception e) {
