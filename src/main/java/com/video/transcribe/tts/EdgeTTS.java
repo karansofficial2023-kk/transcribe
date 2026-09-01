@@ -37,12 +37,24 @@ public class EdgeTTS implements TTSProvider {
     
     private void verifyEdgeTTS() {
         try {
-            ProcessBuilder pb = new ProcessBuilder(pythonPath, "-c", "import edge_tts");
+            logger.info("EdgeTTS using python path: {}", pythonPath);
+            ProcessBuilder pb = new ProcessBuilder(pythonPath, "-c", 
+                "import edge_tts; print('VERSION:', edge_tts.__version__); print('COMMUNICATE:', hasattr(edge_tts, 'Communicate'))");
             pb.redirectErrorStream(true);
             Process p = pb.start();
+            
+            StringBuilder output = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output.append(line).append("\n");
+                    logger.info("EdgeTTS verify: {}", line);
+                }
+            }
+            
             boolean ok = p.waitFor(5, TimeUnit.SECONDS) && p.exitValue() == 0;
             if (ok) logger.info("✓ Edge TTS available");
-            else logger.error("✗ Edge TTS not found. Run: pip install edge-tts");
+            else logger.error("✗ Edge TTS verification failed. Output: {}", output.toString().trim());
         } catch (Exception e) {
             logger.error("✗ Edge TTS check failed: {}", e.getMessage());
         }
@@ -54,10 +66,24 @@ public class EdgeTTS implements TTSProvider {
     @Override
     public boolean isAvailable() {
         try {
-            ProcessBuilder pb = new ProcessBuilder(pythonPath, "-c", "import edge_tts");
+            ProcessBuilder pb = new ProcessBuilder(pythonPath, "-c", 
+                "import edge_tts; print(hasattr(edge_tts, 'Communicate'))");
+            pb.redirectErrorStream(true);
             Process p = pb.start();
-            return p.waitFor(5, TimeUnit.SECONDS) && p.exitValue() == 0;
-        } catch (Exception e) { return false; }
+            
+            StringBuilder output = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output.append(line);
+                }
+            }
+            
+            boolean finished = p.waitFor(5, TimeUnit.SECONDS);
+            return finished && p.exitValue() == 0 && output.toString().trim().equals("True");
+        } catch (Exception e) { 
+            return false; 
+        }
     }
     
     @Override
@@ -66,17 +92,22 @@ public class EdgeTTS implements TTSProvider {
     }
     
     public Path synthesizeWithRate(String text, Path outputPath, String voice, String rate) throws Exception {
+        // Write text to temp file to avoid shell escaping issues
+        Path tempTextFile = Files.createTempFile("edge_tts_input_", ".txt");
+        Files.writeString(tempTextFile, text);
+        
         List<String> command = new ArrayList<>();
         command.add(pythonPath);
         command.add(edgeScript);
-        command.add(text);
+        command.add(tempTextFile.toString());
         command.add("--output");
         command.add(outputPath.toString());
         command.add("--voice");
         command.add(voice != null ? voice : defaultVoice);
-        command.add("--rate");
-        command.add(rate != null ? rate : defaultRate);
+        // FIX: Use --rate=VALUE syntax so negative values like -20% don't get parsed as flags
+        command.add("--rate=" + (rate != null ? rate : defaultRate));
         
+
         logger.info("Edge TTS: {} chars → {} (voice={}, rate={})", 
             text.length(), outputPath, voice, rate);
         long start = System.currentTimeMillis();
@@ -86,23 +117,37 @@ public class EdgeTTS implements TTSProvider {
         pb.redirectErrorStream(true);
         
         Process process = pb.start();
+        StringBuilder output = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                output.append(line).append("\n");
                 logger.info("EdgeTTS: {}", line);
             }
         }
         
         boolean finished = process.waitFor(timeoutMinutes, TimeUnit.MINUTES);
+        
+        // Cleanup temp file
+        try {
+            Files.deleteIfExists(tempTextFile);
+        } catch (IOException e) {
+            logger.warn("Failed to delete temp text file: {}", e.getMessage());
+        }
+        
         if (!finished) {
             process.destroyForcibly();
-            throw new IOException("Edge TTS timed out");
+            throw new IOException("Edge TTS timed out after " + timeoutMinutes + " minutes");
         }
-        if (process.exitValue() != 0) {
-            throw new IOException("Edge TTS failed: " + process.exitValue());
+        
+        int exitCode = process.exitValue();
+        if (exitCode != 0) {
+            throw new IOException("Edge TTS failed with exit code " + exitCode + 
+                ". Output: " + output.toString().trim());
         }
+        
         if (!Files.exists(outputPath) || Files.size(outputPath) == 0) {
-            throw new IOException("Edge TTS produced no output");
+            throw new IOException("Edge TTS produced no output file");
         }
         
         logger.info("Edge done in {} ms", System.currentTimeMillis() - start);
@@ -111,7 +156,6 @@ public class EdgeTTS implements TTSProvider {
     
     @Override
     public Path synthesizeLongText(String text, Path outputDir, String baseName) throws Exception {
-        // Edge can handle ~3000 chars, chunk if longer
         if (text.length() <= 3000) {
             Path out = Paths.get(outputDir.toString(), baseName + "_audio.mp3");
             return synthesize(text, out);

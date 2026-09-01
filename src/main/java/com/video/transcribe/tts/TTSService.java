@@ -1,12 +1,15 @@
 package com.video.transcribe.tts;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import com.video.transcribe.config.AppConfig;
 
 @Service
 public class TTSService {
@@ -15,10 +18,10 @@ public class TTSService {
     
     private final Map<VoiceConfig.TTSProviderType, TTSProvider> providers = new HashMap<>();
     
-    public TTSService() {
-        // Register providers
-        providers.put(VoiceConfig.TTSProviderType.PIPER, new PiperTTS());
-        providers.put(VoiceConfig.TTSProviderType.EDGE, new EdgeTTS());
+    public TTSService(AppConfig appConfig) {
+        // Register providers with config
+        providers.put(VoiceConfig.TTSProviderType.PIPER, new PiperTTS(appConfig));
+        providers.put(VoiceConfig.TTSProviderType.EDGE, new EdgeTTS(appConfig));
     }
     
     /**
@@ -39,14 +42,25 @@ public class TTSService {
         String extension = config.getProvider() == VoiceConfig.TTSProviderType.EDGE ? ".mp3" : ".wav";
         File outputFile = File.createTempFile("tts_", extension);
         
-        boolean success = provider.synthesize(text, outputFile);
+        // Convert File to Path and pass voice-specific settings
+        Path outputPath = outputFile.toPath();
+        Path resultPath;
         
-        if (!success) {
+        if (provider instanceof EdgeTTS && config.getVoiceId() != null) {
+            // EdgeTTS supports custom voice and rate
+            EdgeTTS edge = (EdgeTTS) provider;
+            resultPath = edge.synthesizeWithRate(text, outputPath, config.getVoiceId(), config.getSpeed());
+        } else {
+            // PiperTTS and fallback use standard synthesize
+            resultPath = provider.synthesize(text, outputPath);
+        }
+        
+        if (resultPath == null || !resultPath.toFile().exists() || resultPath.toFile().length() == 0) {
             outputFile.delete();
             throw new RuntimeException("TTS synthesis failed");
         }
         
-        return outputFile;
+        return resultPath.toFile();
     }
     
     /**
