@@ -98,6 +98,9 @@ public class AppConfig {
 		return Boolean.parseBoolean(val);
 	}
 
+	public int getValidationThreshold() {
+		return getInt("validation.threshold", 75);
+	}
 	// === CONVENIENCE METHODS ===
 
 	// Input

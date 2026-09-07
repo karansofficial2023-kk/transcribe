@@ -17,14 +17,23 @@ import com.video.transcribe.audio.FFmpegAudioExtractor;
 import com.video.transcribe.config.AppConfig;
 import com.video.transcribe.llm.OllamaClient;
 import com.video.transcribe.model.TranscriptData;
+import com.video.transcribe.scene.SceneStoryboardGenerator;
+import com.video.transcribe.scene.StoryboardDocument;
 import com.video.transcribe.transcription.LocalWhisperTranscriber;
 import com.video.transcribe.tts.TTSProvider;
 import com.video.transcribe.tts.TTSEngineFactory;
+import com.video.transcribe.validator.AccuracyValidator;
+import com.video.transcribe.validator.ValidationResult;
 
 /**
- * Audio-only pipeline:
- * Video → Audio → Transcript (JSON + TXT) → Paraphrase (TXT + JSON) → TTS Audio (WAV/MP3)
- * NO video creation.
+ * Enhanced Audio-only pipeline:
+ * Video → Audio → Transcript (JSON + TXT) → Paraphrase (TXT + JSON) 
+ * → [VALIDATE] → [SCENE STORYBOARD] → [DOCX EXPORT] → TTS Audio (WAV/MP3)
+ * 
+ * NEW Features Added:
+ * 1. AccuracyValidator - Checks paraphrase fidelity against original transcript
+ * 2. SceneStoryboardGenerator - Creates structured scene breakdown from paraphrased text
+ * 3. StoryboardDocxExporter - Exports scenes to Word document matching sample format
  * 
  * TTS Provider: Configurable via application.properties
  *   tts.provider=piper    → Offline local TTS (Piper)
@@ -53,17 +62,23 @@ public class VideoParaphrasePipeline {
 	private final ExecutorService executor;
 	private final AppConfig config;
 	private final TTSProvider tts;
+	private final AccuracyValidator validator;
+	private final SceneStoryboardGenerator sceneGenerator;
+	private final StoryboardDocxExporter docxExporter;
 
 	/**
-	 * Initialize pipeline with configuration
-	 * TTS provider is auto-selected based on tts.provider property
+	 * Initialize pipeline with configuration.
+	 * TTS provider is auto-selected based on tts.provider property.
 	 */
 	public VideoParaphrasePipeline(AppConfig config) {
 		this.config = config;
 		this.audioExtractor = new FFmpegAudioExtractor(config);
 		this.whisper = new LocalWhisperTranscriber(config);
 		this.ollama = new OllamaClient(config);
-		
+		this.validator = new AccuracyValidator(ollama);
+		this.sceneGenerator = new SceneStoryboardGenerator(ollama);
+		this.docxExporter = new StoryboardDocxExporter();
+
 		// Create TTS provider based on config (piper or edge)
 		this.tts = TTSEngineFactory.createProvider(config);
 
@@ -73,9 +88,9 @@ public class VideoParaphrasePipeline {
 		new File(config.getTempDir()).mkdirs();
 		new File(config.getOutputDir()).mkdirs();
 
-		logger.info("Audio-only pipeline initialized: {} thread(s), mode={}, device={}, TTS={}", 
+		logger.info("Enhanced pipeline initialized: {} thread(s), mode={}, device={}, TTS={}",
 				threads,
-				config.isSequential() ? "sequential" : "parallel", 
+				config.isSequential() ? "sequential" : "parallel",
 				config.getWhisperDevice(),
 				tts.getName());
 	}
@@ -139,6 +154,48 @@ public class VideoParaphrasePipeline {
 	}
 
 	// ============================================
+	// PHASE 3b: Validate Paraphrase Accuracy
+	// ============================================
+
+	public ValidationResult validateParaphrase(String originalText, String paraphrasedText, String baseName) throws Exception {
+		logger.info("=== PHASE 3b: Validating Paraphrase Accuracy ===");
+		ValidationResult result = validator.validate(originalText, paraphrasedText);
+
+		// Save validation report
+		Path validationPath = Paths.get(config.getOutputDir(), baseName + "_validation.json");
+		Files.writeString(validationPath, gson.toJson(result));
+		logger.info("Validation report saved: {} | Score: {}/100 | Passed: {}",
+				validationPath, result.getOverallScore(), result.isPassed());
+
+		if (result.getOverallScore() < config.getValidationThreshold()) {
+			logger.warn("LOW ACCURACY SCORE: {}% (threshold: {}%)",
+				result.getOverallScore(), config.getValidationThreshold());
+		}
+		return result;
+	}
+
+	// ============================================
+	// PHASE 3c: Generate Scene Storyboard
+	// ============================================
+
+	public StoryboardDocument generateStoryboard(String paraphrasedText, String baseName) throws Exception {
+		logger.info("=== PHASE 3c: Generating Scene Storyboard ===");
+		StoryboardDocument storyboard = sceneGenerator.generateStoryboard(paraphrasedText);
+
+		// Save as JSON
+		Path storyboardJson = Paths.get(config.getOutputDir(), baseName + "_storyboard.json");
+		Files.writeString(storyboardJson, gson.toJson(storyboard));
+		logger.info("Storyboard JSON saved: {}", storyboardJson);
+
+		// Export as Word document
+		Path docxPath = Paths.get(config.getOutputDir(), baseName + "_storyboard.docx");
+		docxExporter.export(storyboard, docxPath.toString());
+		logger.info("Storyboard DOCX saved: {}", docxPath);
+
+		return storyboard;
+	}
+
+	// ============================================
 	// PHASE 4: Paraphrased TXT → TTS Audio (WAV or MP3)
 	// ============================================
 	// Output format depends on TTS provider:
@@ -156,7 +213,7 @@ public class VideoParaphrasePipeline {
 	}
 
 	// ============================================
-	// FULL PIPELINE (Audio-only, NO video)
+	// FULL ENHANCED PIPELINE
 	// ============================================
 
 	public PipelineResult processVideo(String videoPath, String language, String style) {
@@ -169,10 +226,17 @@ public class VideoParaphrasePipeline {
 
 			// Phase 2: Transcribe audio → JSON + TXT
 			TranscriptData transcript = transcribeAudio(audioPath, language, baseName);
+			String originalText = transcript.getFullText();
 
 			// Phase 3: Paraphrase using transcript text → TXT + JSON
-			String paraphrased = paraphraseScript(transcript.getFullText(), style);
+			String paraphrased = paraphraseScript(originalText, style);
 			saveParaphrase(paraphrased, baseName);
+
+			// Phase 3b: Validate paraphrase accuracy
+			ValidationResult validation = validateParaphrase(originalText, paraphrased, baseName);
+
+			// Phase 3c: Generate scene storyboard
+			StoryboardDocument storyboard = generateStoryboard(paraphrased, baseName);
 
 			// Phase 4: TTS from paraphrased text → Audio
 			Path audioOutput = generateAudio(paraphrased, baseName);
@@ -182,13 +246,13 @@ public class VideoParaphrasePipeline {
 				cleanupTemp(baseName);
 			}
 
-			return new PipelineResult(true, audioOutput, transcript, paraphrased, 
-					System.currentTimeMillis() - startTime, null);
+			return new PipelineResult(true, audioOutput, transcript, paraphrased,
+					storyboard, validation, System.currentTimeMillis() - startTime, null);
 
 		} catch (Exception e) {
 			logger.error("Pipeline failed: {}", e.getMessage(), e);
-			return new PipelineResult(false, null, null, null, 
-					System.currentTimeMillis() - startTime, e.getMessage());
+			return new PipelineResult(false, null, null, null,
+					null, null, System.currentTimeMillis() - startTime, e.getMessage());
 		}
 	}
 
@@ -227,16 +291,33 @@ public class VideoParaphrasePipeline {
 		private String style;
 		private String model;
 
-		public String getText() { return text; }
-		public void setText(String text) { this.text = text; }
-		public String getStyle() { return style; }
-		public void setStyle(String style) { this.style = style; }
-		public String getModel() { return model; }
-		public void setModel(String model) { this.model = model; }
+		public String getText() {
+			return text;
+		}
+
+		public void setText(String text) {
+			this.text = text;
+		}
+
+		public String getStyle() {
+			return style;
+		}
+
+		public void setStyle(String style) {
+			this.style = style;
+		}
+
+		public String getModel() {
+			return model;
+		}
+
+		public void setModel(String model) {
+			this.model = model;
+		}
 	}
 
 	// ============================================
-	// RESULT CLASS
+	// ENHANCED RESULT CLASS
 	// ============================================
 
 	public static class PipelineResult {
@@ -244,15 +325,20 @@ public class VideoParaphrasePipeline {
 		public final Path audioOutput;      // TTS audio file (.wav for Piper, .mp3 for Edge)
 		public final TranscriptData transcript;
 		public final String paraphrasedText;
+		public final StoryboardDocument storyboard;  // NEW: Scene breakdown
+		public final ValidationResult validation;     // NEW: Accuracy report
 		public final long totalTimeMs;
 		public final String error;
 
-		public PipelineResult(boolean success, Path audioOutput, TranscriptData transcript, 
-				String paraphrasedText, long totalTimeMs, String error) {
+		public PipelineResult(boolean success, Path audioOutput, TranscriptData transcript,
+				String paraphrasedText, StoryboardDocument storyboard, ValidationResult validation,
+				long totalTimeMs, String error) {
 			this.success = success;
 			this.audioOutput = audioOutput;
 			this.transcript = transcript;
 			this.paraphrasedText = paraphrasedText;
+			this.storyboard = storyboard;
+			this.validation = validation;
 			this.totalTimeMs = totalTimeMs;
 			this.error = error;
 		}
