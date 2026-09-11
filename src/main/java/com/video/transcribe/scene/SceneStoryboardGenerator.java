@@ -22,6 +22,66 @@ public class SceneStoryboardGenerator {
     private static final Logger logger = LoggerFactory.getLogger(SceneStoryboardGenerator.class);
     private final OllamaClient ollama;
     private final Gson gson = new Gson();
+    private static final JsonObject SCENES_SCHEMA = JsonParser.parseString("""
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sceneNumber": {
+                "type": "integer"
+              },
+              "sceneTitle": {
+                "type": "string"
+              },
+              "narration": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sceneNumber",
+              "sceneTitle",
+              "narration"
+            ],
+            "additionalProperties": false
+          }
+        }
+        """).getAsJsonObject();
+
+    private static final JsonObject SEGMENTS_SCHEMA = JsonParser.parseString("""
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "segmentNumber": {
+                "type": "integer"
+              },
+              "sentence": {
+                "type": "string"
+              },
+              "visualAnimation": {
+                "type": "string"
+              },
+              "imageRecommendations": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "segmentNumber",
+              "sentence",
+              "visualAnimation",
+              "imageRecommendations"
+            ],
+            "additionalProperties": false
+          }
+        }
+        """).getAsJsonObject();
+
+
     
     public SceneStoryboardGenerator(OllamaClient ollama) {
         this.ollama = ollama;
@@ -79,9 +139,9 @@ n            %s
             - Do not merge unrelated topics
             """.formatted(text);
         
-        String response = ollama.generate(
+        String response = ollama.generateStructured(
             "You are an expert educational video script writer and storyboard creator.",
-            prompt
+            prompt, SCENES_SCHEMA
         );
         
         return parseScenes(response);
@@ -119,9 +179,9 @@ n            %s
             - Use educational documentary style visuals
             """.formatted(scene.getSceneTitle(), scene.getNarration());
         
-        String response = ollama.generate(
+        String response = ollama.generateStructured(
             "You are a professional video storyboard artist and educational content designer.",
-            prompt
+            prompt, SEGMENTS_SCHEMA
         );
         
         List<SceneSegment> segments = parseSegments(response);

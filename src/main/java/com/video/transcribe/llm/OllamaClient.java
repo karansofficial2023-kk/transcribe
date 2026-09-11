@@ -74,12 +74,23 @@ public class OllamaClient {
      * Generate text using Ollama
      */
     public String generate(String systemPrompt, String userPrompt) throws IOException {
-        
+        return generate(systemPrompt, userPrompt, null);
+    }
+
+    /** Request the existing storyboard fields as schema-constrained JSON. */
+    public String generateStructured(String systemPrompt, String userPrompt, JsonObject schema) throws IOException {
+        return generate(systemPrompt, userPrompt, schema);
+    }
+
+    private String generate(String systemPrompt, String userPrompt, JsonObject schema) throws IOException {
         JsonObject requestBody = new JsonObject();
         requestBody.addProperty("model", model);
         requestBody.addProperty("system", systemPrompt);
         requestBody.addProperty("prompt", userPrompt);
         requestBody.addProperty("stream", false);
+        if (schema != null) {
+            requestBody.add("format", schema);
+        }
         requestBody.addProperty("temperature", 0.7);
         requestBody.addProperty("num_predict", 8000);
         

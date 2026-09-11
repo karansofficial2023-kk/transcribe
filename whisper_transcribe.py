@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Open-source Whisper transcription script
 Called by Java via ProcessBuilder
@@ -18,6 +18,20 @@ def transcribe(audio_path, model_size="base", language=None, output_json=None, d
     try:
         # Try faster-whisper first (much faster)
         try:
+            # Load the installed PyTorch CUDA libraries for CTranslate2 on Windows.
+            if sys.platform == "win32" and device == "cuda":
+                import os
+                import ctypes
+                from pathlib import Path
+                import torch
+
+                cuda_lib = Path(torch.__file__).parent / "lib"
+                cuda_handle = os.add_dll_directory(str(cuda_lib))
+                cuda_libraries = [
+                    ctypes.WinDLL(str(cuda_lib / "cublas64_12.dll")),
+                    ctypes.WinDLL(str(cuda_lib / "cudnn64_9.dll")),
+                ]
+
             from faster_whisper import WhisperModel
             
             print(f"Using faster-whisper with model: {model_size}", file=sys.stderr)
