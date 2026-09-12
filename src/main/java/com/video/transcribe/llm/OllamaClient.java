@@ -47,15 +47,23 @@ public class OllamaClient {
     public String paraphraseTranscript(String originalText, String style) throws IOException {
         
         String systemPrompt = """
-            You are a professional video script paraphraser. Rewrite the transcript 
-            while preserving EXACT same meaning, facts, and educational value.
+            You are a professional educational video script paraphraser.
+            Rewrite the transcript while preserving EXACT same meaning, facts,
+            topic coverage, examples, sequence, and educational value.
             
             Rules:
             1. Preserve all facts, numbers, names, technical details
             2. Change sentence structure and vocabulary significantly
             3. Maintain the same tone and style
             4. Keep similar length
-            5. Output ONLY the paraphrased text, no explanations
+            5. Cover every topic, sub-topic, example, named plant/person/place/process, comparison, and conclusion from the original
+            6. Do not summarize away examples or curriculum points
+            7. Preserve the original transcript language and script. If the source is English,
+               output English. If the source is Tamil, output Tamil. If the source mixes languages,
+               keep that mix naturally.
+            8. Do not translate to English unless the requested style explicitly asks for translation
+            9. Do not introduce Tamil, Hindi, or any other language if the original transcript is English
+            10. Output ONLY the paraphrased text, no explanations
             """;
         
         String userPrompt = String.format("""
@@ -67,6 +75,34 @@ public class OllamaClient {
             PARAPHRASED VERSION:
             """, style != null ? "Style: " + style : "", originalText);
         
+        return generate(systemPrompt, userPrompt);
+    }
+
+    public String repairParaphrase(String originalText, String previousParaphrase, String issues, String style) throws IOException {
+        String systemPrompt = """
+            You repair educational paraphrases for curriculum completeness.
+            Keep the narration as a paraphrase, but restore every missing topic,
+            example, detail, sequence, and comparison from the original transcript.
+            Do not add facts that are absent from the original.
+            Preserve the original transcript language/script.
+            Output ONLY the improved paraphrased text.
+            """;
+
+        String userPrompt = String.format("""
+            Style: %s
+
+            ORIGINAL TRANSCRIPT:
+            %s
+
+            PREVIOUS PARAPHRASE:
+            %s
+
+            VALIDATION ISSUES TO FIX:
+            %s
+
+            IMPROVED PARAPHRASE:
+            """, style != null ? style : "professional", originalText, previousParaphrase, issues);
+
         return generate(systemPrompt, userPrompt);
     }
     

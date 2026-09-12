@@ -8,6 +8,7 @@ public class ValidationResult {
 	private double semanticSimilarityScore;
 	private double factualConsistencyScore;
 	private double keyConceptPreservationScore;
+	private double topicCoverageScore;
 	private double hallucinationScore;
 	private double overallScore;
 	private boolean passed;
@@ -53,6 +54,14 @@ public class ValidationResult {
 
 	public void setKeyConceptPreservationScore(double keyConceptPreservationScore) {
 		this.keyConceptPreservationScore = keyConceptPreservationScore;
+	}
+
+	public double getTopicCoverageScore() {
+		return topicCoverageScore;
+	}
+
+	public void setTopicCoverageScore(double topicCoverageScore) {
+		this.topicCoverageScore = topicCoverageScore;
 	}
 
 	public double getHallucinationScore() {

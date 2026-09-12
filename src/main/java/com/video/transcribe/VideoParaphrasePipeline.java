@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -227,13 +229,19 @@ public class VideoParaphrasePipeline {
 			// Phase 2: Transcribe audio → JSON + TXT
 			TranscriptData transcript = transcribeAudio(audioPath, language, baseName);
 			String originalText = transcript.getFullText();
+			if (isNoSpeechTranscript(transcript)) {
+				logSkippedVideo(videoPath, baseName, "No speech detected or only music/background audio");
+				logger.warn("Skipping video with no usable speech: {}", videoPath);
+				return new PipelineResult(false, null, transcript, null,
+						null, null, System.currentTimeMillis() - startTime,
+						"Skipped: no speech detected or only music/background audio");
+			}
 
-			// Phase 3: Paraphrase using transcript text → TXT + JSON
-			String paraphrased = paraphraseScript(originalText, style);
+			// Phase 3 + 3b: Paraphrase, validate, and retry until content coverage passes
+			ParaphraseValidation paraphraseValidation = paraphraseUntilValid(originalText, style, baseName);
+			String paraphrased = paraphraseValidation.paraphrasedText;
+			ValidationResult validation = paraphraseValidation.validation;
 			saveParaphrase(paraphrased, baseName);
-
-			// Phase 3b: Validate paraphrase accuracy
-			ValidationResult validation = validateParaphrase(originalText, paraphrased, baseName);
 
 			// Phase 3c: Generate scene storyboard
 			StoryboardDocument storyboard = generateStoryboard(paraphrased, baseName);
@@ -270,6 +278,105 @@ public class VideoParaphrasePipeline {
 		} catch (Exception e) {
 			logger.warn("Cleanup failed: {}", e.getMessage());
 		}
+	}
+
+	private ParaphraseValidation paraphraseUntilValid(String originalText, String style, String baseName) throws Exception {
+		String paraphrased = null;
+		ValidationResult validation = null;
+		int maxAttempts = Math.max(1, config.getValidationMaxRetries());
+
+		for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+			logger.info("Paraphrase attempt {}/{}", attempt, maxAttempts);
+			if (attempt == 1) {
+				paraphrased = paraphraseScript(originalText, style);
+			} else {
+				paraphrased = ollama.repairParaphrase(
+					originalText,
+					paraphrased,
+					formatValidationIssues(validation),
+					style
+				);
+			}
+
+			validation = validateParaphrase(originalText, paraphrased, baseName);
+			if (validation.getOverallScore() >= config.getValidationThreshold()) {
+				logger.info("Paraphrase accepted with validation score {}/100 on attempt {}",
+					validation.getOverallScore(), attempt);
+				return new ParaphraseValidation(paraphrased, validation);
+			}
+
+			logger.warn("Paraphrase score {}/100 below threshold {}; retrying if attempts remain",
+				validation.getOverallScore(), config.getValidationThreshold());
+		}
+
+		throw new IOException("Paraphrase validation failed after " + maxAttempts
+			+ " attempts. Last score: " + (validation != null ? validation.getOverallScore() : "none"));
+	}
+
+	private String formatValidationIssues(ValidationResult validation) {
+		if (validation == null) {
+			return "No validation details available. Improve topic coverage and factual consistency.";
+		}
+		StringBuilder text = new StringBuilder();
+		text.append("Overall score: ").append(validation.getOverallScore()).append("/100\n");
+		text.append("Semantic similarity: ").append(validation.getSemanticSimilarityScore()).append("/100\n");
+		text.append("Factual consistency: ").append(validation.getFactualConsistencyScore()).append("/100\n");
+		text.append("Key concepts: ").append(validation.getKeyConceptPreservationScore()).append("/100\n");
+		text.append("Topic coverage: ").append(validation.getTopicCoverageScore()).append("/100\n");
+		text.append("Hallucination safety: ").append(validation.getHallucinationScore()).append("/100\n");
+		if (validation.getIssues() != null && !validation.getIssues().isEmpty()) {
+			text.append("Issues:\n");
+			for (String issue : validation.getIssues()) {
+				text.append("- ").append(issue).append("\n");
+			}
+		}
+		return text.toString();
+	}
+
+	private boolean isNoSpeechTranscript(TranscriptData transcript) {
+		if (transcript == null || transcript.getFullText() == null) {
+			return true;
+		}
+		String text = transcript.getFullText().trim();
+		if (text.isBlank()) {
+			return true;
+		}
+		String normalized = text.toLowerCase();
+		List<String> noSpeechMarkers = List.of(
+			"[music]", "(music)", "music", "[applause]", "(applause)",
+			"[noise]", "(noise)", "[silence]", "(silence)"
+		);
+		if (text.length() < 20 && noSpeechMarkers.stream().anyMatch(normalized::contains)) {
+			return true;
+		}
+		String[] words = text.split("\\s+");
+		return words.length < 4 && transcript.getDuration() > 15.0;
+	}
+
+	private void logSkippedVideo(String videoPath, String baseName, String reason) {
+		try {
+			Path skippedLog = Paths.get(config.getOutputDir(), "skipped_videos.csv");
+			if (!Files.exists(skippedLog)) {
+				Files.writeString(skippedLog, "timestamp,baseName,videoPath,reason\n",
+					StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+			}
+			String row = String.format("%s,%s,%s,%s%n",
+				java.time.Instant.now(),
+				csv(baseName),
+				csv(videoPath),
+				csv(reason)
+			);
+			Files.writeString(skippedLog, row, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+		} catch (Exception e) {
+			logger.warn("Failed to write skipped video log: {}", e.getMessage());
+		}
+	}
+
+	private String csv(String value) {
+		if (value == null) {
+			return "\"\"";
+		}
+		return "\"" + value.replace("\"", "\"\"") + "\"";
 	}
 
 	private String getBaseName(String path) {
@@ -313,6 +420,16 @@ public class VideoParaphrasePipeline {
 
 		public void setModel(String model) {
 			this.model = model;
+		}
+	}
+
+	private static class ParaphraseValidation {
+		private final String paraphrasedText;
+		private final ValidationResult validation;
+
+		private ParaphraseValidation(String paraphrasedText, ValidationResult validation) {
+			this.paraphrasedText = paraphrasedText;
+			this.validation = validation;
 		}
 	}
 

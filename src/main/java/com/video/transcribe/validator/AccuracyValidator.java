@@ -31,10 +31,12 @@ public class AccuracyValidator {
         double semanticScore = calculateSemanticSimilarity(originalText, paraphrasedText);
         double factualScore = checkFactualConsistency(originalText, paraphrasedText);
         double keyConceptScore = checkKeyConceptsPreserved(originalText, paraphrasedText);
+        double topicCoverageScore = checkTopicCoverage(originalText, paraphrasedText);
         double hallucinationScore = detectHallucinations(originalText, paraphrasedText);
         
-        double overallScore = (semanticScore * 0.25) + (factualScore * 0.35) + 
-                             (keyConceptScore * 0.25) + (hallucinationScore * 0.15);
+        double overallScore = (semanticScore * 0.15) + (factualScore * 0.25) +
+                             (keyConceptScore * 0.25) + (topicCoverageScore * 0.25) +
+                             (hallucinationScore * 0.10);
         
         ValidationResult result = new ValidationResult();
         result.setOriginalLength(originalText.length());
@@ -42,9 +44,10 @@ public class AccuracyValidator {
         result.setSemanticSimilarityScore(semanticScore);
         result.setFactualConsistencyScore(factualScore);
         result.setKeyConceptPreservationScore(keyConceptScore);
+        result.setTopicCoverageScore(topicCoverageScore);
         result.setHallucinationScore(hallucinationScore);
         result.setOverallScore(Math.round(overallScore * 100.0) / 100.0);
-        result.setPassed(overallScore >= 75.0);
+        result.setPassed(overallScore >= 80.0);
         result.setTimestamp(java.time.Instant.now().toString());
         
         List<String> issues = identifyIssues(originalText, paraphrasedText);
@@ -67,7 +70,7 @@ public class AccuracyValidator {
             
             Respond ONLY with a JSON object:
             {"score": <number 0-100>, "reason": "<brief explanation>"}
-            """.formatted(truncate(original, 2000), truncate(paraphrased, 2000));
+            """.formatted(truncate(original, 6000), truncate(paraphrased, 6000));
         
         String response = ollama.generate(
             "You are a semantic similarity evaluator. Be strict and accurate.", 
@@ -89,7 +92,7 @@ public class AccuracyValidator {
             
             Respond ONLY with a JSON object:
             {"score": <number 0-100>, "missing_facts": ["..."], "changed_facts": ["..."], "added_facts": ["..."]}
-            """.formatted(truncate(original, 2000), truncate(paraphrased, 2000));
+            """.formatted(truncate(original, 6000), truncate(paraphrased, 6000));
         
         String response = ollama.generate(
             "You are a factual consistency checker. Be thorough and strict.",
@@ -111,7 +114,7 @@ public class AccuracyValidator {
             
             Respond ONLY with a JSON object:
             {"score": <number 0-100>, "missing_concepts": ["..."], "preserved_concepts": ["..."]}
-            """.formatted(truncate(original, 2000), truncate(paraphrased, 2000));
+            """.formatted(truncate(original, 6000), truncate(paraphrased, 6000));
         
         String response = ollama.generate(
             "You are a concept preservation checker. Focus on educational/scientific accuracy.",
@@ -134,7 +137,7 @@ public class AccuracyValidator {
             Respond ONLY with a JSON object:
             {"score": <number 0-100>, "hallucinations": ["..."], "severity": "low|medium|high"}
             Score: 100 = no hallucinations, 0 = severe hallucinations
-            """.formatted(truncate(original, 2000), truncate(paraphrased, 2000));
+            """.formatted(truncate(original, 6000), truncate(paraphrased, 6000));
         
         String response = ollama.generate(
             "You are a hallucination detector. Be extremely strict about fabricated information.",
@@ -156,7 +159,7 @@ public class AccuracyValidator {
             
             Respond with a JSON array of issue strings.
             If no issues, return [].
-            """.formatted(truncate(original, 1500), truncate(paraphrased, 1500));
+            """.formatted(truncate(original, 6000), truncate(paraphrased, 6000));
         
         String response = ollama.generate(
             "You are a quality assurance expert. List specific issues concisely.",
@@ -171,6 +174,30 @@ public class AccuracyValidator {
         } catch (Exception e) {
             return List.of("Could not parse issues - manual review recommended");
         }
+    }
+
+    private double checkTopicCoverage(String original, String paraphrased) throws IOException {
+        String prompt = """
+            Grade whether the paraphrase covers ALL educational topics from the original.
+            Look for missing sections, skipped examples, missing named organisms/objects,
+            missing processes, missing comparisons, missing conclusions, and shortened curriculum coverage.
+
+            ORIGINAL:
+            %s
+
+            PARAPHRASED:
+            %s
+
+            Respond ONLY with a JSON object:
+            {"score": <number 0-100>, "missing_topics": ["..."], "covered_topics": ["..."]}
+            Score 100 means every topic and example is covered. Penalize heavily for omissions.
+            """.formatted(truncate(original, 8000), truncate(paraphrased, 8000));
+
+        String response = ollama.generate(
+            "You are an educational curriculum coverage auditor. Be strict about missing topics.",
+            prompt
+        );
+        return extractScore(response);
     }
     
     private double extractScore(String jsonResponse) {

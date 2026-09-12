@@ -121,8 +121,7 @@ public class StoryboardDocxExporter {
         headerRow.setRepeatHeader(true);
         
         // Style header cells
-        String[] headers = {"S.no", "Splitting the Narration (Sentence wise)", "Visual / Animation", "Image Recommendation"};
-        int[] widths = {8, 32, 30, 30};
+        String[] headers = {"S.no", "Splitting the Narration (Sentence wise)", "Media Type", "Motion Plan", "Visual / Animation", "Local Teaching Animation", "Labels", "Image Recommendation", "ComfyUI Prompt", "Coverage / Fact Guard", "Wan Video Shot"};
         
         for (int i = 0; i < headers.length; i++) {
             XWPFTableCell cell = headerRow.getCell(i) != null ? headerRow.getCell(i) : headerRow.addNewTableCell();
@@ -152,25 +151,110 @@ public class StoryboardDocxExporter {
             cell2.setText("\"" + segment.getSentence() + "\"");
             styleCell(cell2, ParagraphAlignment.LEFT);
             
-            // Visual/Animation
+            // Media Type
             XWPFTableCell cell3 = row.getCell(2);
-            cell3.setText(segment.getVisualAnimation());
+            cell3.setText(formatMediaType(segment.getMediaType()));
             styleCell(cell3, ParagraphAlignment.LEFT);
-            
-            // Image Recommendations
+
+            // Motion Plan
             XWPFTableCell cell4 = row.getCell(3);
-            StringBuilder imgText = new StringBuilder();
-            if (segment.getImageRecommendations() != null) {
-                for (String img : segment.getImageRecommendations()) {
-                    imgText.append(img).append("\n");
-                }
-            }
-            cell4.setText(imgText.toString().trim());
+            cell4.setText(formatMotionType(segment.getMotionType()));
             styleCell(cell4, ParagraphAlignment.LEFT);
+
+            // Visual/Animation
+            XWPFTableCell cell5 = row.getCell(4);
+            cell5.setText(segment.getVisualAnimation());
+            styleCell(cell5, ParagraphAlignment.LEFT);
+
+            // Local Teaching Animation
+            XWPFTableCell cell6 = row.getCell(5);
+            cell6.setText(segment.getLocalAnimation() != null ? segment.getLocalAnimation() : "");
+            styleCell(cell6, ParagraphAlignment.LEFT);
+
+            // Labels
+            XWPFTableCell cell7 = row.getCell(6);
+            cell7.setText(formatList(segment.getLabels()));
+            styleCell(cell7, ParagraphAlignment.LEFT);
+
+            // Image Recommendations
+            XWPFTableCell cell8 = row.getCell(7);
+            cell8.setText(formatList(segment.getImageRecommendations()));
+            styleCell(cell8, ParagraphAlignment.LEFT);
+
+            // ComfyUI Prompt
+            XWPFTableCell cell9 = row.getCell(8);
+            cell9.setText(segment.getComfyPrompt() != null ? segment.getComfyPrompt() : "");
+            styleCell(cell9, ParagraphAlignment.LEFT);
+
+            // Coverage / Fact Guard
+            XWPFTableCell cell10 = row.getCell(9);
+            cell10.setText(segment.getCoverageNotes() != null ? segment.getCoverageNotes() : "");
+            styleCell(cell10, ParagraphAlignment.LEFT);
+
+            // Wan Video Shot
+            XWPFTableCell cell11 = row.getCell(10);
+            cell11.setText(formatShot(segment));
+            styleCell(cell11, ParagraphAlignment.LEFT);
         }
         
         // Add spacing after table
         addEmptyLine(doc);
+    }
+
+    private String formatShot(SceneSegment segment) {
+        if (segment.getShot() == null) {
+            return "";
+        }
+
+        String template = segment.getShot().getTemplate() != null ? segment.getShot().getTemplate() : "";
+        String heading = segment.getShot().getHeading() != null ? segment.getShot().getHeading() : "";
+        if (template.isBlank() && heading.isBlank()) {
+            return "";
+        }
+        String prompt = segment.getShot().getPrompt() != null ? segment.getShot().getPrompt() : "";
+        String negativePrompt = segment.getShot().getNegativePrompt() != null ? segment.getShot().getNegativePrompt() : "";
+        return "template: " + template + "\nheading: " + heading
+            + "\nprompt: " + prompt + "\nnegative: " + negativePrompt;
+    }
+
+    private String formatMediaType(String mediaType) {
+        if (mediaType == null || mediaType.isBlank()) {
+            return "";
+        }
+        return switch (mediaType) {
+            case "photo" -> "Photo";
+            case "diagram" -> "Diagram";
+            case "animation" -> "Animation";
+            case "photo_with_labels" -> "Photo with labels";
+            case "animation_with_labels" -> "Animation with labels";
+            case "wan_video" -> "Wan video";
+            default -> mediaType;
+        };
+    }
+
+    private String formatMotionType(String motionType) {
+        if (motionType == null || motionType.isBlank()) {
+            return "";
+        }
+        return switch (motionType) {
+            case "wan_video" -> "Wan video";
+            case "local_animation" -> "Local animation";
+            case "static_image" -> "Static image";
+            default -> motionType;
+        };
+    }
+
+    private String formatList(List<String> values) {
+        if (values == null || values.isEmpty()) {
+            return "";
+        }
+        StringBuilder text = new StringBuilder();
+        for (String value : values) {
+            if (value != null && !value.isBlank()) {
+                text.append(value).append("\n");
+            }
+        }
+        return text.toString().trim();
     }
     
     private void styleCell(XWPFTableCell cell, ParagraphAlignment alignment) {

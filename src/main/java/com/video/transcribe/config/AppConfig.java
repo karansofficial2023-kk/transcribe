@@ -99,7 +99,11 @@ public class AppConfig {
 	}
 
 	public int getValidationThreshold() {
-		return getInt("validation.threshold", 75);
+		return getInt("validation.threshold", 80);
+	}
+
+	public int getValidationMaxRetries() {
+		return getInt("validation.max.retries", 3);
 	}
 	// === CONVENIENCE METHODS ===
 

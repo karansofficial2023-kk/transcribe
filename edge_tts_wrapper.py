@@ -12,12 +12,22 @@ import edge_tts
 
 async def text_to_speech(text, output_path, voice="en-IN-NeerjaNeural", rate="+0%"):
     try:
+        text = " ".join((text or "").split())
+        if not text:
+            raise ValueError("Input text is empty")
+
+        output_dir = os.path.dirname(os.path.abspath(output_path))
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
+
         communicate = edge_tts.Communicate(text, voice, rate=rate)
         await communicate.save(output_path)
+        if not os.path.exists(output_path) or os.path.getsize(output_path) == 0:
+            raise RuntimeError("No audio file was produced")
         print(f"SUCCESS: {output_path}")
         return True
     except Exception as e:
-        print(f"ERROR: {str(e)}", file=sys.stderr)
+        print(f"ERROR: voice={voice}, rate={rate}, chars={len(text or '')}: {str(e)}", file=sys.stderr)
         return False
 
 
