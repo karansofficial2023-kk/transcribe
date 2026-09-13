@@ -78,8 +78,8 @@ public class VideoParaphrasePipeline {
 		this.whisper = new LocalWhisperTranscriber(config);
 		this.ollama = new OllamaClient(config);
 		this.validator = new AccuracyValidator(ollama);
-		this.sceneGenerator = new SceneStoryboardGenerator(ollama, config.isStoryboardAnimationEnabled());
-		this.docxExporter = new StoryboardDocxExporter();
+		this.sceneGenerator = new SceneStoryboardGenerator(ollama, config.isStoryboardAnimationEnabled(), config.getStoryboardVideoProvider());
+		this.docxExporter = new StoryboardDocxExporter(config.getStoryboardVideoProvider());
 
 		// Create TTS provider based on config (piper or edge)
 		this.tts = TTSEngineFactory.createProvider(config);
@@ -95,6 +95,7 @@ public class VideoParaphrasePipeline {
 				config.isSequential() ? "sequential" : "parallel",
 				config.getWhisperDevice(),
 				tts.getName());
+		logger.info("Storyboard video provider: {}", config.getStoryboardVideoProvider());
 	}
 
 	// ============================================

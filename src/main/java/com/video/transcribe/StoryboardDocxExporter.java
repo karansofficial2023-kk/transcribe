@@ -25,6 +25,15 @@ import com.video.transcribe.scene.StoryboardDocument;
  * Matches the format of your sample "Types of Pollination.docx"
  */
 public class StoryboardDocxExporter {
+    private final String videoProvider;
+
+    public StoryboardDocxExporter() {
+        this("wan");
+    }
+
+    public StoryboardDocxExporter(String videoProvider) {
+        this.videoProvider = normalizeVideoProvider(videoProvider);
+    }
     
     public void export(StoryboardDocument storyboard, String outputPath) throws IOException {
         try (XWPFDocument document = new XWPFDocument()) {
@@ -244,7 +253,7 @@ public class StoryboardDocxExporter {
             case "animation" -> "Animation";
             case "photo_with_labels" -> "Photo with labels";
             case "animation_with_labels" -> "Animation with labels";
-            case "wan_video" -> "Wan video";
+            case "wan_video" -> videoProviderLabel() + " video";
             default -> mediaType;
         };
     }
@@ -254,11 +263,30 @@ public class StoryboardDocxExporter {
             return "";
         }
         return switch (motionType) {
-            case "wan_video" -> "Wan video";
+            case "wan_video" -> videoProviderLabel() + " video";
             case "local_animation" -> "Local animation";
             case "static_image" -> "Static image";
             default -> motionType;
         };
+    }
+
+    private String videoProviderLabel() {
+        return switch (videoProvider) {
+            case "ltx" -> "LTX";
+            case "all" -> "Wan/LTX";
+            default -> "Wan";
+        };
+    }
+
+    private String normalizeVideoProvider(String provider) {
+        if (provider == null || provider.isBlank()) {
+            return "wan";
+        }
+        String normalized = provider.trim().toLowerCase();
+        if ("ltx".equals(normalized) || "wan".equals(normalized) || "all".equals(normalized)) {
+            return normalized;
+        }
+        return "wan";
     }
 
     private String formatList(List<String> values) {

@@ -70,6 +70,7 @@ public class AppConfig {
 		props.setProperty("tool.ollama.model", "llama3.1:8b");
 		props.setProperty("tool.piper.path", "piper");
 		props.setProperty("storyboard.animation.enabled", "true");
+		props.setProperty("storyboard.video.provider", "wan");
 		props.setProperty("temp.dir", "./temp");
 		props.setProperty("cleanup.downloads", "true");
 		props.setProperty("download.timeout.seconds", "300");
@@ -109,6 +110,18 @@ public class AppConfig {
 
 	public boolean isStoryboardAnimationEnabled() {
 		return getBoolean("storyboard.animation.enabled", true);
+	}
+
+	public String getStoryboardVideoProvider() {
+		String provider = getString("storyboard.video.provider", "wan");
+		if (provider == null || provider.isBlank()) {
+			return "wan";
+		}
+		provider = provider.trim().toLowerCase();
+		if ("ltx".equals(provider) || "wan".equals(provider) || "all".equals(provider)) {
+			return provider;
+		}
+		return "wan";
 	}
 	// === CONVENIENCE METHODS ===
 

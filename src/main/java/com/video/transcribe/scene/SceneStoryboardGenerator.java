@@ -22,6 +22,7 @@ public class SceneStoryboardGenerator {
     private static final Logger logger = LoggerFactory.getLogger(SceneStoryboardGenerator.class);
     private final OllamaClient ollama;
     private final boolean animationEnabled;
+    private final String videoProvider;
     private final Gson gson = new Gson();
     private static final JsonObject SCENES_SCHEMA = JsonParser.parseString("""
         {
@@ -199,12 +200,17 @@ public class SceneStoryboardGenerator {
 
     
     public SceneStoryboardGenerator(OllamaClient ollama) {
-        this(ollama, true);
+        this(ollama, true, "wan");
     }
 
     public SceneStoryboardGenerator(OllamaClient ollama, boolean animationEnabled) {
+        this(ollama, animationEnabled, "wan");
+    }
+
+    public SceneStoryboardGenerator(OllamaClient ollama, boolean animationEnabled, String videoProvider) {
         this.ollama = ollama;
         this.animationEnabled = animationEnabled;
+        this.videoProvider = normalizeVideoProvider(videoProvider);
     }
     
     /**
@@ -279,6 +285,7 @@ public class SceneStoryboardGenerator {
             notes, and ComfyUI Wan/LTX prompts.
             %s
             %s
+            %s
             For each sentence, provide:
             1. The exact sentence text
             2. mediaType: "photo", "diagram", "animation", "photo_with_labels", "animation_with_labels", or "wan_video"
@@ -345,7 +352,7 @@ public class SceneStoryboardGenerator {
             - Write shot.prompt for Wan style: cinematic natural motion, stable subject anatomy, smooth camera, no text artifacts.
             - Write ltxShot.prompt for LTX style: one continuous realistic action, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.
             - Labels should be short, screen-ready text. Return [] when labels are not useful.
-            """.formatted(languageInstruction, buildAnimationModeInstruction(), scene.getSceneTitle(), scene.getNarration());
+            """.formatted(languageInstruction, buildAnimationModeInstruction(), buildVideoProviderInstruction(), scene.getSceneTitle(), scene.getNarration());
         
         String response = ollama.generateStructured(
             "You are a professional video storyboard artist and educational content designer.",
@@ -568,12 +575,44 @@ public class SceneStoryboardGenerator {
         }
         return """
             Animation mode is DISABLED.
-            Prefer real HD photo/photo_with_labels and wan_video outputs.
+            Prefer real HD photo/photo_with_labels and generated-video outputs.
             Do not choose diagram, animation, or animation_with_labels unless the concept is impossible to show accurately with real imagery.
             Avoid blank educational card layouts, sequence cards, slide-style boxes, and synthetic diagram panels.
             If labels are needed, use photo_with_labels over animation_with_labels.
-            Wan video is allowed more often when natural realistic motion helps the lesson.
+            Generated video is allowed more often when natural realistic motion helps the lesson.
             """;
+    }
+
+    private String buildVideoProviderInstruction() {
+        if ("ltx".equals(videoProvider)) {
+            return """
+                Active generated-video provider is LTX.
+                For generated-video rows, prioritize the ltxShot prompt as the production-ready prompt.
+                Keep the Wan shot field populated as an alternate prompt, but make the LTX shot the clearest and most directly usable option.
+                """;
+        }
+        if ("all".equals(videoProvider)) {
+            return """
+                Active generated-video provider is ALL.
+                For generated-video rows, populate both Wan and LTX shot prompts equally well so downstream tools can choose either model.
+                """;
+        }
+        return """
+            Active generated-video provider is Wan.
+            For generated-video rows, prioritize the Wan shot prompt as the production-ready prompt.
+            Keep the LTX shot field populated as an alternate prompt when generated motion is useful.
+            """;
+    }
+
+    private String normalizeVideoProvider(String provider) {
+        if (provider == null || provider.isBlank()) {
+            return "wan";
+        }
+        String normalized = provider.trim().toLowerCase();
+        if ("ltx".equals(normalized) || "wan".equals(normalized) || "all".equals(normalized)) {
+            return normalized;
+        }
+        return "wan";
     }
 
     private void enforceAnimationMode(SceneSegment segment) {
@@ -607,7 +646,7 @@ public class SceneStoryboardGenerator {
         segment.setLocalAnimation("Animation disabled: use a real HD image/video frame. Add only minimal overlay labels if listed.");
         segment.setComfyPrompt(buildRealHdPrompt(segment));
         segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
-            "Animation disabled: storyboard is biased toward real HD imagery/photo labels and Wan video instead of local card/diagram animation."));
+            "Animation disabled: storyboard is biased toward real HD imagery/photo labels and generated video instead of local card/diagram animation."));
     }
 
     private boolean shouldUseWanWhenAnimationDisabled(SceneSegment segment) {
