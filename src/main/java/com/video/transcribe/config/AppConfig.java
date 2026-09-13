@@ -69,6 +69,7 @@ public class AppConfig {
 		props.setProperty("tool.ollama.url", "http://localhost:11434");
 		props.setProperty("tool.ollama.model", "llama3.1:8b");
 		props.setProperty("tool.piper.path", "piper");
+		props.setProperty("storyboard.animation.enabled", "true");
 		props.setProperty("temp.dir", "./temp");
 		props.setProperty("cleanup.downloads", "true");
 		props.setProperty("download.timeout.seconds", "300");
@@ -104,6 +105,10 @@ public class AppConfig {
 
 	public int getValidationMaxRetries() {
 		return getInt("validation.max.retries", 3);
+	}
+
+	public boolean isStoryboardAnimationEnabled() {
+		return getBoolean("storyboard.animation.enabled", true);
 	}
 	// === CONVENIENCE METHODS ===
 

@@ -48,22 +48,29 @@ public class OllamaClient {
         
         String systemPrompt = """
             You are a professional educational video script paraphraser.
+            Think like a subject-matter expert and curriculum reviewer for the
+            specific topic and subject in the transcript. Use curriculum-safe,
+            age-appropriate explanations and terminology.
             Rewrite the transcript while preserving EXACT same meaning, facts,
             topic coverage, examples, sequence, and educational value.
             
             Rules:
             1. Preserve all facts, numbers, names, technical details
-            2. Change sentence structure and vocabulary significantly
-            3. Maintain the same tone and style
-            4. Keep similar length
-            5. Cover every topic, sub-topic, example, named plant/person/place/process, comparison, and conclusion from the original
-            6. Do not summarize away examples or curriculum points
-            7. Preserve the original transcript language and script. If the source is English,
+            2. Correct obvious transcription misspellings to the proper educational term for the topic
+            3. Preserve technical concepts, names, organisms, processes, and key terms after correcting obvious transcript spelling errors
+            4. Change sentence structure and general vocabulary, but do not rename topics, organisms, processes, or key terms into unrelated concepts
+            5. If a word appears misspelled but the intended subject term is clear from context, use the corrected subject term
+            6. Maintain the same tone and style
+            7. Keep similar length
+            8. Cover every topic, sub-topic, example, named plant/person/place/process, comparison, and conclusion from the original
+            9. Do not summarize away examples or curriculum points
+            10. Do not introduce unsupported facts. If the transcript is unclear, keep the safest curriculum-standard wording for the intended concept.
+            11. Preserve the original transcript language and script. If the source is English,
                output English. If the source is Tamil, output Tamil. If the source mixes languages,
                keep that mix naturally.
-            8. Do not translate to English unless the requested style explicitly asks for translation
-            9. Do not introduce Tamil, Hindi, or any other language if the original transcript is English
-            10. Output ONLY the paraphrased text, no explanations
+            12. Do not translate to English unless the requested style explicitly asks for translation
+            13. Do not introduce Tamil, Hindi, or any other language if the original transcript is English
+            14. Output ONLY the paraphrased text, no explanations
             """;
         
         String userPrompt = String.format("""
@@ -81,9 +88,14 @@ public class OllamaClient {
     public String repairParaphrase(String originalText, String previousParaphrase, String issues, String style) throws IOException {
         String systemPrompt = """
             You repair educational paraphrases for curriculum completeness.
+            Think like a subject-matter expert and curriculum reviewer for the
+            specific topic and subject in the transcript.
             Keep the narration as a paraphrase, but restore every missing topic,
             example, detail, sequence, and comparison from the original transcript.
             Do not add facts that are absent from the original.
+            Correct obvious transcription misspellings to the proper educational term for the topic.
+            Preserve the intended technical concept after correction; do not change it into an unrelated concept.
+            Use curriculum-safe, topic-appropriate wording. If a detail is uncertain, choose the safest standard explanation supported by the transcript.
             Preserve the original transcript language/script.
             Output ONLY the improved paraphrased text.
             """;

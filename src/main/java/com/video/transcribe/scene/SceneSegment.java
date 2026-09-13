@@ -7,6 +7,9 @@ public class SceneSegment {
 	private String sentence;
 	private String mediaType;
 	private String motionType;
+	private double estimatedNarrationSeconds;
+	private double recommendedClipSeconds;
+	private String timingNotes;
 	private String visualAnimation;
 	private String localAnimation;
 	private List<String> labels;
@@ -45,6 +48,30 @@ public class SceneSegment {
 
 	public void setMotionType(String motionType) {
 		this.motionType = motionType;
+	}
+
+	public double getEstimatedNarrationSeconds() {
+		return estimatedNarrationSeconds;
+	}
+
+	public void setEstimatedNarrationSeconds(double estimatedNarrationSeconds) {
+		this.estimatedNarrationSeconds = estimatedNarrationSeconds;
+	}
+
+	public double getRecommendedClipSeconds() {
+		return recommendedClipSeconds;
+	}
+
+	public void setRecommendedClipSeconds(double recommendedClipSeconds) {
+		this.recommendedClipSeconds = recommendedClipSeconds;
+	}
+
+	public String getTimingNotes() {
+		return timingNotes;
+	}
+
+	public void setTimingNotes(String timingNotes) {
+		this.timingNotes = timingNotes;
 	}
 
 	public String getVisualAnimation() {

@@ -3,6 +3,8 @@ package com.video.transcribe.validator;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
@@ -61,6 +63,8 @@ public class AccuracyValidator {
         String prompt = """
             Compare these two texts and rate their semantic similarity (0-100).
             Focus on meaning preservation, not word overlap.
+            IMPORTANT: If the paraphrase corrects an obvious transcript misspelling while preserving the same concept,
+            do not penalize heavily. Mention it in reason if needed.
             
             ORIGINAL:
             %s
@@ -83,6 +87,7 @@ public class AccuracyValidator {
         String prompt = """
             Check if all facts from the original text are preserved in the paraphrased version.
             Identify any changed facts, missing facts, or added incorrect facts.
+            IMPORTANT: Do not treat spelling correction of a key term as a missing fact when the educational concept is preserved.
             
             ORIGINAL:
             %s
@@ -105,6 +110,8 @@ public class AccuracyValidator {
         String prompt = """
             Extract key concepts from the original text and check if they appear in the paraphrased version.
             Key concepts include: technical terms, names, processes, definitions, examples.
+            IMPORTANT: If a transcript term appears misspelled and the paraphrase uses a common corrected spelling
+            for the same concept, count it as preserved, not missing.
             
             ORIGINAL:
             %s
@@ -181,6 +188,7 @@ public class AccuracyValidator {
             Grade whether the paraphrase covers ALL educational topics from the original.
             Look for missing sections, skipped examples, missing named organisms/objects,
             missing processes, missing comparisons, missing conclusions, and shortened curriculum coverage.
+            IMPORTANT: Do not penalize spelling normalization when the same topic/concept remains covered.
 
             ORIGINAL:
             %s
@@ -202,12 +210,54 @@ public class AccuracyValidator {
     
     private double extractScore(String jsonResponse) {
         try {
-            JsonObject obj = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            JsonObject obj = JsonParser.parseString(extractJsonObject(jsonResponse)).getAsJsonObject();
             return obj.get("score").getAsDouble();
         } catch (Exception e) {
+            Double fallbackScore = extractLooseScore(jsonResponse);
+            if (fallbackScore != null) {
+                logger.warn("Recovered loose validation score {} from non-JSON LLM response", fallbackScore);
+                return fallbackScore;
+            }
             logger.warn("Failed to parse score from LLM response: {}", jsonResponse);
             return 50.0;
         }
+    }
+
+    private String extractJsonObject(String response) {
+        if (response == null) {
+            return "{}";
+        }
+        int start = response.indexOf('{');
+        int end = response.lastIndexOf('}');
+        if (start >= 0 && end > start) {
+            return response.substring(start, end + 1);
+        }
+        return response;
+    }
+
+    private Double extractLooseScore(String response) {
+        if (response == null) {
+            return null;
+        }
+        Pattern scoreOutOfTen = Pattern.compile("(?i)(?:score\\s*[:\\-]?\\s*)?(\\d+(?:\\.\\d+)?)\\s*/\\s*10\\b");
+        Matcher outOfTenMatcher = scoreOutOfTen.matcher(response);
+        if (outOfTenMatcher.find()) {
+            return Math.min(100.0, Double.parseDouble(outOfTenMatcher.group(1)) * 10.0);
+        }
+
+        Pattern scoreOutOfHundred = Pattern.compile("(?i)(?:score\\s*[:\\-]?\\s*)?(\\d+(?:\\.\\d+)?)\\s*/\\s*100\\b");
+        Matcher outOfHundredMatcher = scoreOutOfHundred.matcher(response);
+        if (outOfHundredMatcher.find()) {
+            return Math.min(100.0, Double.parseDouble(outOfHundredMatcher.group(1)));
+        }
+
+        Pattern scoreField = Pattern.compile("(?i)score\\D{0,10}(\\d+(?:\\.\\d+)?)");
+        Matcher scoreFieldMatcher = scoreField.matcher(response);
+        if (scoreFieldMatcher.find()) {
+            double score = Double.parseDouble(scoreFieldMatcher.group(1));
+            return score <= 10.0 ? score * 10.0 : Math.min(100.0, score);
+        }
+        return null;
     }
     
     private String truncate(String text, int maxLength) {

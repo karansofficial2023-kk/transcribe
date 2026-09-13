@@ -21,6 +21,7 @@ public class SceneStoryboardGenerator {
     
     private static final Logger logger = LoggerFactory.getLogger(SceneStoryboardGenerator.class);
     private final OllamaClient ollama;
+    private final boolean animationEnabled;
     private final Gson gson = new Gson();
     private static final JsonObject SCENES_SCHEMA = JsonParser.parseString("""
         {
@@ -79,6 +80,15 @@ public class SceneStoryboardGenerator {
                   "static_image"
                 ]
               },
+              "estimatedNarrationSeconds": {
+                "type": "number"
+              },
+              "recommendedClipSeconds": {
+                "type": "number"
+              },
+              "timingNotes": {
+                "type": "string"
+              },
               "visualAnimation": {
                 "type": "string"
               },
@@ -120,13 +130,17 @@ public class SceneStoryboardGenerator {
                   },
                   "negativePrompt": {
                     "type": "string"
+                  },
+                  "durationSeconds": {
+                    "type": "number"
                   }
                 },
                 "required": [
                   "template",
                   "heading",
                   "prompt",
-                  "negativePrompt"
+                  "negativePrompt",
+                  "durationSeconds"
                 ],
                 "additionalProperties": false
               }
@@ -136,6 +150,9 @@ public class SceneStoryboardGenerator {
               "sentence",
               "mediaType",
               "motionType",
+              "estimatedNarrationSeconds",
+              "recommendedClipSeconds",
+              "timingNotes",
               "visualAnimation",
               "localAnimation",
               "labels",
@@ -151,7 +168,12 @@ public class SceneStoryboardGenerator {
 
     
     public SceneStoryboardGenerator(OllamaClient ollama) {
+        this(ollama, true);
+    }
+
+    public SceneStoryboardGenerator(OllamaClient ollama, boolean animationEnabled) {
         this.ollama = ollama;
+        this.animationEnabled = animationEnabled;
     }
     
     /**
@@ -185,6 +207,9 @@ public class SceneStoryboardGenerator {
     private List<Scene> splitIntoScenes(String text, String languageInstruction) throws IOException {
         String prompt = """
             Split the following educational video transcript into logical scenes.
+            Think like a subject-matter expert and curriculum reviewer for this
+            specific topic and subject. Keep explanations curriculum-safe and
+            suitable for educational video production.
             Each scene should cover a distinct topic or sub-topic.
             Create 3-8 scenes depending on content length.
             %s
@@ -192,14 +217,8 @@ public class SceneStoryboardGenerator {
             TEXT:
             %s
             
-            Respond ONLY with a JSON array of objects:
-            [
-              {
-                "sceneNumber": 1,
-                "sceneTitle": "Introduction to Topic",
-                "narration": "full narration text for this scene..."
-              }
-            ]
+            Respond ONLY with a JSON array matching the provided schema.
+            Do not include markdown, explanations, examples, or fields outside the schema.
             
             Rules:
             - Each scene should have complete, flowing narration
@@ -223,50 +242,49 @@ public class SceneStoryboardGenerator {
     private void enrichSceneWithSegments(Scene scene, String languageInstruction) throws IOException {
         String prompt = """
             Break down the following scene narration into sentence-level segments.
+            Think like a subject-matter expert and curriculum reviewer for this
+            specific topic and subject. Preserve the narration/script exactly;
+            improve only storyboard planning, visual choices, labels, coverage
+            notes, and ComfyUI/Wan prompts.
+            %s
             %s
             For each sentence, provide:
             1. The exact sentence text
             2. mediaType: "photo", "diagram", "animation", "photo_with_labels", "animation_with_labels", or "wan_video"
             3. motionType: "wan_video", "local_animation", or "static_image"
-            4. Visual/Animation description (what should be shown on screen)
-            5. Local animation instructions for teaching clarity, such as arrows, highlights, zooms, labels, diagrams, step reveals, or comparison panels
-            6. Labels to place on images/diagrams when useful
-            7. Image recommendations (2 specific image descriptions for stock photo/illustration search)
-            8. ComfyUI prompt for the selected media type
-            9. Coverage notes explaining which curriculum facts from the sentence are covered visually
-            10. A shot object for Wan/ComfyUI video generation only when the scene needs natural cinematic motion.
+            4. estimatedNarrationSeconds based on sentence length at natural voiceover speed
+            5. recommendedClipSeconds for the visual, matching or exceeding narration timing
+            6. timingNotes explaining loop, hold, cutaway, or extension strategy
+            7. Visual/Animation description (what should be shown on screen)
+            8. Local animation instructions for teaching clarity, such as arrows, highlights, zooms, labels, diagrams, step reveals, or comparison panels
+            9. Labels to place on images/diagrams when useful
+            10. Image recommendations (2 specific image descriptions for stock photo/illustration search)
+            11. ComfyUI prompt for the selected media type
+            12. Coverage notes explaining which curriculum facts from the sentence are covered visually
+            13. A shot object for Wan/ComfyUI video generation only when the scene needs natural cinematic motion.
             
             SCENE TITLE: %s
             NARRATION:
             %s
             
-            Respond ONLY with a JSON array:
-            [
-              {
-                "segmentNumber": 1,
-                "sentence": "exact sentence text",
-                "mediaType": "wan_video",
-                "motionType": "wan_video",
-                "visualAnimation": "Natural video: bee moves from one flower to another",
-                "localAnimation": "Add subtle label callouts to flower, bee, and pollen after the motion begins",
-                "labels": ["Bee", "Flower", "Pollen"],
-                "imageRecommendations": ["Image 1: specific description", "Image 2: specific description"],
-                "comfyPrompt": "Educational documentary macro shot of a bee visiting a flower, visible pollen grains, natural daylight, realistic botany detail, clean background, high clarity",
-                "coverageNotes": "Covers bee, flower, and pollen transfer from the narration sentence.",
-                "shot": {
-                  "template": "video",
-                  "heading": "Bee visiting a flower",
-                  "prompt": "Cinematic macro video of a bee naturally moving onto a flower, pollen visible on anthers and bee legs, gentle handheld documentary motion, realistic colors, shallow depth of field, educational clarity",
-                  "negativePrompt": "cartoon, fantasy anatomy, wrong plant parts, text artifacts, watermark, blurry, extra limbs, distorted insect, inaccurate flower structure"
-                }
-              }
-            ]
+            Respond ONLY with a JSON array matching the provided schema.
+            Do not include markdown, explanations, examples, or fields outside the schema.
             
             Rules:
             - Split by natural sentence boundaries
+            - Do not change the narration/script while creating storyboard rows; the sentence must come from the narration
+            - Think as the correct SME for the detected subject and topic
+            - Use curriculum-safe explanations and standard subject terminology
+            - Never introduce off-topic animals, plants, tools, reactions, locations, or examples from previous videos or prompt examples.
+            - If a visual detail is uncertain, avoid inventing it; use a neutral diagram, label, or coverage note instead
             - Visuals should be specific and actionable for video editors
             - Images should be descriptive enough for stock photo searches
             - Use educational documentary style visuals
+            - Estimate timing carefully: short sentences may be 3-5 seconds, medium sentences 6-8 seconds, long sentences 9-12 seconds.
+            - recommendedClipSeconds must be at least estimatedNarrationSeconds.
+            - If Wan generation normally outputs 4-second clips, then for narration longer than 4 seconds specify continuation clips, seamless loop motion, slow camera movement, or cutaways in timingNotes.
+            - Use more Wan where natural motion improves learning: pollinators moving, wind/water motion, liquids flowing, machine/process movement, lab action, real-world cause-effect motion.
+            - Do not use Wan for concepts better taught with clean diagrams, labels, equations, maps, grammar steps, comparisons, or anatomy/process charts.
             - Choose mediaType for learning value, not visual spectacle:
               photo = real-world context or object recognition
               diagram = anatomy, process structure, comparison, classification, or abstract ideas
@@ -279,18 +297,21 @@ public class SceneStoryboardGenerator {
             - Do not change or rewrite narration. The sentence field must remain faithful to the scene narration.
             - Do not add new curriculum facts, but do visually cover every curriculum fact already present in the sentence.
             - Include all named plants, processes, agents, plant parts, and comparisons from the sentence in the visualAnimation, localAnimation, labels, imageRecommendations, or coverageNotes.
+            - Science accuracy guard: do not invent ions, reactions, cell types, forces, organ names, dates, units, or mechanisms that are not supported by the narration or standard curriculum.
+            - If the topic is electroplating, use electrolytic cell terminology, not galvanic cell terminology.
+            - If the topic mentions silver nitrate, represent it as Ag+ and NO3- in solution; do not add chloride ions unless the narration explicitly discusses chloride or silver chloride.
+            - If explaining metal deposition in electroplating, use electron gain at the cathode and the appropriate half-equation. Do not use vague shell/empty-space explanations.
+            - If comparing deposition of gold, silver, copper, or other metals, avoid saying one always deposits more. Refer to Faraday's law: deposited mass depends on current, time, molar mass, and electrons transferred.
             - If a sentence contains a likely anatomy-risk phrase such as "anther curls", preserve the sentence text, but keep the visual neutral: use a labeled diagram and pollen-transfer arrows instead of instructing physical curling/anther motion.
-            - Use Wan video only for natural/cinematic motion. Add shot.template = "video" only for motion such as:
-              bee moving flower to flower, wind blowing pollen across grass,
-              water surface carrying pollen, bird visiting tubular flower,
-              bat visiting night flower
+            - Use generated video shots only for natural/cinematic motion that is explicitly supported by the narration
             - Use local_animation for teaching clarity: arrows, labels, highlighted parts, cutaway diagrams, timelines, maps, math/grammar steps, charts, comparisons, or process diagrams
             - Use static_image for a still photo or illustration with optional labels
             - For diagram/photo/animation media, write comfyPrompt as an image prompt or animation design prompt; for wan_video, write comfyPrompt to match shot.prompt.
             - If motionType is not "wan_video", omit the shot field
             - Never add a shot object for static_image or local_animation rows
+            - For every wan_video shot, shot.durationSeconds must equal recommendedClipSeconds.
             - Labels should be short, screen-ready text. Return [] when labels are not useful.
-            """.formatted(languageInstruction, scene.getSceneTitle(), scene.getNarration());
+            """.formatted(languageInstruction, buildAnimationModeInstruction(), scene.getSceneTitle(), scene.getNarration());
         
         String response = ollama.generateStructured(
             "You are a professional video storyboard artist and educational content designer.",
@@ -335,6 +356,9 @@ public class SceneStoryboardGenerator {
                 seg.setSentence(obj.get("sentence").getAsString());
                 seg.setMediaType(getStringOrDefault(obj, "mediaType", "animation_with_labels"));
                 seg.setMotionType(getStringOrDefault(obj, "motionType", "local_animation"));
+                seg.setEstimatedNarrationSeconds(getDoubleOrDefault(obj, "estimatedNarrationSeconds", estimateNarrationSeconds(seg.getSentence())));
+                seg.setRecommendedClipSeconds(getDoubleOrDefault(obj, "recommendedClipSeconds", seg.getEstimatedNarrationSeconds()));
+                seg.setTimingNotes(getStringOrDefault(obj, "timingNotes", ""));
                 seg.setVisualAnimation(obj.get("visualAnimation").getAsString());
                 seg.setLocalAnimation(getStringOrDefault(obj, "localAnimation", ""));
 
@@ -360,6 +384,7 @@ public class SceneStoryboardGenerator {
                     shot.setHeading(getStringOrDefault(shotObj, "heading", seg.getVisualAnimation()));
                     shot.setPrompt(getStringOrDefault(shotObj, "prompt", seg.getComfyPrompt()));
                     shot.setNegativePrompt(getStringOrDefault(shotObj, "negativePrompt", defaultNegativePrompt()));
+                    shot.setDurationSeconds(getDoubleOrDefault(shotObj, "durationSeconds", seg.getRecommendedClipSeconds()));
                     seg.setShot(shot);
                 }
                 enforceStoryboardQuality(seg);
@@ -372,6 +397,9 @@ public class SceneStoryboardGenerator {
             fallback.setSentence("Full scene narration");
             fallback.setMediaType("animation_with_labels");
             fallback.setMotionType("local_animation");
+            fallback.setEstimatedNarrationSeconds(estimateNarrationSeconds(fallback.getSentence()));
+            fallback.setRecommendedClipSeconds(fallback.getEstimatedNarrationSeconds());
+            fallback.setTimingNotes("Hold the educational diagram for the full narration duration with slow zoom and staged labels.");
             fallback.setVisualAnimation("Animation: Educational content display");
             fallback.setLocalAnimation("Use clear labels, highlights, and step-by-step reveals to explain the concept");
             fallback.setLabels(List.of());
@@ -400,6 +428,8 @@ public class SceneStoryboardGenerator {
         if (!"wan_video".equals(segment.getMediaType())) {
             segment.setShot(null);
         }
+        enforceAnimationMode(segment);
+        enforceTiming(segment);
 
         if (containsIgnoreCase(segment.getSentence(), "anther curls")
                 || containsIgnoreCase(segment.getVisualAnimation(), "anther curls")
@@ -419,9 +449,289 @@ public class SceneStoryboardGenerator {
             segment.setComfyPrompt(buildDefaultComfyPrompt(segment));
         }
 
+        enforceTopicRelevance(segment);
+        enforceElectroplatingScience(segment);
+
         if (segment.getCoverageNotes() == null || segment.getCoverageNotes().isBlank()) {
             segment.setCoverageNotes("Covers the narration sentence with matching visuals, labels, and image recommendations.");
         }
+    }
+
+    private void enforceTopicRelevance(SceneSegment segment) {
+        String sentence = segment.getSentence() != null ? segment.getSentence() : "";
+        String visualFields = joinForFactCheck(
+            segment.getVisualAnimation(),
+            segment.getLocalAnimation(),
+            segment.getComfyPrompt(),
+            segment.getCoverageNotes(),
+            segment.getShot() != null ? segment.getShot().getHeading() : null,
+            segment.getShot() != null ? segment.getShot().getPrompt() : null
+        );
+
+        boolean narrationMentionsPollination = containsAnyIgnoreCase(sentence,
+            "bee", "bees", "flower", "flowers", "pollen", "pollination", "pollinator", "orchid", "stigma", "anther");
+        boolean visualMentionsPollination = containsAnyIgnoreCase(visualFields,
+            "bee", "bees", "flower", "flowers", "pollen", "pollination", "pollinator", "orchid", "stigma", "anther");
+
+        if (!narrationMentionsPollination && visualMentionsPollination) {
+            segment.setMediaType(animationEnabled ? "animation_with_labels" : "photo_with_labels");
+            segment.setMotionType(animationEnabled ? "local_animation" : "static_image");
+            segment.setShot(null);
+            segment.setVisualAnimation("Topic-specific educational visual directly matching the sentence: " + sentence);
+            segment.setLocalAnimation(animationEnabled
+                ? "Use labels, arrows, or highlights only for terms present in the sentence. Do not use bee, flower, pollen, or pollination imagery."
+                : "Animation disabled: use a real HD topic-specific image with minimal labels from the sentence. Do not use bee, flower, pollen, or pollination imagery.");
+            segment.setLabels(extractFallbackLabels(sentence));
+            segment.setComfyPrompt("High-quality educational visual directly matching this sentence: " + sentence
+                + ", accurate subject matter, no bee, no flower, no pollen, no pollination imagery, no unrelated biology content");
+            segment.setCoverageNotes("Topic guard: removed off-topic bee/pollination imagery because it is not present in this narration sentence.");
+        }
+    }
+
+    private boolean containsAnyIgnoreCase(String text, String... needles) {
+        for (String needle : needles) {
+            if (containsIgnoreCase(text, needle)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private List<String> extractFallbackLabels(String sentence) {
+        List<String> labels = new ArrayList<>();
+        if (sentence == null || sentence.isBlank()) {
+            return labels;
+        }
+        String cleaned = sentence.replaceAll("[^A-Za-z0-9+\\- ]", " ");
+        String[] words = cleaned.split("\\s+");
+        for (String word : words) {
+            if (word.length() >= 6 && labels.size() < 3 && !containsLabel(labels, word)) {
+                labels.add(word);
+            }
+        }
+        return labels;
+    }
+
+    private String buildAnimationModeInstruction() {
+        if (animationEnabled) {
+            return """
+                Animation mode is ENABLED.
+                You may use diagram, animation, photo_with_labels, animation_with_labels, or wan_video depending on educational clarity.
+                Use local animation/diagram styles when they explain abstract ideas, labels, equations, sequence, or anatomy better than real footage.
+                """;
+        }
+        return """
+            Animation mode is DISABLED.
+            Prefer real HD photo/photo_with_labels and wan_video outputs.
+            Do not choose diagram, animation, or animation_with_labels unless the concept is impossible to show accurately with real imagery.
+            Avoid blank educational card layouts, sequence cards, slide-style boxes, and synthetic diagram panels.
+            If labels are needed, use photo_with_labels over animation_with_labels.
+            Wan video is allowed more often when natural realistic motion helps the lesson.
+            """;
+    }
+
+    private void enforceAnimationMode(SceneSegment segment) {
+        if (animationEnabled) {
+            return;
+        }
+
+        if ("diagram".equals(segment.getMediaType())
+                || "animation".equals(segment.getMediaType())
+                || "animation_with_labels".equals(segment.getMediaType())) {
+            if (shouldUseWanWhenAnimationDisabled(segment)) {
+                segment.setMediaType("wan_video");
+                segment.setMotionType("wan_video");
+                Shot shot = new Shot();
+                shot.setTemplate("video");
+                shot.setHeading(segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence());
+                shot.setPrompt(buildRealisticWanPrompt(segment));
+                shot.setNegativePrompt(defaultNegativePrompt());
+                shot.setDurationSeconds(segment.getRecommendedClipSeconds());
+                segment.setShot(shot);
+            } else {
+                segment.setMediaType((segment.getLabels() != null && !segment.getLabels().isEmpty()) ? "photo_with_labels" : "photo");
+                segment.setMotionType("static_image");
+                segment.setShot(null);
+            }
+        }
+
+        segment.setVisualAnimation(toRealHdVisual(segment.getVisualAnimation(), segment.getSentence()));
+        segment.setLocalAnimation("Animation disabled: use a real HD image/video frame. Add only minimal overlay labels if listed.");
+        segment.setComfyPrompt(buildRealHdPrompt(segment));
+        segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
+            "Animation disabled: storyboard is biased toward real HD imagery/photo labels and Wan video instead of local card/diagram animation."));
+    }
+
+    private boolean shouldUseWanWhenAnimationDisabled(SceneSegment segment) {
+        String text = joinForFactCheck(segment.getSentence(), segment.getVisualAnimation(), segment.getLocalAnimation());
+        return containsIgnoreCase(text, "bee")
+            || containsIgnoreCase(text, "bird")
+            || containsIgnoreCase(text, "bat")
+            || containsIgnoreCase(text, "wind")
+            || containsIgnoreCase(text, "water")
+            || containsIgnoreCase(text, "moving")
+            || containsIgnoreCase(text, "visiting")
+            || containsIgnoreCase(text, "flow")
+            || containsIgnoreCase(text, "pour")
+            || containsIgnoreCase(text, "reaction")
+            || containsIgnoreCase(text, "machine")
+            || containsIgnoreCase(text, "process");
+    }
+
+    private String toRealHdVisual(String current, String sentence) {
+        String base = current != null && !current.isBlank() ? current : sentence;
+        return "Real HD educational visual: " + base
+            + ". Avoid blank cards, slide boxes, synthetic sequence panels, and diagram-only layouts.";
+    }
+
+    private String buildRealHdPrompt(SceneSegment segment) {
+        String base = segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence();
+        return "Realistic HD educational visual, " + base
+            + ", natural lighting, sharp detail, documentary style, accurate subject, no blank cards, no slide layout, no text-heavy graphic panels";
+    }
+
+    private String buildRealisticWanPrompt(SceneSegment segment) {
+        String base = segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence();
+        return "Realistic HD educational Wan video, " + base
+            + ", natural motion, documentary style, sharp detail, accurate subject, seamless continuation, no blank cards, no slide layout";
+    }
+
+    private void enforceTiming(SceneSegment segment) {
+        if (segment.getEstimatedNarrationSeconds() <= 0) {
+            segment.setEstimatedNarrationSeconds(estimateNarrationSeconds(segment.getSentence()));
+        }
+        if (segment.getRecommendedClipSeconds() < segment.getEstimatedNarrationSeconds()) {
+            segment.setRecommendedClipSeconds(segment.getEstimatedNarrationSeconds());
+        }
+
+        if (segment.getTimingNotes() == null || segment.getTimingNotes().isBlank()) {
+            if ("wan_video".equals(segment.getMediaType())) {
+                segment.setTimingNotes(buildWanTimingNote(segment.getRecommendedClipSeconds()));
+            } else {
+                segment.setTimingNotes("Hold or animate this visual for the full narration duration with slow camera movement and staged labels if needed.");
+            }
+        }
+
+        if (segment.getShot() != null) {
+            segment.getShot().setDurationSeconds(segment.getRecommendedClipSeconds());
+            if (segment.getShot().getPrompt() != null && segment.getRecommendedClipSeconds() > 4.5
+                    && !containsIgnoreCase(segment.getShot().getPrompt(), "seamless")
+                    && !containsIgnoreCase(segment.getShot().getPrompt(), "continuation")) {
+                segment.getShot().setPrompt(segment.getShot().getPrompt()
+                    + ", designed for " + roundOneDecimal(segment.getRecommendedClipSeconds())
+                    + " seconds with seamless natural continuation, no abrupt ending");
+            }
+        }
+    }
+
+    private double estimateNarrationSeconds(String sentence) {
+        if (sentence == null || sentence.isBlank()) {
+            return 4.0;
+        }
+        String[] words = sentence.trim().split("\\s+");
+        double seconds = (words.length / 2.35) + 1.0;
+        return Math.max(3.0, Math.min(12.0, roundOneDecimal(seconds)));
+    }
+
+    private String buildWanTimingNote(double seconds) {
+        if (seconds <= 4.5) {
+            return "Generate one Wan clip for the full narration duration; avoid abrupt final-frame hold.";
+        }
+        int clips = (int) Math.ceil(seconds / 4.0);
+        return "Narration is longer than a 4-second Wan clip. Generate " + clips
+            + " continuation clips or one seamless looping motion totaling at least "
+            + roundOneDecimal(seconds) + " seconds; do not stretch a single 4-second clip.";
+    }
+
+    private double roundOneDecimal(double value) {
+        return Math.round(value * 10.0) / 10.0;
+    }
+
+    private void enforceElectroplatingScience(SceneSegment segment) {
+        String combined = joinForFactCheck(
+            segment.getSentence(),
+            segment.getVisualAnimation(),
+            segment.getLocalAnimation(),
+            segment.getComfyPrompt(),
+            segment.getCoverageNotes()
+        );
+        if (!containsIgnoreCase(combined, "electroplat")
+                && !containsIgnoreCase(combined, "silver nitrate")
+                && !containsIgnoreCase(combined, "cathode")
+                && !containsIgnoreCase(combined, "deposition")) {
+            return;
+        }
+
+        replaceInSegment(segment, "galvanic cell", "electrolytic cell");
+        replaceInSegment(segment, "galvanic setup", "electrolytic setup");
+
+        if (containsIgnoreCase(combined, "silver nitrate") && containsIgnoreCase(combined, "chloride")) {
+            segment.setVisualAnimation("Accurate electrolytic-cell diagram for electroplating: silver nitrate solution contains Ag+ and NO3- ions, with Ag+ moving toward the cathode.");
+            segment.setLocalAnimation("Label Ag+ and NO3- in the electrolyte. Do not show chloride ions unless silver chloride is explicitly being discussed. Show Ag+ gaining an electron at the cathode.");
+            segment.setLabels(mergeLabels(segment.getLabels(), List.of("Ag+", "NO3-", "Cathode", "Anode", "Electrolyte")));
+            segment.setComfyPrompt("Accurate educational chemistry diagram of silver electroplating in an electrolytic cell, silver nitrate electrolyte labeled Ag+ and NO3- ions, cathode and anode clearly labeled, Ag+ ions moving to cathode, clean textbook style");
+            segment.setCoverageNotes(appendNote(segment.getCoverageNotes(), "Science guard: silver nitrate is represented as Ag+ and NO3-; chloride ions are excluded unless chloride chemistry is explicitly part of the lesson."));
+        }
+
+        if (containsIgnoreCase(combined, "empty space")
+                || containsIgnoreCase(combined, "outermost shell")
+                || containsIgnoreCase(combined, "outer shell")) {
+            segment.setVisualAnimation("Electroplating reaction diagram showing Ag+ ions gaining electrons at the cathode and becoming neutral silver atoms.");
+            segment.setLocalAnimation("Animate Ag+ moving to the cathode, then show the half-equation Ag+ + e- -> Ag and silver atoms depositing as a thin coating.");
+            segment.setLabels(mergeLabels(segment.getLabels(), List.of("Ag+", "e-", "Ag", "Cathode")));
+            segment.setComfyPrompt("Educational electrochemistry diagram, cathode electron transfer, Ag+ plus electron becomes Ag, silver atoms depositing as a coating, accurate labels, clean classroom style");
+            segment.setCoverageNotes(appendNote(segment.getCoverageNotes(), "Science guard: deposition is explained as electron gain at the cathode: Ag+ + e- -> Ag."));
+        }
+
+        if ((containsIgnoreCase(combined, "gold") && containsIgnoreCase(combined, "silver"))
+                && (containsIgnoreCase(combined, "more deposit")
+                    || containsIgnoreCase(combined, "deposits more")
+                    || containsIgnoreCase(combined, "always deposits"))) {
+            segment.setVisualAnimation("Comparison diagram using Faraday's law factors for metal deposition rather than claiming one metal always deposits more.");
+            segment.setLocalAnimation("Show deposited mass depends on current, time, molar mass, and number of electrons transferred. Avoid a fixed gold-versus-silver winner unless values are provided.");
+            segment.setLabels(mergeLabels(segment.getLabels(), List.of("Current", "Time", "Molar mass", "Electrons transferred")));
+            segment.setComfyPrompt("Educational Faraday's law comparison diagram for electroplating, deposited mass depends on current, time, molar mass, electrons transferred, gold and silver examples, no unsupported always-more claim");
+            segment.setCoverageNotes(appendNote(segment.getCoverageNotes(), "Science guard: gold-versus-silver deposition is framed with Faraday's law, not as an unconditional more/less claim."));
+        }
+    }
+
+    private String joinForFactCheck(String... values) {
+        StringBuilder joined = new StringBuilder();
+        for (String value : values) {
+            if (value != null) {
+                joined.append(value).append(' ');
+            }
+        }
+        return joined.toString();
+    }
+
+    private void replaceInSegment(SceneSegment segment, String target, String replacement) {
+        segment.setVisualAnimation(replaceIgnoreCase(segment.getVisualAnimation(), target, replacement));
+        segment.setLocalAnimation(replaceIgnoreCase(segment.getLocalAnimation(), target, replacement));
+        segment.setComfyPrompt(replaceIgnoreCase(segment.getComfyPrompt(), target, replacement));
+        segment.setCoverageNotes(replaceIgnoreCase(segment.getCoverageNotes(), target, replacement));
+        if (segment.getShot() != null) {
+            segment.getShot().setHeading(replaceIgnoreCase(segment.getShot().getHeading(), target, replacement));
+            segment.getShot().setPrompt(replaceIgnoreCase(segment.getShot().getPrompt(), target, replacement));
+            segment.getShot().setNegativePrompt(replaceIgnoreCase(segment.getShot().getNegativePrompt(), target, replacement));
+        }
+    }
+
+    private String replaceIgnoreCase(String text, String target, String replacement) {
+        if (text == null) {
+            return null;
+        }
+        return text.replaceAll("(?i)\\b" + java.util.regex.Pattern.quote(target) + "\\b", replacement);
+    }
+
+    private String appendNote(String current, String note) {
+        if (current == null || current.isBlank()) {
+            return note;
+        }
+        if (current.contains(note)) {
+            return current;
+        }
+        return current + " " + note;
     }
 
     private String inferMediaType(SceneSegment segment) {
@@ -483,6 +793,17 @@ public class SceneStoryboardGenerator {
     private String getStringOrDefault(JsonObject obj, String memberName, String fallback) {
         if (obj.has(memberName) && !obj.get(memberName).isJsonNull()) {
             return obj.get(memberName).getAsString();
+        }
+        return fallback;
+    }
+
+    private double getDoubleOrDefault(JsonObject obj, String memberName, double fallback) {
+        if (obj.has(memberName) && !obj.get(memberName).isJsonNull()) {
+            try {
+                return obj.get(memberName).getAsDouble();
+            } catch (Exception ignored) {
+                return fallback;
+            }
         }
         return fallback;
     }

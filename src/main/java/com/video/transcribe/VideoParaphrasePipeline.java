@@ -78,7 +78,7 @@ public class VideoParaphrasePipeline {
 		this.whisper = new LocalWhisperTranscriber(config);
 		this.ollama = new OllamaClient(config);
 		this.validator = new AccuracyValidator(ollama);
-		this.sceneGenerator = new SceneStoryboardGenerator(ollama);
+		this.sceneGenerator = new SceneStoryboardGenerator(ollama, config.isStoryboardAnimationEnabled());
 		this.docxExporter = new StoryboardDocxExporter();
 
 		// Create TTS provider based on config (piper or edge)
@@ -309,8 +309,22 @@ public class VideoParaphrasePipeline {
 				validation.getOverallScore(), config.getValidationThreshold());
 		}
 
+		if (validation != null && isAcceptableAfterRetries(validation)) {
+			logger.warn("Accepting paraphrase after retries with near-threshold score {}/100. Review validation report for warnings.",
+				validation.getOverallScore());
+			return new ParaphraseValidation(paraphrased, validation);
+		}
+
 		throw new IOException("Paraphrase validation failed after " + maxAttempts
 			+ " attempts. Last score: " + (validation != null ? validation.getOverallScore() : "none"));
+	}
+
+	private boolean isAcceptableAfterRetries(ValidationResult validation) {
+		double nearThreshold = Math.max(70.0, config.getValidationThreshold() - 10.0);
+		return validation.getOverallScore() >= nearThreshold
+			&& validation.getFactualConsistencyScore() >= 70.0
+			&& validation.getTopicCoverageScore() >= 70.0
+			&& validation.getHallucinationScore() >= 80.0;
 	}
 
 	private String formatValidationIssues(ValidationResult validation) {

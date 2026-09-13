@@ -5,6 +5,7 @@ public class Shot {
     private String heading;
     private String prompt;
     private String negativePrompt;
+    private double durationSeconds;
 
     public String getTemplate() {
         return template;
@@ -36,5 +37,13 @@ public class Shot {
 
     public void setNegativePrompt(String negativePrompt) {
         this.negativePrompt = negativePrompt;
+    }
+
+    public double getDurationSeconds() {
+        return durationSeconds;
+    }
+
+    public void setDurationSeconds(double durationSeconds) {
+        this.durationSeconds = durationSeconds;
     }
 }
