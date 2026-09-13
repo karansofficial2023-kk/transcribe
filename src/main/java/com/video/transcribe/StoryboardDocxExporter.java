@@ -234,6 +234,9 @@ public class StoryboardDocxExporter {
         String negativePrompt = shot.getNegativePrompt() != null ? shot.getNegativePrompt() : "";
         return "template: " + template + "\nheading: " + heading
             + "\nduration: " + shot.getDurationSeconds() + " sec"
+            + "\nclip duration: " + shot.getClipDurationSeconds() + " sec"
+            + "\nclip count: " + shot.getClipCount()
+            + "\njoin: " + (shot.getJoinInstructions() != null ? shot.getJoinInstructions() : "")
             + "\nprompt: " + prompt + "\nnegative: " + negativePrompt;
     }
 

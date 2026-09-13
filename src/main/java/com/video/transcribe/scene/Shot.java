@@ -6,6 +6,9 @@ public class Shot {
     private String prompt;
     private String negativePrompt;
     private double durationSeconds;
+    private double clipDurationSeconds;
+    private int clipCount;
+    private String joinInstructions;
 
     public String getTemplate() {
         return template;
@@ -45,5 +48,29 @@ public class Shot {
 
     public void setDurationSeconds(double durationSeconds) {
         this.durationSeconds = durationSeconds;
+    }
+
+    public double getClipDurationSeconds() {
+        return clipDurationSeconds;
+    }
+
+    public void setClipDurationSeconds(double clipDurationSeconds) {
+        this.clipDurationSeconds = clipDurationSeconds;
+    }
+
+    public int getClipCount() {
+        return clipCount;
+    }
+
+    public void setClipCount(int clipCount) {
+        this.clipCount = clipCount;
+    }
+
+    public String getJoinInstructions() {
+        return joinInstructions;
+    }
+
+    public void setJoinInstructions(String joinInstructions) {
+        this.joinInstructions = joinInstructions;
     }
 }

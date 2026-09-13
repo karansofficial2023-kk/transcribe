@@ -134,6 +134,15 @@ public class SceneStoryboardGenerator {
                   },
                   "durationSeconds": {
                     "type": "number"
+                  },
+                  "clipDurationSeconds": {
+                    "type": "number"
+                  },
+                  "clipCount": {
+                    "type": "integer"
+                  },
+                  "joinInstructions": {
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -141,7 +150,10 @@ public class SceneStoryboardGenerator {
                   "heading",
                   "prompt",
                   "negativePrompt",
-                  "durationSeconds"
+                  "durationSeconds",
+                  "clipDurationSeconds",
+                  "clipCount",
+                  "joinInstructions"
                 ],
                 "additionalProperties": false
               },
@@ -165,6 +177,15 @@ public class SceneStoryboardGenerator {
                   },
                   "durationSeconds": {
                     "type": "number"
+                  },
+                  "clipDurationSeconds": {
+                    "type": "number"
+                  },
+                  "clipCount": {
+                    "type": "integer"
+                  },
+                  "joinInstructions": {
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -172,7 +193,10 @@ public class SceneStoryboardGenerator {
                   "heading",
                   "prompt",
                   "negativePrompt",
-                  "durationSeconds"
+                  "durationSeconds",
+                  "clipDurationSeconds",
+                  "clipCount",
+                  "joinInstructions"
                 ],
                 "additionalProperties": false
               }
@@ -300,7 +324,7 @@ public class SceneStoryboardGenerator {
             11. ComfyUI prompt for the selected media type
             12. Coverage notes explaining which curriculum facts from the sentence are covered visually
             13. A shot object for Wan/ComfyUI video generation only when the scene needs natural cinematic motion
-            14. An ltxShot object for LTX video generation when the scene needs generated video motion
+            14. An ltxShot object for LTX video generation when the scene needs generated video motion, including 4-second clip planning
             
             SCENE TITLE: %s
             NARRATION:
@@ -321,6 +345,10 @@ public class SceneStoryboardGenerator {
             - Use educational documentary style visuals
             - Estimate timing carefully: short sentences may be 3-5 seconds, medium sentences 6-8 seconds, long sentences 9-12 seconds.
             - recommendedClipSeconds must be at least estimatedNarrationSeconds.
+            - LTX compatibility requirement: LTX outputs 4-second clips. For LTX video rows, plan clipDurationSeconds = 4.0 and clipCount = ceil(recommendedClipSeconds / 4.0).
+            - If narration is longer than 4 seconds, timingNotes must explain that the video generator should create multiple 4-second LTX clips and join them in order.
+            - ltxShot.prompt must be detailed enough for joined 4-second clips: describe the full action, subject, environment, camera movement, continuity, and what each clip should continue from.
+            - ltxShot.joinInstructions must clearly describe how to split and join the LTX clips without changing narration, losing curriculum coverage, or freezing the last frame.
             - If video generation normally outputs short clips, then for narration longer than the clip length specify continuation clips, seamless loop motion, slow camera movement, or cutaways in timingNotes.
             - Use generated video where natural motion improves learning: pollinators moving, wind/water motion, liquids flowing, machine/process movement, lab action, real-world cause-effect motion.
             - Do not use generated video for concepts better taught with clean diagrams, labels, equations, maps, grammar steps, comparisons, or anatomy/process charts.
@@ -349,8 +377,9 @@ public class SceneStoryboardGenerator {
             - If motionType is not "wan_video", omit both shot and ltxShot fields.
             - Never add shot or ltxShot objects for static_image or local_animation rows.
             - For every wan_video row, shot.durationSeconds and ltxShot.durationSeconds must equal recommendedClipSeconds.
+            - For every ltxShot, set clipDurationSeconds = 4.0 and clipCount = ceil(durationSeconds / 4.0).
             - Write shot.prompt for Wan style: cinematic natural motion, stable subject anatomy, smooth camera, no text artifacts.
-            - Write ltxShot.prompt for LTX style: one continuous realistic action, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.
+            - Write ltxShot.prompt for LTX style: realistic educational video, subject-matter accurate, one continuous action split into 4-second continuation clips, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.
             - Labels should be short, screen-ready text. Return [] when labels are not useful.
             """.formatted(languageInstruction, buildAnimationModeInstruction(), buildVideoProviderInstruction(), scene.getSceneTitle(), scene.getNarration());
         
@@ -456,6 +485,9 @@ public class SceneStoryboardGenerator {
         shot.setPrompt(getStringOrDefault(shotObj, "prompt", segment.getComfyPrompt()));
         shot.setNegativePrompt(getStringOrDefault(shotObj, "negativePrompt", defaultNegativePrompt()));
         shot.setDurationSeconds(getDoubleOrDefault(shotObj, "durationSeconds", segment.getRecommendedClipSeconds()));
+        shot.setClipDurationSeconds(getDoubleOrDefault(shotObj, "clipDurationSeconds", 4.0));
+        shot.setClipCount(getIntOrDefault(shotObj, "clipCount", clipCountForDuration(shot.getDurationSeconds(), shot.getClipDurationSeconds())));
+        shot.setJoinInstructions(getStringOrDefault(shotObj, "joinInstructions", buildJoinInstructions(shot.getDurationSeconds(), shot.getClipDurationSeconds())));
         return shot;
     }
 
@@ -589,6 +621,9 @@ public class SceneStoryboardGenerator {
                 Active generated-video provider is LTX.
                 For generated-video rows, prioritize the ltxShot prompt as the production-ready prompt.
                 Keep the Wan shot field populated as an alternate prompt, but make the LTX shot the clearest and most directly usable option.
+                LTX currently works best as 4-second clips, so every ltxShot must be planned as one or more joined 4-second clips.
+                Think like the SME for this subject: make each LTX prompt detailed, visually clear, topic-related, curriculum-safe, and tied only to the narration sentence.
+                Do not change narration. Use prompt detail, clip continuity, and join instructions to cover the narration fully.
                 """;
         }
         if ("all".equals(videoProvider)) {
@@ -690,13 +725,16 @@ public class SceneStoryboardGenerator {
         ltxShot.setPrompt(buildRealisticLtxPrompt(segment));
         ltxShot.setNegativePrompt(defaultNegativePrompt());
         ltxShot.setDurationSeconds(segment.getRecommendedClipSeconds());
+        ltxShot.setClipDurationSeconds(4.0);
+        ltxShot.setClipCount(clipCountForDuration(ltxShot.getDurationSeconds(), ltxShot.getClipDurationSeconds()));
+        ltxShot.setJoinInstructions(buildJoinInstructions(ltxShot.getDurationSeconds(), ltxShot.getClipDurationSeconds()));
         return ltxShot;
     }
 
     private String buildRealisticLtxPrompt(SceneSegment segment) {
         String base = segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence();
         return "LTX video, realistic HD educational footage, " + base
-            + ", one continuous clear action from beginning to end, simple camera movement, stable subject, accurate educational detail, no abrupt final-frame freeze, no text artifacts, no slide layout";
+            + ", split into 4-second continuation clips if needed, one continuous clear action from beginning to end, simple camera movement, stable subject, accurate educational detail, no abrupt final-frame freeze, no text artifacts, no slide layout";
     }
 
     private void enforceTiming(SceneSegment segment) {
@@ -730,6 +768,16 @@ public class SceneStoryboardGenerator {
         }
         if (segment.getLtxShot() != null) {
             segment.getLtxShot().setDurationSeconds(segment.getRecommendedClipSeconds());
+            segment.getLtxShot().setClipDurationSeconds(4.0);
+            segment.getLtxShot().setClipCount(clipCountForDuration(
+                segment.getLtxShot().getDurationSeconds(),
+                segment.getLtxShot().getClipDurationSeconds()));
+            if (segment.getLtxShot().getJoinInstructions() == null
+                    || segment.getLtxShot().getJoinInstructions().isBlank()) {
+                segment.getLtxShot().setJoinInstructions(buildJoinInstructions(
+                    segment.getLtxShot().getDurationSeconds(),
+                    segment.getLtxShot().getClipDurationSeconds()));
+            }
             if (segment.getLtxShot().getPrompt() != null && segment.getRecommendedClipSeconds() > 4.5
                     && !containsIgnoreCase(segment.getLtxShot().getPrompt(), "continuous")
                     && !containsIgnoreCase(segment.getLtxShot().getPrompt(), "no abrupt")) {
@@ -738,6 +786,20 @@ public class SceneStoryboardGenerator {
                     + " seconds, no abrupt final-frame freeze");
             }
         }
+    }
+
+    private int clipCountForDuration(double durationSeconds, double clipDurationSeconds) {
+        double clipLength = clipDurationSeconds > 0 ? clipDurationSeconds : 4.0;
+        return Math.max(1, (int) Math.ceil(durationSeconds / clipLength));
+    }
+
+    private String buildJoinInstructions(double durationSeconds, double clipDurationSeconds) {
+        int clips = clipCountForDuration(durationSeconds, clipDurationSeconds);
+        if (clips == 1) {
+            return "Generate one 4-second LTX clip and trim or hold only as needed to match the narration timing; avoid a frozen final frame.";
+        }
+        return "Generate " + clips + " separate 4-second LTX clips. Clip 1 establishes the subject and action; each next clip continues the same motion, camera direction, lighting, and subject placement. Join clips in order with straight cuts or subtle crossfades to cover "
+            + roundOneDecimal(durationSeconds) + " seconds of narration without changing the script, skipping curriculum facts, or freezing the final frame.";
     }
 
     private double estimateNarrationSeconds(String sentence) {
@@ -750,6 +812,9 @@ public class SceneStoryboardGenerator {
     }
 
     private String buildWanTimingNote(double seconds) {
+        if ("ltx".equals(videoProvider)) {
+            return buildLtxTimingNote(seconds);
+        }
         if (seconds <= 4.5) {
             return "Generate one Wan clip for the full narration duration; avoid abrupt final-frame hold.";
         }
@@ -757,6 +822,15 @@ public class SceneStoryboardGenerator {
         return "Narration is longer than a 4-second Wan clip. Generate " + clips
             + " continuation clips or one seamless looping motion totaling at least "
             + roundOneDecimal(seconds) + " seconds; do not stretch a single 4-second clip.";
+    }
+
+    private String buildLtxTimingNote(double seconds) {
+        int clips = clipCountForDuration(seconds, 4.0);
+        if (clips == 1) {
+            return "LTX plan: generate one 4-second clip and trim/hold subtly to match the narration; avoid a frozen final frame.";
+        }
+        return "LTX plan: split this visual into " + clips + " joined 4-second clips. Keep the same subject, lighting, camera direction, and action continuity across clips; join in order to cover "
+            + roundOneDecimal(seconds) + " seconds of narration.";
     }
 
     private double roundOneDecimal(double value) {
@@ -922,6 +996,17 @@ public class SceneStoryboardGenerator {
         if (obj.has(memberName) && !obj.get(memberName).isJsonNull()) {
             try {
                 return obj.get(memberName).getAsDouble();
+            } catch (Exception ignored) {
+                return fallback;
+            }
+        }
+        return fallback;
+    }
+
+    private int getIntOrDefault(JsonObject obj, String memberName, int fallback) {
+        if (obj.has(memberName) && !obj.get(memberName).isJsonNull()) {
+            try {
+                return obj.get(memberName).getAsInt();
             } catch (Exception ignored) {
                 return fallback;
             }
