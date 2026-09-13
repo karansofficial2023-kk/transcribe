@@ -121,7 +121,7 @@ public class StoryboardDocxExporter {
         headerRow.setRepeatHeader(true);
         
         // Style header cells
-        String[] headers = {"S.no", "Splitting the Narration (Sentence wise)", "Media Type", "Timing", "Motion Plan", "Visual / Animation", "Local Teaching Animation", "Labels", "Image Recommendation", "ComfyUI Prompt", "Coverage / Fact Guard", "Wan Video Shot"};
+        String[] headers = {"S.no", "Splitting the Narration (Sentence wise)", "Media Type", "Timing", "Motion Plan", "Visual / Animation", "Local Teaching Animation", "Labels", "Image Recommendation", "ComfyUI Prompt", "Coverage / Fact Guard", "Wan Video Shot", "LTX Video Shot"};
         
         for (int i = 0; i < headers.length; i++) {
             XWPFTableCell cell = headerRow.getCell(i) != null ? headerRow.getCell(i) : headerRow.addNewTableCell();
@@ -198,28 +198,33 @@ public class StoryboardDocxExporter {
 
             // Wan Video Shot
             XWPFTableCell cell12 = row.getCell(11);
-            cell12.setText(formatShot(segment));
+            cell12.setText(formatShot(segment.getShot()));
             styleCell(cell12, ParagraphAlignment.LEFT);
+
+            // LTX Video Shot
+            XWPFTableCell cell13 = row.getCell(12);
+            cell13.setText(formatShot(segment.getLtxShot()));
+            styleCell(cell13, ParagraphAlignment.LEFT);
         }
         
         // Add spacing after table
         addEmptyLine(doc);
     }
 
-    private String formatShot(SceneSegment segment) {
-        if (segment.getShot() == null) {
+    private String formatShot(com.video.transcribe.scene.Shot shot) {
+        if (shot == null) {
             return "";
         }
 
-        String template = segment.getShot().getTemplate() != null ? segment.getShot().getTemplate() : "";
-        String heading = segment.getShot().getHeading() != null ? segment.getShot().getHeading() : "";
+        String template = shot.getTemplate() != null ? shot.getTemplate() : "";
+        String heading = shot.getHeading() != null ? shot.getHeading() : "";
         if (template.isBlank() && heading.isBlank()) {
             return "";
         }
-        String prompt = segment.getShot().getPrompt() != null ? segment.getShot().getPrompt() : "";
-        String negativePrompt = segment.getShot().getNegativePrompt() != null ? segment.getShot().getNegativePrompt() : "";
+        String prompt = shot.getPrompt() != null ? shot.getPrompt() : "";
+        String negativePrompt = shot.getNegativePrompt() != null ? shot.getNegativePrompt() : "";
         return "template: " + template + "\nheading: " + heading
-            + "\nduration: " + segment.getShot().getDurationSeconds() + " sec"
+            + "\nduration: " + shot.getDurationSeconds() + " sec"
             + "\nprompt: " + prompt + "\nnegative: " + negativePrompt;
     }
 

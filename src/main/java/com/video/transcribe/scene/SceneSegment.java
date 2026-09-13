@@ -17,6 +17,7 @@ public class SceneSegment {
 	private String comfyPrompt;
 	private String coverageNotes;
 	private Shot shot;
+	private Shot ltxShot;
 
 	public int getSegmentNumber() {
 		return segmentNumber;
@@ -128,5 +129,13 @@ public class SceneSegment {
 
 	public void setShot(Shot shot) {
 		this.shot = shot;
+	}
+
+	public Shot getLtxShot() {
+		return ltxShot;
+	}
+
+	public void setLtxShot(Shot ltxShot) {
+		this.ltxShot = ltxShot;
 	}
 }

@@ -143,6 +143,37 @@ public class SceneStoryboardGenerator {
                   "durationSeconds"
                 ],
                 "additionalProperties": false
+              },
+              "ltxShot": {
+                "type": "object",
+                "properties": {
+                  "template": {
+                    "type": "string",
+                    "enum": [
+                      "video"
+                    ]
+                  },
+                  "heading": {
+                    "type": "string"
+                  },
+                  "prompt": {
+                    "type": "string"
+                  },
+                  "negativePrompt": {
+                    "type": "string"
+                  },
+                  "durationSeconds": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "template",
+                  "heading",
+                  "prompt",
+                  "negativePrompt",
+                  "durationSeconds"
+                ],
+                "additionalProperties": false
               }
             },
             "required": [
@@ -245,7 +276,7 @@ public class SceneStoryboardGenerator {
             Think like a subject-matter expert and curriculum reviewer for this
             specific topic and subject. Preserve the narration/script exactly;
             improve only storyboard planning, visual choices, labels, coverage
-            notes, and ComfyUI/Wan prompts.
+            notes, and ComfyUI Wan/LTX prompts.
             %s
             %s
             For each sentence, provide:
@@ -261,7 +292,8 @@ public class SceneStoryboardGenerator {
             10. Image recommendations (2 specific image descriptions for stock photo/illustration search)
             11. ComfyUI prompt for the selected media type
             12. Coverage notes explaining which curriculum facts from the sentence are covered visually
-            13. A shot object for Wan/ComfyUI video generation only when the scene needs natural cinematic motion.
+            13. A shot object for Wan/ComfyUI video generation only when the scene needs natural cinematic motion
+            14. An ltxShot object for LTX video generation when the scene needs generated video motion
             
             SCENE TITLE: %s
             NARRATION:
@@ -282,9 +314,9 @@ public class SceneStoryboardGenerator {
             - Use educational documentary style visuals
             - Estimate timing carefully: short sentences may be 3-5 seconds, medium sentences 6-8 seconds, long sentences 9-12 seconds.
             - recommendedClipSeconds must be at least estimatedNarrationSeconds.
-            - If Wan generation normally outputs 4-second clips, then for narration longer than 4 seconds specify continuation clips, seamless loop motion, slow camera movement, or cutaways in timingNotes.
-            - Use more Wan where natural motion improves learning: pollinators moving, wind/water motion, liquids flowing, machine/process movement, lab action, real-world cause-effect motion.
-            - Do not use Wan for concepts better taught with clean diagrams, labels, equations, maps, grammar steps, comparisons, or anatomy/process charts.
+            - If video generation normally outputs short clips, then for narration longer than the clip length specify continuation clips, seamless loop motion, slow camera movement, or cutaways in timingNotes.
+            - Use generated video where natural motion improves learning: pollinators moving, wind/water motion, liquids flowing, machine/process movement, lab action, real-world cause-effect motion.
+            - Do not use generated video for concepts better taught with clean diagrams, labels, equations, maps, grammar steps, comparisons, or anatomy/process charts.
             - Choose mediaType for learning value, not visual spectacle:
               photo = real-world context or object recognition
               diagram = anatomy, process structure, comparison, classification, or abstract ideas
@@ -307,9 +339,11 @@ public class SceneStoryboardGenerator {
             - Use local_animation for teaching clarity: arrows, labels, highlighted parts, cutaway diagrams, timelines, maps, math/grammar steps, charts, comparisons, or process diagrams
             - Use static_image for a still photo or illustration with optional labels
             - For diagram/photo/animation media, write comfyPrompt as an image prompt or animation design prompt; for wan_video, write comfyPrompt to match shot.prompt.
-            - If motionType is not "wan_video", omit the shot field
-            - Never add a shot object for static_image or local_animation rows
-            - For every wan_video shot, shot.durationSeconds must equal recommendedClipSeconds.
+            - If motionType is not "wan_video", omit both shot and ltxShot fields.
+            - Never add shot or ltxShot objects for static_image or local_animation rows.
+            - For every wan_video row, shot.durationSeconds and ltxShot.durationSeconds must equal recommendedClipSeconds.
+            - Write shot.prompt for Wan style: cinematic natural motion, stable subject anatomy, smooth camera, no text artifacts.
+            - Write ltxShot.prompt for LTX style: one continuous realistic action, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.
             - Labels should be short, screen-ready text. Return [] when labels are not useful.
             """.formatted(languageInstruction, buildAnimationModeInstruction(), scene.getSceneTitle(), scene.getNarration());
         
@@ -378,14 +412,10 @@ public class SceneStoryboardGenerator {
                 seg.setComfyPrompt(getStringOrDefault(obj, "comfyPrompt", ""));
                 seg.setCoverageNotes(getStringOrDefault(obj, "coverageNotes", ""));
                 if (obj.has("shot") && obj.get("shot").isJsonObject()) {
-                    JsonObject shotObj = obj.getAsJsonObject("shot");
-                    Shot shot = new Shot();
-                    shot.setTemplate(getStringOrDefault(shotObj, "template", "video"));
-                    shot.setHeading(getStringOrDefault(shotObj, "heading", seg.getVisualAnimation()));
-                    shot.setPrompt(getStringOrDefault(shotObj, "prompt", seg.getComfyPrompt()));
-                    shot.setNegativePrompt(getStringOrDefault(shotObj, "negativePrompt", defaultNegativePrompt()));
-                    shot.setDurationSeconds(getDoubleOrDefault(shotObj, "durationSeconds", seg.getRecommendedClipSeconds()));
-                    seg.setShot(shot);
+                    seg.setShot(parseShot(obj.getAsJsonObject("shot"), seg));
+                }
+                if (obj.has("ltxShot") && obj.get("ltxShot").isJsonObject()) {
+                    seg.setLtxShot(parseShot(obj.getAsJsonObject("ltxShot"), seg));
                 }
                 enforceStoryboardQuality(seg);
                 segments.add(seg);
@@ -412,6 +442,16 @@ public class SceneStoryboardGenerator {
         return segments;
     }
 
+    private Shot parseShot(JsonObject shotObj, SceneSegment segment) {
+        Shot shot = new Shot();
+        shot.setTemplate(getStringOrDefault(shotObj, "template", "video"));
+        shot.setHeading(getStringOrDefault(shotObj, "heading", segment.getVisualAnimation()));
+        shot.setPrompt(getStringOrDefault(shotObj, "prompt", segment.getComfyPrompt()));
+        shot.setNegativePrompt(getStringOrDefault(shotObj, "negativePrompt", defaultNegativePrompt()));
+        shot.setDurationSeconds(getDoubleOrDefault(shotObj, "durationSeconds", segment.getRecommendedClipSeconds()));
+        return shot;
+    }
+
     private void enforceStoryboardQuality(SceneSegment segment) {
         String motionType = segment.getMotionType();
         if (motionType == null || motionType.isBlank()) {
@@ -421,12 +461,14 @@ public class SceneStoryboardGenerator {
 
         if (!"wan_video".equals(motionType)) {
             segment.setShot(null);
+            segment.setLtxShot(null);
         }
         if (segment.getMediaType() == null || segment.getMediaType().isBlank()) {
             segment.setMediaType("wan_video".equals(motionType) ? "wan_video" : inferMediaType(segment));
         }
         if (!"wan_video".equals(segment.getMediaType())) {
             segment.setShot(null);
+            segment.setLtxShot(null);
         }
         enforceAnimationMode(segment);
         enforceTiming(segment);
@@ -438,6 +480,7 @@ public class SceneStoryboardGenerator {
             segment.setMotionType("local_animation");
             segment.setMediaType("animation_with_labels");
             segment.setShot(null);
+            segment.setLtxShot(null);
             segment.setVisualAnimation("Labeled close-up diagram of the flower reproductive parts showing pollen, anther, and sticky stigma.");
             segment.setLocalAnimation("Preserve the narration sentence, but avoid animating the anther physically curling. Use arrows to show pollen transfer toward the stigma and labels for anther, pollen, and stigma.");
             segment.setLabels(mergeLabels(segment.getLabels(), List.of("Anther", "Pollen", "Stigma")));
@@ -465,7 +508,9 @@ public class SceneStoryboardGenerator {
             segment.getComfyPrompt(),
             segment.getCoverageNotes(),
             segment.getShot() != null ? segment.getShot().getHeading() : null,
-            segment.getShot() != null ? segment.getShot().getPrompt() : null
+            segment.getShot() != null ? segment.getShot().getPrompt() : null,
+            segment.getLtxShot() != null ? segment.getLtxShot().getHeading() : null,
+            segment.getLtxShot() != null ? segment.getLtxShot().getPrompt() : null
         );
 
         boolean narrationMentionsPollination = containsAnyIgnoreCase(sentence,
@@ -477,6 +522,7 @@ public class SceneStoryboardGenerator {
             segment.setMediaType(animationEnabled ? "animation_with_labels" : "photo_with_labels");
             segment.setMotionType(animationEnabled ? "local_animation" : "static_image");
             segment.setShot(null);
+            segment.setLtxShot(null);
             segment.setVisualAnimation("Topic-specific educational visual directly matching the sentence: " + sentence);
             segment.setLocalAnimation(animationEnabled
                 ? "Use labels, arrows, or highlights only for terms present in the sentence. Do not use bee, flower, pollen, or pollination imagery."
@@ -548,10 +594,12 @@ public class SceneStoryboardGenerator {
                 shot.setNegativePrompt(defaultNegativePrompt());
                 shot.setDurationSeconds(segment.getRecommendedClipSeconds());
                 segment.setShot(shot);
+                segment.setLtxShot(buildLtxShot(segment));
             } else {
                 segment.setMediaType((segment.getLabels() != null && !segment.getLabels().isEmpty()) ? "photo_with_labels" : "photo");
                 segment.setMotionType("static_image");
                 segment.setShot(null);
+                segment.setLtxShot(null);
             }
         }
 
@@ -596,6 +644,22 @@ public class SceneStoryboardGenerator {
             + ", natural motion, documentary style, sharp detail, accurate subject, seamless continuation, no blank cards, no slide layout";
     }
 
+    private Shot buildLtxShot(SceneSegment segment) {
+        Shot ltxShot = new Shot();
+        ltxShot.setTemplate("video");
+        ltxShot.setHeading(segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence());
+        ltxShot.setPrompt(buildRealisticLtxPrompt(segment));
+        ltxShot.setNegativePrompt(defaultNegativePrompt());
+        ltxShot.setDurationSeconds(segment.getRecommendedClipSeconds());
+        return ltxShot;
+    }
+
+    private String buildRealisticLtxPrompt(SceneSegment segment) {
+        String base = segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence();
+        return "LTX video, realistic HD educational footage, " + base
+            + ", one continuous clear action from beginning to end, simple camera movement, stable subject, accurate educational detail, no abrupt final-frame freeze, no text artifacts, no slide layout";
+    }
+
     private void enforceTiming(SceneSegment segment) {
         if (segment.getEstimatedNarrationSeconds() <= 0) {
             segment.setEstimatedNarrationSeconds(estimateNarrationSeconds(segment.getSentence()));
@@ -620,6 +684,19 @@ public class SceneStoryboardGenerator {
                 segment.getShot().setPrompt(segment.getShot().getPrompt()
                     + ", designed for " + roundOneDecimal(segment.getRecommendedClipSeconds())
                     + " seconds with seamless natural continuation, no abrupt ending");
+            }
+        }
+        if ("wan_video".equals(segment.getMediaType()) && segment.getLtxShot() == null) {
+            segment.setLtxShot(buildLtxShot(segment));
+        }
+        if (segment.getLtxShot() != null) {
+            segment.getLtxShot().setDurationSeconds(segment.getRecommendedClipSeconds());
+            if (segment.getLtxShot().getPrompt() != null && segment.getRecommendedClipSeconds() > 4.5
+                    && !containsIgnoreCase(segment.getLtxShot().getPrompt(), "continuous")
+                    && !containsIgnoreCase(segment.getLtxShot().getPrompt(), "no abrupt")) {
+                segment.getLtxShot().setPrompt(segment.getLtxShot().getPrompt()
+                    + ", continuous motion for " + roundOneDecimal(segment.getRecommendedClipSeconds())
+                    + " seconds, no abrupt final-frame freeze");
             }
         }
     }
@@ -714,6 +791,11 @@ public class SceneStoryboardGenerator {
             segment.getShot().setHeading(replaceIgnoreCase(segment.getShot().getHeading(), target, replacement));
             segment.getShot().setPrompt(replaceIgnoreCase(segment.getShot().getPrompt(), target, replacement));
             segment.getShot().setNegativePrompt(replaceIgnoreCase(segment.getShot().getNegativePrompt(), target, replacement));
+        }
+        if (segment.getLtxShot() != null) {
+            segment.getLtxShot().setHeading(replaceIgnoreCase(segment.getLtxShot().getHeading(), target, replacement));
+            segment.getLtxShot().setPrompt(replaceIgnoreCase(segment.getLtxShot().getPrompt(), target, replacement));
+            segment.getLtxShot().setNegativePrompt(replaceIgnoreCase(segment.getLtxShot().getNegativePrompt(), target, replacement));
         }
     }
 
