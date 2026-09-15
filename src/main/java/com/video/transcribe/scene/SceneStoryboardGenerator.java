@@ -418,7 +418,7 @@ public class SceneStoryboardGenerator {
             9. labels, arrows, highlights, formulaLines, explainSteps, steps, and columns as renderer overlay instructions
             10. Image recommendations (2 specific no-text image descriptions for stock photo/illustration search)
             11. motion: camera, reveal, and transition plan
-            12. subtitleStyle: usually "bottom_band black 38% opacity white centered max 2 lines"
+            12. subtitleStyle: usually "bottom_band black 38%% opacity white centered max 2 lines"
             13. tool: "pillow_opencv", "ffmpeg", "manim", "comfy_image", "ltx_video", "upscale", or "reviewed_asset"
             14. assetQualityNotes: whether to use reviewed asset, generated still, deterministic diagram, LTX b-roll, and/or upscale
             15. ComfyUI prompt for clean background asset only
