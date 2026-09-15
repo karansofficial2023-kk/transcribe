@@ -70,7 +70,12 @@ public class OllamaClient {
                keep that mix naturally.
             12. Do not translate to English unless the requested style explicitly asks for translation
             13. Do not introduce Tamil, Hindi, or any other language if the original transcript is English
-            14. Output ONLY the paraphrased text, no explanations
+            14. Remove non-educational channel promotion phrases such as subscribe, subscribed,
+                subscription prompts, like it, like, share, comment, press the bell icon,
+                watch more videos, eBibe videos, Embibe videos, "in this video", "welcome back",
+                thanks for watching, stay tuned, and similar social-media calls to action.
+                Do not remove curriculum content.
+            15. Output ONLY the paraphrased text, no explanations
             """;
         
         String userPrompt = String.format("""
@@ -97,6 +102,11 @@ public class OllamaClient {
             Preserve the intended technical concept after correction; do not change it into an unrelated concept.
             Use curriculum-safe, topic-appropriate wording. If a detail is uncertain, choose the safest standard explanation supported by the transcript.
             Preserve the original transcript language/script.
+            Remove non-educational channel promotion phrases such as subscribe, subscribed,
+            subscription prompts, like it, like, share, comment, press the bell icon,
+            watch more videos, eBibe videos, Embibe videos, "in this video", "welcome back",
+            thanks for watching, stay tuned, and similar social-media calls to action.
+            Do not remove curriculum content.
             Output ONLY the improved paraphrased text.
             """;
 

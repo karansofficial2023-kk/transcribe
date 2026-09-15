@@ -364,7 +364,8 @@ public class SceneStoryboardGenerator {
             specific topic and subject. Keep explanations curriculum-safe and
             suitable for educational video production.
             Each scene should cover a distinct topic or sub-topic.
-            Create 3-8 scenes depending on content length.
+            Create fewer, stronger scenes: usually 6-10 scenes for a short lesson.
+            Avoid micro-scenes and avoid one scene per sentence.
             %s
             
             TEXT:
@@ -379,6 +380,9 @@ public class SceneStoryboardGenerator {
             - Scene titles should be descriptive
             - Do not introduce words from any language that is not present in the transcript
             - Do not merge unrelated topics
+            - Use a curriculum arc: title/overview, definition, main categories, mechanisms or agents, adaptations/special cases, comparison, summary
+            - If and only if the topic is types of pollination, prefer this scene arc when supported by the transcript:
+              title card; definition as pollen transfer from anther to stigma; self-pollination; cross-pollination; abiotic agents wind/water; biotic agents insects/birds/bats/animals; adaptations such as homogamy/cleistogamy/dichogamy/herkogamy/heterostyly; self-vs-cross comparison; summary
             """.formatted(languageInstruction, text);
         
         String response = ollama.generateStructured(
@@ -435,6 +439,8 @@ public class SceneStoryboardGenerator {
             
             Rules:
             - Split by natural sentence boundaries
+            - Prefer one strong segment for this scene unless the scene contains two clearly different visual ideas.
+            - Do not create empty white/card layouts. Use real HD photo/background assets or deterministic diagrams with strong composition.
             - Use 8 to 14 total segments for a 1-2 minute lesson when possible; if narration is longer, keep one concept per segment.
             - Target 5 to 9 seconds per segment; short title cards may be 3 to 5 seconds.
             - Every 2-3 segments, vary visual rhythm using title_card, labeled_image, comparison, process, formula, split_screen, or video_broll.
@@ -443,6 +449,8 @@ public class SceneStoryboardGenerator {
             - Use curriculum-safe explanations and standard subject terminology
             - Never introduce off-topic animals, plants, tools, reactions, locations, or examples from previous videos or prompt examples.
             - If a visual detail is uncertain, avoid inventing it; use a neutral diagram, label, or coverage note instead
+            - Never use vague placeholder labels such as "observe detail", "bees present", "important part", "key detail", "main object", "thing", or "area".
+            - Labels must be exact curriculum nouns visible in the background asset, not general instructions to the viewer.
             - Core renderer rule: never ask AI image/video models to create exact text, labels, arrows, formulas, legends, numbers, or scientific names inside the generated image/video.
             - Put all exact text, labels, arrows, legends, highlights, formulas, and subtitles in overlay fields so Pillow/OpenCV/Manim/FFmpeg can draw them precisely.
             - comfyPrompt and shot prompts must request clean backgrounds with no text, no labels, no captions, no watermarks, and no formula text.
@@ -455,8 +463,8 @@ public class SceneStoryboardGenerator {
             - Use video_broll only for simple natural motion where exact labels/formulas are not required.
             - Tool routing: title_card/labeled_image/process/comparison/split_screen usually use pillow_opencv plus ffmpeg; formula uses manim; generated still background uses comfy_image; LTX b-roll uses ltx_video; final sharpening can add upscale in assetQualityNotes.
             - Visuals should be specific and actionable for video editors
-            - Images should be descriptive enough for stock photo searches
-            - Use educational documentary style visuals
+            - Images should be descriptive enough for stock photo searches and real-HD image generation.
+            - Use polished educational documentary style visuals with realistic lighting, shallow depth of field where useful, strong subject placement, and enough negative space for overlays.
             - Estimate timing carefully: short sentences may be 3-5 seconds, medium sentences 6-8 seconds, long sentences 9-12 seconds.
             - recommendedClipSeconds must be at least estimatedNarrationSeconds.
             - LTX compatibility requirement: LTX outputs 4-second clips. For LTX video rows, plan clipDurationSeconds = 4.0 and clipCount = ceil(recommendedClipSeconds / 4.0).
@@ -479,6 +487,10 @@ public class SceneStoryboardGenerator {
             - Do not change or rewrite narration. The sentence field must remain faithful to the scene narration.
             - Do not add new curriculum facts, but do visually cover every curriculum fact already present in the sentence.
             - Include all named plants, processes, agents, plant parts, and comparisons from the sentence in the visualAnimation, localAnimation, labels, imageRecommendations, or coverageNotes.
+            - If and only if the topic is pollination, use exact labels only when relevant and visible: anther, stigma, pollen grains, filament, style, ovary, nectar guide, pollinator, pollen transfer path.
+            - For pollination title cards, use a strong real macro flower/pollinator background and renderer-drawn title "Types of Pollination".
+            - For pollination comparison, use columns for self-pollination and cross-pollination instead of many weak cards.
+            - For pollination adaptations, cover homogamy, cleistogamy, dichogamy, herkogamy, and heterostyly as overlay terms/process labels only if present in narration.
             - Science accuracy guard: do not invent ions, reactions, cell types, forces, organ names, dates, units, or mechanisms that are not supported by the narration or standard curriculum.
             - If the topic is electroplating, use electrolytic cell terminology, not galvanic cell terminology.
             - If the topic mentions silver nitrate, represent it as Ag+ and NO3- in solution; do not add chloride ions unless the narration explicitly discusses chloride or silver chloride.
@@ -735,6 +747,8 @@ public class SceneStoryboardGenerator {
             segment.setAssetPath("");
         }
         if (segment.getLabels() == null) segment.setLabels(List.of());
+        segment.setLabels(sanitizeLabels(segment.getLabels(), segment));
+        applySubjectSpecificLabels(segment);
         if (segment.getArrows() == null) segment.setArrows(List.of());
         if (segment.getHighlights() == null) segment.setHighlights(List.of());
         if (segment.getFormulaLines() == null) segment.setFormulaLines(List.of());
@@ -794,7 +808,7 @@ public class SceneStoryboardGenerator {
         String base = segment.getVisualAnimation() != null && !segment.getVisualAnimation().isBlank()
             ? segment.getVisualAnimation()
             : segment.getSentence();
-        return base + "; clean background asset only; no text, no labels, no formulas, no arrows";
+        return base + "; real HD educational background asset, strong subject placement, natural lighting, no text, no labels, no formulas, no arrows, no blank white card";
     }
 
     private String defaultMotion(String template) {
@@ -861,6 +875,84 @@ public class SceneStoryboardGenerator {
         }
     }
 
+    private List<String> sanitizeLabels(List<String> labels, SceneSegment segment) {
+        List<String> cleaned = new ArrayList<>();
+        if (labels != null) {
+            for (String label : labels) {
+                if (label == null || label.isBlank()) {
+                    continue;
+                }
+                String trimmed = label.trim();
+                if (isWeakPlaceholderLabel(trimmed)) {
+                    continue;
+                }
+                if (!containsLabel(cleaned, trimmed)) {
+                    cleaned.add(trimmed);
+                }
+            }
+        }
+        return cleaned;
+    }
+
+    private boolean isWeakPlaceholderLabel(String label) {
+        String normalized = label.toLowerCase(java.util.Locale.ROOT).trim();
+        return normalized.equals("observe detail")
+            || normalized.equals("bees present")
+            || normalized.equals("important part")
+            || normalized.equals("key detail")
+            || normalized.equals("main object")
+            || normalized.equals("area")
+            || normalized.equals("thing")
+            || normalized.equals("detail")
+            || normalized.startsWith("observe ")
+            || normalized.endsWith(" present");
+    }
+
+    private void applySubjectSpecificLabels(SceneSegment segment) {
+        String combined = joinForFactCheck(
+            segment.getSentence(),
+            segment.getHeading(),
+            segment.getVisualSubject(),
+            segment.getVisualAnimation(),
+            segment.getLocalAnimation(),
+            segment.getCoverageNotes()
+        );
+        if (!containsAnyIgnoreCase(combined, "pollination", "pollen", "anther", "stigma", "flower", "pollinator")) {
+            return;
+        }
+
+        List<String> exact = new ArrayList<>();
+        addIfMentioned(exact, combined, "anther");
+        addIfMentioned(exact, combined, "stigma");
+        addIfMentioned(exact, combined, "pollen grains", "pollen");
+        addIfMentioned(exact, combined, "filament");
+        addIfMentioned(exact, combined, "style");
+        addIfMentioned(exact, combined, "ovary");
+        addIfMentioned(exact, combined, "nectar guide", "nectar");
+        addIfMentioned(exact, combined, "pollinator", "bee", "insect", "bird", "bat", "animal");
+        addIfMentioned(exact, combined, "pollen transfer path", "transfer");
+        if (!exact.isEmpty()) {
+            segment.setLabels(mergeLabels(exact, List.of()));
+        }
+    }
+
+    private void addIfMentioned(List<String> labels, String text, String label, String... triggers) {
+        if (containsIgnoreCase(text, label)) {
+            if (!containsLabel(labels, label)) {
+                labels.add(label);
+            }
+            return;
+        }
+        for (String trigger : triggers) {
+            if (containsIgnoreCase(text, trigger)) {
+                if (!containsLabel(labels, label)) {
+                    labels.add(label);
+                }
+                return;
+            }
+        }
+    }
+
     private boolean containsAnyIgnoreCase(String text, String... needles) {
         for (String needle : needles) {
             if (containsIgnoreCase(text, needle)) {
@@ -875,13 +967,20 @@ public class SceneStoryboardGenerator {
         if (sentence == null || sentence.isBlank()) {
             return labels;
         }
-        String cleaned = sentence.replaceAll("[^A-Za-z0-9+\\- ]", " ");
-        String[] words = cleaned.split("\\s+");
-        for (String word : words) {
-            if (word.length() >= 6 && labels.size() < 3 && !containsLabel(labels, word)) {
-                labels.add(word);
-            }
-        }
+        addIfMentioned(labels, sentence, "anther");
+        addIfMentioned(labels, sentence, "stigma");
+        addIfMentioned(labels, sentence, "pollen grains", "pollen");
+        addIfMentioned(labels, sentence, "filament");
+        addIfMentioned(labels, sentence, "style");
+        addIfMentioned(labels, sentence, "ovary");
+        addIfMentioned(labels, sentence, "nectar guide", "nectar");
+        addIfMentioned(labels, sentence, "pollinator", "pollinator", "bee", "insect", "bird", "bat", "animal");
+        addIfMentioned(labels, sentence, "pollen transfer path", "transfer");
+        addIfMentioned(labels, sentence, "cathode");
+        addIfMentioned(labels, sentence, "anode");
+        addIfMentioned(labels, sentence, "electrolyte");
+        addIfMentioned(labels, sentence, "Ag+", "silver ion", "silver ions");
+        addIfMentioned(labels, sentence, "NO3-", "nitrate");
         return labels;
     }
 
@@ -996,8 +1095,8 @@ public class SceneStoryboardGenerator {
 
     private String buildRealHdPrompt(SceneSegment segment) {
         String base = segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence();
-        return "Realistic HD educational visual, " + base
-            + ", natural lighting, sharp detail, documentary style, accurate subject, no blank cards, no slide layout, no text-heavy graphic panels";
+        return "Realistic HD educational background image, " + base
+            + ", strong subject placement, natural lighting, sharp detail, documentary style, accurate subject, shallow depth of field where useful, clear negative space for later overlay labels, no blank cards, no slide layout, no white empty panel, no text-heavy graphic panels, no embedded text, no generated labels, no generated arrows";
     }
 
     private String buildRealisticWanPrompt(SceneSegment segment) {
@@ -1235,8 +1334,8 @@ public class SceneStoryboardGenerator {
 
     private String buildDefaultComfyPrompt(SceneSegment segment) {
         String base = segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence();
-        return "Educational content visual, " + base
-            + ", accurate subject matter, clean composition, high clarity, suitable for classroom video";
+        return "Realistic HD educational background image, " + base
+            + ", accurate subject matter, strong composition, natural lighting, high clarity, suitable for classroom video, clear negative space for renderer overlays, no blank slide, no white card, no embedded text, no generated labels, no generated arrows";
     }
 
     private String defaultNegativePrompt() {
