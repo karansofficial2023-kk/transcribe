@@ -514,9 +514,9 @@ public class SceneStoryboardGenerator {
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject obj = arr.get(i).getAsJsonObject();
                 Scene scene = new Scene();
-                scene.setSceneNumber(obj.get("sceneNumber").getAsInt());
-                scene.setSceneTitle(obj.get("sceneTitle").getAsString());
-                scene.setNarration(obj.get("narration").getAsString());
+                scene.setSceneNumber(getIntOrDefault(obj, "sceneNumber", i + 1));
+                scene.setSceneTitle(getStringOrDefault(obj, "sceneTitle", "Scene " + (i + 1)));
+                scene.setNarration(getStringOrDefault(obj, "narration", ""));
                 scenes.add(scene);
             }
         } catch (Exception e) {
@@ -537,8 +537,8 @@ public class SceneStoryboardGenerator {
             for (int i = 0; i < arr.size(); i++) {
                 JsonObject obj = arr.get(i).getAsJsonObject();
                 SceneSegment seg = new SceneSegment();
-                seg.setSegmentNumber(obj.get("segmentNumber").getAsInt());
-                seg.setSentence(obj.get("sentence").getAsString());
+                seg.setSegmentNumber(getIntOrDefault(obj, "segmentNumber", i + 1));
+                seg.setSentence(getStringOrDefault(obj, "sentence", ""));
                 seg.setTemplate(getStringOrDefault(obj, "template", "labeled_image"));
                 seg.setHeading(getStringOrDefault(obj, "heading", ""));
                 seg.setVisualSubject(getStringOrDefault(obj, "visualSubject", ""));
@@ -548,7 +548,7 @@ public class SceneStoryboardGenerator {
                 seg.setEstimatedNarrationSeconds(getDoubleOrDefault(obj, "estimatedNarrationSeconds", estimateNarrationSeconds(seg.getSentence())));
                 seg.setRecommendedClipSeconds(getDoubleOrDefault(obj, "recommendedClipSeconds", seg.getEstimatedNarrationSeconds()));
                 seg.setTimingNotes(getStringOrDefault(obj, "timingNotes", ""));
-                seg.setVisualAnimation(obj.get("visualAnimation").getAsString());
+                seg.setVisualAnimation(getStringOrDefault(obj, "visualAnimation", buildVisualSubject(seg)));
                 seg.setLocalAnimation(getStringOrDefault(obj, "localAnimation", ""));
 
                 seg.setLabels(getStringList(obj, "labels"));
