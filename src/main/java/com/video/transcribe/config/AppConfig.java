@@ -67,7 +67,7 @@ public class AppConfig {
 		props.setProperty("tool.whisper.model", "base");
 		props.setProperty("tool.whisper.device", "cuda");
 		props.setProperty("tool.ollama.url", "http://localhost:11434");
-		props.setProperty("tool.ollama.model", "llama3.1:8b");
+		props.setProperty("tool.ollama.model", "qwen3:14b");
 		props.setProperty("tool.piper.path", "piper");
 		props.setProperty("storyboard.animation.enabled", "true");
 		props.setProperty("storyboard.video.provider", "wan");

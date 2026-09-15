@@ -130,7 +130,7 @@ public class StoryboardDocxExporter {
         headerRow.setRepeatHeader(true);
         
         // Style header cells
-        String[] headers = {"S.no", "Splitting the Narration (Sentence wise)", "Media Type", "Timing", "Motion Plan", "Visual / Animation", "Local Teaching Animation", "Labels", "Image Recommendation", "ComfyUI Prompt", "Coverage / Fact Guard", "Wan Video Shot", "LTX Video Shot"};
+        String[] headers = {"S.no", "Narration", "Template", "Heading", "Timing", "Tool", "Visual Subject", "Asset / Image Prompt", "Overlay Plan", "Motion / Subtitle", "Coverage / Asset Quality", "Wan Video Shot", "LTX Video Shot"};
         
         for (int i = 0; i < headers.length; i++) {
             XWPFTableCell cell = headerRow.getCell(i) != null ? headerRow.getCell(i) : headerRow.addNewTableCell();
@@ -155,54 +155,54 @@ public class StoryboardDocxExporter {
             cell1.setText(String.valueOf(segment.getSegmentNumber()));
             styleCell(cell1, ParagraphAlignment.CENTER);
             
-            // Sentence
+            // Narration
             XWPFTableCell cell2 = row.getCell(1);
             cell2.setText("\"" + segment.getSentence() + "\"");
             styleCell(cell2, ParagraphAlignment.LEFT);
             
-            // Media Type
+            // Template
             XWPFTableCell cell3 = row.getCell(2);
-            cell3.setText(formatMediaType(segment.getMediaType()));
+            cell3.setText(formatTemplate(segment.getTemplate()) + "\n" + formatMediaType(segment.getMediaType()));
             styleCell(cell3, ParagraphAlignment.LEFT);
 
-            // Timing
+            // Heading
             XWPFTableCell cell4 = row.getCell(3);
-            cell4.setText(formatTiming(segment));
+            cell4.setText(segment.getHeading() != null ? segment.getHeading() : "");
             styleCell(cell4, ParagraphAlignment.LEFT);
 
-            // Motion Plan
+            // Timing
             XWPFTableCell cell5 = row.getCell(4);
-            cell5.setText(formatMotionType(segment.getMotionType()));
+            cell5.setText(formatTiming(segment));
             styleCell(cell5, ParagraphAlignment.LEFT);
 
-            // Visual/Animation
+            // Tool
             XWPFTableCell cell6 = row.getCell(5);
-            cell6.setText(segment.getVisualAnimation());
+            cell6.setText((segment.getTool() != null ? segment.getTool() : "") + "\n" + formatMotionType(segment.getMotionType()));
             styleCell(cell6, ParagraphAlignment.LEFT);
 
-            // Local Teaching Animation
+            // Visual Subject
             XWPFTableCell cell7 = row.getCell(6);
-            cell7.setText(segment.getLocalAnimation() != null ? segment.getLocalAnimation() : "");
+            cell7.setText(formatVisualSubject(segment));
             styleCell(cell7, ParagraphAlignment.LEFT);
 
-            // Labels
+            // Asset / Image Prompt
             XWPFTableCell cell8 = row.getCell(7);
-            cell8.setText(formatList(segment.getLabels()));
+            cell8.setText(formatAssetPrompt(segment));
             styleCell(cell8, ParagraphAlignment.LEFT);
 
-            // Image Recommendations
+            // Overlay Plan
             XWPFTableCell cell9 = row.getCell(8);
-            cell9.setText(formatList(segment.getImageRecommendations()));
+            cell9.setText(formatOverlayPlan(segment));
             styleCell(cell9, ParagraphAlignment.LEFT);
 
-            // ComfyUI Prompt
+            // Motion / Subtitle
             XWPFTableCell cell10 = row.getCell(9);
-            cell10.setText(segment.getComfyPrompt() != null ? segment.getComfyPrompt() : "");
+            cell10.setText("motion: " + safe(segment.getMotion()) + "\nsubtitle: " + safe(segment.getSubtitleStyle()));
             styleCell(cell10, ParagraphAlignment.LEFT);
 
-            // Coverage / Fact Guard
+            // Coverage / Asset Quality
             XWPFTableCell cell11 = row.getCell(10);
-            cell11.setText(segment.getCoverageNotes() != null ? segment.getCoverageNotes() : "");
+            cell11.setText(safe(segment.getCoverageNotes()) + "\n\nasset quality: " + safe(segment.getAssetQualityNotes()));
             styleCell(cell11, ParagraphAlignment.LEFT);
 
             // Wan Video Shot
@@ -244,6 +244,48 @@ public class StoryboardDocxExporter {
         return "narration: " + segment.getEstimatedNarrationSeconds() + " sec"
             + "\nvisual: " + segment.getRecommendedClipSeconds() + " sec"
             + "\n" + (segment.getTimingNotes() != null ? segment.getTimingNotes() : "");
+    }
+
+    private String formatTemplate(String template) {
+        if (template == null || template.isBlank()) {
+            return "";
+        }
+        return switch (template) {
+            case "title_card" -> "Title card";
+            case "labeled_image" -> "Labeled image";
+            case "comparison" -> "Comparison";
+            case "process" -> "Process";
+            case "formula" -> "Formula";
+            case "split_screen" -> "Split screen";
+            case "video_broll" -> "Video b-roll";
+            default -> template;
+        };
+    }
+
+    private String formatVisualSubject(SceneSegment segment) {
+        return "visual_subject: " + safe(segment.getVisualSubject())
+            + "\nvisual notes: " + safe(segment.getVisualAnimation())
+            + "\nlocal animation: " + safe(segment.getLocalAnimation());
+    }
+
+    private String formatAssetPrompt(SceneSegment segment) {
+        return "asset_path: " + safe(segment.getAssetPath())
+            + "\nimage recommendations:\n" + formatList(segment.getImageRecommendations())
+            + "\n\ncomfy/background prompt:\n" + safe(segment.getComfyPrompt());
+    }
+
+    private String formatOverlayPlan(SceneSegment segment) {
+        return "labels:\n" + formatList(segment.getLabels())
+            + "\n\narrows:\n" + formatList(segment.getArrows())
+            + "\n\nhighlights:\n" + formatList(segment.getHighlights())
+            + "\n\nformula lines:\n" + formatList(segment.getFormulaLines())
+            + "\n\nexplain steps:\n" + formatList(segment.getExplainSteps())
+            + "\n\nsteps:\n" + formatList(segment.getSteps())
+            + "\n\ncolumns:\n" + formatList(segment.getColumns());
+    }
+
+    private String safe(String value) {
+        return value != null ? value : "";
     }
 
     private String formatMediaType(String mediaType) {

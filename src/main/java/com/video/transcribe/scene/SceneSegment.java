@@ -5,6 +5,10 @@ import java.util.List;
 public class SceneSegment {
 	private int segmentNumber;
 	private String sentence;
+	private String template;
+	private String heading;
+	private String visualSubject;
+	private String assetPath;
 	private String mediaType;
 	private String motionType;
 	private double estimatedNarrationSeconds;
@@ -13,7 +17,17 @@ public class SceneSegment {
 	private String visualAnimation;
 	private String localAnimation;
 	private List<String> labels;
+	private List<String> arrows;
+	private List<String> highlights;
+	private List<String> formulaLines;
+	private List<String> explainSteps;
+	private List<String> steps;
+	private List<String> columns;
 	private List<String> imageRecommendations;
+	private String motion;
+	private String subtitleStyle;
+	private String tool;
+	private String assetQualityNotes;
 	private String comfyPrompt;
 	private String coverageNotes;
 	private Shot shot;
@@ -33,6 +47,38 @@ public class SceneSegment {
 
 	public void setSentence(String sentence) {
 		this.sentence = sentence;
+	}
+
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+
+	public String getHeading() {
+		return heading;
+	}
+
+	public void setHeading(String heading) {
+		this.heading = heading;
+	}
+
+	public String getVisualSubject() {
+		return visualSubject;
+	}
+
+	public void setVisualSubject(String visualSubject) {
+		this.visualSubject = visualSubject;
+	}
+
+	public String getAssetPath() {
+		return assetPath;
+	}
+
+	public void setAssetPath(String assetPath) {
+		this.assetPath = assetPath;
 	}
 
 	public String getMediaType() {
@@ -99,12 +145,92 @@ public class SceneSegment {
 		this.labels = labels;
 	}
 
+	public List<String> getArrows() {
+		return arrows;
+	}
+
+	public void setArrows(List<String> arrows) {
+		this.arrows = arrows;
+	}
+
+	public List<String> getHighlights() {
+		return highlights;
+	}
+
+	public void setHighlights(List<String> highlights) {
+		this.highlights = highlights;
+	}
+
+	public List<String> getFormulaLines() {
+		return formulaLines;
+	}
+
+	public void setFormulaLines(List<String> formulaLines) {
+		this.formulaLines = formulaLines;
+	}
+
+	public List<String> getExplainSteps() {
+		return explainSteps;
+	}
+
+	public void setExplainSteps(List<String> explainSteps) {
+		this.explainSteps = explainSteps;
+	}
+
+	public List<String> getSteps() {
+		return steps;
+	}
+
+	public void setSteps(List<String> steps) {
+		this.steps = steps;
+	}
+
+	public List<String> getColumns() {
+		return columns;
+	}
+
+	public void setColumns(List<String> columns) {
+		this.columns = columns;
+	}
+
 	public List<String> getImageRecommendations() {
 		return imageRecommendations;
 	}
 
 	public void setImageRecommendations(List<String> imageRecommendations) {
 		this.imageRecommendations = imageRecommendations;
+	}
+
+	public String getMotion() {
+		return motion;
+	}
+
+	public void setMotion(String motion) {
+		this.motion = motion;
+	}
+
+	public String getSubtitleStyle() {
+		return subtitleStyle;
+	}
+
+	public void setSubtitleStyle(String subtitleStyle) {
+		this.subtitleStyle = subtitleStyle;
+	}
+
+	public String getTool() {
+		return tool;
+	}
+
+	public void setTool(String tool) {
+		this.tool = tool;
+	}
+
+	public String getAssetQualityNotes() {
+		return assetQualityNotes;
+	}
+
+	public void setAssetQualityNotes(String assetQualityNotes) {
+		this.assetQualityNotes = assetQualityNotes;
 	}
 
 	public String getComfyPrompt() {

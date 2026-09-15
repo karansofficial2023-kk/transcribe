@@ -62,6 +62,27 @@ public class SceneStoryboardGenerator {
               "sentence": {
                 "type": "string"
               },
+              "template": {
+                "type": "string",
+                "enum": [
+                  "title_card",
+                  "labeled_image",
+                  "comparison",
+                  "process",
+                  "formula",
+                  "split_screen",
+                  "video_broll"
+                ]
+              },
+              "heading": {
+                "type": "string"
+              },
+              "visualSubject": {
+                "type": "string"
+              },
+              "assetPath": {
+                "type": "string"
+              },
               "mediaType": {
                 "type": "string",
                 "enum": [
@@ -102,11 +123,68 @@ public class SceneStoryboardGenerator {
                   "type": "string"
                 }
               },
+              "arrows": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "highlights": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "formulaLines": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "explainSteps": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "columns": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
               "imageRecommendations": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
+              },
+              "motion": {
+                "type": "string"
+              },
+              "subtitleStyle": {
+                "type": "string"
+              },
+              "tool": {
+                "type": "string",
+                "enum": [
+                  "pillow_opencv",
+                  "ffmpeg",
+                  "manim",
+                  "comfy_image",
+                  "ltx_video",
+                  "upscale",
+                  "reviewed_asset"
+                ]
+              },
+              "assetQualityNotes": {
+                "type": "string"
               },
               "comfyPrompt": {
                 "type": "string"
@@ -204,6 +282,10 @@ public class SceneStoryboardGenerator {
             "required": [
               "segmentNumber",
               "sentence",
+              "template",
+              "heading",
+              "visualSubject",
+              "assetPath",
               "mediaType",
               "motionType",
               "estimatedNarrationSeconds",
@@ -212,7 +294,17 @@ public class SceneStoryboardGenerator {
               "visualAnimation",
               "localAnimation",
               "labels",
+              "arrows",
+              "highlights",
+              "formulaLines",
+              "explainSteps",
+              "steps",
+              "columns",
               "imageRecommendations",
+              "motion",
+              "subtitleStyle",
+              "tool",
+              "assetQualityNotes",
               "comfyPrompt",
               "coverageNotes"
             ],
@@ -310,21 +402,29 @@ public class SceneStoryboardGenerator {
             %s
             %s
             %s
-            For each sentence, provide:
+            For each segment, provide:
             1. The exact sentence text
-            2. mediaType: "photo", "diagram", "animation", "photo_with_labels", "animation_with_labels", or "wan_video"
-            3. motionType: "wan_video", "local_animation", or "static_image"
+            2. template: "title_card", "labeled_image", "comparison", "process", "formula", "split_screen", or "video_broll"
+            3. heading: short screen title drawn by the renderer
+            4. visualSubject: clean background image/video subject with no embedded text
+            5. assetPath: optional reviewed asset path, or "" when none
+            6. mediaType: "photo", "diagram", "animation", "photo_with_labels", "animation_with_labels", or "wan_video"
+            7. motionType: "wan_video", "local_animation", or "static_image"
             4. estimatedNarrationSeconds based on sentence length at natural voiceover speed
             5. recommendedClipSeconds for the visual, matching or exceeding narration timing
             6. timingNotes explaining loop, hold, cutaway, or extension strategy
             7. Visual/Animation description (what should be shown on screen)
             8. Local animation instructions for teaching clarity, such as arrows, highlights, zooms, labels, diagrams, step reveals, or comparison panels
-            9. Labels to place on images/diagrams when useful
-            10. Image recommendations (2 specific image descriptions for stock photo/illustration search)
-            11. ComfyUI prompt for the selected media type
-            12. Coverage notes explaining which curriculum facts from the sentence are covered visually
-            13. A shot object for Wan/ComfyUI video generation only when the scene needs natural cinematic motion
-            14. An ltxShot object for LTX video generation when the scene needs generated video motion, including 4-second clip planning
+            9. labels, arrows, highlights, formulaLines, explainSteps, steps, and columns as renderer overlay instructions
+            10. Image recommendations (2 specific no-text image descriptions for stock photo/illustration search)
+            11. motion: camera, reveal, and transition plan
+            12. subtitleStyle: usually "bottom_band black 38% opacity white centered max 2 lines"
+            13. tool: "pillow_opencv", "ffmpeg", "manim", "comfy_image", "ltx_video", "upscale", or "reviewed_asset"
+            14. assetQualityNotes: whether to use reviewed asset, generated still, deterministic diagram, LTX b-roll, and/or upscale
+            15. ComfyUI prompt for clean background asset only
+            16. Coverage notes explaining which curriculum facts from the sentence are covered visually
+            17. A shot object for Wan/ComfyUI video generation only when the scene needs natural cinematic motion
+            18. An ltxShot object for LTX video generation only for short b-roll motion, including 4-second clip planning
             
             SCENE TITLE: %s
             NARRATION:
@@ -335,11 +435,25 @@ public class SceneStoryboardGenerator {
             
             Rules:
             - Split by natural sentence boundaries
+            - Use 8 to 14 total segments for a 1-2 minute lesson when possible; if narration is longer, keep one concept per segment.
+            - Target 5 to 9 seconds per segment; short title cards may be 3 to 5 seconds.
+            - Every 2-3 segments, vary visual rhythm using title_card, labeled_image, comparison, process, formula, split_screen, or video_broll.
             - Do not change the narration/script while creating storyboard rows; the sentence must come from the narration
             - Think as the correct SME for the detected subject and topic
             - Use curriculum-safe explanations and standard subject terminology
             - Never introduce off-topic animals, plants, tools, reactions, locations, or examples from previous videos or prompt examples.
             - If a visual detail is uncertain, avoid inventing it; use a neutral diagram, label, or coverage note instead
+            - Core renderer rule: never ask AI image/video models to create exact text, labels, arrows, formulas, legends, numbers, or scientific names inside the generated image/video.
+            - Put all exact text, labels, arrows, legends, highlights, formulas, and subtitles in overlay fields so Pillow/OpenCV/Manim/FFmpeg can draw them precisely.
+            - comfyPrompt and shot prompts must request clean backgrounds with no text, no labels, no captions, no watermarks, and no formula text.
+            - Use title_card for openings and section starts; renderer draws heading/subheading.
+            - Use labeled_image for apparatus/anatomy/parts; labels/arrows are overlays, not generated in the image.
+            - Use process for one-by-one steps; steps are renderer text overlays.
+            - Use comparison for self-vs-cross, strong-vs-weak, before-vs-after, or concept contrasts; columns are renderer text overlays.
+            - Use formula for chemistry/physics/math formulas and derivations; tool must be manim and formulaLines must contain exact formula text.
+            - Use split_screen for two related visuals; labels are overlays.
+            - Use video_broll only for simple natural motion where exact labels/formulas are not required.
+            - Tool routing: title_card/labeled_image/process/comparison/split_screen usually use pillow_opencv plus ffmpeg; formula uses manim; generated still background uses comfy_image; LTX b-roll uses ltx_video; final sharpening can add upscale in assetQualityNotes.
             - Visuals should be specific and actionable for video editors
             - Images should be descriptive enough for stock photo searches
             - Use educational documentary style visuals
@@ -350,8 +464,9 @@ public class SceneStoryboardGenerator {
             - ltxShot.prompt must be detailed enough for joined 4-second clips: describe the full action, subject, environment, camera movement, continuity, and what each clip should continue from.
             - ltxShot.joinInstructions must clearly describe how to split and join the LTX clips without changing narration, losing curriculum coverage, or freezing the last frame.
             - If video generation normally outputs short clips, then for narration longer than the clip length specify continuation clips, seamless loop motion, slow camera movement, or cutaways in timingNotes.
-            - Use generated video where natural motion improves learning: pollinators moving, wind/water motion, liquids flowing, machine/process movement, lab action, real-world cause-effect motion.
+            - Use generated video only where natural motion improves learning: pollinators moving, wind/water motion, liquids flowing, machine/process movement, lab action, real-world cause-effect motion.
             - Do not use generated video for concepts better taught with clean diagrams, labels, equations, maps, grammar steps, comparisons, or anatomy/process charts.
+            - LTX must not be used for exact anther/stigma labeling, formulas, graphs with readable numbers, legends, or small precise anatomy.
             - Choose mediaType for learning value, not visual spectacle:
               photo = real-world context or object recognition
               diagram = anatomy, process structure, comparison, classification, or abstract ideas
@@ -370,7 +485,7 @@ public class SceneStoryboardGenerator {
             - If explaining metal deposition in electroplating, use electron gain at the cathode and the appropriate half-equation. Do not use vague shell/empty-space explanations.
             - If comparing deposition of gold, silver, copper, or other metals, avoid saying one always deposits more. Refer to Faraday's law: deposited mass depends on current, time, molar mass, and electrons transferred.
             - If a sentence contains a likely anatomy-risk phrase such as "anther curls", preserve the sentence text, but keep the visual neutral: use a labeled diagram and pollen-transfer arrows instead of instructing physical curling/anther motion.
-            - Use generated video shots only for natural/cinematic motion that is explicitly supported by the narration
+            - Use generated video shots only for natural/cinematic motion that is explicitly supported by the narration; template must be video_broll when using ltxShot
             - Use local_animation for teaching clarity: arrows, labels, highlighted parts, cutaway diagrams, timelines, maps, math/grammar steps, charts, comparisons, or process diagrams
             - Use static_image for a still photo or illustration with optional labels
             - For diagram/photo/animation media, write comfyPrompt as an image prompt or animation design prompt; for wan_video, write comfyPrompt to match shot.prompt.
@@ -424,6 +539,10 @@ public class SceneStoryboardGenerator {
                 SceneSegment seg = new SceneSegment();
                 seg.setSegmentNumber(obj.get("segmentNumber").getAsInt());
                 seg.setSentence(obj.get("sentence").getAsString());
+                seg.setTemplate(getStringOrDefault(obj, "template", "labeled_image"));
+                seg.setHeading(getStringOrDefault(obj, "heading", ""));
+                seg.setVisualSubject(getStringOrDefault(obj, "visualSubject", ""));
+                seg.setAssetPath(getStringOrDefault(obj, "assetPath", ""));
                 seg.setMediaType(getStringOrDefault(obj, "mediaType", "animation_with_labels"));
                 seg.setMotionType(getStringOrDefault(obj, "motionType", "local_animation"));
                 seg.setEstimatedNarrationSeconds(getDoubleOrDefault(obj, "estimatedNarrationSeconds", estimateNarrationSeconds(seg.getSentence())));
@@ -432,19 +551,18 @@ public class SceneStoryboardGenerator {
                 seg.setVisualAnimation(obj.get("visualAnimation").getAsString());
                 seg.setLocalAnimation(getStringOrDefault(obj, "localAnimation", ""));
 
-                List<String> labels = new ArrayList<>();
-                JsonArray labelArr = obj.getAsJsonArray("labels");
-                if (labelArr != null) {
-                    labelArr.forEach(e -> labels.add(e.getAsString()));
-                }
-                seg.setLabels(labels);
-                
-                List<String> images = new ArrayList<>();
-                JsonArray imgArr = obj.getAsJsonArray("imageRecommendations");
-                if (imgArr != null) {
-                    imgArr.forEach(e -> images.add(e.getAsString()));
-                }
-                seg.setImageRecommendations(images);
+                seg.setLabels(getStringList(obj, "labels"));
+                seg.setArrows(getStringList(obj, "arrows"));
+                seg.setHighlights(getStringList(obj, "highlights"));
+                seg.setFormulaLines(getStringList(obj, "formulaLines"));
+                seg.setExplainSteps(getStringList(obj, "explainSteps"));
+                seg.setSteps(getStringList(obj, "steps"));
+                seg.setColumns(getStringList(obj, "columns"));
+                seg.setImageRecommendations(getStringList(obj, "imageRecommendations"));
+                seg.setMotion(getStringOrDefault(obj, "motion", ""));
+                seg.setSubtitleStyle(getStringOrDefault(obj, "subtitleStyle", ""));
+                seg.setTool(getStringOrDefault(obj, "tool", "pillow_opencv"));
+                seg.setAssetQualityNotes(getStringOrDefault(obj, "assetQualityNotes", ""));
                 seg.setComfyPrompt(getStringOrDefault(obj, "comfyPrompt", ""));
                 seg.setCoverageNotes(getStringOrDefault(obj, "coverageNotes", ""));
                 if (obj.has("shot") && obj.get("shot").isJsonObject()) {
@@ -461,6 +579,10 @@ public class SceneStoryboardGenerator {
             SceneSegment fallback = new SceneSegment();
             fallback.setSegmentNumber(1);
             fallback.setSentence("Full scene narration");
+            fallback.setTemplate("process");
+            fallback.setHeading("Main Content");
+            fallback.setVisualSubject("Clean educational background related to the lesson topic, no text");
+            fallback.setAssetPath("");
             fallback.setMediaType("animation_with_labels");
             fallback.setMotionType("local_animation");
             fallback.setEstimatedNarrationSeconds(estimateNarrationSeconds(fallback.getSentence()));
@@ -469,7 +591,17 @@ public class SceneStoryboardGenerator {
             fallback.setVisualAnimation("Animation: Educational content display");
             fallback.setLocalAnimation("Use clear labels, highlights, and step-by-step reveals to explain the concept");
             fallback.setLabels(List.of());
+            fallback.setArrows(List.of());
+            fallback.setHighlights(List.of());
+            fallback.setFormulaLines(List.of());
+            fallback.setExplainSteps(List.of());
+            fallback.setSteps(List.of("Show the main concept", "Reveal supporting details", "Hold for narration"));
+            fallback.setColumns(List.of());
             fallback.setImageRecommendations(List.of("Image 1: Educational illustration", "Image 2: Related concept diagram"));
+            fallback.setMotion("camera: static; reveal: one_by_one; transition_in: fade; transition_out: crossfade");
+            fallback.setSubtitleStyle("bottom_band black 38% opacity white centered max 2 lines");
+            fallback.setTool("pillow_opencv");
+            fallback.setAssetQualityNotes("Fallback deterministic overlay layout; generate or choose a clean no-text background.");
             fallback.setComfyPrompt("Clean educational diagram with labeled parts, accurate subject matter, simple background, high readability");
             fallback.setCoverageNotes("Fallback row covers the full scene narration with local teaching animation.");
             enforceStoryboardQuality(fallback);
@@ -492,6 +624,7 @@ public class SceneStoryboardGenerator {
     }
 
     private void enforceStoryboardQuality(SceneSegment segment) {
+        enforceProStyleDefaults(segment);
         String motionType = segment.getMotionType();
         if (motionType == null || motionType.isBlank()) {
             motionType = "local_animation";
@@ -508,6 +641,11 @@ public class SceneStoryboardGenerator {
         if (!"wan_video".equals(segment.getMediaType())) {
             segment.setShot(null);
             segment.setLtxShot(null);
+        }
+        enforceTemplateToolRules(segment);
+        if (segment.getLtxShot() != null) {
+            segment.setTemplate("video_broll");
+            segment.setTool("ltx_video");
         }
         enforceAnimationMode(segment);
         enforceTiming(segment);
@@ -530,6 +668,7 @@ public class SceneStoryboardGenerator {
         if (segment.getComfyPrompt() == null || segment.getComfyPrompt().isBlank()) {
             segment.setComfyPrompt(buildDefaultComfyPrompt(segment));
         }
+        segment.setComfyPrompt(ensureNoTextPrompt(segment.getComfyPrompt()));
 
         enforceTopicRelevance(segment);
         enforceElectroplatingScience(segment);
@@ -537,6 +676,155 @@ public class SceneStoryboardGenerator {
         if (segment.getCoverageNotes() == null || segment.getCoverageNotes().isBlank()) {
             segment.setCoverageNotes("Covers the narration sentence with matching visuals, labels, and image recommendations.");
         }
+    }
+
+    private void enforceTemplateToolRules(SceneSegment segment) {
+        if ("formula".equals(segment.getTemplate())) {
+            segment.setTool("manim");
+            segment.setMotionType("local_animation");
+            segment.setMediaType("animation_with_labels");
+            segment.setShot(null);
+            segment.setLtxShot(null);
+            if (segment.getFormulaLines() == null || segment.getFormulaLines().isEmpty()) {
+                segment.setFormulaLines(extractFormulaFallback(segment.getSentence()));
+            }
+            segment.setAssetQualityNotes(appendNote(segment.getAssetQualityNotes(),
+                "Formula segment: render exact formulas with Manim and composite over clean background; do not generate formulas inside image/video."));
+        }
+        if ("video_broll".equals(segment.getTemplate())) {
+            segment.setMediaType("wan_video");
+            segment.setMotionType("wan_video");
+            segment.setTool("ltx_video");
+        }
+        if (!"video_broll".equals(segment.getTemplate()) && segment.getLtxShot() != null) {
+            segment.setLtxShot(null);
+        }
+    }
+
+    private List<String> extractFormulaFallback(String sentence) {
+        if (sentence == null || sentence.isBlank()) {
+            return List.of();
+        }
+        if (sentence.contains("=")) {
+            return List.of(sentence);
+        }
+        return List.of();
+    }
+
+    private String ensureNoTextPrompt(String prompt) {
+        if (prompt == null || prompt.isBlank()) {
+            return prompt;
+        }
+        if (containsIgnoreCase(prompt, "no text") && containsIgnoreCase(prompt, "no labels")) {
+            return prompt;
+        }
+        return prompt + ", no text, no labels, no captions, no arrows, no formulas, no watermark";
+    }
+
+    private void enforceProStyleDefaults(SceneSegment segment) {
+        if (segment.getTemplate() == null || segment.getTemplate().isBlank()) {
+            segment.setTemplate(inferTemplate(segment));
+        }
+        if (segment.getHeading() == null || segment.getHeading().isBlank()) {
+            segment.setHeading(buildHeading(segment.getSentence()));
+        }
+        if (segment.getVisualSubject() == null || segment.getVisualSubject().isBlank()) {
+            segment.setVisualSubject(buildVisualSubject(segment));
+        }
+        if (segment.getAssetPath() == null) {
+            segment.setAssetPath("");
+        }
+        if (segment.getLabels() == null) segment.setLabels(List.of());
+        if (segment.getArrows() == null) segment.setArrows(List.of());
+        if (segment.getHighlights() == null) segment.setHighlights(List.of());
+        if (segment.getFormulaLines() == null) segment.setFormulaLines(List.of());
+        if (segment.getExplainSteps() == null) segment.setExplainSteps(List.of());
+        if (segment.getSteps() == null) segment.setSteps(List.of());
+        if (segment.getColumns() == null) segment.setColumns(List.of());
+        if (segment.getMotion() == null || segment.getMotion().isBlank()) {
+            segment.setMotion(defaultMotion(segment.getTemplate()));
+        }
+        if (segment.getSubtitleStyle() == null || segment.getSubtitleStyle().isBlank()) {
+            segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.38; text_color=white; max_lines=2; align=center");
+        }
+        if (segment.getTool() == null || segment.getTool().isBlank()) {
+            segment.setTool(inferTool(segment));
+        }
+        if (segment.getAssetQualityNotes() == null || segment.getAssetQualityNotes().isBlank()) {
+            segment.setAssetQualityNotes(defaultAssetQualityNotes(segment));
+        }
+    }
+
+    private String inferTemplate(SceneSegment segment) {
+        String text = joinForFactCheck(segment.getSentence(), segment.getVisualAnimation(), segment.getLocalAnimation());
+        if (containsAnyIgnoreCase(text, "=", "formula", "law", "equation", "lambda", "Λ")) {
+            return "formula";
+        }
+        if (containsAnyIgnoreCase(text, "versus", " vs ", "compare", "comparison", "different", "whereas")) {
+            return "comparison";
+        }
+        if ("wan_video".equals(segment.getMediaType()) || "wan_video".equals(segment.getMotionType())) {
+            return "video_broll";
+        }
+        if (containsAnyIgnoreCase(text, "step", "first", "second", "then", "process")) {
+            return "process";
+        }
+        if (segment.getLabels() != null && !segment.getLabels().isEmpty()) {
+            return "labeled_image";
+        }
+        return "labeled_image";
+    }
+
+    private String buildHeading(String sentence) {
+        if (sentence == null || sentence.isBlank()) {
+            return "Main Concept";
+        }
+        String heading = sentence.replaceAll("[\\r\\n]+", " ").trim();
+        if (heading.length() > 54) {
+            heading = heading.substring(0, 54).trim();
+            int lastSpace = heading.lastIndexOf(' ');
+            if (lastSpace > 20) {
+                heading = heading.substring(0, lastSpace);
+            }
+        }
+        return heading;
+    }
+
+    private String buildVisualSubject(SceneSegment segment) {
+        String base = segment.getVisualAnimation() != null && !segment.getVisualAnimation().isBlank()
+            ? segment.getVisualAnimation()
+            : segment.getSentence();
+        return base + "; clean background asset only; no text, no labels, no formulas, no arrows";
+    }
+
+    private String defaultMotion(String template) {
+        return switch (template) {
+            case "title_card" -> "camera: slow_zoom_in; title_animation: fade_up; transition_in: fade; transition_out: crossfade";
+            case "formula" -> "formula_reveal: line_by_line; camera: static; transition_in: fade; transition_out: crossfade";
+            case "comparison" -> "column_reveal: left_then_right; camera: static; transition_in: fade; transition_out: crossfade";
+            case "process" -> "step_reveal: one_by_one; camera: static; transition_in: fade; transition_out: crossfade";
+            case "split_screen" -> "camera: subtle_independent_zoom; transition_in: fade; transition_out: crossfade";
+            case "video_broll" -> "camera: stable; transition_in: fade; transition_out: crossfade";
+            default -> "camera: slow_zoom_in; label_reveal: one_by_one; transition_in: fade; transition_out: crossfade";
+        };
+    }
+
+    private String inferTool(SceneSegment segment) {
+        return switch (segment.getTemplate()) {
+            case "formula" -> "manim";
+            case "video_broll" -> "ltx_video";
+            case "title_card", "labeled_image", "comparison", "process", "split_screen" -> "pillow_opencv";
+            default -> "pillow_opencv";
+        };
+    }
+
+    private String defaultAssetQualityNotes(SceneSegment segment) {
+        return switch (segment.getTemplate()) {
+            case "formula" -> "Use Manim for exact formula text and line-by-line reveal; do not generate formulas inside images.";
+            case "video_broll" -> "Use LTX only for short natural motion; composite precise labels/subtitles separately; upscale if needed.";
+            case "labeled_image" -> "Prefer reviewed real/curriculum asset; otherwise generate a no-text still and draw labels/arrows with Pillow/OpenCV.";
+            default -> "Use clean no-text background asset; draw all text, labels, arrows, legends, and subtitles in renderer overlays.";
+        };
     }
 
     private void enforceTopicRelevance(SceneSegment segment) {
@@ -990,6 +1278,30 @@ public class SceneStoryboardGenerator {
             return obj.get(memberName).getAsString();
         }
         return fallback;
+    }
+
+    private List<String> getStringList(JsonObject obj, String memberName) {
+        List<String> values = new ArrayList<>();
+        if (!obj.has(memberName) || obj.get(memberName).isJsonNull()) {
+            return values;
+        }
+        try {
+            JsonArray arr = obj.getAsJsonArray(memberName);
+            if (arr != null) {
+                arr.forEach(e -> {
+                    if (!e.isJsonNull()) {
+                        values.add(e.getAsString());
+                    }
+                });
+            }
+        } catch (Exception ignored) {
+            try {
+                values.add(obj.get(memberName).getAsString());
+            } catch (Exception alsoIgnored) {
+                return values;
+            }
+        }
+        return values;
     }
 
     private double getDoubleOrDefault(JsonObject obj, String memberName, double fallback) {
