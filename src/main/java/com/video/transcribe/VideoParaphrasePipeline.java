@@ -78,7 +78,11 @@ public class VideoParaphrasePipeline {
 		this.whisper = new LocalWhisperTranscriber(config);
 		this.ollama = new OllamaClient(config);
 		this.validator = new AccuracyValidator(ollama);
-		this.sceneGenerator = new SceneStoryboardGenerator(ollama, config.isStoryboardAnimationEnabled(), config.getStoryboardVideoProvider());
+		this.sceneGenerator = new SceneStoryboardGenerator(
+				ollama,
+				config.isStoryboardAnimationEnabled(),
+				config.getStoryboardVideoProvider(),
+				config.isStoryboardCurriculumEnrichmentEnabled());
 		this.docxExporter = new StoryboardDocxExporter(config.getStoryboardVideoProvider());
 
 		// Create TTS provider based on config (piper or edge)
@@ -96,6 +100,7 @@ public class VideoParaphrasePipeline {
 				config.getWhisperDevice(),
 				tts.getName());
 		logger.info("Storyboard video provider: {}", config.getStoryboardVideoProvider());
+		logger.info("Storyboard curriculum enrichment: {}", config.isStoryboardCurriculumEnrichmentEnabled());
 	}
 
 	// ============================================
@@ -183,7 +188,7 @@ public class VideoParaphrasePipeline {
 
 	public StoryboardDocument generateStoryboard(String paraphrasedText, String baseName) throws Exception {
 		logger.info("=== PHASE 3c: Generating Scene Storyboard ===");
-		StoryboardDocument storyboard = sceneGenerator.generateStoryboard(paraphrasedText);
+		StoryboardDocument storyboard = sceneGenerator.generateStoryboard(paraphrasedText, baseName);
 
 		// Save as JSON
 		Path storyboardJson = Paths.get(config.getOutputDir(), baseName + "_storyboard.json");

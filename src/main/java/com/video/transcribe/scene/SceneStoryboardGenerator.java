@@ -2,7 +2,10 @@ package com.video.transcribe.scene;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +26,7 @@ public class SceneStoryboardGenerator {
     private final OllamaClient ollama;
     private final boolean animationEnabled;
     private final String videoProvider;
+    private final boolean curriculumEnrichmentEnabled;
     private final Gson gson = new Gson();
     private static final JsonObject SCENES_SCHEMA = JsonParser.parseString("""
         {
@@ -324,15 +328,25 @@ public class SceneStoryboardGenerator {
     }
 
     public SceneStoryboardGenerator(OllamaClient ollama, boolean animationEnabled, String videoProvider) {
+        this(ollama, animationEnabled, videoProvider, false);
+    }
+
+    public SceneStoryboardGenerator(OllamaClient ollama, boolean animationEnabled, String videoProvider,
+            boolean curriculumEnrichmentEnabled) {
         this.ollama = ollama;
         this.animationEnabled = animationEnabled;
         this.videoProvider = normalizeVideoProvider(videoProvider);
+        this.curriculumEnrichmentEnabled = curriculumEnrichmentEnabled;
     }
     
     /**
      * Generate complete storyboard from paraphrased text
      */
     public StoryboardDocument generateStoryboard(String paraphrasedText) throws IOException {
+        return generateStoryboard(paraphrasedText, null);
+    }
+
+    public StoryboardDocument generateStoryboard(String paraphrasedText, String baseName) throws IOException {
         logger.info("Generating scene storyboard from text ({} chars)...", paraphrasedText.length());
         String languageInstruction = buildLanguageInstruction(paraphrasedText);
         
@@ -343,9 +357,10 @@ public class SceneStoryboardGenerator {
         for (Scene scene : scenes) {
             enrichSceneWithSegments(scene, languageInstruction);
         }
+        normalizeScenes(scenes);
         
         StoryboardDocument doc = new StoryboardDocument();
-        doc.setTitle("Storyboard: " + extractTitle(paraphrasedText));
+        doc.setTitle("Storyboard: " + extractTitle(paraphrasedText, baseName));
         doc.setSourceText(paraphrasedText);
         doc.setScenes(scenes);
         doc.setGeneratedAt(java.time.Instant.now().toString());
@@ -367,6 +382,7 @@ public class SceneStoryboardGenerator {
             Create fewer, stronger scenes: usually 6-10 scenes for a short lesson.
             Avoid micro-scenes and avoid one scene per sentence.
             %s
+            %s
             
             TEXT:
             %s
@@ -383,7 +399,7 @@ public class SceneStoryboardGenerator {
             - Use a curriculum arc: title/overview, definition, main categories, mechanisms or agents, adaptations/special cases, comparison, summary
             - If and only if the topic is types of pollination, prefer this scene arc when supported by the transcript:
               title card; definition as pollen transfer from anther to stigma; self-pollination; cross-pollination; abiotic agents wind/water; biotic agents insects/birds/bats/animals; adaptations such as homogamy/cleistogamy/dichogamy/herkogamy/heterostyly; self-vs-cross comparison; summary
-            """.formatted(languageInstruction, text);
+            """.formatted(languageInstruction, buildCurriculumEnrichmentInstruction(), text);
         
         String response = ollama.generateStructured(
             "You are an expert educational video script writer and storyboard creator.",
@@ -403,6 +419,7 @@ public class SceneStoryboardGenerator {
             specific topic and subject. Preserve the narration/script exactly;
             improve only storyboard planning, visual choices, labels, coverage
             notes, and ComfyUI Wan/LTX prompts.
+            %s
             %s
             %s
             %s
@@ -439,6 +456,7 @@ public class SceneStoryboardGenerator {
             
             Rules:
             - Split by natural sentence boundaries
+            - Each segment sentence must be copied exactly from this scene narration. Do not create new sentence fragments.
             - Prefer one strong segment for this scene unless the scene contains two clearly different visual ideas.
             - Do not create empty white/card layouts. Use real HD photo/background assets or deterministic diagrams with strong composition.
             - Use 8 to 14 total segments for a 1-2 minute lesson when possible; if narration is longer, keep one concept per segment.
@@ -484,8 +502,7 @@ public class SceneStoryboardGenerator {
               wan_video = natural cinematic motion only, such as pollinator movement, wind, water, animal behavior, or real-world motion
             - Use the selected language/script for sentence, visualAnimation, localAnimation, labels, and imageRecommendations
             - Do not use Tamil, Hindi, or any other Indic-language words unless the scene narration itself uses that language
-            - Do not change or rewrite narration. The sentence field must remain faithful to the scene narration.
-            - Do not add new curriculum facts, but do visually cover every curriculum fact already present in the sentence.
+            - Do not change or rewrite the scene narration while making segment rows.
             - Include all named plants, processes, agents, plant parts, and comparisons from the sentence in the visualAnimation, localAnimation, labels, imageRecommendations, or coverageNotes.
             - If and only if the topic is pollination, use exact labels only when relevant and visible: anther, stigma, pollen grains, filament, style, ovary, nectar guide, pollinator, pollen transfer path.
             - For pollination title cards, use a strong real macro flower/pollinator background and renderer-drawn title "Types of Pollination".
@@ -508,14 +525,14 @@ public class SceneStoryboardGenerator {
             - Write shot.prompt for Wan style: cinematic natural motion, stable subject anatomy, smooth camera, no text artifacts.
             - Write ltxShot.prompt for LTX style: realistic educational video, subject-matter accurate, one continuous action split into 4-second continuation clips, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.
             - Labels should be short, screen-ready text. Return [] when labels are not useful.
-            """.formatted(languageInstruction, buildAnimationModeInstruction(), buildVideoProviderInstruction(), scene.getSceneTitle(), scene.getNarration());
+            """.formatted(languageInstruction, buildAnimationModeInstruction(), buildVideoProviderInstruction(), buildCurriculumEnrichmentInstruction(), scene.getSceneTitle(), scene.getNarration());
         
         String response = ollama.generateStructured(
             "You are a professional video storyboard artist and educational content designer.",
             prompt, SEGMENTS_SCHEMA
         );
         
-        List<SceneSegment> segments = parseSegments(response);
+        List<SceneSegment> segments = normalizeSegments(parseSegments(response), scene.getNarration());
         scene.setSegments(segments);
     }
     
@@ -540,6 +557,128 @@ public class SceneStoryboardGenerator {
             scenes.add(fallback);
         }
         return scenes;
+    }
+
+    private void normalizeScenes(List<Scene> scenes) {
+        for (int i = 0; i < scenes.size(); i++) {
+            Scene scene = scenes.get(i);
+            scene.setSceneNumber(i + 1);
+            if (scene.getSceneTitle() == null || scene.getSceneTitle().isBlank()) {
+                scene.setSceneTitle("Scene " + (i + 1));
+            }
+            if (scene.getNarration() == null) {
+                scene.setNarration("");
+            }
+            scene.setSegments(normalizeSegments(scene.getSegments(), scene.getNarration()));
+        }
+    }
+
+    private List<SceneSegment> normalizeSegments(List<SceneSegment> segments, String sceneNarration) {
+        if (segments == null || segments.isEmpty()) {
+            return List.of();
+        }
+        List<String> sourceSentences = splitSentences(sceneNarration);
+        Set<String> usedKeys = new LinkedHashSet<>();
+        List<SceneSegment> cleaned = new ArrayList<>();
+        int maxSegments = curriculumEnrichmentEnabled ? 6 : 4;
+
+        for (SceneSegment segment : segments) {
+            if (segment == null) {
+                continue;
+            }
+            repairSegmentSentence(segment, sourceSentences, usedKeys);
+            String key = normalizeForDuplicateKey(segment.getSentence());
+            if (key.isBlank() || usedKeys.contains(key)) {
+                continue;
+            }
+            usedKeys.add(key);
+            segment.setLabels(sanitizeLabels(segment.getLabels(), segment));
+            cleaned.add(segment);
+            if (cleaned.size() >= maxSegments) {
+                break;
+            }
+        }
+        for (int i = 0; i < cleaned.size(); i++) {
+            cleaned.get(i).setSegmentNumber(i + 1);
+        }
+        return cleaned;
+    }
+
+    private void repairSegmentSentence(SceneSegment segment, List<String> sourceSentences, Set<String> usedKeys) {
+        String sentence = segment.getSentence() != null ? segment.getSentence().trim() : "";
+        if (sourceSentences.isEmpty()) {
+            return;
+        }
+        if (containsExactSentence(sourceSentences, sentence)) {
+            return;
+        }
+        for (String sourceSentence : sourceSentences) {
+            String sourceKey = normalizeForDuplicateKey(sourceSentence);
+            if (usedKeys.contains(sourceKey)) {
+                continue;
+            }
+            if (sentence.isBlank()
+                    || containsIgnoreCase(sourceSentence, sentence)
+                    || containsIgnoreCase(sentence, sourceSentence)
+                    || hasMeaningfulOverlap(sentence, sourceSentence)) {
+                segment.setSentence(sourceSentence);
+                if (segment.getHeading() == null || segment.getHeading().isBlank()
+                        || containsIgnoreCase(sentence, segment.getHeading())) {
+                    segment.setHeading(buildHeading(sourceSentence));
+                }
+                return;
+            }
+        }
+    }
+
+    private List<String> splitSentences(String text) {
+        List<String> sentences = new ArrayList<>();
+        if (text == null || text.isBlank()) {
+            return sentences;
+        }
+        String normalized = text.replaceAll("[\\r\\n]+", " ").replaceAll("\\s+", " ").trim();
+        String[] parts = normalized.split("(?<=[.!?])\\s+");
+        for (String part : parts) {
+            String sentence = part.trim();
+            if (!sentence.isBlank()) {
+                sentences.add(sentence);
+            }
+        }
+        if (sentences.isEmpty()) {
+            sentences.add(normalized);
+        }
+        return sentences;
+    }
+
+    private boolean containsExactSentence(List<String> sourceSentences, String sentence) {
+        for (String sourceSentence : sourceSentences) {
+            if (sourceSentence.equals(sentence)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasMeaningfulOverlap(String a, String b) {
+        String[] words = normalizeForDuplicateKey(a).split(" ");
+        int matches = 0;
+        String normalizedB = " " + normalizeForDuplicateKey(b) + " ";
+        for (String word : words) {
+            if (word.length() >= 5 && normalizedB.contains(" " + word + " ")) {
+                matches++;
+            }
+        }
+        return matches >= 3;
+    }
+
+    private String normalizeForDuplicateKey(String text) {
+        if (text == null) {
+            return "";
+        }
+        return text.toLowerCase(Locale.ROOT)
+            .replaceAll("[^a-z0-9]+", " ")
+            .replaceAll("\\s+", " ")
+            .trim();
     }
     
     private List<SceneSegment> parseSegments(String jsonResponse) {
@@ -688,6 +827,7 @@ public class SceneStoryboardGenerator {
         if (segment.getCoverageNotes() == null || segment.getCoverageNotes().isBlank()) {
             segment.setCoverageNotes("Covers the narration sentence with matching visuals, labels, and image recommendations.");
         }
+        segment.setLabels(sanitizeLabels(segment.getLabels(), segment));
     }
 
     private void enforceTemplateToolRules(SceneSegment segment) {
@@ -882,7 +1022,7 @@ public class SceneStoryboardGenerator {
                 if (label == null || label.isBlank()) {
                     continue;
                 }
-                String trimmed = label.trim();
+                String trimmed = normalizeLabel(label.trim());
                 if (isWeakPlaceholderLabel(trimmed)) {
                     continue;
                 }
@@ -892,6 +1032,22 @@ public class SceneStoryboardGenerator {
             }
         }
         return cleaned;
+    }
+
+    private String normalizeLabel(String label) {
+        String normalized = label.toLowerCase(Locale.ROOT).trim();
+        return switch (normalized) {
+            case "pollen", "pollen grain" -> "pollen grains";
+            case "stigma" -> "stigma";
+            case "anther" -> "anther";
+            case "filament" -> "filament";
+            case "style" -> "style";
+            case "ovary" -> "ovary";
+            case "nectar", "nectar guides" -> "nectar guide";
+            case "bee", "bees", "insect", "insects", "bird", "birds", "bat", "bats", "animal", "animals" -> "pollinator";
+            case "transfer path", "pollen path", "pollen transfer" -> "pollen transfer path";
+            default -> label.trim();
+        };
     }
 
     private boolean isWeakPlaceholderLabel(String label) {
@@ -982,6 +1138,29 @@ public class SceneStoryboardGenerator {
         addIfMentioned(labels, sentence, "Ag+", "silver ion", "silver ions");
         addIfMentioned(labels, sentence, "NO3-", "nitrate");
         return labels;
+    }
+
+    private String buildCurriculumEnrichmentInstruction() {
+        if (curriculumEnrichmentEnabled) {
+            return """
+                Curriculum enrichment mode is ENABLED.
+                Create a teacher-style storyboard, not only a literal transcript storyboard.
+                Keep the original paraphrased narration ideas, but you may add concise,
+                curriculum-standard bridge scenes and definitions that a subject teacher
+                would naturally include for completeness. Use only safe textbook facts
+                directly related to the same topic. Mark these additions in coverageNotes
+                as curriculum enrichment. Do not add unrelated examples or examples from
+                other videos.
+                For pollination, a complete lesson may include definition, self-pollination,
+                cross-pollination, autogamy, geitonogamy, agents such as wind/water/insects/
+                birds/bats/animals, adaptations, comparison, and summary when suitable.
+                """;
+        }
+        return """
+            Curriculum enrichment mode is DISABLED.
+            Make a transcript-only storyboard. Do not add curriculum facts, examples,
+            scene topics, or definitions that are absent from the paraphrased narration.
+            """;
     }
 
     private String buildAnimationModeInstruction() {
@@ -1425,13 +1604,34 @@ public class SceneStoryboardGenerator {
         return fallback;
     }
     
-    private String extractTitle(String text) {
-        // Simple title extraction - first sentence or first 50 chars
+    private String extractTitle(String text, String baseName) {
+        String fileTitle = titleFromBaseName(baseName);
+        if (!fileTitle.isBlank()) {
+            return fileTitle;
+        }
         int end = text.indexOf('.');
         if (end > 10 && end < 100) {
             return text.substring(0, end);
         }
         return text.substring(0, Math.min(50, text.length())) + "...";
+    }
+
+    private String titleFromBaseName(String baseName) {
+        if (baseName == null || baseName.isBlank()) {
+            return "";
+        }
+        String title = baseName.replaceAll("(?i)_storyboard$", "")
+            .replaceAll("(?i)_paraphrased$", "")
+            .replaceAll("(?i)_transcript$", "")
+            .replaceAll("^[0-9]+[-_\\s]+", "")
+            .replace('-', ' ')
+            .replace('_', ' ')
+            .replaceAll("\\s+", " ")
+            .trim();
+        if (title.matches(".*[A-Za-z].*")) {
+            return title;
+        }
+        return "";
     }
 
     private String buildLanguageInstruction(String text) {

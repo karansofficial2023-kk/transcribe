@@ -71,6 +71,7 @@ public class AppConfig {
 		props.setProperty("tool.piper.path", "piper");
 		props.setProperty("storyboard.animation.enabled", "true");
 		props.setProperty("storyboard.video.provider", "wan");
+		props.setProperty("storyboard.curriculum.enrichment", "false");
 		props.setProperty("temp.dir", "./temp");
 		props.setProperty("cleanup.downloads", "true");
 		props.setProperty("download.timeout.seconds", "300");
@@ -122,6 +123,10 @@ public class AppConfig {
 			return provider;
 		}
 		return "wan";
+	}
+
+	public boolean isStoryboardCurriculumEnrichmentEnabled() {
+		return getBoolean("storyboard.curriculum.enrichment", false);
 	}
 	// === CONVENIENCE METHODS ===
 
@@ -280,6 +285,7 @@ public class AppConfig {
 		System.out.println("  Whisper Model:  " + getWhisperModel() + " (" + getWhisperDevice() + ")");
 		System.out.println("  Ollama Model:   " + getOllamaModel());
 		System.out.println("  Ollama URL:     " + getOllamaUrl());
+		System.out.println("  Storyboard Enrich: " + isStoryboardCurriculumEnrichmentEnabled());
 		System.out.println("  Piper Model:    " + getPiperModel());
 
 		// Temp
