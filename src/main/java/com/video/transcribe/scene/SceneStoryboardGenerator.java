@@ -28,6 +28,40 @@ public class SceneStoryboardGenerator {
     private final String videoProvider;
     private final boolean curriculumEnrichmentEnabled;
     private final Gson gson = new Gson();
+    private static final JsonObject TOPIC_SCHEMA = JsonParser.parseString("""
+        {
+          "type": "object",
+          "properties": {
+            "inferredTopic": {
+              "type": "string"
+            },
+            "filenameTopic": {
+              "type": "string"
+            },
+            "topicMatch": {
+              "type": "boolean"
+            },
+            "confidence": {
+              "type": "number"
+            },
+            "safeStoryboardTitle": {
+              "type": "string"
+            },
+            "warning": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "inferredTopic",
+            "filenameTopic",
+            "topicMatch",
+            "confidence",
+            "safeStoryboardTitle",
+            "warning"
+          ],
+          "additionalProperties": false
+        }
+        """).getAsJsonObject();
     private static final JsonObject SCENES_SCHEMA = JsonParser.parseString("""
         {
           "type": "array",
@@ -349,18 +383,19 @@ public class SceneStoryboardGenerator {
     public StoryboardDocument generateStoryboard(String paraphrasedText, String baseName) throws IOException {
         logger.info("Generating scene storyboard from text ({} chars)...", paraphrasedText.length());
         String languageInstruction = buildLanguageInstruction(paraphrasedText);
+        TopicCheck topicCheck = verifyTopic(paraphrasedText, baseName, languageInstruction);
         
         // Step 1: Split into logical scenes
-        List<Scene> scenes = splitIntoScenes(paraphrasedText, languageInstruction);
+        List<Scene> scenes = splitIntoScenes(paraphrasedText, languageInstruction, topicCheck);
         
         // Step 2: For each scene, generate segments with visuals and images
         for (Scene scene : scenes) {
             enrichSceneWithSegments(scene, languageInstruction);
         }
-        normalizeScenes(scenes);
+        normalizeScenes(scenes, paraphrasedText);
         
         StoryboardDocument doc = new StoryboardDocument();
-        doc.setTitle("Storyboard: " + extractTitle(paraphrasedText, baseName));
+        doc.setTitle(topicCheck.safeStoryboardTitle());
         doc.setSourceText(paraphrasedText);
         doc.setScenes(scenes);
         doc.setGeneratedAt(java.time.Instant.now().toString());
@@ -372,7 +407,59 @@ public class SceneStoryboardGenerator {
     /**
      * Split text into logical scenes using LLM
      */
-    private List<Scene> splitIntoScenes(String text, String languageInstruction) throws IOException {
+    private TopicCheck verifyTopic(String text, String baseName, String languageInstruction) throws IOException {
+        String filenameTopic = titleFromBaseName(baseName);
+        String prompt = """
+            Verify the real educational topic of this video transcript before storyboard creation.
+            Compare the filename-derived topic with the transcript content. If the filename is
+            wrong or too narrow, choose a safe storyboard title from the transcript topic instead.
+            %s
+
+            FILENAME TOPIC:
+            %s
+
+            TRANSCRIPT/PARAPHRASE:
+            %s
+
+            Respond ONLY with a JSON object matching the provided schema.
+            Rules:
+            - inferredTopic must describe the actual topic taught by the transcript.
+            - topicMatch is true only when the filename topic matches the transcript topic well enough for a storyboard title.
+            - safeStoryboardTitle must be short and suitable for the Word title.
+            - warning should be "" when there is no mismatch; otherwise explain the mismatch briefly.
+            """.formatted(languageInstruction, filenameTopic, text);
+
+        try {
+            String response = ollama.generateStructured(
+                "You are a strict educational topic auditor.",
+                prompt,
+                TOPIC_SCHEMA
+            );
+            JsonObject obj = JsonParser.parseString(response).getAsJsonObject();
+            String inferredTopic = getStringOrDefault(obj, "inferredTopic", extractTitle(text, baseName));
+            String checkedFilenameTopic = getStringOrDefault(obj, "filenameTopic", filenameTopic);
+            boolean topicMatch = getBooleanOrDefault(obj, "topicMatch", true);
+            double confidence = getDoubleOrDefault(obj, "confidence", 0.0);
+            String title = cleanStoryboardTitle(getStringOrDefault(obj, "safeStoryboardTitle", ""));
+            String warning = getStringOrDefault(obj, "warning", "");
+            if (title.isBlank()) {
+                title = topicMatch && !checkedFilenameTopic.isBlank() ? checkedFilenameTopic : inferredTopic;
+            }
+            if (!topicMatch) {
+                logger.warn("Storyboard topic mismatch: filenameTopic='{}', inferredTopic='{}', confidence={}, warning={}",
+                    checkedFilenameTopic, inferredTopic, confidence, warning);
+            } else {
+                logger.info("Storyboard topic verified: {} (confidence={})", title, confidence);
+            }
+            return new TopicCheck(inferredTopic, checkedFilenameTopic, topicMatch, confidence, cleanStoryboardTitle(title), warning);
+        } catch (Exception e) {
+            String fallbackTitle = cleanStoryboardTitle(extractTitle(text, baseName));
+            logger.warn("Topic verification failed; using fallback storyboard title '{}': {}", fallbackTitle, e.getMessage());
+            return new TopicCheck(fallbackTitle, filenameTopic, true, 0.0, fallbackTitle, "");
+        }
+    }
+
+    private List<Scene> splitIntoScenes(String text, String languageInstruction, TopicCheck topicCheck) throws IOException {
         String prompt = """
             Split the following educational video transcript into logical scenes.
             Think like a subject-matter expert and curriculum reviewer for this
@@ -383,6 +470,8 @@ public class SceneStoryboardGenerator {
             Avoid micro-scenes and avoid one scene per sentence.
             %s
             %s
+            Verified topic: %s
+            Filename topic match: %s
             
             TEXT:
             %s
@@ -396,10 +485,11 @@ public class SceneStoryboardGenerator {
             - Scene titles should be descriptive
             - Do not introduce words from any language that is not present in the transcript
             - Do not merge unrelated topics
+            - If filename topic match is false, trust the verified topic and transcript content, not the filename.
             - Use a curriculum arc: title/overview, definition, main categories, mechanisms or agents, adaptations/special cases, comparison, summary
             - If and only if the topic is types of pollination, prefer this scene arc when supported by the transcript:
               title card; definition as pollen transfer from anther to stigma; self-pollination; cross-pollination; abiotic agents wind/water; biotic agents insects/birds/bats/animals; adaptations such as homogamy/cleistogamy/dichogamy/herkogamy/heterostyly; self-vs-cross comparison; summary
-            """.formatted(languageInstruction, buildCurriculumEnrichmentInstruction(), text);
+            """.formatted(languageInstruction, buildCurriculumEnrichmentInstruction(), topicCheck.inferredTopic(), topicCheck.topicMatch(), text);
         
         String response = ollama.generateStructured(
             "You are an expert educational video script writer and storyboard creator.",
@@ -559,7 +649,7 @@ public class SceneStoryboardGenerator {
         return scenes;
     }
 
-    private void normalizeScenes(List<Scene> scenes) {
+    private void normalizeScenes(List<Scene> scenes, String sourceText) {
         for (int i = 0; i < scenes.size(); i++) {
             Scene scene = scenes.get(i);
             scene.setSceneNumber(i + 1);
@@ -569,8 +659,41 @@ public class SceneStoryboardGenerator {
             if (scene.getNarration() == null) {
                 scene.setNarration("");
             }
+            boolean transcriptScene = isSupportedBySource(scene.getNarration(), sourceText);
             scene.setSegments(normalizeSegments(scene.getSegments(), scene.getNarration()));
+            tagSceneSource(scene, transcriptScene);
         }
+    }
+
+    private void tagSceneSource(Scene scene, boolean transcriptScene) {
+        if (scene.getSegments() == null) {
+            return;
+        }
+        String sourceNote = transcriptScene
+            ? "Source: transcript/paraphrase."
+            : "Source: curriculum enrichment; this may not appear verbatim in the source video.";
+        for (SceneSegment segment : scene.getSegments()) {
+            boolean transcriptSegment = isSupportedBySource(segment.getSentence(), scene.getNarration());
+            String note = transcriptScene && transcriptSegment
+                ? "Source: transcript/paraphrase."
+                : sourceNote;
+            segment.setCoverageNotes(prependNote(segment.getCoverageNotes(), note));
+        }
+    }
+
+    private boolean isSupportedBySource(String candidate, String source) {
+        if (candidate == null || candidate.isBlank() || source == null || source.isBlank()) {
+            return false;
+        }
+        String candidateKey = normalizeForDuplicateKey(candidate);
+        String sourceKey = normalizeForDuplicateKey(source);
+        if (candidateKey.isBlank() || sourceKey.isBlank()) {
+            return false;
+        }
+        if (sourceKey.contains(candidateKey)) {
+            return true;
+        }
+        return hasMeaningfulOverlap(candidate, source);
     }
 
     private List<SceneSegment> normalizeSegments(List<SceneSegment> segments, String sceneNarration) {
@@ -1495,6 +1618,16 @@ public class SceneStoryboardGenerator {
         return current + " " + note;
     }
 
+    private String prependNote(String current, String note) {
+        if (current == null || current.isBlank()) {
+            return note;
+        }
+        if (current.contains(note)) {
+            return current;
+        }
+        return note + " " + current;
+    }
+
     private String inferMediaType(SceneSegment segment) {
         if (segment.getLabels() != null && !segment.getLabels().isEmpty()) {
             return "animation_with_labels";
@@ -1603,6 +1736,17 @@ public class SceneStoryboardGenerator {
         }
         return fallback;
     }
+
+    private boolean getBooleanOrDefault(JsonObject obj, String memberName, boolean fallback) {
+        if (obj.has(memberName) && !obj.get(memberName).isJsonNull()) {
+            try {
+                return obj.get(memberName).getAsBoolean();
+            } catch (Exception ignored) {
+                return fallback;
+            }
+        }
+        return fallback;
+    }
     
     private String extractTitle(String text, String baseName) {
         String fileTitle = titleFromBaseName(baseName);
@@ -1633,6 +1777,32 @@ public class SceneStoryboardGenerator {
         }
         return "";
     }
+
+    private String cleanStoryboardTitle(String title) {
+        if (title == null) {
+            return "";
+        }
+        String cleaned = title.replaceAll("(?i)^storyboard\\s*:\\s*", "")
+            .replaceAll("\\s+", " ")
+            .trim();
+        if (cleaned.length() > 80) {
+            cleaned = cleaned.substring(0, 80).trim();
+            int lastSpace = cleaned.lastIndexOf(' ');
+            if (lastSpace > 30) {
+                cleaned = cleaned.substring(0, lastSpace);
+            }
+        }
+        return cleaned;
+    }
+
+    private record TopicCheck(
+        String inferredTopic,
+        String filenameTopic,
+        boolean topicMatch,
+        double confidence,
+        String safeStoryboardTitle,
+        String warning
+    ) {}
 
     private String buildLanguageInstruction(String text) {
         if (containsRange(text, '\u0B80', '\u0BFF')) {
