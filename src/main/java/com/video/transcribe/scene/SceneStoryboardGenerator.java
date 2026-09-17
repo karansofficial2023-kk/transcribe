@@ -392,7 +392,7 @@ public class SceneStoryboardGenerator {
         for (Scene scene : scenes) {
             enrichSceneWithSegments(scene, languageInstruction);
         }
-        normalizeScenes(scenes, paraphrasedText);
+        normalizeScenes(scenes, paraphrasedText, topicCheck.safeStoryboardTitle());
         
         StoryboardDocument doc = new StoryboardDocument();
         doc.setTitle(topicCheck.safeStoryboardTitle());
@@ -649,7 +649,7 @@ public class SceneStoryboardGenerator {
         return scenes;
     }
 
-    private void normalizeScenes(List<Scene> scenes, String sourceText) {
+    private void normalizeScenes(List<Scene> scenes, String sourceText, String storyboardTitle) {
         for (int i = 0; i < scenes.size(); i++) {
             Scene scene = scenes.get(i);
             scene.setSceneNumber(i + 1);
@@ -661,8 +661,40 @@ public class SceneStoryboardGenerator {
             }
             boolean transcriptScene = isSupportedBySource(scene.getNarration(), sourceText);
             scene.setSegments(normalizeSegments(scene.getSegments(), scene.getNarration()));
+            normalizeTitleCard(scene, i == 0 ? storyboardTitle : scene.getSceneTitle());
             tagSceneSource(scene, transcriptScene);
         }
+    }
+
+    private void normalizeTitleCard(Scene scene, String displayTitle) {
+        if (scene.getSegments() == null || scene.getSegments().isEmpty()) {
+            return;
+        }
+        SceneSegment first = scene.getSegments().get(0);
+        if (!"title_card".equals(first.getTemplate())) {
+            return;
+        }
+        String title = cleanStoryboardTitle(displayTitle);
+        if (!title.isBlank()) {
+            first.setHeading(title);
+        }
+        first.setLabels(List.of());
+        first.setArrows(List.of());
+        first.setHighlights(List.of());
+        first.setVisualSubject(buildTitleBackgroundSubject(title));
+        first.setLocalAnimation("Renderer draws only the heading/subtitle/narration as text. Use visualSubject only as background search/generation guidance; do not display visualSubject text on screen.");
+        first.setCoverageNotes(appendNote(first.getCoverageNotes(),
+            "Title-card guard: visualSubject is background guidance only and must not be rendered as visible text."));
+    }
+
+    private String buildTitleBackgroundSubject(String title) {
+        if (containsIgnoreCase(title, "pollination")) {
+            return "Clean real HD pollination background with flowering plants and a pollinator, no embedded text";
+        }
+        if (title == null || title.isBlank()) {
+            return "Clean real HD educational background related to the lesson topic, no embedded text";
+        }
+        return "Clean real HD educational background for " + title + ", no embedded text";
     }
 
     private void tagSceneSource(Scene scene, boolean transcriptScene) {
@@ -921,6 +953,7 @@ public class SceneStoryboardGenerator {
             segment.setTemplate("video_broll");
             segment.setTool("ltx_video");
         }
+        enforceGeneratedVideoOverlayRules(segment);
         enforceAnimationMode(segment);
         enforceTiming(segment);
 
@@ -951,6 +984,22 @@ public class SceneStoryboardGenerator {
             segment.setCoverageNotes("Covers the narration sentence with matching visuals, labels, and image recommendations.");
         }
         segment.setLabels(sanitizeLabels(segment.getLabels(), segment));
+    }
+
+    private void enforceGeneratedVideoOverlayRules(SceneSegment segment) {
+        boolean generatedVideo = "video_broll".equals(segment.getTemplate())
+            || "wan_video".equals(segment.getMediaType())
+            || "wan_video".equals(segment.getMotionType())
+            || segment.getShot() != null
+            || segment.getLtxShot() != null;
+        if (!generatedVideo) {
+            return;
+        }
+        segment.setLabels(List.of());
+        segment.setArrows(List.of());
+        segment.setHighlights(List.of());
+        segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
+            "Generated-video guard: do not draw exact labels/arrows on this moving shot; use subtitles only or cut to a separate labeled still/diagram."));
     }
 
     private void enforceTemplateToolRules(SceneSegment segment) {
