@@ -6,6 +6,7 @@ public class SceneSegment {
 	private int segmentNumber;
 	private String sentence;
 	private String template;
+	private String visualType;
 	private String heading;
 	private String visualSubject;
 	private String assetPath;
@@ -17,6 +18,8 @@ public class SceneSegment {
 	private String visualAnimation;
 	private String localAnimation;
 	private List<String> labels;
+	private List<String> labelPlacements;
+	private String labelStyle;
 	private List<String> arrows;
 	private List<String> highlights;
 	private List<String> formulaLines;
@@ -25,6 +28,7 @@ public class SceneSegment {
 	private List<String> columns;
 	private List<String> imageRecommendations;
 	private String motion;
+	private String subtitle;
 	private String subtitleStyle;
 	private String tool;
 	private String assetQualityNotes;
@@ -55,6 +59,14 @@ public class SceneSegment {
 
 	public void setTemplate(String template) {
 		this.template = template;
+	}
+
+	public String getVisualType() {
+		return visualType;
+	}
+
+	public void setVisualType(String visualType) {
+		this.visualType = visualType;
 	}
 
 	public String getHeading() {
@@ -145,6 +157,22 @@ public class SceneSegment {
 		this.labels = labels;
 	}
 
+	public List<String> getLabelPlacements() {
+		return labelPlacements;
+	}
+
+	public void setLabelPlacements(List<String> labelPlacements) {
+		this.labelPlacements = labelPlacements;
+	}
+
+	public String getLabelStyle() {
+		return labelStyle;
+	}
+
+	public void setLabelStyle(String labelStyle) {
+		this.labelStyle = labelStyle;
+	}
+
 	public List<String> getArrows() {
 		return arrows;
 	}
@@ -207,6 +235,14 @@ public class SceneSegment {
 
 	public void setMotion(String motion) {
 		this.motion = motion;
+	}
+
+	public String getSubtitle() {
+		return subtitle;
+	}
+
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
 	}
 
 	public String getSubtitleStyle() {

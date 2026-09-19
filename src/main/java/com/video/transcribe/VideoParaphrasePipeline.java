@@ -21,7 +21,9 @@ import com.video.transcribe.llm.OllamaClient;
 import com.video.transcribe.model.TranscriptData;
 import com.video.transcribe.scene.SceneStoryboardGenerator;
 import com.video.transcribe.scene.StoryboardDocument;
+import com.video.transcribe.scene.StoryboardQualityGate;
 import com.video.transcribe.transcription.LocalWhisperTranscriber;
+import com.video.transcribe.transcription.TranscriptQualityGate;
 import com.video.transcribe.tts.TTSProvider;
 import com.video.transcribe.tts.TTSEngineFactory;
 import com.video.transcribe.validator.AccuracyValidator;
@@ -189,6 +191,7 @@ public class VideoParaphrasePipeline {
 	public StoryboardDocument generateStoryboard(String paraphrasedText, String baseName) throws Exception {
 		logger.info("=== PHASE 3c: Generating Scene Storyboard ===");
 		StoryboardDocument storyboard = sceneGenerator.generateStoryboard(paraphrasedText, baseName);
+		StoryboardQualityGate.validate(storyboard);
 
 		// Save as JSON
 		Path storyboardJson = Paths.get(config.getOutputDir(), baseName + "_storyboard.json");
@@ -235,7 +238,7 @@ public class VideoParaphrasePipeline {
 			// Phase 2: Transcribe audio → JSON + TXT
 			TranscriptData transcript = transcribeAudio(audioPath, language, baseName);
 			String originalText = transcript.getFullText();
-			if (isNoSpeechTranscript(transcript)) {
+			if (!TranscriptQualityGate.hasUsableSpeech(transcript)) {
 				logSkippedVideo(videoPath, baseName, "No speech detected or only music/background audio");
 				logger.warn("Skipping video with no usable speech: {}", videoPath);
 				return new PipelineResult(false, null, transcript, null,
@@ -351,26 +354,6 @@ public class VideoParaphrasePipeline {
 			}
 		}
 		return text.toString();
-	}
-
-	private boolean isNoSpeechTranscript(TranscriptData transcript) {
-		if (transcript == null || transcript.getFullText() == null) {
-			return true;
-		}
-		String text = transcript.getFullText().trim();
-		if (text.isBlank()) {
-			return true;
-		}
-		String normalized = text.toLowerCase();
-		List<String> noSpeechMarkers = List.of(
-			"[music]", "(music)", "music", "[applause]", "(applause)",
-			"[noise]", "(noise)", "[silence]", "(silence)"
-		);
-		if (text.length() < 20 && noSpeechMarkers.stream().anyMatch(normalized::contains)) {
-			return true;
-		}
-		String[] words = text.split("\\s+");
-		return words.length < 4 && transcript.getDuration() > 15.0;
 	}
 
 	private void logSkippedVideo(String videoPath, String baseName, String reason) {

@@ -10,10 +10,12 @@ import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * Loads and provides access to application.properties
  */
+@Component
 public class AppConfig {
 
 	private static final Logger logger = LoggerFactory.getLogger(AppConfig.class);
@@ -75,7 +77,8 @@ public class AppConfig {
 		props.setProperty("temp.dir", "./temp");
 		props.setProperty("cleanup.downloads", "true");
 		props.setProperty("download.timeout.seconds", "300");
-		props.setProperty("logging.level", "INFO");
+		props.setProperty("logging.level.root", "INFO");
+		props.setProperty("logging.file.name", "./logs/video-processor.log");
 	}
 
 	// === GETTERS ===
@@ -252,11 +255,11 @@ public class AppConfig {
 
 	// Logging
 	public String getLogLevel() {
-		return getString("logging.level", "INFO");
+		return getString("logging.level.root", getString("logging.level", "INFO"));
 	}
 
 	public String getLogFile() {
-		return getString("logging.file", "./logs/video-processor.log");
+		return getString("logging.file.name", getString("logging.file", "./logs/video-processor.log"));
 	}
 
 	/**

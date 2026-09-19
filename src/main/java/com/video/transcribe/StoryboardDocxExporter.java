@@ -15,6 +15,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSectPr;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTblWidth;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblWidth;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STPageOrientation;
 
 import com.video.transcribe.scene.Scene;
 import com.video.transcribe.scene.SceneSegment;
@@ -66,6 +67,9 @@ public class StoryboardDocxExporter {
         pageMar.setRight(BigInteger.valueOf(720));  // 0.5 inch
         pageMar.setTop(BigInteger.valueOf(720));
         pageMar.setBottom(BigInteger.valueOf(720));
+        sectPr.addNewPgSz().setOrient(STPageOrientation.LANDSCAPE);
+        sectPr.getPgSz().setW(BigInteger.valueOf(15840));
+        sectPr.getPgSz().setH(BigInteger.valueOf(12240));
     }
     
     private void addTitle(XWPFDocument doc, String text) {
@@ -124,13 +128,21 @@ public class StoryboardDocxExporter {
         CTTblWidth tblWidth = table.getCTTbl().getTblPr().addNewTblW();
         tblWidth.setType(STTblWidth.PCT);
         tblWidth.setW(BigInteger.valueOf(5000)); // 100% in fiftieths of a percent
+
+        // Explicit grid keeps the DOCX structurally valid for python-docx and downstream parsers.
+        var tableGrid = table.getCTTbl().addNewTblGrid();
+        for (int i = 0; i < 15; i++) {
+            tableGrid.addNewGridCol().setW(BigInteger.valueOf(900));
+        }
         
         // Header row
         XWPFTableRow headerRow = table.getRow(0);
         headerRow.setRepeatHeader(true);
         
         // Style header cells
-        String[] headers = {"S.no", "Narration", "Template", "Heading", "Timing", "Tool", "Visual Subject", "Asset / Image Prompt", "Overlay Plan", "Motion / Subtitle", "Coverage / Asset Quality", "Wan Video Shot", "LTX Video Shot"};
+        String[] headers = {"S.no", "Narration", "Template", "Heading", "Timing", "Tool",
+            "Visual Type / Image Requirement", "Asset / Image Prompt", "Labels", "Label Placement",
+            "Label Style", "Motion / Subtitle", "Coverage / Asset Quality", "Wan Video Shot", "LTX Video Shot"};
         
         for (int i = 0; i < headers.length; i++) {
             XWPFTableCell cell = headerRow.getCell(i) != null ? headerRow.getCell(i) : headerRow.addNewTableCell();
@@ -190,30 +202,48 @@ public class StoryboardDocxExporter {
             cell8.setText(formatAssetPrompt(segment));
             styleCell(cell8, ParagraphAlignment.LEFT);
 
-            // Overlay Plan
+            // Labels only: downstream parsers must never infer labels from style or placement text.
             XWPFTableCell cell9 = row.getCell(8);
-            cell9.setText(formatOverlayPlan(segment));
+            cell9.setText(formatList(segment.getLabels()));
             styleCell(cell9, ParagraphAlignment.LEFT);
 
-            // Motion / Subtitle
+            // Label Placement
             XWPFTableCell cell10 = row.getCell(9);
-            cell10.setText("motion: " + safe(segment.getMotion()) + "\nsubtitle: " + safe(segment.getSubtitleStyle()));
+            cell10.setText(formatList(segment.getLabelPlacements()));
             styleCell(cell10, ParagraphAlignment.LEFT);
 
-            // Coverage / Asset Quality
+            // Label Style
             XWPFTableCell cell11 = row.getCell(10);
-            cell11.setText(safe(segment.getCoverageNotes()) + "\n\nasset quality: " + safe(segment.getAssetQualityNotes()));
+            cell11.setText(safe(segment.getLabelStyle()));
             styleCell(cell11, ParagraphAlignment.LEFT);
 
-            // Wan Video Shot
+            // Motion / Subtitle
             XWPFTableCell cell12 = row.getCell(11);
-            cell12.setText(formatShot(segment.getShot()));
+            cell12.setText("motion: " + safe(segment.getMotion())
+                + "\nsubtitle: " + safe(segment.getSubtitle())
+                + "\nsubtitle_style: " + safe(segment.getSubtitleStyle())
+                + "\narrows: " + formatList(segment.getArrows())
+                + "\nhighlights: " + formatList(segment.getHighlights()));
             styleCell(cell12, ParagraphAlignment.LEFT);
 
-            // LTX Video Shot
+            // Coverage / Asset Quality
             XWPFTableCell cell13 = row.getCell(12);
-            cell13.setText(formatShot(segment.getLtxShot()));
+            cell13.setText(safe(segment.getCoverageNotes()) + "\n\nasset quality: " + safe(segment.getAssetQualityNotes())
+                + "\n\nformula lines:\n" + formatList(segment.getFormulaLines())
+                + "\n\nexplain steps:\n" + formatList(segment.getExplainSteps())
+                + "\n\nsteps:\n" + formatList(segment.getSteps())
+                + "\n\ncolumns:\n" + formatList(segment.getColumns()));
             styleCell(cell13, ParagraphAlignment.LEFT);
+
+            // Wan Video Shot
+            XWPFTableCell cell14 = row.getCell(13);
+            cell14.setText(formatShot(segment.getShot()));
+            styleCell(cell14, ParagraphAlignment.LEFT);
+
+            // LTX Video Shot
+            XWPFTableCell cell15 = row.getCell(14);
+            cell15.setText(formatShot(segment.getLtxShot()));
+            styleCell(cell15, ParagraphAlignment.LEFT);
         }
         
         // Add spacing after table
@@ -241,8 +271,8 @@ public class StoryboardDocxExporter {
     }
 
     private String formatTiming(SceneSegment segment) {
-        return "narration: " + segment.getEstimatedNarrationSeconds() + " sec"
-            + "\nvisual: " + segment.getRecommendedClipSeconds() + " sec"
+        return "narration_duration: " + segment.getEstimatedNarrationSeconds() + " sec"
+            + "\nduration: " + segment.getRecommendedClipSeconds() + " sec"
             + "\n" + (segment.getTimingNotes() != null ? segment.getTimingNotes() : "");
     }
 
@@ -252,6 +282,7 @@ public class StoryboardDocxExporter {
         }
         return switch (template) {
             case "title_card" -> "Title card";
+            case "photo" -> "Photo";
             case "labeled_image" -> "Labeled image";
             case "comparison" -> "Comparison";
             case "process" -> "Process";
@@ -263,7 +294,8 @@ public class StoryboardDocxExporter {
     }
 
     private String formatVisualSubject(SceneSegment segment) {
-        return "visual_subject: " + safe(segment.getVisualSubject())
+        return "visual_type: " + safe(segment.getVisualType())
+            + "\nimage_requirement: " + safe(segment.getVisualSubject())
             + "\nvisual notes: " + safe(segment.getVisualAnimation())
             + "\nlocal animation: " + safe(segment.getLocalAnimation());
     }
@@ -271,17 +303,7 @@ public class StoryboardDocxExporter {
     private String formatAssetPrompt(SceneSegment segment) {
         return "asset_path: " + safe(segment.getAssetPath())
             + "\nimage recommendations:\n" + formatList(segment.getImageRecommendations())
-            + "\n\ncomfy/background prompt:\n" + safe(segment.getComfyPrompt());
-    }
-
-    private String formatOverlayPlan(SceneSegment segment) {
-        return "labels:\n" + formatList(segment.getLabels())
-            + "\n\narrows:\n" + formatList(segment.getArrows())
-            + "\n\nhighlights:\n" + formatList(segment.getHighlights())
-            + "\n\nformula lines:\n" + formatList(segment.getFormulaLines())
-            + "\n\nexplain steps:\n" + formatList(segment.getExplainSteps())
-            + "\n\nsteps:\n" + formatList(segment.getSteps())
-            + "\n\ncolumns:\n" + formatList(segment.getColumns());
+            + "\n\nimage_prompt:\n" + safe(segment.getComfyPrompt());
     }
 
     private String safe(String value) {

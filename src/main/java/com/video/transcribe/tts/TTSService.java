@@ -17,18 +17,17 @@ public class TTSService {
     private static final Logger logger = LoggerFactory.getLogger(TTSService.class);
     
     private final Map<VoiceConfig.TTSProviderType, TTSProvider> providers = new HashMap<>();
+    private final AppConfig appConfig;
     
     public TTSService(AppConfig appConfig) {
-        // Register providers with config
-        providers.put(VoiceConfig.TTSProviderType.PIPER, new PiperTTS(appConfig));
-        providers.put(VoiceConfig.TTSProviderType.EDGE, new EdgeTTS(appConfig));
+        this.appConfig = appConfig;
     }
     
     /**
      * Synthesize speech with given configuration
      */
     public File synthesize(String text, VoiceConfig config) throws Exception {
-        TTSProvider provider = providers.get(config.getProvider());
+        TTSProvider provider = providers.computeIfAbsent(config.getProvider(), this::createProvider);
         
         if (provider == null) {
             throw new IllegalArgumentException("Unknown TTS provider: " + config.getProvider());
@@ -81,7 +80,14 @@ public class TTSService {
      * Check provider availability
      */
     public boolean isProviderAvailable(VoiceConfig.TTSProviderType type) {
-        TTSProvider provider = providers.get(type);
+        TTSProvider provider = providers.computeIfAbsent(type, this::createProvider);
         return provider != null && provider.isAvailable();
+    }
+
+    private TTSProvider createProvider(VoiceConfig.TTSProviderType type) {
+        return switch (type) {
+            case EDGE -> new EdgeTTS(appConfig);
+            case PIPER -> new PiperTTS(appConfig);
+        };
     }
 }
