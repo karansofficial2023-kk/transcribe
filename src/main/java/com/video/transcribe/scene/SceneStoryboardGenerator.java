@@ -555,10 +555,14 @@ public class SceneStoryboardGenerator {
                 - labels contains separate atomic curriculum terms; one visible target per item.
                 - Never combine distinct labels into one string.
                 - Replace vague nouns with precise names supported by the narration.
-                - labelPlacements contains exactly one entry per label using:
-                  Label name | exact semantic target description | target_xy: AUTO_VERIFY
-                - Never invent coordinates for an image that has not been generated. Numeric normalized
-                  coordinates are allowed only when assetPath identifies a locked, reviewed asset.
+                - A production labeled row requires an existing absolute assetPath for the exact final,
+                  human-reviewed static image.
+                - labelPlacements contains exactly one entry per visible-object label using:
+                  Label name | exact semantic target description | target_xy: x,y
+                - x,y must be manually measured normalized coordinates from that exact reviewed image.
+                  Never use AUTO_VERIFY and never invent coordinates.
+                - Labels name concrete visible objects only. Put mechanisms, classifications, phases,
+                  laws, and other scientific concepts in subtitles or legends, never as arrow targets.
                 - visualSubject and comfyPrompt must describe a sharp 1920x1080 label-ready composition
                   in which every semantic target is unobscured with sufficient overlay margins.
                 - End comfyPrompt with: No embedded text. No generated labels. No generated arrows.
@@ -566,8 +570,8 @@ public class SceneStoryboardGenerator {
                 - Narration about named structures, anatomical parts, apparatus components,
                   spatial comparisons, visible adaptations, process stages, or contrasting phases
                   requires a stable labeled still or deterministic diagram with complete labels.
-                - If a concept genuinely has no trustworthy visible target, return empty labels and
-                  placements; the application will convert it to a plain unlabeled realistic image.
+                - If no reviewed final asset and measured coordinates are available, return empty
+                  labels and placements; the application will keep a draft realistic image.
                 """.formatted(languageInstruction, lessonText, topicCheck.subject(),
                     topicCheck.inferredTopic(), gson.toJson(labelCandidates));
             try {
@@ -839,9 +843,12 @@ public class SceneStoryboardGenerator {
             }
             normalizeTitleCards(scene,
                 sceneIndex == 0 ? storyboardTitle : scene.getSceneTitle(), sceneIndex == 0);
-            for (SceneSegment segment : scene.getSegments()) {
+            for (int segmentIndex = 0; segmentIndex < scene.getSegments().size(); segmentIndex++) {
+                SceneSegment segment = scene.getSegments().get(segmentIndex);
+                boolean openingTitle = sceneIndex == 0 && segmentIndex == 0;
+                segment.setHeading(openingTitle ? storyboardTitle : "");
                 segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
-                segment.setSubtitle(buildSubtitle(segment.getSentence()));
+                segment.setSubtitle(openingTitle ? "" : buildSubtitle(segment.getSentence()));
                 segment.setComfyPrompt(ensureNoTextPrompt(segment.getComfyPrompt()));
                 enforceLabelContract(segment);
                 enforceLabelDuration(segment);
@@ -884,9 +891,8 @@ public class SceneStoryboardGenerator {
 
     private boolean hasAllowedTarget(SceneSegment segment, String placement) {
         if (placement == null) return false;
-        if (containsIgnoreCase(placement, "target_xy: AUTO_VERIFY")) return true;
-        return segment.getAssetPath() != null && !segment.getAssetPath().isBlank()
-            && hasNumericTarget(placement);
+        return hasReviewedAsset(segment) && hasNumericTarget(placement)
+            && !containsIgnoreCase(placement, "AUTO_VERIFY");
     }
 
     private boolean isTooGenericLabel(String label) {
@@ -1146,7 +1152,9 @@ public class SceneStoryboardGenerator {
             7. Visual/Animation description (what should be shown on screen)
             8. Local animation instructions for teaching clarity, such as arrows, highlights, zooms, labels, diagrams, step reveals, or comparison panels
             9. labels: exact, atomic curriculum terms that point only to clearly visible objects. Each array item must name one target only; never combine multiple terms in one string.
-            10. labelPlacements: one entry per label in "Label name | exact semantic target description | target_xy: AUTO_VERIFY" format. Never invent coordinates for an image that has not been generated. Numeric normalized coordinates are allowed only for a locked reviewed assetPath.
+            10. labelPlacements: for a locked reviewed static asset only, one entry per visible-object
+                label in "Label name | exact semantic target description | target_xy: x,y" format,
+                using manually measured normalized coordinates from that exact image. Never use AUTO_VERIFY.
             11. labelStyle: exactly "%s"
             12. arrows, highlights, formulaLines, explainSteps, steps, and columns as renderer overlay instructions
             10. Image recommendations (2 specific no-text image descriptions for stock photo/illustration search)
@@ -1186,12 +1194,12 @@ public class SceneStoryboardGenerator {
             - A labeled_image/realistic_labeled_image/diagram_overlay must contain at least one reliable atomic label and one matching placement per label. Process and comparison visuals must also include the exact stage, role, or side labels needed to interpret them. If reliable visible targets cannot be identified, use a plain realistic image or short_motion_clip instead; formula rows remain deterministic Manim output.
             - Decide whether labels teach necessary spatial information. Labels are normally required for anatomy/parts, apparatus, maps, definitions based on named parts, mechanisms with visible targets, and adaptations tied to visible structures. Labels are normally unnecessary for title cards, mood/background images, broad concept photos, recap images, transitions, and simple documentary photos.
             - A named visible adaptation, positional difference, developmental phase, timing contrast, or mechanism must use a stable labeled still or deterministic labeled diagram, never moving Wan/LTX footage. Split crowded concepts into focused rows.
-            - If labels are needed, use template=labeled_image, visualType=realistic_labeled_image, and mediaType=photo_with_labels. If labels are not needed, labels and labelPlacements must both be empty and use template=photo with visualType=realistic_image and mediaType=photo, or another appropriate non-labeled specialized type.
-            - Labels must be exact curriculum nouns visible in the background asset, not general instructions to the viewer.
+            - If a reviewed final asset and measured coordinates are available, use template=labeled_image, visualType=realistic_labeled_image, and mediaType=photo_with_labels. Otherwise create a draft with empty assetPath, labels, and labelPlacements using template=photo, visualType=realistic_image, and mediaType=photo.
+            - Labels must name exact concrete objects visibly present in the reviewed asset, not mechanisms, classifications, phases, laws, processes, or instructions. Put those scientific concepts in subtitles or renderer legends.
             - Every label must have a matching labelPlacements entry naming the same label and an unambiguous visible target. Never point a structure label to an animal, background, or approximate area.
             - Coordinate examples describe the required format only. Choose coordinates from the requested composition; do not copy coordinates from another subject or frame.
-            - For every labeled still, provide an exact semantic target description and target_xy: AUTO_VERIFY. The renderer resolves the anchor only after the final image exists.
-            - Numeric normalized coordinates may appear only when assetPath identifies a locked reviewed asset. Never guess coordinates for generated imagery.
+            - Never use target_xy: AUTO_VERIFY. Numeric normalized coordinates may appear only after
+              the exact final asset has been generated or selected, manually reviewed, and measured.
             - If the exact target will not be reliably visible, remove that label or change to a reviewed still/diagram where it is visible.
             - Choose the number of labels from the topic, lesson requirement, and visible structures in that frame. Do not impose a fixed label count.
             - If all required labels cannot remain readable without overlap, divide the concept into additional focused frames; do not omit required curriculum labels merely to meet an arbitrary count.
@@ -1201,6 +1209,9 @@ public class SceneStoryboardGenerator {
             - Core renderer rule: never ask AI image/video models to create exact text, labels, arrows, formulas, legends, numbers, or scientific names inside the generated image/video.
             - Put all exact text, labels, arrows, legends, highlights, formulas, and subtitles in overlay fields so Pillow/OpenCV/Manim/FFmpeg can draw them precisely.
             - comfyPrompt and shot prompts must request clean backgrounds with no text, no labels, no captions, no watermarks, and no formula text.
+            - Every image prompt must name the exact subject or species supplied by the narration,
+              the structures or objects that must be visibly distinguishable, camera view, lighting,
+              and composition. Never use generic wording such as "show the exact narrated concept".
             - Every still-image prompt must request sharp 1920x1080 educational photography, subject-accurate structures, realistic natural lighting, clear subject separation, sufficient empty overlay margins, no embedded text, no generated labels, no generated arrows, no captions, no watermark, and no slide or presentation-card layout.
             - Use title_card exactly once, for the first lesson shot only. Every later row must use a content visual.
             - Use labeled_image for apparatus/anatomy/parts; labels/arrows are overlays, not generated in the image.
@@ -2046,15 +2057,17 @@ public class SceneStoryboardGenerator {
             supplied.stream()
                 .filter(value -> placementMatchesLabel(value, prefix))
                 .findFirst()
-                .ifPresent(placement -> placements.add(normalizeLabelPlacement(segment, label, placement)));
+                .map(placement -> normalizeLabelPlacement(segment, label, placement))
+                .filter(placement -> !placement.isBlank())
+                .ifPresent(placements::add);
         }
         segment.setLabelPlacements(placements);
         segment.setLabelStyle(defaultLabelStyle());
         segment.setMotion(labels.isEmpty() ? removeLabelAnimation(segment.getMotion()) : LABELED_MOTION);
         if (!labels.isEmpty()) {
             segment.setAssetQualityNotes(appendNote(segment.getAssetQualityNotes(),
-                "Resolve AUTO_VERIFY anchors after the final image is generated or loaded. Draw an arrow only "
-                    + "after its named semantic target is verified; otherwise skip the unsafe arrow."));
+                "Coordinates are manually measured normalized anchors from the locked reviewed asset. "
+                    + "Do not reuse them with a regenerated or cropped image."));
         }
     }
 
@@ -2066,11 +2079,23 @@ public class SceneStoryboardGenerator {
             .compile("(?:target=\\(|target_xy:\\s*)(" + normalizedNumber + ")\\s*,\\s*(" + normalizedNumber + ")\\)?",
                 java.util.regex.Pattern.CASE_INSENSITIVE)
             .matcher(value);
-        boolean lockedAsset = segment.getAssetPath() != null && !segment.getAssetPath().isBlank();
-        String target = lockedAsset && coordinate.find()
-            ? coordinate.group(1) + "," + coordinate.group(2)
-            : "AUTO_VERIFY";
-        return label + " | " + description + " | target_xy: " + target;
+        if (!hasReviewedAsset(segment) || !coordinate.find()
+                || containsIgnoreCase(value, "AUTO_VERIFY")) {
+            return "";
+        }
+        return label + " | " + description + " | target_xy: "
+            + coordinate.group(1) + "," + coordinate.group(2);
+    }
+
+    private boolean hasReviewedAsset(SceneSegment segment) {
+        String value = segment.getAssetPath();
+        if (value == null || value.isBlank()) return false;
+        try {
+            Path path = Path.of(value);
+            return path.isAbsolute() && Files.isRegularFile(path);
+        } catch (InvalidPathException ignored) {
+            return false;
+        }
     }
 
     private String extractTargetDescription(String placement, String label) {

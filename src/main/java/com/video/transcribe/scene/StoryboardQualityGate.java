@@ -104,9 +104,21 @@ public final class StoryboardQualityGate {
         if (!SUBTITLE_STYLE.equals(segment.getSubtitleStyle())) {
             throw new IllegalStateException("Storyboard row " + id + " has non-standard subtitle style");
         }
-        if (segment.getSubtitle() == null || segment.getSubtitle().isBlank()
-                || segment.getSubtitle().contains("...")) {
-            throw new IllegalStateException("Storyboard row " + id + " has an incomplete subtitle");
+        boolean titleCard = "title_card".equals(segment.getVisualType());
+        if (titleCard) {
+            if (segment.getSubtitle() != null && !segment.getSubtitle().isBlank()) {
+                throw new IllegalStateException("Storyboard row " + id
+                    + " must leave the opening title subheading empty");
+            }
+        } else {
+            if (segment.getHeading() != null && !segment.getHeading().isBlank()) {
+                throw new IllegalStateException("Storyboard row " + id
+                    + " must not display a heading on an ordinary content shot");
+            }
+            if (segment.getSubtitle() == null || segment.getSubtitle().isBlank()
+                    || segment.getSubtitle().contains("...")) {
+                throw new IllegalStateException("Storyboard row " + id + " has an incomplete subtitle");
+            }
         }
         if (segment.getMotion() == null || segment.getMotion().isBlank()) {
             throw new IllegalStateException("Storyboard row " + id + " has no motion instruction");
@@ -115,6 +127,9 @@ public final class StoryboardQualityGate {
         rejectReplacementCharacters(segment, id);
         if (requiresCleanImagePrompt(segment) && !hasCleanImageContract(segment.getComfyPrompt())) {
             throw new IllegalStateException("Storyboard row " + id + " has an unsafe image prompt");
+        }
+        if (containsGenericPrompt(segment.getComfyPrompt())) {
+            throw new IllegalStateException("Storyboard row " + id + " has a generic image prompt");
         }
 
         if (StoryboardRules.requiresFormulaRenderer(segment)) {
@@ -153,9 +168,15 @@ public final class StoryboardQualityGate {
                 + " places scientific labels on moving footage");
         }
 
-        if (!supportsLabels(segment)) {
+        if (!"realistic_labeled_image".equals(segment.getVisualType())
+                || !"labeled_image".equals(segment.getTemplate())
+                || !"photo_with_labels".equals(segment.getMediaType())) {
             throw new IllegalStateException("Storyboard row " + id
-                + " contains labels but its visual type does not support labels");
+                + " must use the reviewed realistic_labeled_image contract");
+        }
+        if (segment.getAssetPath() == null || segment.getAssetPath().isBlank()) {
+            throw new IllegalStateException("Storyboard row " + id
+                + " has labels without a reviewed static asset");
         }
         if (placements.size() != labels.size()) {
             throw new IllegalStateException("Storyboard row " + id
@@ -193,9 +214,9 @@ public final class StoryboardQualityGate {
             boolean autoVerify = placement.toLowerCase(Locale.ROOT).contains("target_xy: auto_verify");
             boolean lockedNumeric = segment.getAssetPath() != null && !segment.getAssetPath().isBlank()
                 && (NUMERIC_TARGET.matcher(placement).find() || hasNumericTargetXy(placement));
-            if (!autoVerify && !lockedNumeric) {
+            if (autoVerify || !lockedNumeric) {
                 throw new IllegalStateException("Storyboard row " + id
-                    + " has neither AUTO_VERIFY nor a locked-asset coordinate for label " + label);
+                    + " lacks manually measured coordinates for label " + label);
             }
             if (!hasSpecificTargetDescription(placement, label)) {
                 throw new IllegalStateException("Storyboard row " + id
@@ -251,6 +272,14 @@ public final class StoryboardQualityGate {
     private static boolean hasNumericTargetXy(String placement) {
         return Pattern.compile("(?i)target_xy:\\s*" + NUMBER + "\\s*,\\s*" + NUMBER)
             .matcher(placement).find();
+    }
+
+    private static boolean containsGenericPrompt(String prompt) {
+        if (prompt == null) return true;
+        String value = prompt.toLowerCase(Locale.ROOT);
+        return value.contains("show the exact narrated concept")
+            || value.contains("curriculum-accurate visual directly illustrating")
+            || value.contains("main lesson concept");
     }
 
     private static boolean requiresCleanImagePrompt(SceneSegment segment) {

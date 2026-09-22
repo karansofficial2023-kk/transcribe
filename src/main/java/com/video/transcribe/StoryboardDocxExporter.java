@@ -136,8 +136,12 @@ public class StoryboardDocxExporter {
         shotHeader.setSpacingBefore(140);
         shotHeader.setSpacingAfter(70);
         XWPFRun header = shotHeader.createRun();
-        header.setText("Shot " + sceneNumber + "." + segment.getSegmentNumber()
-            + ": " + safe(segment.getHeading()));
+        String shotLabel = "Shot " + sceneNumber + "." + segment.getSegmentNumber();
+        if ("title_card".equals(segment.getVisualType())
+                && segment.getHeading() != null && !segment.getHeading().isBlank()) {
+            shotLabel += ": " + segment.getHeading();
+        }
+        header.setText(shotLabel);
         header.setBold(true);
         header.setFontFamily("Arial");
         header.setFontSize(12);

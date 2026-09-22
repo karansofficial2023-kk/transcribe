@@ -50,14 +50,15 @@ class StoryboardQualityGateTest {
     }
 
     @Test
-    void acceptsAutoVerifyTargetForGeneratedImage() {
+    void rejectsAutoVerifyTargetForGeneratedImage() {
         SceneSegment segment = segment("labeled_image", "realistic_labeled_image", "photo_with_labels");
         segment.setLabels(List.of("Anther"));
         segment.setLabelPlacements(List.of(
             "Anther | upper pollen-bearing structure | target_xy: AUTO_VERIFY"));
         labeledContract(segment);
 
-        assertDoesNotThrow(() -> StoryboardQualityGate.validate(storyboard(segment)));
+        assertThrows(IllegalStateException.class,
+            () -> StoryboardQualityGate.validate(storyboard(segment)));
     }
 
     @Test
@@ -65,7 +66,7 @@ class StoryboardQualityGateTest {
         SceneSegment segment = segment("labeled_image", "realistic_labeled_image", "photo_with_labels");
         segment.setLabels(List.of("Anther"));
         segment.setLabelPlacements(List.of(
-            "Anther | upper pollen-bearing structure | target_xy: AUTO_VERIFY"));
+            "Anther | upper pollen-bearing structure | target_xy: 0.35,0.42"));
         labeledContract(segment);
 
         assertDoesNotThrow(() -> StoryboardQualityGate.validate(storyboard(segment)));
@@ -102,6 +103,7 @@ class StoryboardQualityGateTest {
         segment.setLabelPlacements(List.of(
             "Anther: box=left; target=(0.35,0.42); target_description=upper pollen-bearing structure"));
         labeledContract(segment);
+        segment.setAssetPath("");
 
         assertThrows(IllegalStateException.class,
             () -> StoryboardQualityGate.validate(storyboard(segment)));
@@ -163,6 +165,7 @@ class StoryboardQualityGateTest {
     }
 
     private void labeledContract(SceneSegment segment) {
+        segment.setAssetPath(java.nio.file.Path.of("pom.xml").toAbsolutePath().normalize().toString());
         segment.setLabelStyle("high_contrast_box; white_text; dark_background; colored_target_dot; 3px_leader_line; 28px_minimum_font; avoid_subject; avoid_title_area; avoid_subtitle_area; avoid_logo_area");
         segment.setMotion("arrow_draw_then_label_fade; reveal_in_list_order; keep_previous_labels_visible; completed_frame_hold=2.5s");
         segment.setRecommendedClipSeconds(4.0);
@@ -171,6 +174,7 @@ class StoryboardQualityGateTest {
     private StoryboardDocument storyboard(SceneSegment segment) {
         SceneSegment title = segment("title_card", "title_card", "photo");
         title.setHeading("Lesson Title");
+        title.setSubtitle("");
         Scene titleScene = new Scene();
         titleScene.setSceneNumber(1);
         titleScene.setNarration(title.getSentence());

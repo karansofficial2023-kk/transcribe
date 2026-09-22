@@ -24,12 +24,12 @@ class StoryboardDocxExporterTest {
         segment.setSentence("Pollen moves from anther to stigma.");
         segment.setTemplate("labeled_image");
         segment.setVisualType("realistic_labeled_image");
-        segment.setHeading("Pollen Transfer");
+        segment.setHeading("");
         segment.setLabels(List.of("anther", "stigma", "pollen grains"));
         segment.setLabelPlacements(List.of(
-            "anther | pollen-bearing anther | target_xy: AUTO_VERIFY",
-            "stigma | receptive stigma tip | target_xy: AUTO_VERIFY",
-            "pollen grains | visible pollen grains | target_xy: AUTO_VERIFY"));
+            "anther | pollen-bearing anther | target_xy: 0.35,0.42",
+            "stigma | receptive stigma tip | target_xy: 0.58,0.36",
+            "pollen grains | visible pollen grains | target_xy: 0.43,0.45"));
         segment.setLabelStyle("high_contrast_box; white_text; dark_background; colored_target_dot; 3px_leader_line; 28px_minimum_font; avoid_subject; avoid_title_area; avoid_subtitle_area; avoid_logo_area");
         segment.setMotion("arrow_draw_then_label_fade; reveal_in_list_order; keep_previous_labels_visible; completed_frame_hold=2.5s");
         segment.setSubtitle("Pollen moves from the anther to the stigma.");
@@ -75,7 +75,8 @@ class StoryboardDocxExporterTest {
             assertFalse(labels.contains("yellow"));
             assertFalse(labels.contains("1080p"));
 
-            assertTrue(placementRow.getCell(1).getText().contains("target_xy: AUTO_VERIFY"));
+            assertTrue(placementRow.getCell(1).getText().contains("target_xy: 0.35,0.42"));
+            assertFalse(placementRow.getCell(1).getText().contains("AUTO_VERIFY"));
             assertTrue(styleRow.getCell(1).getText().contains("28px_minimum_font"));
             assertEquals(17, table.getRows().size());
         }

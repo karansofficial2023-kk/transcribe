@@ -52,6 +52,7 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
         StoryboardDocument document = new StoryboardDocument();
         document.setTitle("Battery Cells in Series");
         title.setHeading("Battery Cells in Series");
+        title.setSubtitle("");
         document.setScenes(List.of(titleScene, scene));
         assertDoesNotThrow(() -> StoryboardQualityGate.validate(document));
     }
