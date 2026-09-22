@@ -59,4 +59,20 @@ class SceneStoryboardSourceIntegrityTest {
         assertFalse(generator.normalizeForDuplicateKey("மகரந்தச் சேர்க்கை நடைபெறுகிறது").isBlank());
         assertFalse(generator.normalizeForDuplicateKey("परागण एक महत्वपूर्ण प्रक्रिया है").isBlank());
     }
+
+    @Test
+    void terminologyCleanupNeverChangesNarrationOrSegmentText() {
+        SceneSegment segment = new SceneSegment();
+        segment.setSentence("The flower is called Xora.");
+        segment.setHeading("Xora flower");
+        Scene scene = new Scene();
+        scene.setNarration("The flower is called Xora.");
+        scene.setSegments(List.of(segment));
+
+        generator.correctKnownStoryboardTerminology(scene);
+
+        assertEquals("The flower is called Xora.", scene.getNarration());
+        assertEquals("The flower is called Xora.", segment.getSentence());
+        assertEquals("Ixora flower", segment.getHeading());
+    }
 }

@@ -2,6 +2,7 @@ package com.video.transcribe.scene;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -47,6 +48,12 @@ public class SceneStoryboardGenerator {
             "safeStoryboardTitle": {
               "type": "string"
             },
+            "subject": {
+              "type": "string"
+            },
+            "smeRole": {
+              "type": "string"
+            },
             "warning": {
               "type": "string"
             }
@@ -57,6 +64,8 @@ public class SceneStoryboardGenerator {
             "topicMatch",
             "confidence",
             "safeStoryboardTitle",
+            "subject",
+            "smeRole",
             "warning"
           ],
           "additionalProperties": false
@@ -391,17 +400,42 @@ public class SceneStoryboardGenerator {
           "items": {
             "type": "object",
             "properties": {
-              "sceneNumber": { "type": "integer" },
-              "segmentNumber": { "type": "integer" },
+              "rowId": { "type": "string" },
               "labels": { "type": "array", "items": { "type": "string" } },
               "labelPlacements": { "type": "array", "items": { "type": "string" } },
               "visualSubject": { "type": "string" },
               "comfyPrompt": { "type": "string" }
             },
             "required": [
-              "sceneNumber", "segmentNumber", "labels", "labelPlacements",
+              "rowId", "labels", "labelPlacements",
               "visualSubject", "comfyPrompt"
             ],
+            "additionalProperties": false
+          }
+        }
+        """).getAsJsonObject();
+
+    private static final JsonObject SME_REVIEW_SCHEMA = JsonParser.parseString("""
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "rowId": { "type": "string" },
+              "approved": { "type": "boolean" },
+              "issue": { "type": "string" },
+              "template": { "type": "string", "enum": ["title_card", "photo", "labeled_image", "comparison", "process", "formula", "split_screen", "video_broll"] },
+              "visualType": { "type": "string", "enum": ["title_card", "realistic_image", "realistic_labeled_image", "split_screen_comparison", "diagram_overlay", "process_steps", "formula/derivation", "realistic_background_with_labels", "short_motion_clip"] },
+              "heading": { "type": "string" },
+              "visualSubject": { "type": "string" },
+              "mediaType": { "type": "string", "enum": ["photo", "diagram", "animation", "photo_with_labels", "animation_with_labels", "wan_video"] },
+              "motionType": { "type": "string", "enum": ["wan_video", "local_animation", "static_image"] },
+              "tool": { "type": "string", "enum": ["pillow_opencv", "ffmpeg", "manim", "comfy_image", "ltx_video", "upscale", "reviewed_asset"] },
+              "comfyPrompt": { "type": "string" },
+              "coverageNotes": { "type": "string" },
+              "formulaLines": { "type": "array", "items": { "type": "string" } }
+            },
+            "required": ["rowId", "approved", "issue", "template", "visualType", "heading", "visualSubject", "mediaType", "motionType", "tool", "comfyPrompt", "coverageNotes", "formulaLines"],
             "additionalProperties": false
           }
         }
@@ -446,13 +480,18 @@ public class SceneStoryboardGenerator {
         
         // Step 2: For each scene, generate segments with visuals and images
         for (Scene scene : scenes) {
-            enrichSceneWithSegments(scene, languageInstruction);
+            enrichSceneWithSegments(scene, languageInstruction, topicCheck);
         }
         normalizeScenes(scenes, paraphrasedText, topicCheck.safeStoryboardTitle());
-        repairAndValidateLabelPlans(scenes, paraphrasedText, languageInstruction);
+        reviewVisualPlansWithSme(scenes, paraphrasedText, languageInstruction, topicCheck);
+        repairAndValidateLabelPlans(scenes, paraphrasedText, languageInstruction, topicCheck);
+        rebuildSceneNarrationFromSegments(scenes);
         
         StoryboardDocument doc = new StoryboardDocument();
         doc.setTitle(topicCheck.safeStoryboardTitle());
+        doc.setSubject(topicCheck.subject());
+        doc.setTopic(topicCheck.inferredTopic());
+        doc.setSmeRole(topicCheck.smeRole());
         doc.setSourceText(paraphrasedText);
         doc.setScenes(scenes);
         doc.setGeneratedAt(java.time.Instant.now().toString());
@@ -462,36 +501,41 @@ public class SceneStoryboardGenerator {
     }
 
     private void repairAndValidateLabelPlans(List<Scene> scenes, String lessonText,
-            String languageInstruction) {
+            String languageInstruction, TopicCheck topicCheck) {
         JsonArray labelCandidates = new JsonArray();
+        Set<String> expectedRowIds = new LinkedHashSet<>();
         for (Scene scene : scenes) {
             for (SceneSegment segment : scene.getSegments()) {
                 if (isLabeledVisual(segment) || hasLabels(segment)) {
                     JsonObject item = new JsonObject();
-                    item.addProperty("sceneNumber", scene.getSceneNumber());
-                    item.addProperty("segmentNumber", segment.getSegmentNumber());
+                    String rowId = scene.getSceneNumber() + "." + segment.getSegmentNumber();
+                    item.addProperty("rowId", rowId);
                     item.addProperty("sentence", segment.getSentence());
                     item.addProperty("heading", segment.getHeading());
                     item.addProperty("visualSubject", segment.getVisualSubject());
                     item.add("labels", gson.toJsonTree(segment.getLabels()));
                     item.add("labelPlacements", gson.toJsonTree(segment.getLabelPlacements()));
                     labelCandidates.add(item);
+                    expectedRowIds.add(rowId);
                 }
             }
         }
 
         if (!labelCandidates.isEmpty()) {
             String systemPrompt = """
-                You are a subject-matter expert and scientific illustration director.
+                You are %s and a scientific illustration director.
                 Repair label plans for educational storyboard still images in any subject.
                 Return only schema-constrained JSON. Do not change narration or lesson facts.
-                """;
+                """.formatted(topicCheck.smeRole());
             String userPrompt = """
                 Review and repair every labeled row below, including rows that appear structurally valid.
                 %s
 
                 LESSON CONTEXT:
                 %s
+
+                VERIFIED SUBJECT: %s
+                VERIFIED TOPIC: %s
 
                 LABELED ROWS TO REVIEW:
                 %s
@@ -510,10 +554,13 @@ public class SceneStoryboardGenerator {
                   All text labels will be added as overlay. No arrows, captions, or watermark.
                 - If a concept cannot be represented with trustworthy visible targets, return empty
                   labels and placements; the application will convert it to an unlabeled visual.
-                """.formatted(languageInstruction, lessonText, gson.toJson(labelCandidates));
+                """.formatted(languageInstruction, lessonText, topicCheck.subject(),
+                    topicCheck.inferredTopic(), gson.toJson(labelCandidates));
             try {
-                String response = ollama.generateStructured(systemPrompt, userPrompt, LABEL_REPAIR_SCHEMA);
-                applyLabelPlanRepairs(scenes, JsonParser.parseString(response).getAsJsonArray());
+                String response = ollama.generateStructured(systemPrompt, userPrompt,
+                    buildLabelRepairSchema(expectedRowIds));
+                applyLabelPlanRepairs(scenes, JsonParser.parseString(response).getAsJsonArray(),
+                    expectedRowIds);
             } catch (Exception e) {
                 logger.warn("Label-plan repair failed; unsafe labeled rows will be downgraded: {}", e.getMessage());
             }
@@ -524,6 +571,125 @@ public class SceneStoryboardGenerator {
                 finalizeLabelConsistency(segment);
             }
         }
+    }
+
+    private void reviewVisualPlansWithSme(List<Scene> scenes, String lessonText,
+            String languageInstruction, TopicCheck topicCheck) {
+        JsonArray rows = new JsonArray();
+        Set<String> expected = new LinkedHashSet<>();
+        for (Scene scene : scenes) {
+            for (SceneSegment segment : scene.getSegments()) {
+                JsonObject item = new JsonObject();
+                item.addProperty("rowId", scene.getSceneNumber() + "." + segment.getSegmentNumber());
+                item.addProperty("sentence", segment.getSentence());
+                item.addProperty("template", segment.getTemplate());
+                item.addProperty("visualType", segment.getVisualType());
+                item.addProperty("heading", segment.getHeading());
+                item.addProperty("visualSubject", segment.getVisualSubject());
+                item.addProperty("mediaType", segment.getMediaType());
+                item.addProperty("motionType", segment.getMotionType());
+                item.addProperty("tool", segment.getTool());
+                item.addProperty("comfyPrompt", segment.getComfyPrompt());
+                item.addProperty("coverageNotes", segment.getCoverageNotes());
+                item.add("formulaLines", gson.toJsonTree(segment.getFormulaLines()));
+                rows.add(item);
+                expected.add(scene.getSceneNumber() + "." + segment.getSegmentNumber());
+            }
+        }
+        if (rows.isEmpty()) return;
+
+        String systemPrompt = "You are " + topicCheck.smeRole()
+            + " and the final curriculum and visual-production reviewer. "
+            + "Return only schema-constrained JSON. Never rewrite narration.";
+        String userPrompt = """
+            Perform a final SME audit of every storyboard row for this lesson.
+            %s
+
+            VERIFIED SUBJECT: %s
+            VERIFIED TOPIC: %s
+            REQUIRED SME ROLE: %s
+
+            LESSON SOURCE:
+            %s
+
+            STORYBOARD ROWS:
+            %s
+
+            Return every row exactly once. Set approved=true only when the visual is factual,
+            directly relevant to its narration, and suitable for the detected subject and topic.
+            For rejected rows, correct only the production fields in the schema.
+            Requirements:
+            - Remove all people, organisms, apparatus, locations, reactions, formulas, and examples
+              that belong to another lesson or subject.
+            - Do not add curriculum claims not supported by the source lesson.
+            - Route exact equations, calculations, derivations, symbolic laws, and substitutions to
+              template=formula, visualType=formula/derivation, mediaType=animation,
+              motionType=local_animation, tool=manim, with exact formulaLines.
+            - AI image prompts describe only a clean background asset. They must not ask the image
+              model to render text, labels, arrows, captions, formulas, numbers, or watermarks.
+            - Use generated motion video only for natural continuous motion. Use deterministic
+              overlays or diagrams for exact teaching content.
+            - If one row contains several distinct structures, examples, phases, or mechanisms,
+              use stable split-screen/process panels; never combine precise labels with LTX/Wan motion.
+            - Keep the heading concise and the coverage note specific to the narration sentence.
+            """.formatted(languageInstruction, topicCheck.subject(), topicCheck.inferredTopic(),
+                topicCheck.smeRole(), lessonText, gson.toJson(rows));
+        try {
+            String response = ollama.generateStructured(systemPrompt, userPrompt,
+                buildSmeReviewSchema(expected));
+            JsonArray reviews = JsonParser.parseString(response).getAsJsonArray();
+            Set<String> seen = new LinkedHashSet<>();
+            for (var element : reviews) {
+                JsonObject review = element.getAsJsonObject();
+                String key = getStringOrDefault(review, "rowId", "");
+                if (!expected.contains(key)) {
+                    logger.warn("SME visual audit returned unknown row {}; ignoring it", key);
+                    continue;
+                }
+                if (!seen.add(key)) {
+                    logger.warn("SME visual audit returned duplicate row {}; keeping the first review", key);
+                    continue;
+                }
+                String[] keyParts = key.split("\\.", 2);
+                int sceneNumber = Integer.parseInt(keyParts[0]);
+                int segmentNumber = Integer.parseInt(keyParts[1]);
+                SceneSegment segment = findSegment(scenes, sceneNumber, segmentNumber);
+                if (segment == null) {
+                    logger.warn("SME visual audit row {} no longer exists; ignoring it", key);
+                    continue;
+                }
+                if (getBooleanOrDefault(review, "approved", false)) continue;
+                segment.setTemplate(getStringOrDefault(review, "template", segment.getTemplate()));
+                segment.setVisualType(getStringOrDefault(review, "visualType", segment.getVisualType()));
+                segment.setHeading(getStringOrDefault(review, "heading", segment.getHeading()));
+                segment.setVisualSubject(getStringOrDefault(review, "visualSubject", segment.getVisualSubject()));
+                segment.setMediaType(getStringOrDefault(review, "mediaType", segment.getMediaType()));
+                segment.setMotionType(getStringOrDefault(review, "motionType", segment.getMotionType()));
+                segment.setTool(getStringOrDefault(review, "tool", segment.getTool()));
+                segment.setComfyPrompt(getStringOrDefault(review, "comfyPrompt", segment.getComfyPrompt()));
+                segment.setCoverageNotes(appendNote(
+                    getStringOrDefault(review, "coverageNotes", segment.getCoverageNotes()),
+                    "SME correction: " + getStringOrDefault(review, "issue", "visual plan corrected")));
+                segment.setFormulaLines(getStringList(review, "formulaLines"));
+                enforceStoryboardQuality(segment);
+            }
+            if (!seen.equals(expected)) {
+                Set<String> missing = new LinkedHashSet<>(expected);
+                missing.removeAll(seen);
+                logger.warn("SME visual audit omitted rows {}; keeping their existing SME-generated plans", missing);
+            }
+        } catch (Exception e) {
+            logger.warn("Final SME visual audit could not be applied; keeping existing SME-generated plans: {}",
+                e.getMessage());
+        }
+    }
+
+    private JsonObject buildSmeReviewSchema(Set<String> expectedRowIds) {
+        JsonObject schema = SME_REVIEW_SCHEMA.deepCopy();
+        JsonObject rowId = schema.getAsJsonObject("items")
+            .getAsJsonObject("properties").getAsJsonObject("rowId");
+        rowId.add("enum", gson.toJsonTree(expectedRowIds));
+        return schema;
     }
 
     void finalizeLabelConsistency(SceneSegment segment) {
@@ -588,11 +754,19 @@ public class SceneStoryboardGenerator {
         segment.setMotionType("static_image");
     }
 
-    private void applyLabelPlanRepairs(List<Scene> scenes, JsonArray repairs) {
+    private void applyLabelPlanRepairs(List<Scene> scenes, JsonArray repairs,
+            Set<String> expectedRowIds) {
+        Set<String> seen = new LinkedHashSet<>();
         for (var element : repairs) {
             JsonObject repair = element.getAsJsonObject();
-            int sceneNumber = repair.get("sceneNumber").getAsInt();
-            int segmentNumber = repair.get("segmentNumber").getAsInt();
+            String rowId = getStringOrDefault(repair, "rowId", "");
+            if (!expectedRowIds.contains(rowId) || !seen.add(rowId)) {
+                logger.warn("Label-plan repair returned unknown or duplicate row {}; ignoring it", rowId);
+                continue;
+            }
+            String[] keyParts = rowId.split("\\.", 2);
+            int sceneNumber = Integer.parseInt(keyParts[0]);
+            int segmentNumber = Integer.parseInt(keyParts[1]);
             SceneSegment segment = findSegment(scenes, sceneNumber, segmentNumber);
             if (segment == null) continue;
             segment.setLabels(sanitizeLabels(getStringList(repair, "labels"), segment));
@@ -600,6 +774,25 @@ public class SceneStoryboardGenerator {
             segment.setVisualSubject(repair.get("visualSubject").getAsString());
             segment.setComfyPrompt(ensureNoTextPrompt(repair.get("comfyPrompt").getAsString()));
             enforceLabelContract(segment);
+        }
+    }
+
+    private JsonObject buildLabelRepairSchema(Set<String> expectedRowIds) {
+        JsonObject schema = LABEL_REPAIR_SCHEMA.deepCopy();
+        JsonObject rowId = schema.getAsJsonObject("items")
+            .getAsJsonObject("properties").getAsJsonObject("rowId");
+        rowId.add("enum", gson.toJsonTree(expectedRowIds));
+        return schema;
+    }
+
+    private void rebuildSceneNarrationFromSegments(List<Scene> scenes) {
+        for (Scene scene : scenes) {
+            if (scene.getSegments() == null) continue;
+            String narration = scene.getSegments().stream()
+                .map(SceneSegment::getSentence)
+                .filter(value -> value != null && !value.isBlank())
+                .collect(java.util.stream.Collectors.joining(" "));
+            scene.setNarration(narration);
         }
     }
 
@@ -725,6 +918,9 @@ public class SceneStoryboardGenerator {
             Respond ONLY with a JSON object matching the provided schema.
             Rules:
             - inferredTopic must describe the actual topic taught by the transcript.
+            - subject must name the curriculum discipline that owns this lesson.
+            - smeRole must name the narrow professional expertise needed to review this exact topic,
+              not merely say "subject-matter expert".
             - topicMatch is true only when the filename topic matches the transcript topic well enough for a storyboard title.
             - safeStoryboardTitle must be short and suitable for the Word title.
             - warning should be "" when there is no mismatch; otherwise explain the mismatch briefly.
@@ -742,7 +938,14 @@ public class SceneStoryboardGenerator {
             boolean topicMatch = getBooleanOrDefault(obj, "topicMatch", true);
             double confidence = getDoubleOrDefault(obj, "confidence", 0.0);
             String title = cleanStoryboardTitle(getStringOrDefault(obj, "safeStoryboardTitle", ""));
+            String subject = getStringOrDefault(obj, "subject", inferSubjectFallback(text));
+            String smeRole = getStringOrDefault(obj, "smeRole", "");
             String warning = getStringOrDefault(obj, "warning", "");
+            if (isFilenameTopicSupportedByTranscript(checkedFilenameTopic, text)) {
+                topicMatch = true;
+                title = cleanStoryboardTitle(checkedFilenameTopic);
+                warning = "";
+            }
             if (title.isBlank()) {
                 title = topicMatch && !checkedFilenameTopic.isBlank() ? checkedFilenameTopic : inferredTopic;
             }
@@ -752,12 +955,38 @@ public class SceneStoryboardGenerator {
             } else {
                 logger.info("Storyboard topic verified: {} (confidence={})", title, confidence);
             }
-            return new TopicCheck(inferredTopic, checkedFilenameTopic, topicMatch, confidence, cleanStoryboardTitle(title), warning);
+            if (smeRole.isBlank()) {
+                smeRole = buildSmeRole(subject, inferredTopic);
+            }
+            return new TopicCheck(inferredTopic, checkedFilenameTopic, topicMatch, confidence,
+                cleanStoryboardTitle(title), subject, smeRole, warning);
         } catch (Exception e) {
             String fallbackTitle = cleanStoryboardTitle(extractTitle(text, baseName));
+            String subject = inferSubjectFallback(text);
             logger.warn("Topic verification failed; using fallback storyboard title '{}': {}", fallbackTitle, e.getMessage());
-            return new TopicCheck(fallbackTitle, filenameTopic, true, 0.0, fallbackTitle, "");
+            return new TopicCheck(fallbackTitle, filenameTopic, true, 0.0, fallbackTitle,
+                subject, buildSmeRole(subject, fallbackTitle), "");
         }
+    }
+
+    private boolean isFilenameTopicSupportedByTranscript(String filenameTopic, String transcript) {
+        if (filenameTopic == null || filenameTopic.isBlank() || transcript == null || transcript.isBlank()) {
+            return false;
+        }
+        Set<String> ignored = Set.of(
+            "about", "and", "chapter", "class", "for", "introduction", "lesson", "of",
+            "overview", "part", "the", "to", "types", "video");
+        List<String> topicWords = Arrays.stream(filenameTopic.toLowerCase(Locale.ROOT).split("[^\\p{L}\\p{N}]+"))
+            .filter(word -> word.length() >= 4 && !ignored.contains(word))
+            .distinct()
+            .toList();
+        if (topicWords.isEmpty()) return false;
+        String normalizedTranscript = " " + transcript.toLowerCase(Locale.ROOT)
+            .replaceAll("[^\\p{L}\\p{N}]+", " ") + " ";
+        long matches = topicWords.stream()
+            .filter(word -> normalizedTranscript.contains(" " + word + " "))
+            .count();
+        return matches >= Math.max(1, (topicWords.size() + 1) / 2);
     }
 
     private List<Scene> splitIntoScenes(String text, String languageInstruction, TopicCheck topicCheck) throws IOException {
@@ -777,6 +1006,8 @@ public class SceneStoryboardGenerator {
             %s
             %s
             Verified topic: %s
+            Verified subject: %s
+            Required SME reviewer: %s
             Filename topic match: %s
             
             NUMBERED SOURCE SENTENCES:
@@ -797,10 +1028,12 @@ public class SceneStoryboardGenerator {
             - Use a curriculum arc: title/overview, definition, main categories, mechanisms or agents, adaptations/special cases, comparison, summary
             - If and only if the topic is types of pollination, prefer this scene arc when supported by the transcript:
               title card; definition as pollen transfer from anther to stigma; self-pollination; cross-pollination; abiotic agents wind/water; biotic agents insects/birds/bats/animals; adaptations such as homogamy/cleistogamy/dichogamy/herkogamy/heterostyly; self-vs-cross comparison; summary
-            """.formatted(languageInstruction, buildCurriculumEnrichmentInstruction(), topicCheck.inferredTopic(), topicCheck.topicMatch(), numberedText);
+            """.formatted(languageInstruction, buildCurriculumEnrichmentInstruction(),
+                topicCheck.inferredTopic(), topicCheck.subject(), topicCheck.smeRole(),
+                topicCheck.topicMatch(), numberedText);
         
         String response = ollama.generateStructured(
-            "You are an expert educational video script writer and storyboard creator.",
+            "You are " + topicCheck.smeRole() + " and an educational storyboard director.",
             prompt, SCENES_SCHEMA
         );
         
@@ -810,7 +1043,8 @@ public class SceneStoryboardGenerator {
     /**
      * Enrich scene with sentence-level segments, visuals, and image recommendations
      */
-    private void enrichSceneWithSegments(Scene scene, String languageInstruction) throws IOException {
+    private void enrichSceneWithSegments(Scene scene, String languageInstruction,
+            TopicCheck topicCheck) throws IOException {
         String prompt = """
             Break down the following scene narration into sentence-level segments.
             Think like a subject-matter expert and curriculum reviewer for this
@@ -821,6 +1055,9 @@ public class SceneStoryboardGenerator {
             %s
             %s
             %s
+            VERIFIED SUBJECT: %s
+            VERIFIED TOPIC: %s
+            REQUIRED SME REVIEWER: %s
             For each segment, provide:
             1. The exact sentence text
             2. template: "title_card", "photo", "labeled_image", "comparison", "process", "formula", "split_screen", or "video_broll"
@@ -884,6 +1121,7 @@ public class SceneStoryboardGenerator {
             - If the exact target will not be reliably visible, remove that label or change to a reviewed still/diagram where it is visible.
             - Choose the number of labels from the topic, lesson requirement, and visible structures in that frame. Do not impose a fixed label count.
             - If all required labels cannot remain readable without overlap, divide the concept into additional focused frames; do not omit required curriculum labels merely to meet an arbitrary count.
+            - When one narration sentence names several distinct structures, examples, phases, or mechanisms, use stable split-screen/process panels or a sequence of deterministic stills. Do not combine them into one moving LTX/Wan shot with precise labels.
             - labelStyle must keep labels and arrows clear of the subject, heading, and subtitle safe areas.
             - For labeled stills, motion must define this overlay sequence: draw each arrow from its label box toward the exact target, make the arrow endpoint touch the target, then fade in that arrow's label text. Reveal pairs one by one in the listed label order.
             - Core renderer rule: never ask AI image/video models to create exact text, labels, arrows, formulas, legends, numbers, or scientific names inside the generated image/video.
@@ -946,10 +1184,14 @@ public class SceneStoryboardGenerator {
             - Write shot.prompt for Wan style: cinematic natural motion, stable subject anatomy, smooth camera, no text artifacts.
             - Write ltxShot.prompt for LTX style: realistic educational video, subject-matter accurate, one continuous action split into 4-second continuation clips, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.
             - Labels should be short, screen-ready text. Return [] when labels are not useful.
-            """.formatted(languageInstruction, buildAnimationModeInstruction(), buildVideoProviderInstruction(), buildCurriculumEnrichmentInstruction(), scene.getSceneTitle(), scene.getNarration());
+            """.formatted(languageInstruction, buildAnimationModeInstruction(),
+                buildVideoProviderInstruction(), buildCurriculumEnrichmentInstruction(),
+                topicCheck.subject(), topicCheck.inferredTopic(), topicCheck.smeRole(),
+                scene.getSceneTitle(), scene.getNarration());
         
         String response = ollama.generateStructured(
-            "You are a professional video storyboard artist and educational content designer.",
+            "You are " + topicCheck.smeRole()
+                + " and a professional educational storyboard director.",
             prompt, SEGMENTS_SCHEMA
         );
         
@@ -1091,12 +1333,10 @@ public class SceneStoryboardGenerator {
         return containsAnyIgnoreCase(text, "summary", "recap", "conclusion", "review", "key points");
     }
 
-    private void correctKnownStoryboardTerminology(Scene scene) {
+    void correctKnownStoryboardTerminology(Scene scene) {
         scene.setSceneTitle(correctKnownTerm(scene.getSceneTitle()));
-        scene.setNarration(correctKnownTerm(scene.getNarration()));
         if (scene.getSegments() == null) return;
         for (SceneSegment segment : scene.getSegments()) {
-            segment.setSentence(correctKnownTerm(segment.getSentence()));
             segment.setHeading(correctKnownTerm(segment.getHeading()));
             segment.setVisualSubject(correctKnownTerm(segment.getVisualSubject()));
             segment.setVisualAnimation(correctKnownTerm(segment.getVisualAnimation()));
@@ -1423,6 +1663,7 @@ public class SceneStoryboardGenerator {
 
     private void enforceStoryboardQuality(SceneSegment segment) {
         enforceProStyleDefaults(segment);
+        enforceFormulaRouting(segment);
         String motionType = segment.getMotionType();
         if (motionType == null || motionType.isBlank()) {
             motionType = "local_animation";
@@ -1447,6 +1688,8 @@ public class SceneStoryboardGenerator {
         }
         enforceGeneratedVideoOverlayRules(segment);
         enforceAnimationMode(segment);
+        // Formula rendering is deterministic and must survive animation/provider conversion.
+        enforceFormulaRouting(segment);
         // Animation mode can convert a still/diagram into Wan/LTX after the first guard.
         enforceGeneratedVideoOverlayRules(segment);
         enforceTiming(segment);
@@ -1471,7 +1714,6 @@ public class SceneStoryboardGenerator {
         }
         segment.setComfyPrompt(ensureNoTextPrompt(segment.getComfyPrompt()));
 
-        enforceTopicRelevance(segment);
         enforceElectroplatingScience(segment);
 
         if (segment.getCoverageNotes() == null || segment.getCoverageNotes().isBlank()) {
@@ -1533,7 +1775,8 @@ public class SceneStoryboardGenerator {
         if ("formula".equals(segment.getTemplate())) {
             segment.setTool("manim");
             segment.setMotionType("local_animation");
-            segment.setMediaType("animation_with_labels");
+            segment.setMediaType("animation");
+            segment.setVisualType("formula/derivation");
             segment.setShot(null);
             segment.setLtxShot(null);
             if (segment.getFormulaLines() == null || segment.getFormulaLines().isEmpty()) {
@@ -1553,13 +1796,29 @@ public class SceneStoryboardGenerator {
     }
 
     private List<String> extractFormulaFallback(String sentence) {
-        if (sentence == null || sentence.isBlank()) {
-            return List.of();
+        return StoryboardRules.extractFormulaLines(sentence);
+    }
+
+    private void enforceFormulaRouting(SceneSegment segment) {
+        if (!StoryboardRules.requiresFormulaRenderer(segment)) return;
+        segment.setTemplate("formula");
+        segment.setVisualType("formula/derivation");
+        segment.setMediaType("animation");
+        segment.setMotionType("local_animation");
+        segment.setTool("manim");
+        segment.setShot(null);
+        segment.setLtxShot(null);
+        segment.setLabels(List.of());
+        segment.setLabelPlacements(List.of());
+        segment.setArrows(List.of());
+        segment.setHighlights(List.of());
+        if (segment.getFormulaLines() == null || segment.getFormulaLines().isEmpty()) {
+            segment.setFormulaLines(StoryboardRules.extractFormulaLines(segment.getSentence()));
         }
-        if (sentence.contains("=")) {
-            return List.of(sentence);
-        }
-        return List.of();
+        segment.setLocalAnimation("Render exact formula lines with Manim; reveal symbols and substitution steps in narration order; hold the final result for readability.");
+        segment.setMotion("formula_reveal: line_by_line; transition_in: fade; transition_out: crossfade");
+        segment.setAssetQualityNotes(appendNote(segment.getAssetQualityNotes(),
+            "Deterministic formula route: Manim draws all equations, symbols, units, and derivation steps; the generated image is background only."));
     }
 
     private String ensureNoTextPrompt(String prompt) {
@@ -1592,7 +1851,6 @@ public class SceneStoryboardGenerator {
         }
         if (segment.getLabels() == null) segment.setLabels(List.of());
         segment.setLabels(sanitizeLabels(segment.getLabels(), segment));
-        applySubjectSpecificLabels(segment);
         if (segment.getLabelPlacements() == null) segment.setLabelPlacements(List.of());
         if (segment.getLabelStyle() == null || segment.getLabelStyle().isBlank()) {
             segment.setLabelStyle(defaultLabelStyle());
@@ -1609,9 +1867,7 @@ public class SceneStoryboardGenerator {
         if (segment.getSubtitle() == null || segment.getSubtitle().isBlank()) {
             segment.setSubtitle(buildSubtitle(segment.getSentence()));
         }
-        if (segment.getSubtitleStyle() == null || segment.getSubtitleStyle().isBlank()) {
-            segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.38; text_color=white; max_lines=2; align=center");
-        }
+        segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.38; text_color=white; max_lines=2; align=center");
         if (segment.getTool() == null || segment.getTool().isBlank()) {
             segment.setTool(inferTool(segment));
         }
@@ -2537,8 +2793,43 @@ public class SceneStoryboardGenerator {
         boolean topicMatch,
         double confidence,
         String safeStoryboardTitle,
+        String subject,
+        String smeRole,
         String warning
     ) {}
+
+    private String inferSubjectFallback(String text) {
+        String value = text == null ? "" : text.toLowerCase(Locale.ROOT);
+        if (containsAnyIgnoreCase(value, "molecule", "ion", "electroly", "reaction", "acid", "base",
+                "salt", "cathode", "anode", "molar", "kohlrausch")) return "Chemistry";
+        if (containsAnyIgnoreCase(value, "cell membrane", "organism", "tissue", "organ", "plant",
+                "flower", "pollination", "genetic", "photosynthesis", "anatomy", "ecology")) {
+            return "Biology";
+        }
+        if (containsAnyIgnoreCase(value, "battery cell", "electric cell", "circuit", "voltage", "current", "resistance",
+                "force", "energy", "motion", "wave", "lens", "electric")) return "Physics";
+        if (containsAnyIgnoreCase(value, "equation", "theorem", "geometry", "algebra", "fraction",
+                "probability", "calculus", "matrix")) return "Mathematics";
+        if (containsAnyIgnoreCase(value, "algorithm", "software", "computer", "database", "programming",
+                "network", "binary")) return "Computer Science";
+        if (containsAnyIgnoreCase(value, "map", "climate", "river", "continent", "latitude",
+                "longitude", "population")) return "Geography";
+        if (containsAnyIgnoreCase(value, "empire", "century", "revolution", "dynasty", "civilization",
+                "historical")) return "History";
+        if (containsAnyIgnoreCase(value, "grammar", "noun", "verb", "poem", "literature", "language")) {
+            return "Language and Literature";
+        }
+        if (containsAnyIgnoreCase(value, "economy", "market", "demand", "supply", "inflation", "finance")) {
+            return "Economics";
+        }
+        return "General Education";
+    }
+
+    private String buildSmeRole(String subject, String topic) {
+        String safeSubject = subject == null || subject.isBlank() ? "education" : subject.trim();
+        String safeTopic = topic == null || topic.isBlank() ? "this lesson" : topic.trim();
+        return safeSubject + " curriculum specialist with domain expertise in " + safeTopic;
+    }
 
     private String buildLanguageInstruction(String text) {
         if (containsRange(text, '\u0B80', '\u0BFF')) {

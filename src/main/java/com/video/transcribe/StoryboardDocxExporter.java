@@ -3,6 +3,7 @@ package com.video.transcribe;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
@@ -44,12 +45,11 @@ public class StoryboardDocxExporter {
             
             // Title
             addTitle(document, "Storyboard: " + storyboard.getTitle());
-            addEmptyLine(document);
+            addStoryboardMetadata(document, storyboard);
             
             // Process each scene
             for (Scene scene : storyboard.getScenes()) {
                 addScene(document, scene);
-                addEmptyLine(document);
             }
             
             // Save
@@ -80,7 +80,16 @@ public class StoryboardDocxExporter {
         run.setBold(true);
         run.setFontSize(18);
         run.setFontFamily("Arial");
-        run.setColor("2E5090");
+        run.setColor("000000");
+    }
+
+    private void addStoryboardMetadata(XWPFDocument doc, StoryboardDocument storyboard) {
+        XWPFTable table = doc.createTable(3, 2);
+        table.setWidth("100%");
+        setFieldRow(table.getRow(0), "Subject", safe(storyboard.getSubject()));
+        setFieldRow(table.getRow(1), "Verified Topic", safe(storyboard.getTopic()));
+        setFieldRow(table.getRow(2), "SME Review Role", safe(storyboard.getSmeRole()));
+        addEmptyLine(doc);
     }
     
     private void addScene(XWPFDocument doc, Scene scene) {
@@ -92,7 +101,7 @@ public class StoryboardDocxExporter {
         headerRun.setBold(true);
         headerRun.setFontSize(14);
         headerRun.setFontFamily("Arial");
-        headerRun.setColor("1F4788");
+        headerRun.setColor("000000");
         
         // Narration/Audiobook label
         XWPFParagraph narrLabel = doc.createParagraph();
@@ -113,141 +122,94 @@ public class StoryboardDocxExporter {
         narrRun.setFontSize(10);
         narrRun.setFontFamily("Arial");
         
-        // Add table for segments
+        // Each segment is a readable production specification, not a wide spreadsheet row.
         if (scene.getSegments() != null && !scene.getSegments().isEmpty()) {
-            addSegmentTable(doc, scene.getSegments());
+            for (SceneSegment segment : scene.getSegments()) {
+                addSegmentSpecification(doc, scene.getSceneNumber(), segment);
+            }
         }
+        addEmptyLine(doc);
     }
-    
-    private void addSegmentTable(XWPFDocument doc, List<SceneSegment> segments) {
-        // Table header row
-        XWPFTable table = doc.createTable();
+
+    private void addSegmentSpecification(XWPFDocument doc, int sceneNumber, SceneSegment segment) {
+        XWPFParagraph shotHeader = doc.createParagraph();
+        shotHeader.setSpacingBefore(140);
+        shotHeader.setSpacingAfter(70);
+        XWPFRun header = shotHeader.createRun();
+        header.setText("Shot " + sceneNumber + "." + segment.getSegmentNumber()
+            + ": " + safe(segment.getHeading()));
+        header.setBold(true);
+        header.setFontFamily("Arial");
+        header.setFontSize(12);
+        header.setColor("000000");
+
+        List<String[]> fields = new ArrayList<>();
+        addField(fields, "Narration", safe(segment.getSentence()));
+        addField(fields, "Template / Media", joinNonBlank(
+            formatTemplate(segment.getTemplate()), formatMediaType(segment.getMediaType())));
+        addField(fields, "Timing", formatTiming(segment));
+        addField(fields, "Tool / Motion Type", joinNonBlank(
+            safe(segment.getTool()), formatMotionType(segment.getMotionType())));
+        addField(fields, "Visual Type / Image Requirement", formatVisualSubject(segment));
+        addField(fields, "Asset / Image Prompt", formatAssetPrompt(segment));
+        addField(fields, "Labels", formatList(segment.getLabels()));
+        addField(fields, "Label Placement", formatList(segment.getLabelPlacements()));
+        if (segment.getLabels() != null && !segment.getLabels().isEmpty()) {
+            addField(fields, "Label Style", safe(segment.getLabelStyle()));
+        }
+        addField(fields, "Motion / Subtitle", formatMotionAndSubtitle(segment));
+        addField(fields, "Coverage / Asset Quality", formatCoverageAndQuality(segment));
+        addField(fields, "Wan Video Shot", formatShot(segment.getShot()));
+        addField(fields, "LTX Video Shot", formatShot(segment.getLtxShot()));
+
+        XWPFTable table = doc.createTable(fields.size(), 2);
         table.setWidth("100%");
-        
-        // Set table width to 100%
         CTTblWidth tblWidth = table.getCTTbl().getTblPr().addNewTblW();
         tblWidth.setType(STTblWidth.PCT);
-        tblWidth.setW(BigInteger.valueOf(5000)); // 100% in fiftieths of a percent
-
-        // Explicit grid keeps the DOCX structurally valid for python-docx and downstream parsers.
-        var tableGrid = table.getCTTbl().addNewTblGrid();
-        for (int i = 0; i < 15; i++) {
-            tableGrid.addNewGridCol().setW(BigInteger.valueOf(900));
+        tblWidth.setW(BigInteger.valueOf(5000));
+        var grid = table.getCTTbl().addNewTblGrid();
+        grid.addNewGridCol().setW(BigInteger.valueOf(2400));
+        grid.addNewGridCol().setW(BigInteger.valueOf(10800));
+        for (XWPFTableRow row : table.getRows()) {
+            row.setCantSplitRow(true);
         }
-        
-        // Header row
-        XWPFTableRow headerRow = table.getRow(0);
-        headerRow.setRepeatHeader(true);
-        
-        // Style header cells
-        String[] headers = {"S.no", "Narration", "Template", "Heading", "Timing", "Tool",
-            "Visual Type / Image Requirement", "Asset / Image Prompt", "Labels", "Label Placement",
-            "Label Style", "Motion / Subtitle", "Coverage / Asset Quality", "Wan Video Shot", "LTX Video Shot"};
-        
-        for (int i = 0; i < headers.length; i++) {
-            XWPFTableCell cell = headerRow.getCell(i) != null ? headerRow.getCell(i) : headerRow.addNewTableCell();
-            cell.setText(headers[i]);
-            cell.setColor("2E5090");
-            
-            XWPFParagraph para = cell.getParagraphs().get(0);
-            para.setAlignment(ParagraphAlignment.CENTER);
-            XWPFRun run = para.getRuns().get(0);
-            run.setBold(true);
-            run.setColor("FFFFFF");
-            run.setFontSize(10);
-            run.setFontFamily("Arial");
+
+        for (int i = 0; i < fields.size(); i++) {
+            setFieldRow(table.getRow(i), fields.get(i)[0], fields.get(i)[1]);
         }
-        
-        // Data rows
-        for (SceneSegment segment : segments) {
-            XWPFTableRow row = table.createRow();
-            
-            // S.no
-            XWPFTableCell cell1 = row.getCell(0);
-            cell1.setText(String.valueOf(segment.getSegmentNumber()));
-            styleCell(cell1, ParagraphAlignment.CENTER);
-            
-            // Narration
-            XWPFTableCell cell2 = row.getCell(1);
-            cell2.setText("\"" + segment.getSentence() + "\"");
-            styleCell(cell2, ParagraphAlignment.LEFT);
-            
-            // Template
-            XWPFTableCell cell3 = row.getCell(2);
-            cell3.setText(formatTemplate(segment.getTemplate()) + "\n" + formatMediaType(segment.getMediaType()));
-            styleCell(cell3, ParagraphAlignment.LEFT);
+    }
 
-            // Heading
-            XWPFTableCell cell4 = row.getCell(3);
-            cell4.setText(segment.getHeading() != null ? segment.getHeading() : "");
-            styleCell(cell4, ParagraphAlignment.LEFT);
-
-            // Timing
-            XWPFTableCell cell5 = row.getCell(4);
-            cell5.setText(formatTiming(segment));
-            styleCell(cell5, ParagraphAlignment.LEFT);
-
-            // Tool
-            XWPFTableCell cell6 = row.getCell(5);
-            cell6.setText((segment.getTool() != null ? segment.getTool() : "") + "\n" + formatMotionType(segment.getMotionType()));
-            styleCell(cell6, ParagraphAlignment.LEFT);
-
-            // Visual Subject
-            XWPFTableCell cell7 = row.getCell(6);
-            cell7.setText(formatVisualSubject(segment));
-            styleCell(cell7, ParagraphAlignment.LEFT);
-
-            // Asset / Image Prompt
-            XWPFTableCell cell8 = row.getCell(7);
-            cell8.setText(formatAssetPrompt(segment));
-            styleCell(cell8, ParagraphAlignment.LEFT);
-
-            // Labels only: downstream parsers must never infer labels from style or placement text.
-            XWPFTableCell cell9 = row.getCell(8);
-            cell9.setText(formatList(segment.getLabels()));
-            styleCell(cell9, ParagraphAlignment.LEFT);
-
-            // Label Placement
-            XWPFTableCell cell10 = row.getCell(9);
-            cell10.setText(formatList(segment.getLabelPlacements()));
-            styleCell(cell10, ParagraphAlignment.LEFT);
-
-            // Label Style
-            XWPFTableCell cell11 = row.getCell(10);
-            cell11.setText(safe(segment.getLabelStyle()));
-            styleCell(cell11, ParagraphAlignment.LEFT);
-
-            // Motion / Subtitle
-            XWPFTableCell cell12 = row.getCell(11);
-            cell12.setText("motion: " + safe(segment.getMotion())
-                + "\nsubtitle: " + safe(segment.getSubtitle())
-                + "\nsubtitle_style: " + safe(segment.getSubtitleStyle())
-                + "\narrows: " + formatList(segment.getArrows())
-                + "\nhighlights: " + formatList(segment.getHighlights()));
-            styleCell(cell12, ParagraphAlignment.LEFT);
-
-            // Coverage / Asset Quality
-            XWPFTableCell cell13 = row.getCell(12);
-            cell13.setText(safe(segment.getCoverageNotes()) + "\n\nasset quality: " + safe(segment.getAssetQualityNotes())
-                + "\n\nformula lines:\n" + formatList(segment.getFormulaLines())
-                + "\n\nexplain steps:\n" + formatList(segment.getExplainSteps())
-                + "\n\nsteps:\n" + formatList(segment.getSteps())
-                + "\n\ncolumns:\n" + formatList(segment.getColumns()));
-            styleCell(cell13, ParagraphAlignment.LEFT);
-
-            // Wan Video Shot
-            XWPFTableCell cell14 = row.getCell(13);
-            cell14.setText(formatShot(segment.getShot()));
-            styleCell(cell14, ParagraphAlignment.LEFT);
-
-            // LTX Video Shot
-            XWPFTableCell cell15 = row.getCell(14);
-            cell15.setText(formatShot(segment.getLtxShot()));
-            styleCell(cell15, ParagraphAlignment.LEFT);
+    private void addField(List<String[]> fields, String name, String value) {
+        if (value != null && !value.isBlank()) {
+            fields.add(new String[] {name, value.trim()});
         }
-        
-        // Add spacing after table
-        addEmptyLine(doc);
+    }
+
+    private void setFieldRow(XWPFTableRow row, String field, String value) {
+        XWPFTableCell fieldCell = row.getCell(0);
+        setCellText(fieldCell, field);
+        fieldCell.setColor("D9E2F3");
+        styleCell(fieldCell, ParagraphAlignment.LEFT);
+        XWPFRun fieldRun = fieldCell.getParagraphs().get(0).getRuns().get(0);
+        fieldRun.setBold(true);
+        fieldRun.setColor("1F355E");
+
+        XWPFTableCell valueCell = row.getCell(1);
+        setCellText(valueCell, value == null ? "" : value);
+        styleCell(valueCell, ParagraphAlignment.LEFT);
+    }
+
+    private void setCellText(XWPFTableCell cell, String value) {
+        XWPFParagraph paragraph = cell.getParagraphs().get(0);
+        for (int i = paragraph.getRuns().size() - 1; i >= 0; i--) {
+            paragraph.removeRun(i);
+        }
+        String[] lines = (value == null ? "" : value).split("\\R", -1);
+        XWPFRun run = paragraph.createRun();
+        for (int i = 0; i < lines.length; i++) {
+            if (i > 0) run.addBreak();
+            run.setText(lines[i]);
+        }
     }
 
     private String formatShot(com.video.transcribe.scene.Shot shot) {
@@ -271,9 +233,10 @@ public class StoryboardDocxExporter {
     }
 
     private String formatTiming(SceneSegment segment) {
-        return "narration_duration: " + segment.getEstimatedNarrationSeconds() + " sec"
-            + "\nduration: " + segment.getRecommendedClipSeconds() + " sec"
-            + "\n" + (segment.getTimingNotes() != null ? segment.getTimingNotes() : "");
+        return joinNonBlank(
+            "narration_duration: " + segment.getEstimatedNarrationSeconds() + " sec",
+            "duration: " + segment.getRecommendedClipSeconds() + " sec",
+            safe(segment.getTimingNotes()));
     }
 
     private String formatTemplate(String template) {
@@ -294,16 +257,52 @@ public class StoryboardDocxExporter {
     }
 
     private String formatVisualSubject(SceneSegment segment) {
-        return "visual_type: " + safe(segment.getVisualType())
-            + "\nimage_requirement: " + safe(segment.getVisualSubject())
-            + "\nvisual notes: " + safe(segment.getVisualAnimation())
-            + "\nlocal animation: " + safe(segment.getLocalAnimation());
+        return joinNonBlank(
+            fieldLine("visual_type", segment.getVisualType()),
+            fieldLine("image_requirement", segment.getVisualSubject()),
+            fieldLine("visual notes", segment.getVisualAnimation()),
+            fieldLine("local animation", segment.getLocalAnimation()));
     }
 
     private String formatAssetPrompt(SceneSegment segment) {
-        return "asset_path: " + safe(segment.getAssetPath())
-            + "\nimage recommendations:\n" + formatList(segment.getImageRecommendations())
-            + "\n\nimage_prompt:\n" + safe(segment.getComfyPrompt());
+        return joinNonBlank(
+            fieldLine("asset_path", segment.getAssetPath()),
+            fieldBlock("image recommendations", formatList(segment.getImageRecommendations())),
+            fieldBlock("image_prompt", segment.getComfyPrompt()));
+    }
+
+    private String formatMotionAndSubtitle(SceneSegment segment) {
+        return joinNonBlank(
+            fieldLine("motion", segment.getMotion()),
+            fieldLine("subtitle", segment.getSubtitle()),
+            fieldLine("subtitle_style", segment.getSubtitleStyle()),
+            fieldBlock("arrows", formatList(segment.getArrows())),
+            fieldBlock("highlights", formatList(segment.getHighlights())));
+    }
+
+    private String formatCoverageAndQuality(SceneSegment segment) {
+        return joinNonBlank(
+            safe(segment.getCoverageNotes()),
+            fieldBlock("asset quality", segment.getAssetQualityNotes()),
+            fieldBlock("formula lines", formatList(segment.getFormulaLines())),
+            fieldBlock("explain steps", formatList(segment.getExplainSteps())),
+            fieldBlock("steps", formatList(segment.getSteps())),
+            fieldBlock("columns", formatList(segment.getColumns())));
+    }
+
+    private String fieldLine(String name, String value) {
+        return value == null || value.isBlank() ? "" : name + ": " + value.trim();
+    }
+
+    private String fieldBlock(String name, String value) {
+        return value == null || value.isBlank() ? "" : name + ":\n" + value.trim();
+    }
+
+    private String joinNonBlank(String... values) {
+        return java.util.Arrays.stream(values)
+            .filter(value -> value != null && !value.isBlank())
+            .map(String::trim)
+            .collect(java.util.stream.Collectors.joining("\n"));
     }
 
     private String safe(String value) {
@@ -375,9 +374,10 @@ public class StoryboardDocxExporter {
         if (para.getRuns().isEmpty()) {
             para.createRun();
         }
-        XWPFRun run = para.getRuns().get(0);
-        run.setFontSize(9);
-        run.setFontFamily("Arial");
+        for (XWPFRun run : para.getRuns()) {
+            run.setFontSize(9);
+            run.setFontFamily("Arial");
+        }
         
         // Add borders
         cell.setVerticalAlignment(XWPFTableCell.XWPFVertAlign.CENTER);

@@ -98,6 +98,32 @@ class StoryboardQualityGateTest {
         assertThrows(IllegalStateException.class, () -> StoryboardQualityGate.validate(storyboard));
     }
 
+    @Test
+    void rejectsEquationRoutedToPhoto() {
+        SceneSegment segment = segment("photo", "realistic_image", "photo");
+        segment.setSentence("The relation is V = IR.");
+        segment.setMotionType("static_image");
+        segment.setTool("comfy_image");
+        segment.setLabels(List.of());
+        segment.setLabelPlacements(List.of());
+
+        assertThrows(IllegalStateException.class,
+            () -> StoryboardQualityGate.validate(storyboard(segment)));
+    }
+
+    @Test
+    void acceptsDeterministicFormulaContract() {
+        SceneSegment segment = segment("formula", "formula/derivation", "animation");
+        segment.setSentence("The relation is V = IR.");
+        segment.setMotionType("local_animation");
+        segment.setTool("manim");
+        segment.setFormulaLines(List.of("V = IR"));
+        segment.setLabels(List.of());
+        segment.setLabelPlacements(List.of());
+
+        assertDoesNotThrow(() -> StoryboardQualityGate.validate(storyboard(segment)));
+    }
+
     private SceneSegment segment(String template, String visualType, String mediaType) {
         SceneSegment segment = new SceneSegment();
         segment.setSegmentNumber(1);

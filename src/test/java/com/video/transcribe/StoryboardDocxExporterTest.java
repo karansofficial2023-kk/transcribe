@@ -18,7 +18,7 @@ import com.video.transcribe.scene.StoryboardDocument;
 class StoryboardDocxExporterTest {
 
     @Test
-    void exportsLabelsPlacementAndStyleInSeparateColumns() throws Exception {
+    void exportsReadableProductionSpecificationWithSeparateLabelFields() throws Exception {
         SceneSegment segment = new SceneSegment();
         segment.setSegmentNumber(1);
         segment.setSentence("Pollen moves from anther to stigma.");
@@ -42,26 +42,39 @@ class StoryboardDocxExporterTest {
 
         StoryboardDocument storyboard = new StoryboardDocument();
         storyboard.setTitle("Types of Pollination");
+        storyboard.setSubject("Biology");
+        storyboard.setTopic("Pollination in flowering plants");
+        storyboard.setSmeRole("Botany curriculum specialist");
         storyboard.setScenes(List.of(scene));
 
         Path output = Path.of("target", "storyboard-contract-test.docx");
         new StoryboardDocxExporter("ltx").export(storyboard, output.toString());
 
         try (XWPFDocument document = new XWPFDocument(new FileInputStream(output.toFile()))) {
-            var table = document.getTables().get(0);
-            assertEquals(15, table.getRow(0).getTableCells().size());
-            assertEquals("Labels", table.getRow(0).getCell(8).getText());
-            assertEquals("Label Placement", table.getRow(0).getCell(9).getText());
-            assertEquals("Label Style", table.getRow(0).getCell(10).getText());
+            assertEquals("Storyboard: Types of Pollination", document.getParagraphs().get(0).getText());
+            assertEquals(2, document.getTables().get(0).getRow(0).getTableCells().size());
+            assertEquals("Subject", document.getTables().get(0).getRow(0).getCell(0).getText());
+            assertEquals("Biology", document.getTables().get(0).getRow(0).getCell(1).getText());
 
-            String labels = table.getRow(1).getCell(8).getText();
+            var table = document.getTables().stream()
+                .filter(value -> "Narration".equals(value.getRow(0).getCell(0).getText()))
+                .findFirst().orElseThrow();
+            assertEquals(2, table.getRow(0).getTableCells().size());
+            var labelsRow = table.getRows().stream()
+                .filter(row -> "Labels".equals(row.getCell(0).getText())).findFirst().orElseThrow();
+            var placementRow = table.getRows().stream()
+                .filter(row -> "Label Placement".equals(row.getCell(0).getText())).findFirst().orElseThrow();
+            var styleRow = table.getRows().stream()
+                .filter(row -> "Label Style".equals(row.getCell(0).getText())).findFirst().orElseThrow();
+
+            String labels = labelsRow.getCell(1).getText();
             assertTrue(labels.contains("anther"));
             assertTrue(labels.contains("stigma"));
             assertFalse(labels.contains("yellow"));
             assertFalse(labels.contains("1080p"));
 
-            assertTrue(table.getRow(1).getCell(9).getText().contains("target=(0.35,0.42)"));
-            assertTrue(table.getRow(1).getCell(10).getText().contains("yellow arrows"));
+            assertTrue(placementRow.getCell(1).getText().contains("target=(0.35,0.42)"));
+            assertTrue(styleRow.getCell(1).getText().contains("yellow arrows"));
         }
     }
 }

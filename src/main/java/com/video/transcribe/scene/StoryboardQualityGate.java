@@ -64,6 +64,19 @@ public final class StoryboardQualityGate {
             ? List.of() : segment.getLabelPlacements();
         String id = scene.getSceneNumber() + "." + segment.getSegmentNumber();
 
+        if (StoryboardRules.requiresFormulaRenderer(segment)) {
+            if (!"formula".equals(segment.getTemplate())
+                    || !"formula/derivation".equals(segment.getVisualType())
+                    || !"animation".equals(segment.getMediaType())
+                    || !"local_animation".equals(segment.getMotionType())
+                    || !"manim".equals(segment.getTool())
+                    || segment.getFormulaLines() == null || segment.getFormulaLines().isEmpty()
+                    || segment.getShot() != null || segment.getLtxShot() != null) {
+                throw new IllegalStateException("Storyboard row " + id
+                    + " contains formula content without the deterministic Manim contract");
+            }
+        }
+
         if (labels.isEmpty()) {
             if (declaresLabeledVisual(segment)) {
                 throw new IllegalStateException("Storyboard row " + id
