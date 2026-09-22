@@ -1,5 +1,8 @@
 package com.video.transcribe.scene;
 
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -105,6 +108,11 @@ public final class StoryboardQualityGate {
                 || segment.getSubtitle().contains("...")) {
             throw new IllegalStateException("Storyboard row " + id + " has an incomplete subtitle");
         }
+        if (segment.getMotion() == null || segment.getMotion().isBlank()) {
+            throw new IllegalStateException("Storyboard row " + id + " has no motion instruction");
+        }
+        validateAssetPath(segment, id);
+        rejectReplacementCharacters(segment, id);
         if (requiresCleanImagePrompt(segment) && !hasCleanImageContract(segment.getComfyPrompt())) {
             throw new IllegalStateException("Storyboard row " + id + " has an unsafe image prompt");
         }
@@ -132,7 +140,7 @@ public final class StoryboardQualityGate {
                     + " has label placements without labels");
             }
             if (segment.getMotion() != null
-                    && segment.getMotion().toLowerCase(Locale.ROOT).contains("arrow_draw_then_label_fade")) {
+                    && containsLabelOnlyMotion(segment.getMotion())) {
                 throw new IllegalStateException("Storyboard row " + id
                     + " requests label animation with an empty label list");
             }
@@ -194,6 +202,43 @@ public final class StoryboardQualityGate {
                     + " has no specific target description for label " + label);
             }
         }
+    }
+
+    private static void validateAssetPath(SceneSegment segment, String id) {
+        String value = segment.getAssetPath();
+        if (value == null || value.isBlank()) return;
+        try {
+            Path path = Path.of(value);
+            if (path.isAbsolute() && Files.isRegularFile(path)) return;
+        } catch (InvalidPathException ignored) {
+            // Report a single stable validation error below.
+        }
+        throw new IllegalStateException("Storyboard row " + id
+            + " references an asset_path that is not a locked existing file");
+    }
+
+    private static void rejectReplacementCharacters(SceneSegment segment, String id) {
+        for (String value : List.of(
+                safe(segment.getSentence()), safe(segment.getHeading()), safe(segment.getVisualSubject()),
+                safe(segment.getComfyPrompt()), safe(segment.getSubtitle()), safe(segment.getMotion()))) {
+            if (value.indexOf('\uFFFD') >= 0) {
+                throw new IllegalStateException("Storyboard row " + id
+                    + " contains a Unicode replacement character");
+            }
+        }
+    }
+
+    private static boolean containsLabelOnlyMotion(String motion) {
+        String value = motion.toLowerCase(Locale.ROOT);
+        return value.contains("arrow_draw_then_label_fade")
+            || value.contains("label_reveal")
+            || value.contains("reveal_in_list_order")
+            || value.contains("keep_previous_labels_visible")
+            || value.contains("completed_frame_hold");
+    }
+
+    private static String safe(String value) {
+        return value == null ? "" : value;
     }
 
     private static boolean placementMatchesLabel(String placement, String lowerLabel) {

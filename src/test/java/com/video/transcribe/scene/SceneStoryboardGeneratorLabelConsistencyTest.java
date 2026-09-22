@@ -2,6 +2,7 @@ package com.video.transcribe.scene;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -94,6 +95,41 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
         assertEquals("photo", segment.getMediaType());
         assertTrue(segment.getLabels().isEmpty());
         assertTrue(segment.getLabelPlacements().isEmpty());
+    }
+
+    @Test
+    void unlabeledShotDoesNotRetainLabelRevealMotion() {
+        SceneSegment segment = new SceneSegment();
+        segment.setTemplate("photo");
+        segment.setVisualType("realistic_image");
+        segment.setMediaType("photo");
+        segment.setLabels(List.of());
+        segment.setLabelPlacements(List.of());
+        segment.setMotion("reveal_in_list_order; keep_previous_labels_visible; completed_frame_hold=2.5s");
+
+        SceneStoryboardGenerator generator = new SceneStoryboardGenerator(null, false, "ltx", true);
+        generator.finalizeLabelConsistency(segment);
+
+        assertEquals("slow_zoom_in", segment.getMotion());
+        assertFalse(segment.getMotion().contains("label"));
+    }
+
+    @Test
+    void missingModelSuppliedAssetPathIsCleared() {
+        SceneSegment segment = new SceneSegment();
+        segment.setAssetPath("invented_asset.png");
+
+        SceneStoryboardGenerator generator = new SceneStoryboardGenerator(null, false, "ltx", true);
+        generator.sanitizeAssetPath(segment);
+
+        assertEquals("", segment.getAssetPath());
+        assertTrue(segment.getCoverageNotes().contains("Asset guard"));
+    }
+
+    @Test
+    void productionTextUsesStablePunctuation() {
+        assertEquals("nature's process - clearly explained.",
+            SceneStoryboardGenerator.normalizeProductionText("nature\uFFFDs process \u2014 clearly explained\u2026"));
     }
 
     private void setProductionDefaults(SceneSegment segment, String sentence) {

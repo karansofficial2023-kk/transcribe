@@ -61,7 +61,7 @@ class SceneStoryboardSourceIntegrityTest {
     }
 
     @Test
-    void terminologyCleanupNeverChangesNarrationOrSegmentText() {
+    void storyboardCleanupDoesNotApplyTopicSpecificSubstitutions() {
         SceneSegment segment = new SceneSegment();
         segment.setSentence("The flower is called Xora.");
         segment.setHeading("Xora flower");
@@ -73,6 +73,6 @@ class SceneStoryboardSourceIntegrityTest {
 
         assertEquals("The flower is called Xora.", scene.getNarration());
         assertEquals("The flower is called Xora.", segment.getSentence());
-        assertEquals("Ixora flower", segment.getHeading());
+        assertEquals("Xora flower", segment.getHeading());
     }
 }

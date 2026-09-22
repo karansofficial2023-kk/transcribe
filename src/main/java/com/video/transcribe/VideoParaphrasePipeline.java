@@ -307,6 +307,13 @@ public class VideoParaphrasePipeline {
 				);
 			}
 
+			try {
+				paraphrased = ollama.proofreadEducationalTerminology(paraphrased);
+			} catch (IOException e) {
+				logger.warn("SME terminology proofread could not be applied; validating the paraphrase as generated: {}",
+					e.getMessage());
+			}
+
 			validation = validateParaphrase(originalText, paraphrased, baseName);
 			if (validation.getOverallScore() >= config.getValidationThreshold()) {
 				logger.info("Paraphrase accepted with validation score {}/100 on attempt {}",

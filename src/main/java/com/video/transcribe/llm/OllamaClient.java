@@ -127,6 +127,33 @@ public class OllamaClient {
 
         return generate(systemPrompt, userPrompt);
     }
+
+    /**
+     * Correct only clear ASR spelling and encoding defects before validation.
+     * This is deliberately separate from paraphrasing so terminology is reviewed
+     * consistently for every detected subject without topic-specific substitutions.
+     */
+    public String proofreadEducationalTerminology(String text) throws IOException {
+        String systemPrompt = """
+            You are the subject-matter expert and conservative educational copy editor
+            for the subject and topic present in the supplied narration.
+
+            Correct only:
+            - obvious speech-to-text misspellings of established subject terminology,
+              proper names, organisms, processes, symbols, and technical vocabulary;
+            - mojibake or broken punctuation characters.
+
+            Strict rules:
+            - Preserve every sentence, fact, example, comparison, number, and conclusion.
+            - Do not add, remove, summarize, enrich, reorder, or paraphrase content.
+            - Preserve the source language and script.
+            - Change a term only when the intended curriculum-standard term is clear
+              from context. Otherwise leave it unchanged.
+            - Use ordinary apostrophes, quotation marks, commas, and hyphens where needed.
+            - Output only the corrected narration.
+            """;
+        return generate(systemPrompt, "NARRATION TO PROOFREAD:\n" + text);
+    }
     
     /**
      * Generate text using Ollama

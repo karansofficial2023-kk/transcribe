@@ -18,6 +18,28 @@ class StoryboardQualityGateTest {
     }
 
     @Test
+    void rejectsMissingAssetPath() {
+        SceneSegment segment = segment("photo", "realistic_image", "photo");
+        segment.setAssetPath("missing_generated_asset.jpg");
+        segment.setLabels(List.of());
+        segment.setLabelPlacements(List.of());
+
+        assertThrows(IllegalStateException.class,
+            () -> StoryboardQualityGate.validate(storyboard(segment)));
+    }
+
+    @Test
+    void rejectsLabelRevealMotionOnUnlabeledPhoto() {
+        SceneSegment segment = segment("photo", "realistic_image", "photo");
+        segment.setMotion("reveal_in_list_order; completed_frame_hold=2.5s");
+        segment.setLabels(List.of());
+        segment.setLabelPlacements(List.of());
+
+        assertThrows(IllegalStateException.class,
+            () -> StoryboardQualityGate.validate(storyboard(segment)));
+    }
+
+    @Test
     void rejectsLabeledImageWithEmptyLabels() {
         SceneSegment segment = segment("labeled_image", "realistic_labeled_image", "photo_with_labels");
         segment.setLabels(List.of());
