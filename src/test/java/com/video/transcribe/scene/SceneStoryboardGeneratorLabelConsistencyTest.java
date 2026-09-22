@@ -31,11 +31,27 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
         assertTrue(segment.getLabels().isEmpty());
         assertTrue(segment.getLabelPlacements().isEmpty());
 
+        setProductionDefaults(segment, "Battery terminals are shown clearly.");
+
+        SceneSegment title = new SceneSegment();
+        title.setSegmentNumber(1);
+        title.setTemplate("title_card");
+        title.setVisualType("title_card");
+        title.setMediaType("photo");
+        setProductionDefaults(title, "Battery Cells in Series.");
+        Scene titleScene = new Scene();
+        titleScene.setSceneNumber(1);
+        titleScene.setNarration(title.getSentence());
+        titleScene.setSegments(List.of(title));
+
         Scene scene = new Scene();
         scene.setSceneNumber(6);
+        scene.setNarration(segment.getSentence());
         scene.setSegments(List.of(segment));
         StoryboardDocument document = new StoryboardDocument();
-        document.setScenes(List.of(scene));
+        document.setTitle("Battery Cells in Series");
+        title.setHeading("Battery Cells in Series");
+        document.setScenes(List.of(titleScene, scene));
         assertDoesNotThrow(() -> StoryboardQualityGate.validate(document));
     }
 
@@ -56,5 +72,15 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
         assertTrue(segment.getLabels().isEmpty(),
             "An unreviewed combined target must be downgraded instead of drawing a wrong arrow");
         assertEquals("realistic_image", segment.getVisualType());
+    }
+
+    private void setProductionDefaults(SceneSegment segment, String sentence) {
+        segment.setSentence(sentence);
+        segment.setEstimatedNarrationSeconds(3.0);
+        segment.setRecommendedClipSeconds(4.0);
+        segment.setMotion("slow_zoom_in");
+        segment.setSubtitle(sentence);
+        segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.55; text_color=white; font_size=42; max_lines=2; align=center; horizontal_margin=120; bottom_margin=55");
+        segment.setComfyPrompt("Sharp 1920x1080 educational photography with accurate structures and realistic natural lighting, clear subject separation, sufficient empty margins for overlays. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout.");
     }
 }

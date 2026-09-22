@@ -27,12 +27,14 @@ class StoryboardDocxExporterTest {
         segment.setHeading("Pollen Transfer");
         segment.setLabels(List.of("anther", "stigma", "pollen grains"));
         segment.setLabelPlacements(List.of(
-            "anther: box=left; target=(0.35,0.42); target_description=pollen-bearing anther",
-            "stigma: box=right; target=(0.58,0.36); target_description=receptive stigma tip",
-            "pollen grains: box=bottom; target=(0.43,0.45); target_description=visible pollen grains"));
-        segment.setLabelStyle("white label box; dark outline; yellow arrows; readable at 1080p");
-        segment.setMotion("overlay_sequence: arrow_draw_then_label_fade");
+            "anther | pollen-bearing anther | target_xy: AUTO_VERIFY",
+            "stigma | receptive stigma tip | target_xy: AUTO_VERIFY",
+            "pollen grains | visible pollen grains | target_xy: AUTO_VERIFY"));
+        segment.setLabelStyle("high_contrast_box; white_text; dark_background; colored_target_dot; 3px_leader_line; 28px_minimum_font; avoid_subject; avoid_title_area; avoid_subtitle_area; avoid_logo_area");
+        segment.setMotion("arrow_draw_then_label_fade; reveal_in_list_order; keep_previous_labels_visible; completed_frame_hold=2.5s");
         segment.setSubtitle("Pollen moves from the anther to the stigma.");
+        segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.55; text_color=white; font_size=42; max_lines=2; align=center; horizontal_margin=120; bottom_margin=55");
+        segment.setRecommendedClipSeconds(6.0);
 
         Scene scene = new Scene();
         scene.setSceneNumber(1);
@@ -57,15 +59,15 @@ class StoryboardDocxExporterTest {
             assertEquals("Biology", document.getTables().get(0).getRow(0).getCell(1).getText());
 
             var table = document.getTables().stream()
-                .filter(value -> "Narration".equals(value.getRow(0).getCell(0).getText()))
+                .filter(value -> "shot_id".equals(value.getRow(0).getCell(0).getText()))
                 .findFirst().orElseThrow();
             assertEquals(2, table.getRow(0).getTableCells().size());
             var labelsRow = table.getRows().stream()
-                .filter(row -> "Labels".equals(row.getCell(0).getText())).findFirst().orElseThrow();
+                .filter(row -> "labels".equals(row.getCell(0).getText())).findFirst().orElseThrow();
             var placementRow = table.getRows().stream()
-                .filter(row -> "Label Placement".equals(row.getCell(0).getText())).findFirst().orElseThrow();
+                .filter(row -> "label_placement".equals(row.getCell(0).getText())).findFirst().orElseThrow();
             var styleRow = table.getRows().stream()
-                .filter(row -> "Label Style".equals(row.getCell(0).getText())).findFirst().orElseThrow();
+                .filter(row -> "label_style".equals(row.getCell(0).getText())).findFirst().orElseThrow();
 
             String labels = labelsRow.getCell(1).getText();
             assertTrue(labels.contains("anther"));
@@ -73,8 +75,9 @@ class StoryboardDocxExporterTest {
             assertFalse(labels.contains("yellow"));
             assertFalse(labels.contains("1080p"));
 
-            assertTrue(placementRow.getCell(1).getText().contains("target=(0.35,0.42)"));
-            assertTrue(styleRow.getCell(1).getText().contains("yellow arrows"));
+            assertTrue(placementRow.getCell(1).getText().contains("target_xy: AUTO_VERIFY"));
+            assertTrue(styleRow.getCell(1).getText().contains("28px_minimum_font"));
+            assertEquals(17, table.getRows().size());
         }
     }
 }

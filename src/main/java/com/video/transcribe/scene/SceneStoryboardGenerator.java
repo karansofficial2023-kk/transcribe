@@ -29,6 +29,14 @@ public class SceneStoryboardGenerator {
     private final String videoProvider;
     private final boolean curriculumEnrichmentEnabled;
     private final Gson gson = new Gson();
+    private static final String PRO_LABEL_STYLE = "high_contrast_box; white_text; dark_background; "
+        + "colored_target_dot; 3px_leader_line; 28px_minimum_font; avoid_subject; "
+        + "avoid_title_area; avoid_subtitle_area; avoid_logo_area";
+    private static final String PRO_SUBTITLE_STYLE = "bottom_band; band_color=black; band_opacity=0.55; "
+        + "text_color=white; font_size=42; max_lines=2; align=center; "
+        + "horizontal_margin=120; bottom_margin=55";
+    private static final String LABELED_MOTION = "arrow_draw_then_label_fade; reveal_in_list_order; "
+        + "keep_previous_labels_visible; completed_frame_hold=2.5s";
     private static final JsonObject TOPIC_SCHEMA = JsonParser.parseString("""
         {
           "type": "object",
@@ -131,10 +139,8 @@ public class SceneStoryboardGenerator {
                   "title_card",
                   "realistic_image",
                   "realistic_labeled_image",
-                  "split_screen_comparison",
                   "diagram_overlay",
                   "process_steps",
-                  "formula/derivation",
                   "realistic_background_with_labels",
                   "short_motion_clip"
                 ]
@@ -425,7 +431,7 @@ public class SceneStoryboardGenerator {
               "approved": { "type": "boolean" },
               "issue": { "type": "string" },
               "template": { "type": "string", "enum": ["title_card", "photo", "labeled_image", "comparison", "process", "formula", "split_screen", "video_broll"] },
-              "visualType": { "type": "string", "enum": ["title_card", "realistic_image", "realistic_labeled_image", "split_screen_comparison", "diagram_overlay", "process_steps", "formula/derivation", "realistic_background_with_labels", "short_motion_clip"] },
+              "visualType": { "type": "string", "enum": ["title_card", "realistic_image", "realistic_labeled_image", "diagram_overlay", "process_steps", "realistic_background_with_labels", "short_motion_clip"] },
               "heading": { "type": "string" },
               "visualSubject": { "type": "string" },
               "mediaType": { "type": "string", "enum": ["photo", "diagram", "animation", "photo_with_labels", "animation_with_labels", "wan_video"] },
@@ -485,6 +491,7 @@ public class SceneStoryboardGenerator {
         normalizeScenes(scenes, paraphrasedText, topicCheck.safeStoryboardTitle());
         reviewVisualPlansWithSme(scenes, paraphrasedText, languageInstruction, topicCheck);
         repairAndValidateLabelPlans(scenes, paraphrasedText, languageInstruction, topicCheck);
+        enforceFinalProductionContract(scenes, topicCheck.safeStoryboardTitle());
         rebuildSceneNarrationFromSegments(scenes);
         
         StoryboardDocument doc = new StoryboardDocument();
@@ -545,13 +552,13 @@ public class SceneStoryboardGenerator {
                 - Never combine distinct labels into one string.
                 - Replace vague nouns with precise names supported by the narration.
                 - labelPlacements contains exactly one entry per label using:
-                  Label: box=left|right|top|bottom; target=(x,y); target_description=specific visible structure or object
-                - x and y are numeric normalized coordinates from 0.0 to 1.0. Never use auto.
-                - Coordinates are planned arrow endpoints, not label-box positions.
-                - visualSubject and comfyPrompt must describe a sharp 1080p label-ready composition
-                  in which every target is unobscured and positioned consistently with its coordinate.
-                - End comfyPrompt with: No text, no labels, no letters inside generated image.
-                  All text labels will be added as overlay. No arrows, captions, or watermark.
+                  Label name | exact semantic target description | target_xy: AUTO_VERIFY
+                - Never invent coordinates for an image that has not been generated. Numeric normalized
+                  coordinates are allowed only when assetPath identifies a locked, reviewed asset.
+                - visualSubject and comfyPrompt must describe a sharp 1920x1080 label-ready composition
+                  in which every semantic target is unobscured with sufficient overlay margins.
+                - End comfyPrompt with: No embedded text. No generated labels. No generated arrows.
+                  No captions. No watermark. No slide or presentation-card layout.
                 - If a concept cannot be represented with trustworthy visible targets, return empty
                   labels and placements; the application will convert it to an unlabeled visual.
                 """.formatted(languageInstruction, lessonText, topicCheck.subject(),
@@ -623,7 +630,7 @@ public class SceneStoryboardGenerator {
               that belong to another lesson or subject.
             - Do not add curriculum claims not supported by the source lesson.
             - Route exact equations, calculations, derivations, symbolic laws, and substitutions to
-              template=formula, visualType=formula/derivation, mediaType=animation,
+              template=formula, visualType=process_steps, mediaType=animation,
               motionType=local_animation, tool=manim, with exact formulaLines.
             - AI image prompts describe only a clean background asset. They must not ask the image
               model to render text, labels, arrows, captions, formulas, numbers, or watermarks.
@@ -704,10 +711,22 @@ public class SceneStoryboardGenerator {
         }
         // Re-apply alignment after downgrade so every metadata field agrees.
         alignVisualTypeWithLabels(segment);
+        enforceLabelContract(segment);
+        enforceLabelDuration(segment);
     }
 
     private boolean hasLabels(SceneSegment segment) {
         return segment.getLabels() != null && !segment.getLabels().isEmpty();
+    }
+
+    private void enforceLabelDuration(SceneSegment segment) {
+        int labelCount = segment.getLabels() == null ? 0 : segment.getLabels().size();
+        if (labelCount == 0) return;
+        double minimum = Math.max(segment.getEstimatedNarrationSeconds(), labelCount + 2.5);
+        if (segment.getRecommendedClipSeconds() < minimum) {
+            segment.setRecommendedClipSeconds(roundOneDecimal(minimum));
+        }
+        segment.setTimingNotes("Allow approximately 1.0 second per arrow-label reveal, keep earlier labels visible, then hold the completed labeled frame for at least 2.5 seconds.");
     }
 
     private boolean isSpecializedLayout(SceneSegment segment) {
@@ -796,6 +815,26 @@ public class SceneStoryboardGenerator {
         }
     }
 
+    private void enforceFinalProductionContract(List<Scene> scenes, String storyboardTitle) {
+        for (int sceneIndex = 0; sceneIndex < scenes.size(); sceneIndex++) {
+            Scene scene = scenes.get(sceneIndex);
+            if (scene.getSegments() == null) continue;
+            for (SceneSegment segment : scene.getSegments()) {
+                enforceStoryboardQuality(segment);
+                finalizeLabelConsistency(segment);
+            }
+            normalizeTitleCards(scene,
+                sceneIndex == 0 ? storyboardTitle : scene.getSceneTitle(), sceneIndex == 0);
+            for (SceneSegment segment : scene.getSegments()) {
+                segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
+                segment.setSubtitle(buildSubtitle(segment.getSentence()));
+                segment.setComfyPrompt(ensureNoTextPrompt(segment.getComfyPrompt()));
+                enforceLabelContract(segment);
+                enforceLabelDuration(segment);
+            }
+        }
+    }
+
     private SceneSegment findSegment(List<Scene> scenes, int sceneNumber, int segmentNumber) {
         return scenes.stream()
             .filter(scene -> scene.getSceneNumber() == sceneNumber)
@@ -812,13 +851,28 @@ public class SceneStoryboardGenerator {
         for (String label : labels) {
             if (label == null || label.isBlank() || isTooGenericLabel(label)
                     || isCombinedLabel(label)) return false;
-            String prefix = label.toLowerCase(Locale.ROOT) + ":";
+            String prefix = label.toLowerCase(Locale.ROOT);
             String placement = placements.stream()
-                .filter(value -> value != null && value.toLowerCase(Locale.ROOT).trim().startsWith(prefix))
+                .filter(value -> placementMatchesLabel(value, prefix))
                 .findFirst().orElse("");
-            if (!hasNumericTarget(placement) || !hasSpecificTargetDescription(placement, label)) return false;
+            if (!hasAllowedTarget(segment, placement) || !hasSpecificTargetDescription(placement, label)) return false;
         }
         return true;
+    }
+
+    private boolean placementMatchesLabel(String placement, String lowerLabel) {
+        if (placement == null) return false;
+        String value = placement.toLowerCase(Locale.ROOT).trim();
+        if (!value.startsWith(lowerLabel)) return false;
+        String remainder = value.substring(lowerLabel.length()).trim();
+        return remainder.startsWith("|") || remainder.startsWith(":");
+    }
+
+    private boolean hasAllowedTarget(SceneSegment segment, String placement) {
+        if (placement == null) return false;
+        if (containsIgnoreCase(placement, "target_xy: AUTO_VERIFY")) return true;
+        return segment.getAssetPath() != null && !segment.getAssetPath().isBlank()
+            && hasNumericTarget(placement);
     }
 
     private boolean isTooGenericLabel(String label) {
@@ -869,6 +923,13 @@ public class SceneStoryboardGenerator {
 
     private boolean hasSpecificTargetDescription(String placement, String label) {
         if (placement == null) return false;
+        String[] pipeParts = placement.split("\\|", -1);
+        if (pipeParts.length >= 3) {
+            String description = pipeParts[1].trim();
+            return description.length() >= 8
+                && !description.equalsIgnoreCase(label)
+                && !containsAnyIgnoreCase(description, "object", "thing", "area", "detail");
+        }
         java.util.regex.Matcher matcher = java.util.regex.Pattern.compile(
             "(?i)target_description=([^;]+)").matcher(placement);
         if (!matcher.find()) return false;
@@ -883,7 +944,7 @@ public class SceneStoryboardGenerator {
         if ("process".equals(segment.getTemplate())) {
             segment.setVisualType("process_steps");
         } else if ("comparison".equals(segment.getTemplate()) || "split_screen".equals(segment.getTemplate())) {
-            segment.setVisualType("split_screen_comparison");
+            segment.setVisualType("diagram_overlay");
         } else {
             segment.setTemplate("photo");
             segment.setVisualType("realistic_image");
@@ -1061,7 +1122,7 @@ public class SceneStoryboardGenerator {
             For each segment, provide:
             1. The exact sentence text
             2. template: "title_card", "photo", "labeled_image", "comparison", "process", "formula", "split_screen", or "video_broll"
-            3. visualType: "title_card", "realistic_image", "realistic_labeled_image", "split_screen_comparison", "diagram_overlay", "process_steps", "formula/derivation", "realistic_background_with_labels", or "short_motion_clip"
+            3. visualType: "title_card", "realistic_image", "realistic_labeled_image", "diagram_overlay", "process_steps", "realistic_background_with_labels", or "short_motion_clip"
             4. heading: short screen title drawn by the renderer
             5. visualSubject: exact frame requirement describing the subject, composition, visible structures, camera angle, and 1080p realism; production metadata that must never be displayed as text
             5. assetPath: optional reviewed asset path, or "" when none
@@ -1073,13 +1134,13 @@ public class SceneStoryboardGenerator {
             7. Visual/Animation description (what should be shown on screen)
             8. Local animation instructions for teaching clarity, such as arrows, highlights, zooms, labels, diagrams, step reveals, or comparison panels
             9. labels: exact, atomic curriculum terms that point only to clearly visible objects. Each array item must name one target only; never combine multiple terms in one string.
-            10. labelPlacements: one entry per label in "Label: box=left|right|top|bottom; target=(normalized_x,normalized_y); target_description=exact visible part" format. Coordinates are normalized from 0.0 to 1.0 relative to the final image. The shorthand "Label: left side -> 0.35,0.42" is also accepted.
-            11. labelStyle: normally "clean white label box with dark outline; yellow arrow; readable at 1080p; no overlap with subject or subtitles"
+            10. labelPlacements: one entry per label in "Label name | exact semantic target description | target_xy: AUTO_VERIFY" format. Never invent coordinates for an image that has not been generated. Numeric normalized coordinates are allowed only for a locked reviewed assetPath.
+            11. labelStyle: exactly "%s"
             12. arrows, highlights, formulaLines, explainSteps, steps, and columns as renderer overlay instructions
             10. Image recommendations (2 specific no-text image descriptions for stock photo/illustration search)
             13. motion: one controlled camera/reveal instruction, never vague full animation
             14. subtitle: concise screen-readable summary, preferably 8-14 words; it may shorten narration without changing meaning
-            15. subtitleStyle: usually "bottom_band black 38%% opacity white centered max 2 lines"
+            15. subtitleStyle: exactly "%s"
             13. tool: "pillow_opencv", "ffmpeg", "manim", "comfy_image", "ltx_video", "upscale", or "reviewed_asset"
             14. assetQualityNotes: whether to use reviewed asset, generated still, deterministic diagram, LTX b-roll, and/or upscale
             15. ComfyUI prompt for clean background asset only
@@ -1116,19 +1177,19 @@ public class SceneStoryboardGenerator {
             - Labels must be exact curriculum nouns visible in the background asset, not general instructions to the viewer.
             - Every label must have a matching labelPlacements entry naming the same label and an unambiguous visible target. Never point a structure label to an animal, background, or approximate area.
             - Coordinate examples describe the required format only. Choose coordinates from the requested composition; do not copy coordinates from another subject or frame.
-            - For every labeled still, plan the composition and provide a normalized numeric target=(x,y) between 0.0 and 1.0 plus an exact target_description. Never return target=(auto).
-            - Never provide a coordinate outside 0.0..1.0. Coordinates identify the arrow endpoint on the subject, not the label-box position.
+            - For every labeled still, provide an exact semantic target description and target_xy: AUTO_VERIFY. The renderer resolves the anchor only after the final image exists.
+            - Numeric normalized coordinates may appear only when assetPath identifies a locked reviewed asset. Never guess coordinates for generated imagery.
             - If the exact target will not be reliably visible, remove that label or change to a reviewed still/diagram where it is visible.
             - Choose the number of labels from the topic, lesson requirement, and visible structures in that frame. Do not impose a fixed label count.
             - If all required labels cannot remain readable without overlap, divide the concept into additional focused frames; do not omit required curriculum labels merely to meet an arbitrary count.
             - When one narration sentence names several distinct structures, examples, phases, or mechanisms, use stable split-screen/process panels or a sequence of deterministic stills. Do not combine them into one moving LTX/Wan shot with precise labels.
             - labelStyle must keep labels and arrows clear of the subject, heading, and subtitle safe areas.
-            - For labeled stills, motion must define this overlay sequence: draw each arrow from its label box toward the exact target, make the arrow endpoint touch the target, then fade in that arrow's label text. Reveal pairs one by one in the listed label order.
+            - For labeled stills, motion must be arrow_draw_then_label_fade. Reveal labels in list order, keep earlier labels visible, and hold the completed frame for at least 2.5 seconds.
             - Core renderer rule: never ask AI image/video models to create exact text, labels, arrows, formulas, legends, numbers, or scientific names inside the generated image/video.
             - Put all exact text, labels, arrows, legends, highlights, formulas, and subtitles in overlay fields so Pillow/OpenCV/Manim/FFmpeg can draw them precisely.
             - comfyPrompt and shot prompts must request clean backgrounds with no text, no labels, no captions, no watermarks, and no formula text.
-            - End every still-image prompt with: "No text, no labels, no letters inside generated image. All text labels will be added as overlay."
-            - Use title_card once for the lesson opening. A later title-style frame is allowed only for a real recap/conclusion and its heading must begin with "Conclusion:" or "Summary:"; otherwise use a content visual.
+            - Every still-image prompt must request sharp 1920x1080 educational photography, subject-accurate structures, realistic natural lighting, clear subject separation, sufficient empty overlay margins, no embedded text, no generated labels, no generated arrows, no captions, no watermark, and no slide or presentation-card layout.
+            - Use title_card exactly once, for the first lesson shot only. Every later row must use a content visual.
             - Use labeled_image for apparatus/anatomy/parts; labels/arrows are overlays, not generated in the image.
             - Use process for one-by-one steps; steps are renderer text overlays.
             - Use comparison for self-vs-cross, strong-vs-weak, before-vs-after, or concept contrasts; columns are renderer text overlays.
@@ -1186,6 +1247,7 @@ public class SceneStoryboardGenerator {
             - Labels should be short, screen-ready text. Return [] when labels are not useful.
             """.formatted(languageInstruction, buildAnimationModeInstruction(),
                 buildVideoProviderInstruction(), buildCurriculumEnrichmentInstruction(),
+                PRO_LABEL_STYLE, PRO_SUBTITLE_STYLE,
                 topicCheck.subject(), topicCheck.inferredTopic(), topicCheck.smeRole(),
                 scene.getSceneTitle(), scene.getNarration());
         
@@ -1290,17 +1352,6 @@ public class SceneStoryboardGenerator {
         for (int i = 0; i < scene.getSegments().size(); i++) {
             SceneSegment segment = scene.getSegments().get(i);
             if ("title_card".equals(segment.getTemplate()) && (!allowOpeningTitleCard || i > 0)) {
-                if (isRecapOrConclusion(segment, scene)) {
-                    segment.setHeading("Conclusion: " + cleanStoryboardTitle(displayTitle));
-                    segment.setVisualType("title_card");
-                    segment.setLabels(List.of());
-                    segment.setLabelPlacements(List.of());
-                    segment.setArrows(List.of());
-                    segment.setHighlights(List.of());
-                    segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
-                        "Conclusion-card guard: this is a recap/conclusion, not a repeated opening title."));
-                    continue;
-                }
                 boolean hasLabels = segment.getLabels() != null && !segment.getLabels().isEmpty();
                 segment.setTemplate(hasLabels ? "labeled_image" : "photo");
                 segment.setVisualType(hasLabels ? "realistic_labeled_image" : "realistic_image");
@@ -1311,7 +1362,12 @@ public class SceneStoryboardGenerator {
             }
         }
         SceneSegment first = scene.getSegments().get(0);
-        if (!allowOpeningTitleCard || !"title_card".equals(first.getTemplate())) return;
+        if (!allowOpeningTitleCard) return;
+        first.setTemplate("title_card");
+        first.setMediaType("photo");
+        first.setMotionType("static_image");
+        first.setShot(null);
+        first.setLtxShot(null);
         String title = cleanStoryboardTitle(displayTitle);
         if (!title.isBlank()) {
             first.setHeading(title);
@@ -1322,6 +1378,8 @@ public class SceneStoryboardGenerator {
         first.setArrows(List.of());
         first.setHighlights(List.of());
         first.setVisualSubject(buildTitleBackgroundSubject(title));
+        first.setComfyPrompt(ensureNoTextPrompt(first.getVisualSubject()));
+        first.setMotion("camera: slow_zoom_in; title_animation: fade_up; transition_in: fade; transition_out: crossfade");
         first.setLocalAnimation("Renderer draws only the heading/subtitle/narration as text. Use visualSubject only as background search/generation guidance; do not display visualSubject text on screen.");
         first.setCoverageNotes(appendNote(first.getCoverageNotes(),
             "Title-card guard: visualSubject is background guidance only and must not be rendered as visible text."));
@@ -1371,7 +1429,7 @@ public class SceneStoryboardGenerator {
 
     private String buildTitleBackgroundSubject(String title) {
         if (containsIgnoreCase(title, "pollination")) {
-            return "Clean real HD pollination background with flowering plants and a pollinator, no embedded text";
+            return "Sharp 1920x1080 realistic sunflower and pollinator background, botanically accurate, natural lighting, clear subject separation, empty central margins for renderer title, no embedded text";
         }
         if (title == null || title.isBlank()) {
             return "Clean real HD educational background related to the lesson topic, no embedded text";
@@ -1454,7 +1512,7 @@ public class SceneStoryboardGenerator {
         segment.setTemplate(labeled ? "labeled_image" : "photo");
         segment.setVisualType(labeled ? "realistic_labeled_image" : "realistic_image");
         segment.setHeading(buildHeading(sentence));
-        segment.setVisualSubject("Sharp 1080p curriculum-accurate visual directly illustrating: " + sentence);
+        segment.setVisualSubject("Sharp 1920x1080 curriculum-accurate visual directly illustrating: " + sentence);
         segment.setAssetPath("");
         segment.setMediaType(labeled ? "photo_with_labels" : "photo");
         segment.setMotionType("static_image");
@@ -1475,10 +1533,10 @@ public class SceneStoryboardGenerator {
         segment.setImageRecommendations(List.of("Sharp curriculum-accurate real HD visual for: " + sentence));
         segment.setMotion(defaultMotion(segment.getTemplate()));
         segment.setSubtitle(buildSubtitle(sentence));
-        segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.38; text_color=white; max_lines=2; align=center");
+        segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
         segment.setTool("pillow_opencv");
         segment.setAssetQualityNotes("Fallback source-coverage visual; use a reviewed asset when precise anatomy or apparatus is required.");
-        segment.setComfyPrompt(ensureNoTextPrompt("Sharp 1080p realistic educational image directly matching: " + sentence));
+        segment.setComfyPrompt(ensureNoTextPrompt("Sharp 1920x1080 realistic educational image directly matching: " + sentence));
         segment.setCoverageNotes("Source-coverage guard: generated because the LLM omitted this narration sentence.");
         return segment;
     }
@@ -1776,7 +1834,7 @@ public class SceneStoryboardGenerator {
             segment.setTool("manim");
             segment.setMotionType("local_animation");
             segment.setMediaType("animation");
-            segment.setVisualType("formula/derivation");
+            segment.setVisualType("process_steps");
             segment.setShot(null);
             segment.setLtxShot(null);
             if (segment.getFormulaLines() == null || segment.getFormulaLines().isEmpty()) {
@@ -1802,7 +1860,7 @@ public class SceneStoryboardGenerator {
     private void enforceFormulaRouting(SceneSegment segment) {
         if (!StoryboardRules.requiresFormulaRenderer(segment)) return;
         segment.setTemplate("formula");
-        segment.setVisualType("formula/derivation");
+        segment.setVisualType("process_steps");
         segment.setMediaType("animation");
         segment.setMotionType("local_animation");
         segment.setTool("manim");
@@ -1825,12 +1883,15 @@ public class SceneStoryboardGenerator {
         if (prompt == null || prompt.isBlank()) {
             return prompt;
         }
-        if (containsIgnoreCase(prompt, "no text")
-                && containsIgnoreCase(prompt, "all text labels will be added as overlay")) {
+        if (containsIgnoreCase(prompt, "1920x1080")
+                && containsIgnoreCase(prompt, "no embedded text")
+                && containsIgnoreCase(prompt, "no generated labels")) {
             return prompt;
         }
-        return prompt + ". No text, no labels, no letters inside generated image. "
-            + "All text labels will be added as overlay. No captions, arrows, formulas, or watermark.";
+        return "Sharp 1920x1080 educational photography, botanically or subject-matter accurate structures, "
+            + "realistic natural lighting, clear subject separation, sufficient empty margins for overlays. "
+            + prompt + ". No embedded text. No generated labels. No generated arrows. No captions. "
+            + "No watermark. No slide or presentation-card layout.";
     }
 
     private void enforceProStyleDefaults(SceneSegment segment) {
@@ -1840,6 +1901,7 @@ public class SceneStoryboardGenerator {
         if (segment.getVisualType() == null || segment.getVisualType().isBlank()) {
             segment.setVisualType(inferVisualType(segment));
         }
+        segment.setVisualType(normalizeVisualType(segment));
         if (segment.getHeading() == null || segment.getHeading().isBlank()) {
             segment.setHeading(buildHeading(segment.getSentence()));
         }
@@ -1867,13 +1929,25 @@ public class SceneStoryboardGenerator {
         if (segment.getSubtitle() == null || segment.getSubtitle().isBlank()) {
             segment.setSubtitle(buildSubtitle(segment.getSentence()));
         }
-        segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.38; text_color=white; max_lines=2; align=center");
+        segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
         if (segment.getTool() == null || segment.getTool().isBlank()) {
             segment.setTool(inferTool(segment));
         }
         if (segment.getAssetQualityNotes() == null || segment.getAssetQualityNotes().isBlank()) {
             segment.setAssetQualityNotes(defaultAssetQualityNotes(segment));
         }
+    }
+
+    private String normalizeVisualType(SceneSegment segment) {
+        String value = segment.getVisualType() == null ? "" : segment.getVisualType().trim();
+        return switch (value) {
+            case "title_card", "realistic_image", "realistic_labeled_image",
+                 "realistic_background_with_labels", "diagram_overlay", "process_steps",
+                 "short_motion_clip" -> value;
+            case "split_screen_comparison", "comparison" -> "diagram_overlay";
+            case "formula/derivation" -> "process_steps";
+            default -> inferVisualType(segment);
+        };
     }
 
     private String inferTemplate(SceneSegment segment) {
@@ -1900,9 +1974,9 @@ public class SceneStoryboardGenerator {
         return switch (segment.getTemplate()) {
             case "title_card" -> "title_card";
             case "photo" -> "realistic_image";
-            case "comparison", "split_screen" -> "split_screen_comparison";
+            case "comparison", "split_screen" -> "diagram_overlay";
             case "process" -> "process_steps";
-            case "formula" -> "formula/derivation";
+            case "formula" -> "process_steps";
             case "video_broll" -> "short_motion_clip";
             case "labeled_image" -> "diagram".equals(segment.getMediaType())
                 ? "diagram_overlay" : "realistic_labeled_image";
@@ -1912,8 +1986,7 @@ public class SceneStoryboardGenerator {
     }
 
     private String defaultLabelStyle() {
-        return "clean white label box with dark outline; yellow arrow; readable at 1080p; "
-            + "no overlap with subject, heading, or subtitles";
+        return PRO_LABEL_STYLE;
     }
 
     private String buildSubtitle(String sentence) {
@@ -1921,11 +1994,7 @@ public class SceneStoryboardGenerator {
             return "";
         }
         String clean = sentence.replaceAll("[\\r\\n]+", " ").replaceAll("\\s+", " ").trim();
-        String[] words = clean.split(" ");
-        if (words.length <= 14) {
-            return clean;
-        }
-        return String.join(" ", java.util.Arrays.copyOf(words, 14)).replaceAll("[,;:]$", "") + "...";
+        return clean;
     }
 
     private void enforceLabelContract(SceneSegment segment) {
@@ -1933,6 +2002,9 @@ public class SceneStoryboardGenerator {
                 || "video_broll".equals(segment.getTemplate())) {
             segment.setLabels(List.of());
             segment.setLabelPlacements(List.of());
+            if (containsIgnoreCase(segment.getMotion(), "arrow_draw_then_label_fade")) {
+                segment.setMotion("natural_motion_only; no_scientific_labels");
+            }
             return;
         }
 
@@ -1941,56 +2013,51 @@ public class SceneStoryboardGenerator {
             ? List.of() : segment.getLabelPlacements();
         List<String> placements = new ArrayList<>();
         for (String label : labels) {
-            String prefix = label.toLowerCase(Locale.ROOT) + ":";
+            String prefix = label.toLowerCase(Locale.ROOT);
             supplied.stream()
-                .filter(value -> value != null
-                    && value.toLowerCase(Locale.ROOT).trim().startsWith(prefix))
+                .filter(value -> placementMatchesLabel(value, prefix))
                 .findFirst()
-                .ifPresent(placement -> placements.add(normalizeLabelPlacement(label, placement)));
+                .ifPresent(placement -> placements.add(normalizeLabelPlacement(segment, label, placement)));
         }
         segment.setLabelPlacements(placements);
         segment.setLabelStyle(defaultLabelStyle());
-        if (!labels.isEmpty() && !containsIgnoreCase(segment.getMotion(), "arrow_draw_then_label_fade")) {
-            segment.setMotion(appendNote(segment.getMotion(),
-                "overlay_sequence: arrow_draw_then_label_fade; reveal each arrow-label pair one by one in labels order; use the reviewed numeric target coordinate and skip any arrow whose target does not match the final image"));
-        }
+        segment.setMotion(labels.isEmpty() ? removeLabelAnimation(segment.getMotion()) : LABELED_MOTION);
         if (!labels.isEmpty()) {
             segment.setAssetQualityNotes(appendNote(segment.getAssetQualityNotes(),
-                "Label anchors are planned coordinates only. After the final image is generated or loaded, "
-                    + "verify each named structure at its target coordinate; relocate a verified anchor or skip "
-                    + "the arrow when confidence is insufficient. Never point a label to a nearby object."));
+                "Resolve AUTO_VERIFY anchors after the final image is generated or loaded. Draw an arrow only "
+                    + "after its named semantic target is verified; otherwise skip the unsafe arrow."));
         }
     }
 
-    private String normalizeLabelPlacement(String label, String placement) {
+    private String normalizeLabelPlacement(SceneSegment segment, String label, String placement) {
         String value = placement == null ? "" : placement.trim();
-        String normalizedNumber = "(0(?:\\.\\d+)?|1(?:\\.0+)?)";
-        java.util.regex.Matcher shorthand = java.util.regex.Pattern
-            .compile("->\\s*" + normalizedNumber + "\\s*,\\s*" + normalizedNumber,
-                java.util.regex.Pattern.CASE_INSENSITIVE)
-            .matcher(value);
-        if (shorthand.find()) {
-            value = shorthand.replaceFirst("; target=(" + shorthand.group(1) + "," + shorthand.group(2) + ")");
-        }
-        value = value.replaceAll("(?i);?\\s*target=\\(auto\\)", "").trim();
+        String normalizedNumber = "(?:0(?:\\.\\d+)?|1(?:\\.0+)?)";
+        String description = extractTargetDescription(value, label);
         java.util.regex.Matcher coordinate = java.util.regex.Pattern
-            .compile("target=\\(\\s*" + normalizedNumber + "\\s*,\\s*" + normalizedNumber + "\\s*\\)",
+            .compile("(?:target=\\(|target_xy:\\s*)(" + normalizedNumber + ")\\s*,\\s*(" + normalizedNumber + ")\\)?",
                 java.util.regex.Pattern.CASE_INSENSITIVE)
             .matcher(value);
-        boolean validCoordinates = coordinate.find();
-        if (!validCoordinates) {
-            value = value.replaceFirst("(?i)target=\\([^)]*\\)", "").trim();
-        }
-        if (!containsIgnoreCase(value, "target_description=")) {
-            value += "; target_description=exact visible " + label;
-        }
-        if (!containsIgnoreCase(value, "anchor_source=")) {
-            value += "; anchor_source=post_render_visual_verification";
-        }
-        if (!containsIgnoreCase(value, "on_mismatch=")) {
-            value += "; on_mismatch=skip_arrow";
-        }
-        return value;
+        boolean lockedAsset = segment.getAssetPath() != null && !segment.getAssetPath().isBlank();
+        String target = lockedAsset && coordinate.find()
+            ? coordinate.group(1) + "," + coordinate.group(2)
+            : "AUTO_VERIFY";
+        return label + " | " + description + " | target_xy: " + target;
+    }
+
+    private String extractTargetDescription(String placement, String label) {
+        String[] pipeParts = placement.split("\\|", -1);
+        if (pipeParts.length >= 2 && pipeParts[1].trim().length() >= 8) return pipeParts[1].trim();
+        java.util.regex.Matcher matcher = java.util.regex.Pattern
+            .compile("(?i)target_description=([^;]+)").matcher(placement);
+        if (matcher.find() && matcher.group(1).trim().length() >= 8) return matcher.group(1).trim();
+        return "";
+    }
+
+    private String removeLabelAnimation(String motion) {
+        if (motion == null || motion.isBlank()) return "slow_zoom_in";
+        String cleaned = motion.replaceAll("(?i)[^;]*arrow_draw_then_label_fade[^;]*;?", "")
+            .replaceAll("(?i)[^;]*label_reveal[^;]*;?", "").trim();
+        return cleaned.isBlank() ? "slow_zoom_in" : cleaned;
     }
 
     private String buildHeading(String sentence) {

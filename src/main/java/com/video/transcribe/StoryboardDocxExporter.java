@@ -144,23 +144,24 @@ public class StoryboardDocxExporter {
         header.setColor("000000");
 
         List<String[]> fields = new ArrayList<>();
-        addField(fields, "Narration", safe(segment.getSentence()));
-        addField(fields, "Template / Media", joinNonBlank(
-            formatTemplate(segment.getTemplate()), formatMediaType(segment.getMediaType())));
-        addField(fields, "Timing", formatTiming(segment));
-        addField(fields, "Tool / Motion Type", joinNonBlank(
-            safe(segment.getTool()), formatMotionType(segment.getMotionType())));
-        addField(fields, "Visual Type / Image Requirement", formatVisualSubject(segment));
-        addField(fields, "Asset / Image Prompt", formatAssetPrompt(segment));
-        addField(fields, "Labels", formatList(segment.getLabels()));
-        addField(fields, "Label Placement", formatList(segment.getLabelPlacements()));
-        if (segment.getLabels() != null && !segment.getLabels().isEmpty()) {
-            addField(fields, "Label Style", safe(segment.getLabelStyle()));
-        }
-        addField(fields, "Motion / Subtitle", formatMotionAndSubtitle(segment));
-        addField(fields, "Coverage / Asset Quality", formatCoverageAndQuality(segment));
-        addField(fields, "Wan Video Shot", formatShot(segment.getShot()));
-        addField(fields, "LTX Video Shot", formatShot(segment.getLtxShot()));
+        fields.add(new String[] {"shot_id", sceneNumber + "." + segment.getSegmentNumber()});
+        fields.add(new String[] {"narration", safe(segment.getSentence())});
+        fields.add(new String[] {"duration", segment.getRecommendedClipSeconds() + " sec"});
+        fields.add(new String[] {"visual_type", safe(segment.getVisualType())});
+        fields.add(new String[] {"media_type", safe(segment.getMediaType())});
+        fields.add(new String[] {"image_requirement", safe(segment.getVisualSubject())});
+        fields.add(new String[] {"image_prompt", safe(segment.getComfyPrompt())});
+        fields.add(new String[] {"labels", formatList(segment.getLabels())});
+        fields.add(new String[] {"label_placement", formatList(segment.getLabelPlacements())});
+        fields.add(new String[] {"label_style", safe(segment.getLabelStyle())});
+        fields.add(new String[] {"motion", safe(segment.getMotion())});
+        fields.add(new String[] {"subtitle", safe(segment.getSubtitle())});
+        fields.add(new String[] {"subtitle_style", safe(segment.getSubtitleStyle())});
+        fields.add(new String[] {"asset_path", safe(segment.getAssetPath())});
+        fields.add(new String[] {"wan_video_prompt", shotPrompt(segment.getShot())});
+        fields.add(new String[] {"ltx_video_prompt", shotPrompt(segment.getLtxShot())});
+        fields.add(new String[] {"review_notes", joinNonBlank(
+            safe(segment.getCoverageNotes()), safe(segment.getAssetQualityNotes()))});
 
         XWPFTable table = doc.createTable(fields.size(), 2);
         table.setWidth("100%");
@@ -177,6 +178,10 @@ public class StoryboardDocxExporter {
         for (int i = 0; i < fields.size(); i++) {
             setFieldRow(table.getRow(i), fields.get(i)[0], fields.get(i)[1]);
         }
+    }
+
+    private String shotPrompt(com.video.transcribe.scene.Shot shot) {
+        return shot == null ? "" : safe(shot.getPrompt());
     }
 
     private void addField(List<String[]> fields, String name, String value) {
