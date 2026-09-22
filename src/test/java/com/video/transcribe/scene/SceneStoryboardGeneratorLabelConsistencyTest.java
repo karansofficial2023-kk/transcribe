@@ -74,6 +74,28 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
         assertEquals("realistic_image", segment.getVisualType());
     }
 
+    @Test
+    void diagramWithNoLabelsIsDowngradedBeforeQualityGate() {
+        SceneSegment segment = new SceneSegment();
+        segment.setSegmentNumber(3);
+        segment.setSentence("The lesson compares two related mechanisms.");
+        segment.setTemplate("comparison");
+        segment.setVisualType("diagram_overlay");
+        segment.setMediaType("photo");
+        segment.setMotionType("static_image");
+        segment.setLabels(List.of());
+        segment.setLabelPlacements(List.of());
+
+        SceneStoryboardGenerator generator = new SceneStoryboardGenerator(null, false, "ltx", true);
+        generator.finalizeLabelConsistency(segment);
+
+        assertEquals("photo", segment.getTemplate());
+        assertEquals("realistic_image", segment.getVisualType());
+        assertEquals("photo", segment.getMediaType());
+        assertTrue(segment.getLabels().isEmpty());
+        assertTrue(segment.getLabelPlacements().isEmpty());
+    }
+
     private void setProductionDefaults(SceneSegment segment, String sentence) {
         segment.setSentence(sentence);
         segment.setEstimatedNarrationSeconds(3.0);

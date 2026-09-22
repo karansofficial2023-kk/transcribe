@@ -703,7 +703,7 @@ public class SceneStoryboardGenerator {
         // First align rows that arrived as process/photo layouts but contain labels.
         alignVisualTypeWithLabels(segment);
         if ((isLabeledVisual(segment) || hasLabels(segment)) && !isValidLabelPlan(segment)) {
-            if (isSpecializedLayout(segment)) {
+            if (canRemainSpecializedWithoutLabels(segment)) {
                 clearUnsafeLabels(segment);
             } else {
                 downgradeToUnlabeledVisual(segment);
@@ -735,6 +735,12 @@ public class SceneStoryboardGenerator {
             || "formula".equals(segment.getTemplate())
             || "comparison".equals(segment.getTemplate())
             || "split_screen".equals(segment.getTemplate());
+    }
+
+    private boolean canRemainSpecializedWithoutLabels(SceneSegment segment) {
+        return "title_card".equals(segment.getTemplate())
+            || "video_broll".equals(segment.getTemplate())
+            || "formula".equals(segment.getTemplate());
     }
 
     private void clearUnsafeLabels(SceneSegment segment) {
@@ -941,14 +947,11 @@ public class SceneStoryboardGenerator {
     }
 
     private void downgradeToUnlabeledVisual(SceneSegment segment) {
-        if ("process".equals(segment.getTemplate())) {
-            segment.setVisualType("process_steps");
-        } else if ("comparison".equals(segment.getTemplate()) || "split_screen".equals(segment.getTemplate())) {
-            segment.setVisualType("diagram_overlay");
-        } else {
-            segment.setTemplate("photo");
-            segment.setVisualType("realistic_image");
-        }
+        // Diagram, comparison, process, and labeled-image contracts all require
+        // trustworthy labels. If that contract cannot be completed, retain the
+        // visual concept as a plain still instead of exporting contradictory metadata.
+        segment.setTemplate("photo");
+        segment.setVisualType("realistic_image");
         segment.setMediaType("photo");
         segment.setMotionType("static_image");
         segment.setLabels(List.of());
