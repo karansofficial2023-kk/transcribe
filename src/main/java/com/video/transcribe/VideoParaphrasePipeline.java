@@ -191,9 +191,13 @@ public class VideoParaphrasePipeline {
 	// ============================================
 
 	public StoryboardDocument generateStoryboard(String paraphrasedText, String baseName) throws Exception {
+		StoryboardProjectMaterials materials = loadStoryboardMaterials(baseName);
+		return generateStoryboard(paraphrasedText, baseName, materials);
+	}
+
+	public StoryboardDocument generateStoryboard(String paraphrasedText, String baseName,
+			StoryboardProjectMaterials materials) throws Exception {
 		logger.info("=== PHASE 3c: Generating Scene Storyboard ===");
-		StoryboardProjectMaterials materials = StoryboardProjectMaterialsLoader.load(
-			config.getStoryboardMaterialsDir(), baseName);
 		if (!materials.isEmpty()) {
 			logger.info("Loaded storyboard project materials: {} approved/reference assets",
 				materials.approvedAssets().size());
@@ -257,12 +261,15 @@ public class VideoParaphrasePipeline {
 
 			// Phase 3 + 3b: Paraphrase, validate, and retry until content coverage passes
 			ParaphraseValidation paraphraseValidation = paraphraseUntilValid(originalText, style, baseName);
-			String paraphrased = paraphraseValidation.paraphrasedText;
+			StoryboardProjectMaterials materials = loadStoryboardMaterials(baseName);
+			String paraphrased = maybeEnrichParaphrase(originalText, paraphraseValidation.paraphrasedText,
+				style, baseName, materials);
+			paraphrased = factCheckNarration(paraphrased, materials);
 			ValidationResult validation = paraphraseValidation.validation;
 			saveParaphrase(paraphrased, baseName);
 
 			// Phase 3c: Generate scene storyboard
-			StoryboardDocument storyboard = generateStoryboard(paraphrased, baseName);
+			StoryboardDocument storyboard = generateStoryboard(paraphrased, baseName, materials);
 
 			// Phase 4: TTS from paraphrased text → Audio
 			Path audioOutput = generateAudio(paraphrased, baseName);
@@ -389,6 +396,106 @@ public class VideoParaphrasePipeline {
 		} catch (Exception e) {
 			logger.warn("Failed to write skipped video log: {}", e.getMessage());
 		}
+	}
+
+	private StoryboardProjectMaterials loadStoryboardMaterials(String baseName) throws IOException {
+		return StoryboardProjectMaterialsLoader.load(config.getStoryboardMaterialsDir(), baseName);
+	}
+
+	private String maybeEnrichParaphrase(String originalText, String validatedParaphrase,
+			String style, String baseName, StoryboardProjectMaterials materials) {
+		if (!config.isStoryboardCurriculumEnrichmentEnabled()) {
+			return validatedParaphrase;
+		}
+		logger.info("=== PHASE 3b.5: Curriculum Enrichment ===");
+		try {
+			String enriched = ollama.enrichParaphraseForCurriculum(
+				originalText,
+				validatedParaphrase,
+				materials.promptContext(),
+				style
+			);
+			enriched = cleanGeneratedNarration(enriched);
+			if (enriched.isBlank()) {
+				logger.warn("Curriculum enrichment returned blank text; using validated paraphrase");
+				return validatedParaphrase;
+			}
+			if (enriched.length() < validatedParaphrase.length() * 0.9) {
+				logger.warn("Curriculum enrichment shortened the validated paraphrase; using validated paraphrase");
+				return validatedParaphrase;
+			}
+			if (!containsMeaningfulPrefix(enriched, validatedParaphrase)) {
+				logger.warn("Curriculum enrichment did not preserve the validated paraphrase prefix clearly; using validated paraphrase");
+				return validatedParaphrase;
+			}
+			if (enriched.length() > validatedParaphrase.length() + 120) {
+				Path enrichmentPath = Paths.get(config.getOutputDir(), baseName + "_curriculum_enriched.txt");
+				Files.writeString(enrichmentPath, enriched);
+				logger.info("Curriculum-enriched narration saved: {}", enrichmentPath);
+			} else {
+				logger.info("Curriculum enrichment made no substantial additions; continuing with validated paraphrase");
+			}
+			return enriched;
+		} catch (Exception e) {
+			logger.warn("Curriculum enrichment failed; continuing with validated paraphrase: {}", e.getMessage());
+			return validatedParaphrase;
+		}
+	}
+
+	private String factCheckNarration(String narration, StoryboardProjectMaterials materials) {
+		logger.info("=== PHASE 3b.6: Subject-Aware Factual Audit ===");
+		try {
+			String corrected = ollama.factCheckEducationalNarration(
+				narration,
+				materials == null ? "" : materials.promptContext());
+			corrected = cleanGeneratedNarration(corrected);
+			if (!corrected.isBlank()) {
+				return corrected;
+			}
+			logger.warn("Factual audit returned blank text; keeping the enriched narration");
+		} catch (IOException e) {
+			logger.warn("Factual audit could not be applied; keeping the enriched narration: {}",
+				e.getMessage());
+		}
+		return narration;
+	}
+
+	private String cleanGeneratedNarration(String value) {
+		if (value == null) {
+			return "";
+		}
+		String cleaned = value
+			.replaceAll("(?m)^```[a-zA-Z]*\\s*$", "")
+			.replaceAll("(?m)^```\\s*$", "")
+			.replace("**", "")
+			.replace("__", "")
+			.replace("`", "")
+			.replaceAll("(?m)^\\s*[-*]\\s+", "")
+			.replaceAll("(?m)^\\s{0,3}#{1,6}\\s*", "")
+			.replaceAll("[ \\t]+", " ")
+			.replaceAll("\\n{3,}", "\n\n")
+			.trim();
+		return cleaned;
+	}
+
+	private boolean containsMeaningfulPrefix(String enriched, String validatedParaphrase) {
+		String enrichedNormalized = normalizeForPrefixCheck(enriched);
+		String paraphraseNormalized = normalizeForPrefixCheck(validatedParaphrase);
+		int required = Math.min(paraphraseNormalized.length(), 400);
+		if (required < 80) {
+			return enrichedNormalized.contains(paraphraseNormalized);
+		}
+		return enrichedNormalized.contains(paraphraseNormalized.substring(0, required));
+	}
+
+	private String normalizeForPrefixCheck(String value) {
+		if (value == null) {
+			return "";
+		}
+		return value.toLowerCase()
+			.replaceAll("[^\\p{L}\\p{N}]+", " ")
+			.replaceAll("\\s+", " ")
+			.trim();
 	}
 
 	private String csv(String value) {

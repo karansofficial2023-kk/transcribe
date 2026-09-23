@@ -175,7 +175,7 @@ public class StoryboardDocxExporter {
     }
 
     private String productionMediaType(SceneSegment segment) {
-        if (segment.getAssetPath() != null && !segment.getAssetPath().isBlank()) return "supplied_image";
+        if (segment.getAssetPath() != null && !segment.getAssetPath().isBlank()) return "supplied image";
         if ("manim".equals(segment.getTool())) return "Manim animation";
         if ("short_motion_clip".equals(segment.getVisualType())) {
             if (segment.getLtxShot() != null || "ltx_video".equals(segment.getTool())) return "LTX clip";

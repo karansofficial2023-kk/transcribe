@@ -149,6 +149,30 @@ class StoryboardQualityGateTest {
         assertDoesNotThrow(() -> StoryboardQualityGate.validate(storyboard(segment)));
     }
 
+    @Test
+    void rejectsNarrationReferencingPlaceholderRequirement() {
+        SceneSegment segment = segment("photo", "realistic_image", "photo");
+        segment.setVisualSubject("Sharp frame whose exact subject and visible action are stated in this approved narration sentence, with safe margins.");
+
+        assertThrows(IllegalStateException.class,
+            () -> StoryboardQualityGate.validate(storyboard(segment)));
+    }
+
+    @Test
+    void rejectsLongAllPhotoStoryboard() {
+        StoryboardDocument document = storyboard(segment("photo", "realistic_image", "photo"));
+        Scene scene = document.getScenes().get(1);
+        java.util.ArrayList<SceneSegment> shots = new java.util.ArrayList<>();
+        for (int index = 1; index <= 6; index++) {
+            SceneSegment shot = segment("photo", "realistic_image", "photo");
+            shot.setSegmentNumber(index);
+            shots.add(shot);
+        }
+        scene.setSegments(shots);
+
+        assertThrows(IllegalStateException.class, () -> StoryboardQualityGate.validate(document));
+    }
+
     private SceneSegment segment(String template, String visualType, String mediaType) {
         SceneSegment segment = new SceneSegment();
         segment.setSegmentNumber(1);
@@ -162,7 +186,8 @@ class StoryboardQualityGateTest {
         segment.setSubtitle("A complete educational sentence.");
         segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.55; text_color=white; font_size=42; max_lines=2; align=center; horizontal_margin=120; bottom_margin=55");
         segment.setHeading("Shot Heading");
-        segment.setComfyPrompt("Sharp 1920x1080 educational photography with accurate structures and realistic natural lighting, clear subject separation, sufficient empty margins for overlays. No generated text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.");
+        segment.setVisualSubject("A clearly visible lesson subject fills the frame, with exact structures unobscured and clean margins reserved for overlays.");
+        segment.setComfyPrompt("Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. No generated text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.");
         return segment;
     }
 

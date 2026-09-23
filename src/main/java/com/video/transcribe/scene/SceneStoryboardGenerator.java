@@ -39,9 +39,13 @@ public class SceneStoryboardGenerator {
         + "text_color=white; font_size=42; max_lines=2; align=center; "
         + "horizontal_margin=120; bottom_margin=55";
     private static final String LABELED_MOTION = "arrow_draw_then_label_fade; reveal_in_list_order; "
-        + "keep_previous_labels_visible; completed_frame_hold=2.5s";
+        + "keep_previous_labels_visible; completed_frame_hold=3s";
     private static final String PENDING_COORDINATES = "COORDINATES_PENDING_APPROVED_IMAGE";
     private static final String BLOCK_FINAL_RENDER = "BLOCK_FINAL_RENDER_UNTIL_LABEL_COORDINATES_ARE_VERIFIED";
+    private static final String PREMIUM_STILL_CONTRACT = "Premium educational documentary frame, sharp native 1920x1080 detail, "
+        + "full-frame visual coverage with no blank card panel, intentional foreground-background separation, "
+        + "camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, "
+        + "natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays.";
     private static final JsonObject TOPIC_SCHEMA = JsonParser.parseString("""
         {
           "type": "object",
@@ -176,6 +180,13 @@ public class SceneStoryboardGenerator {
               "mediaType": {
                 "type": "string",
                 "enum": [
+                  "generated still",
+                  "supplied image",
+                  "local diagram",
+                  "Manim animation",
+                  "FFmpeg composite",
+                  "LTX clip",
+                  "Wan clip",
                   "photo",
                   "diagram",
                   "animation",
@@ -453,7 +464,24 @@ public class SceneStoryboardGenerator {
               "visualType": { "type": "string", "enum": ["title_card", "realistic_image", "realistic_labeled_image", "diagram_overlay", "process_steps", "realistic_background_with_labels", "split_screen", "short_motion_clip"] },
               "heading": { "type": "string" },
               "visualSubject": { "type": "string" },
-              "mediaType": { "type": "string", "enum": ["photo", "diagram", "animation", "photo_with_labels", "animation_with_labels", "wan_video"] },
+              "mediaType": {
+                "type": "string",
+                "enum": [
+                  "generated still",
+                  "supplied image",
+                  "local diagram",
+                  "Manim animation",
+                  "FFmpeg composite",
+                  "LTX clip",
+                  "Wan clip",
+                  "photo",
+                  "diagram",
+                  "animation",
+                  "photo_with_labels",
+                  "animation_with_labels",
+                  "wan_video"
+                ]
+              },
               "motionType": { "type": "string", "enum": ["wan_video", "local_animation", "static_image"] },
               "tool": { "type": "string", "enum": ["pillow_opencv", "ffmpeg", "manim", "comfy_image", "ltx_video", "upscale", "reviewed_asset"] },
               "comfyPrompt": { "type": "string" },
@@ -515,8 +543,11 @@ public class SceneStoryboardGenerator {
             enrichSceneWithSegments(scene, languageInstruction, topicCheck, projectContext);
         }
         normalizeScenes(scenes, storyboardText, topicCheck.safeStoryboardTitle());
-        reviewVisualPlansWithSme(scenes, storyboardText, languageInstruction, topicCheck, projectContext);
+        // Complete labels before the broad visual audit. Otherwise a source-coverage
+        // fallback with pending labels can be mistaken for an unlabeled photo and lose
+        // its educational overlay plan before the label specialist sees it.
         repairAndValidateLabelPlans(scenes, storyboardText, languageInstruction, topicCheck, projectContext);
+        reviewVisualPlansWithSme(scenes, storyboardText, languageInstruction, topicCheck, projectContext);
         recordDiscoveryReviewNotes(scenes, topicCheck);
         enforceFinalProductionContract(scenes, topicCheck.safeStoryboardTitle());
         rebuildSceneNarrationFromSegments(scenes);
@@ -588,11 +619,13 @@ public class SceneStoryboardGenerator {
         Set<String> expectedRowIds = new LinkedHashSet<>();
         for (Scene scene : scenes) {
             for (SceneSegment segment : scene.getSegments()) {
-                if (isLabeledVisual(segment) || hasLabels(segment)) {
+                if (isLabelPlanningCandidate(segment)) {
                     JsonObject item = new JsonObject();
                     String rowId = scene.getSceneNumber() + "." + segment.getSegmentNumber();
                     item.addProperty("rowId", rowId);
                     item.addProperty("sentence", segment.getSentence());
+                    item.addProperty("template", segment.getTemplate());
+                    item.addProperty("visualType", segment.getVisualType());
                     item.addProperty("heading", segment.getHeading());
                     item.addProperty("visualSubject", segment.getVisualSubject());
                     item.add("labels", gson.toJsonTree(segment.getLabels()));
@@ -610,7 +643,9 @@ public class SceneStoryboardGenerator {
                 Return only schema-constrained JSON. Do not change narration or lesson facts.
                 """.formatted(topicCheck.smeRole());
             String userPrompt = """
-                Review and repair every labeled row below, including rows that appear structurally valid.
+                Decide the labeling contract for every eligible stable teaching shot below.
+                The input includes both currently labeled and currently unlabeled rows because the
+                first visual-planning pass is not authoritative about whether labels are needed.
                 %s
 
                 LESSON CONTEXT:
@@ -626,6 +661,10 @@ public class SceneStoryboardGenerator {
                 %s
 
                 Requirements for every returned row:
+                - Return every supplied row exactly once, in the same order.
+                - Decide from the lesson meaning whether spatial labels materially improve learning.
+                  Return [] for both arrays only for documentary/context/transition shots where labels
+                  would add no educational value. Do not default every row to an unlabeled photograph.
                 - labels contains separate atomic curriculum terms; one visible target per item.
                 - Never combine distinct labels into one string.
                 - Replace vague nouns with precise names supported by the narration.
@@ -647,6 +686,8 @@ public class SceneStoryboardGenerator {
                 - Narration about named structures, anatomical parts, apparatus components,
                   spatial comparisons, visible adaptations, process stages, or contrasting phases
                   requires a stable labeled still or deterministic diagram with complete labels.
+                - The rule is subject-neutral: derive labels only from this lesson and supplied
+                  materials. Never copy examples, terms, or structures from another lesson.
                 - If no reviewed final asset is available, retain the labeled still plan and semantic
                   targets with pending-coordinate markers so image generation can happen first.
                 """.formatted(languageInstruction, lessonText, projectContext, topicCheck.subject(),
@@ -666,6 +707,16 @@ public class SceneStoryboardGenerator {
                 finalizeLabelConsistency(segment);
             }
         }
+    }
+
+    boolean isLabelPlanningCandidate(SceneSegment segment) {
+        if (segment == null) return false;
+        return !"title_card".equals(segment.getTemplate())
+            && !"title_card".equals(segment.getVisualType())
+            && !"video_broll".equals(segment.getTemplate())
+            && !"short_motion_clip".equals(segment.getVisualType())
+            && !"formula".equals(segment.getTemplate())
+            && !StoryboardRules.requiresFormulaRenderer(segment);
     }
 
     private void reviewVisualPlansWithSme(List<Scene> scenes, String lessonText,
@@ -761,7 +812,10 @@ public class SceneStoryboardGenerator {
                 segment.setVisualType(getStringOrDefault(review, "visualType", segment.getVisualType()));
                 segment.setHeading(getStringOrDefault(review, "heading", segment.getHeading()));
                 segment.setVisualSubject(getStringOrDefault(review, "visualSubject", segment.getVisualSubject()));
-                segment.setMediaType(getStringOrDefault(review, "mediaType", segment.getMediaType()));
+                segment.setMediaType(normalizeInternalMediaType(
+                    getStringOrDefault(review, "mediaType", segment.getMediaType()),
+                    getStringOrDefault(review, "visualType", segment.getVisualType()),
+                    getStringOrDefault(review, "tool", segment.getTool())));
                 segment.setMotionType(getStringOrDefault(review, "motionType", segment.getMotionType()));
                 segment.setTool(getStringOrDefault(review, "tool", segment.getTool()));
                 segment.setComfyPrompt(getStringOrDefault(review, "comfyPrompt", segment.getComfyPrompt()));
@@ -817,7 +871,7 @@ public class SceneStoryboardGenerator {
         if (segment.getRecommendedClipSeconds() < minimum) {
             segment.setRecommendedClipSeconds(roundOneDecimal(minimum));
         }
-        segment.setTimingNotes("Allow approximately 1.0 second per arrow-label reveal, keep earlier labels visible, then hold the completed labeled frame for at least 2.5 seconds.");
+        segment.setTimingNotes("Allow approximately 1.0 second per arrow-label reveal, keep earlier labels visible, then hold the completed labeled frame for at least 3 seconds.");
     }
 
     private boolean isSpecializedLayout(SceneSegment segment) {
@@ -892,8 +946,14 @@ public class SceneStoryboardGenerator {
             segment.setLabels(sanitizeLabels(getStringList(repair, "labels"), segment));
             segment.setLabelPlacements(getStringList(repair, "labelPlacements"));
             segment.setVisualSubject(repair.get("visualSubject").getAsString());
-            segment.setComfyPrompt(ensureNoTextPrompt(repair.get("comfyPrompt").getAsString()));
+            segment.setComfyPrompt(ensureProductionImagePrompt(segment,
+                repair.get("comfyPrompt").getAsString()));
             enforceLabelContract(segment);
+        }
+        if (!seen.equals(expectedRowIds)) {
+            Set<String> missing = new LinkedHashSet<>(expectedRowIds);
+            missing.removeAll(seen);
+            throw new IllegalStateException("Label-planning review omitted rows " + missing);
         }
     }
 
@@ -933,8 +993,11 @@ public class SceneStoryboardGenerator {
                 segment.setHeading(openingTitle ? storyboardTitle : buildHeading(segment.getSentence()));
                 segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
                 segment.setSubtitle(openingTitle ? "" : buildSubtitle(segment.getSentence()));
+                if (!openingTitle) {
+                    removeContentShotTitleCardWording(segment);
+                }
                 if (usesGeneratedStill(segment)) {
-                    segment.setComfyPrompt(ensureNoTextPrompt(segment.getComfyPrompt()));
+                    segment.setComfyPrompt(ensureProductionImagePrompt(segment));
                 } else if ("manim".equals(segment.getTool()) || hasReviewedAsset(segment)) {
                     segment.setComfyPrompt("");
                 }
@@ -1233,11 +1296,12 @@ public class SceneStoryboardGenerator {
             1. The exact sentence text
             2. template: "title_card", "photo", "labeled_image", "comparison", "process", "formula", "split_screen", or "video_broll"
             3. visualType: "title_card", "realistic_image", "realistic_labeled_image", "diagram_overlay", "process_steps", "realistic_background_with_labels", "split_screen", or "short_motion_clip"
-            4. heading: short screen title drawn by the renderer
+            4. heading: short DOCX shot heading for production organization only; do not display it on ordinary content shots
             5. visualSubject: exact frame requirement describing the subject, composition, visible structures, camera angle, and 1080p realism; production metadata that must never be displayed as text
             5. assetPath: use "" unless the application supplied an absolute path to an existing,
                locked, human-reviewed asset. Never invent a filename or relative path.
-            6. mediaType: "photo", "diagram", "animation", "photo_with_labels", "animation_with_labels", or "wan_video"
+            6. mediaType: actual production method: "generated still", "supplied image",
+               "local diagram", "Manim animation", "FFmpeg composite", "LTX clip", or "Wan clip"
             7. motionType: "wan_video", "local_animation", or "static_image"
             4. estimatedNarrationSeconds based on sentence length at natural voiceover speed
             5. recommendedClipSeconds for the visual, matching or exceeding narration timing
@@ -1273,10 +1337,21 @@ public class SceneStoryboardGenerator {
             Do not include markdown, explanations, examples, or fields outside the schema.
             
             Rules:
-            - Split by natural sentence boundaries
+            - Return exactly one segment for every narration sentence, in the same order.
+            - Copy each complete narration sentence exactly into its segment sentence field.
+            - Never combine two narration sentences into one segment and never omit a sentence.
             - Each segment sentence must be copied exactly from this scene narration. Do not create new sentence fragments.
-            - Prefer one strong segment for this scene unless the scene contains two clearly different visual ideas.
+            - Use one strong, focused visual plan for each sentence-level segment.
             - Do not create empty white/card layouts. Use real HD photo/background assets or deterministic diagrams with strong composition.
+            - Match premium educational documentary direction: fill the 16:9 frame with meaningful visual evidence, preserve fine texture,
+              use intentional depth and subject separation, and choose camera distance, angle, lighting, and negative space for the lesson.
+            - The main subject or deterministic teaching graphic must occupy the frame confidently. Do not make it a tiny object inside a
+              mostly empty canvas, generic stock background, decorative slide, or presentation template.
+            - Alternate shot scale and composition only when the lesson supports it: establishing view, medium explanatory view,
+              close detail, comparison, deterministic diagram, or restrained natural-motion cutaway. Avoid repetitive identical zoom shots.
+            - For charts, timelines, comparisons, process stages, maps, anatomical diagrams, and evidence boards, construct the exact
+              graphic locally with Pillow/OpenCV/Manim/FFmpeg. Use generated imagery only as a clean visual source layer.
+            - Do not display headings on ordinary content shots. Use heading only for the DOCX Shot paragraph. The visible learner text is subtitle plus renderer labels/legends when needed.
             - Use 8 to 14 total segments for a 1-2 minute lesson when possible; if narration is longer, keep one concept per segment.
             - Target 5 to 9 seconds per segment; short title cards may be 3 to 5 seconds.
             - Every 2-3 segments, vary visual rhythm using title_card, labeled_image, comparison, process, formula, split_screen, or video_broll.
@@ -1301,7 +1376,7 @@ public class SceneStoryboardGenerator {
             - If all required labels cannot remain readable without overlap, divide the concept into additional focused frames; do not omit required curriculum labels merely to meet an arbitrary count.
             - When one narration sentence names several distinct structures, examples, phases, or mechanisms, use stable split-screen/process panels or a sequence of deterministic stills. Do not combine them into one moving LTX/Wan shot with precise labels.
             - labelStyle must keep labels and arrows clear of the subject, heading, and subtitle safe areas.
-            - For labeled stills, motion must be arrow_draw_then_label_fade. Reveal labels in list order, keep earlier labels visible, and hold the completed frame for at least 2.5 seconds.
+            - For labeled stills, motion must be arrow_draw_then_label_fade. Reveal labels in list order, keep earlier labels visible, and hold the completed frame for at least 3 seconds.
             - Core renderer rule: never ask AI image/video models to create exact text, labels, arrows, formulas, legends, numbers, or scientific names inside the generated image/video.
             - Put all exact text, labels, arrows, legends, highlights, formulas, and subtitles in overlay fields so Pillow/OpenCV/Manim/FFmpeg can draw them precisely.
             - comfyPrompt and shot prompts must request clean backgrounds with no text, no labels, no captions, no watermarks, and no formula text.
@@ -1310,14 +1385,14 @@ public class SceneStoryboardGenerator {
               and composition. Never use generic wording such as "show the exact narrated concept".
             - Every still-image prompt must request sharp 1920x1080 educational photography, subject-accurate structures, realistic natural lighting, clear subject separation, sufficient empty overlay margins, no embedded text, no generated labels, no generated arrows, no captions, no watermark, and no slide or presentation-card layout.
             - Use title_card exactly once, for the first lesson shot only. Every later row must use a content visual.
-            - Use labeled_image for apparatus/anatomy/parts; labels/arrows are overlays, not generated in the image.
-            - Use process for one-by-one steps; steps are renderer text overlays.
-            - Use comparison for self-vs-cross, strong-vs-weak, before-vs-after, or concept contrasts; columns are renderer text overlays.
+            - Use realistic_labeled_image for visible structures, apparatus, maps, staged evidence, or exact object labels; labels/arrows are overlays, not generated in the image.
+            - Use process_steps for one-by-one steps; steps are renderer text overlays.
+            - Use split_screen for two-side comparisons or related visuals; labels/columns are renderer overlays.
             - Use formula for chemistry/physics/math formulas and derivations; tool must be manim and formulaLines must contain exact formula text.
             - Use split_screen for two related visuals; labels are overlays.
             - Use video_broll only for simple natural motion where exact labels/formulas are not required.
             - short_motion_clip/video_broll rows must have empty labels and empty labelPlacements. Put precise labels on a separate still or diagram row.
-            - Tool routing: title_card/labeled_image/process/comparison/split_screen usually use pillow_opencv plus ffmpeg; formula uses manim; generated still background uses comfy_image; LTX b-roll uses ltx_video; final sharpening can add upscale in assetQualityNotes.
+            - Tool routing: title cards, still labels, process steps, diagram overlays, and split screens use Pillow/OpenCV plus FFmpeg; formulas use Manim; clean generated still backgrounds use ComfyUI/image generation; LTX/Wan rows use short motion clips only.
             - Visuals should be specific and actionable for video editors
             - Images should be descriptive enough for stock photo searches and real-HD image generation.
             - Use polished educational documentary style visuals with realistic lighting, shallow depth of field where useful, strong subject placement, and enough negative space for overlays.
@@ -1331,13 +1406,14 @@ public class SceneStoryboardGenerator {
             - Use generated video only where natural continuous motion materially improves learning and is supported by the narration.
             - Do not use generated video for concepts better taught with clean diagrams, labels, equations, maps, grammar steps, comparisons, or anatomy/process charts.
             - LTX must not be used for exact anatomical labeling, formulas, graphs with readable numbers, legends, maps, or other small precise targets.
-            - Choose mediaType for learning value, not visual spectacle:
-              photo = real-world context or object recognition
-              diagram = anatomy, process structure, comparison, classification, or abstract ideas
-              animation = step-by-step movement, sequence, timeline, flow, or transformation
-              photo_with_labels = real-world photo plus a few labels for parts/objects
-              animation_with_labels = process explanation with arrows, highlights, labels, or step reveals
-              wan_video = short natural cinematic motion that does not require exact overlays
+            - Choose mediaType for the actual production method, not visual spectacle:
+              generated still = generated no-text image background or subject image
+              supplied image = locked teacher-approved/reviewed asset_path
+              local diagram = Pillow/OpenCV rendered diagram, process, labels, arrows, overlays, or chart
+              Manim animation = formulas, derivations, symbolic transformations, graphs, or calculations
+              FFmpeg composite = split-screen, image composites, fades, zoom/pan, or final assembly
+              LTX clip = short natural movement generated by LTX without precise labels
+              Wan clip = short natural cinematic motion generated by Wan without precise labels
             - Use the selected language/script for sentence, visualAnimation, localAnimation, labels, and imageRecommendations
             - Do not use Tamil, Hindi, or any other Indic-language words unless the scene narration itself uses that language
             - Do not change or rewrite the scene narration while making segment rows.
@@ -1347,7 +1423,7 @@ public class SceneStoryboardGenerator {
             - Use generated video shots only for natural/cinematic motion that is explicitly supported by the narration; template must be video_broll when using ltxShot
             - Use local_animation for teaching clarity: arrows, labels, highlighted parts, cutaway diagrams, timelines, maps, math/grammar steps, charts, comparisons, or process diagrams
             - Use static_image for a still photo or illustration with optional labels
-            - For diagram/photo/animation media, write comfyPrompt as an image prompt or animation design prompt; for wan_video, write comfyPrompt to match shot.prompt.
+            - For generated still, supplied image, local diagram, Manim animation, or FFmpeg composite media, write comfyPrompt only when image generation is required. For LTX clip or Wan clip rows, write the generated-video prompt in ltxShot or shot.
             - If motionType is not "wan_video", omit both shot and ltxShot fields.
             - Never add shot or ltxShot objects for static_image or local_animation rows.
             - For every wan_video row, shot.durationSeconds and ltxShot.durationSeconds must equal recommendedClipSeconds.
@@ -1563,12 +1639,16 @@ public class SceneStoryboardGenerator {
             return;
         }
         String sourceNote = transcriptScene
-            ? "Source: transcript/paraphrase."
+            ? (curriculumEnrichmentEnabled
+                ? "Source: transcript/paraphrase plus enabled curriculum enrichment/materials."
+                : "Source: transcript/paraphrase.")
             : "Source: curriculum enrichment; this may not appear verbatim in the source video.";
         for (SceneSegment segment : scene.getSegments()) {
             boolean transcriptSegment = isSupportedBySource(segment.getSentence(), scene.getNarration());
             String note = transcriptScene && transcriptSegment
-                ? "Source: transcript/paraphrase."
+                ? (curriculumEnrichmentEnabled
+                    ? "Source: transcript/paraphrase plus enabled curriculum enrichment/materials."
+                    : "Source: transcript/paraphrase.")
                 : sourceNote;
             segment.setCoverageNotes(prependNote(segment.getCoverageNotes(), note));
         }
@@ -1594,6 +1674,7 @@ public class SceneStoryboardGenerator {
         if (sourceSentences.isEmpty()) return List.of();
         List<SceneSegment> candidates = segments == null ? new ArrayList<>() : new ArrayList<>(segments);
         Set<String> usedKeys = new LinkedHashSet<>();
+        Set<SceneSegment> consumed = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
         List<SceneSegment> cleaned = new ArrayList<>();
 
         for (SceneSegment segment : candidates) {
@@ -1604,18 +1685,31 @@ public class SceneStoryboardGenerator {
             segment.setLabels(sanitizeLabels(segment.getLabels(), segment));
         }
 
-        for (String sourceSentence : sourceSentences) {
+        for (int sourceIndex = 0; sourceIndex < sourceSentences.size(); sourceIndex++) {
+            String sourceSentence = sourceSentences.get(sourceIndex);
             String sourceKey = normalizeForDuplicateKey(sourceSentence);
             SceneSegment match = null;
             for (SceneSegment candidate : candidates) {
-                if (candidate == null || usedKeys.contains(normalizeForDuplicateKey(candidate.getSentence()))) continue;
+                if (candidate == null || consumed.contains(candidate)) continue;
                 if (sourceKey.equals(normalizeForDuplicateKey(candidate.getSentence()))) {
                     match = candidate;
                     break;
                 }
             }
+            // Qwen sometimes preserves order and visual planning but lightly rewrites the
+            // sentence field. When the counts match, positional reconciliation safely keeps
+            // that visual/label plan while restoring the exact approved narration sentence.
+            if (match == null && candidates.size() == sourceSentences.size()) {
+                SceneSegment positional = candidates.get(sourceIndex);
+                if (positional != null && !consumed.contains(positional)) {
+                    match = positional;
+                    match.setCoverageNotes(appendNote(match.getCoverageNotes(),
+                        "Source-coverage guard: restored the exact narration sentence while preserving the ordered visual plan."));
+                }
+            }
             if (match == null) match = createSourceFallbackSegment(sourceSentence);
             match.setSentence(sourceSentence);
+            consumed.add(match);
             usedKeys.add(sourceKey);
             cleaned.add(match);
         }
@@ -1627,8 +1721,11 @@ public class SceneStoryboardGenerator {
 
     private SceneSegment createSourceFallbackSegment(String sentence) {
         SceneSegment segment = new SceneSegment();
-        List<String> labels = extractFallbackLabels(sentence);
-        boolean labeled = !labels.isEmpty();
+        // This is a provisional label candidate. The subject-aware label repair pass
+        // decides whether visible-object labels are educationally necessary. If not,
+        // finalizeLabelConsistency safely converts it to a plain realistic image.
+        List<String> labels = List.of();
+        boolean labeled = true;
         segment.setSentence(sentence);
         segment.setTemplate(labeled ? "labeled_image" : "photo");
         segment.setVisualType(labeled ? "realistic_labeled_image" : "realistic_image");
@@ -1641,7 +1738,7 @@ public class SceneStoryboardGenerator {
         segment.setEstimatedNarrationSeconds(estimateNarrationSeconds(sentence));
         segment.setRecommendedClipSeconds(segment.getEstimatedNarrationSeconds());
         segment.setTimingNotes("Hold the visual for the full narration sentence with a subtle slow zoom.");
-        segment.setVisualAnimation("Show the exact narrated concept with one clear, topic-specific composition.");
+        segment.setVisualAnimation("Use the named objects, structures, stages, symbols, places, or actions stated in this narration sentence; avoid unrelated filler visuals.");
         segment.setLocalAnimation("Use only renderer-controlled overlays supported by the narration.");
         segment.setLabels(labels);
         segment.setLabelPlacements(List.of());
@@ -1657,8 +1754,8 @@ public class SceneStoryboardGenerator {
         segment.setSubtitle(buildSubtitle(sentence));
         segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
         segment.setTool("pillow_opencv");
-        segment.setAssetQualityNotes("Fallback source-coverage visual; use a reviewed asset when precise anatomy or apparatus is required.");
-        segment.setComfyPrompt(ensureNoTextPrompt("Sharp 1920x1080 realistic educational image directly matching: " + sentence));
+        segment.setAssetQualityNotes("Fallback source-coverage visual requires subject-aware label review; use a reviewed asset when precise anatomy or apparatus is required.");
+        segment.setComfyPrompt(ensureProductionImagePrompt(segment));
         segment.setCoverageNotes("Source-coverage guard: generated because the LLM omitted this narration sentence.");
         return segment;
     }
@@ -1754,7 +1851,8 @@ public class SceneStoryboardGenerator {
                 seg.setHeading(getStringOrDefault(obj, "heading", ""));
                 seg.setVisualSubject(getStringOrDefault(obj, "visualSubject", ""));
                 seg.setAssetPath(getStringOrDefault(obj, "assetPath", ""));
-                seg.setMediaType(getStringOrDefault(obj, "mediaType", "animation_with_labels"));
+                seg.setMediaType(normalizeInternalMediaType(getStringOrDefault(obj, "mediaType", "generated still"),
+                    seg.getVisualType(), seg.getTool()));
                 seg.setMotionType(getStringOrDefault(obj, "motionType", "local_animation"));
                 seg.setEstimatedNarrationSeconds(getDoubleOrDefault(obj, "estimatedNarrationSeconds", estimateNarrationSeconds(seg.getSentence())));
                 seg.setRecommendedClipSeconds(getDoubleOrDefault(obj, "recommendedClipSeconds", seg.getEstimatedNarrationSeconds()));
@@ -1776,6 +1874,7 @@ public class SceneStoryboardGenerator {
                 seg.setSubtitle(getStringOrDefault(obj, "subtitle", ""));
                 seg.setSubtitleStyle(getStringOrDefault(obj, "subtitleStyle", ""));
                 seg.setTool(getStringOrDefault(obj, "tool", "pillow_opencv"));
+                seg.setMediaType(normalizeInternalMediaType(seg.getMediaType(), seg.getVisualType(), seg.getTool()));
                 seg.setAssetQualityNotes(getStringOrDefault(obj, "assetQualityNotes", ""));
                 seg.setComfyPrompt(getStringOrDefault(obj, "comfyPrompt", ""));
                 seg.setCoverageNotes(getStringOrDefault(obj, "coverageNotes", ""));
@@ -1798,7 +1897,7 @@ public class SceneStoryboardGenerator {
             fallback.setHeading("Main Content");
             fallback.setVisualSubject("Clean educational background related to the lesson topic, no text");
             fallback.setAssetPath("");
-            fallback.setMediaType("animation_with_labels");
+            fallback.setMediaType("animation");
             fallback.setMotionType("local_animation");
             fallback.setEstimatedNarrationSeconds(estimateNarrationSeconds(fallback.getSentence()));
             fallback.setRecommendedClipSeconds(fallback.getEstimatedNarrationSeconds());
@@ -1817,10 +1916,10 @@ public class SceneStoryboardGenerator {
             fallback.setImageRecommendations(List.of("Image 1: Educational illustration", "Image 2: Related concept diagram"));
             fallback.setMotion("camera: static; reveal: one_by_one; transition_in: fade; transition_out: crossfade");
             fallback.setSubtitle("Main lesson concept");
-            fallback.setSubtitleStyle("bottom_band black 38% opacity white centered max 2 lines");
+            fallback.setSubtitleStyle(PRO_SUBTITLE_STYLE);
             fallback.setTool("pillow_opencv");
             fallback.setAssetQualityNotes("Fallback deterministic overlay layout; generate or choose a clean no-text background.");
-            fallback.setComfyPrompt("Clean educational diagram with labeled parts, accurate subject matter, simple background, high readability");
+            fallback.setComfyPrompt("Sharp 1920x1080 educational visual with accurate subject matter, strong composition, clear subject separation, and sufficient empty margins for overlays.");
             fallback.setCoverageNotes("Fallback row covers the full scene narration with local teaching animation.");
             enforceStoryboardQuality(fallback);
             segments.add(fallback);
@@ -1879,7 +1978,7 @@ public class SceneStoryboardGenerator {
             segment.setComfyPrompt(buildDefaultComfyPrompt(segment));
         }
         if (usesGeneratedStill(segment)) {
-            segment.setComfyPrompt(ensureNoTextPrompt(segment.getComfyPrompt()));
+            segment.setComfyPrompt(ensureProductionImagePrompt(segment));
         } else if ("manim".equals(segment.getTool()) || hasReviewedAsset(segment)) {
             segment.setComfyPrompt("");
         }
@@ -2000,14 +2099,128 @@ public class SceneStoryboardGenerator {
         }
         String result = prompt.trim();
         if (!containsIgnoreCase(result, "1920x1080")) {
-            result = "Sharp 1920x1080 production asset in the subject-appropriate visual medium, "
-                + "accurate structures, clear subject separation, and safe overlay margins. " + result;
+            result = PREMIUM_STILL_CONTRACT + " " + result;
         }
-        return result + ". No generated text. No embedded text. No generated labels. "
-            + "No generated arrows. No captions. No watermark. No logo. No border. No UI. "
-            + "No incorrect anatomy or technical structure. No duplicated or malformed objects. "
-            + "No irrelevant background elements. No decorative infographic text. "
-            + "No slide or presentation-card layout.";
+        result = appendPromptClause(result, PREMIUM_STILL_CONTRACT);
+        result = appendPromptClause(result, "No generated text.");
+        result = appendPromptClause(result, "No embedded text.");
+        result = appendPromptClause(result, "No generated labels.");
+        result = appendPromptClause(result, "No generated arrows.");
+        result = appendPromptClause(result, "No captions.");
+        result = appendPromptClause(result, "No watermark.");
+        result = appendPromptClause(result, "No logo.");
+        result = appendPromptClause(result, "No border.");
+        result = appendPromptClause(result, "No UI.");
+        result = appendPromptClause(result, "No incorrect anatomy or technical structure.");
+        result = appendPromptClause(result, "No duplicated or malformed objects.");
+        result = appendPromptClause(result, "No irrelevant background elements.");
+        result = appendPromptClause(result, "No decorative infographic text.");
+        result = appendPromptClause(result, "No slide or presentation-card layout.");
+        return result;
+    }
+
+    private String appendPromptClause(String prompt, String clause) {
+        String normalizedPrompt = prompt.toLowerCase(Locale.ROOT);
+        String normalizedClause = clause.toLowerCase(Locale.ROOT)
+            .replace(".", "")
+            .trim();
+        if (normalizedPrompt.contains(normalizedClause)) {
+            return prompt;
+        }
+        String separator = prompt.endsWith(".") ? " " : ". ";
+        return prompt + separator + clause;
+    }
+
+    private String ensureProductionImagePrompt(SceneSegment segment) {
+        return ensureProductionImagePrompt(segment, segment == null ? "" : segment.getComfyPrompt());
+    }
+
+    private String ensureProductionImagePrompt(SceneSegment segment, String prompt) {
+        String candidate = prompt == null ? "" : prompt.trim();
+        if (candidate.isBlank() || containsGenericImagePrompt(candidate)) {
+            candidate = buildSpecificImagePrompt(segment);
+        }
+        return ensureNoTextPrompt(candidate);
+    }
+
+    private boolean containsGenericImagePrompt(String prompt) {
+        return containsAnyIgnoreCase(prompt,
+            "show the exact narrated concept",
+            "curriculum-accurate visual directly illustrating",
+            "main lesson concept",
+            "educational image directly matching",
+            "directly matching:",
+            "related concept diagram",
+            "based only on the approved narration sentence",
+            "approved narration sentence",
+            "approved narration:",
+            "topic-specific composition",
+            "approved lesson subject",
+            "relevant educational visual",
+            "generic educational image",
+            "suitable background image",
+            "whose exact subject and visible action are stated",
+            "use the named objects, structures, stages",
+            "this narration sentence");
+    }
+
+    private String buildSpecificImagePrompt(SceneSegment segment) {
+        String requirement = segment == null ? "" : safePromptText(segment.getVisualSubject());
+        String narration = segment == null ? "" : safePromptText(segment.getSentence());
+        String heading = segment == null ? "" : safePromptText(segment.getHeading());
+        String subject = !requirement.isBlank() && !containsGenericImagePrompt(requirement) ? requirement
+            : (!narration.isBlank() ? narration : heading);
+        if (subject.isBlank()) {
+            subject = heading;
+        }
+        if (subject == null || subject.isBlank()) {
+            subject = narration;
+        }
+        return PREMIUM_STILL_CONTRACT + " Exact shot requirement: " + subject
+            + ". Depict only source-supported visible evidence and physically credible objects. "
+            + "Keep all required structures unobscured and large enough for inspection; reserve overlay-safe space without weakening the composition.";
+    }
+
+    private String safePromptText(String value) {
+        if (value == null) return "";
+        return normalizeProductionText(value)
+            .replaceAll("[\\r\\n]+", " ")
+            .replaceAll("\\s+", " ")
+            .trim();
+    }
+
+    private void removeContentShotTitleCardWording(SceneSegment segment) {
+        segment.setVisualSubject(cleanContentShotProductionText(segment.getVisualSubject()));
+        segment.setVisualAnimation(cleanContentShotProductionText(segment.getVisualAnimation()));
+        segment.setLocalAnimation(cleanContentShotProductionText(segment.getLocalAnimation()));
+        segment.setComfyPrompt(cleanContentShotProductionText(segment.getComfyPrompt()));
+        segment.setCoverageNotes(cleanContentShotProductionText(segment.getCoverageNotes()));
+        segment.setMotion(cleanContentShotProductionText(segment.getMotion()));
+        segment.setSubtitle(cleanSubtitleText(segment.getSubtitle()));
+        segment.setImageRecommendations(cleanContentShotProductionText(segment.getImageRecommendations()));
+    }
+
+    private List<String> cleanContentShotProductionText(List<String> values) {
+        if (values == null) return null;
+        return values.stream()
+            .map(this::cleanContentShotProductionText)
+            .toList();
+    }
+
+    private String cleanContentShotProductionText(String value) {
+        if (value == null) return null;
+        String cleaned = normalizeProductionText(value);
+        cleaned = cleaned.replaceAll("(?i)\\ba\\s+title\\s+card\\s+with\\s+the\\s+text\\b", "A content visual showing");
+        cleaned = cleaned.replaceAll("(?i)\\btitle\\s+card\\s+with\\s+the\\s+text\\b", "content visual showing");
+        cleaned = cleaned.replaceAll("(?i)\\ba\\s+title\\s+card\\b", "a content visual");
+        cleaned = cleaned.replaceAll("(?i)\\btitle\\s+card\\b", "content visual");
+        cleaned = cleaned.replaceAll("(?i)\\bcard\\s+with\\s+the\\s+text\\b", "visual showing");
+        cleaned = cleaned.replaceAll("(?i)\\bwith\\s+the\\s+text\\s*[:\\-]?", "showing");
+        cleaned = cleaned.replaceAll("(?i)create\\s+one\\s+clear,?\\s+topic-specific\\s+composition\\s+based\\s+only\\s+on\\s+the\\s+approved\\s+narration\\s+sentence\\.?", "Use source-grounded visible details from this shot.");
+        cleaned = cleaned.replaceAll("(?i)show\\s+the\\s+exact\\s+narrated\\s+concept", "show the named visible subject or deterministic diagram elements");
+        cleaned = cleaned.replaceAll("(?i)curriculum-accurate\\s+visual\\s+directly\\s+illustrating", "specific production visual showing");
+        cleaned = cleaned.replaceAll("(?i)main\\s+lesson\\s+concept", "specific lesson subject");
+        return cleaned.replaceAll("\\s+", " ").trim();
     }
 
     private void enforceProStyleDefaults(SceneSegment segment) {
@@ -2044,6 +2257,8 @@ public class SceneStoryboardGenerator {
         }
         if (segment.getSubtitle() == null || segment.getSubtitle().isBlank()) {
             segment.setSubtitle(buildSubtitle(segment.getSentence()));
+        } else {
+            segment.setSubtitle(cleanSubtitleText(segment.getSubtitle()));
         }
         segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
         if (segment.getTool() == null || segment.getTool().isBlank()) {
@@ -2109,7 +2324,24 @@ public class SceneStoryboardGenerator {
         if (sentence == null) {
             return "";
         }
-        String clean = sentence.replaceAll("[\\r\\n]+", " ").replaceAll("\\s+", " ").trim();
+        return cleanSubtitleText(sentence);
+    }
+
+    private String cleanSubtitleText(String value) {
+        if (value == null) {
+            return null;
+        }
+        String clean = normalizeProductionText(value)
+            .replaceAll("[\\r\\n]+", " ")
+            .replaceAll("(?m)^\\s*[-*+]\\s+", "")
+            .replaceAll("\\*\\*([^*]+)\\*\\*", "$1")
+            .replaceAll("__([^_]+)__", "$1")
+            .replaceAll("\\*([^*]+)\\*", "$1")
+            .replaceAll("_([^_]+)_", "$1")
+            .replaceAll("`([^`]+)`", "$1")
+            .replaceAll("#{1,6}\\s*", "")
+            .replaceAll("\\s+", " ")
+            .trim();
         return clean;
     }
 
@@ -2373,16 +2605,18 @@ public class SceneStoryboardGenerator {
         if (animationEnabled) {
             return """
                 Animation mode is ENABLED.
-                You may use diagram, animation, photo_with_labels, animation_with_labels, or wan_video depending on educational clarity.
-                Use local animation/diagram styles when they explain abstract ideas, labels, equations, sequence, or anatomy better than real footage.
+                You may use generated still, supplied image, local diagram, Manim animation,
+                FFmpeg composite, LTX clip, or Wan clip depending on educational clarity.
+                Use local diagrams, overlays, and Manim when they explain abstract ideas,
+                labels, equations, sequence, or anatomy better than real footage.
                 """;
         }
         return """
             Animation mode is DISABLED.
-            Prefer real HD photo/photo_with_labels and generated-video outputs.
-            Do not choose diagram, animation, or animation_with_labels unless the concept is impossible to show accurately with real imagery.
+            Prefer real HD generated stills, supplied images, and generated-video outputs.
+            Do not choose local diagram, Manim animation, or FFmpeg composite unless the concept is impossible to show accurately with real imagery.
             Avoid blank educational card layouts, sequence cards, slide-style boxes, and synthetic diagram panels.
-            If labels are needed, use photo_with_labels over animation_with_labels.
+            If labels are needed, use realistic_labeled_image over process-heavy animation.
             Generated video is allowed more often when natural realistic motion helps the lesson.
             """;
     }
@@ -2645,6 +2879,28 @@ public class SceneStoryboardGenerator {
             return "photo";
         }
         return "animation";
+    }
+
+    private String normalizeInternalMediaType(String mediaType, String visualType, String tool) {
+        String value = mediaType == null ? "" : mediaType.trim();
+        return switch (value) {
+            case "generated still" -> "realistic_labeled_image".equals(visualType)
+                || "realistic_background_with_labels".equals(visualType) ? "photo_with_labels" : "photo";
+            case "supplied image" -> "realistic_labeled_image".equals(visualType)
+                || "realistic_background_with_labels".equals(visualType) ? "photo_with_labels" : "photo";
+            case "local diagram", "FFmpeg composite" -> "diagram_overlay".equals(visualType)
+                || "process_steps".equals(visualType)
+                || "split_screen".equals(visualType) ? "animation" : "photo";
+            case "Manim animation" -> "animation";
+            case "LTX clip", "Wan clip" -> "wan_video";
+            case "photo", "diagram", "animation", "photo_with_labels", "animation_with_labels", "wan_video" -> value;
+            default -> {
+                if ("manim".equals(tool)) yield "animation";
+                if ("ltx_video".equals(tool) || "short_motion_clip".equals(visualType)) yield "wan_video";
+                yield "realistic_labeled_image".equals(visualType)
+                    || "realistic_background_with_labels".equals(visualType) ? "photo_with_labels" : "photo";
+            }
+        };
     }
 
     private String buildDefaultComfyPrompt(SceneSegment segment) {

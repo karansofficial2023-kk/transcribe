@@ -52,6 +52,9 @@ public final class StoryboardProjectMaterialsLoader {
         StringBuilder context = new StringBuilder();
         List<Path> assets = new ArrayList<>();
         for (Path file : files) {
+            if (!isRelevantToProject(file, baseName)) {
+                continue;
+            }
             String extension = extension(file);
             if (ASSET_EXTENSIONS.contains(extension)) {
                 assets.add(file.toAbsolutePath().normalize());
@@ -124,6 +127,40 @@ public final class StoryboardProjectMaterialsLoader {
     private static boolean containsAny(String value, String... terms) {
         for (String term : terms) if (value.contains(term)) return true;
         return false;
+    }
+
+    private static boolean isRelevantToProject(Path file, String baseName) {
+        if (baseName == null || baseName.isBlank()) {
+            return true;
+        }
+        String fileName = file.getFileName().toString();
+        String fileKey = normalizeKey(fileName);
+        String pathKey = normalizeKey(file.toString());
+        String baseKey = normalizeKey(baseName);
+        if (!baseKey.isBlank() && (pathKey.contains(baseKey)
+                || fileKey.contains(baseKey)
+                || baseKey.contains(stripExtensionKey(fileKey)))) {
+            return true;
+        }
+
+        int priority = priority(file);
+        String lowerName = fileName.toLowerCase(Locale.ROOT);
+        boolean likelyLessonSpecific = containsAny(lowerName,
+            "storyboard", "transcript", "paraphrase", "narration", "script", "lesson");
+        return priority <= 5 && !likelyLessonSpecific;
+    }
+
+    private static String stripExtensionKey(String key) {
+        return key.replaceAll("(docx|pptx|pdf|txt|md|json|csv|tsv|png|jpg|jpeg|webp|mp4|mov|mkv|avi|webm)$", "");
+    }
+
+    private static String normalizeKey(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.toLowerCase(Locale.ROOT)
+            .replaceAll("[^\\p{L}\\p{N}]+", "")
+            .trim();
     }
 
     private static String extension(Path path) {

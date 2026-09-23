@@ -133,6 +133,31 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
             SceneStoryboardGenerator.normalizeProductionText("nature\uFFFDs process \u2014 clearly explained\u2026"));
     }
 
+    @Test
+    void plainStablePhotoReceivesSubjectAwareLabelReview() {
+        SceneSegment segment = new SceneSegment();
+        segment.setTemplate("photo");
+        segment.setVisualType("realistic_image");
+
+        SceneStoryboardGenerator generator = new SceneStoryboardGenerator(null, false, "ltx", true);
+
+        assertTrue(generator.isLabelPlanningCandidate(segment));
+    }
+
+    @Test
+    void movingAndFormulaShotsDoNotReceiveStaticLabelReview() {
+        SceneStoryboardGenerator generator = new SceneStoryboardGenerator(null, false, "ltx", true);
+        SceneSegment motion = new SceneSegment();
+        motion.setTemplate("video_broll");
+        motion.setVisualType("short_motion_clip");
+        SceneSegment formula = new SceneSegment();
+        formula.setTemplate("formula");
+        formula.setVisualType("process_steps");
+
+        assertFalse(generator.isLabelPlanningCandidate(motion));
+        assertFalse(generator.isLabelPlanningCandidate(formula));
+    }
+
     private void setProductionDefaults(SceneSegment segment, String sentence) {
         segment.setSentence(sentence);
         segment.setHeading("Shot Heading");
@@ -141,6 +166,7 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
         segment.setMotion("slow_zoom_in");
         segment.setSubtitle(sentence);
         segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.55; text_color=white; font_size=42; max_lines=2; align=center; horizontal_margin=120; bottom_margin=55");
-        segment.setComfyPrompt("Sharp 1920x1080 educational photography with accurate structures and realistic natural lighting, clear subject separation, sufficient empty margins for overlays. No generated text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.");
+        segment.setVisualSubject("A clearly visible lesson subject fills the frame, with exact structures unobscured and clean margins reserved for overlays.");
+        segment.setComfyPrompt("Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. No generated text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.");
     }
 }

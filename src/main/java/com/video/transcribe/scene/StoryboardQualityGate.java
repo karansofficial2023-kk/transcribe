@@ -5,7 +5,9 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /** Final invariant check before storyboard JSON or DOCX is written. */
@@ -60,7 +62,25 @@ public final class StoryboardQualityGate {
                 && !storyboard.getTitle().equals(first.getHeading())) {
             throw new IllegalStateException("Opening title_card heading must equal the storyboard title");
         }
+        validateVisualDiversity(storyboard);
         validateSourceCoverage(storyboard);
+    }
+
+    private static void validateVisualDiversity(StoryboardDocument storyboard) {
+        int contentShots = 0;
+        Set<String> visualTypes = new LinkedHashSet<>();
+        for (Scene scene : storyboard.getScenes()) {
+            if (scene.getSegments() == null) continue;
+            for (SceneSegment segment : scene.getSegments()) {
+                if ("title_card".equals(segment.getVisualType())) continue;
+                contentShots++;
+                visualTypes.add(segment.getVisualType());
+            }
+        }
+        if (contentShots >= 6 && visualTypes.size() < 2) {
+            throw new IllegalStateException(
+                "Long storyboard lacks visual variety; use labels, diagrams, comparisons, processes, or short motion where educationally appropriate");
+        }
     }
 
     private static void validateSourceCoverage(StoryboardDocument storyboard) {
@@ -108,6 +128,7 @@ public final class StoryboardQualityGate {
         }
         boolean titleCard = "title_card".equals(segment.getVisualType());
         if (!titleCard) {
+            rejectContentShotTitleCardWording(segment, id);
             if (segment.getHeading() == null || segment.getHeading().isBlank()) {
                 throw new IllegalStateException("Storyboard row " + id
                     + " must have a concise Shot heading");
@@ -122,8 +143,16 @@ public final class StoryboardQualityGate {
         }
         validateAssetPath(segment, id);
         rejectReplacementCharacters(segment, id);
-        if (requiresImagePrompt(segment) && !hasCleanImageContract(segment.getComfyPrompt())) {
-            throw new IllegalStateException("Storyboard row " + id + " has an unsafe image prompt");
+        if (requiresImagePrompt(segment)) {
+            if (!hasSpecificImageRequirement(segment.getVisualSubject())) {
+                throw new IllegalStateException("Storyboard row " + id
+                    + " lacks a specific image requirement");
+            }
+            if (!hasCleanImageContract(segment.getComfyPrompt())
+                    || !hasPremiumStillContract(segment.getComfyPrompt())) {
+                throw new IllegalStateException("Storyboard row " + id
+                    + " has an unsafe or low-detail image prompt");
+            }
         }
         if (segment.getComfyPrompt() != null && !segment.getComfyPrompt().isBlank()
                 && (!hasCleanImageContract(segment.getComfyPrompt())
@@ -182,7 +211,7 @@ public final class StoryboardQualityGate {
                 || !segment.getMotion().toLowerCase(Locale.ROOT).contains("arrow_draw_then_label_fade")) {
             throw new IllegalStateException("Storyboard row " + id + " lacks labeled reveal motion");
         }
-        double minimumDuration = Math.max(segment.getEstimatedNarrationSeconds(), labels.size() + 2.5);
+        double minimumDuration = Math.max(segment.getEstimatedNarrationSeconds(), labels.size() + 3.0);
         if (segment.getRecommendedClipSeconds() + 0.001 < minimumDuration) {
             throw new IllegalStateException("Storyboard row " + id + " is too short for its labels");
         }
@@ -240,6 +269,18 @@ public final class StoryboardQualityGate {
             + " references an asset_path that is not a locked existing file");
     }
 
+    private static void rejectContentShotTitleCardWording(SceneSegment segment, String id) {
+        String productionText = String.join(" ", List.of(
+            safe(segment.getVisualSubject()), safe(segment.getComfyPrompt()),
+            safe(segment.getVisualAnimation()), safe(segment.getLocalAnimation()),
+            safe(segment.getCoverageNotes()), safe(segment.getMotion()),
+            safe(segment.getSubtitle()))).toLowerCase(Locale.ROOT);
+        if (productionText.contains("title card") || productionText.contains("card with the text")) {
+            throw new IllegalStateException("Storyboard row " + id
+                + " contains title-card wording in a content shot");
+        }
+    }
+
     private static void rejectReplacementCharacters(SceneSegment segment, String id) {
         for (String value : List.of(
                 safe(segment.getSentence()), safe(segment.getHeading()), safe(segment.getVisualSubject()),
@@ -276,7 +317,17 @@ public final class StoryboardQualityGate {
         String value = prompt.toLowerCase(Locale.ROOT);
         return value.contains("show the exact narrated concept")
             || value.contains("curriculum-accurate visual directly illustrating")
-            || value.contains("main lesson concept");
+            || value.contains("main lesson concept")
+            || value.contains("based only on the approved narration sentence")
+            || value.contains("approved narration sentence")
+            || value.contains("topic-specific composition")
+            || value.contains("approved lesson subject")
+            || value.contains("relevant educational visual")
+            || value.contains("generic educational image")
+            || value.contains("suitable background image")
+            || value.contains("whose exact subject and visible action are stated")
+            || value.contains("use the named objects, structures, stages")
+            || value.contains("this narration sentence");
     }
 
     private static boolean requiresImagePrompt(SceneSegment segment) {
@@ -300,6 +351,32 @@ public final class StoryboardQualityGate {
             && value.contains("no ui")
             && value.contains("no duplicated or malformed objects")
             && value.contains("no slide or presentation-card layout");
+    }
+
+    private static boolean hasPremiumStillContract(String prompt) {
+        if (prompt == null) return false;
+        String value = prompt.toLowerCase(Locale.ROOT);
+        return value.contains("full-frame visual coverage")
+            && value.contains("foreground-background separation")
+            && value.contains("camera distance and angle")
+            && value.contains("controlled realistic lighting")
+            && value.contains("stable professional composition")
+            && value.contains("safe margins for renderer overlays");
+    }
+
+    private static boolean hasSpecificImageRequirement(String requirement) {
+        if (requirement == null) return false;
+        String value = requirement.trim().toLowerCase(Locale.ROOT);
+        if (value.length() < 48) return false;
+        return !value.contains("show the concept")
+            && !value.contains("exact narrated concept")
+            && !value.contains("approved lesson subject")
+            && !value.contains("topic-specific composition")
+            && !value.contains("relevant educational visual")
+            && !value.contains("suitable background image")
+            && !value.contains("whose exact subject and visible action are stated")
+            && !value.contains("this approved narration")
+            && !value.contains("this narration sentence");
     }
 
     private static boolean hasSpecificTargetDescription(String placement, String label) {

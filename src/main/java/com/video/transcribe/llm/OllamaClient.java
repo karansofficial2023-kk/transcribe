@@ -154,6 +154,118 @@ public class OllamaClient {
             """;
         return generate(systemPrompt, "NARRATION TO PROOFREAD:\n" + text);
     }
+
+    /**
+     * Add optional curriculum-safe supporting details after a validated paraphrase.
+     * This is intentionally separate from transcript paraphrasing so validation can
+     * still measure transcript fidelity before enrichment.
+     */
+    public String enrichParaphraseForCurriculum(String originalTranscript, String validatedParaphrase,
+            String projectMaterialsContext, String style) throws IOException {
+        String systemPrompt = """
+            You are a senior educational script editor, curriculum reviewer, and
+            subject-matter expert for the exact topic in the supplied lesson.
+
+            Task:
+            Preserve the validated paraphrase exactly in meaning and sequence, then
+            append a concise curriculum enrichment section only when it strengthens
+            the lesson for educational video production.
+
+            Source priority:
+            1. Explicit teacher corrections or approved materials in PROJECT MATERIALS
+            2. Approved lesson/storyboard/script in PROJECT MATERIALS
+            3. Curriculum, objectives, textbook, notes, or references in PROJECT MATERIALS
+            4. The original transcript and validated paraphrase
+            5. Widely accepted curriculum-standard supporting facts directly tied to the same topic
+
+            Rules:
+            - Do not change, shorten, reorder, or remove the validated paraphrase.
+            - Do not change the transcript; only return the final narration text.
+            - Add only lesson-related enrichment: missing subtopics, advantages,
+              disadvantages, applications, comparisons, examples, common mistakes,
+              safety notes, prerequisites, or recap points when relevant.
+            - Never hardcode a subject, species, formula, place, or topic.
+            - Do not add unrelated examples or unverified claims.
+            - If supplied materials conflict, follow teacher-approved material and
+              avoid unsupported claims.
+            - Preserve the source language/script of the paraphrase.
+            - Remove channel promotion phrases if any remain.
+            - Use plain narration sentences. No Markdown bullets, asterisks,
+              tables, headings with symbols, citations, JSON, or notes to the user.
+            - Keep enrichment concise: normally 4 to 8 sentences.
+            - Output only the final narration text.
+            """;
+
+        String userPrompt = String.format("""
+            Style: %s
+
+            PROJECT MATERIALS:
+            %s
+
+            ORIGINAL TRANSCRIPT:
+            %s
+
+            VALIDATED PARAPHRASE TO PRESERVE:
+            %s
+
+            FINAL NARRATION WITH OPTIONAL CURRICULUM ENRICHMENT:
+            """,
+            style != null ? style : "professional educational narration",
+            projectMaterialsContext == null || projectMaterialsContext.isBlank()
+                ? "No additional project materials were supplied."
+                : projectMaterialsContext,
+            originalTranscript,
+            validatedParaphrase);
+
+        return generate(systemPrompt, userPrompt);
+    }
+
+    /**
+     * Correct high-confidence factual defects without tying the pipeline to one
+     * subject. This pass runs after optional enrichment so the storyboard is not
+     * forced to preserve an inaccurate claim merely because it came from ASR.
+     */
+    public String factCheckEducationalNarration(String narration,
+            String projectMaterialsContext) throws IOException {
+        String systemPrompt = """
+            You are a conservative senior subject-matter fact-checker for the exact
+            educational topic in the supplied narration.
+
+            Source priority:
+            1. Explicit teacher corrections and explicitly approved materials
+            2. Approved curriculum, textbook, standards, lesson notes, or references
+            3. Widely accepted subject knowledge
+            4. The narration or transcript
+
+            Requirements:
+            - Preserve the lesson topic, learning sequence, useful examples, and language.
+            - Correct a factual mechanism, classification, name, formula, organism,
+              historical claim, or technical statement only when the correction is
+              high confidence.
+            - Do not preserve a demonstrably incorrect claim merely for transcript fidelity.
+            - Replace unsupported broad claims with accurate qualified wording.
+            - If an example cannot be verified confidently, remove that example while
+              preserving the concept with a neutral accurate explanation.
+            - Never invent a citation, source, species, formula, statistic, or example.
+            - Do not add unrelated curriculum material or hardcode another lesson.
+            - Remove Markdown and production instructions.
+            - Return only the corrected narration as natural spoken sentences.
+            """;
+        String userPrompt = """
+            PROJECT MATERIALS:
+            %s
+
+            NARRATION TO FACT-CHECK:
+            %s
+
+            CORRECTED NARRATION:
+            """.formatted(
+                projectMaterialsContext == null || projectMaterialsContext.isBlank()
+                    ? "No additional project materials were supplied."
+                    : projectMaterialsContext,
+                narration);
+        return generate(systemPrompt, userPrompt);
+    }
     
     /**
      * Generate text using Ollama
