@@ -77,7 +77,7 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
     }
 
     @Test
-    void diagramWithNoLabelsIsDowngradedBeforeQualityGate() {
+    void unlabeledComparisonLayoutIsPreserved() {
         SceneSegment segment = new SceneSegment();
         segment.setSegmentNumber(3);
         segment.setSentence("The lesson compares two related mechanisms.");
@@ -91,8 +91,8 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
         SceneStoryboardGenerator generator = new SceneStoryboardGenerator(null, false, "ltx", true);
         generator.finalizeLabelConsistency(segment);
 
-        assertEquals("photo", segment.getTemplate());
-        assertEquals("realistic_image", segment.getVisualType());
+        assertEquals("comparison", segment.getTemplate());
+        assertEquals("diagram_overlay", segment.getVisualType());
         assertEquals("photo", segment.getMediaType());
         assertTrue(segment.getLabels().isEmpty());
         assertTrue(segment.getLabelPlacements().isEmpty());
@@ -135,11 +135,12 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
 
     private void setProductionDefaults(SceneSegment segment, String sentence) {
         segment.setSentence(sentence);
+        segment.setHeading("Shot Heading");
         segment.setEstimatedNarrationSeconds(3.0);
         segment.setRecommendedClipSeconds(4.0);
         segment.setMotion("slow_zoom_in");
         segment.setSubtitle(sentence);
         segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.55; text_color=white; font_size=42; max_lines=2; align=center; horizontal_margin=120; bottom_margin=55");
-        segment.setComfyPrompt("Sharp 1920x1080 educational photography with accurate structures and realistic natural lighting, clear subject separation, sufficient empty margins for overlays. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout.");
+        segment.setComfyPrompt("Sharp 1920x1080 educational photography with accurate structures and realistic natural lighting, clear subject separation, sufficient empty margins for overlays. No generated text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.");
     }
 }

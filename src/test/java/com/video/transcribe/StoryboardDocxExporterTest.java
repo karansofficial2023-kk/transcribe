@@ -24,13 +24,13 @@ class StoryboardDocxExporterTest {
         segment.setSentence("Pollen moves from anther to stigma.");
         segment.setTemplate("labeled_image");
         segment.setVisualType("realistic_labeled_image");
-        segment.setHeading("");
+        segment.setHeading("Pollen Transfer");
         segment.setLabels(List.of("anther", "stigma", "pollen grains"));
         segment.setLabelPlacements(List.of(
-            "anther | pollen-bearing anther | target_xy: 0.35,0.42",
-            "stigma | receptive stigma tip | target_xy: 0.58,0.36",
-            "pollen grains | visible pollen grains | target_xy: 0.43,0.45"));
-        segment.setLabelStyle("high_contrast_box; white_text; dark_background; colored_target_dot; 3px_leader_line; 28px_minimum_font; avoid_subject; avoid_title_area; avoid_subtitle_area; avoid_logo_area");
+            "anther | pollen-bearing anther | target=(0.350,0.420)",
+            "stigma | receptive stigma tip | target=(0.580,0.360)",
+            "pollen grains | visible pollen grains | target=(0.430,0.450)"));
+        segment.setLabelStyle("high_contrast_box; dark_text; light_background; thin_colored_border; colored_target_dot; 3px_leader_line; sans_serif; 28px_minimum_font; avoid_subject; avoid_title_area; avoid_subtitle_area; avoid_logo_area");
         segment.setMotion("arrow_draw_then_label_fade; reveal_in_list_order; keep_previous_labels_visible; completed_frame_hold=2.5s");
         segment.setSubtitle("Pollen moves from the anther to the stigma.");
         segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.55; text_color=white; font_size=42; max_lines=2; align=center; horizontal_margin=120; bottom_margin=55");
@@ -55,8 +55,8 @@ class StoryboardDocxExporterTest {
         try (XWPFDocument document = new XWPFDocument(new FileInputStream(output.toFile()))) {
             assertEquals("Storyboard: Types of Pollination", document.getParagraphs().get(0).getText());
             assertEquals(2, document.getTables().get(0).getRow(0).getTableCells().size());
-            assertEquals("Subject", document.getTables().get(0).getRow(0).getCell(0).getText());
-            assertEquals("Biology", document.getTables().get(0).getRow(0).getCell(1).getText());
+            assertEquals("shot_id", document.getTables().get(0).getRow(0).getCell(0).getText());
+            assertEquals(1, document.getTables().size());
 
             var table = document.getTables().stream()
                 .filter(value -> "shot_id".equals(value.getRow(0).getCell(0).getText()))
@@ -75,8 +75,8 @@ class StoryboardDocxExporterTest {
             assertFalse(labels.contains("yellow"));
             assertFalse(labels.contains("1080p"));
 
-            assertTrue(placementRow.getCell(1).getText().contains("target_xy: 0.35,0.42"));
-            assertFalse(placementRow.getCell(1).getText().contains("AUTO_VERIFY"));
+            assertTrue(placementRow.getCell(1).getText().contains("target=(0.350,0.420)"));
+            assertFalse(placementRow.getCell(1).getText().contains("COORDINATES_PENDING"));
             assertTrue(styleRow.getCell(1).getText().contains("28px_minimum_font"));
             assertEquals(17, table.getRows().size());
         }

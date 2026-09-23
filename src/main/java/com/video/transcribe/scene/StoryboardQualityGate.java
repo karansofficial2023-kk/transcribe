@@ -10,16 +10,18 @@ import java.util.regex.Pattern;
 
 /** Final invariant check before storyboard JSON or DOCX is written. */
 public final class StoryboardQualityGate {
-    private static final String LABEL_STYLE = "high_contrast_box; white_text; dark_background; "
-        + "colored_target_dot; 3px_leader_line; 28px_minimum_font; avoid_subject; "
+    private static final String LABEL_STYLE = "high_contrast_box; dark_text; light_background; "
+        + "thin_colored_border; colored_target_dot; 3px_leader_line; sans_serif; 28px_minimum_font; avoid_subject; "
         + "avoid_title_area; avoid_subtitle_area; avoid_logo_area";
+    private static final String PENDING_COORDINATES = "COORDINATES_PENDING_APPROVED_IMAGE";
+    private static final String BLOCK_FINAL_RENDER = "BLOCK_FINAL_RENDER_UNTIL_LABEL_COORDINATES_ARE_VERIFIED";
     private static final String SUBTITLE_STYLE = "bottom_band; band_color=black; band_opacity=0.55; "
         + "text_color=white; font_size=42; max_lines=2; align=center; "
         + "horizontal_margin=120; bottom_margin=55";
     private static final List<String> VISUAL_TYPES = List.of(
         "title_card", "realistic_image", "realistic_labeled_image",
         "realistic_background_with_labels", "diagram_overlay", "process_steps",
-        "short_motion_clip");
+        "split_screen", "short_motion_clip");
     private static final String NUMBER = "(0(?:\\.\\d+)?|1(?:\\.0+)?)";
     private static final Pattern NUMERIC_TARGET = Pattern.compile(
         "target=\\(\\s*" + NUMBER + "\\s*,\\s*" + NUMBER + "\\s*\\)",
@@ -105,15 +107,10 @@ public final class StoryboardQualityGate {
             throw new IllegalStateException("Storyboard row " + id + " has non-standard subtitle style");
         }
         boolean titleCard = "title_card".equals(segment.getVisualType());
-        if (titleCard) {
-            if (segment.getSubtitle() != null && !segment.getSubtitle().isBlank()) {
+        if (!titleCard) {
+            if (segment.getHeading() == null || segment.getHeading().isBlank()) {
                 throw new IllegalStateException("Storyboard row " + id
-                    + " must leave the opening title subheading empty");
-            }
-        } else {
-            if (segment.getHeading() != null && !segment.getHeading().isBlank()) {
-                throw new IllegalStateException("Storyboard row " + id
-                    + " must not display a heading on an ordinary content shot");
+                    + " must have a concise Shot heading");
             }
             if (segment.getSubtitle() == null || segment.getSubtitle().isBlank()
                     || segment.getSubtitle().contains("...")) {
@@ -125,10 +122,12 @@ public final class StoryboardQualityGate {
         }
         validateAssetPath(segment, id);
         rejectReplacementCharacters(segment, id);
-        if (requiresCleanImagePrompt(segment) && !hasCleanImageContract(segment.getComfyPrompt())) {
+        if (requiresImagePrompt(segment) && !hasCleanImageContract(segment.getComfyPrompt())) {
             throw new IllegalStateException("Storyboard row " + id + " has an unsafe image prompt");
         }
-        if (containsGenericPrompt(segment.getComfyPrompt())) {
+        if (segment.getComfyPrompt() != null && !segment.getComfyPrompt().isBlank()
+                && (!hasCleanImageContract(segment.getComfyPrompt())
+                    || containsGenericPrompt(segment.getComfyPrompt()))) {
             throw new IllegalStateException("Storyboard row " + id + " has a generic image prompt");
         }
 
@@ -168,15 +167,9 @@ public final class StoryboardQualityGate {
                 + " places scientific labels on moving footage");
         }
 
-        if (!"realistic_labeled_image".equals(segment.getVisualType())
-                || !"labeled_image".equals(segment.getTemplate())
-                || !"photo_with_labels".equals(segment.getMediaType())) {
+        if (!supportsLabels(segment)) {
             throw new IllegalStateException("Storyboard row " + id
-                + " must use the reviewed realistic_labeled_image contract");
-        }
-        if (segment.getAssetPath() == null || segment.getAssetPath().isBlank()) {
-            throw new IllegalStateException("Storyboard row " + id
-                + " has labels without a reviewed static asset");
+                + " uses labels with a visual type that cannot support stable overlays");
         }
         if (placements.size() != labels.size()) {
             throw new IllegalStateException("Storyboard row " + id
@@ -211,17 +204,26 @@ public final class StoryboardQualityGate {
                     && placementMatchesLabel(value, prefix))
                 .findFirst().orElseThrow(() -> new IllegalStateException(
                     "Storyboard row " + id + " has no placement for label " + label));
-            boolean autoVerify = placement.toLowerCase(Locale.ROOT).contains("target_xy: auto_verify");
-            boolean lockedNumeric = segment.getAssetPath() != null && !segment.getAssetPath().isBlank()
-                && (NUMERIC_TARGET.matcher(placement).find() || hasNumericTargetXy(placement));
-            if (autoVerify || !lockedNumeric) {
+            boolean reviewedAsset = segment.getAssetPath() != null && !segment.getAssetPath().isBlank();
+            boolean numeric = NUMERIC_TARGET.matcher(placement).find();
+            boolean pending = placement.contains(PENDING_COORDINATES);
+            if (reviewedAsset && (!numeric || pending)) {
                 throw new IllegalStateException("Storyboard row " + id
-                    + " lacks manually measured coordinates for label " + label);
+                    + " lacks manually measured coordinates for reviewed label " + label);
+            }
+            if (!reviewedAsset && (!pending || numeric)) {
+                throw new IllegalStateException("Storyboard row " + id
+                    + " must mark unapproved label coordinates as pending for " + label);
             }
             if (!hasSpecificTargetDescription(placement, label)) {
                 throw new IllegalStateException("Storyboard row " + id
                     + " has no specific target description for label " + label);
             }
+        }
+        if ((segment.getAssetPath() == null || segment.getAssetPath().isBlank())
+                && !joinNotes(segment).contains(BLOCK_FINAL_RENDER)) {
+            throw new IllegalStateException("Storyboard row " + id
+                + " must block final rendering until label coordinates are verified");
         }
     }
 
@@ -269,32 +271,34 @@ public final class StoryboardQualityGate {
         return remainder.startsWith("|") || remainder.startsWith(":");
     }
 
-    private static boolean hasNumericTargetXy(String placement) {
-        return Pattern.compile("(?i)target_xy:\\s*" + NUMBER + "\\s*,\\s*" + NUMBER)
-            .matcher(placement).find();
-    }
-
     private static boolean containsGenericPrompt(String prompt) {
-        if (prompt == null) return true;
+        if (prompt == null || prompt.isBlank()) return false;
         String value = prompt.toLowerCase(Locale.ROOT);
         return value.contains("show the exact narrated concept")
             || value.contains("curriculum-accurate visual directly illustrating")
             || value.contains("main lesson concept");
     }
 
-    private static boolean requiresCleanImagePrompt(SceneSegment segment) {
-        return !"short_motion_clip".equals(segment.getVisualType());
+    private static boolean requiresImagePrompt(SceneSegment segment) {
+        if (segment.getAssetPath() != null && !segment.getAssetPath().isBlank()) return false;
+        return List.of("title_card", "realistic_image", "realistic_labeled_image",
+            "realistic_background_with_labels").contains(segment.getVisualType());
     }
 
     private static boolean hasCleanImageContract(String prompt) {
         if (prompt == null) return false;
         String value = prompt.toLowerCase(Locale.ROOT);
         return value.contains("1920x1080")
+            && value.contains("no generated text")
             && value.contains("no embedded text")
             && value.contains("no generated labels")
             && value.contains("no generated arrows")
             && value.contains("no captions")
             && value.contains("no watermark")
+            && value.contains("no logo")
+            && value.contains("no border")
+            && value.contains("no ui")
+            && value.contains("no duplicated or malformed objects")
             && value.contains("no slide or presentation-card layout");
     }
 
@@ -317,38 +321,19 @@ public final class StoryboardQualityGate {
 
     private static boolean isTooGenericLabel(String label) {
         String value = label.toLowerCase(Locale.ROOT).trim();
-        return List.of("flower", "pollinator", "pollen", "nectar", "part", "component",
-            "structure", "object", "item", "area").contains(value);
+        return List.of("part", "component", "structure", "object", "item", "area",
+            "thing", "detail").contains(value);
     }
 
     private static boolean isCombinedLabel(String label) {
         String value = label.toLowerCase(Locale.ROOT).trim();
-        if (value.matches(".*[,;/|\\n].*") || value.matches(".*\\s+(?:and|&)\\s+.*")) {
-            return true;
-        }
-        if (List.of("pollen grains", "pollen transfer path", "bee pollinator",
-                "flower 1", "flower 2", "positive terminal", "negative terminal",
-                "silver nitrate electrolyte").contains(value)) {
-            return false;
-        }
-        int concepts = 0;
-        for (String concept : List.of("anther", "stigma", "pollen", "filament", "style",
-                "ovary", "nectar", "pollinator", "flower", "cathode", "anode",
-                "electrolyte", "positive terminal", "negative terminal", "resistor",
-                "switch", "ammeter", "voltmeter")) {
-            if (Pattern.compile("(?i)(?<![\\p{L}\\p{N}])" + Pattern.quote(concept)
-                    + "(?![\\p{L}\\p{N}])").matcher(value).find()) {
-                concepts++;
-            }
-        }
-        return concepts > 1;
+        return value.matches(".*[,;/|\\n].*") || value.matches(".*\\s+(?:and|&)\\s+.*");
     }
 
     private static boolean declaresLabeledVisual(SceneSegment segment) {
         return "labeled_image".equals(segment.getTemplate())
             || "realistic_labeled_image".equals(segment.getVisualType())
             || "realistic_background_with_labels".equals(segment.getVisualType())
-            || "diagram_overlay".equals(segment.getVisualType())
             || "photo_with_labels".equals(segment.getMediaType())
             || "animation_with_labels".equals(segment.getMediaType());
     }
@@ -357,6 +342,10 @@ public final class StoryboardQualityGate {
         return declaresLabeledVisual(segment)
             || "process_steps".equals(segment.getVisualType())
             || "diagram_overlay".equals(segment.getVisualType())
-            || "process_steps".equals(segment.getVisualType());
+            || "split_screen".equals(segment.getVisualType());
+    }
+
+    private static String joinNotes(SceneSegment segment) {
+        return safe(segment.getCoverageNotes()) + " " + safe(segment.getAssetQualityNotes());
     }
 }

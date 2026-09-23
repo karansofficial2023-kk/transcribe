@@ -74,6 +74,7 @@ public class AppConfig {
 		props.setProperty("storyboard.animation.enabled", "true");
 		props.setProperty("storyboard.video.provider", "wan");
 		props.setProperty("storyboard.curriculum.enrichment", "false");
+		props.setProperty("storyboard.materials.dir", "");
 		props.setProperty("temp.dir", "./temp");
 		props.setProperty("cleanup.downloads", "true");
 		props.setProperty("download.timeout.seconds", "300");
@@ -130,6 +131,10 @@ public class AppConfig {
 
 	public boolean isStoryboardCurriculumEnrichmentEnabled() {
 		return getBoolean("storyboard.curriculum.enrichment", false);
+	}
+
+	public String getStoryboardMaterialsDir() {
+		return getString("storyboard.materials.dir", "");
 	}
 	// === CONVENIENCE METHODS ===
 

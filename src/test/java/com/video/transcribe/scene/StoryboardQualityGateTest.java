@@ -50,15 +50,14 @@ class StoryboardQualityGateTest {
     }
 
     @Test
-    void rejectsAutoVerifyTargetForGeneratedImage() {
+    void acceptsPendingCoordinatesForDraftImage() {
         SceneSegment segment = segment("labeled_image", "realistic_labeled_image", "photo_with_labels");
         segment.setLabels(List.of("Anther"));
         segment.setLabelPlacements(List.of(
-            "Anther | upper pollen-bearing structure | target_xy: AUTO_VERIFY"));
-        labeledContract(segment);
+            "Anther | upper pollen-bearing structure | COORDINATES_PENDING_APPROVED_IMAGE"));
+        pendingLabelContract(segment);
 
-        assertThrows(IllegalStateException.class,
-            () -> StoryboardQualityGate.validate(storyboard(segment)));
+        assertDoesNotThrow(() -> StoryboardQualityGate.validate(storyboard(segment)));
     }
 
     @Test
@@ -66,7 +65,7 @@ class StoryboardQualityGateTest {
         SceneSegment segment = segment("labeled_image", "realistic_labeled_image", "photo_with_labels");
         segment.setLabels(List.of("Anther"));
         segment.setLabelPlacements(List.of(
-            "Anther | upper pollen-bearing structure | target_xy: 0.35,0.42"));
+            "Anther | upper pollen-bearing structure | target=(0.350,0.420)"));
         labeledContract(segment);
 
         assertDoesNotThrow(() -> StoryboardQualityGate.validate(storyboard(segment)));
@@ -77,8 +76,8 @@ class StoryboardQualityGateTest {
         SceneSegment segment = segment("labeled_image", "realistic_labeled_image", "photo_with_labels");
         segment.setLabels(List.of("Component"));
         segment.setLabelPlacements(List.of(
-            "Component | visible machine component | target_xy: AUTO_VERIFY"));
-        labeledContract(segment);
+            "Component | visible machine component | COORDINATES_PENDING_APPROVED_IMAGE"));
+        pendingLabelContract(segment);
 
         assertThrows(IllegalStateException.class,
             () -> StoryboardQualityGate.validate(storyboard(segment)));
@@ -87,10 +86,10 @@ class StoryboardQualityGateTest {
     @Test
     void rejectsCombinedScientificLabels() {
         SceneSegment segment = segment("labeled_image", "realistic_labeled_image", "photo_with_labels");
-        segment.setLabels(List.of("anther stigma pollen"));
+        segment.setLabels(List.of("Anther and stigma"));
         segment.setLabelPlacements(List.of(
-            "anther stigma pollen | flower reproductive structures | target_xy: AUTO_VERIFY"));
-        labeledContract(segment);
+            "Anther and stigma | two visible reproductive structures | COORDINATES_PENDING_APPROVED_IMAGE"));
+        pendingLabelContract(segment);
 
         assertThrows(IllegalStateException.class,
             () -> StoryboardQualityGate.validate(storyboard(segment)));
@@ -130,6 +129,7 @@ class StoryboardQualityGateTest {
         segment.setTool("comfy_image");
         segment.setLabels(List.of());
         segment.setLabelPlacements(List.of());
+        segment.setComfyPrompt("");
 
         assertThrows(IllegalStateException.class,
             () -> StoryboardQualityGate.validate(storyboard(segment)));
@@ -144,6 +144,7 @@ class StoryboardQualityGateTest {
         segment.setFormulaLines(List.of("V = IR"));
         segment.setLabels(List.of());
         segment.setLabelPlacements(List.of());
+        segment.setComfyPrompt("");
 
         assertDoesNotThrow(() -> StoryboardQualityGate.validate(storyboard(segment)));
     }
@@ -160,13 +161,22 @@ class StoryboardQualityGateTest {
         segment.setMotion("slow_zoom_in");
         segment.setSubtitle("A complete educational sentence.");
         segment.setSubtitleStyle("bottom_band; band_color=black; band_opacity=0.55; text_color=white; font_size=42; max_lines=2; align=center; horizontal_margin=120; bottom_margin=55");
-        segment.setComfyPrompt("Sharp 1920x1080 educational photography with accurate structures and realistic natural lighting, clear subject separation, sufficient empty margins for overlays. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout.");
+        segment.setHeading("Shot Heading");
+        segment.setComfyPrompt("Sharp 1920x1080 educational photography with accurate structures and realistic natural lighting, clear subject separation, sufficient empty margins for overlays. No generated text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.");
         return segment;
     }
 
     private void labeledContract(SceneSegment segment) {
         segment.setAssetPath(java.nio.file.Path.of("pom.xml").toAbsolutePath().normalize().toString());
-        segment.setLabelStyle("high_contrast_box; white_text; dark_background; colored_target_dot; 3px_leader_line; 28px_minimum_font; avoid_subject; avoid_title_area; avoid_subtitle_area; avoid_logo_area");
+        segment.setLabelStyle("high_contrast_box; dark_text; light_background; thin_colored_border; colored_target_dot; 3px_leader_line; sans_serif; 28px_minimum_font; avoid_subject; avoid_title_area; avoid_subtitle_area; avoid_logo_area");
+        segment.setMotion("arrow_draw_then_label_fade; reveal_in_list_order; keep_previous_labels_visible; completed_frame_hold=2.5s");
+        segment.setRecommendedClipSeconds(4.0);
+    }
+
+    private void pendingLabelContract(SceneSegment segment) {
+        segment.setAssetPath("");
+        segment.setAssetQualityNotes("BLOCK_FINAL_RENDER_UNTIL_LABEL_COORDINATES_ARE_VERIFIED");
+        segment.setLabelStyle("high_contrast_box; dark_text; light_background; thin_colored_border; colored_target_dot; 3px_leader_line; sans_serif; 28px_minimum_font; avoid_subject; avoid_title_area; avoid_subtitle_area; avoid_logo_area");
         segment.setMotion("arrow_draw_then_label_fade; reveal_in_list_order; keep_previous_labels_visible; completed_frame_hold=2.5s");
         segment.setRecommendedClipSeconds(4.0);
     }

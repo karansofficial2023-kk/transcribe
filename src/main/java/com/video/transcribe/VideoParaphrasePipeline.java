@@ -20,6 +20,8 @@ import com.video.transcribe.config.AppConfig;
 import com.video.transcribe.llm.OllamaClient;
 import com.video.transcribe.model.TranscriptData;
 import com.video.transcribe.scene.SceneStoryboardGenerator;
+import com.video.transcribe.scene.StoryboardProjectMaterials;
+import com.video.transcribe.scene.StoryboardProjectMaterialsLoader;
 import com.video.transcribe.scene.StoryboardDocument;
 import com.video.transcribe.scene.StoryboardQualityGate;
 import com.video.transcribe.transcription.LocalWhisperTranscriber;
@@ -190,7 +192,14 @@ public class VideoParaphrasePipeline {
 
 	public StoryboardDocument generateStoryboard(String paraphrasedText, String baseName) throws Exception {
 		logger.info("=== PHASE 3c: Generating Scene Storyboard ===");
-		StoryboardDocument storyboard = sceneGenerator.generateStoryboard(paraphrasedText, baseName);
+		StoryboardProjectMaterials materials = StoryboardProjectMaterialsLoader.load(
+			config.getStoryboardMaterialsDir(), baseName);
+		if (!materials.isEmpty()) {
+			logger.info("Loaded storyboard project materials: {} approved/reference assets",
+				materials.approvedAssets().size());
+		}
+		StoryboardDocument storyboard = sceneGenerator.generateStoryboard(
+			paraphrasedText, baseName, materials);
 		StoryboardQualityGate.validate(storyboard);
 
 		// Save as JSON

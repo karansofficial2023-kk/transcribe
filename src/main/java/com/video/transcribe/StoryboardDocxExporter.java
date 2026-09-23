@@ -22,10 +22,7 @@ import com.video.transcribe.scene.Scene;
 import com.video.transcribe.scene.SceneSegment;
 import com.video.transcribe.scene.StoryboardDocument;
 
-/**
- * Exports StoryboardDocument to formatted Word document (.docx)
- * Matches the format of your sample "Types of Pollination.docx"
- */
+/** Exports a storyboard as one exact two-column production record per shot. */
 public class StoryboardDocxExporter {
     private final String videoProvider;
 
@@ -45,7 +42,6 @@ public class StoryboardDocxExporter {
             
             // Title
             addTitle(document, "Storyboard: " + storyboard.getTitle());
-            addStoryboardMetadata(document, storyboard);
             
             // Process each scene
             for (Scene scene : storyboard.getScenes()) {
@@ -83,15 +79,6 @@ public class StoryboardDocxExporter {
         run.setColor("000000");
     }
 
-    private void addStoryboardMetadata(XWPFDocument doc, StoryboardDocument storyboard) {
-        XWPFTable table = doc.createTable(3, 2);
-        table.setWidth("100%");
-        setFieldRow(table.getRow(0), "Subject", safe(storyboard.getSubject()));
-        setFieldRow(table.getRow(1), "Verified Topic", safe(storyboard.getTopic()));
-        setFieldRow(table.getRow(2), "SME Review Role", safe(storyboard.getSmeRole()));
-        addEmptyLine(doc);
-    }
-    
     private void addScene(XWPFDocument doc, Scene scene) {
         // Scene Header
         XWPFParagraph sceneHeader = doc.createParagraph();
@@ -137,8 +124,7 @@ public class StoryboardDocxExporter {
         shotHeader.setSpacingAfter(70);
         XWPFRun header = shotHeader.createRun();
         String shotLabel = "Shot " + sceneNumber + "." + segment.getSegmentNumber();
-        if ("title_card".equals(segment.getVisualType())
-                && segment.getHeading() != null && !segment.getHeading().isBlank()) {
+        if (segment.getHeading() != null && !segment.getHeading().isBlank()) {
             shotLabel += ": " + segment.getHeading();
         }
         header.setText(shotLabel);
@@ -152,7 +138,7 @@ public class StoryboardDocxExporter {
         fields.add(new String[] {"narration", safe(segment.getSentence())});
         fields.add(new String[] {"duration", segment.getRecommendedClipSeconds() + " sec"});
         fields.add(new String[] {"visual_type", safe(segment.getVisualType())});
-        fields.add(new String[] {"media_type", safe(segment.getMediaType())});
+        fields.add(new String[] {"media_type", productionMediaType(segment)});
         fields.add(new String[] {"image_requirement", safe(segment.getVisualSubject())});
         fields.add(new String[] {"image_prompt", safe(segment.getComfyPrompt())});
         fields.add(new String[] {"labels", formatList(segment.getLabels())});
@@ -186,6 +172,19 @@ public class StoryboardDocxExporter {
 
     private String shotPrompt(com.video.transcribe.scene.Shot shot) {
         return shot == null ? "" : safe(shot.getPrompt());
+    }
+
+    private String productionMediaType(SceneSegment segment) {
+        if (segment.getAssetPath() != null && !segment.getAssetPath().isBlank()) return "supplied_image";
+        if ("manim".equals(segment.getTool())) return "Manim animation";
+        if ("short_motion_clip".equals(segment.getVisualType())) {
+            if (segment.getLtxShot() != null || "ltx_video".equals(segment.getTool())) return "LTX clip";
+            return "Wan clip";
+        }
+        if ("diagram_overlay".equals(segment.getVisualType())
+                || "process_steps".equals(segment.getVisualType())) return "local diagram";
+        if ("split_screen".equals(segment.getVisualType())) return "FFmpeg composite";
+        return "generated still";
     }
 
     private void addField(List<String[]> fields, String name, String value) {
