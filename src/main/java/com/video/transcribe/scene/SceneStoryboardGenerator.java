@@ -609,6 +609,16 @@ public class SceneStoryboardGenerator {
         return doc;
     }
 
+    /** Apply deterministic production guards without calling an LLM or changing narration. */
+    public StoryboardDocument finalizeProductionContract(StoryboardDocument doc) {
+        if (doc == null || doc.getScenes() == null || doc.getScenes().isEmpty()) {
+            throw new IllegalArgumentException("Storyboard draft has no scenes");
+        }
+        enforceFinalProductionContract(doc.getScenes(), doc.getTitle());
+        rebuildSceneNarrationFromSegments(doc.getScenes());
+        return doc;
+    }
+
     private String buildProjectContext(StoryboardProjectMaterials materials) {
         String evidence = materials == null ? "" : materials.promptContext();
         if (evidence.isBlank()) {
