@@ -205,6 +205,18 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
             "Positive terminals", "raised metal terminal"));
     }
 
+    @Test
+    void labelCannotDriftFromAnAdjacentNarrationRow() {
+        assertFalse(SceneStoryboardGenerator.labelSupportedBySentence(
+            "Anther", "Three categories compare transfer within and between flowers."));
+        assertTrue(SceneStoryboardGenerator.labelSupportedBySentence(
+            "Sunflower head", "Sunflowers use a complex reproductive strategy."));
+        assertTrue(SceneStoryboardGenerator.labelSupportedBySentence(
+            "butterfly", "Beetles, butterflies, moths, and flies visit flowers."));
+        assertTrue(SceneStoryboardGenerator.labelSupportedBySentence(
+            "fly", "Beetles, butterflies, moths, and flies visit flowers."));
+    }
+
     private JsonArray strings(String... values) {
         JsonArray result = new JsonArray();
         for (String value : values) result.add(value);

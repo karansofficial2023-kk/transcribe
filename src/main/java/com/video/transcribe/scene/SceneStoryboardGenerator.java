@@ -10,6 +10,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +45,9 @@ public class SceneStoryboardGenerator {
     private static final String PENDING_COORDINATES = "COORDINATES_PENDING_APPROVED_IMAGE";
     private static final String BLOCK_FINAL_RENDER = "BLOCK_FINAL_RENDER_UNTIL_LABEL_COORDINATES_ARE_VERIFIED";
     private static final int REVIEW_BATCH_SIZE = 5;
+    private static final Pattern DEFINED_MECHANISM = Pattern.compile(
+        "\\b([\\p{L}][\\p{L}-]{3,})\\s+(?:means|occurs|involves|refers\\s+to|describes|is\\s+defined\\s+as)\\b",
+        Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
     private static final String PREMIUM_STILL_CONTRACT = "Premium educational documentary frame, sharp native 1920x1080 detail, "
         + "full-frame visual coverage with no blank card panel, intentional foreground-background separation, "
         + "camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, "
@@ -709,6 +714,10 @@ public class SceneStoryboardGenerator {
                 - labels contains separate atomic curriculum terms; one visible target per item.
                 - Never combine distinct labels into one string.
                 - Replace vague nouns with precise names supported by the narration.
+                - Every label must share a concrete subject term with this row's narration sentence.
+                  Do not move labels or structures from the preceding or following row. When a row
+                  compares categories or relationships instead of naming pointable structures, use
+                  focused_frames or no_labels rather than borrowing anatomy from lesson context.
                 - Keep every educationally necessary visible-object label even before its image is approved.
                 - labelPlacements contains exactly one entry per visible-object label.
                 - labelTargetKinds contains exactly one classification per label, in the same order.
@@ -1043,7 +1052,8 @@ public class SceneStoryboardGenerator {
             List<String> physicalPlacements = new ArrayList<>();
             for (int index = 0; index < labels.size(); index++) {
                 if ("visible_physical_target".equals(targetKinds.get(index))
-                        && labelNamesPointTarget(labels.get(index), pointTargetNames.get(index))) {
+                        && labelNamesPointTarget(labels.get(index), pointTargetNames.get(index))
+                        && labelSupportedBySentence(labels.get(index), segment.getSentence())) {
                     physicalLabels.add(labels.get(index));
                     physicalPlacements.add(placements.get(index));
                 }
@@ -1117,16 +1127,36 @@ public class SceneStoryboardGenerator {
         return !labelWords.isEmpty();
     }
 
+    static boolean labelSupportedBySentence(String label, String sentence) {
+        Set<String> labelWords = concreteWords(label);
+        Set<String> sentenceWords = concreteWords(sentence);
+        labelWords.retainAll(sentenceWords);
+        return !labelWords.isEmpty();
+    }
+
     private static Set<String> concreteWords(String value) {
         Set<String> words = new LinkedHashSet<>();
         if (value == null) return words;
         for (String token : value.toLowerCase(Locale.ROOT).split("[^a-z0-9]+")) {
-            String word = token.replaceFirst("(?:ies|es|s)$", "");
+            String word = singularizeToken(token);
             if (word.length() >= 3 && !Set.of("the", "with", "from", "into", "part", "area").contains(word)) {
                 words.add(word);
             }
         }
         return words;
+    }
+
+    private static String singularizeToken(String token) {
+        if (token.length() > 4 && token.endsWith("ies")) {
+            return token.substring(0, token.length() - 3) + "y";
+        }
+        if (token.length() > 4 && token.matches(".*(?:sses|shes|ches|xes|zes)$")) {
+            return token.substring(0, token.length() - 2);
+        }
+        if (token.length() > 3 && token.endsWith("s") && !token.endsWith("ss")) {
+            return token.substring(0, token.length() - 1);
+        }
+        return token;
     }
 
     private static String sanitizeGeneratedProductionText(String value) {
@@ -2133,6 +2163,7 @@ public class SceneStoryboardGenerator {
     private void enforceStoryboardQuality(SceneSegment segment) {
         enforceProStyleDefaults(segment);
         enforceFormulaRouting(segment);
+        enforceNarrationVisualAlignment(segment);
         String motionType = segment.getMotionType();
         if (motionType == null || motionType.isBlank()) {
             motionType = "local_animation";
@@ -2184,6 +2215,46 @@ public class SceneStoryboardGenerator {
         segment.setLabels(sanitizeLabels(segment.getLabels(), segment));
         enforceLabeledVisualQuality(segment);
         enforceLabelContract(segment);
+    }
+
+    void enforceNarrationVisualAlignment(SceneSegment segment) {
+        List<String> mechanisms = definedMechanisms(segment.getSentence());
+        if (mechanisms.size() < 2) return;
+        String production = String.join(" ", List.of(
+            safePromptText(segment.getVisualSubject()),
+            safePromptText(segment.getComfyPrompt()),
+            safePromptText(segment.getVisualAnimation()))).toLowerCase(Locale.ROOT);
+        boolean complete = mechanisms.stream()
+            .allMatch(term -> production.contains(term.toLowerCase(Locale.ROOT)));
+        if (complete) return;
+
+        String named = String.join("; ", mechanisms);
+        segment.setTemplate("photo");
+        segment.setVisualType("realistic_image");
+        segment.setMediaType("photo");
+        segment.setMotionType("static_image");
+        segment.setTool("comfyui");
+        segment.setVisualSubject("Sharp 1920x1080 comparative scientific composition with one distinct, equally weighted "
+            + "realistic view for each narration-defined mechanism: " + named + ". Visually demonstrate the "
+            + "within, between, earlier, later, or other relationship stated in the narration using physical subjects "
+            + "and spatial arrangement only. Keep every view clear and inspectable; no embedded text or generated labels.");
+        segment.setComfyPrompt("");
+        segment.setLabels(List.of());
+        segment.setLabelPlacements(List.of());
+        segment.setArrows(List.of());
+        segment.setHighlights(List.of());
+        segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
+            "Narration-visual alignment guard: every separately defined mechanism is represented in its own focused view."));
+    }
+
+    static List<String> definedMechanisms(String sentence) {
+        if (sentence == null || sentence.isBlank()) return List.of();
+        Set<String> result = new LinkedHashSet<>();
+        Matcher matcher = DEFINED_MECHANISM.matcher(sentence);
+        while (matcher.find()) {
+            result.add(matcher.group(1));
+        }
+        return new ArrayList<>(result);
     }
 
     private boolean hasSpecificVisualSubject(String requirement) {
