@@ -1,7 +1,15 @@
 package com.video.transcribe.llm;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -167,9 +175,9 @@ public class OllamaClient {
             subject-matter expert for the exact topic in the supplied lesson.
 
             Task:
-            Preserve the validated paraphrase exactly in meaning and sequence, then
-            append a concise curriculum enrichment section only when it strengthens
-            the lesson for educational video production.
+            Preserve all accurate ideas from the validated paraphrase in a coherent
+            sequence, then integrate curriculum enrichment when it strengthens the
+            lesson for educational video production.
 
             Source priority:
             1. Explicit teacher corrections or approved materials in PROJECT MATERIALS
@@ -179,7 +187,9 @@ public class OllamaClient {
             5. Widely accepted curriculum-standard supporting facts directly tied to the same topic
 
             Rules:
-            - Do not change, shorten, reorder, or remove the validated paraphrase.
+            - Teacher corrections and approved materials may replace an inaccurate
+              example or mechanism in the validated paraphrase.
+            - Otherwise preserve the validated paraphrase's accurate ideas and sequence.
             - Do not change the transcript; only return the final narration text.
             - Add only lesson-related enrichment: missing subtopics, advantages,
               disadvantages, applications, comparisons, examples, common mistakes,
@@ -192,7 +202,11 @@ public class OllamaClient {
             - Remove channel promotion phrases if any remain.
             - Use plain narration sentences. No Markdown bullets, asterisks,
               tables, headings with symbols, citations, JSON, or notes to the user.
-            - Keep enrichment concise: normally 4 to 8 sentences.
+            - When PROJECT MATERIALS explicitly mark topics as required lesson coverage,
+              include every required topic. Split dense coverage into concise spoken
+              sentences; do not impose a fixed sentence limit that causes omissions.
+            - Integrate additions naturally. Do not output headings such as
+              "Curriculum Enrichment", production notes, or commentary.
             - Output only the final narration text.
             """;
 
@@ -264,7 +278,145 @@ public class OllamaClient {
                     ? "No additional project materials were supplied."
                     : projectMaterialsContext,
                 narration);
-        return generate(systemPrompt, userPrompt);
+        String corrected = generate(systemPrompt, userPrompt);
+        return auditCorrectedNarration(corrected, projectMaterialsContext);
+    }
+
+    private String auditCorrectedNarration(String corrected,
+            String projectMaterialsContext) throws IOException {
+        List<String> requiredCoverage = extractRequiredCoverage(projectMaterialsContext);
+        Map<String, String> coverageById = new LinkedHashMap<>();
+        for (int index = 0; index < requiredCoverage.size(); index++) {
+            coverageById.put("R%02d".formatted(index + 1), requiredCoverage.get(index));
+        }
+        String coverageChecklist = coverageById.entrySet().stream()
+            .map(entry -> entry.getKey() + " | " + entry.getValue())
+            .collect(java.util.stream.Collectors.joining("\n"));
+        String auditPrompt = """
+            Perform an adversarial final audit of the corrected educational narration.
+
+            PROJECT MATERIALS AND REQUIRED COVERAGE:
+            %s
+
+            EXACT REQUIRED COVERAGE CHECKLIST:
+            %s
+
+            NARRATION TO AUDIT:
+            %s
+
+            Requirements:
+            - Check every factual sentence, example, classification, mechanism, formula,
+              and named entity against the supplied higher-priority materials.
+            - Resolve contradictions inside the narration. A mechanism that prevents or
+              reduces a process must never be summarized as causing that process.
+            - Apply every explicit correction, prohibition, qualification, and
+              species-specific distinction in the project materials.
+            - Include every item explicitly marked as required lesson coverage, with a
+              clear definition or explanation rather than only naming the term.
+            - Keep accurate existing content and the source language.
+            - Remove unsupported claims rather than guessing.
+            - correctedNarration must be the complete final spoken script, with no
+              Markdown, headings, production notes, citations, or audit commentary.
+            - Set coverageComplete=true only if all explicit required coverage is present.
+            - Return every checklist requirementId exactly once in coverageChecks and set
+              covered=true only when correctedNarration explains that mapped requirement clearly.
+            - evidenceQuote must be an exact, direct explanatory sentence copied from
+              correctedNarration for that requirement, not a keyword or unrelated sentence.
+            - remainingConcerns must be empty only when no factual or coverage defect remains.
+            """.formatted(
+                projectMaterialsContext == null || projectMaterialsContext.isBlank()
+                    ? "No additional project materials were supplied."
+                    : projectMaterialsContext,
+                coverageById.isEmpty()
+                    ? "No machine-readable checklist was supplied."
+                    : coverageChecklist,
+                corrected);
+        JsonObject auditSchema = gson.fromJson("""
+            {
+              "type": "object",
+              "properties": {
+                "correctedNarration": { "type": "string" },
+                "coverageComplete": { "type": "boolean" },
+                "issuesResolved": { "type": "integer" },
+                "coverageChecks": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "requirementId": { "type": "string" },
+                      "covered": { "type": "boolean" },
+                      "evidenceQuote": { "type": "string" }
+                    },
+                    "required": ["requirementId", "covered", "evidenceQuote"],
+                    "additionalProperties": false
+                  }
+                },
+                "remainingConcerns": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                }
+              },
+              "required": [
+                "correctedNarration",
+                "coverageComplete",
+                "issuesResolved",
+                "coverageChecks",
+                "remainingConcerns"
+              ],
+              "additionalProperties": false
+            }
+            """, JsonObject.class);
+        if (!coverageById.isEmpty()) {
+            auditSchema.getAsJsonObject("properties")
+                .getAsJsonObject("coverageChecks")
+                .getAsJsonObject("items")
+                .getAsJsonObject("properties")
+                .getAsJsonObject("requirementId")
+                .add("enum", gson.toJsonTree(coverageById.keySet()));
+        }
+        JsonObject audit = gson.fromJson(generateStructured(
+            "You are the final independent educational accuracy and curriculum auditor. "
+                + "Return only schema-constrained JSON.", auditPrompt, auditSchema), JsonObject.class);
+        Set<String> covered = new LinkedHashSet<>();
+        String auditedNarration = audit.get("correctedNarration").getAsString();
+        audit.getAsJsonArray("coverageChecks").forEach(element -> {
+            JsonObject check = element.getAsJsonObject();
+            String evidence = check.get("evidenceQuote").getAsString().trim();
+            if (check.get("covered").getAsBoolean() && evidence.length() >= 12
+                    && auditedNarration.contains(evidence)) {
+                covered.add(check.get("requirementId").getAsString().trim());
+            }
+        });
+        Set<String> missingIds = new LinkedHashSet<>(coverageById.keySet());
+        missingIds.removeAll(covered);
+        List<String> missing = missingIds.stream().map(coverageById::get).toList();
+        if (!audit.get("coverageComplete").getAsBoolean() || !missingIds.isEmpty()
+                || !audit.getAsJsonArray("remainingConcerns").isEmpty()) {
+            throw new IOException("Narration audit failed. Missing coverage=" + missing
+                + "; remaining concerns=" + audit.get("remainingConcerns"));
+        }
+        return auditedNarration;
+    }
+
+    private List<String> extractRequiredCoverage(String projectMaterialsContext) {
+        if (projectMaterialsContext == null || projectMaterialsContext.isBlank()) {
+            return List.of();
+        }
+        List<String> requirements = new ArrayList<>();
+        Pattern item = Pattern.compile("^\\s*\\d+[.)]\\s+(.+?)\\s*$");
+        boolean inCoverage = false;
+        for (String line : projectMaterialsContext.split("\\R")) {
+            String trimmed = line.trim();
+            if (trimmed.toLowerCase().contains("required lesson coverage")) {
+                inCoverage = true;
+                continue;
+            }
+            if (inCoverage && trimmed.startsWith("## ")) break;
+            if (!inCoverage) continue;
+            Matcher matcher = item.matcher(trimmed);
+            if (matcher.matches()) requirements.add(matcher.group(1).trim());
+        }
+        return requirements;
     }
     
     /**

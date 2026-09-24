@@ -6,8 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 class SceneStoryboardGeneratorLabelConsistencyTest {
     @Test
@@ -156,6 +160,55 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
 
         assertFalse(generator.isLabelPlanningCandidate(motion));
         assertFalse(generator.isLabelPlanningCandidate(formula));
+    }
+
+    @Test
+    void abstractConceptsAreRemovedFromScientificArrowTargets() {
+        SceneSegment segment = new SceneSegment();
+        segment.setSegmentNumber(1);
+        segment.setSentence("The visible terminals demonstrate a circuit relationship.");
+        segment.setTemplate("labeled_image");
+        segment.setVisualType("realistic_labeled_image");
+        segment.setLabels(List.of("Positive terminal", "Circuit relationship"));
+        segment.setLabelPlacements(List.of());
+        Scene scene = new Scene();
+        scene.setSceneNumber(2);
+        scene.setSegments(List.of(segment));
+
+        JsonObject repair = new JsonObject();
+        repair.addProperty("rowId", "2.1");
+        repair.add("labels", strings("Positive terminal", "Circuit relationship"));
+        repair.add("labelPlacements", strings(
+            "Positive terminal | raised metal terminal | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Circuit relationship | relationship shown by the whole circuit | COORDINATES_PENDING_APPROVED_IMAGE"));
+        repair.add("labelTargetKinds", strings("visible_physical_target", "abstract_or_nonpointable"));
+        repair.add("pointTargetNames", strings("metal terminal", ""));
+        repair.addProperty("presentationMode", "point_labels");
+        repair.addProperty("visualSubject", "A close view of a battery and its two metal terminals.");
+        repair.addProperty("comfyPrompt", "A close view of a battery and its two metal terminals.");
+        JsonArray repairs = new JsonArray();
+        repairs.add(repair);
+
+        SceneStoryboardGenerator generator = new SceneStoryboardGenerator(null, false, "ltx", true);
+        generator.applyLabelPlanRepairs(List.of(scene), repairs, Set.of("2.1"));
+
+        assertEquals(List.of("Positive terminal"), segment.getLabels());
+        assertEquals(1, segment.getLabelPlacements().size());
+        assertTrue(segment.getCoverageNotes().contains("abstract or non-pointable"));
+    }
+
+    @Test
+    void conceptCannotBorrowDifferentPhysicalStructuresAsItsArrowTarget() {
+        assertFalse(SceneStoryboardGenerator.labelNamesPointTarget(
+            "spatial adaptation", "anthers and stigma"));
+        assertTrue(SceneStoryboardGenerator.labelNamesPointTarget(
+            "Positive terminals", "raised metal terminal"));
+    }
+
+    private JsonArray strings(String... values) {
+        JsonArray result = new JsonArray();
+        for (String value : values) result.add(value);
+        return result;
     }
 
     private void setProductionDefaults(SceneSegment segment, String sentence) {

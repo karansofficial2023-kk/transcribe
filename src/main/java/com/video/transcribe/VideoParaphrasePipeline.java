@@ -465,6 +465,7 @@ public class VideoParaphrasePipeline {
 			return "";
 		}
 		String cleaned = value
+			.replaceAll("(?im)^\\s*curriculum enrichment\\s*:\\s*", "")
 			.replaceAll("(?m)^```[a-zA-Z]*\\s*$", "")
 			.replaceAll("(?m)^```\\s*$", "")
 			.replace("**", "")

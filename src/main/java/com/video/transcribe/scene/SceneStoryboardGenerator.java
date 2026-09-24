@@ -42,6 +42,7 @@ public class SceneStoryboardGenerator {
         + "keep_previous_labels_visible; completed_frame_hold=3s";
     private static final String PENDING_COORDINATES = "COORDINATES_PENDING_APPROVED_IMAGE";
     private static final String BLOCK_FINAL_RENDER = "BLOCK_FINAL_RENDER_UNTIL_LABEL_COORDINATES_ARE_VERIFIED";
+    private static final int REVIEW_BATCH_SIZE = 5;
     private static final String PREMIUM_STILL_CONTRACT = "Premium educational documentary frame, sharp native 1920x1080 detail, "
         + "full-frame visual coverage with no blank card panel, intentional foreground-background separation, "
         + "camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, "
@@ -439,11 +440,24 @@ public class SceneStoryboardGenerator {
               "rowId": { "type": "string" },
               "labels": { "type": "array", "items": { "type": "string" } },
               "labelPlacements": { "type": "array", "items": { "type": "string" } },
+              "labelTargetKinds": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": ["visible_physical_target", "abstract_or_nonpointable"]
+                }
+              },
+              "pointTargetNames": { "type": "array", "items": { "type": "string" } },
+              "presentationMode": {
+                "type": "string",
+                "enum": ["point_labels", "focused_frames", "no_labels"]
+              },
               "visualSubject": { "type": "string" },
               "comfyPrompt": { "type": "string" }
             },
             "required": [
-              "rowId", "labels", "labelPlacements",
+              "rowId", "labels", "labelPlacements", "labelTargetKinds",
+              "pointTargetNames", "presentationMode",
               "visualSubject", "comfyPrompt"
             ],
             "additionalProperties": false
@@ -565,6 +579,31 @@ public class SceneStoryboardGenerator {
         return doc;
     }
 
+    /** Re-run the label specialist and deterministic production contract on a saved draft. */
+    public StoryboardDocument repairProductionLabels(StoryboardDocument doc, String baseName,
+            StoryboardProjectMaterials materials) throws IOException {
+        if (doc == null || doc.getScenes() == null || doc.getScenes().isEmpty()) {
+            throw new IllegalArgumentException("Storyboard draft has no scenes");
+        }
+        String storyboardText = normalizeProductionText(doc.getSourceText());
+        if (storyboardText.isBlank()) {
+            throw new IllegalArgumentException("Storyboard draft has no source text");
+        }
+        String languageInstruction = buildLanguageInstruction(storyboardText);
+        String projectContext = buildProjectContext(materials);
+        TopicCheck topicCheck = verifyTopic(storyboardText, baseName, languageInstruction, projectContext);
+        repairAndValidateLabelPlans(doc.getScenes(), storyboardText, languageInstruction,
+            topicCheck, projectContext);
+        enforceFinalProductionContract(doc.getScenes(), topicCheck.safeStoryboardTitle());
+        rebuildSceneNarrationFromSegments(doc.getScenes());
+        doc.setTitle(topicCheck.safeStoryboardTitle());
+        doc.setSubject(topicCheck.subject());
+        doc.setTopic(topicCheck.inferredTopic());
+        doc.setSmeRole(topicCheck.smeRole());
+        doc.setGeneratedAt(java.time.Instant.now().toString());
+        return doc;
+    }
+
     private String buildProjectContext(StoryboardProjectMaterials materials) {
         String evidence = materials == null ? "" : materials.promptContext();
         if (evidence.isBlank()) {
@@ -642,7 +681,9 @@ public class SceneStoryboardGenerator {
                 Repair label plans for educational storyboard still images in any subject.
                 Return only schema-constrained JSON. Do not change narration or lesson facts.
                 """.formatted(topicCheck.smeRole());
-            String userPrompt = """
+            for (JsonArray batch : partitionRows(labelCandidates)) {
+                Set<String> batchRowIds = rowIds(batch);
+                String userPrompt = """
                 Decide the labeling contract for every eligible stable teaching shot below.
                 The input includes both currently labeled and currently unlabeled rows because the
                 first visual-planning pass is not authoritative about whether labels are needed.
@@ -670,6 +711,32 @@ public class SceneStoryboardGenerator {
                 - Replace vague nouns with precise names supported by the narration.
                 - Keep every educationally necessary visible-object label even before its image is approved.
                 - labelPlacements contains exactly one entry per visible-object label.
+                - labelTargetKinds contains exactly one classification per label, in the same order.
+                  Use visible_physical_target only when the exact object, part, material, organism,
+                  or apparatus component can be pointed to at one stable image coordinate.
+                  Use abstract_or_nonpointable for mechanisms, classifications, relationships,
+                  timing phases, behaviors, directions or currents, advantages, disadvantages,
+                  laws, properties, outcomes, and other concepts that are not point targets.
+                - Prefer replacing an abstract candidate with the concrete visible structures that
+                  demonstrate it. If that is impossible, retain the concept with
+                  abstract_or_nonpointable so the renderer can move it to narration/subtitle rather
+                  than drawing a scientifically misleading arrow.
+                - Never mark a concept visible_physical_target merely because its placement names
+                  nearby concrete structures. Replace it with those concrete structure labels.
+                  For example, a process name is not a point target; its visible apparatus parts,
+                  anatomical structures, materials, or objects may be point targets.
+                - pointTargetNames contains exactly one short physical target name per label in the
+                  same order. For a visible target it must name the object under the target dot and
+                  share a concrete noun with the displayed label. For a nonpointable concept use "".
+                  A concept name may never be justified by naming different physical structures.
+                - presentationMode is point_labels only when all retained labels and boxes can remain
+                  readable without covering the subject or reserved areas. Use focused_frames when
+                  the row needs multiple clean close-ups or panels; each item then becomes a separate
+                  deterministic focused frame/caption instead of an arrow label. Use no_labels when
+                  spatial labels add no learning value.
+                - Use focused_frames for a list of separate species, examples, objects, or cases that
+                  would otherwise require a synthetic collage. Do not force independent examples into
+                  one generated image simply because their label text is short.
                 - For an existing absolute assetPath that identifies the exact reviewed static image, use:
                   Label name | exact semantic target description | target=(0.000,0.000)
                   Coordinates must be manually measured from that exact image.
@@ -690,15 +757,29 @@ public class SceneStoryboardGenerator {
                   materials. Never copy examples, terms, or structures from another lesson.
                 - If no reviewed final asset is available, retain the labeled still plan and semantic
                   targets with pending-coordinate markers so image generation can happen first.
-                """.formatted(languageInstruction, lessonText, projectContext, topicCheck.subject(),
-                    topicCheck.inferredTopic(), gson.toJson(labelCandidates));
-            try {
-                String response = ollama.generateStructured(systemPrompt, userPrompt,
-                    buildLabelRepairSchema(expectedRowIds));
-                applyLabelPlanRepairs(scenes, JsonParser.parseString(response).getAsJsonArray(),
-                    expectedRowIds);
-            } catch (Exception e) {
-                logger.warn("Label-plan repair failed; unsafe labeled rows will be downgraded: {}", e.getMessage());
+                    """.formatted(languageInstruction, lessonText, projectContext, topicCheck.subject(),
+                        topicCheck.inferredTopic(), gson.toJson(batch));
+                boolean applied = false;
+                for (int attempt = 1; attempt <= 2 && !applied; attempt++) {
+                    try {
+                        String response = ollama.generateStructured(systemPrompt, userPrompt,
+                            buildLabelRepairSchema(batchRowIds));
+                        applyLabelPlanRepairs(scenes, JsonParser.parseString(response).getAsJsonArray(),
+                            batchRowIds);
+                        applied = true;
+                    } catch (Exception e) {
+                        if (attempt < 2) {
+                            logger.warn("Label-plan repair failed validation for rows {}; retrying once: {}",
+                                batchRowIds, e.getMessage());
+                        } else {
+                            logger.warn("Label-plan repair failed twice for rows {}; unsafe labels in that "
+                                + "batch will be downgraded: {}", batchRowIds, e.getMessage());
+                        }
+                    }
+                }
+                if (!applied) {
+                    clearUnsafeLabelPlans(scenes, batchRowIds);
+                }
             }
         }
 
@@ -783,15 +864,19 @@ public class SceneStoryboardGenerator {
             - Keep the heading concise and the coverage note specific to the narration sentence.
             """.formatted(languageInstruction, topicCheck.subject(), topicCheck.inferredTopic(),
                 topicCheck.smeRole(), lessonText, projectContext, gson.toJson(rows));
-        try {
-            String response = ollama.generateStructured(systemPrompt, userPrompt,
-                buildSmeReviewSchema(expected));
+        String allRowsJson = gson.toJson(rows);
+        for (JsonArray batch : partitionRows(rows)) {
+            Set<String> batchRowIds = rowIds(batch);
+            String batchPrompt = userPrompt.replace(allRowsJson, gson.toJson(batch));
+            try {
+            String response = ollama.generateStructured(systemPrompt, batchPrompt,
+                buildSmeReviewSchema(batchRowIds));
             JsonArray reviews = JsonParser.parseString(response).getAsJsonArray();
             Set<String> seen = new LinkedHashSet<>();
             for (var element : reviews) {
                 JsonObject review = element.getAsJsonObject();
                 String key = getStringOrDefault(review, "rowId", "");
-                if (!expected.contains(key)) {
+                if (!batchRowIds.contains(key)) {
                     logger.warn("SME visual audit returned unknown row {}; ignoring it", key);
                     continue;
                 }
@@ -825,14 +910,15 @@ public class SceneStoryboardGenerator {
                 segment.setFormulaLines(getStringList(review, "formulaLines"));
                 enforceStoryboardQuality(segment);
             }
-            if (!seen.equals(expected)) {
-                Set<String> missing = new LinkedHashSet<>(expected);
+            if (!seen.equals(batchRowIds)) {
+                Set<String> missing = new LinkedHashSet<>(batchRowIds);
                 missing.removeAll(seen);
                 logger.warn("SME visual audit omitted rows {}; keeping their existing SME-generated plans", missing);
             }
-        } catch (Exception e) {
-            logger.warn("Final SME visual audit could not be applied; keeping existing SME-generated plans: {}",
-                e.getMessage());
+            } catch (Exception e) {
+                logger.warn("Final SME visual audit could not be applied for rows {}; "
+                    + "keeping existing SME-generated plans: {}", batchRowIds, e.getMessage());
+            }
         }
     }
 
@@ -867,7 +953,7 @@ public class SceneStoryboardGenerator {
     private void enforceLabelDuration(SceneSegment segment) {
         int labelCount = segment.getLabels() == null ? 0 : segment.getLabels().size();
         if (labelCount == 0) return;
-        double minimum = Math.max(segment.getEstimatedNarrationSeconds(), labelCount + 2.5);
+        double minimum = Math.max(segment.getEstimatedNarrationSeconds(), labelCount + 3.0);
         if (segment.getRecommendedClipSeconds() < minimum) {
             segment.setRecommendedClipSeconds(roundOneDecimal(minimum));
         }
@@ -928,7 +1014,7 @@ public class SceneStoryboardGenerator {
         segment.setMotionType("static_image");
     }
 
-    private void applyLabelPlanRepairs(List<Scene> scenes, JsonArray repairs,
+    void applyLabelPlanRepairs(List<Scene> scenes, JsonArray repairs,
             Set<String> expectedRowIds) {
         Set<String> seen = new LinkedHashSet<>();
         for (var element : repairs) {
@@ -943,11 +1029,54 @@ public class SceneStoryboardGenerator {
             int segmentNumber = Integer.parseInt(keyParts[1]);
             SceneSegment segment = findSegment(scenes, sceneNumber, segmentNumber);
             if (segment == null) continue;
-            segment.setLabels(sanitizeLabels(getStringList(repair, "labels"), segment));
-            segment.setLabelPlacements(getStringList(repair, "labelPlacements"));
-            segment.setVisualSubject(repair.get("visualSubject").getAsString());
+            List<String> labels = getStringList(repair, "labels");
+            List<String> placements = getStringList(repair, "labelPlacements");
+            List<String> targetKinds = getStringList(repair, "labelTargetKinds");
+            List<String> pointTargetNames = getStringList(repair, "pointTargetNames");
+            String presentationMode = getStringOrDefault(repair, "presentationMode", "no_labels");
+            if (labels.size() != placements.size() || labels.size() != targetKinds.size()
+                    || labels.size() != pointTargetNames.size()) {
+                throw new IllegalStateException("Label-planning review returned mismatched label arrays for row "
+                    + rowId);
+            }
+            List<String> physicalLabels = new ArrayList<>();
+            List<String> physicalPlacements = new ArrayList<>();
+            for (int index = 0; index < labels.size(); index++) {
+                if ("visible_physical_target".equals(targetKinds.get(index))
+                        && labelNamesPointTarget(labels.get(index), pointTargetNames.get(index))) {
+                    physicalLabels.add(labels.get(index));
+                    physicalPlacements.add(placements.get(index));
+                }
+            }
+            if ("focused_frames".equals(presentationMode) && !physicalLabels.isEmpty()) {
+                segment.setLabels(List.of());
+                segment.setLabelPlacements(List.of());
+                segment.setTemplate("process");
+                segment.setVisualType("process_steps");
+                segment.setMediaType("animation");
+                segment.setMotionType("local_animation");
+                segment.setTool("pillow_opencv");
+                segment.setSteps(List.copyOf(physicalLabels));
+                segment.setMotion("cross_dissolve; focused_frame_sequence; no_scientific_arrows");
+                segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
+                    "Layout safety review: present the visible items as separate focused frames "
+                        + "with deterministic captions, not crowded arrow labels."));
+            } else if ("point_labels".equals(presentationMode)) {
+                segment.setLabels(sanitizeLabels(physicalLabels, segment));
+                segment.setLabelPlacements(physicalPlacements);
+            } else {
+                segment.setLabels(List.of());
+                segment.setLabelPlacements(List.of());
+            }
+            if (physicalLabels.size() < labels.size()) {
+                segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
+                    "Label safety review: abstract or non-pointable concepts remain in narration/subtitles; "
+                        + "no scientific arrows are drawn to them."));
+            }
+            segment.setVisualSubject(sanitizeGeneratedProductionText(
+                repair.get("visualSubject").getAsString()));
             segment.setComfyPrompt(ensureProductionImagePrompt(segment,
-                repair.get("comfyPrompt").getAsString()));
+                sanitizeGeneratedProductionText(repair.get("comfyPrompt").getAsString())));
             enforceLabelContract(segment);
         }
         if (!seen.equals(expectedRowIds)) {
@@ -963,6 +1092,67 @@ public class SceneStoryboardGenerator {
             .getAsJsonObject("properties").getAsJsonObject("rowId");
         rowId.add("enum", gson.toJsonTree(expectedRowIds));
         return schema;
+    }
+
+    private void clearUnsafeLabelPlans(List<Scene> scenes, Set<String> rowIds) {
+        for (String rowId : rowIds) {
+            String[] keyParts = rowId.split("\\.", 2);
+            SceneSegment segment = findSegment(scenes,
+                Integer.parseInt(keyParts[0]), Integer.parseInt(keyParts[1]));
+            if (segment == null) continue;
+            segment.setLabels(List.of());
+            segment.setLabelPlacements(List.of());
+            segment.setArrows(List.of());
+            segment.setHighlights(List.of());
+            if (isLabeledVisual(segment)) downgradeToUnlabeledVisual(segment);
+            segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
+                "Label safety review failed twice; omitted all unverified scientific arrows."));
+        }
+    }
+
+    static boolean labelNamesPointTarget(String label, String pointTargetName) {
+        Set<String> labelWords = concreteWords(label);
+        Set<String> targetWords = concreteWords(pointTargetName);
+        labelWords.retainAll(targetWords);
+        return !labelWords.isEmpty();
+    }
+
+    private static Set<String> concreteWords(String value) {
+        Set<String> words = new LinkedHashSet<>();
+        if (value == null) return words;
+        for (String token : value.toLowerCase(Locale.ROOT).split("[^a-z0-9]+")) {
+            String word = token.replaceFirst("(?:ies|es|s)$", "");
+            if (word.length() >= 3 && !Set.of("the", "with", "from", "into", "part", "area").contains(word)) {
+                words.add(word);
+            }
+        }
+        return words;
+    }
+
+    private static String sanitizeGeneratedProductionText(String value) {
+        return normalizeProductionText(value)
+            .replaceAll("(?i)1920x\\d{2,4}\\p{IsHan}+", "1920x1080 frame");
+    }
+
+    private List<JsonArray> partitionRows(JsonArray rows) {
+        List<JsonArray> batches = new ArrayList<>();
+        for (int start = 0; start < rows.size(); start += REVIEW_BATCH_SIZE) {
+            JsonArray batch = new JsonArray();
+            int end = Math.min(rows.size(), start + REVIEW_BATCH_SIZE);
+            for (int index = start; index < end; index++) {
+                batch.add(rows.get(index));
+            }
+            batches.add(batch);
+        }
+        return batches;
+    }
+
+    private Set<String> rowIds(JsonArray rows) {
+        Set<String> ids = new LinkedHashSet<>();
+        for (var element : rows) {
+            ids.add(element.getAsJsonObject().get("rowId").getAsString());
+        }
+        return ids;
     }
 
     private void rebuildSceneNarrationFromSegments(List<Scene> scenes) {
@@ -1973,6 +2163,11 @@ public class SceneStoryboardGenerator {
         enforceGeneratedVideoOverlayRules(segment);
         enforceTiming(segment);
 
+        if (usesGeneratedStill(segment) && !hasSpecificVisualSubject(segment.getVisualSubject())) {
+            String narration = safePromptText(segment.getSentence());
+            segment.setVisualSubject("Source-faithful visible subject and action: " + narration
+                + " Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.");
+        }
         if (usesGeneratedStill(segment)
                 && (segment.getComfyPrompt() == null || segment.getComfyPrompt().isBlank())) {
             segment.setComfyPrompt(buildDefaultComfyPrompt(segment));
@@ -1989,6 +2184,12 @@ public class SceneStoryboardGenerator {
         segment.setLabels(sanitizeLabels(segment.getLabels(), segment));
         enforceLabeledVisualQuality(segment);
         enforceLabelContract(segment);
+    }
+
+    private boolean hasSpecificVisualSubject(String requirement) {
+        if (requirement == null) return false;
+        String value = requirement.trim().toLowerCase(Locale.ROOT);
+        return value.length() >= 48 && !containsGenericImagePrompt(value);
     }
 
     private void enforceLabeledVisualQuality(SceneSegment segment) {

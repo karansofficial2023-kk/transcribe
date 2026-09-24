@@ -55,6 +55,9 @@ public final class StoryboardProjectMaterialsLoader {
             if (!isRelevantToProject(file, baseName)) {
                 continue;
             }
+            if (isUnapprovedGeneratedStoryboard(file)) {
+                continue;
+            }
             String extension = extension(file);
             if (ASSET_EXTENSIONS.contains(extension)) {
                 assets.add(file.toAbsolutePath().normalize());
@@ -73,6 +76,14 @@ public final class StoryboardProjectMaterialsLoader {
             context.append(section);
         }
         return new StoryboardProjectMaterials(context.toString().trim(), assets);
+    }
+
+    private static boolean isUnapprovedGeneratedStoryboard(Path file) {
+        String name = file.getFileName().toString().toLowerCase(Locale.ROOT);
+        if (!name.contains("storyboard")) return false;
+        return !containsAny(name,
+            "teacher approved", "teacher_approved", "teacher-approved",
+            "approved storyboard", "approved_storyboard", "approved-storyboard");
     }
 
     private static String extractText(Path file, String extension) throws IOException {
