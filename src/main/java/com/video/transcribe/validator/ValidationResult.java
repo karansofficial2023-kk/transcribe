@@ -7,6 +7,7 @@ public class ValidationResult {
 	private int paraphrasedLength;
 	private double semanticSimilarityScore;
 	private double factualConsistencyScore;
+	private double scientificAccuracyScore;
 	private double keyConceptPreservationScore;
 	private double topicCoverageScore;
 	private double hallucinationScore;
@@ -46,6 +47,14 @@ public class ValidationResult {
 
 	public void setFactualConsistencyScore(double factualConsistencyScore) {
 		this.factualConsistencyScore = factualConsistencyScore;
+	}
+
+	public double getScientificAccuracyScore() {
+		return scientificAccuracyScore;
+	}
+
+	public void setScientificAccuracyScore(double scientificAccuracyScore) {
+		this.scientificAccuracyScore = scientificAccuracyScore;
 	}
 
 	public double getKeyConceptPreservationScore() {

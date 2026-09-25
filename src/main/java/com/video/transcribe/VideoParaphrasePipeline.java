@@ -265,7 +265,11 @@ public class VideoParaphrasePipeline {
 			String paraphrased = maybeEnrichParaphrase(originalText, paraphraseValidation.paraphrasedText,
 				style, baseName, materials);
 			paraphrased = factCheckNarration(paraphrased, materials);
-			ValidationResult validation = paraphraseValidation.validation;
+			ValidationResult validation = validateParaphrase(originalText, paraphrased, baseName);
+			if (!validation.isPassed()) {
+				throw new IOException("Final narration failed the production accuracy gate: "
+					+ formatValidationIssues(validation));
+			}
 			saveParaphrase(paraphrased, baseName);
 
 			// Phase 3c: Generate scene storyboard
@@ -331,7 +335,8 @@ public class VideoParaphrasePipeline {
 			}
 
 			validation = validateParaphrase(originalText, paraphrased, baseName);
-			if (validation.getOverallScore() >= config.getValidationThreshold()) {
+			if (validation.isPassed()
+					&& validation.getOverallScore() >= config.getValidationThreshold()) {
 				logger.info("Paraphrase accepted with validation score {}/100 on attempt {}",
 					validation.getOverallScore(), attempt);
 				return new ParaphraseValidation(paraphrased, validation);
@@ -354,9 +359,9 @@ public class VideoParaphrasePipeline {
 	private boolean isAcceptableAfterRetries(ValidationResult validation) {
 		double nearThreshold = Math.max(70.0, config.getValidationThreshold() - 10.0);
 		return validation.getOverallScore() >= nearThreshold
-			&& validation.getFactualConsistencyScore() >= 70.0
+			&& validation.getScientificAccuracyScore() >= 85.0
 			&& validation.getTopicCoverageScore() >= 70.0
-			&& validation.getHallucinationScore() >= 80.0;
+			&& validation.getHallucinationScore() >= 85.0;
 	}
 
 	private String formatValidationIssues(ValidationResult validation) {
@@ -367,6 +372,7 @@ public class VideoParaphrasePipeline {
 		text.append("Overall score: ").append(validation.getOverallScore()).append("/100\n");
 		text.append("Semantic similarity: ").append(validation.getSemanticSimilarityScore()).append("/100\n");
 		text.append("Factual consistency: ").append(validation.getFactualConsistencyScore()).append("/100\n");
+		text.append("Scientific accuracy: ").append(validation.getScientificAccuracyScore()).append("/100\n");
 		text.append("Key concepts: ").append(validation.getKeyConceptPreservationScore()).append("/100\n");
 		text.append("Topic coverage: ").append(validation.getTopicCoverageScore()).append("/100\n");
 		text.append("Hallucination safety: ").append(validation.getHallucinationScore()).append("/100\n");

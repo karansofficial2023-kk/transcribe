@@ -32,24 +32,26 @@ public class AccuracyValidator {
         
         double semanticScore = calculateSemanticSimilarity(originalText, paraphrasedText);
         double factualScore = checkFactualConsistency(originalText, paraphrasedText);
+        double scientificScore = checkScientificAccuracy(paraphrasedText);
         double keyConceptScore = checkKeyConceptsPreserved(originalText, paraphrasedText);
         double topicCoverageScore = checkTopicCoverage(originalText, paraphrasedText);
         double hallucinationScore = detectHallucinations(originalText, paraphrasedText);
         
-        double overallScore = (semanticScore * 0.15) + (factualScore * 0.25) +
-                             (keyConceptScore * 0.25) + (topicCoverageScore * 0.25) +
-                             (hallucinationScore * 0.10);
+        double overallScore = (semanticScore * 0.10) + (factualScore * 0.15) +
+                             (scientificScore * 0.25) + (keyConceptScore * 0.20) +
+                             (topicCoverageScore * 0.20) + (hallucinationScore * 0.10);
         
         ValidationResult result = new ValidationResult();
         result.setOriginalLength(originalText.length());
         result.setParaphrasedLength(paraphrasedText.length());
         result.setSemanticSimilarityScore(semanticScore);
         result.setFactualConsistencyScore(factualScore);
+        result.setScientificAccuracyScore(scientificScore);
         result.setKeyConceptPreservationScore(keyConceptScore);
         result.setTopicCoverageScore(topicCoverageScore);
         result.setHallucinationScore(hallucinationScore);
         result.setOverallScore(Math.round(overallScore * 100.0) / 100.0);
-        result.setPassed(overallScore >= 80.0);
+        result.setPassed(passesQualityGates(result));
         result.setTimestamp(java.time.Instant.now().toString());
         
         List<String> issues = identifyIssues(originalText, paraphrasedText);
@@ -57,6 +59,35 @@ public class AccuracyValidator {
         
         logger.info("Validation complete - Overall Score: {}/100", result.getOverallScore());
         return result;
+    }
+
+    static boolean passesQualityGates(ValidationResult result) {
+        return result.getOverallScore() >= 80.0
+            && result.getScientificAccuracyScore() >= 85.0
+            && result.getTopicCoverageScore() >= 80.0
+            && result.getHallucinationScore() >= 85.0;
+    }
+
+    private double checkScientificAccuracy(String narration) throws IOException {
+        String prompt = """
+            Independently audit this educational narration against established subject knowledge.
+            Do not assume a claim is correct merely because it came from a transcript.
+            Check every mechanism, classification, named example, formula, organism, causal claim,
+            and technical statement. Penalize unsupported species-general claims, invented anatomy,
+            internal contradictions, and explanations that reverse cause and effect.
+
+            NARRATION:
+            %s
+
+            Respond ONLY with a JSON object:
+            {"score": <number 0-100>, "incorrect_claims": ["..."], "uncertain_claims": ["..."]}
+            Score 100 only when no factual defect or unsupported mechanism remains.
+            """.formatted(truncate(narration, 8000));
+        String response = ollama.generate(
+            "You are an independent senior subject-matter fact-checker. Be conservative and strict.",
+            prompt
+        );
+        return extractScore(response);
     }
     
     private double calculateSemanticSimilarity(String original, String paraphrased) throws IOException {
