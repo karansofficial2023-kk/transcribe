@@ -21,16 +21,11 @@ def transcribe(audio_path, model_size="base", language=None, output_json=None, d
             # Load the installed PyTorch CUDA libraries for CTranslate2 on Windows.
             if sys.platform == "win32" and device == "cuda":
                 import os
-                import ctypes
                 from pathlib import Path
                 import torch
 
                 cuda_lib = Path(torch.__file__).parent / "lib"
                 cuda_handle = os.add_dll_directory(str(cuda_lib))
-                cuda_libraries = [
-                    ctypes.WinDLL(str(cuda_lib / "cublas64_12.dll")),
-                    ctypes.WinDLL(str(cuda_lib / "cudnn64_9.dll")),
-                ]
 
             from faster_whisper import WhisperModel
             

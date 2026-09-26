@@ -912,6 +912,13 @@ public class SceneStoryboardGenerator {
                     continue;
                 }
                 if (getBooleanOrDefault(review, "approved", false)) continue;
+                String issue = getStringOrDefault(review, "issue", "visual plan corrected");
+                if (isSubjectMismatchIssue(issue)) {
+                    applySourceFaithfulFallback(segment);
+                    segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
+                        "SME guard: replaced an unrelated visual plan with a source-faithful fallback."));
+                    continue;
+                }
                 segment.setTemplate(getStringOrDefault(review, "template", segment.getTemplate()));
                 segment.setVisualType(getStringOrDefault(review, "visualType", segment.getVisualType()));
                 segment.setHeading(getStringOrDefault(review, "heading", segment.getHeading()));
@@ -925,7 +932,7 @@ public class SceneStoryboardGenerator {
                 segment.setComfyPrompt(getStringOrDefault(review, "comfyPrompt", segment.getComfyPrompt()));
                 segment.setCoverageNotes(appendNote(
                     getStringOrDefault(review, "coverageNotes", segment.getCoverageNotes()),
-                    "SME correction: " + getStringOrDefault(review, "issue", "visual plan corrected")));
+                    "SME correction: " + issue));
                 segment.setFormulaLines(getStringList(review, "formulaLines"));
                 enforceStoryboardQuality(segment);
             }
@@ -939,6 +946,50 @@ public class SceneStoryboardGenerator {
                     + "keeping existing SME-generated plans: {}", batchRowIds, e.getMessage());
             }
         }
+    }
+
+    private boolean isSubjectMismatchIssue(String issue) {
+        String value = issue == null ? "" : issue.toLowerCase(Locale.ROOT);
+        return containsAnyIgnoreCase(value,
+            "unrelated", "wrong subject", "different subject", "another lesson",
+            "does not match", "mismatch", "irrelevant to the narration");
+    }
+
+    private void applySourceFaithfulFallback(SceneSegment target) {
+        applySourceFaithfulFallback(target, "");
+    }
+
+    private void applySourceFaithfulFallback(SceneSegment target, String lessonContext) {
+        SceneSegment fallback = createSourceFallbackSegment(target.getSentence(), lessonContext);
+        target.setTemplate(fallback.getTemplate());
+        target.setVisualType(fallback.getVisualType());
+        target.setHeading(fallback.getHeading());
+        target.setVisualSubject(fallback.getVisualSubject());
+        target.setAssetPath(fallback.getAssetPath());
+        target.setMediaType(fallback.getMediaType());
+        target.setMotionType(fallback.getMotionType());
+        target.setEstimatedNarrationSeconds(fallback.getEstimatedNarrationSeconds());
+        target.setRecommendedClipSeconds(fallback.getRecommendedClipSeconds());
+        target.setTimingNotes(fallback.getTimingNotes());
+        target.setVisualAnimation(fallback.getVisualAnimation());
+        target.setLocalAnimation(fallback.getLocalAnimation());
+        target.setLabels(fallback.getLabels());
+        target.setLabelPlacements(fallback.getLabelPlacements());
+        target.setLabelStyle(fallback.getLabelStyle());
+        target.setArrows(fallback.getArrows());
+        target.setHighlights(fallback.getHighlights());
+        target.setFormulaLines(fallback.getFormulaLines());
+        target.setExplainSteps(fallback.getExplainSteps());
+        target.setSteps(fallback.getSteps());
+        target.setColumns(fallback.getColumns());
+        target.setImageRecommendations(fallback.getImageRecommendations());
+        target.setMotion(fallback.getMotion());
+        target.setSubtitle(fallback.getSubtitle());
+        target.setSubtitleStyle(fallback.getSubtitleStyle());
+        target.setTool(fallback.getTool());
+        target.setAssetQualityNotes(fallback.getAssetQualityNotes());
+        target.setComfyPrompt(fallback.getComfyPrompt());
+        target.setLtxShot(null);
     }
 
     private JsonObject buildSmeReviewSchema(Set<String> expectedRowIds) {
@@ -1211,6 +1262,15 @@ public class SceneStoryboardGenerator {
             Scene scene = scenes.get(sceneIndex);
             if (scene.getSegments() == null) continue;
             for (SceneSegment segment : scene.getSegments()) {
+                if (hasRecordedSubjectMismatch(segment)) {
+                    String lessonContext = String.join(" - ", java.util.stream.Stream.of(
+                            storyboardTitle, scene.getSceneTitle())
+                        .filter(value -> value != null && !value.isBlank())
+                        .distinct()
+                        .toList());
+                    applySourceFaithfulFallback(segment, lessonContext);
+                    segment.setCoverageNotes("SME guard: replaced an unrelated visual plan with a source-faithful fallback.");
+                }
                 sanitizeAssetPath(segment);
                 enforceStoryboardQuality(segment);
                 finalizeLabelConsistency(segment);
@@ -1235,6 +1295,24 @@ public class SceneStoryboardGenerator {
                 enforceLabelDuration(segment);
             }
         }
+    }
+
+    private boolean hasRecordedSubjectMismatch(SceneSegment segment) {
+        String notes = segment == null ? "" : segment.getCoverageNotes();
+        if (containsAnyIgnoreCase(notes,
+            "subject and narration are unrelated", "wrong subject", "different subject",
+            "another lesson", "visual irrelevant", "mismatch makes the visual irrelevant")) {
+            return true;
+        }
+        if (!containsAnyIgnoreCase(notes,
+                "restored the exact narration sentence while preserving the ordered visual plan")) {
+            return false;
+        }
+        String productionPlan = String.join(" ", java.util.stream.Stream.of(
+                segment.getVisualSubject(), segment.getVisualAnimation(), segment.getComfyPrompt())
+            .filter(value -> value != null && !value.isBlank())
+            .toList());
+        return !hasMeaningfulOverlap(segment.getSentence(), productionPlan);
     }
 
     private SceneSegment findSegment(List<Scene> scenes, int sceneNumber, int segmentNumber) {
@@ -1950,6 +2028,10 @@ public class SceneStoryboardGenerator {
     }
 
     private SceneSegment createSourceFallbackSegment(String sentence) {
+        return createSourceFallbackSegment(sentence, "");
+    }
+
+    private SceneSegment createSourceFallbackSegment(String sentence, String lessonContext) {
         SceneSegment segment = new SceneSegment();
         // This is a provisional label candidate. The subject-aware label repair pass
         // decides whether visible-object labels are educationally necessary. If not,
@@ -1960,8 +2042,13 @@ public class SceneStoryboardGenerator {
         segment.setTemplate(labeled ? "labeled_image" : "photo");
         segment.setVisualType(labeled ? "realistic_labeled_image" : "realistic_image");
         segment.setHeading(buildHeading(sentence));
-        segment.setVisualSubject("Sharp 1920x1080 frame whose exact subject and visible action are stated in this approved narration: "
-            + sentence + "; subject centered with clear separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.");
+        String context = lessonContext == null || lessonContext.isBlank()
+            ? sentence
+            : lessonContext;
+        segment.setVisualSubject("Sharp 1920x1080 realistic documentary image for " + context
+            + "; depict the concrete subject or visible action described by: " + sentence
+            + "; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, "
+            + "eye-level camera, neutral natural lighting, and no unrelated elements.");
         segment.setAssetPath("");
         segment.setMediaType(labeled ? "photo_with_labels" : "photo");
         segment.setMotionType("static_image");
