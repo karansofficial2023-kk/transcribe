@@ -265,11 +265,15 @@ public class VideoParaphrasePipeline {
 			String paraphrased = maybeEnrichParaphrase(originalText, paraphraseValidation.paraphrasedText,
 				style, baseName, materials);
 			paraphrased = factCheckNarration(paraphrased, materials);
-			ValidationResult validation = validateParaphrase(originalText, paraphrased, baseName);
-			if (!validation.isPassed()) {
-				throw new IOException("Final narration failed the production accuracy gate: "
-					+ formatValidationIssues(validation));
-			}
+			ParaphraseValidation finalNarration = finalizeNarrationUntilValid(
+				originalText,
+				paraphrased,
+				style,
+				baseName,
+				materials
+			);
+			paraphrased = finalNarration.paraphrasedText;
+			ValidationResult validation = finalNarration.validation;
 			saveParaphrase(paraphrased, baseName);
 
 			// Phase 3c: Generate scene storyboard
@@ -335,15 +339,19 @@ public class VideoParaphrasePipeline {
 			}
 
 			validation = validateParaphrase(originalText, paraphrased, baseName);
-			if (validation.isPassed()
-					&& validation.getOverallScore() >= config.getValidationThreshold()) {
+			List<String> failedGates = AccuracyValidator.failedQualityGates(
+				validation,
+				config.getValidationThreshold()
+			);
+			if (validation.isPassed() && failedGates.isEmpty()) {
 				logger.info("Paraphrase accepted with validation score {}/100 on attempt {}",
 					validation.getOverallScore(), attempt);
 				return new ParaphraseValidation(paraphrased, validation);
 			}
 
-			logger.warn("Paraphrase score {}/100 below threshold {}; retrying if attempts remain",
-				validation.getOverallScore(), config.getValidationThreshold());
+			logger.warn("Paraphrase failed production quality gates: {}. Overall score: {}/100; retrying if attempts remain",
+				failedGates.isEmpty() ? "validator returned passed=false" : String.join("; ", failedGates),
+				validation.getOverallScore());
 		}
 
 		if (validation != null && isAcceptableAfterRetries(validation)) {
@@ -352,8 +360,15 @@ public class VideoParaphrasePipeline {
 			return new ParaphraseValidation(paraphrased, validation);
 		}
 
+		String failedGateSummary = validation == null
+			? "validation result unavailable"
+			: String.join("; ", AccuracyValidator.failedQualityGates(
+				validation,
+				config.getValidationThreshold()
+			));
 		throw new IOException("Paraphrase validation failed after " + maxAttempts
-			+ " attempts. Last score: " + (validation != null ? validation.getOverallScore() : "none"));
+			+ " attempts. Last score: " + (validation != null ? validation.getOverallScore() : "none")
+			+ ". Failed gates: " + failedGateSummary);
 	}
 
 	private boolean isAcceptableAfterRetries(ValidationResult validation) {
@@ -362,6 +377,58 @@ public class VideoParaphrasePipeline {
 			&& validation.getScientificAccuracyScore() >= 85.0
 			&& validation.getTopicCoverageScore() >= 70.0
 			&& validation.getHallucinationScore() >= 85.0;
+	}
+
+	private ParaphraseValidation finalizeNarrationUntilValid(
+			String originalText,
+			String candidate,
+			String style,
+			String baseName,
+			StoryboardProjectMaterials materials) throws Exception {
+		String narration = candidate;
+		ValidationResult validation = null;
+		int maxAttempts = Math.max(1, config.getValidationMaxRetries());
+
+		for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+			logger.info("Final narration validation attempt {}/{}", attempt, maxAttempts);
+			if (attempt > 1) {
+				String repaired = ollama.repairParaphrase(
+					originalText,
+					narration,
+					formatValidationIssues(validation),
+					style
+				);
+				repaired = cleanGeneratedNarration(repaired);
+				if (repaired.isBlank()) {
+					logger.warn("Final narration repair returned blank text; retaining the previous candidate");
+				} else {
+					narration = repaired;
+				}
+				try {
+					narration = ollama.proofreadEducationalTerminology(narration);
+				} catch (IOException e) {
+					logger.warn("Final terminology proofread could not be applied: {}", e.getMessage());
+				}
+				narration = factCheckNarration(narration, materials);
+			}
+
+			validation = validateParaphrase(originalText, narration, baseName);
+			List<String> failedGates = AccuracyValidator.failedQualityGates(
+				validation,
+				config.getValidationThreshold()
+			);
+			if (validation.isPassed() && failedGates.isEmpty()) {
+				logger.info("Final narration accepted with validation score {}/100 on attempt {}",
+					validation.getOverallScore(), attempt);
+				return new ParaphraseValidation(narration, validation);
+			}
+
+			logger.warn("Final narration failed production quality gates: {}. Repairing if attempts remain",
+				failedGates.isEmpty() ? "validator returned passed=false" : String.join("; ", failedGates));
+		}
+
+		throw new IOException("Final narration failed the production accuracy gate after "
+			+ maxAttempts + " attempts:\n" + formatValidationIssues(validation));
 	}
 
 	private String formatValidationIssues(ValidationResult validation) {
