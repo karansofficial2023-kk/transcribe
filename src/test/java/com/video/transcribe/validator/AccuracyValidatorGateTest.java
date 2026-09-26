@@ -61,6 +61,20 @@ class AccuracyValidatorGateTest {
         );
     }
 
+    @Test
+    void parsesIssueEvaluatorObjectsAsWellAsArrays() {
+        String response = """
+            ```json
+            {"issues": ["Remove an unsupported example."], "severity": "high"}
+            ```
+            """;
+
+        assertEquals(
+            java.util.List.of("Remove an unsupported example."),
+            AccuracyValidator.extractIssueList(response)
+        );
+    }
+
     private ValidationResult result(double overall, double scientific, double coverage, double hallucination) {
         ValidationResult result = new ValidationResult();
         result.setOverallScore(overall);
