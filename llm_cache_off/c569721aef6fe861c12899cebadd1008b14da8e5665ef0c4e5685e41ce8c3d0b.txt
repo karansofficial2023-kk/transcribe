@@ -1,0 +1,22 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A green plant with leaves, roots in soil, and a transparent tube delivering carbon dioxide near the base of the plant. The camera is at eye level, slightly angled down to show the plant's base and surrounding environment. Natural sunlight illuminates the scene with warm tones.",
+      "image_requirement": "Viewer must see the plant absorbing carbon dioxide from the air and water from the soil.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In this process, plants absorb carbon dioxide from the air and water from the soil.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

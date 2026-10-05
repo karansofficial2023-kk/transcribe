@@ -1,0 +1,64 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a flower's anthers releasing pollen, with the stigma positioned higher on the same flower, natural lighting from the side highlighting the structure.",
+      "image_requirement": "Viewer must see the anthers and stigma in different positions to understand harkogamy.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This structural adaptation is called harkogamy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Harkogamy in Flowers"
+    },
+    {
+      "shot_id": "6.5",
+      "visual_type": "split_screen",
+      "image_prompt": "Primrose flower with stigma at a higher position | Primrose flower with anthers positioned lower on the same flower",
+      "image_requirement": "Viewer must see both flowers to compare the different heights of stigma and anther.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [
+        "Primrose with stigma higher | A close-up of a primrose showing the stigma at a higher position than the anthers",
+        "Primrose with anthers lower | A close-up of a primrose showing the anthers positioned lower than the stigma"
+      ],
+      "narration_en": "Primrose shows heterostyly as the stigma is located at a different height compared to the anther.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Heterostyly in Primrose"
+    },
+    {
+      "shot_id": "6.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a flower with multiple adaptations: long nectar tube, bright petals, and positioned anthers, natural lighting from the side.",
+      "image_requirement": "Viewer must see the various adaptations to understand their role in cross-pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "These are various adaptations in flowers that assist in cross-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Adaptations for Cross-Pollination"
+    }
+  ]
+}

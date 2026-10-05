@@ -1,0 +1,14 @@
+{
+  "score": 85,
+  "incorrect_claims": [
+    "The male stamen curls inward to deposit pollen onto the sticky female stigma. This process is referred to as self-pollination.",
+    "In plants such as Ixora, the anther and the stigma reach maturity at the same time. This simultaneous maturation of both structures supports self-pollination and is known as homogamy.",
+    "Some plants, like wood sorrel during late summer, produce small, inconspicuous flowers that lack fragrance. These bisexual flowers remain closed. The occurrence of self-pollination and fertilization within a flower that does not open is called clistogamy. In these plants, the pollen grains are already positioned on the stigma of the same flower to facilitate self-pollination.",
+    "In flowers like orchids, the pollen from the anther does not germinate on the stigma of the same flower.",
+    "Pansies have a hood that covers the stigma, which is a structural adaptation known as harkogamy."
+  ],
+  "uncertain_claims": [
+    "The male stamen curls inward to deposit pollen onto the sticky female stigma. This process is referred to as self-pollination.",
+    "In plants such as Ixora, the anther and the stigma reach maturity at the same time. This simultaneous maturation of both structures supports self-pollination and is known as homogamy."
+  ]
+}

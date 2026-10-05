@@ -1,0 +1,80 @@
+[
+    {
+        "rowId": "1.2",
+        "labels": ["కార్బన్ డయాక్సైడ్", "నీరు"],
+        "labelPlacements": [
+            "కార్బన్ డయాక్సైడ్ | గాలి నుండి పొందిన వాయువు అంశం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీరు | నేల నుండి పొందిన నీరు | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "కార్బన్ డయాక్సైడ్ - గాలి నుండి పొందిన వాయువు అంశం",
+            "నీరు - నేల నుండి పొందిన నీరు"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ మరియు నేల నుండి నీటిని గ్రహిస్తున్నట్లు చూపే క్లిప్",
+        "comfyPrompt": "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ మరియు నేల నుండి నీటిని గ్రహిస్తున్నట్లు చూపే క్లిప్. కార్బన్ డయాక్సైడ్ మరియు నీరు వివరణ కోసం స్పష్టంగా చూపబడతాయి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.3",
+        "labels": ["పత్రహరితం", "సూర్యరశ్మి"],
+        "labelPlacements": [
+            "పత్రహరితం | ఆకులలో ఉన్న రంగు అంశం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "సూర్యరశ్మి | సూర్యుడి నుండి పొందిన వాయువు అంశం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "పత్రహరితం - ఆకులలో ఉన్న రంగు అంశం",
+            "సూర్యరశ్మి - సూర్యుడి నుండి పొందిన వాయువు అంశం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "ఆకులలో ఉండే పత్రహరితం సూర్యరశ్మిని గ్రహిస్తున్నట్లు చూపే క్లిప్",
+        "comfyPrompt": "ఆకులలో ఉండే పత్రహరితం సూర్యరశ్మిని గ్రహిస్తున్నట్లు చూపే క్లిప్. పత్రహరితం మరియు సూర్యరశ్మి వివరణ కోసం స్పష్టంగా చూపబడతాయి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "2.1",
+        "labels": ["కార్బన్ డయాక్సైడ్", "నీరు", "గ్లూకోజ్"],
+        "labelPlacements": [
+            "కార్బన్ డయాక్సైడ్ | ఆకుల ఉపరితలంపై పత్రరంధ్రాలు | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీరు | ఆకుల ఉపరితలంపై పత్రరంధ్రాలు | COORDINATES_PENDING_APPROVED_IMAGE",
+            "గ్లూకోజ్ | ఆకుల ఉపరితలంపై పత్రరంధ్రాలు | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "కార్బన్ డయాక్సైడ్ - ఆకుల ఉపరితలంపై పత్రరంధ్రాలు",
+            "నీరు - ఆకుల ఉపరితలంపై పత్రరంధ్రాలు",
+            "గ్లూకోజ్ - ఆకుల ఉపరితలంపై పత్రరంధ్రాలు"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "చిన్న ఆకుల ఉపరితలం, పత్రరంధ్రాలు, కార్బన్ డయాక్సైడ్ మరియు నీరు సంయోగం",
+        "comfyPrompt": "చిన్న ఆకుల ఉపరితలం, పత్రరంధ్రాలు, కార్బన్ డయాక్సైడ్ మరియు నీరు సంయోగం. కార్బన్ డయాక్సైడ్, నీరు మరియు గ్లూకోజ్ వివరణ కోసం స్పష్టంగా చూపబడతాయి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "2.2",
+        "labels": ["ఆక్సిజన్"],
+        "labelPlacements": [
+            "ఆక్సిజన్ | ఆకుల ఉపరితలంపై పత్రరంధ్రాలు | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": [
+            "ఆక్సిజన్ - ఆకుల ఉపరితలంపై పత్రరంధ్రాలు"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "ఈ ప్రక్రియలో ఆక్సిజన్ విడుదల అవుతుంది.",
+        "comfyPrompt": "ఈ ప్రక్రియలో ఆక్సిజన్ విడుదల అవుతుంది. ఆక్సిజన్ వివరణ కోసం స్పష్టంగా చూపబడతాయి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "2.3",
+        "labels": ["పత్రరంధ్రాలు"],
+        "labelPlacements": [
+            "పత్రరంధ్రాలు | ఆకుల ఉపరితలంపై చిన్న రంధ్రాలు | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": [
+            "పత్రరంధ్రాలు - ఆకుల ఉపరితలంపై చిన్న రంధ్రాలు"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "ఆకుల ఉపరితలంపై ఉండే చిన్న రంధ్రాలను పత్రరంధ్రాలు అంటారు.",
+        "comfyPrompt": "ఆకుల ఉపరితలంపై ఉండే చిన్న రంధ్రాలను పత్రరంధ్రాలు అంటారు. పత్రరంధ్రాలు వివరణ కోసం స్పష్టంగా చూపబడతాయి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

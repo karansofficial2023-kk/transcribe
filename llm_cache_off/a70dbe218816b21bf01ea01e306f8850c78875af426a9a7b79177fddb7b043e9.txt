@@ -1,0 +1,9 @@
+{
+  "score": 95,
+  "missing_facts": [],
+  "changed_facts": [
+    "In the original text, it says 'E1 is in the associative mode with E2,' while the paraphrased version states 'E1 is connected in a series configuration with E2.' Although 'associative mode' is not a standard term in this context, the intended meaning appears to be that the sources are connected in series. The paraphrase uses 'series configuration,' which is a more accurate and standard term.",
+    "The original text mentions 'the total potential difference in this case is 2E over the total resistance the total resistance is R plus R1 plus R2.' The paraphrased version says 'the total electromotive force in the circuit, which is 2E, and divide it by the total resistance, which includes R, R1, and R2.' This is consistent with the original but slightly rephrased."
+  ],
+  "added_facts": []
+}

@@ -1,0 +1,64 @@
+[
+  {
+    "rowId": "3.5",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for This process is known as protandry.; depict the concrete subject or visible action described by: This process is known as protandry.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "A close-up of a sunflower flower with anthers mature and releasing pollen, while the stigma remains immature. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.6",
+    "labels": ["Stigma", "Anther"],
+    "labelPlacements": [
+      "Stigma | Stigma located near the center of the flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Anther | Anther located at the base of the flower | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Stigma - Stigma located near the center of the flower",
+      "Anther - Anther located at the base of the flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A realistic image of a custard apple showing stigma and anthers at different maturity stages, with labels for stigma and anther",
+    "comfyPrompt": "A close-up of a custard apple flower with the stigma mature and receptive near the center, while the anthers are immature and located at the base. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A clear, high-contrast title card with the text 'Protogyny' centered at the top of the screen. The background is dark with a black band at the bottom, and the text is white with a font size of 42.",
+    "comfyPrompt": "A title card with the text 'Protogyny' centered at the top of the screen. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.2",
+    "labels": ["Hood", "Stigma"],
+    "labelPlacements": [
+      "Hood | Hood covering the stigma | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma | Stigma covered by hood | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Hood - Hood covering the stigma",
+      "Stigma - Stigma covered by hood"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a pansy flower showing the hood covering the stigma. The image is realistic, high-resolution, and includes visible structures such as petals, sepals, and the hood.",
+    "comfyPrompt": "A close-up of a pansy flower with the hood clearly covering the stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.3",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A clear, high-contrast title card with the text 'Herkogamy' centered at the top of the screen. The background is dark with a black band at the bottom, and the text is white with a font size of 42.",
+    "comfyPrompt": "A title card with the text 'Herkogamy' centered at the top of the screen. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

@@ -1,0 +1,4 @@
+{
+  "score": 95,
+  "reason": "The paraphrased text preserves the original meaning, concepts, and technical details accurately. It rephrases sentences effectively without altering the core information. Minor differences in phrasing and structure are present but do not affect semantic similarity. No corrections of obvious misspellings were needed, so no penalty was applied."
+}

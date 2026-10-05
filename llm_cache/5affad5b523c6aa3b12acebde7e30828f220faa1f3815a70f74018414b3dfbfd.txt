@@ -1,0 +1,88 @@
+[
+  {
+    "rowId": "5.3",
+    "labels": ["Sepal", "Petals", "Stamen", "Pistil"],
+    "labelPlacements": [
+      "Sepal - Outer protective leaf-like structure at the base of the flower",
+      "Petals - Colored, showy parts attracting pollinators",
+      "Stamen - Male reproductive organ with anthers producing pollen",
+      "Pistil - Female reproductive organ with stigma receiving pollen"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Sepal - Outer protective leaf-like structure at the base of the flower",
+      "Petals - Colored, showy parts attracting pollinators",
+      "Stamen - Male reproductive organ with anthers producing pollen",
+      "Pistil - Female reproductive organ with stigma receiving pollen"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a wood sorrel flower with labeled sepals, petals, stamen, and pistil showing closed flowers.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a wood sorrel flower with clear sepals, petals, stamen, and pistil. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.4",
+    "labels": ["Sepal", "Petals", "Stamen", "Pistil"],
+    "labelPlacements": [
+      "Sepal - Outer protective leaf-like structure at the base of the flower",
+      "Petals - Colored, showy parts attracting pollinators",
+      "Stamen - Male reproductive organ with anthers producing pollen",
+      "Pistil - Female reproductive organ with stigma receiving pollen"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Sepal - Outer protective leaf-like structure at the base of the flower",
+      "Petals - Colored, showy parts attracting pollinators",
+      "Stamen - Male reproductive organ with anthers producing pollen",
+      "Pist,il - Female reproductive organ with stigma receiving pollen"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a wood sorrel flower with labeled sepals, petals, stamen, and pistil showing self-pollination within an unopened flower.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a wood sorrel flower with clear sepals, petals, stamen, and pistil. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.5",
+    "labels": ["Stamen", "Pistil"],
+    "labelPlacements": [
+      "Stamen - Male reproductive organ with anthers producing pollen",
+      "Pistil - Female reproductive organ with stigma receiving pollen"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Stamen - Male reproductive organ with anthers producing pollen",
+      "Pistil - Female reproductive organ with stigma receiving pollen"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a papaya flower with labeled stamen and pistil showing unisexuality.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a papaya flower with clear stamen and pistil. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.6",
+    "labels": ["Sepal", "Petals", "Stamen", "Pistil"],
+    "labelPlacements": [
+      "Sepal - Outer protective leaf-like structure at the base of the flower",
+      "Petals - Colored, showy parts attracting pollinators",
+      "Stamen - Male reproductive organ with anthers producing pollen",
+      "Pistil - Female reproductive organ with stigma receiving pollen"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Sepal - Outer protective leaf-like structure at the base of the flower",
+      "Petals - Colored, showy parts attracting pollinators",
+      "Stamen - Male reproductive organ with anthers producing pollen",
+      "Pistil - Female reproductive organ with stigma receiving pollen"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a sunflower with labeled sepals, petals, stamen, and pistil showing bisexual flowers.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a sunflower with clear sepals, petals, stamen, and pistil. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with text 'Anther Maturation in Flowers' on a dark background with light text and thin colored border",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a title card with text 'Anther Maturation in Flowers' on a dark background. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

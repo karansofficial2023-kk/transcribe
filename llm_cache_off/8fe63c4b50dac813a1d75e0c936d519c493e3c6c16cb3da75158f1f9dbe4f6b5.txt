@@ -1,0 +1,47 @@
+[
+  {
+    "rowId": "6.1",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Evaluating Second Derivative at x = -1",
+    "visualSubject": "mathematical expression with labeled variables and function notation on a dark background, showing f''(x) and the value of x = -1 in bold",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the second derivative expression and substitution of x = -1",
+    "formulaLines": ["f''(x) = 2/x³"]
+  },
+  {
+    "rowId": "6.2",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Conclusion: Minimum Value at x = 1",
+    "visualSubject": "mathematical graph of f(x) with labeled critical points and concavity on a dark background, showing x = 1 as a minimum point",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the conclusion that the minimum value occurs at x = 1 due to concave up nature",
+    "formulaLines": ["f''(1) > 0 indicates concave up"]
+  },
+  {
+    "rowId": "7.1",
+    "approved": true,
+    "issue": "",
+    "template": "labeled_image",
+    "visualType": "realistic_labeled_image",
+    "heading": "Final Answer Confirmation",
+    "visualSubject": "A clean white background with a centered black text box containing the equation x = 1 in large white font, surrounded by a thin colored border and a colored target dot at the center of the text.",
+    "mediaType": "photo_with_labels",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "A clean white background with a centered black text box containing the equation x = 1 in large white font, surrounded by a thin colored border and a colored target dot at the center of the text. High contrast, no text artifacts, sharp 1920x1080 resolution. Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. No generated text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visual confirmation of final answer using high-contrast formatting for clarity Repeated-title guard: render this concept as a content visual, not another presentation title card.",
+    "formulaLines": []
+  }
+]

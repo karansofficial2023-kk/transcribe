@@ -1,0 +1,52 @@
+[
+  {
+    "rowId": "1.2",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "point_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for Join Anita on an exciting journey as she undertakes a mission to electroplate an antique copper keychain with silver, creating a special birthday gift for Vivaan.; depict the concrete subject or visible action described by: Join Anita on an exciting journey as she undertakes a mission to electroplate an antique copper keychain with silver, creating a special birthday gift for Vivaan.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "Anita holding an antique copper keychain in front of a lab setup with silver nitrate solution and electroplating equipment. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.4",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "point_labels",
+    "visualSubject": "Title card with animated text and background image of Vivaan holding the keychain",
+    "comfyPrompt": "Vivaan holding a silver-plated keychain in front of a birthday cake. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.5",
+    "labels": ["Antique Copper Keychain", "Electroplating Target"],
+    "labelPlacements": ["Antique Copper Keychain | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE", "Electroplating Target | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": ["Antique Copper Keychain - antique copper keychain with visible surface texture", "Electroplating Target - electroplating target with visible structure"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Realistic image of an antique copper keychain with labels for material and purpose",
+    "comfyPrompt": "Antique copper keychain in focus with clear surface texture. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "point_labels",
+    "visualSubject": "Title card with animated text and background image of a lab setup",
+    "comfyPrompt": "Lab setup with electroplating equipment in focus. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.7",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "point_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for The goal of this simulation is to understand the process of electroplating.; depict the concrete subject or visible action described by: The goal of this simulation is to understand the process of electroplating.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "Anita explaining the electroplating process in front of a lab setup. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

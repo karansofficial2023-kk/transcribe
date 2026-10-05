@@ -1,0 +1,58 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A photorealistic close-up of a leaf surface with carbon dioxide and water molecules combining to form glucose, shown in a controlled lab environment with soft natural lighting.",
+      "image_requirement": "Viewer must see carbon dioxide and water molecules forming glucose on the leaf surface.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "With this power, carbon dioxide and water combine to form glucose.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A photorealistic view of a leaf with oxygen bubbles rising from its surface, shown in a greenhouse with natural sunlight.",
+      "image_requirement": "Viewer must see oxygen being released from the leaf surface.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In this process, oxygen is released.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "2.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "A photorealistic close-up of a leaf with tiny pores on its surface, shown under natural light in a botanical garden.",
+      "image_requirement": "Viewer must see the small pores on the leaf surface.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The small pores on the leaf surface are called stomata.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు",
+        "visualSubject": "భూమిపై జీవం ఉనికి గురించి సంక్షిప్తంగా వివరించే కాలేజియన్ స్లైడ్",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "పూర్తి సందర్శనకు ముందు చిన్న విలోమం కలిగి ఉండాలి",
+        "visualAnimation": "భూమిపై జీవం ఉనికి గురించి సంక్షిప్తంగా వివరించే కాలేజియన్ స్లైడ్",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "భూమిపై జీవం ఉనికి గురించి సంక్షిప్తంగా వివరించే కాలేజియన్ స్లైడ్",
+            "భూమిపై జీవం ఉనికి గురించి వివరించే స్లైడ్"
+        ],
+        "motion": "స్థిరమైన కాలేజియన్ స్లైడ్",
+        "subtitle": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం ఉండలేదు",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "comfy_image",
+        "assetQualityNotes": "సృష్టించిన కాలేజియన్ స్లైడ్, పరిశీలనకు సిద్ధం చేయబడింది",
+        "comfyPrompt": "A clean educational slide showing the impossibility of life on Earth without photosynthesis. Title: 'Photosynthesis is essential for life on Earth'. Background: light blue, text in white, sans-serif font, 28px minimum font size, no title or subtitle areas.",
+        "coverageNotes": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం ఉండలేదు అనే విషయాన్ని స్లైడ్ ద్వారా వివరించడం.",
+        "shot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు",
+            "prompt": "A cinematic shot of Earth with no life, emphasizing the absence of photosynthesis. The background is dark, and the title appears in white text on a light blue background.",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows Earth with no life, second clip transitions to the importance of photosynthesis."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు",
+            "prompt": "A realistic educational video showing Earth without life, emphasizing the absence of photosynthesis. The background is dark, and the title appears in white text on a light blue background.",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows Earth with no life, second clip transitions to the importance of photosynthesis."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "ఎందుకంటే అది మనకు అవసరమైన ఆక్సిజన్ ఇస్తుంది.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "ఆక్సిజన్ ఉత్పత్తి",
+        "visualSubject": "మనకు అవసరమైన ఆక్సిజన్ ఉత్పత్తి గురించి వివరించే కాలేజియన్ స్లైడ్",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "పూర్తి సందర్శనకు ముందు చిన్న విలోమం కలిగి ఉండాలి",
+        "visualAnimation": "ఆక్సిజన్ ఉత్పత్తి గురించి వివరించే కాలేజియన్ స్లైడ్",
+        "localAnimation": "",
+        "labels": [
+            "ఆక్సిజన్"
+        ],
+        "labelPlacements": [
+            "ఆక్సిజన్ | ఆక్సిజన్ ఉత్పత్తి గురించి వివరించే కాలేజియన్ స్లైడ్ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ఆక్సిజన్ ఉత్పత్తి గురించి వివరించే కాలేజియన్ స్లైడ్",
+            "ఆక్సిజన్ ఉత్పత్తి గురించి వివరించే స్లైడ్"
+        ],
+        "motion": "స్థిరమైన కాలేజియన్ స్లైడ్",
+        "subtitle": "కిరణజన్య సంయోగక్రియ ఆక్సిజన్ ఉత్పత్తిలో కీలక పాత్ర వహిస్తుంది",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "comfy_image",
+        "assetQualityNotes": "సృష్టించిన కాలేజియన్ స్లైడ్, పరిశీలనకు సిద్ధం చేయబడింది",
+        "comfyPrompt": "A clean educational slide showing the production of oxygen through photosynthesis. Title: 'Photosynthesis produces oxygen'. Background: light blue, text in white, sans-serif font, 28px minimum font size, no title or subtitle areas.",
+        "coverageNotes": "కిరణజన్య సంయోగక్రియ ఆక్సిజన్ ఉత్పత్తిలో కీలక పాత్ర వహిస్తుంది అనే విషయాన్ని స్లైడ్ ద్వారా వివరించడం.",
+        "shot": {
+            "template": "video",
+            "heading": "ఆక్సిజన్ ఉత్పత్తి",
+            "prompt": "A cinematic shot of oxygen production through photosynthesis. The background is dark, and the title appears in white text on a light blue background.",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows oxygen production through photosynthesis, second clip transitions to the importance of oxygen for life."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ఆక్సిజన్ ఉత్పత్తి",
+            "prompt": "A realistic educational video showing oxygen production through photosynthesis. The background is dark, and the title appears in white text on a light blue background.",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows oxygen production through photosynthesis, second clip transitions to the importance of oxygen for life."
+        }
+    }
+]

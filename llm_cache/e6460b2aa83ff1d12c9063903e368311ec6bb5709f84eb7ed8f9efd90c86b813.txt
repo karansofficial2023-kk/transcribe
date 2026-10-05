@@ -1,0 +1,113 @@
+{
+  "correctedNarration": "Pollination is the transfer of pollen grains from anther to stigma. Autogamy refers to the transfer of pollen within the same flower, geitonogamy is the transfer of pollen between different flowers on the same plant, and xenogamy involves the transfer of pollen between flowers on different plants of the same species. In sunflower heads, many florets are present, and their disc florets are generally protandrous: pollen is presented before the stigma becomes receptive. The anthers form a tube, and as the style elongates through that tube, it pushes or brushes pollen outward. The stigma lobes open and become receptive later. This is referred to as secondary pollen presentation and promotes outcrossing. In plants such as Ixora, the anther and the stigma reach maturity at the same time. This simultaneous maturation of the anther and the stigma facilitates self-pollination, a process known as homogamy. Some plants, like wood sorrel during late summer, produce small and unnoticeable flowers that lack fragrance. These bisexual flowers remain closed. The occurrence of self-pollination and fertilization within an unopened flower is called cleistogamy. In such plants, the pollen grain is already distributed on the stigma of the same flower to enable self-pollination. Cross-pollination occurs in papaya, a unisexual, dioecious plant. Male and female flowers grow on separate plants and typically undergo cross-pollination. Here, the anthers mature first, followed by the stigma. This process is known as protandry. On the other hand, in custard apple, the stigma matures before the anther. This process is referred to as protogyny. Some flowers, such as pansies, have a structure that spatially separates the anthers and the stigma within a flower. This structural adaptation is called herkogamy. In primrose, heterostyly is observed, where the stigma is located at a different height compared to the anther. These are various adaptations in flowers that aid cross-pollination. What draws a pollinator to a flower? Sometimes it's the sweet scent and the promise of nutritious nectar. Other times, it's deception. A flower known as Ophrys sphegodes mimics the chemical and floral signals of a female bee. This flower attracts male bees seeking a mate. When these males attempt to mate with the flower, they end up pollinating it. Fascinating, isn't it? Keep exploring to learn more. Keep learning. We believe in you.",
+  "coverageComplete": true,
+  "issuesResolved": 100,
+  "coverageChecks": [
+    {
+      "requirementId": "R01",
+      "covered": true,
+      "evidenceQuote": "Pollination is the transfer of pollen grains from anther to stigma."
+    },
+    {
+      "requirementId": "R02",
+      "covered": true,
+      "evidenceQuote": "Autogamy refers to the transfer of pollen within the same flower"
+    },
+    {
+      "requirementId": "R03",
+      "covered": true,
+      "evidenceQuote": "geitonogamy is the transfer of pollen between different flowers on the same plant"
+    },
+    {
+      "requirementId": "R04",
+      "covered": true,
+      "evidenceQuote": "xenogamy involves the transfer of pollen between flowers on different plants of the same species"
+    },
+    {
+      "requirementId": "R05",
+      "covered": true,
+      "evidenceQuote": "Some plants, like wood sorrel during late summer, produce small and unnoticeable flowers that lack fragrance. These bisexual flowers remain closed. The occurrence of self-pollination and fertilization within an unopened flower is called cleistogamy."
+    },
+    {
+      "requirementId": "R06",
+      "covered": true,
+      "evidenceQuote": "Here, the anthers mature first, followed by the stigma. This process is known as protandry. On the other hand, in custard apple, the stigma matures before the anther. This process is referred to as protogyny."
+    },
+    {
+      "requirementId": "R07",
+      "covered": true,
+      "evidenceQuote": "Some flowers, such as pansies, have a structure that spatially separates the anthers and the stigma within a flower. This structural adaptation is called herkogamy."
+    },
+    {
+      "requirementId": "R08",
+      "covered": true,
+      "evidenceQuote": "In primrose, heterostyly is observed, where the stigma is located at a different height compared to the anther."
+    },
+    {
+      "requirementId": "R09",
+      "covered": true,
+      "evidenceQuote": "What draws a pollinator to a flower? Sometimes it's the sweet scent and the promise of nutritious nectar."
+    },
+    {
+      "requirementId": "R10",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R11",
+      "covered": true,
+      "evidenceQuote": "A flower known as Ophrys sphegodes mimics the chemical and floral signals of a female bee."
+    },
+    {
+      "requirementId": "R12",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R13",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R14",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R15",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R16",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R17",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R18",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R19",
+      "covered": false,
+      "evidenceQuote": ""
+    }
+  ],
+  "remainingConcerns": [
+    "R10: Wind pollination is not explicitly described in the narration with examples such as grasses or maize.",
+    "R12: Bird pollination is not clearly explained with specific examples of robust, red/orange flowers without internal labels.",
+    "R13: Bat pollination is not addressed with examples of pale nocturnal flowers with strong scent and nectar.",
+    "R14: Other animal pollinators (e.g., beetles, butterflies) are not mentioned with supported examples.",
+    "R15: Advantages of self-pollination (reproductive assurance, less dependence on pollinators, preservation of successful gene combinations) are not explicitly stated.",
+    "R16: Disadvantages of self-pollination (reduced genetic variation, inbreeding depression) are not clearly explained.",
+    "R17: Advantages of cross-pollination (genetic diversity, adaptability, hybrid vigor) are not explicitly mentioned.",
+    "R18: Disadvantages of cross-pollination (dependence on agents, pollen wastage, energy cost, uncertain transfer) are not covered in the narration.",
+    "R19: The final concise comparison and recap of pollination types is missing."
+  ]
+}

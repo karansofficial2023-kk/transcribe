@@ -1,0 +1,24 @@
+[
+  {
+    "rowId": "4.1",
+    "labels": ["Statin - cholesterol-lowering medication"],
+    "labelPlacements": [
+      "Statin - cholesterol-lowering medication | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Statin - cholesterol-lowering medication"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text",
+    "comfyPrompt": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Close-up of a teacher's face with a warm, sincere expression, looking directly at the camera in a classroom setting",
+    "comfyPrompt": "Close-up of a teacher's face with a warm, sincere expression, looking directly at the camera in a classroom setting. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

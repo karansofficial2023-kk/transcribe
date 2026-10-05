@@ -1,0 +1,18 @@
+{
+  "inferredTopic": "Mechanisms of Pollination in Plants",
+  "filenameTopic": "Types of Pollination",
+  "topicMatch": true,
+  "confidence": 0.95,
+  "safeStoryboardTitle": "Pollination Mechanisms in Plants",
+  "subject": "Biology",
+  "academicLevel": "Middle School",
+  "intendedLearners": "Students learning about plant reproduction and pollination",
+  "learningObjectives": [
+    "Identify different types of pollination (self-pollination, cross-pollination).",
+    "Explain the mechanisms that support self-pollination in plants.",
+    "Describe adaptations that promote cross-pollination in flowers.",
+    "Understand how structural and temporal features aid in pollination."
+  ],
+  "smeRole": "Plant Biology Educator",
+  "warning": "The filename topic 'Types of Pollination' is appropriate for the transcript content, which discusses various mechanisms and types of pollination. No significant mismatch detected."
+}

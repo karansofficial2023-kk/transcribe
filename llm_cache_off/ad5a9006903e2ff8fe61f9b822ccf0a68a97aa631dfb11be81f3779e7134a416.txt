@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A dark forest at dusk with no visible light sources, trees in silhouette against a starless sky, camera distance medium, angle slightly upward, natural lighting from moonlight, colors deep blues and blacks.",
+      "image_requirement": "Viewer must see the dark forest and lack of visible light to understand the narration about photosynthesis being absent.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Without photosynthesis, life on Earth would not exist.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A human lung with visible airways and alveoli, camera distance close, angle slightly from the side, natural lighting soft and diffused, colors pale pink and white.",
+      "image_requirement": "Viewer must see the human lung and its internal structure to understand the narration about oxygen production.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Because it produces the oxygen we need.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

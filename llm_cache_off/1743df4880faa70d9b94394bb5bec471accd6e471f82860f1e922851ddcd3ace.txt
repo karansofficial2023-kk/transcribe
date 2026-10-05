@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with visible chlorophyll, sunlight filtering through the leaves, showing energy transfer in photosynthesis.",
+      "image_requirement": "Viewer must see a leaf with visible chlorophyll and sunlight to understand the process.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Glucose provides energy to the plant.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "4.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a plant's storage organs, such as roots or tubers, showing stored glucose as starch.",
+      "image_requirement": "Viewer must see stored glucose in the form of starch within plant structures to understand the concept.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Remaining glucose is stored as a carbohydrate.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

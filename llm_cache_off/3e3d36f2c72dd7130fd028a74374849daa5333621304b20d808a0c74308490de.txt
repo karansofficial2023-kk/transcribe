@@ -1,0 +1,27 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see the equation relating current, voltage and resistance.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "It indicates that the current passing through a conductor is directly proportional to the voltage applied across it, as long as the temperature remains unchanged.",
+      "formula_lines": [
+        "I = V / R"
+      ],
+      "explain_steps": [
+        "Current equals voltage divided by resistance."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Ohm's Law Definition and Proportionality"
+    }
+  ]
+}

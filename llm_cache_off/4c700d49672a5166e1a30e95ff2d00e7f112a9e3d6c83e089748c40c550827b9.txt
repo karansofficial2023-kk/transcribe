@@ -1,0 +1,161 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Simplifying this equation further allows us to cancel out the EMF (E) from both sides, resulting in a simpler expression: R plus R1 plus R2 is equal to twice R2.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Simplifying Equation with Two EMF Sources",
+        "visualSubject": "A clean, high-contrast white background with a black band at the bottom. A labeled electrical circuit diagram showing two EMF sources and resistors R, R1, and R2. The equation is written in large white text on the bottom band.",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 8,
+        "recommendedClipSeconds": 9,
+        "timingNotes": "Hold for full duration, then transition to next segment with a fade-out effect.",
+        "visualAnimation": "A labeled electrical circuit diagram with two EMF sources and resistors R, R1, and R2. The equation is written in large white text on the bottom band. The animation shows the cancellation of EMF (E) from both sides, simplifying the expression step by step.",
+        "localAnimation": "Start with a full circuit diagram. Use arrows to highlight the EMF sources and resistors. Animate the cancellation of E from both sides, then reveal the simplified equation: R + R1 + R2 = 2R2.",
+        "labels": [
+            "EMF Source",
+            "Resistor R",
+            "Resistor R1",
+            "Resistor R2"
+        ],
+        "labelPlacements": [
+            "EMF Source | EMF source in the circuit diagram | target=(0.35, 0.75)",
+            "Resistor R | Resistor labeled as R in the circuit | target=(0.65, 0.85)",
+            "Resistor R1 | Resistor labeled as R1 in the circuit | target=(0.45, 0.95)",
+            "Resistor R2 | Resistor labeled as R2 in the circuit | target=(0.75, 0.65)"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [
+            "Arrow from EMF Source to Resistor R",
+            "Arrow from EMF Source to Resistor R1",
+            "Arrow from EMF Source to Resistor R2"
+        ],
+        "highlights": [
+            "Highlight the equation on the bottom band as it is simplified"
+        ],
+        "formulaLines": [
+            "R + R1 + R2 = 2R2"
+        ],
+        "explainSteps": [
+            "Step 1: Cancel out EMF (E) from both sides",
+            "Step 2: Simplify the equation to R + R1 + R2 = 2R2"
+        ],
+        "steps": [
+            "Simplifying Equation with Two EMF Sources",
+            "Cancelling EMF (E)"
+        ],
+        "columns": [],
+        "imageRecommendations": [
+            "Electrical circuit diagram with two EMF sources and resistors R, R1, and R2",
+            "Labeled equation on a black band at the bottom of a white background"
+        ],
+        "motion": "Zoom in slightly on the equation as it is simplified",
+        "subtitle": "Simplifying the equation by cancelling out EMF (E) results in R + R1 + R2 = 2R2",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use a reviewed diagram with clear labels and a clean white background for educational clarity.",
+        "comfyPrompt": "A high-contrast white background with a black band at the bottom. A labeled electrical circuit diagram showing two EMF sources and resistors R, R1, and R2. The equation is written in large white text on the bottom band. Clean background, no text or labels in the image.",
+        "coverageNotes": "Visuals cover the cancellation of EMF (E) from both sides and the simplified expression R + R1 + R2 = 2R2.",
+        "shot": {
+            "template": "video",
+            "heading": "Simplifying Equation with Two EMF Sources",
+            "prompt": "A labeled electrical circuit diagram showing two EMF sources and resistors R, R1, and R2. The equation is written in large white text on the bottom band. The animation shows the cancellation of EMF (E) from both sides, simplifying the expression step by step.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Split the animation into three 4-second clips: first showing the full circuit diagram, second highlighting the cancellation of EMF (E), and third revealing the simplified equation."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Simplifying Equation with Two EMF Sources",
+            "prompt": "A labeled electrical circuit diagram showing two EMF sources and resistors R, R1, and R2. The equation is written in large white text on the bottom band. The animation shows the cancellation of EMF (E) from both sides, simplifying the expression step by step.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Split the animation into three 4-second clips: first showing the full circuit diagram, second highlighting the cancellation of EMF (E), and third revealing the simplified equation."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "From here, we can clearly deduce that R equals R2 minus R1.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Solving for Resistance in the Circuit",
+        "visualSubject": "A clean, high-contrast white background with a black band at the bottom. A labeled electrical circuit diagram showing resistors R, R1, and R2. The equation is written in large white text on the bottom band.",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 7,
+        "timingNotes": "Hold for full duration, then transition to next segment with a fade-out effect.",
+        "visualAnimation": "A labeled electrical circuit diagram with resistors R, R1, and R2. The equation is written in large white text on the bottom band. The animation shows the derivation of R = R2 - R1 from the simplified expression.",
+        "localAnimation": "Start with the simplified equation: R + R1 + R2 = 2R2. Use arrows to highlight the terms and animate the rearrangement to solve for R, resulting in R = R2 - R1.",
+        "labels": [
+            "Resistor R",
+            "Resistor R1",
+            "Resistor R2"
+        ],
+        "labelPlacements": [
+            "Resistor R | Resistor labeled as R in the circuit | target=(0.65, 0.85)",
+            "Resistor R1 | Resistor labeled as R1 in the circuit | target=(0.45, 0.95)",
+            "Resistor R2 | Resistor labeled as R2 in the circuit | target=(0.75, 0.65)"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [
+            "Arrow from simplified equation to resistor R",
+            "Arrow from simplified equation to resistor R1",
+            "Arrow from simplified equation to resistor R2"
+        ],
+        "highlights": [
+            "Highlight the final expression: R = R2 - R1"
+        ],
+        "formulaLines": [
+            "R + R1 + R2 = 2R2",
+            "R = R2 - R1"
+        ],
+        "explainSteps": [
+            "Step 1: Start with simplified equation R + R1 + R2 = 2R2",
+            "Step 2: Rearrange to solve for R, resulting in R = R2 - R1"
+        ],
+        "steps": [
+            "Solving for Resistance in the Circuit",
+            "Deriving R from the Simplified Equation"
+        ],
+        "columns": [],
+        "imageRecommendations": [
+            "Electrical circuit diagram with resistors R, R1, and R2",
+            "Labeled equation on a black band at the bottom of a white background"
+        ],
+        "motion": "Zoom in slightly on the final expression as it is derived",
+        "subtitle": "Solving for resistance gives R = R2 - R1 based on the simplified equation.",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use a reviewed diagram with clear labels and a clean white background for educational clarity.",
+        "comfyPrompt": "A high-contrast white background with a black band at the bottom. A labeled electrical circuit diagram showing resistors R, R1, and R2. The equation is written in large white text on the bottom band. Clean background, no text or labels in the image.",
+        "coverageNotes": "Visuals cover the derivation of R = R2 - R1 from the simplified expression.",
+        "shot": {
+            "template": "video",
+            "heading": "Solving for Resistance in the Circuit",
+            "prompt": "A labeled electrical circuit diagram showing resistors R, R1, and R2. The equation is written in large white text on the bottom band. The animation shows the derivation of R = R2 - R1 from the simplified expression.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split the animation into two 4-second clips: first showing the simplified equation and second revealing the final expression R = R2 - R1."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Solving for Resistance in the Circuit",
+            "prompt": "A labeled electrical circuit diagram showing resistors R, R1, and R2. The equation is written in large white text on the bottom band. The animation shows the derivation of R = R2 - R1 from the simplified expression.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split the animation into two 4-second clips: first showing the simplified equation and second revealing the final expression R = R2 - R1."
+        }
+    }
+]

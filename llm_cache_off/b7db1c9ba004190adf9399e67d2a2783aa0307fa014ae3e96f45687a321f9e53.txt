@@ -1,0 +1,60 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The first derivative is given by: f'(x) = 1 - 1/x². Setting f'(x) = 0, we get: 1 - 1/x² = 0. This simplifies to: 1/x² = 1. Which implies: x² = 1 ⇒ x = ±1. Next, we determine whether these points correspond to a minimum or maximum by examining the second derivative.",
+      "formula_lines": [
+        "f'(x) = 1 - \\frac{1}{x^2}",
+        "1 - \\frac{1}{x^2} = 0",
+        "\\frac{1}{x^2} = 1",
+        "x^2 = 1 \\Rightarrow x = \\pm 1"
+      ],
+      "explain_steps": [
+        "First derivative of f(x) is 1 minus 1 over x squared.",
+        "Set first derivative equal to zero for critical points.",
+        "Simplify equation to find x squared equals one.",
+        "Solve for x to get positive and negative one."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "First Derivative of f(x) = x + 1/x"
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The second derivative is: f''(x) = 2/x³. Evaluating this at x = 1: f''(1) = 2/1³ = 2 > 0. This indicates that the function has a minimum at x = 1.",
+      "formula_lines": [
+        "f''(x) = \\frac{2}{x^3}",
+        "f''(1) = \\frac{2}{1^3} = 2",
+        "f''(1) > 0"
+      ],
+      "explain_steps": [
+        "Second derivative of f(x) is 2 over x cubed.",
+        "Evaluate second derivative at x equals one to get two.",
+        "Positive second derivative indicates a minimum."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Second Derivative Test for Minimum"
+    }
+  ]
+}

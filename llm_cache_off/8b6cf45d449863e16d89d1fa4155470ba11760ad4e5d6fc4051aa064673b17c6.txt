@@ -1,0 +1,58 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Ohm's law explains how voltage, current, and resistance are related in an electrical circuit.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Introduction to Ohm's Law",
+        "visualSubject": "Title card with centered text on dark background, sans-serif font, 28px minimum font size, high contrast box, thin colored border, and white text",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full narration duration",
+        "visualAnimation": "Title card with centered text on dark background, sans-serif font, 28px minimum font size, high contrast box, thin colored border, and white text",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Ohm's Law and Resistor Circuits",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Dark background with centered white text, sans-serif font, high contrast box, thin colored border",
+            "Title card for educational documentary style with clear subject and minimal design"
+        ],
+        "motion": "Static title card",
+        "subtitle": "Ohm's Law Explains Voltage, Current, and Resistance Relationship",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background, no text or labels",
+        "comfyPrompt": "Dark background, centered white text, sans-serif font, high contrast box, thin colored border, 28px minimum font size, educational documentary style",
+        "coverageNotes": "Introduces the topic of Ohm's Law and its relevance to electrical circuits",
+        "shot": {
+            "template": "video",
+            "heading": "Introduction to Ohm's Law",
+            "prompt": "Dark background with centered white text, sans-serif font, high contrast box, thin colored border, 28px minimum font size, educational documentary style",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full 6-second narration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Introduction to Ohm's Law",
+            "prompt": "Dark background with centered white text, sans-serif font, high contrast box, thin colored border, 28px minimum font size, educational documentary style",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full 6-second narration"
+        }
+    }
+]

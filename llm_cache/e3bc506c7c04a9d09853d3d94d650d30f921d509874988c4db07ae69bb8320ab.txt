@@ -1,0 +1,71 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Ixora plant with open flower, anther and stigma visible at same height, medium distance, eye-level view, natural daylight, green and yellow tones.",
+      "image_requirement": "Viewer must see both anther and stigma at the same level in the flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In plants such as Ixora, the anther and the stigma reach maturity at the same time.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Anther and Stigma Maturation"
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Anther releases pollen grains",
+        "Stigma receives pollen from anther",
+        "Pollen germinates on stigma",
+        "Pollination completes within flower"
+      ],
+      "panels": [],
+      "narration_en": "This simultaneous maturation of the anther and the stigma facilitates self-pollination, a process known as homogamy.",
+      "formula_lines": [],
+      "explain_steps": [
+        "Anther releases pollen grains",
+        "Stigma receives pollen from anther",
+        "Pollen germinates on stigma",
+        "Pollination completes within flower"
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Self-Pollination Process"
+    },
+    {
+      "shot_id": "2.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "Wood sorrel plant with small, unnoticeable flowers, no fragrance, medium distance, eye-level view, natural daylight, green tones.",
+      "image_requirement": "Viewer must see small, unnoticeable flowers without fragrance.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Some plants, like wood sorrel during late summer, produce small and unnoticeable flowers that lack fragrance.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Unnoticeable Flowers"
+    }
+  ]
+}

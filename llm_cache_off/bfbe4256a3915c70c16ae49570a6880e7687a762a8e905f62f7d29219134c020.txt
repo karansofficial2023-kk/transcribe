@@ -1,0 +1,52 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Therefore, $ f(x) = x + \\frac{1}{x} $.",
+      "formula_lines": [
+        "f(x) = x + 1/x"
+      ],
+      "explain_steps": [
+        "Function is defined as x plus one over x."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Function Definition"
+    },
+    {
+      "shot_id": "4.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "To find the maximum or minimum values of this function, we take its derivative and set it equal to zero.",
+      "formula_lines": [
+        "f'(x) = 1 - 1/x^2",
+        "f'(x) = 0"
+      ],
+      "explain_steps": [
+        "Derivative is one minus one over x squared.",
+        "Set derivative equal to zero for critical points."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Finding Critical Points"
+    }
+  ]
+}

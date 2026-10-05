@@ -1,0 +1,7 @@
+{
+  "score": 95,
+  "incorrect_claims": [
+    "The electrolyte contains positively charged silver ions and negatively charged chloride ions."
+  ],
+  "uncertain_claims": []
+}

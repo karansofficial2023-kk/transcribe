@@ -1,0 +1,84 @@
+[
+  {
+    "rowId": "3.2",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Simplification of Cross-Sectional Area Formula",
+    "visualSubject": "A clean, high-contrast white background with a centered black band at the bottom. The text is in white, 42px font size, two lines max, centered horizontally and vertically. The formula $ A' = \frac{A_0}{1.1} $ is displayed.",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visualizes the simplified formula for calculating new cross-sectional area based on original area and scaling factor. Source-coverage guard: restored the exact narration sentence while preserving the ordered visual plan.",
+    "formulaLines": [
+      "A' = A₀ / 1.1"
+    ]
+  },
+  {
+    "rowId": "4.1",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Resistance Calculation Formula",
+    "visualSubject": "Electrical resistance calculation with resistivity, length, and cross-sectional area variables; 3D resistor model with labeled components; camera angle: medium shot focusing on the formula and resistor diagram",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover resistivity, length, cross-sectional area, and their roles in resistance calculation Source-coverage guard: restored the exact narration sentence while preserving the ordered visual plan.",
+    "formulaLines": [
+      "R' = ρ × (L') / (A')"
+    ]
+  },
+  {
+    "rowId": "4.2",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Resistance Simplification",
+    "visualSubject": "Simplified resistance formula with original variables; 3D resistor model with labeled components; camera angle: medium shot focusing on the simplified formula and resistor diagram",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover resistivity, original length, cross-sectional area, and the factor of 1.21 in resistance simplification Source-coverage guard: restored the exact narration sentence while preserving the ordered visual plan.",
+    "formulaLines": [
+      "R' = 1.21 × ρ × (L₀ / A₀)",
+      "R' = 1.21R₀"
+    ]
+  },
+  {
+    "rowId": "5.1",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Resistance Calculation Summary",
+    "visualSubject": "Title card with centered text and dark background, white font, no borders or logos",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "pillow_opencv",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a title card with centered text 'Resistance Calculation Summary' on a dark background. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visual confirms the mathematical relationship between new and original resistance Repeated-title guard: render this concept as a content visual, not another presentation title card. Strict label-readiness guard: omitted unsafe labels while preserving the specialized layout. Label specialist was unavailable; retained only source-supported physical labels with pending targets.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "5.2",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Clear?",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for Clear?; depict the concrete subject or visible action described by: Clear?; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "pillow_opencv",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a person facing the camera with a questioning expression. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Source-coverage guard: generated because the LLM omitted this narration sentence. Strict label-readiness guard: omitted unsafe labels while preserving the specialized layout. Strict label-readiness guard: rendered without labels because exact reviewed targets and coordinates were unavailable. Label specialist was unavailable; retained only source-supported physical labels with pending targets.",
+    "formulaLines": []
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "score": 75,
+  "incorrect_claims": [
+    "Lithium-ion batteries use solid electrolytes that allow ions to travel from the negative electrode to the positive electrode during discharge and return when charging.",
+    "When a cylinder and graphite rod are connected by a conducting wire, zinc functions as the anode, while the graphite rod, which interacts with MnO2, serves as the cathode."
+  ],
+  "uncertain_claims": [
+    "Batteries that utilize lead storage or nickel cadmium also lose power over time but can be recharged again.",
+    "The chemistry involved in each of these is more complex than it appears at first glance."
+  ]
+}

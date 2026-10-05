@@ -1,0 +1,27 @@
+[
+  {
+    "sceneNumber": 1,
+    "sceneTitle": "Introduction to the Problem",
+    "sentenceNumbers": [2, 3, 4, 5, 6, 7]
+  },
+  {
+    "sceneNumber": 2,
+    "sceneTitle": "Understanding the Function and Its Derivative",
+    "sentenceNumbers": [8, 9]
+  },
+  {
+    "sceneNumber": 3,
+    "sceneTitle": "Finding Critical Points",
+    "sentenceNumbers": [10]
+  },
+  {
+    "sceneNumber": 4,
+    "sceneTitle": "Analyzing the Second Derivative for Concavity",
+    "sentenceNumbers": [11]
+  },
+  {
+    "sceneNumber": 5,
+    "sceneTitle": "Conclusion and Final Answer",
+    "sentenceNumbers": [12, 13]
+  }
+]

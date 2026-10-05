@@ -1,0 +1,72 @@
+[
+  {
+    "rowId": "1.2",
+    "labels": ["Medical Textbook Page"],
+    "labelPlacements": ["Medical Textbook Page | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Medical Textbook Page - page with highlighted question 176"],
+    "presentationMode": "point_labels",
+    "visualSubject": "A realistic image of a medical textbook page with question 176 highlighted and labeled as a cholesterol-lowering drug question",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a medical textbook page with question 176 highlighted. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.1",
+    "labels": ["cyclosporine A", "statin", "streptokinase", "lipases"],
+    "labelPlacements": [
+      "cyclosporine A | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "statin | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "streptokinase | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "lipases | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "cyclosporine A - drug name text",
+      "statin - drug name text",
+      "streptokinase - drug name text",
+      "lipases - drug name text"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A clean, high-contrast image of four drug names: cyclosporine A, statin, streptokinase, and lipases, displayed in a medical context with clear labels.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of four drug names displayed in a medical context. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.2",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A clean, high-contrast title card with the text 'This question relies entirely on memory.' in a medical context.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a clean, high-contrast title card. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.3",
+    "labels": ["cyclosporine A", "statin", "streptokinase", "lipases"],
+    "labelPlacements": [
+      "cyclosporine A | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "statin | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "streptokinase | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "lipases | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "cyclosporine A - drug name text",
+      "statin - drug name text",
+      "streptokinase - drug name text",
+      "lipases - drug name text"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A clean, high-contrast image of a medical chart with the text 'Lowering Blood Cholesterol' and the four drug names: cyclosporine A, statin, streptokinase, and lipases.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a clean, high-contrast medical chart. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.4",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A clean, high-contrast title card with the text 'However, if you remember this information, the question becomes straightforward.' in a medical context.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a clean, high-contrast title card. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

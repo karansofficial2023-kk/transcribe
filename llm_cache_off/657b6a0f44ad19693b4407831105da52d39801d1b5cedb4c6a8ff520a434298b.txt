@@ -1,0 +1,50 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Simplifying this equation further allows us to cancel out the EMF (E) from both sides, resulting in a simpler expression: R plus R1 plus R2 is equal to twice R2.",
+      "formula_lines": [
+        "R + R1 + R2 = 2R2"
+      ],
+      "explain_steps": [
+        "Simplify equation by removing EMF terms."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Simplified Resistance Equation"
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "From here, we can clearly deduce that R equals R2 minus R1.",
+      "formula_lines": [
+        "R = R2 - R1"
+      ],
+      "explain_steps": [
+        "Solve for R using subtraction of resistances."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Resistance Deduction"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see the function f(x) = x + 1/x written in mathematical notation.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "We are asked to find the value of $ x $.",
+      "formula_lines": ["f(x) = x + 1/x"],
+      "explain_steps": ["The function to minimize is f(x) = x plus 1 over x."],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Function to Minimize"
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see the variable $ x $ defined as the given number.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Let the given number be $ x $.",
+      "formula_lines": ["x = given number"],
+      "explain_steps": ["The variable x is defined as the given number."],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Definition of x"
+    }
+  ]
+}

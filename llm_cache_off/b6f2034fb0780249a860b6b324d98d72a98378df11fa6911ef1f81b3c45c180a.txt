@@ -1,0 +1,50 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "process_steps",
+      "image_prompt": "A photorealistic image of a leaf releasing oxygen bubbles into the air during photosynthesis.",
+      "image_requirement": "Viewer must see oxygen bubbles rising from the leaf surface.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Oxygen released through stomata",
+        "Gas bubbles rise into atmosphere",
+        "Photosynthesis produces oxygen"
+      ],
+      "panels": [],
+      "narration_en": "During this process, oxygen is released.",
+      "formula_lines": [],
+      "explain_steps": [
+        "Stomata release oxygen gas",
+        "Bubbles move upward through air",
+        "Oxygen is a byproduct of photosynthesis"
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "ஆக்சிஜன் வெளியேற்றப்படுகிறது"
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with tiny pores called stomata visible on its surface, under natural light.",
+      "image_requirement": "Viewer must see the small pores on the leaf surface.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The small areas in leaves are called stomata.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "இலைத்துறைகள்"
+    }
+  ]
+}

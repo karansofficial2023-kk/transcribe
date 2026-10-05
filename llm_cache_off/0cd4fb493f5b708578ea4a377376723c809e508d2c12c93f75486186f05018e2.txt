@@ -1,0 +1,24 @@
+{
+  "score": 100,
+  "missing_concepts": [],
+  "preserved_concepts": [
+    "mobile phone",
+    "smartphones",
+    "powerful battery",
+    "lithium-ion batteries",
+    "solid electrolytes",
+    "ions move from the negative electrode to the positive electrode during discharge and back when charging",
+    "Lithium-ion cells can be recharged multiple times",
+    "secondary cells",
+    "dry cell",
+    "primary cells",
+    "lead storage",
+    "nickel cadmium",
+    "cylinder and graphite rod connected by a conducting wire",
+    "zinc acts as an anode",
+    "graphite rod in contact with MnO2 acts as a cathode",
+    "button cell",
+    "calculators",
+    "durable and long-lasting"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Close-up of a flower with pollen grains on the anther and stigma, showing self-pollination process in a plant, natural lighting, soft yellow tones.",
+      "image_requirement": "Viewer must see pollen transfer from anther to stigma within the same flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "To summarize, self-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Self-Pollination Summary"
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "Close-up of Ixora flower with anther and stigma visible, natural lighting, soft yellow tones.",
+      "image_requirement": "Viewer must see both the anther and stigma in the same flower to understand homogamy.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In plants like Ix, the anther and the stigma mature simultaneously.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Ixora Flower Anatomy"
+    },
+    {
+      "shot_id": "5.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "Close-up of a flower with anther and stigma, showing pollen transfer, natural lighting, soft yellow tones.",
+      "image_requirement": "Viewer must see the anther and stigma in the same flower to understand homogamy.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This process is called homogamy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Homogamy Process"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "7.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a vibrant flower with bright petals and visible stamen, set against a green background, natural lighting, warm tones.",
+      "image_requirement": "Viewer must see the flower's color and structure to understand its role in attracting pollinators.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "What draws pollinators to a flower?",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Pollinator Attraction"
+    },
+    {
+      "shot_id": "7.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a flower with visible nectar droplets and fragrant petals, natural lighting, warm tones, set against a green background.",
+      "image_requirement": "Viewer must see the nectar and scent to understand how pollinators are attracted.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Sometimes it's the sweet scent and the promise of nutritious nectar.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Nectar and Scent"
+    },
+    {
+      "shot_id": "7.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a deceptive flower with bright colors but no nectar, set against a green background, natural lighting, warm tones.",
+      "image_requirement": "Viewer must see the flower's appearance without nectar to understand deception as an attraction method.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Other times, it's deception.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Deceptive Flowers"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Therefore, the initial resistance $ R_0 $ is given by $ \rho \times \frac{L_0}{A_0} $.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Resistance Formula Derivation",
+        "visualSubject": "Electrical resistance formula with resistivity, length, and cross-sectional area variables clearly labeled in a clean educational diagram",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold the final frame for at least 3 seconds to emphasize the formula",
+        "visualAnimation": "A clean, white background with a central resistivity symbol (ρ), length (L₀), and cross-sectional area (A₀) labeled in a clear diagram. The formula $ R_0 = \rho \times \frac{L_0}{A_0} $ is animated to appear step-by-step.",
+        "localAnimation": "Manim animation showing the formula being built from individual components with labels appearing sequentially and clearly",
+        "labels": [
+            "Resistivity (ρ)",
+            "Length (L₀)",
+            "Cross-sectional Area (A₀)",
+            "Resistance (R₀)"
+        ],
+        "labelPlacements": [
+            "Resistivity | resistivity symbol in the center of the frame | target=(0.5, 0.75)",
+            "Length | length variable above the resistivity symbol | target=(0.5, 0.65)",
+            "Cross-sectional Area | area variable to the right of the resistivity symbol | target=(0.7, 0.75)",
+            "Resistance (R₀) | resistance formula at the bottom center | target=(0.5, 0.4)"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "R_0 = \\rho \\times \\frac{L_0}{A_0}"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Electrical resistance formula with resistivity, length, and cross-sectional area variables clearly labeled in a clean educational diagram",
+            "Manim animation of the resistance formula being built from individual components"
+        ],
+        "motion": "Camera slowly zooms into the central resistivity symbol to emphasize its role in the formula",
+        "subtitle": "Initial Resistance Formula: R₀ = Resistivity × Length / Area",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "manim",
+        "assetQualityNotes": "Use Manim animation for precise formula derivation and labeling",
+        "comfyPrompt": "A clean, white background with a central resistivity symbol (ρ), length (L₀), and cross-sectional area (A₀) labeled in a clear diagram. The formula $ R_0 = \rho \\times \\frac{L_0}{A_0} $ is animated to appear step-by-step.",
+        "coverageNotes": "Visuals cover the resistivity, length, cross-sectional area, and resistance formula as defined by the narration",
+        "shot": {
+            "template": "video",
+            "heading": "Resistance Formula Derivation",
+            "prompt": "A clean, white background with a central resistivity symbol (ρ), length (L₀), and cross-sectional area (A₀) labeled in a clear diagram. The formula $ R_0 = \rho \\times \\frac{L_0}{A_0} $ is animated to appear step-by-step.",
+            "negativePrompt": "No text, no labels, no captions, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous animation of the formula derivation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Resistance Formula Derivation",
+            "prompt": "A clean, white background with a central resistivity symbol (ρ), length (L₀), and cross-sectional area (A₀) labeled in a clear diagram. The formula $ R_0 = \rho \\times \\frac{L_0}{A_0} $ is animated to appear step-by-step.",
+            "negativePrompt": "No text, no labels, no captions, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous animation of the formula derivation"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Now, the new length $ L' $ is 10% greater than the original length, making it $ 1.1L_0 $.",
+        "template": "process",
+        "visualType": "realistic_labeled_image",
+        "heading": "Length Increase and Resistance Change",
+        "visualSubject": "A diagram showing the original length (L₀) and new length (L') with a 10% increase, labeled in a clean educational format",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold the final frame for at least 3 seconds to emphasize the length increase",
+        "visualAnimation": "A clean, white background with a central diagram showing the original length (L₀) and new length (L') with a 10% increase. The formula $ L' = 1.1L_0 $ is animated to appear step-by-step.",
+        "localAnimation": "Local animation showing the original length and new length with a clear visual representation of the 10% increase",
+        "labels": [
+            "Original Length (L₀)",
+            "New Length (L')",
+            "10% Increase"
+        ],
+        "labelPlacements": [
+            "Original Length (L₀) | original length variable above the diagram | target=(0.5, 0.75)",
+            "New Length (L') | new length variable to the right of the diagram | target=(0.7, 0.75)",
+            "10% Increase | percentage increase label below the diagram | target=(0.5, 0.4)"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "L' = 1.1L_0"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A diagram showing the original length (L₀) and new length (L') with a 10% increase, labeled in a clean educational format",
+            "Local animation of the original length and new length with a clear visual representation of the 10% increase"
+        ],
+        "motion": "Camera slowly zooms into the central diagram to emphasize the length increase",
+        "subtitle": "New Length is 10% Greater: L' = 1.1L₀",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram for precise labeling and visual representation of the length increase",
+        "comfyPrompt": "A clean, white background with a central diagram showing the original length (L₀) and new length (L') with a 10% increase. The formula $ L' = 1.1L_0 $ is animated to appear step-by-step.",
+        "coverageNotes": "Visuals cover the original length, new length, and the 10% increase as defined by the narration",
+        "shot": {
+            "template": "video",
+            "heading": "Length Increase and Resistance Change",
+            "prompt": "A clean, white background with a central diagram showing the original length (L₀) and new length (L') with a 10% increase. The formula $ L' = 1.1L_0 $ is animated to appear step-by-step.",
+            "negativePrompt": "No text, no labels, no captions, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous animation of the length increase"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Length Increase and Resistance Change",
+            "prompt": "A clean, white background with a central diagram showing the original length (L₀) and new length (L') with a 10% increase. The formula $ L' = 1.1L_0 $ is animated to appear step-by-step.",
+            "negativePrompt": "No text, no labels, no captions, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous animation of the length increase"
+        }
+    }
+]

@@ -1,0 +1,4 @@
+{
+  "score": 98,
+  "reason": "The paraphrased text preserves the original meaning accurately, using different phrasing and synonyms without altering the scientific concepts. Minor differences in word choice (e.g., 'observe them closely' vs. 'get a really good look at them') do not affect semantic similarity. The structure and key information are fully maintained, with no significant omissions or additions. A few minor rephrasings (e.g., 'trickery' vs. 'deception') are semantically equivalent."
+}

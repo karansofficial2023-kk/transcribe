@@ -1,0 +1,124 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Let us work through this problem, which was presented in AIEEE 2003 and focuses on the continuity and differentiability of a function at $ x = a $.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Lesson Introduction: Continuity & Differentiability",
+        "visualSubject": "A title card with the lesson heading in sans-serif font, centered on screen, dark text on light background, thin colored border, and no additional elements.",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration; no motion required.",
+        "visualAnimation": "A title card with the heading in sans-serif font, centered on screen, dark text on light background, thin colored border, and no additional elements.",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean title card background with centered text, sans-serif font, dark text on light background, thin colored border.",
+            "A title card with the heading in bold sans-serif font, centered on screen, dark text on light background, thin colored border."
+        ],
+        "motion": "Static title card",
+        "subtitle": "Lesson Introduction: Continuity & Differentiability",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for clean background, no text or labels.",
+        "comfyPrompt": "A title card with the heading 'Lesson Introduction: Continuity & Differentiability' in bold sans-serif font, centered on screen, dark text on light background, thin colored border, no additional elements. Clean background, no text artifacts.",
+        "coverageNotes": "Introduces the lesson topic and context of the problem from AIEEE 2003.",
+        "shot": {
+            "template": "video",
+            "heading": "Lesson Introduction: Continuity & Differentiability",
+            "prompt": "A title card with the heading 'Lesson Introduction: Continuity & Differentiability' in bold sans-serif font, centered on screen, dark text on light background, thin colored border, no additional elements. Clean background, no text artifacts.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form the full 6-second title card."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Lesson Introduction: Continuity & Differentiability",
+            "prompt": "A title card with the heading 'Lesson Introduction: Continuity & Differentiability' in bold sans-serif font, centered on screen, dark text on light background, thin colored border, no additional elements. Clean background, no text artifacts.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form the full 6-second title card."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "The question states that for a real number $ x $, when it is added to its reciprocal, the sum reaches its minimum value.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Function and Optimization Problem",
+        "visualSubject": "A clean white background with a mathematical function f(x) = x + 1/x written in large font, centered on screen, with clear labels for each term.",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration; no motion required.",
+        "visualAnimation": "A clean white background with a mathematical function f(x) = x + 1/x written in large font, centered on screen, with clear labels for each term. The function is animated to appear gradually.",
+        "localAnimation": "Animate the function f(x) = x + 1/x to appear gradually, with each term labeled clearly and highlighted as it appears.",
+        "labels": [
+            "x",
+            "reciprocal of x",
+            "sum of x and reciprocal of x"
+        ],
+        "labelPlacements": [
+            "Label name | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Label name | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Label name | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Finding the minimum value of the function f(x) = x + 1/x using calculus",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "f(x) = x + 1/x"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean white background with a mathematical function f(x) = x + 1/x written in large font, centered on screen, with clear labels for each term.",
+            "A clean white background with a mathematical function f(x) = x + 1/x written in large font, centered on screen, with clear labels for each term."
+        ],
+        "motion": "Static title card",
+        "subtitle": "Function and Optimization Problem",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "manim",
+        "assetQualityNotes": "Manim animation for formula derivation, no text or labels in background.",
+        "comfyPrompt": "A clean white background with a mathematical function f(x) = x + 1/x written in large font, centered on screen, with clear labels for each term. No text artifacts, no watermarks.",
+        "coverageNotes": "Introduces the function and the optimization problem of finding its minimum value.",
+        "shot": {
+            "template": "video",
+            "heading": "Function and Optimization Problem",
+            "prompt": "A clean white background with a mathematical function f(x) = x + 1/x written in large font, centered on screen, with clear labels for each term. No text artifacts, no watermarks.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form the full 8-second function display."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Function and Optimization Problem",
+            "prompt": "A clean white background with a mathematical function f(x) = x + 1/x written in large font, centered on screen, with clear labels for each term. No text artifacts, no watermarks.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form the full 8-second function display."
+        }
+    }
+]

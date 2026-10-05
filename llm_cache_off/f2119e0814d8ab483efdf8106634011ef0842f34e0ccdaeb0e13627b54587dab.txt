@@ -1,0 +1,4 @@
+{
+  "score": 95,
+  "reason": "The paraphrased text preserves the core meaning of the original, explaining photosynthesis accurately. It adds some elaboration on the importance of photosynthesis for humans and the role of stomata, which are not in the original but do not contradict it. Minor differences in phrasing and additional details do not affect the overall semantic similarity."
+}

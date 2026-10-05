@@ -1,0 +1,68 @@
+[
+  {
+    "rowId": "2.1",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther | pollen-producing structure in stamen | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma | receptive surface for pollen grains | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - pollen-producing structure in stamen",
+      "Stigma - receptive surface for pollen grains"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of Ixora flower with anther and stigma clearly visible, natural lighting, 1920x1080 resolution, high detail",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of Ixora flower with anther and stigma clearly visible. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.2",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with text 'Homogamy in Ixora Flowers' centered, dark background, white text",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of title card with text 'Homogamy in Ixora Flowers' centered. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.3",
+    "labels": ["Wood Sorrel Flower"],
+    "labelPlacements": [
+      "Wood Sorrel Flower | small, inconspicuous, fragrance-less | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": [
+      "Wood Sorrel Flower - small, inconspicuous, fragrance-less"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of wood sorrel flower with small size, no fragrance, natural lighting, 1920x1080 resolution, high detail",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of wood sorrel flower with small size and no fragrance. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.4",
+    "labels": ["Closed Bisexual Flower", "Clistogamy"],
+    "labelPlacements": [
+      "Closed Bisexual Flower | self-pollination within closed structure | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Clistogamy | self-pollination in closed flowers | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "abstract_or_nonpointable"],
+    "pointTargetNames": [
+      "Closed Bisexual Flower - self-pollination within closed structure",
+      ""
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of closed bisexual flower with no opening, natural lighting, 1920x1080 resolution, high detail",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of closed bisexual flower with no opening. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.5",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for The occurrence of self-pollination and fertilization within a flower that does not open is called clistogamy.; depict the concrete subject or visible action described by: The occurrence of self-pollination and fertilization within a flower that does not open is called clistogamy.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of closed flower with self-pollination and fertilization occurring within. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

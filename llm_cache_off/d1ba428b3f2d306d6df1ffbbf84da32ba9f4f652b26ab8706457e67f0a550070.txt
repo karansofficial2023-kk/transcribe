@@ -1,0 +1,17 @@
+{
+  "score": 50,
+  "missing_facts": [
+    "The original text mentions that the curve is represented by x as a sin t minus b sin at upon b and y as a cos t minus b cos at by b. This was simplified to x = a sin t - sin(at) and y = a cos t - cos(at). However, in the paraphrased version, this simplification is not clearly stated or explained.",
+    "The original text explicitly states that OA^2 equals a^2 + b^2 minus 2ab cosine of (t - at/b), but the paraphrased version incorrectly simplifies it to OA^2 = a^2 + 1 - 2a cos(t - at). This is a significant change in the mathematical derivation.",
+    "The original text concludes that OA equals a + b, while the paraphrased version concludes that OA equals a + 1. This is a critical factual error."
+  ],
+  "changed_facts": [
+    "In the original text, the expression for x and y includes division by b (i.e., 'b sin at upon b'), which simplifies to just sin(at). However, in the paraphrased version, this is not clearly stated or simplified correctly.",
+    "The original derivation involves a term with b^2, but the paraphrased version incorrectly replaces it with 1. This changes the mathematical context and result significantly.",
+    "The original text defines alpha as t - at/b, while the paraphrased version defines alpha as t - at. This is an incorrect simplification that alters the derivation."
+  ],
+  "added_facts": [
+    "The paraphrased version introduces a new term '1' in the equation OA^2 = a^2 + 1 - 2a cos(t - at), which was not present in the original text. This is an incorrect addition.",
+    "The paraphrased version concludes that the maximum distance is a + 1, while the original text correctly states it as a + b. This is an added and incorrect fact."
+  ]
+}

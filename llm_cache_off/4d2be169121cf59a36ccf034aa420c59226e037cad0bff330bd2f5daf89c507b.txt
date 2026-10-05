@@ -1,0 +1,4 @@
+{
+  "score": 98,
+  "reason": "The paraphrased text preserves the original meaning, scientific explanations, and instructional intent with minimal changes. It uses synonyms and rephrases sentences without altering the core concepts or technical details. There are no significant omissions or additions that affect the overall message. The only minor differences are stylistic variations in phrasing, which do not impact semantic similarity."
+}

@@ -1,0 +1,23 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A classroom with a whiteboard showing a circuit diagram with two EMF sources, labeled as V1 and V2, and resistors R1 and R2. A student is pointing at the whiteboard, camera slightly angled from the side, natural daylight through a window.",
+      "image_requirement": "Viewer must see the whiteboard with the circuit diagram and the student indicating the correct answer.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Therefore, based on our analysis and calculations, it becomes evident that the correct answer is option D.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Conclusion and Final Answer"
+    }
+  ]
+}

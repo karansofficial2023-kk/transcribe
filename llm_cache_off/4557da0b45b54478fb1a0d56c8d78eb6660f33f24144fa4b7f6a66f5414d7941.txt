@@ -1,0 +1,136 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Whether the wire is at its original dimensions or stretched to its new length, $ \\rho $ does not change.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Resistance and Resistivity Relationship",
+        "visualSubject": "A copper wire with a resistivity symbol ρ labeled near the wire, showing both original and stretched dimensions with clear labels for length and cross-sectional area",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6.5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold the final frame for 3 seconds to emphasize the concept of resistivity being constant.",
+        "visualAnimation": "Show a copper wire with original and stretched dimensions, labeled with 'Original Length' and 'New Length', and a resistivity symbol ρ near the wire. Use arrows to highlight that ρ remains unchanged.",
+        "localAnimation": "Zoom in on the resistivity symbol ρ, then pan out to show the entire wire with both length labels. Highlight ρ with a glowing label and arrow pointing to it.",
+        "labels": [
+            "Resistivity Symbol | Resistivity value (ρ) of copper",
+            "Original Length | Original dimension of the wire before stretching"
+        ],
+        "labelPlacements": [
+            "Resistivity Symbol | exact semantic target description | target=(0.35, 0.65)",
+            "Original Length | exact semantic target description | target=(0.25, 0.85)"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [
+            "Arrow from resistivity symbol to wire | Highlighting the constant nature of ρ"
+        ],
+        "highlights": [
+            "Resistivity Symbol | Glowing label for emphasis"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Copper wire with resistivity symbol and length labels",
+            "Wire stretched with original and new length annotations"
+        ],
+        "motion": "Zoom in on the resistivity symbol, then pan out to show the entire wire with both length labels.",
+        "subtitle": "Resistivity remains constant regardless of wire dimensions",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use a deterministic diagram with precise labels and coordinates for resistivity symbol and length labels. Avoid generated video for this concept.",
+        "comfyPrompt": "A copper wire with resistivity symbol ρ labeled near the wire, showing both original and stretched dimensions with clear labels for length and cross-sectional area",
+        "coverageNotes": "Visuals cover the constancy of resistivity (ρ) regardless of wire dimensions. Labels clarify the resistivity symbol and original length.",
+        "shot": {
+            "template": "video",
+            "heading": "Resistance and Resistivity Relationship",
+            "prompt": "A copper wire with a resistivity symbol ρ labeled near the wire, showing both original and stretched dimensions with clear labels for length and cross-sectional area. Zoom in on the resistivity symbol, then pan out to show the entire wire with both length labels.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two clips seamlessly to show a smooth transition from focusing on ρ to showing the entire wire with both length labels."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Resistance and Resistivity Relationship",
+            "prompt": "A copper wire with resistivity symbol ρ labeled near the wire, showing both original and stretched dimensions. Zoom in on the resistivity symbol, then pan out to show the entire wire with both length labels.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two clips seamlessly to show a smooth transition from focusing on ρ to showing the entire wire with both length labels."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "As a result, the new resistance being 1.21 times the original is indeed the correct conclusion.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Resistance Change Calculation",
+        "visualSubject": "A whiteboard with the formula for resistance change, showing R_new = 1.21 * R_original, and a labeled diagram of a wire with original and new dimensions",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6.5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold the final frame for 3 seconds to emphasize the calculation and conclusion.",
+        "visualAnimation": "Show a whiteboard with the formula R_new = 1.21 * R_original, and a labeled diagram of a wire with original and new dimensions. Use arrows to highlight the relationship between length and cross-sectional area.",
+        "localAnimation": "Zoom in on the formula, then pan out to show the entire diagram with both length labels. Highlight the 1.21 multiplier with a glowing label.",
+        "labels": [
+            "Resistance Formula | R_new = 1.21 * R_original",
+            "New Resistance | Calculated resistance after stretching"
+        ],
+        "labelPlacements": [
+            "Resistance Formula | exact semantic target description | target=(0.35, 0.65)",
+            "New Resistance | exact semantic target description | target=(0.25, 0.85)"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [
+            "Arrow from resistivity symbol to resistance formula | Highlighting the relationship between ρ and R"
+        ],
+        "highlights": [
+            "Resistance Formula | Glowing label for emphasis"
+        ],
+        "formulaLines": [
+            "R_new = 1.21 * R_original"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Whiteboard with resistance formula and wire diagram",
+            "Wire diagram showing original and new dimensions with resistivity labels"
+        ],
+        "motion": "Zoom in on the formula, then pan out to show the entire diagram with both length labels.",
+        "subtitle": "New resistance is 1.21 times the original due to dimensional changes",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "manim",
+        "assetQualityNotes": "Use a deterministic diagram with precise labels and coordinates for resistivity symbol and length labels. Avoid generated video for this concept.",
+        "comfyPrompt": "A whiteboard with the formula R_new = 1.21 * R_original, and a labeled diagram of a wire with original and new dimensions",
+        "coverageNotes": "Visuals cover the calculation of resistance change due to dimensional changes. Labels clarify the resistance formula and new resistance value.",
+        "shot": {
+            "template": "video",
+            "heading": "Resistance Change Calculation",
+            "prompt": "A whiteboard with the formula R_new = 1.21 * R_original, and a labeled diagram of a wire with original and new dimensions. Zoom in on the formula, then pan out to show the entire diagram with both length labels.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two clips seamlessly to show a smooth transition from focusing on the formula to showing the entire diagram with both length labels."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Resistance Change Calculation",
+            "prompt": "A whiteboard with the formula R_new = 1.21 * R_original, and a labeled diagram of a wire with original and new dimensions. Zoom in on the formula, then pan out to show the entire diagram with both length labels.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two clips seamlessly to show a smooth transition from focusing on the formula to showing the entire diagram with both length labels."
+        }
+    }
+]

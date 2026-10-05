@@ -1,0 +1,42 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Now, let's consider the specific resistance $ \\rho $.",
+      "formula_lines": ["$ \\rho = \\frac{R A}{L} $"],
+      "explain_steps": ["Resistance times length equals resistivity times area."],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Resistivity Formula"
+    },
+    {
+      "shot_id": "6.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A copper wire stretched on a table, with a ruler next to it showing length increase, and a multimeter measuring resistance at both ends. The lighting is natural daylight from the left side, creating soft shadows. The camera is at medium distance, slightly angled down to show the wire and ruler in focus.",
+      "image_requirement": "The viewer must see the stretched copper wire and the ruler to understand the change in length.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "It is a property that depends on the material itself and remains constant regardless of changes in length or area.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Resistivity and Wire Stretching"
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "This means we are adding $ \\frac{1}{x} $ to $ x $.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "Visualizing the addition of 1/x and x",
+        "visualSubject": "A dynamic visual showing two terms, x and 1/x, being added together with a clear mathematical expression in motion",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Use seamless loop motion to show the addition process continuously",
+        "visualAnimation": "A cinematic shot showing two terms, x and 1/x, being added together with a clear mathematical expression in motion. The visual should emphasize the operation of addition between these two algebraic expressions.",
+        "localAnimation": "Show the addition of $ x $ and $ \\frac{1}{x} $ using arrows and labels to highlight the components being combined",
+        "labels": [
+            "Algebraic term x",
+            "Algebraic term 1/x"
+        ],
+        "labelPlacements": [
+            "Algebraic term x | algebraic expression x | target=(0.35,0.65)",
+            "Algebraic term 1/x | algebraic expression 1/x | target=(0.45,0.25)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [
+            "Arrow from x to addition symbol",
+            "Arrow from 1/x to addition symbol"
+        ],
+        "highlights": [
+            "Highlight the expression $ x + \\frac{1}{x} $"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean whiteboard showing the addition of two algebraic terms",
+            "An animated diagram illustrating the sum of x and 1/x"
+        ],
+        "motion": "Smooth camera movement from left to right across the expression",
+        "subtitle": "Visualizing the addition of 1/x and x",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "ltx_video",
+        "assetQualityNotes": "Use LTX clip for natural motion; no labels or formulas in the generated video",
+        "comfyPrompt": "A clean whiteboard showing the addition of two algebraic terms, x and 1/x, with clear mathematical expression and minimal background",
+        "coverageNotes": "Visualizes the operation of adding $ x $ and $ \\frac{1}{x} $ to form the function $ f(x) = x + \\frac{1}{x} $",
+        "shot": {
+            "template": "video",
+            "heading": "Visualizing the addition of 1/x and x",
+            "prompt": "A cinematic shot showing two terms, x and 1/x, being added together with a clear mathematical expression in motion. The visual should emphasize the operation of addition between these two algebraic expressions.",
+            "negativePrompt": "No text artifacts, no labels, no formulas, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to show the addition process continuously"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Visualizing the addition of 1/x and x",
+            "prompt": "A realistic educational video showing the addition of $ x $ and $ \\frac{1}{x} $ with clear mathematical expression. The visual should emphasize the operation of addition between these two algebraic expressions.",
+            "negativePrompt": "No text artifacts, no labels, no formulas, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to show the addition process continuously"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Let us denote this sum as $ f(x) $.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "Introducing the function notation",
+        "visualSubject": "A dynamic visual showing the transformation of the expression into a function with proper notation",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Use seamless loop motion to show the transformation into a function",
+        "visualAnimation": "A cinematic shot showing the expression $ x + \\frac{1}{x} $ being transformed into the function $ f(x) = x + \\frac{1}{x} $ with clear mathematical notation and visual emphasis on the function definition",
+        "localAnimation": "Show the transformation of the expression into a function using arrows and labels to highlight the change in notation",
+        "labels": [
+            "Function notation f(x)",
+            "Expression x + 1/x"
+        ],
+        "labelPlacements": [
+            "Function notation f(x) | algebraic function definition | target=(0.45,0.65)",
+            "Expression x + 1/x | algebraic expression | target=(0.35,0.25)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [
+            "Arrow from expression to function notation"
+        ],
+        "highlights": [
+            "Highlight the transformation into a function"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean whiteboard showing the transformation of an expression into a function",
+            "An animated diagram illustrating the function notation f(x)"
+        ],
+        "motion": "Smooth camera movement from left to right across the function definition",
+        "subtitle": "Introducing the function notation",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "ltx_video",
+        "assetQualityNotes": "Use LTX clip for natural motion; no labels or formulas in the generated video",
+        "comfyPrompt": "A clean whiteboard showing the transformation of an expression into a function, with clear mathematical notation and minimal background",
+        "coverageNotes": "Visualizes the transformation of the expression $ x + \\frac{1}{x} $ into the function $ f(x) = x + \\frac{1}{x} $",
+        "shot": {
+            "template": "video",
+            "heading": "Introducing the function notation",
+            "prompt": "A cinematic shot showing the transformation of the expression $ x + \\frac{1}{x} $ into the function $ f(x) = x + \\frac{1}{x} $ with clear mathematical notation and visual emphasis on the function definition.",
+            "negativePrompt": "No text artifacts, no labels, no formulas, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to show the transformation into a function"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Introducing the function notation",
+            "prompt": "A realistic educational video showing the transformation of $ x + \\frac{1}{x} $ into the function $ f(x) = x + \\frac{1}{x} $ with clear mathematical notation. The visual should emphasize the operation of defining a function.",
+            "negativePrompt": "No text artifacts, no labels, no formulas, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to show the transformation into a function"
+        }
+    }
+]

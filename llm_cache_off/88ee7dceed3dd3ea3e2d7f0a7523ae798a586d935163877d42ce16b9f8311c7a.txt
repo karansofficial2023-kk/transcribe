@@ -1,0 +1,84 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "For instance, if a 12-volt battery is connected to a resistor with a value of 4 ohms, the resulting current would be 12 divided by 4, which equals 3 amperes.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Ohm's Law Calculation Example",
+        "visualSubject": "A simple electrical circuit with a battery, resistor, and current flow; labeled components including voltage, resistance, and current; realistic lighting and depth of field",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 8,
+        "recommendedClipSeconds": 10,
+        "timingNotes": "Hold the final frame for clarity; use a slow reveal to show each label and calculation step.",
+        "visualAnimation": "A labeled electrical circuit diagram with a battery, resistor, and current flow. The voltage (V), resistance (R), and current (I) are clearly marked. A visual representation of Ohm's Law formula is shown in the background.",
+        "localAnimation": "Reveal labels step-by-step: first show the battery and resistor, then label them with 12 volts and 4 ohms respectively. Next, display the current as 3 amperes. Finally, overlay the formula V = IR with arrows pointing to each component.",
+        "labels": [
+            "Voltage | electrical potential difference across the battery |",
+            "Resistance | opposition to current flow in the resistor |",
+            "Current | flow of electric charge through the circuit |"
+        ],
+        "labelPlacements": [
+            "Voltage | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Resistance | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Current | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Ohm's Law and Resistor Circuits",
+        "arrows": [
+            "Arrow from battery to resistor indicating current flow",
+            "Arrow pointing to voltage label on the battery",
+            "Arrow pointing to resistance label on the resistor"
+        ],
+        "highlights": [
+            "Highlight the 12-volt value on the battery",
+            "Highlight the 4-ohm value on the resistor",
+            "Highlight the 3-ampere value in the circuit"
+        ],
+        "formulaLines": [
+            "V = IR"
+        ],
+        "explainSteps": [
+            "Step 1: Voltage is applied across a resistor.",
+            "Step 2: Current flows through the resistor based on Ohm's Law.",
+            "Step 3: Calculate current using V divided by R."
+        ],
+        "steps": [
+            "Voltage | electrical potential difference",
+            "Resistance | opposition to current flow",
+            "Current | flow of electric charge"
+        ],
+        "columns": [],
+        "imageRecommendations": [
+            "A labeled diagram of a simple circuit with battery, resistor, and current arrows",
+            "A clean educational illustration showing Ohm's Law formula with component labels"
+        ],
+        "motion": "Zoom in on the formula after revealing all components; hold final frame for 3 seconds.",
+        "subtitle": "Ohm's Law: Voltage equals Current multiplied by Resistance",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use a reviewed diagram with clear labels and formula. Avoid generated text or labels in the image.",
+        "comfyPrompt": "A clean educational diagram of an electrical circuit with labeled components, realistic lighting, and no text artifacts",
+        "coverageNotes": "Visuals cover Ohm's Law formula, voltage, resistance, and current calculation as per the narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Ohm's Law Calculation Example",
+            "prompt": "A labeled electrical circuit diagram with a battery, resistor, and current flow. The voltage (V), resistance (R), and current (I) are clearly marked. A visual representation of Ohm's Law formula is shown in the background.",
+            "negativePrompt": "No text artifacts, no generated labels, no watermarks",
+            "durationSeconds": 10,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Split the calculation process into three 4-second clips: first showing the components, second labeling them, and third displaying the formula and result."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Ohm's Law Calculation Example",
+            "prompt": "A labeled electrical circuit diagram with a battery, resistor, and current flow. The voltage (V), resistance (R), and current (I) are clearly marked. A visual representation of Ohm's Law formula is shown in the background.",
+            "negativePrompt": "No text artifacts, no generated labels, no watermarks",
+            "durationSeconds": 10,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Split the calculation process into three 4-second clips: first showing the components, second labeling them, and third displaying the formula and result."
+        }
+    }
+]

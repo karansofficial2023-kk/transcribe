@@ -1,0 +1,58 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "The options provided are cyclosporine A, statin, streptokinase, and lipases.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Segment 1: Question Overview",
+        "visualSubject": "Text overlay on a dark background with white text, centered horizontally and vertically, displaying the four drug names in a clear, readable font",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration to ensure clarity and readability",
+        "visualAnimation": "Text overlay on a dark background with white text, centered horizontally and vertically, displaying the four drug names in a clear, readable font",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "White text on black background with clear font, centered",
+            "Text overlay on dark educational background with white letters"
+        ],
+        "motion": "Static display of the title card",
+        "subtitle": "The options provided are cyclosporine A, statin, streptokinase, and lipases.",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background, no text or labels",
+        "comfyPrompt": "A dark educational background with white text centered at the top, displaying the four drug names in a clear, readable font. No additional elements or distractions.",
+        "coverageNotes": "Visualizes the question options for clarity and ensures all drugs are clearly named and presented.",
+        "shot": {
+            "template": "video",
+            "heading": "Segment 1: Question Overview",
+            "prompt": "A dark educational background with white text centered at the top, displaying the four drug names in a clear, readable font. No additional elements or distractions.",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second duration without freezing or cutting off the text."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Segment 1: Question Overview",
+            "prompt": "A dark educational background with white text centered at the top, displaying the four drug names in a clear, readable font. No additional elements or distractions.",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second duration without freezing or cutting off the text."
+        }
+    }
+]

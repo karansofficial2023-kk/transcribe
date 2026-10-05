@@ -1,0 +1,25 @@
+{
+  "score": 100,
+  "missing_concepts": [],
+  "preserved_concepts": [
+    "Sunflowers",
+    "pollinated by bees",
+    "self-pollination",
+    "Ixora",
+    "homogamy",
+    "wood sorrel",
+    "clistogamy",
+    "cross-pollination",
+    "papaya",
+    "unisexual, dioecious plant",
+    "protandry",
+    "custard apple",
+    "protogyny",
+    "pansies",
+    "harkogamy",
+    "orchids",
+    "primrose",
+    "heterostyly",
+    "bee orchid"
+  ]
+}

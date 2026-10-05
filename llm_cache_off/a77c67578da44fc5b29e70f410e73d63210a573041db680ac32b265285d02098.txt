@@ -1,0 +1,1 @@
+{"score": 95, "reason": "The paraphrased text preserves the original meaning, concepts, and logical flow of the explanation. It uses different phrasing and sentence structures but maintains all technical details, equations, and conclusions. The only minor difference is a slight reorganization of some explanations, which does not affect semantic similarity."}

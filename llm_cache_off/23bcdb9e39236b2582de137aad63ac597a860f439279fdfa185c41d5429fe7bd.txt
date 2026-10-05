@@ -1,0 +1,137 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "The process can be summarized as silver atoms from the pure silver rod being deposited onto the keychain.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Silver Deposition Process",
+        "visualSubject": "silver atoms moving from a pure silver rod to a keychain in an electroplating setup with clear labeling of cathode and anode positions",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6.5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold the frame for full duration to allow visual absorption of the process",
+        "visualAnimation": "A clear electroplating setup with a pure silver rod as anode and keychain as cathode, showing silver atoms moving from rod to keychain",
+        "localAnimation": "Highlight the movement of silver atoms using arrows and labels; zoom in on the keychain to show deposition",
+        "labels": [
+            "silver atoms",
+            "pure silver rod",
+            "keychain"
+        ],
+        "labelPlacements": [
+            "silver atoms | moving from anode to cathode | target=(0.45, 0.65)",
+            "pure silver rod | anode position | target=(0.15, 0.85)",
+            "keychain | cathode position | target=(0.75, 0.35)"
+        ],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [
+            "silver atoms movement from rod to keychain"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Silver atoms moving from anode to cathode in electroplating setup",
+            "Electroplating process with labeled anode and cathode"
+        ],
+        "motion": "Static image with labels and arrows for clarity",
+        "subtitle": "Silver atoms move from the rod to the keychain during electroplating",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use deterministic diagram with labeled structures; avoid generated text or labels in image",
+        "comfyPrompt": "A clean educational diagram of an electroplating setup with silver atoms moving from rod to keychain, no text, no labels, no watermarks",
+        "coverageNotes": "Visuals cover the movement of silver atoms, anode and cathode positions, and the overall process summary",
+        "shot": {
+            "template": "video",
+            "heading": "Silver Deposition Process",
+            "prompt": "A clear electroplating setup with a pure silver rod as anode and keychain as cathode, showing silver atoms moving from rod to keychain",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips with smooth transition to maintain motion continuity"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Silver Deposition Process",
+            "prompt": "A clear electroplating setup with a pure silver rod as anode and keychain as cathode, showing silver atoms moving from rod to keychain in smooth motion",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips with smooth transition to maintain motion continuity"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Let's answer the given question. Since reduction occurs at the cathode and oxidation takes place at the anode, the overall reaction is a redox reaction.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Redox Reaction in Electroplating",
+        "visualSubject": "electrochemical cell with labeled cathode (reduction) and anode (oxidation), showing electron flow and redox reaction summary",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 7.5,
+        "recommendedClipSeconds": 9,
+        "timingNotes": "Hold the frame for full duration to allow visual absorption of the process",
+        "visualAnimation": "A clear electrochemical cell with labeled cathode and anode, showing electron flow from anode to cathode and redox reaction summary",
+        "localAnimation": "Highlight the electron flow using arrows and labels; zoom in on the redox reaction summary",
+        "labels": [
+            "cathode (reduction)",
+            "anode (oxidation)",
+            "electron flow"
+        ],
+        "labelPlacements": [
+            "cathode (reduction) | labeled cathode position | target=(0.25, 0.75)",
+            "anode (oxidation) | labeled anode position | target=(0.15, 0.35)",
+            "electron flow | direction from anode to cathode | target=(0.45, 0.55)"
+        ],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [
+            "electron flow from anode to cathode"
+        ],
+        "highlights": [],
+        "formulaLines": [
+            "Redox reaction: Ag⁺ + e⁻ → Ag (reduction at cathode)",
+            "Oxidation: Ag → Ag⁺ + e⁻ (oxidation at anode)"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Electrochemical cell with labeled cathode and anode showing electron flow",
+            "Redox reaction summary in electroplating process"
+        ],
+        "motion": "Static image with labels and arrows for clarity",
+        "subtitle": "Reduction at the cathode and oxidation at the anode form a redox reaction",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use deterministic diagram with labeled structures; avoid generated text or labels in image",
+        "comfyPrompt": "A clean educational diagram of an electrochemical cell with labeled cathode and anode, showing electron flow and redox reaction summary, no text, no labels, no watermarks",
+        "coverageNotes": "Visuals cover the reduction at cathode, oxidation at anode, and overall redox reaction in electroplating",
+        "shot": {
+            "template": "video",
+            "heading": "Redox Reaction in Electroplating",
+            "prompt": "A clear electrochemical cell with labeled cathode (reduction) and anode (oxidation), showing electron flow from anode to cathode and redox reaction summary",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips with smooth transition to maintain motion continuity"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Redox Reaction in Electroplating",
+            "prompt": "A clear electrochemical cell with labeled cathode (reduction) and anode (oxidation), showing electron flow from anode to cathode and redox reaction summary in smooth motion",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips with smooth transition to maintain motion continuity"
+        }
+    }
+]

@@ -1,0 +1,13 @@
+{
+  "inferredTopic": "Ohm's Law and Resistor Circuits",
+  "filenameTopic": "Ohms Law and Resistor Circuits",
+  "topicMatch": true,
+  "confidence": 1.0,
+  "safeStoryboardTitle": "Ohm's Law and Resistor Circuits",
+  "subject": "Physics",
+  "academicLevel": "REVIEW_REQUIRED",
+  "intendedLearners": "REVIEW_REQUIRED",
+  "learningObjectives": [],
+  "smeRole": "Electrical Engineering Educator",
+  "warning": ""
+}

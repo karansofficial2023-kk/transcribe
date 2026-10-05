@@ -1,0 +1,134 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "To find the value of the current (I), we consider the total electromotive force in the circuit, which is 2E, and divide it by the total resistance, which includes R, R1, and R2.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Current Calculation Formula",
+        "visualSubject": "Electrical circuit diagram with labeled components: two EMF sources (E), resistors (R, R1, R2), and current path. Clean background with white text on black band.",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 8,
+        "recommendedClipSeconds": 9,
+        "timingNotes": "Hold the formula for full duration, use step-by-step reveal of labels and equations.",
+        "visualAnimation": "A clean circuit diagram with two EMF sources (E) in series, resistors R, R1, R2 in parallel, and a current path. The total electromotive force is labeled as 2E, and the total resistance is shown as R + R1 + R2.",
+        "localAnimation": "Step-by-step reveal of labels: first show EMF sources, then add resistors, finally display the formula I = 2E / (R + R1 + R2).",
+        "labels": [
+            "Electromotive Force | Total electromotive force in the circuit | target=(0.000,0.000)",
+            "Resistance | Total resistance in the circuit | target=(0.000,0.000)",
+            "Current | Current (I) flowing through the circuit | target=(0.000,0.000)"
+        ],
+        "labelPlacements": [
+            "Electromotive Force | Total electromotive force in the circuit | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Resistance | Total resistance in the circuit | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Current | Current (I) flowing through the circuit | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "I = 2E / (R + R1 + R2)"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Circuit diagram with two EMF sources and three resistors in parallel",
+            "Electrical circuit showing total electromotive force and resistance"
+        ],
+        "motion": "Zoom into the formula, then pan to show the full circuit diagram",
+        "subtitle": "Current is calculated by dividing total EMF by total resistance.",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use deterministic diagram with labeled components and clean background",
+        "comfyPrompt": "Clean educational circuit diagram, two EMF sources, three resistors in parallel, white text on black band, 1920x1080, no labels or watermarks.",
+        "coverageNotes": "Visuals cover total electromotive force (2E), total resistance (R + R1 + R2), and the formula for current calculation.",
+        "shot": {
+            "template": "video",
+            "heading": "Current Calculation Formula",
+            "prompt": "Cinematic shot of a clean circuit diagram with two EMF sources, three resistors in parallel, and current path. Labels appear step-by-step: first EMF sources, then resistors, finally the formula I = 2E / (R + R1 + R2).",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout.",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips: first showing EMF sources, second adding resistors, third revealing the full formula."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Current Calculation Formula",
+            "prompt": "Realistic educational circuit diagram with two EMF sources and three resistors in parallel. Labels appear step-by-step: first EMF sources, then resistors, finally the formula I = 2E / (R + R1 + R2).",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout.",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips: first showing EMF sources, second adding resistors, third revealing the full formula."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "By applying these two equations together, we can deduce that E equals 2E times R2 divided by the sum of R, R1, and R2.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Deriving Voltage from Current and Resistance",
+        "visualSubject": "Electrical circuit diagram with labeled components: two EMF sources (E), resistors (R, R1, R2), and current path. Clean background with white text on black band.",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 8,
+        "recommendedClipSeconds": 9,
+        "timingNotes": "Hold the formula for full duration, use step-by-step reveal of labels and equations.",
+        "visualAnimation": "A clean circuit diagram with two EMF sources (E) in series, resistors R, R1, R2 in parallel, and a current path. The derived voltage equation is labeled as E = 2E * R2 / (R + R1 + R2).",
+        "localAnimation": "Step-by-step reveal of labels: first show EMF sources, then add resistors, finally display the formula E = 2E * R2 / (R + R1 + R2).",
+        "labels": [
+            "Electromotive Force | Total electromotive force in the circuit | target=(0.000,0.000)",
+            "Resistance | Total resistance in the circuit | target=(0.000,0.000)",
+            "Voltage | Derived voltage (E) from current and resistance | target=(0.000,0.000)"
+        ],
+        "labelPlacements": [
+            "Electromotive Force | Total electromotive force in the circuit | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Resistance | Total resistance in the circuit | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Voltage | Derived voltage (E) from current and resistance | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "E = 2E * R2 / (R + R1 + R2)"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Circuit diagram with two EMF sources and three resistors in parallel",
+            "Electrical circuit showing derived voltage equation"
+        ],
+        "motion": "Zoom into the formula, then pan to show the full circuit diagram",
+        "subtitle": "Voltage is derived by multiplying total EMF by R2 and dividing by total resistance.",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use deterministic diagram with labeled components and clean background",
+        "comfyPrompt": "Clean educational circuit diagram, two EMF sources, three resistors in parallel, white text on black band, 1920x1080, no labels or watermarks.",
+        "coverageNotes": "Visuals cover derived voltage equation (E = 2E * R2 / (R + R1 + R2)), total EMF and resistance, and the relationship between current and voltage in a circuit.",
+        "shot": {
+            "template": "video",
+            "heading": "Deriving Voltage from Current and Resistance",
+            "prompt": "Cinematic shot of a clean circuit diagram with two EMF sources, three resistors in parallel, and current path. Labels appear step-by-step: first EMF sources, then resistors, finally the formula E = 2E * R2 / (R + R1 + R2).",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout.",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips: first showing EMF sources, second adding resistors, third revealing the full formula."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Deriving Voltage from Current and Resistance",
+            "prompt": "Realistic educational circuit diagram with two EMF sources and three resistors in parallel. Labels appear step-by-step: first EMF sources, then resistors, finally the formula E = 2E * R2 / (R + R1 + R2).",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout.",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips: first showing EMF sources, second adding resistors, third revealing the full formula."
+        }
+    }
+]

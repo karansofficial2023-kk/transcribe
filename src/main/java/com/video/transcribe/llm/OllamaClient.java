@@ -15,8 +15,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.video.transcribe.config.AppConfig;
+import com.video.transcribe.util.Sleeper;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -35,18 +37,71 @@ public class OllamaClient {
     private final OkHttpClient httpClient;
     private final String baseUrl;
     private final String model;
+    private final boolean think;
+    private final double temperature;
+    private final int numCtx;
+    private final String keepAlive;
+    private volatile int nextNumPredict = 0;
+    private final LlmCache cache;
+    private volatile boolean lastAnswerCutOff;
+    // Self-healing: how often a transient failure is retried, the first back-off (doubles each time, capped at 60 s), how long to wait for
+    // Ollama to return when it is down, and the clock used for waiting. Overridable with -Dollama.retry.attempts / .base-ms / .service-wait-ms.
+    private final int maxAttempts;
+    private final long retryBaseMillis;
+    private final long serviceWaitMillis;
+    private final long servicePollMillis;
+    private final Sleeper sleeper;
+
+    /** True when the most recent answer stopped at the token limit instead of finishing, so callers can retry with a larger budget. */
+    public boolean lastAnswerWasCutOff() {
+        return lastAnswerCutOff;
+    }
     
     public OllamaClient(AppConfig config) {
+        this(config, config.getOllamaModel());
+    }
+
+    /** Client bound to a specific model (e.g. the fast model for structured planning passes). */
+    public OllamaClient(AppConfig config, String modelName) {
         this.baseUrl = config.getOllamaUrl();
-        this.model = config.getOllamaModel();
+        this.model = modelName;
+        this.think = config.isOllamaThink();
+        this.temperature = config.getOllamaTemperature();
+        // The fast model (8B) leaves VRAM headroom, so it gets a larger window for long structured plans.
+        this.numCtx = modelName.equals(config.getOllamaModel()) ? config.getOllamaNumCtx() : config.getOllamaFastNumCtx();
+        this.keepAlive = config.getOllamaKeepAlive();
+        this.cache = new LlmCache(config.getOllamaCacheDir());
         // FIX: Much longer timeouts for LLM generation
         this.httpClient = new OkHttpClient.Builder()
             .connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(300, TimeUnit.SECONDS)
-            .readTimeout(600, TimeUnit.SECONDS)
+            .readTimeout(1500, TimeUnit.SECONDS)
             .build();
-        
+        this.maxAttempts = Math.max(1, Integer.getInteger("ollama.retry.attempts", 4));
+        this.retryBaseMillis = Long.getLong("ollama.retry.base-ms", 4_000L);
+        this.serviceWaitMillis = Long.getLong("ollama.retry.service-wait-ms", 600_000L);
+        this.servicePollMillis = 5_000L;
+        this.sleeper = Sleeper.REAL;
+
         logger.info("Ollama client configured: URL={}, Model={}", baseUrl, model);
+    }
+
+    /** For tests: a client against a given URL with explicit recovery settings and an injected clock. */
+    OllamaClient(String baseUrl, String modelName, String cacheDir, int maxAttempts, long retryBaseMillis, long serviceWaitMillis, Sleeper sleeper) {
+        this.baseUrl = baseUrl;
+        this.model = modelName;
+        this.think = false;
+        this.temperature = 0.2;
+        this.numCtx = 4096;
+        this.keepAlive = "5m";
+        this.cache = new LlmCache(cacheDir);
+        this.httpClient = new OkHttpClient.Builder()
+            .connectTimeout(2, TimeUnit.SECONDS).writeTimeout(10, TimeUnit.SECONDS).readTimeout(10, TimeUnit.SECONDS).build();
+        this.maxAttempts = Math.max(1, maxAttempts);
+        this.retryBaseMillis = retryBaseMillis;
+        this.serviceWaitMillis = serviceWaitMillis;
+        this.servicePollMillis = 1L;
+        this.sleeper = sleeper;
     }
     
     /**
@@ -431,7 +486,35 @@ public class OllamaClient {
         return generate(systemPrompt, userPrompt, schema);
     }
 
-    private String generate(String systemPrompt, String userPrompt, JsonObject schema) throws IOException {
+    /** Structured request with an explicit output-token budget (large JSON plans must never be cut off mid-object). */
+    public String generateStructured(String systemPrompt, String userPrompt, JsonObject schema, int maxTokens) throws IOException {
+        this.nextNumPredict = maxTokens;
+        try {
+            return generate(systemPrompt, userPrompt, schema);
+        } finally {
+            this.nextNumPredict = 0;
+        }
+    }
+
+    /** Number of non-Latin letters, used to detect narration written in Indic/Arabic scripts. */
+    static int nonLatinLetters(String text) {
+        int count = 0;
+        for (int i = 0; text != null && i < text.length(); i++) {
+            char ch = text.charAt(i);
+            if (ch >= 0x0590 && Character.isLetter(ch)) count++;
+        }
+        return count;
+    }
+
+    static final String KEEP_LANGUAGE_RULE = "\nLANGUAGE RULE: the source text is not English. Write ALL output in exactly the same "
+        + "language and the same script as the source text. Never translate it into English and never transliterate it into Latin "
+        + "letters. Keep standard scientific terms in the form the source uses (native script, or English only where the source "
+        + "itself uses English). Keep numbers, symbols and formulas unchanged.\n";
+
+    String generate(String systemPrompt, String userPrompt, JsonObject schema) throws IOException {
+        if (schema == null && nonLatinLetters(userPrompt) >= 30) {
+            systemPrompt = systemPrompt + KEEP_LANGUAGE_RULE;
+        }
         JsonObject requestBody = new JsonObject();
         requestBody.addProperty("model", model);
         requestBody.addProperty("system", systemPrompt);
@@ -440,37 +523,176 @@ public class OllamaClient {
         if (schema != null) {
             requestBody.add("format", schema);
         }
-        requestBody.addProperty("temperature", 0.7);
-        requestBody.addProperty("num_predict", 8000);
+        requestBody.addProperty("think", think);
+        requestBody.addProperty("keep_alive", keepAlive);
+        // Ollama reads sampling parameters from "options"; top-level temperature/num_predict are silently ignored.
+        JsonObject options = new JsonObject();
+        options.addProperty("temperature", temperature);
+        int budget = nextNumPredict > 0 ? nextNumPredict
+            : (schema != null ? 16000 : (int) Math.max(1500, Math.min(8000, userPrompt.length() * 1.6 + 800)));
+        options.addProperty("num_predict", budget);
+        options.addProperty("repeat_penalty", 1.08);
+        options.addProperty("num_ctx", numCtx);
+        requestBody.add("options", options);
         
-        RequestBody body = RequestBody.create(
-            requestBody.toString(),
-            MediaType.parse("application/json")
-        );
-        
+        String cached = cache.get(requestBody.toString());
+        if (cached != null) {
+            logger.info("Ollama answer from cache ({})", model);
+            return cached;
+        }
+
+        logger.info("Sending request to Ollama ({}) - expecting up to 10 min", model);
+        String requestJson = requestBody.toString();
+        RetryableException last = null;
+        // A dropped connection, a server error, a restarting Ollama or a garbled / empty answer is transient: recover and ask again instead of
+        // failing the whole video. Only a request Ollama itself rejects (4xx) is final.
+        for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+            long start = System.currentTimeMillis();
+            try {
+                String text = sendOnce(requestJson, budget);
+                long elapsed = System.currentTimeMillis() - start;
+                LlmCache.MODEL_MILLIS.addAndGet(elapsed);
+                logger.info("Ollama response in {} ms", elapsed);
+                return text;
+            } catch (RetryableException e) {
+                last = e;
+                if (attempt == maxAttempts) {
+                    break;
+                }
+                logger.warn("Ollama ({}) attempt {}/{} failed: {} - recovering, then retrying", model, attempt, maxAttempts, e.getMessage());
+                recoverFrom(e);
+                pause(Math.min(60_000L, retryBaseMillis * (1L << (attempt - 1))));
+            }
+        }
+        throw new IOException("Ollama request failed after " + maxAttempts + " attempts: " + (last == null ? "unknown error" : last.getMessage()), last);
+    }
+
+    /** One request. Throws RetryableException for anything worth another try, a plain IOException for a request that will never work. */
+    private String sendOnce(String requestJson, int budget) throws IOException {
         Request request = new Request.Builder()
             .url(baseUrl + "/api/generate")
-            .post(body)
+            .post(RequestBody.create(requestJson, MediaType.parse("application/json")))
             .build();
-        
-        logger.info("Sending request to Ollama ({}) - expecting up to 10 min", model);
-        long start = System.currentTimeMillis();
-        
+        String responseBody;
+        int code;
         try (Response response = httpClient.newCall(request).execute()) {
-            String responseBody = response.body() != null ? response.body().string() : "";
-            
-            if (!response.isSuccessful()) {
-                throw new IOException("Ollama error " + response.code() + ": " + responseBody);
+            responseBody = response.body() != null ? response.body().string() : "";
+            code = response.code();
+        } catch (IOException e) {
+            throw new RetryableException("connection problem (" + e.getClass().getSimpleName() + ": " + e.getMessage() + ")", e, isConnectFailure(e));
+        }
+        if (code >= 500 || code == 429 || code == 408) {
+            throw new RetryableException("HTTP " + code + ": " + shorten(responseBody), null, false);
+        }
+        if (code < 200 || code >= 300) {
+            throw new IOException("Ollama error " + code + ": " + shorten(responseBody));
+        }
+        JsonObject jsonResponse;
+        String generatedText;
+        try {
+            jsonResponse = gson.fromJson(responseBody, JsonObject.class);
+            JsonElement answer = jsonResponse == null ? null : jsonResponse.get("response");
+            if (answer == null || answer.isJsonNull()) {
+                throw new RetryableException("the answer has no 'response' field", null, false);
             }
-            
-            JsonObject jsonResponse = gson.fromJson(responseBody, JsonObject.class);
-            String generatedText = jsonResponse.get("response").getAsString();
-            
-            logger.info("Ollama response in {} ms", System.currentTimeMillis() - start);
-            return generatedText.trim();
+            generatedText = answer.getAsString().trim();
+        } catch (RuntimeException e) {                  // not JSON at all (an HTML error page, a cut-off body), or 'response' is not text
+            throw new RetryableException("malformed answer (" + e.getClass().getSimpleName() + ")", e, false);
+        }
+        // done_reason "length" means the model hit its output limit mid-answer: such text is incomplete, so it is flagged and never cached
+        // (a cached cut-off answer would be replayed identically on every re-run)
+        boolean cutOff = jsonResponse.has("done_reason") && !jsonResponse.get("done_reason").isJsonNull()
+            && "length".equals(jsonResponse.get("done_reason").getAsString());
+        lastAnswerCutOff = cutOff;
+        if (generatedText.isEmpty()) {
+            throw new RetryableException("empty answer", null, false);
+        }
+        if (cutOff) {
+            logger.warn("Ollama ({}) stopped at its output limit of {} tokens; the answer is incomplete and is not cached", model, budget);
+        } else {
+            cache.put(requestJson, generatedText);
+        }
+        return generatedText;
+    }
+
+    /** Fixes what can be fixed before the next attempt: waits for Ollama to come back, or frees VRAM after a memory fault. */
+    private void recoverFrom(RetryableException e) {
+        if (e.connectFailure) {
+            waitForService();
+        } else if (looksLikeMemoryFault(e.getMessage())) {
+            unload();
+        }
+    }
+
+    private void waitForService() {
+        long deadline = System.currentTimeMillis() + serviceWaitMillis;
+        long lastNote = 0;
+        while (!isAvailable()) {
+            if (System.currentTimeMillis() >= deadline) {
+                logger.error("Ollama ({}) did not come back within {} s", baseUrl, serviceWaitMillis / 1000);
+                return;
+            }
+            if (System.currentTimeMillis() - lastNote > 30_000) {
+                logger.warn("Ollama is not reachable at {}; waiting for it to return (start it with: ollama serve)", baseUrl);
+                lastNote = System.currentTimeMillis();
+            }
+            pause(servicePollMillis);
+        }
+        logger.info("Ollama is reachable again");
+    }
+
+    private void pause(long millis) {
+        try {
+            sleeper.sleep(millis);
+        } catch (InterruptedException interrupted) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private static boolean isConnectFailure(IOException e) {
+        String text = String.valueOf(e.getMessage()).toLowerCase(java.util.Locale.ROOT);
+        return e instanceof java.net.ConnectException || e instanceof java.net.UnknownHostException
+            || text.contains("failed to connect") || text.contains("connection refused");
+    }
+
+    private static boolean looksLikeMemoryFault(String message) {
+        String text = String.valueOf(message).toLowerCase(java.util.Locale.ROOT);
+        return text.contains("memory") || text.contains("runner") || text.contains("cuda") || text.contains("terminated")
+            || text.contains("killed") || text.contains("insufficient");
+    }
+
+    private static String shorten(String text) {
+        String single = String.valueOf(text).replaceAll("\\s+", " ").trim();
+        return single.length() > 200 ? single.substring(0, 200) + "..." : single;
+    }
+
+    /** A failure worth another attempt; connectFailure marks "Ollama is not running / not reachable". */
+    private static final class RetryableException extends IOException {
+        private static final long serialVersionUID = 1L;
+        final boolean connectFailure;
+
+        RetryableException(String message, Throwable cause, boolean connectFailure) {
+            super(message, cause);
+            this.connectFailure = connectFailure;
         }
     }
     
+    /** Frees the model's VRAM (keep_alive 0) so GPU-bound tools such as Whisper can use the whole card. */
+    public void unload() {
+        try {
+            JsonObject body = new JsonObject();
+            body.addProperty("model", model);
+            body.addProperty("keep_alive", 0);
+            Request request = new Request.Builder().url(baseUrl + "/api/generate")
+                .post(RequestBody.create(body.toString(), MediaType.parse("application/json"))).build();
+            try (Response response = httpClient.newCall(request).execute()) {
+                logger.info("Unloaded Ollama model {} ({})", model, response.code());
+            }
+        } catch (Exception e) {
+            logger.debug("Ollama unload skipped: {}", e.getMessage());
+        }
+    }
+
     /**
      * Check if Ollama is running
      */

@@ -1,0 +1,8 @@
+{
+  "score": 95,
+  "missing_facts": [],
+  "changed_facts": [
+    "The original text says 'the dry cell in your wall clock or your toys which die after long use are primary cells.' The paraphrased version changes this to 'The dry cell in your wall clock or your toys, which die after long use, are primary cells.' This is a minor grammatical change and does not alter the factual content."
+  ],
+  "added_facts": []
+}

@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Now, considering the additional information provided: the potential drop across battery 2 is zero.",
+      "formula_lines": ["V = E - I R"],
+      "explain_steps": ["Potential drop equals EMF minus current times internal resistance."],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Zero Potential Drop Across Battery 2"
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "From this, we can infer that the EMF across battery 2 should be equal to the current in the circuit times its internal resistance, because only then do we know that V is always equal to E - IR, where R represents the internal resistance of the battery.",
+      "formula_lines": ["E = I R"],
+      "explain_steps": ["EMF equals current times internal resistance."],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "EMF Equals Current Times Internal Resistance"
+    },
+    {
+      "shot_id": "3.3",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Using this relationship, if the potential difference across battery 2 is zero, then we can directly apply this equation.",
+      "formula_lines": ["0 = E - I R"],
+      "explain_steps": ["Zero potential drop equals EMF minus current times internal resistance."],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Applying Zero Potential Drop Equation"
+    }
+  ]
+}

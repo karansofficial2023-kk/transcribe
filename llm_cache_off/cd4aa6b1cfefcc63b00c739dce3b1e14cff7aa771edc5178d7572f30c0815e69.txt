@@ -1,0 +1,48 @@
+{
+  "shots": [
+    {
+      "shot_id": "7.7",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see a time slider and gold deposition.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Move time slider to adjust duration",
+        "Observe increased gold deposit over time"
+      ],
+      "panels": [],
+      "narration_en": "If instead of silver, we were depositing gold, move the time slider and observe that more gold is deposited in the same period.",
+      "formula_lines": [],
+      "explain_steps": [
+        "Adjusting time changes the duration of current flow",
+        "More gold deposits with longer exposure to current"
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Gold Deposition Over Time"
+    },
+    {
+      "shot_id": "7.8",
+      "visual_type": "realistic_image",
+      "image_prompt": "Electroplating setup with silver and gold electrodes, electrolyte solution, and a timer showing 10 minutes. Camera is medium distance, slightly angled down to show the apparatus in action. Natural lighting from a window on the left side, warm tones.",
+      "image_requirement": "Viewer must see electroplating setup with time display.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "To summarize, we can say that the process of electroplating depends on the intensity of current, the duration for which it's applied, and also the type of metal being used for deposition.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Factors in Electroplating"
+    }
+  ]
+}

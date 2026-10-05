@@ -1,0 +1,4 @@
+{
+  "score": 95,
+  "reason": "The paraphrased text preserves the core meaning of the original, explaining photosynthesis accurately. It adds some elaboration and rephrases sentences without altering the scientific concepts. A minor spelling correction ('புரிஞ்சுகிறது' to 'புறங்கிறது') is present but does not affect meaning significantly."
+}

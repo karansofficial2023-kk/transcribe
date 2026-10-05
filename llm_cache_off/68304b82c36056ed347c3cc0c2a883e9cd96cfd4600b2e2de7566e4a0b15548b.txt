@@ -1,0 +1,76 @@
+[
+  {
+    "rowId": "2.6",
+    "labels": ["Pollen Grains", "Stigma"],
+    "labelPlacements": [
+      "Pollen Grains | positioned on stigma for self-pollination | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma | receptive surface for pollen grains | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Pollen Grains - small, yellowish structures on stigma",
+      "Stigma - sticky, receptive surface at the center of the flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of clistogamous flower with pollen grains on stigma, natural lighting, 1920x1080 resolution, high detail",
+    "comfyPrompt": "A close-up view of a closed flower with pollen grains already positioned on the stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with bold, centered text on a dark background; no image or diagram",
+    "comfyPrompt": "A title card with the word 'Cross-pollination' in bold, centered text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.2",
+    "labels": ["Male Flower", "Female Flower"],
+    "labelPlacements": [
+      "Male Flower | Male flower on the papaya plant | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Female Flower | Female flower on the papaya plant | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Male Flower - yellow, stamen-bearing structure on the plant",
+      "Female Flower - green, pistil-bearing structure on the plant"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A realistic image of a papaya plant with male and female flowers clearly visible; camera angle: medium shot, lighting: natural daylight",
+    "comfyPrompt": "A medium shot of a papaya plant showing both male and female flowers. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.3",
+    "labels": ["Male Flower (Plant 1)", "Female Flower (Plant 2)"],
+    "labelPlacements": [
+      "Male Flower (Plant 1) | Male flower on Plant 1 | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Female Flower (Plant 2) | Female flower on Plant 2 | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Male Flower (Plant 1) - yellow, stamen-bearing structure on Plant 1",
+      "Female Flower (Plant 2) - green, pistil-bearing structure on Plant 2"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A realistic image of two separate papaya plants with male and female flowers clearly visible; camera angle: medium shot, lighting: natural daylight",
+    "comfyPrompt": "A medium shot of two separate papaya plants showing a male flower on Plant 1 and a female flower on Plant 2. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.4",
+    "labels": ["Stamen (Male Part)", "Pistil (Female Part)"],
+    "labelPlacements": [
+      "Stamen (Male Part) | Stamen on the sunflower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Pistil (Female Part) | Pistil on the sunflower | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Stamen (Male Part) - yellow, pollen-bearing structure on the sunflower",
+      "Pistil (Female Part) - green, stigma and ovary structure on the sunflower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A realistic image of a sunflower with both male and female parts visible; camera angle: medium shot, lighting: natural daylight",
+    "comfyPrompt": "A medium shot of a sunflower showing both stamen (male part) and pistil (female part). No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

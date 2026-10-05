@@ -1,0 +1,118 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "అలాగే, ఆకులలో పత్రహరితం ఉండాలి.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "ఆకులలో పత్రహరితం ఉండాలి",
+        "visualSubject": "సైద్ధాంతిక చిత్రం: ఆకులలో పత్రహరితం ఉండటం",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "స్థిర చిత్రం కావచ్చు; మొదటి శిక్షణ ప్రారంభం",
+        "visualAnimation": "ఆకుల చిత్రం, పత్రహరితం ఉన్న ఆకుల సైద్ధాంతిక చిత్రం",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ఆకుల చిత్రం, పత్రహరితం ఉన్న ఆకుల సైద్ధాంతిక చిత్రం",
+            "ఆకుల వివరణ, పత్రహరితం ఉన్న ఆకుల సైద్ధాంతిక చిత్రం"
+        ],
+        "motion": "స్థిర చిత్రం",
+        "subtitle": "ఆకులలో పత్రహరితం ఉండాలి",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "comfy_image",
+        "assetQualityNotes": "పత్రహరితం ఉన్న ఆకుల చిత్రం కోసం సృష్టించబడిన చిత్రం",
+        "comfyPrompt": "ఆకుల చిత్రం, పత్రహరితం ఉన్న ఆకుల సైద్ధాంతిక చిత్రం, 1920x1080, శాస్త్రీయ వివరణ, పొడవు మరియు వెనుక అలంకరణ కోసం స్థానం ఉండాలి",
+        "coverageNotes": "ఆకులలో పత్రహరితం ఉండటం వివరణ కోసం చిత్రం ఉపయోగించబడింది",
+        "shot": {
+            "template": "video",
+            "heading": "ఆకులలో పత్రహరితం ఉండాలి",
+            "prompt": "ఆకుల చిత్రం, పత్రహరితం ఉన్న ఆకుల సైద్ధాంతిక చిత్రం, 1920x1080, శాస్త్రీయ వివరణ, పొడవు మరియు వెనుక అలంకరణ కోసం స్థానం ఉండాలి",
+            "negativePrompt": "చిత్రంలో ఏ వివరణ లేదు, పత్రహరితం అనేక ఆకులలో ఉండదు",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "ప్రతి చిత్రం కొన్ని సెకన్లు ఉండాలి, వాటిని క్లిప్ లో చేర్చండి"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ఆకులలో పత్రహరితం ఉండాలి",
+            "prompt": "ఆకుల చిత్రం, పత్రహరితం ఉన్న ఆకుల సైద్ధాంతిక చిత్రం, 1920x1080, శాస్త్రీయ వివరణ, పొడవు మరియు వెనుక అలంకరణ కోసం స్థానం ఉండాలి",
+            "negativePrompt": "చిత్రంలో ఏ వివరణ లేదు, పత్రహరితం అనేక ఆకులలో ఉండదు",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "ప్రతి చిత్రం కొన్ని సెకన్లు ఉండాలి, వాటిని క్లిప్ లో చేర్చండి"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "కిరణజన్య సంయోగక్రియ లేకుండా, జీవితం అసాధ్యమైనది.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది",
+        "visualSubject": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "స్థిర చిత్రం కావచ్చు; మొదటి శిక్షణ ప్రారంభం",
+        "visualAnimation": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది",
+        "localAnimation": "ఆకుల చిత్రం, పత్రహరితం ఉన్న ఆకుల సైద్ధాంతిక చిత్రం",
+        "labels": [
+            "కిరణజన్య సంయోగక్రియ"
+        ],
+        "labelPlacements": [
+            "కిరణజన్య సంయోగక్రియ | కిరణజన్య సంయోగక్రియ ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది",
+            "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది"
+        ],
+        "motion": "స్థిర చిత్రం",
+        "subtitle": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది",
+        "comfyPrompt": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది, 1920x1080, శాస్త్రీయ వివరణ, పొడవు మరియు వెనుక అలంకరణ కోసం స్థానం ఉండాలి",
+        "coverageNotes": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది వివరణ కోసం చిత్రం ఉపయోగించబడింది",
+        "shot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది",
+            "prompt": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది, 1920x1080, శాస్త్రీయ వివరణ, పొడవు మరియు వెనుక అలంకరణ కోసం స్థానం ఉండాలి",
+            "negativePrompt": "చిత్రంలో ఏ వివరణ లేదు, కిరణజన్య సంయోగక్రియ అనేక ఆకులలో ఉండదు",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "ప్రతి చిత్రం కొన్ని సెకన్లు ఉండాలి, వాటిని క్లిప్ లో చేర్చండి"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది",
+            "prompt": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది, 1920x1080, శాస్త్రీయ వివరణ, పొడవు మరియు వెనుక అలంకరణ కోసం స్థానం ఉండాలి",
+            "negativePrompt": "చిత్రంలో ఏ వివరణ లేదు, కిరణజన్య సంయోగక్రియ అనేక ఆకులలో ఉండదు",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "ప్రతి చిత్రం కొన్ని సెకన్లు ఉండాలి, వాటిని క్లిప్ లో చేర్చండి"
+        }
+    }
+]

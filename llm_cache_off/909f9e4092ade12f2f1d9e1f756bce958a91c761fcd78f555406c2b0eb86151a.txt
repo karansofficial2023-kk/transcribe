@@ -1,0 +1,27 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "When resistors are connected in parallel, the reciprocal of the total resistance is equal to the sum of the reciprocals of each resistor's value.",
+      "formula_lines": [
+        "1/R_total = 1/R1 + 1/R2"
+      ],
+      "explain_steps": [
+        "Reciprocal of total resistance equals sum of reciprocals of individual resistances."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Parallel Circuit Resistance Calculation"
+    }
+  ]
+}

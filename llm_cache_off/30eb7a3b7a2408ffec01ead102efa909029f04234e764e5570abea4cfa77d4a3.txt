@@ -1,0 +1,26 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A straight copper wire lying on a table, with its original length L0 and cross-sectional area A0 labeled near the wire. The wire is centered in the frame, with natural lighting from a window to the right.",
+      "image_requirement": "The viewer must be able to see the wire and the labels for L0 and A0.",
+      "labels": ["L0", "A0"],
+      "label_placement": [
+        "L0 - below the wire, written in white text on a black label",
+        "A0 - above the wire, written in white text on a black label"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Let's assume here that the original length and cross-sectional area of the wire are L0 and A0, respectively.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Original Wire Dimensions"
+    }
+  ]
+}

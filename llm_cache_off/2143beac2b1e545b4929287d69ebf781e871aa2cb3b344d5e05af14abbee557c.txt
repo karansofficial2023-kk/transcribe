@@ -1,0 +1,79 @@
+[
+  {
+    "rowId": "1.1",
+    "approved": true,
+    "issue": "",
+    "template": "title_card",
+    "visualType": "title_card",
+    "heading": "Minimizing f(x) = x + 1/x Using Calculus",
+    "visualSubject": "Sharp 1920x1080 realistic educational background directly representing Minimizing f(x) = x + 1/x Using Calculus, subject-matter accurate, natural lighting, clear subject separation, empty central margins with a calm uncluttered central area, no embedded text",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Sharp 1920x1080 realistic educational background directly representing Minimizing f(x) = x + 1/x Using Calculus, subject-matter accurate, natural lighting, clear subject separation, empty central margins with a calm uncluttered central area, no embedded text. Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. No generated text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Introduces the lesson topic and context of the problem from AIEEE 2003. Title-card guard: visualSubject is background guidance only and must not be rendered as visible text.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "1.2",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Function and Optimization Problem",
+    "visualSubject": "A clean white background with a mathematical function f(x) = x + 1/x written in large font, centered on screen, with clear labels for each term.",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Introduces the function and the optimization problem of finding its minimum value.",
+    "formulaLines": [
+      "f(x) = x + 1/x"
+    ]
+  },
+  {
+    "rowId": "2.1",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Segment 1: Introduction to Optimization Problem",
+    "visualSubject": "A clean, high-contrast title card with a dark background and light text, featuring a mathematical expression for the function f(x) = x + 1/x in bold sans-serif font.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. Title card with dark background and light text. Mathematical expression for the function f(x) = x + 1/x in bold sans-serif font. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Introduces the optimization problem and the function to be minimized. Repeated-title guard: render this concept as a content visual, not another presentation title card.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "2.2",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Segment 2: Defining the Variable",
+    "visualSubject": "A clean, high-contrast image of a mathematical expression with a black band at the bottom and white text centered, displaying 'Let the given number be x'.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. Clean, high-contrast image of a mathematical expression with a black band at the bottom and white text centered. Displaying 'Let the given number be x'. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Defines the variable x as the number to be optimized in the problem. Label safety review: abstract or non-pointable concepts remain in narration/subtitles; no scientific arrows are drawn to them. Strict label-readiness guard: rendered without labels because exact reviewed targets and coordinates were unavailable.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "3.1",
+    "approved": true,
+    "issue": "",
+    "template": "video_broll",
+    "visualType": "short_motion_clip",
+    "heading": "Visualizing the addition of 1/x and x",
+    "visualSubject": "A dynamic visual showing two terms, x and 1/x, being added together with a clear mathematical expression in motion",
+    "mediaType": "wan_video",
+    "motionType": "wan_video",
+    "tool": "ltx_video",
+    "comfyPrompt": "A clean whiteboard showing the addition of two algebraic terms, x and 1/x, with clear mathematical expression and minimal background",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visualizes the operation of adding x and 1/x to form the function f(x) = x + 1/x. Generated-video guard: do not draw exact labels/arrows on this moving shot; use subtitles only or cut to a separate labeled still/diagram.",
+    "formulaLines": []
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "inferredTopic": "Types of Pollination in Plants",
+  "filenameTopic": "Types of Pollination",
+  "topicMatch": true,
+  "confidence": 0.95,
+  "safeStoryboardTitle": "Types of Pollination in Plants",
+  "subject": "Biology",
+  "academicLevel": "High School",
+  "intendedLearners": "Students studying plant reproduction and pollination mechanisms",
+  "learningObjectives": [
+    "Define pollination as the transfer of pollen grains from anther to stigma.",
+    "Explain autogamy, geitonogamy, and xenogamy with examples.",
+    "Describe cleistogamy and dichogamy (protandry and protogyny) in plants.",
+    "Discuss herkogamy and heterostyly as adaptations for cross-pollination.",
+    "Compare the advantages and disadvantages of self-pollination and cross-pollination.",
+    "Identify examples of insect, wind, bird, and bat pollination with specific plant species."
+  ],
+  "smeRole": "Plant Biology Educator",
+  "warning": "The filename topic matches well enough for a storyboard title. However, the transcript includes detailed information about specific adaptations (e.g., herkogamy, heterostyly) and examples that may require careful alignment with curriculum standards to ensure accuracy and relevance in the final storyboard."
+}

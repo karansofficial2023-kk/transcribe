@@ -1,0 +1,4 @@
+{
+  "score": 98,
+  "reason": "The paraphrased text preserves the meaning of the original with high accuracy, using different phrasing and sentence structures while maintaining all key concepts, formulas, and examples. Minor differences in wording (e.g., 'explains how' vs. 'describes the relationship') do not affect semantic similarity. No significant information is lost or altered."
+}

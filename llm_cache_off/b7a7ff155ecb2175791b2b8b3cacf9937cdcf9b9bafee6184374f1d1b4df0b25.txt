@@ -1,0 +1,46 @@
+{
+  "shots": [
+    {
+      "shot_id": "7.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Whether the wire is at its original dimensions or stretched to its new length, $ \\rho $ does not change.",
+      "formula_lines": [
+        "\\rho = \\frac{R A}{L}"
+      ],
+      "explain_steps": [
+        "Resistivity depends on material, not shape."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Resistivity and Wire Dimensions"
+    },
+    {
+      "shot_id": "7.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A stretched copper wire lying on a table, with a ruler next to it showing the length increase from 1.0 m to 1.21 m. The wire is slightly thinner than its original form. Natural lighting from a window illuminates the scene in warm tones.",
+      "image_requirement": "The viewer must see the stretched wire and the ruler to understand the length change.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "As a result, the new resistance being 1.21 times the original is indeed the correct conclusion.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Resistance After Stretching"
+    }
+  ]
+}

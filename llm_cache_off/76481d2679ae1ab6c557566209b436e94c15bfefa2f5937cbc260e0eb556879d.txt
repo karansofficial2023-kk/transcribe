@@ -1,0 +1,58 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Right?",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Segment 1: Confirmation",
+        "visualSubject": "A clean, dark background with a centered white text label reading 'Right?' in sans-serif font, size 42px, max two lines, aligned center, horizontal margin 120, bottom margin 55",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 3,
+        "recommendedClipSeconds": 4,
+        "timingNotes": "Hold for full duration of narration",
+        "visualAnimation": "A centered white text label on a dark background, reading 'Right?' in sans-serif font, size 42px, max two lines, aligned center, horizontal margin 120, bottom margin 55",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A dark background with a centered white text label reading 'Right?' in sans-serif font, size 42px",
+            "A clean educational title card with centered white text on a dark background"
+        ],
+        "motion": "Static image",
+        "subtitle": "Is this correct?",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for clean, curriculum-safe title card",
+        "comfyPrompt": "A dark background with a centered white text label reading 'Right?' in sans-serif font, size 42px, max two lines, aligned center, horizontal margin 120, bottom margin 55",
+        "coverageNotes": "Visual confirms the question being asked",
+        "shot": {
+            "template": "video",
+            "heading": "Segment 1: Confirmation",
+            "prompt": "A centered white text label on a dark background reading 'Right?' in sans-serif font, size 42px, max two lines, aligned center, horizontal margin 120, bottom margin 55",
+            "negativePrompt": "",
+            "durationSeconds": 4,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Segment 1: Confirmation",
+            "prompt": "A centered white text label on a dark background reading 'Right?' in sans-serif font, size 42px, max two lines, aligned center, horizontal margin 120, bottom margin 55",
+            "negativePrompt": "",
+            "durationSeconds": 4,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration"
+        }
+    }
+]

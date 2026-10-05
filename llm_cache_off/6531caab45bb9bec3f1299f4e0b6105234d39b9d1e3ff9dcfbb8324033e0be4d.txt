@@ -1,0 +1,58 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "This means that the correct answer to the question is $ x = 1 $.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Correct Answer Confirmation",
+        "visualSubject": "A clean, high-contrast title card with a centered white text on black background, displaying the equation $ x = 1 $ in bold, sans-serif font.",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold the title card for full duration to emphasize the final answer.",
+        "visualAnimation": "A clean, high-contrast title card with a centered white text on black background, displaying the equation $ x = 1 $ in bold, sans-serif font.",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean, high-contrast title card with a centered white text on black background, displaying the equation $ x = 1 $ in bold, sans-serif font.",
+            "A minimalist educational title card with a centered mathematical expression in white text on a dark background."
+        ],
+        "motion": "Static display of the title card",
+        "subtitle": "The correct answer to the question is x equals one",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for clean background, no text or labels included.",
+        "comfyPrompt": "A high-contrast title card with centered white text on black background, displaying the equation $ x = 1 $ in bold, sans-serif font. Clean background, no text artifacts, sharp 1920x1080 resolution.",
+        "coverageNotes": "Visual confirmation of the final answer to the question using a clear, high-contrast title card with centered white text on black background.",
+        "shot": {
+            "template": "video",
+            "heading": "Correct Answer Confirmation",
+            "prompt": "A clean, high-contrast title card with a centered white text on black background, displaying the equation $ x = 1 $ in bold, sans-serif font. Static display for full duration.",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second duration of the title card."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Correct Answer Confirmation",
+            "prompt": "A clean, high-contrast title card with a centered white text on black background, displaying the equation $ x = 1 $ in bold, sans-serif font. Static display for full duration.",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second duration of the title card."
+        }
+    }
+]

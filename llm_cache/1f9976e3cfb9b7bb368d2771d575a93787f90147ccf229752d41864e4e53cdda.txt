@@ -1,0 +1,70 @@
+[
+  {
+    "rowId": "4.4",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther - Pollen-producing structure at the flower's center | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma - Sticky surface where pollen lands | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - Pollen-producing structure at the flower's center",
+      "Stigma - Sticky surface where pollen lands"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of an orchid flower showing the pollen from the anther failing to germinate on the stigma. The image is realistic, high-resolution, and includes visible structures such as the anther and stigma.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition with unobscured anther and stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.5",
+    "labels": ["Stigma", "Anther"],
+    "labelPlacements": [
+      "Stigma - Stigma located at a different height | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Anther - Anther positioned lower than the stigma | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Stigma - Stigma located at a different height",
+      "Anther - Anther positioned lower than the stigma"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a primrose flower showing the stigma located at a different height compared to the anther. The image is realistic, high-resolution, and includes visible structures such as the stigma and anther.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition with unobscured stigma and anther. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A clear, high-contrast title card with the text 'Cross-Pollination Adaptations' centered at the top of the screen. The background is dark with a black band at the bottom, and the text is white with a font size of 42.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition with unobscured title card. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with text 'To summarize, Self-pollination In plants like Ixora, the anther and the stigma mature simultaneously.'",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition with unobscured title card. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.2",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther - Anther showing simultaneous maturity | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma - Stigma showing simultaneous maturity | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - Anther showing simultaneous maturity",
+      "Stigma - Stigma showing simultaneous maturity"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of an Ixora flower with labeled anther and stigma showing simultaneous maturity.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition with unobscured anther and stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

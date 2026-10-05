@@ -1,0 +1,10 @@
+{
+  "score": 95,
+  "hallucinations": [
+    "The phrase 'When a cylinder and graphite rod are connected by a conducting wire' introduces an unclear or possibly fabricated scenario. The original text mentions 'the cylinder and the graphite rod,' but it does not specify that they are connected by a conducting wire in this context, which may be an invented detail."
+  ],
+  "supported_corrections_or_additions": [
+    "The paraphrased text accurately reflects the original content regarding lithium-ion batteries, primary vs. secondary cells, button cells, and general battery chemistry."
+  ],
+  "severity": "low"
+}

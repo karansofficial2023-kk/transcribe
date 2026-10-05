@@ -1,0 +1,23 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "A person studying a textbook with a focused expression, sitting at a desk with a notebook and pen, natural daylight from a window illuminating the scene.",
+      "image_requirement": "Viewer must see a person studying to understand the context of the question.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "However, if you remember this information, the question becomes straightforward.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Person Studying Question"
+    }
+  ]
+}

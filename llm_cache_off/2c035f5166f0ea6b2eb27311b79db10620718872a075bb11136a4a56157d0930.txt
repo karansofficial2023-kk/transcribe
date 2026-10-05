@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "7.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with visible stomata on its surface, natural light highlighting the tiny pores, camera at medium distance from the leaf, slightly angled to show texture and structure.",
+      "image_requirement": "Viewer must see the stomata on the leaf surface to understand gas exchange.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "For this, plants take in air through their stomata.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "7.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with visible stomata, natural light showing the pores, camera at medium distance from the leaf, slightly angled to show the structure and function of the pores.",
+      "image_requirement": "Viewer must see the stomata on the leaf surface to understand gas exchange.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "These pores help plants take in carbon dioxide and release oxygen.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

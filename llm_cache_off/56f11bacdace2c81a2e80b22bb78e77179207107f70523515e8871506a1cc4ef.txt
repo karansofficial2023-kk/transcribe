@@ -1,0 +1,122 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "This means we are adding $ \\frac{1}{x} $ to $ x $.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "Visualizing the addition of 1/x and x",
+        "visualSubject": "A dynamic visual showing a mathematical expression with two terms, x and 1/x, being added together in an animated format. The subject is centered in the frame with clear lighting and minimal background.",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Use a smooth camera movement to show the addition process. Loop the motion if needed for clarity.",
+        "visualAnimation": "A cinematic visual showing the mathematical expression $ x + \\frac{1}{x} $ being formed dynamically with clear animation of each term appearing and combining.",
+        "localAnimation": "Show the terms $ x $ and $ \\frac{1}{x} $ as separate entities, then animate their addition together in a clean educational style.",
+        "labels": ["Mathematical expression", "Term 1: x", "Term 2: 1/x"],
+        "labelPlacements": [
+            "Mathematical expression | The full expression $ x + \\frac{1}{x} $ | target=(0.5, 0.7)",
+            "Term 1: x | The variable term in the function | target=(0.3, 0.4)",
+            "Term 2: 1/x | The reciprocal term being added to x | target=(0.7, 0.4)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean, animated mathematical expression showing x and 1/x being added together.",
+            "A dynamic visual of the function $ f(x) = x + \\frac{1}{x} $ with clear animation."
+        ],
+        "motion": "Smooth camera movement from left to right across the expression",
+        "subtitle": "Visualizing the addition of 1/x and x in a mathematical function",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "ltx_video",
+        "assetQualityNotes": "Use LTX clip for natural motion; no generated labels or text in the background.",
+        "comfyPrompt": "A clean educational animation showing $ x + \\frac{1}{x} $ being formed dynamically with clear lighting and minimal background.",
+        "coverageNotes": "Visualizes the addition of 1/x to x, forming the function f(x) = x + 1/x as described in the narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Visualizing the addition of 1/x and x",
+            "prompt": "A cinematic visual showing the mathematical expression $ x + \\frac{1}{x} $ being formed dynamically with clear animation of each term appearing and combining.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous motion showing the addition of x and 1/x."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Visualizing the addition of 1/x and x",
+            "prompt": "A cinematic visual showing the mathematical expression $ x + \\frac{1}{x} $ being formed dynamically with clear animation of each term appearing and combining.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous motion showing the addition of x and 1/x."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Let us denote this sum as a function $ f(x) $.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "Introducing the function f(x)",
+        "visualSubject": "A dynamic visual showing the mathematical expression being transformed into a function notation, with clear animation and educational style.",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Use a smooth camera movement to show the transformation into function notation. Loop the motion if needed for clarity.",
+        "visualAnimation": "A cinematic visual showing the mathematical expression $ x + \\frac{1}{x} $ being transformed into the function $ f(x) = x + \\frac{1}{x} $ with clear animation.",
+        "localAnimation": "Show the transformation of the expression into a function notation with clear labels and educational style.",
+        "labels": ["Mathematical function", "Function notation: f(x)", "Expression: x + 1/x"],
+        "labelPlacements": [
+            "Mathematical function | The full function $ f(x) = x + \\frac{1}{x} $ | target=(0.5, 0.7)",
+            "Function notation: f(x) | The function being defined | target=(0.3, 0.4)",
+            "Expression: x + 1/x | The expression forming the function | target=(0.7, 0.4)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean, animated mathematical function showing $ f(x) = x + \\frac{1}{x} $ with clear animation.",
+            "A dynamic visual of the function $ f(x) = x + \\frac{1}{x} $ being formed from its components."
+        ],
+        "motion": "Smooth camera movement from left to right across the expression",
+        "subtitle": "Introducing the function f(x) as a representation of the sum",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "ltx_video",
+        "assetQualityNotes": "Use LTX clip for natural motion; no generated labels or text in the background.",
+        "comfyPrompt": "A clean educational animation showing $ f(x) = x + \\frac{1}{x} $ being formed dynamically with clear lighting and minimal background.",
+        "coverageNotes": "Visualizes the transformation of the expression into a function notation, forming $ f(x) = x + 1/x $ as described in the narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Introducing the function f(x)",
+            "prompt": "A cinematic visual showing the mathematical expression $ x + \\frac{1}{x} $ being transformed into the function $ f(x) = x + \\frac{1}{x} $ with clear animation.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous motion showing the transformation into function notation."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Introducing the function f(x)",
+            "prompt": "A cinematic visual showing the mathematical expression $ x + \\frac{1}{x} $ being transformed into the function $ f(x) = x + \\frac{1}{x} $ with clear animation.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous motion showing the transformation into function notation."
+        }
+    }
+]

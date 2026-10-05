@@ -1,0 +1,35 @@
+{
+  "shots": [
+    {
+      "shot_id": "7.1",
+      "visual_type": "formula",
+      "image_prompt": "A blackboard with white chalk writing showing the equation f(x) = x + 1/x, and the solution x = 1.",
+      "image_requirement": "The viewer must be able to see the equation f(x) = x + 1/x and the final answer x = 1 written on the board.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Hence, the correct answer is $ x = 1 $.",
+      "formula_lines": [
+        "f(x) = x + 1/x",
+        "f'(x) = 1 - 1/x^2",
+        "Set f'(x) = 0: 1 - 1/x^2 = 0",
+        "Solve for x: x^2 = 1",
+        "Therefore, x = 1"
+      ],
+      "explain_steps": [
+        "Function is defined as f(x) equals x plus one over x.",
+        "Derivative of the function is found to be one minus one over x squared.",
+        "Set derivative equal to zero to find critical points.",
+        "Solve equation to find value of x that satisfies condition.",
+        "Conclude that x equals one is the solution."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Correct Answer for Minimizing f(x)"
+    }
+  ]
+}

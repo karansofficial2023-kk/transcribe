@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Aerial view of Earth with a glowing greenish-blue atmosphere, showing the planet's surface and the faint outline of the ozone layer above it. The camera is at a distance of 200 km, looking down at an angle of 45 degrees. Natural lighting from sunlight illuminates the atmosphere in soft blue and green tones.",
+      "image_requirement": "Viewer must see Earth with a glowing atmosphere to understand the narration.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Without photosynthesis, life on Earth is impossible.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with visible veins, showing the green chlorophyll-rich cells and the structure of the stomata on the underside. The camera is at a distance of 10 cm, looking straight ahead at an angle of 0 degrees. Natural lighting from sunlight highlights the texture and color of the leaf.",
+      "image_requirement": "Viewer must see the leaf's chlorophyll and stomata to understand the narration.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Because it provides the oxygen we need.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

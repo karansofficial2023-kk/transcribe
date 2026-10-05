@@ -1,0 +1,4 @@
+{
+  "score": 95,
+  "reason": "The paraphrased text preserves the original meaning, including the context of the question, the options provided, and the correct answer (statin). It adds some explanatory details about how statins work, which enhances clarity without altering the core message. There are no significant differences in meaning, and any additional information is relevant and supportive."
+}

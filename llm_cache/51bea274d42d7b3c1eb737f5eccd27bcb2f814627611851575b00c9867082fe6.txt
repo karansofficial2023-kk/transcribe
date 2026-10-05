@@ -1,0 +1,58 @@
+[
+  {
+    "segmentNumber": 1,
+    "sentence": "Thank you students.",
+    "template": "title_card",
+    "visualType": "title_card",
+    "heading": "Conclusion and Summary - Thank You Students",
+    "visualSubject": "A clean, dark-themed title card with a white text overlay on a light background. The text is centered at the bottom of the frame, with a thin colored border and a colored target dot.",
+    "assetPath": "",
+    "mediaType": "generated still",
+    "motionType": "static_image",
+    "estimatedNarrationSeconds": 3,
+    "recommendedClipSeconds": 4,
+    "timingNotes": "Hold for the full duration of the narration. No cutaways or transitions required.",
+    "visualAnimation": "A title card with a dark background, white text, and a thin colored border. The text is centered at the bottom of the frame, with a colored target dot aligned to the text.",
+    "localAnimation": "",
+    "labels": [],
+    "labelPlacements": [],
+    "labelStyle": "Pharmacology and Medical Biology Specialist",
+    "arrows": [],
+    "highlights": [],
+    "formulaLines": [],
+    "explainSteps": [],
+    "steps": [],
+    "columns": [],
+    "imageRecommendations": [
+      "A dark-themed title card with white text centered at the bottom of the frame, featuring a thin colored border and a colored target dot.",
+      "A clean educational title card with a light background, white text, and a thin colored border aligned to the bottom margin."
+    ],
+    "motion": "Static image",
+    "subtitle": "Thank you students. End of lesson.",
+    "subtitleStyle": "Pharmacology and Medical Biology Specialist",
+    "tool": "comfy_image",
+    "assetQualityNotes": "Use generated still for clean background asset only. No labels or text in the prompt.",
+    "comfyPrompt": "A dark-themed title card with white text centered at the bottom of the frame, featuring a thin colored border and a colored target dot. Clean background, no text or labels. 1920x1080 resolution, realistic lighting.",
+    "coverageNotes": "Visual covers the conclusion and summary of the lesson as per narration.",
+    "shot": {
+      "template": "video",
+      "heading": "Conclusion and Summary - Thank You Students",
+      "prompt": "A dark-themed title card with white text centered at the bottom of the frame, featuring a thin colored border and a colored target dot. Clean background, no text or labels. 1920x1080 resolution, realistic lighting.",
+      "negativePrompt": "",
+      "durationSeconds": 4,
+      "clipDurationSeconds": 4,
+      "clipCount": 1,
+      "joinInstructions": "Hold for the full duration of the narration."
+    },
+    "ltxShot": {
+      "template": "video",
+      "heading": "Conclusion and Summary - Thank You Students",
+      "prompt": "A dark-themed title card with white text centered at the bottom of the frame, featuring a thin colored border and a colored target dot. Clean background, no text or labels. 1920x1080 resolution, realistic lighting.",
+      "negativePrompt": "",
+      "durationSeconds": 4,
+      "clipDurationSeconds": 4,
+      "clipCount": 1,
+      "joinInstructions": "Hold for the full duration of the narration."
+    }
+  }
+]

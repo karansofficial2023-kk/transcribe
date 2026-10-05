@@ -1,0 +1,69 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Four pills on a white table: cyclosporine A, statin, streptokinase, and lipases. Close-up view from above, natural lighting.",
+      "image_requirement": "Viewer must see all four drugs clearly labeled by name.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The options provided are cyclosporine A, statin, streptokinase, and lipases.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Options for Blood Cholesterol Drugs"
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Question depends on memory recall",
+        "No visual aids provided",
+        "Answer requires prior knowledge"
+      ],
+      "panels": [],
+      "narration_en": "This question relies entirely on memory.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Memory-Based Question"
+    },
+    {
+      "shot_id": "2.3",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Recall cholesterol-lowering drug",
+        "Identify correct commercial agent",
+        "Difficulty in memory retrieval"
+      ],
+      "panels": [],
+      "narration_en": "If you are unable to recall the correct commercial agent for lowering blood cholesterol, you may find it challenging to answer.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Cholesterol Drug Recall Challenge"
+    }
+  ]
+}

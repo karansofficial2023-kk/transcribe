@@ -1,0 +1,9 @@
+{
+  "correctedNarration": "Welcome students to the NEET 2019 question and answer solutions. Let's now work through question number 176, which asks: Which of the following is a commercial blood cholesterol-lowering agent? The options provided are cyclosporine A, statin, streptokinase, and lipases. This question relies on knowledge of pharmacology related to lipid metabolism. If you cannot recall the correct commercial agent for lowering blood cholesterol, it will be difficult to answer this question correctly. However, if you remember the information, this is a straightforward question. The correct answer is statin, as it is widely used as a commercial medication to lower blood cholesterol levels by inhibiting HMG-CoA reductase, an enzyme involved in cholesterol synthesis. Thank you students.",
+  "coverageComplete": false,
+  "issuesResolved": 1,
+  "coverageChecks": [],
+  "remainingConcerns": [
+    "The narration does not explicitly define or explain key terms such as 'HMG-CoA reductase' or provide a detailed explanation of how statins function in lipid metabolism, which may be required for full coverage."
+  ]
+}

@@ -1,0 +1,122 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "This class of drugs is commonly prescribed for individuals at risk of cardiovascular disease due to their effectiveness and relatively mild side effects.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Clinical Use and Benefits of Statins",
+        "visualSubject": "Title card with centered text, dark background, white text, sans-serif font, 42px size, two lines max, horizontal margin 120, bottom margin 55",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 9,
+        "recommendedClipSeconds": 10,
+        "timingNotes": "Hold for full narration duration",
+        "visualAnimation": "Title card with centered text, dark background, white text, sans-serif font, 42px size, two lines max, horizontal margin 120, bottom margin 55",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Pharmacology and Medical Biology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A dark background with centered white text reading 'Clinical Use and Benefits of Statins'",
+            "A title card with a black band at the bottom, white text, sans-serif font, 42px size"
+        ],
+        "motion": "",
+        "subtitle": "Clinical Use and Benefits of Statins",
+        "subtitleStyle": "Pharmacology and Medical Biology Specialist",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background, no text or labels",
+        "comfyPrompt": "A dark background with centered white text reading 'Clinical Use and Benefits of Statins', sans-serif font, 42px size, two lines max, horizontal margin 120, bottom margin 55",
+        "coverageNotes": "Introduces the topic by defining the clinical use of statins for cardiovascular risk reduction.",
+        "shot": {
+            "template": "video",
+            "heading": "Clinical Use and Benefits of Statins",
+            "prompt": "A dark background with centered white text reading 'Clinical Use and Benefits of Statins', sans-serif font, 42px size, two lines max, horizontal margin 120, bottom margin 55",
+            "negativePrompt": "",
+            "durationSeconds": 10,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join the three 4-second clips in sequence to form a 12-second title card with smooth transition."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Clinical Use and Benefits of Statins",
+            "prompt": "A dark background with centered white text reading 'Clinical Use and Benefits of Statins', sans-serif font, 42px size, two lines max, horizontal margin 120, bottom margin 55",
+            "negativePrompt": "",
+            "durationSeconds": 10,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join the three 4-second clips in sequence to form a 12-second title card with smooth transition."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "This class of drugs is commonly prescribed for individuals at risk of cardiovascular disease due to their effectiveness and relatively mild side effects.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Statins in Cardiovascular Risk Reduction",
+        "visualSubject": "A realistic image of a doctor prescribing statins, with labels for 'Cardiovascular Disease', 'Effectiveness', and 'Mild Side Effects'",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 9,
+        "recommendedClipSeconds": 10,
+        "timingNotes": "Hold for full narration duration",
+        "visualAnimation": "A realistic image of a doctor prescribing statins, with labels for 'Cardiovascular Disease', 'Effectiveness', and 'Mild Side Effects'",
+        "localAnimation": "Reveal labels in list order, keep earlier labels visible, hold the completed frame for at least 3 seconds",
+        "labels": [
+            "Cardiovascular Disease",
+            "Effectiveness",
+            "Mild Side Effects"
+        ],
+        "labelPlacements": [
+            "Cardiovascular Disease | A patient with a heart condition | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Effectiveness | A doctor holding a statin pill | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Mild Side Effects | A label on the medication bottle | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Pharmacology and Medical Biology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A doctor prescribing statins to a patient with cardiovascular disease",
+            "A realistic image of a medication bottle labeled 'Statins' with side effect information"
+        ],
+        "motion": "",
+        "subtitle": "Statins in Cardiovascular Risk Reduction",
+        "subtitleStyle": "Pharmacology and Medical Biology Specialist",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with precise labels, no generated text or labels",
+        "comfyPrompt": "A realistic image of a doctor prescribing statins to a patient with cardiovascular disease, with labels for 'Cardiovascular Disease', 'Effectiveness', and 'Mild Side Effects'",
+        "coverageNotes": "Visualizes the clinical use of statins in reducing cardiovascular risk, highlighting their effectiveness and mild side effects.",
+        "shot": {
+            "template": "video",
+            "heading": "Statins in Cardiovascular Risk Reduction",
+            "prompt": "A realistic image of a doctor prescribing statins to a patient with cardiovascular disease, with labels for 'Cardiovascular Disease', 'Effectiveness', and 'Mild Side Effects'",
+            "negativePrompt": "",
+            "durationSeconds": 10,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join the three 4-second clips in sequence to form a 12-second labeled image with smooth transition."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Statins in Cardiovascular Risk Reduction",
+            "prompt": "A realistic image of a doctor prescribing statins to a patient with cardiovascular disease, with labels for 'Cardiovascular Disease', 'Effectiveness', and 'Mild Side Effects'",
+            "negativePrompt": "",
+            "durationSeconds": 10,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join the three 4-second clips in sequence to form a 12-second labeled image with smooth transition."
+        }
+    }
+]

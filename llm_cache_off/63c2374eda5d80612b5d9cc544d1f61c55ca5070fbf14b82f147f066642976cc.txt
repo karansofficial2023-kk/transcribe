@@ -1,0 +1,62 @@
+[
+  {
+    "rowId": "8.1",
+    "approved": true,
+    "issue": "",
+    "template": "video_broll",
+    "visualType": "short_motion_clip",
+    "heading": "Electroplating Overview Recap",
+    "visualSubject": "A 16:9 educational documentary-style shot of a lab setup with electroplating equipment, including anode and cathode electrodes, a power source, and metal ions in solution. The camera is at eye level, slightly angled to show the entire apparatus.",
+    "mediaType": "wan_video",
+    "motionType": "wan_video",
+    "tool": "ltx_video",
+    "comfyPrompt": "A clean educational lab setup with anode and cathode electrodes, power source, and metal ions in solution. No text, no labels, realistic lighting.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the roles of anode and cathode, reduction and oxidation processes, and factors influencing metal deposition as per curriculum standards. Generated-video guard: do not draw exact labels/arrows on this moving shot; use subtitles only or cut to a separate labeled still/diagram.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "8.2",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Next Chapter: Practical Applications of Electroplating",
+    "visualSubject": "A title card with the text \"Next Chapter: Practical Applications of Electroplating\" in a dark background, white text, and sans-serif font.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A title card with the text \"Next Chapter: Practical Applications of Electroplating\" in a dark background, white text, and sans-serif font. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the transition to practical applications and artistic potential of electroplating as per curriculum standards. Repeated-title guard: render this concept as a content visual, not another presentation title card.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "8.3",
+    "approved": true,
+    "issue": "",
+    "template": "video_broll",
+    "visualType": "short_motion_clip",
+    "heading": "Practical Applications of Electroplating",
+    "visualSubject": "A 16:9 educational documentary-style shot of a modern electroplating facility, showing metal objects being coated with a thin layer of another metal. The camera is at eye level, slightly angled to show the entire process.",
+    "mediaType": "wan_video",
+    "motionType": "wan_video",
+    "tool": "ltx_video",
+    "comfyPrompt": "A clean educational electroplating facility setup with metal objects being coated. No text, no labels, realistic lighting.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the practical applications and artistic potential of electroplating as per curriculum standards. Generated-video guard: do not draw exact labels/arrows on this moving shot; use subtitles only or cut to a separate labeled still/diagram.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "8.4",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Encouragement and Final Words",
+    "visualSubject": "A title card with the text \"We believe in you.\" in a dark background, white text, and sans-serif font.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A title card with the text \"We believe in you.\" in a dark background, white text, and sans-serif font. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the encouragement and final words as per curriculum standards. Repeated-title guard: render this concept as a content visual, not another presentation title card.",
+    "formulaLines": []
+  }
+]

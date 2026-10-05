@@ -1,0 +1,50 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Therefore, the initial resistance R₀ is given by ρ × (L₀/A₀).",
+      "formula_lines": [
+        "R_0 = \\rho \\times \\frac{L_0}{A_0}"
+      ],
+      "explain_steps": [
+        "Resistance equals resistivity multiplied by length divided by area."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Initial Resistance Formula"
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Now, the new length L' is 10% greater than the original length, making it 1.1L₀.",
+      "formula_lines": [
+        "L' = 1.1 L_0"
+      ],
+      "explain_steps": [
+        "New length is 10% more than original length."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "New Length After Stretching"
+    }
+  ]
+}

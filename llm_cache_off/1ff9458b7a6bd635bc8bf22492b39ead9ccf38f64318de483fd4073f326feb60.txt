@@ -1,0 +1,498 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "The first derivative is given by: $$ f'(x) = 1 - \frac{1}{x^2} $$",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Derivative Expression",
+        "visualSubject": "Mathematical expression of the first derivative with clear formatting and visual alignment to a whiteboard or chalkboard background",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold the formula for full duration, use local animation to reveal step-by-step derivation if needed",
+        "visualAnimation": "A whiteboard with a clean black background showing the derivative expression in large font, centered and well-lit",
+        "localAnimation": "Reveal the formula line by line using arrows and labels to highlight each term",
+        "labels": [
+            "First derivative of f(x) | The derivative of the function f(x) = x + 1/x | (0.000,0.000)"
+        ],
+        "labelPlacements": [
+            "First derivative of f(x) | The derivative of the function f(x) = x + 1/x | target=(0.000,0.000)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "f'(x) = 1 - 1/x²"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Whiteboard with large mathematical expression in clear font",
+            "Chalkboard showing derivative of f(x) = x + 1/x"
+        ],
+        "motion": "Static reveal of formula on whiteboard",
+        "subtitle": "First derivative of the function f(x) = x + 1/x is shown",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "manim",
+        "assetQualityNotes": "Use Manim animation for precise formula rendering, no need to upscale",
+        "comfyPrompt": "Clean whiteboard background with large mathematical expression f'(x) = 1 - 1/x², clear font, centered, well-lit",
+        "coverageNotes": "Visualizes the first derivative of the function f(x) = x + 1/x using standard calculus notation",
+        "shot": {
+            "template": "video",
+            "heading": "Derivative Expression",
+            "prompt": "A whiteboard with a clean black background showing the derivative expression in large font, centered and well-lit",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the derivative expression"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Derivative Expression",
+            "prompt": "A whiteboard with a clean black background showing the derivative expression in large font, centered and well-lit. The formula is revealed step-by-step using smooth camera movement.",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the derivative expression"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Setting $ f'(x) = 0 $, we get: $$ 1 - \frac{1}{x^2} = 0 $$",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Solving for Critical Points",
+        "visualSubject": "Mathematical equation on whiteboard with clear formatting and visual alignment to a whiteboard or chalkboard background",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold the equation for full duration, use local animation to reveal step-by-step derivation if needed",
+        "visualAnimation": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit",
+        "localAnimation": "Reveal the equation line by line using arrows and labels to highlight each term",
+        "labels": [
+            "Setting derivative equal to zero | Solving for critical points of f(x) = x + 1/x | (0.000,0.000)"
+        ],
+        "labelPlacements": [
+            "Setting derivative equal to zero | Solving for critical points of f(x) = x + 1/x | target=(0.000,0.000)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "1 - 1/x² = 0"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Whiteboard with large mathematical equation in clear font",
+            "Chalkboard showing solving for critical points of f(x) = x + 1/x"
+        ],
+        "motion": "Static reveal of equation on whiteboard",
+        "subtitle": "Setting the derivative equal to zero to find critical points",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "manim",
+        "assetQualityNotes": "Use Manim animation for precise formula rendering, no need to upscale",
+        "comfyPrompt": "Clean whiteboard background with large mathematical equation 1 - 1/x² = 0, clear font, centered, well-lit",
+        "coverageNotes": "Visualizes the process of setting the derivative equal to zero to find critical points",
+        "shot": {
+            "template": "video",
+            "heading": "Solving for Critical Points",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Solving for Critical Points",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit. The equation is revealed step-by-step using smooth camera movement.",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        }
+    },
+    {
+        "segmentNumber": 3,
+        "sentence": "This simplifies to: $$ \frac{1}{x^2} = 1 $$",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Simplifying the Equation",
+        "visualSubject": "Mathematical equation on whiteboard with clear formatting and visual alignment to a whiteboard or chalkboard background",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold the equation for full duration, use local animation to reveal step-by-step derivation if needed",
+        "visualAnimation": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit",
+        "localAnimation": "Reveal the equation line by line using arrows and labels to highlight each term",
+        "labels": [
+            "Simplifying the derivative equation | Solving for x² = 1 | (0.000,0.000)"
+        ],
+        "labelPlacements": [
+            "Simplifying the derivative equation | Solving for x² = 1 | target=(0.000,0.000)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "1/x² = 1"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Whiteboard with large mathematical equation in clear font",
+            "Chalkboard showing simplifying the derivative equation to x² = 1"
+        ],
+        "motion": "Static reveal of equation on whiteboard",
+        "subtitle": "Simplifying the derivative equation to find x² = 1",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "manim",
+        "assetQualityNotes": "Use Manim animation for precise formula rendering, no need to upscale",
+        "comfyPrompt": "Clean whiteboard background with large mathematical equation 1/x² = 1, clear font, centered, well-lit",
+        "coverageNotes": "Visualizes the simplification of the derivative equation to x² = 1",
+        "shot": {
+            "template": "video",
+            "heading": "Simplifying the Equation",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Simplifying the Equation",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit. The equation is revealed step-by-step using smooth camera movement.",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        }
+    },
+    {
+        "segmentNumber": 4,
+        "sentence": "Which implies: $$ x^2 = 1 \rightarrow x = \text{±}1 $$",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Solving for x",
+        "visualSubject": "Mathematical equation on whiteboard with clear formatting and visual alignment to a whiteboard or chalkboard background",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold the equation for full duration, use local animation to reveal step-by-step derivation if needed",
+        "visualAnimation": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit",
+        "localAnimation": "Reveal the equation line by line using arrows and labels to highlight each term",
+        "labels": [
+            "Solving for x | Critical points at x = ±1 | (0.000,0.000)"
+        ],
+        "labelPlacements": [
+            "Solving for x | Critical points at x = ±1 | target=(0.000,0.000)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "x² = 1 → x = ±1"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Whiteboard with large mathematical equation in clear font",
+            "Chalkboard showing solving for x to find critical points at x = ±1"
+        ],
+        "motion": "Static reveal of equation on whiteboard",
+        "subtitle": "Solving for x gives critical points at x = ±1",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "manim",
+        "assetQualityNotes": "Use Manim animation for precise formula rendering, no need to upscale",
+        "comfyPrompt": "Clean whiteboard background with large mathematical equation x² = 1 → x = ±1, clear font, centered, well-lit",
+        "coverageNotes": "Visualizes the solution of the simplified equation to find critical points at x = ±1",
+        "shot": {
+            "template": "video",
+            "heading": "Solving for x",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Solving for x",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit. The equation is revealed step-by-step using smooth camera movement.",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        }
+    },
+    {
+        "segmentNumber": 5,
+        "sentence": "Next, we determine whether these points correspond to a minimum or maximum by examining the second derivative.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Second Derivative Test",
+        "visualSubject": "Mathematical equation on whiteboard with clear formatting and visual alignment to a whiteboard or chalkboard background",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold the equation for full duration, use local animation to reveal step-by-step derivation if needed",
+        "visualAnimation": "A whiteboard with a clean black background showing the second derivative in large font, centered and well-lit",
+        "localAnimation": "Reveal the equation line by line using arrows and labels to highlight each term",
+        "labels": [
+            "Second derivative test | Determining minima or maxima of f(x) = x + 1/x | (0.000,0.000)"
+        ],
+        "labelPlacements": [
+            "Second derivative test | Determining minima or maxima of f(x) = x + 1/x | target=(0.000,0.000)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "f''(x) = 2/x³"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Whiteboard with large mathematical equation in clear font",
+            "Chalkboard showing second derivative test for f(x) = x + 1/x"
+        ],
+        "motion": "Static reveal of equation on whiteboard",
+        "subtitle": "Using the second derivative to determine minima or maxima",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "manim",
+        "assetQualityNotes": "Use Manim animation for precise formula rendering, no need to upscale",
+        "comfyPrompt": "Clean whiteboard background with large mathematical equation f''(x) = 2/x³, clear font, centered, well-lit",
+        "coverageNotes": "Visualizes the second derivative test as a method to determine minima or maxima",
+        "shot": {
+            "template": "video",
+            "heading": "Second Derivative Test",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Second Derivative Test",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit. The equation is revealed step-by-step using smooth camera movement.",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        }
+    },
+    {
+        "segmentNumber": 6,
+        "sentence": "The second derivative is: $$ f''(x) = \frac{2}{x^3} $$",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Second Derivative Expression",
+        "visualSubject": "Mathematical equation on whiteboard with clear formatting and visual alignment to a whiteboard or chalkboard background",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold the equation for full duration, use local animation to reveal step-by-step derivation if needed",
+        "visualAnimation": "A whiteboard with a clean black background showing the second derivative in large font, centered and well-lit",
+        "localAnimation": "Reveal the equation line by line using arrows and labels to highlight each term",
+        "labels": [
+            "Second derivative of f(x) | The second derivative of the function f(x) = x + 1/x | (0.000,0.000)"
+        ],
+        "labelPlacements": [
+            "Second derivative of f(x) | The second derivative of the function f(x) = x + 1/x | target=(0.000,0.000)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "f''(x) = 2/x³"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Whiteboard with large mathematical equation in clear font",
+            "Chalkboard showing second derivative of f(x) = x + 1/x"
+        ],
+        "motion": "Static reveal of equation on whiteboard",
+        "subtitle": "Second derivative of the function f(x) = x + 1/x is shown",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "manim",
+        "assetQualityNotes": "Use Man,im animation for precise formula rendering, no need to upscale",
+        "comfyPrompt": "Clean whiteboard background with large mathematical equation f''(x) = 2/x³, clear font, centered, well-lit",
+        "coverageNotes": "Visualizes the second derivative of the function f(x) = x + 1/x using standard calculus notation",
+        "shot": {
+            "template": "video",
+            "heading": "Second Derivative Expression",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Second Derivative Expression",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit. The equation is revealed step-by-step using smooth camera movement.",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        }
+    },
+    {
+        "segmentNumber": 7,
+        "sentence": "Evaluating this at $ x = 1 $: $$ f''(1) = \frac{2}{1^3} = 2 > 0 $$",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Second Derivative at x = 1",
+        "visualSubject": "Mathematical equation on whiteboard with clear formatting and visual alignment to a whiteboard or chalkboard background",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold the equation for full duration, use local animation to reveal step-by-step derivation if needed",
+        "visualAnimation": "A whiteboard with a clean black background showing the evaluation of the second derivative at x = 1 in large font, centered and well-lit",
+        "localAnimation": "Reveal the equation line by line using arrows and labels to highlight each term",
+        "labels": [
+            "Evaluating second derivative at x = 1 | f''(1) = 2 > 0 | (0.000,0.000)"
+        ],
+        "labelPlacements": [
+            "Evaluating second derivative at x = 1 | f''(1) = 2 > 0 | target=(0.000,0.000)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "f''(1) = 2/1³ = 2 > 0"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Whiteboard with large mathematical equation in clear font",
+            "Chalkboard showing evaluating the second derivative at x = 1"
+        ],
+        "motion": "Static reveal of equation on whiteboard",
+        "subtitle": "Evaluating the second derivative at x = 1 to determine concavity",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "manim",
+        "assetQualityNotes": "Use Manim animation for precise formula rendering, no need to upscale",
+        "comfyPrompt": "Clean whiteboard background with large mathematical equation f''(1) = 2/1³ = 2 > 0, clear font, centered, well-lit",
+        "coverageNotes": "Visualizes the evaluation of the second derivative at x = 1 to determine concavity",
+        "shot": {
+            "template": "video",
+            "heading": "Second Derivative at x = 1",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Second Derivative at x = 1",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit. The equation is revealed step-by-step using smooth camera movement.",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        }
+    },
+    {
+        "segmentNumber": 8,
+        "sentence": "This indicates that the function has a minimum at $ x = 1 $.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Conclusion: Minimum at x = 1",
+        "visualSubject": "Mathematical equation on whiteboard with clear formatting and visual alignment to a whiteboard or chalkboard background",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold the equation for full duration, use local animation to reveal step-by-step derivation if needed",
+        "visualAnimation": "A whiteboard with a clean black background showing the conclusion in large font, centered and well-lit",
+        "localAnimation": "Reveal the equation line by line using arrows and labels to highlight each term",
+        "labels": [
+            "Conclusion | The function has a minimum at x = 1 | (0.000,0.000)"
+        ],
+        "labelPlacements": [
+            "Conclusion | The function has a minimum at x = 1 | target=(0.000,0.000)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "f''(1) > 0 → minimum at x = 1"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Whiteboard with large mathematical equation in clear font",
+            "Chalkboard showing conclusion that the function has a minimum at x = 1"
+        ],
+        "motion": "Static reveal of equation on whiteboard",
+        "subtitle": "The second derivative test confirms a minimum at x = 1",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "manim",
+        "assetQualityNotes": "Use Manim animation for precise formula rendering, no need to upscale",
+        "comfyPrompt": "Clean whiteboard background with large mathematical equation f''(1) > 0 → minimum at x = 1, clear font, centered, well-lit",
+        "coverageNotes": "Visualizes the conclusion that the function has a minimum at x = 1 based on the second derivative test",
+        "shot": {
+            "template": "video",
+            "heading": "Conclusion: Minimum at x = 1",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Conclusion: Minimum at x = 1",
+            "prompt": "A whiteboard with a clean black background showing the equation in large font, centered and well-lit. The equation is revealed step-by-step using smooth camera movement.",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous reveal of the equation"
+        }
+    }
+]

@@ -1,0 +1,78 @@
+[
+    {
+        "rowId": "5.2",
+        "labels": ["ఆక్సిజన్", "ఉత్పత్తి"],
+        "labelPlacements": [
+            "ఆక్సిజన్ | ఆక్సిజన్ ఉత్పత్తి ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "ఉత్పత్తి | ఉత్పత్తి సేకరణ ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "ఆక్సిజన్ - ఆకుల ఉపరితలం నుండి వచ్చే వాయువు",
+            "ఉత్పత్తి - కార్బన్ డయాక్సైడ్ నుండి ఆక్సిజన్ విడుదల"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "మొక్క, ఆక్సిజన్, ప్రక్రియ చిత్రం, కెమేరా వీక్షణ సుదూర అంగీకరణ",
+        "comfyPrompt": "మొక్క ఆకుల ఉపరితలం నుండి ఆక్సిజన్ విడుదల చేస్తుంది. కార్బన్ డయాక్సైడ్ నుండి ఆక్సిజన్ ఉత్పత్తి చేస్తుంది. కెమేరా వీక్షణ సుదూర అంగీకరణలో ప్రక్రియ చిత్రం ఉండాలి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "6.1",
+        "labels": ["సూర్యరశ్మి", "నీరు", "కార్బన్ డయాక్సైడ్"],
+        "labelPlacements": [
+            "సూర్యరశ్మి | సూర్య నుండి వచ్చే ప్రకాశం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీరు | తల్లిదండ్రుల నుండి వచ్చే పదార్థం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "కార్బన్ డయాక్సైడ్ | కలుషిత వాయువు నుండి వచ్చే పదార్థం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "సూర్యరశ్మి - ఆకుల ఉపరితలం నుండి వచ్చే ప్రకాశం",
+            "నీరు - మొక్క నుండి వచ్చే పదార్థం",
+            "కార్బన్ డయాక్సైడ్ - వాయువు నుండి వచ్చే పదార్థం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుంది",
+        "comfyPrompt": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుంది. కెమేరా వీక్షణ సుదూర అంగీకరణలో ప్రక్రియ చిత్రం ఉండాలి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "6.2",
+        "labels": ["సూర్యరశ్మి", "నీరు", "కార్బన్ డయాక్సైడ్"],
+        "labelPlacements": [
+            "సూర్యరశ్మి | సూర్య నుండి వచ్చే ప్రకాశం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీరు | తల్లిదండ్రుల నుండి వచ్చే పదార్థం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "కార్బన్ డయాక్సైడ్ | కలుషిత వాయువు నుండి వచ్చే పదార్థం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "సూర్యరశ్మి - ఆకుల ఉపరితలం నుండి వచ్చే ప్రకాశం",
+            "నీరు - మొక్క నుండి వచ్చే పదార్థం",
+            "కార్బయాక్సైడ్ - వాయువు నుండి వచ్చే పదార్థం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుంది",
+        "comfyPrompt": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుంది. కెమేరా వీక్షణ సుదూర అంగీకరణలో ప్రక్రియ చిత్రం ఉండాలి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "7.1",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "no_labels",
+        "visualSubject": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుంది",
+        "comfyPrompt": "ఆకులలో పత్రహరితం ఉండాలి. కెమేరా వీక్షణ సుదూర అంగీకరణలో ప్రక్రియ చిత్రం ఉండాలి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "7.2",
+        "labels": ["కిరణజన్య సంయోగక్రియ"],
+        "labelPlacements": [
+            "కిరణజన్య సంయోగక్రియ | కిరణజన్య సంయోగక్రియ ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": [
+            "కిరణజన్య సంయోగక్రియ - ఆకుల ఉపరితలం నుండి వచ్చే ప్రక్రియ"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "కిరణజన్య సంయోగక్రియ లేకుండా, జీవితం అసాధ్యమైనది",
+        "comfyPrompt": "కిరణజన్య సంయోగక్రియ లేకుండా, జీవితం అసాధ్యమైనది. కెమేరా వీక్షణ సుదూర అంగీకరణలో ప్రక్రియ చిత్రం ఉండాలి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

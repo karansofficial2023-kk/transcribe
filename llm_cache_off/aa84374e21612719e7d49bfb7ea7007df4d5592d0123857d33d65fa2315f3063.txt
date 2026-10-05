@@ -1,0 +1,250 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Now, evaluating the second derivative at $ x = -1 $",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Evaluating Second Derivative at x = -1",
+        "visualSubject": "mathematical expression with labeled variables and function notation on a dark background, showing f''(x) and the value of x = -1 in bold",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration to allow visual processing of the derivative expression and x-value",
+        "visualAnimation": "A clean, dark background with a white mathematical expression showing f''(x) = 2/x³, with x = -1 substituted in bold. The function is clearly labeled as the second derivative.",
+        "localAnimation": "No animation required; static image with clear labels and formula",
+        "labels": [
+            "Second Derivative"
+        ],
+        "labelPlacements": [
+            "Second Derivative | f''(x) = 2/x³ | target=(0.35,0.65)"
+        ],
+        "labelStyle": "Finding the minimum value of the function f(x) = x + 1/x using calculus",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "f''(x) = 2/x³"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Mathematical expression with labeled variables and function notation on a dark background",
+            "White mathematical expression showing f''(x) and the value of x = -1 in bold"
+        ],
+        "motion": "Static image",
+        "subtitle": "Evaluating the second derivative at x equals negative one",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram for clear formula and labels",
+        "comfyPrompt": "Clean dark background, white mathematical expression f''(x) = 2/x³, bold x = -1, no text or labels in image",
+        "coverageNotes": "Visuals cover the second derivative expression and substitution of x = -1",
+        "shot": {
+            "template": "video",
+            "heading": "Evaluating Second Derivative at x = -1",
+            "prompt": "Static image of a dark background with white mathematical expression f''(x) = 2/x³, bold x = -1, no text or labels in image",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6 seconds of narration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Evaluating Second Derivative at x = -1",
+            "prompt": "Static image of a dark background with white mathematical expression f''(x) = 2/x³, bold x = -1, no text or labels in image",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6 seconds of narration"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "$$ f''(-1) = \\frac{2}{(-1)^3} = \\frac{2}{-1} = -2 < 0 $$",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Calculating the Second Derivative at x = -1",
+        "visualSubject": "mathematical expression showing step-by-step calculation of f''(-1) on a dark background with white text and labels",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5.0,
+        "recommendedClipSeconds": 7,
+        "timingNotes": "Hold for full duration to allow visual processing of the derivative calculation",
+        "visualAnimation": "A clean, dark background with a white mathematical expression showing f''(-1) = 2/(-1)^3 = -2 < 0. Each step is clearly labeled and separated.",
+        "localAnimation": "No animation required; static image with clear labels and formula",
+        "labels": [
+            "Second Derivative Calculation"
+        ],
+        "labelPlacements": [
+            "Second Derivative Calculation | f''(-1) = 2/(-1)^3 = -2 < 0 | target=(0.35,0.65)"
+        ],
+        "labelStyle": "Finding the minimum value of the function f(x) = x + 1/x using calculus",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "f''(-1) = 2/(-1)^3 = -2 < 0"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Mathematical expression showing step-by-step calculation of f''(-1) on a dark background",
+            "White mathematical expression with labeled steps for f''(-1)"
+        ],
+        "motion": "Static image",
+        "subtitle": "Calculating the second derivative at x equals negative one",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram for clear formula and labels",
+        "comfyPrompt": "Clean dark background, white mathematical expression f''(-1) = 2/(-1)^3 = -2 < 0, no text or labels in image",
+        "coverageNotes": "Visuals cover the step-by-step calculation of the second derivative at x = -1",
+        "shot": {
+            "template": "video",
+            "heading": "Calculating the Second Derivative at x = -1",
+            "prompt": "Static image of a dark background with white mathematical expression f''(-1) = 2/(-1)^3 = -2 < 0, no text or labels in image",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 7 seconds of narration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Calculating the Second Derivative at x = -1",
+            "prompt": "Static image of a dark background with white mathematical expression f''(-1) = 2/(-1)^3 = -2 < 0, no text or labels in image",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 7 seconds of narration"
+        }
+    },
+    {
+        "segmentNumber": 3,
+        "sentence": "This shows that the function has a maximum at $ x = -1 $.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Interpreting the Second Derivative Result",
+        "visualSubject": "mathematical graph of f(x) with labeled critical points and concavity on a dark background, showing x = -1 as a maximum point",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 4.0,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration to allow visual processing of the function's concavity and critical point",
+        "visualAnimation": "A clean, dark background with a white graph of f(x) = x + 1/x showing a maximum at x = -1. The concave down nature is indicated by the second derivative being negative.",
+        "localAnimation": "No animation required; static image with clear labels and formula",
+        "labels": [
+            "Maximum Point"
+        ],
+        "labelPlacements": [
+            "Maximum Point | f(x) has a maximum at x = -1 | target=(0.35,0.65)"
+        ],
+        "labelStyle": "Finding the minimum value of the function f(x) = x + 1/x using calculus",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "f''(-1) < 0 indicates concave down"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Mathematical graph of f(x) with labeled critical points and concavity on a dark background",
+            "White graph showing maximum at x = -1 and concave down nature"
+        ],
+        "motion": "Static image",
+        "subtitle": "This shows the function has a maximum at x equals negative one",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram for clear formula and labels",
+        "comfyPrompt": "Clean dark background, white graph of f(x) = x + 1/x showing maximum at x = -1, no text or labels in image",
+        "coverageNotes": "Visuals cover the interpretation of the second derivative result indicating a maximum at x = -1",
+        "shot": {
+            "template": "video",
+            "heading": "Interpreting the Second Derivative Result",
+            "prompt": "Static image of a dark background with white graph of f(x) = x + 1/x showing maximum at x = -1, no text or labels in image",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6 seconds of narration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Interpreting the Second Derivative Result",
+            "prompt": "Static image of a dark background with white graph of f(x) = x + 1/x showing maximum at x = -1, no text or labels in image",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6 seconds of narration"
+        }
+    },
+    {
+        "segmentNumber": 4,
+        "sentence": "Therefore, the minimum value of the sum occurs when $ x = 1 $.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Conclusion: Minimum Value at x = 1",
+        "visualSubject": "mathematical graph of f(x) with labeled critical points and concavity on a dark background, showing x = 1 as a minimum point",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 4.0,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration to allow visual processing of the function's concavity and critical point",
+        "visualAnimation": "A clean, dark background with a white graph of f(x) = x + 1/x showing a minimum at x = 1. The concave up nature is indicated by the second derivative being positive.",
+        "localAnimation": "No animation required; static image with clear labels and formula",
+        "labels": [
+            "Minimum Point"
+        ],
+        "labelPlacements": [
+            "Minimum Point | f(x) has a minimum at x = 1 | target=(0.35,0.65)"
+        ],
+        "labelStyle": "Finding the minimum value of the function f(x) = x + 1/x using calculus",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "f''(1) > 0 indicates concave up"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Mathematical graph of f(x) with labeled critical points and concavity on a dark background",
+            "White graph showing minimum at x = 1 and concave up nature"
+        ],
+        "motion": "Static image",
+        "subtitle": "Therefore, the minimum value occurs when x equals one",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram for clear formula and labels",
+        "comfyPrompt": "Clean dark background, white graph of f(x) = x + 1/x showing minimum at x = 1, no text or labels in image",
+        "coverageNotes": "Visuals cover the conclusion that the minimum value occurs at x = 1 due to concave up nature",
+        "shot": {
+            "template": "video",
+            "heading": "Conclusion: Minimum Value at x = 1",
+            "prompt": "Static image of a dark background with white graph of f(x) = x + 1/x showing minimum at x = 1, no text or labels in image",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6 seconds of narration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Conclusion: Minimum Value at x = 1",
+            "prompt": "Static image of a dark background with white graph of f(x) = x + 1/x showing minimum at x = 1, no text or labels in image",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6 seconds of narration"
+        }
+    }
+]

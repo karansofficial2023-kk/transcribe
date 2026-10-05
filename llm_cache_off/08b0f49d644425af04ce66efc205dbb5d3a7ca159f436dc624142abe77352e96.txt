@@ -1,0 +1,20 @@
+{
+  "score": 100,
+  "missing_concepts": [],
+  "preserved_concepts": [
+    "resistance R",
+    "specific resistance Rho (rho)",
+    "length of the resistance",
+    "area A of the resistance",
+    "original length L0",
+    "original area A0",
+    "original resistance R0",
+    "new length L' = 1.1L0",
+    "new area A' = A0 / 1.1",
+    "volume = A0 * L0",
+    "new resistance R' = rho * L' / A'",
+    "R' = 1.21 * R0",
+    "specific resistance rho is a material-dependent property",
+    "rho remains constant"
+  ]
+}

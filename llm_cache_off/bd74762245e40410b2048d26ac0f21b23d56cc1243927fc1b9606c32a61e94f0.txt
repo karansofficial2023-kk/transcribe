@@ -1,0 +1,120 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+        "visualSubject": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది, పచ్చ రంగు మొక్క అందుబాటులో ఉండాలి",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Title card, hold for full duration",
+        "visualAnimation": "గ్లూకోజ్ మొక్క పచ్చ రంగులో ఉండాలి, శక్తిని ఇస్తున్న విధానం కనిపించాలి",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A green plant with visible chlorophyll, showing energy absorption",
+            "Close-up of a leaf with sunlight and photosynthesis process"
+        ],
+        "motion": "static",
+        "subtitle": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background, no text or labels",
+        "comfyPrompt": "A green plant in a natural setting, showing chlorophyll absorption and energy transfer, 1920x1080, realistic lighting, educational documentary style",
+        "coverageNotes": "Visualizes the concept of glucose providing energy to plants through photosynthesis",
+        "shot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+            "prompt": "A green plant in a natural setting, showing chlorophyll absorption and energy transfer, cinematic motion, educational documentary style",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration of the narration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+            "prompt": "A green plant in a natural setting, showing chlorophyll absorption and energy transfer, cinematic motion, educational documentary style",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration of the narration"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "మిగిలిన గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+        "visualSubject": "గ్లూకోజ్ మొక్కలో పిండి పదార్థంగా నిల్వ అవుతుంది, చిన్న మొక్క కనిపిస్తుంది",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration, no motion required",
+        "visualAnimation": "గ్లూకోజ్ మొక్కలో పిండి పదార్థంగా నిల్వ అవుతుంది, చిన్న మొక్క కనిపిస్తుంది",
+        "localAnimation": "",
+        "labels": [
+            "గ్లూకోజ్",
+            "పిండి పదార్థం"
+        ],
+        "labelPlacements": [
+            "గ్లూకోజ్ | మొక్కలో ఉన్న శక్తి సమృద్ధి | COORDINATES_PENDING_APPROVED_IMAGE",
+            "పిండి పదార్థం | మొక్కలో నిల్వ అవుతున్న పదార్థం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A small plant with glucose stored as starch, showing the process of storage",
+            "Close-up of a leaf with visible starch granules"
+        ],
+        "motion": "static",
+        "subtitle": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with labeled glucose and starch storage in a plant",
+        "comfyPrompt": "",
+        "coverageNotes": "Visualizes the concept of glucose being stored as starch in plants",
+        "shot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+            "prompt": "A small plant with glucose stored as starch, showing the process of storage, cinematic motion, educational documentary style",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration of the narration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+            "prompt": "A small plant with glucose stored as starch, showing the process of storage, cinematic motion, educational documentary style",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration of the narration"
+        }
+    }
+]

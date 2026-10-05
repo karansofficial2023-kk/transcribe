@@ -1,0 +1,60 @@
+[
+  {
+    "rowId": "4.7",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for This creates a neutral silver atom, which then deposits onto the keychain.; depict the concrete subject or visible action described by: This creates a neutral silver atom, which then deposits onto the keychain.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "A close-up view of a silver atom depositing onto a copper keychain in an electroplating setup. The silver atom is clearly visible as it attaches to the surface of the keychain. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.2",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Text overlay with 'Reduction: Gaining Electrons' on a dark background with white text and thin colored border",
+    "comfyPrompt": "A dark background with the text 'Reduction: Gaining Electrons' in white, surrounded by a thin colored border. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.8",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Text overlay with 'Oxidation: Losing Electrons' on a dark background with white text and thin colored border",
+    "comfyPrompt": "A dark background with the text 'Oxidation: Losing Electrons' in white, surrounded by a thin colored border. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.1",
+    "labels": ["silver atoms", "pure silver rod", "keychain"],
+    "labelPlacements": [
+      "silver atoms | moving from anode to cathode | COORDINATES_PENDING_APPROVED_IMAGE",
+      "pure silver rod | anode position | COORDINATES_PENDING_APPROVED_IMAGE",
+      "keychain | cathode position | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "silver atoms - small, metallic particles moving toward the keychain",
+      "pure silver rod - long, cylindrical metal rod connected to the positive terminal",
+      "keychain - copper object with a smooth surface receiving the silver coating"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "silver atoms moving from a pure silver rod to a keychain in an electroplating setup with clear labeling of cathode and anode positions",
+    "comfyPrompt": "A realistic image showing silver atoms moving from a pure silver rod toward a copper keychain. The silver rod is connected to the positive terminal, and the keychain is connected to the negative terminal. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.3",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for Since reduction occurs at the cathode and oxidation takes place at the anode, the overall reaction is a redox reaction.; depict the concrete subject or visible action described by: Since reduction occurs at the cathode and oxidation takes place at the anode, the overall reaction is a redox reaction.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "A close-up view of an electroplating setup showing the cathode (keychain) and anode (silver rod), with a redox reaction occurring in the solution. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

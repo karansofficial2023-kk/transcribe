@@ -1,0 +1,58 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "You're welcome for viewing.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Welcome Title Card",
+        "visualSubject": "A clean, professional title card with the text 'Welcome' centered at the top of the screen. The background is a light gray with a thin black border. The font is sans-serif, 28px minimum size, white text on dark background.",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 3,
+        "recommendedClipSeconds": 5,
+        "timingNotes": "Hold for full duration of narration. No cutaway or loop required.",
+        "visualAnimation": "A title card with the text 'Welcome' centered at the top of the screen, using a sans-serif font in white on a dark background with a thin black border.",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Public Health Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean, professional title card with the text 'Welcome' centered at the top of the screen. The background is a light gray with a thin black border.",
+            "White text on dark background with a sans-serif font, 28px minimum size, and a thin black border."
+        ],
+        "motion": "Static image",
+        "subtitle": "Welcome to this educational content.",
+        "subtitleStyle": "Public Health Educator",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background, no text or labels. Use ComfyUI for high-quality output.",
+        "comfyPrompt": "A title card with the text 'Welcome' centered at the top of the screen, using a sans-serif font in white on a dark background with a thin black border. Clean background, no text or labels. 1920x1080 resolution.",
+        "coverageNotes": "Visual covers the welcome message as stated in the narration. No curriculum enrichment required for this sentence.",
+        "shot": {
+            "template": "video",
+            "heading": "Welcome Title Card",
+            "prompt": "A title card with the text 'Welcome' centered at the top of the screen, using a sans-serif font in white on a dark background with a thin black border. Clean background, no text or labels.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "Single clip, no join required."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Welcome Title Card",
+            "prompt": "A title card with the text 'Welcome' centered at the top of the screen, using a sans-serif font in white on a dark background with a thin black border. Clean background, no text or labels.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "Single clip, no join required."
+        }
+    }
+]

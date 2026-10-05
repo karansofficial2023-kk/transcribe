@@ -1,0 +1,4 @@
+{
+  "score": 98,
+  "reason": "The paraphrased text preserves the original meaning accurately, using different phrasing and sentence structures while maintaining all key scientific concepts. Minor variations in wording (e.g., 'உணவு தயாரிக்கும்' vs. 'உணவு உற்பத்தி செய்வதற்கான') do not affect the semantic meaning. No significant information is lost or altered."
+}

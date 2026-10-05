@@ -1,0 +1,27 @@
+[
+  {
+    "sceneNumber": 1,
+    "sceneTitle": "Introduction to the Topic",
+    "sentenceNumbers": [1, 2]
+  },
+  {
+    "sceneNumber": 2,
+    "sceneTitle": "Question Overview",
+    "sentenceNumbers": [3]
+  },
+  {
+    "sceneNumber": 3,
+    "sceneTitle": "Understanding the Question",
+    "sentenceNumbers": [4, 5, 6]
+  },
+  {
+    "sceneNumber": 4,
+    "sceneTitle": "Correct Answer and Explanation",
+    "sentenceNumbers": [7]
+  },
+  {
+    "sceneNumber": 5,
+    "sceneTitle": "Conclusion and Acknowledgment",
+    "sentenceNumbers": [8]
+  }
+]

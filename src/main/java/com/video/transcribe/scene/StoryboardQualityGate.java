@@ -23,7 +23,7 @@ public final class StoryboardQualityGate {
     private static final List<String> VISUAL_TYPES = List.of(
         "title_card", "realistic_image", "realistic_labeled_image",
         "realistic_background_with_labels", "diagram_overlay", "process_steps",
-        "split_screen", "short_motion_clip");
+        "split_screen", "short_motion_clip", "graph", "circuit");
     private static final String NUMBER = "(0(?:\\.\\d+)?|1(?:\\.0+)?)";
     private static final Pattern NUMERIC_TARGET = Pattern.compile(
         "target=\\(\\s*" + NUMBER + "\\s*,\\s*" + NUMBER + "\\s*\\)",
@@ -33,37 +33,62 @@ public final class StoryboardQualityGate {
     }
 
     public static void validate(StoryboardDocument storyboard) {
+        List<String> issues = inspect(storyboard);
+        if (!issues.isEmpty()) {
+            throw new IllegalStateException(String.join(" | ", issues));
+        }
+    }
+
+    /** Return every production-contract defect so callers can repair rows in one pass. */
+    public static List<String> inspect(StoryboardDocument storyboard) {
+        List<String> issues = new ArrayList<>();
         if (storyboard == null || storyboard.getScenes() == null) {
-            throw new IllegalStateException("Storyboard is empty");
+            return List.of("Storyboard is empty");
         }
         int titleCards = 0;
         boolean firstShot = true;
         for (Scene scene : storyboard.getScenes()) {
             if (scene.getSegments() == null) continue;
             for (SceneSegment segment : scene.getSegments()) {
-                validateSegment(scene, segment);
+                try {
+                    validateSegment(scene, segment);
+                } catch (IllegalStateException error) {
+                    issues.add(error.getMessage());
+                }
                 if ("title_card".equals(segment.getVisualType())) {
                     titleCards++;
                     if (!firstShot) {
-                        throw new IllegalStateException("title_card is allowed only for the first shot");
+                        issues.add("title_card is allowed only for the first shot");
                     }
                 }
                 firstShot = false;
             }
         }
         if (titleCards != 1) {
-            throw new IllegalStateException("Storyboard must contain exactly one opening title_card");
+            issues.add("Storyboard must contain exactly one opening title_card");
         }
         SceneSegment first = storyboard.getScenes().stream()
             .filter(scene -> scene.getSegments() != null && !scene.getSegments().isEmpty())
-            .findFirst().orElseThrow(() -> new IllegalStateException("Storyboard contains no shots"))
-            .getSegments().get(0);
+            .findFirst().map(scene -> scene.getSegments().get(0)).orElse(null);
+        if (first == null) {
+            issues.add("Storyboard contains no shots");
+            return issues;
+        }
         if (storyboard.getTitle() != null && !storyboard.getTitle().isBlank()
                 && !storyboard.getTitle().equals(first.getHeading())) {
-            throw new IllegalStateException("Opening title_card heading must equal the storyboard title");
+            issues.add("Opening title_card heading must equal the storyboard title");
         }
-        validateVisualDiversity(storyboard);
-        validateSourceCoverage(storyboard);
+        try {
+            validateVisualDiversity(storyboard);
+        } catch (IllegalStateException error) {
+            issues.add(error.getMessage());
+        }
+        try {
+            validateSourceCoverage(storyboard);
+        } catch (IllegalStateException error) {
+            issues.add(error.getMessage());
+        }
+        return issues;
     }
 
     private static void validateVisualDiversity(StoryboardDocument storyboard) {
@@ -79,7 +104,8 @@ public final class StoryboardQualityGate {
         }
         if (contentShots >= 6 && visualTypes.size() < 2) {
             throw new IllegalStateException(
-                "Long storyboard lacks visual variety; use labels, diagrams, comparisons, processes, or short motion where educationally appropriate");
+                "Long storyboard lacks visual variety (observed=" + visualTypes
+                    + "); use labels, diagrams, comparisons, processes, or short motion where educationally appropriate");
         }
     }
 
@@ -107,7 +133,7 @@ public final class StoryboardQualityGate {
         if (text == null || text.isBlank()) return List.of();
         String normalized = text.replaceAll("[\\r\\n]+", " ").replaceAll("\\s+", " ").trim();
         List<String> result = new ArrayList<>();
-        for (String value : normalized.split("(?<=[.!?।])\\s+")) {
+        for (String value : normalized.split("(?<=[.!?\\u0964\\u06D4\\u061F])\\s+")) {
             if (!value.isBlank()) result.add(value.trim());
         }
         return result.isEmpty() ? List.of(normalized) : result;
@@ -148,16 +174,28 @@ public final class StoryboardQualityGate {
                 throw new IllegalStateException("Storyboard row " + id
                     + " lacks a specific image requirement");
             }
+            if (looksTruncated(segment.getVisualSubject())) {
+                throw new IllegalStateException("Storyboard row " + id
+                    + " has a truncated image requirement");
+            }
             if (!hasCleanImageContract(segment.getComfyPrompt())
                     || !hasPremiumStillContract(segment.getComfyPrompt())) {
                 throw new IllegalStateException("Storyboard row " + id
                     + " has an unsafe or low-detail image prompt");
+            }
+            if (looksTruncated(segment.getComfyPrompt())) {
+                throw new IllegalStateException("Storyboard row " + id
+                    + " has a truncated image prompt");
             }
         }
         if (segment.getComfyPrompt() != null && !segment.getComfyPrompt().isBlank()
                 && (!hasCleanImageContract(segment.getComfyPrompt())
                     || containsGenericPrompt(segment.getComfyPrompt()))) {
             throw new IllegalStateException("Storyboard row " + id + " has a generic image prompt");
+        }
+        if (hasUnsupportedCoverageClaim(segment)) {
+            throw new IllegalStateException("Storyboard row " + id
+                + " contains a cross-topic or unsupported review claim");
         }
 
         if (StoryboardRules.requiresFormulaRenderer(segment)) {
@@ -169,8 +207,33 @@ public final class StoryboardQualityGate {
                     || segment.getFormulaLines() == null || segment.getFormulaLines().isEmpty()
                     || segment.getShot() != null || segment.getLtxShot() != null) {
                 throw new IllegalStateException("Storyboard row " + id
-                    + " contains formula content without the deterministic Manim contract");
+                    + " contains formula content without the deterministic Manim contract"
+                    + " [template=" + segment.getTemplate()
+                    + ", visualType=" + segment.getVisualType()
+                    + ", mediaType=" + segment.getMediaType()
+                    + ", motionType=" + segment.getMotionType()
+                    + ", tool=" + segment.getTool()
+                    + ", formulaLines=" + (segment.getFormulaLines() == null
+                        ? 0 : segment.getFormulaLines().size())
+                    + ", movingShot=" + (segment.getShot() != null || segment.getLtxShot() != null)
+                    + "]");
             }
+        }
+        if ("formula".equals(segment.getTemplate())
+                && (segment.getFormulaLines() == null || segment.getFormulaLines().isEmpty())) {
+            throw new IllegalStateException("Storyboard row " + id
+                + " declares a formula shot but has no exact formula lines");
+        }
+        if ("process_steps".equals(segment.getVisualType())
+                && !"formula".equals(segment.getTemplate())
+                && (segment.getSteps() == null || segment.getSteps().size() < 2)) {
+            throw new IllegalStateException("Storyboard row " + id
+                + " declares process_steps but lacks at least two ordered teaching steps");
+        }
+        if ("split_screen".equals(segment.getVisualType())
+                && (segment.getColumns() == null || segment.getColumns().size() < 2)) {
+            throw new IllegalStateException("Storyboard row " + id
+                + " declares split_screen but lacks two comparison columns");
         }
 
         if (labels.isEmpty()) {
@@ -377,6 +440,47 @@ public final class StoryboardQualityGate {
             && !value.contains("whose exact subject and visible action are stated")
             && !value.contains("this approved narration")
             && !value.contains("this narration sentence");
+    }
+
+    private static boolean looksTruncated(String value) {
+        if (value == null || value.isBlank()) return true;
+        String clean = value.replaceAll("[\\r\\n]+", " ").replaceAll("\\s+", " ").trim();
+        if (clean.contains("...") || clean.endsWith("\u2026")) return true;
+        String tail = clean.replaceAll("[,:;-]+$", "").trim().toLowerCase(Locale.ROOT);
+        return tail.matches(".*\\b(?:and|or|but|because|while|when|with|from|into|of|the|a|an|to|for|in|on|by)$");
+    }
+
+    private static boolean hasUnsupportedCoverageClaim(SceneSegment segment) {
+        String notes = safe(segment.getCoverageNotes());
+        if (notes.isBlank()) return false;
+        for (String clause : notes.split("(?<=[.!?\\u0964\\u06D4\\u061F])\\s+|\\s*;\\s*")) {
+            String clean = clause.trim();
+            if (!clean.matches("(?i)^(?:the image|this image|the visual|this visual)\\s+(?:shows|covers|depicts|demonstrates).*$")) {
+                continue;
+            }
+            if (!hasMeaningfulOverlap(segment.getSentence(), clean)) return true;
+        }
+        return false;
+    }
+
+    private static boolean hasMeaningfulOverlap(String first, String second) {
+        Set<String> left = significantWords(first);
+        Set<String> right = significantWords(second);
+        left.retainAll(right);
+        return !left.isEmpty();
+    }
+
+    private static Set<String> significantWords(String value) {
+        Set<String> result = new LinkedHashSet<>();
+        if (value == null) return result;
+        Set<String> ignored = Set.of(
+            "this", "that", "with", "from", "into", "about", "image", "visual",
+            "shows", "covers", "depicts", "demonstrates", "lesson", "video"
+        );
+        for (String token : value.toLowerCase(Locale.ROOT).split("[^\\p{L}\\p{M}\\p{N}]+")) {
+            if (token.length() >= 3 && !ignored.contains(token)) result.add(token);
+        }
+        return result;
     }
 
     private static boolean hasSpecificTargetDescription(String placement, String label) {

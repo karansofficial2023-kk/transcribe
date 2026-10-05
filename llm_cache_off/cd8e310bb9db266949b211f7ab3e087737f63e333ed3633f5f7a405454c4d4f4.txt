@@ -1,0 +1,60 @@
+[
+    {
+        "rowId": "1.7",
+        "labels": ["குளுக்கோஸ்"],
+        "labelPlacements": [
+            "குளுக்கோஸ் - இலையில் உள்ள சிறிய துறைகளின் மூலம் உருவாகும் சத்து வடிவம் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": ["குளுக்கோஸ் - இலையில் உள்ள சிறிய துறைகளின் மூலம் உருவாகும் சத்து வடிவம்"],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: குளுக்கோஸ் தாவரத்திற்கு ஆற்றலை வழங்குகிறது, மீதமுள்ளது சத்தாக சேமிக்கப்படுகிறது. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "இலையில் உள்ள சிறிய துறைகளின் மூலம் உருவாகும் குளுக்கோஸ் வடிவம். No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.8",
+        "labels": ["ஆக்சிஜன்"],
+        "labelPlacements": [
+            "ஆக்சிஜன் - இலையில் உள்ள சிறிய துறைகளின் மூலம் வெளியிடப்படும் காற்று வடிவம் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": ["ஆக்சிஜன் - இலையில் உள்ள சிறிய துறைகளின் மூலம் வெளியிடப்படும் காற்று வடிவம்"],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: ஒளிச்சேர்க்கை இல்லாமல், பூமியில் உயிர்கள் வாழ முடியாது. ஏனெனில், அது நமக்கு தேவையான ஆக்சிஜனை தருகிறது. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "இலையில் உள்ள சிறிய துறைகளின் மூலம் வெளியிடப்படும் ஆக்சிஜன் வடிவம். No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.9",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "no_labels",
+        "visualSubject": "Sharp 1920x1080 realistic documentary image for ஏனெனில், அது நமக்கு தேவையான ஆக்சிஜனை தருகிறது.; depict the concrete subject or visible action described by: ஏனெனில், அது நமக்கு தேவையான ஆக்சிஜனை தருகிறது.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+        "comfyPrompt": "இலையில் உள்ள சிறிய துறைகளின் மூலம் வெளியிடப்படும் ஆக்சிஜன் வடிவம். No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.10",
+        "labels": ["இலைத்துறை"],
+        "labelPlacements": [
+            "இலைத்துறை | வேலை முறை | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": ["இலைத்துறை - சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர் மற்றும் குளுக்கோஸ் உருவாக்கும் துறை | COORDINATES_PENDING_APPROVED_IMAGE"],
+        "presentationMode": "point_labels",
+        "visualSubject": "இலைத்துறைகளின் வேலை முறை, சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர்",
+        "comfyPrompt": "இலைத்துறைகளின் வேலை முறையில் உள்ள சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர் மற்றும் குளுக்கோஸ் உருவாக்கும் துறை. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.11",
+        "labels": ["குளுக்கோஸ்"],
+        "labelPlacements": [
+            "குளுக்கோஸ் - இலையில் உள்ள சிறிய துறைகளின் மூலம் உருவாகும் சத்து வடிவம் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": ["குளுக்கோஸ் - இலையில் உள்ள சிறிய துறைகளின் மூலம் உருவாகும் சத்து வடிவம்"],
+        "presentationMode": "point_labels",
+        "visualSubject": "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ், ஆக்சிஜன்",
+        "comfyPrompt": "இலையில் உள்ள சிறிய துறைகளின் மூலம் உருவாகும் குளுக்கோஸ் வடிவம். No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

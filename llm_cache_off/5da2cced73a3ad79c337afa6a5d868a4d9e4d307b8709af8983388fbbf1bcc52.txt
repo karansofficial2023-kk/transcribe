@@ -1,0 +1,27 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see the formula for total resistance in a series circuit.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In series circuits, the total resistance is calculated by adding up all individual resistances, represented as R equals R1 plus R2 plus R3.",
+      "formula_lines": [
+        "R = R1 + R2 + R3"
+      ],
+      "explain_steps": [
+        "Total resistance in a series circuit is the sum of individual resistances."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Total Resistance in Series Circuit"
+    }
+  ]
+}

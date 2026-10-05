@@ -1,0 +1,26 @@
+{
+  "score": 100,
+  "missing_topics": [],
+  "covered_topics": [
+    "Sunflowers are one of my favourite flowers",
+    "At this size, we can get a really good look at them",
+    "Sunflowers are often pollinated by bees",
+    "When no bees are present, sunflowers have an ingenious mechanism to ensure pollination",
+    "The male stamen curls in on itself to deposit pollen in the sticky female stigma (self-pollination)",
+    "In plants like Ixora, the anther and the stigma mature at the same time (homogamy)",
+    "Wood sorrel has small, inconspicuous flowers that lack fragrance and never open (clistogamy)",
+    "Self-pollination and fertilization in unopened flowers is called clistogamy",
+    "Pollen grain is distributed on the stigma of the same flower to enable self-pollination",
+    "Cross-pollination in papaya (unisexual, dioecious plant with average cross-pollination)",
+    "Sunflowers have bisexual flowers where anthers mature first followed by the stigma (protandry)",
+    "In custard apple, the stigma matures before the anther (protogyny)",
+    "Pansies have a hood covering the stigma (harkogamy)",
+    "Orchids' pollen fails to germinate on the same flower's stigma",
+    "Primrose shows heterostyly (stigma at different height compared to anther)",
+    "Adaptations in flowers that help with cross-pollination",
+    "Summary of self-pollination (Ixora, homogamy; wood sorrel, clistogamy)",
+    "Summary of cross-pollination (papaya, sunflower protandry, pansies harkogamy, primrose heterostyly)",
+    "What attracts pollinators: sweet scent, nutritious nectar, or deception",
+    "Bee orchid mimics female bee to attract male bees for pollination"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "8.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A laboratory setup with an electrolysis cell, showing a copper anode dissolving into solution, and a silver cathode with metallic silver depositing on its surface. The setup is under natural daylight with a clean white background. Camera distance: medium, angle: slightly angled to show the electrolyte solution between electrodes.",
+      "image_requirement": "Viewer must see the anode, cathode, and electrolyte solution in the cell.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "As we explore the world of electroplating, we've learned about the roles of anode and cathode, the processes of reduction and oxidation, and the various factors that influence the deposition of metals.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Electroplating Electrodes and Processes"
+    },
+    {
+      "shot_id": "8.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A classroom with students seated, a teacher standing at the front, and a whiteboard displaying the word 'Electroplating' in bold letters. Natural daylight illuminates the room with a clean white background. Camera distance: medium, angle: slightly angled to show the class and board.",
+      "image_requirement": "Viewer must see the classroom setting and the whiteboard with the word 'Electroplating'.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "But our journey doesn't end here.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Continuing the Electroplating Journey"
+    },
+    {
+      "shot_id": "8.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "A book titled 'Electroplating Applications and Artistry' open on a table, with a magnifying glass over the cover. A lamp provides warm lighting, and the background is a clean white surface. Camera distance: medium, angle: slightly angled to show the book and magnifying glass.",
+      "image_requirement": "Viewer must see the book and magnifying glass to understand the focus on applications and artistry.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Stay with us for the next chapter, where we will examine the practical applications and artistic potential of electroplating.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Electroplating Applications and Artistry"
+    }
+  ]
+}

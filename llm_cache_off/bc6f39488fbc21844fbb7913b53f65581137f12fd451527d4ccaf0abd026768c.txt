@@ -1,0 +1,57 @@
+[
+  {
+    "sceneNumber": 1,
+    "sceneTitle": "Introduction to Pollination",
+    "sentenceNumbers": [1, 2, 3]
+  },
+  {
+    "sceneNumber": 2,
+    "sceneTitle": "Self-Pollination in Sunflowers",
+    "sentenceNumbers": [4, 5, 6]
+  },
+  {
+    "sceneNumber": 3,
+    "sceneTitle": "Homogamy and Self-Pollination",
+    "sentenceNumbers": [7, 8, 12]
+  },
+  {
+    "sceneNumber": 4,
+    "sceneTitle": "Clistogamy in Wood Sorrel",
+    "sentenceNumbers": [9, 10, 11]
+  },
+  {
+    "sceneNumber": 5,
+    "sceneTitle": "Cross-Pollination Overview",
+    "sentenceNumbers": [13, 14, 15]
+  },
+  {
+    "sceneNumber": 6,
+    "sceneTitle": "Protandry and Protogyny",
+    "sentenceNumbers": [16, 17, 18, 19]
+  },
+  {
+    "sceneNumber": 7,
+    "sceneTitle": "Structural Adaptations for Cross-Pollination",
+    "sentenceNumbers": [20, 21, 22, 23, 24]
+  },
+  {
+    "sceneNumber": 8,
+    "sceneTitle": "Heterostyly and Pollination Mechanisms",
+    "sentenceNumbers": [25, 26, 27, 28, 29]
+  },
+  {
+    "sceneNumber": 9,
+    "sceneTitle": "Pollinator Attraction Strategies",
+    "sentenceNumbers": [30, 31, 32, 33, 34, 35]
+  },
+  {
+    "sceneNumber": 10,
+    "sceneTitle": "Deception and Pollination",
+    "sentenceNumbers": [36, 37, 38, 39, 40, 41, 42]
+  },
+  {
+    "sceneNumber": 11,
+    "sceneTitle": "Conclusion and Encouragement",
+    "sentenceNumbers": [43, 44, 45, 46]
+  }
+]

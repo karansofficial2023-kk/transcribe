@@ -1,0 +1,60 @@
+[
+    {
+        "rowId": "1.2",
+        "labels": ["கார்பன் டை ஆக்சைடு", "நீர்"],
+        "labelPlacements": [
+            "கார்பன் டை ஆக்சைடு | காற்றிலிருந்து உறிஞ்சி எடுக்கப்படும் பொருள் | COORDINATES_PENDING_APPROVED_IMAGE",
+            "நீர் | மண்ணிலிருந்து உறிஞ்சி எடுக்கப்படும் பொருள் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "கார்பன் டை ஆக்சைடு - காற்றிலிருந்து உறிஞ்சி எடுக்கப்படும் பொருள்",
+            "நீர் - மண்ணிலிருந்து உறிஞ்சி எடுக்கப்படும் பொருள்"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "தாவரங்கள் காற்றிலிருந்து கார்பன் டை ஆக்சைடையும், மண்ணிலிருந்து நீரையும் உறிஞ்சி எடுக்கும் பொருட்கள்",
+        "comfyPrompt": "தாவரங்களின் இலைகள், காற்று மற்றும் மண் தோற்றும் படம். கார்பன் டை ஆக்சைடு மற்றும் நீர் விளக்கப்படும். No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "3.2",
+        "labels": ["இலைத்துறைகள்", "சிறிய துறைகள்"],
+        "labelPlacements": [
+            "இலைத்துறைகள் | இலைகளில் உள்ள சிறிய துறைகள் | COORDINATES_PENDING_APPROVED_IMAGE",
+            "சிறிய துறைகள் | இலைகளில் உள்ள சிறிய துறைகள் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "இலைத்துறைகள் - இலைகளில் உள்ள சிறிய துறைகள்",
+            "சிறிய துறைகள் - இலைகளில் உள்ள சிறிய துறைகள்"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள், இலைத்துறைகள்",
+        "comfyPrompt": "தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள், இலைத்துறைகள். இலைத்துறைகள் மற்றும் சிறிய துறைகள் விளக்கப்படும். No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "4.1",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "no_labels",
+        "visualSubject": "தாவரங்களின் உயிர் செயல்பாட்டு திட்டம், குளுக்கோஸ் மற்றும் ஆற்றல் வழங்குதல்",
+        "comfyPrompt": "தாவரங்களின் உயிர் செயல்பாட்டு திட்டம், குளுக்கோஸ் மற்றும் ஆற்றல் வழங்குதல். No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "4.2",
+        "labels": ["சத்துக்கள்", "சேமிப்பு"],
+        "labelPlacements": [
+            "சத்துக்கள் | சத்துக்களின் வகைகள் | COORDINATES_PENDING_APPROVED_IMAGE",
+            "சேமிப்பு | சத்துக்கள் சேமிப்பு முறை | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "சத்துக்கள் - சத்துக்களின் வகைகள்",
+            "சேமிப்பு - சத்துக்கள் சேமிப்பு முறை"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "தாவரங்களின் உயிர் செயல்பாட்டு திட்டம், சத்துக்கள் மற்றும் சேமிப்பு",
+        "comfyPrompt": "தாவரங்களின் உயிர் செயல்பாட்டு திட்டம், சத்துக்கள் மற்றும் சேமிப்பு. சத்துக்கள் மற்றும் சேமிப்பு விளக்கப்படும். No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

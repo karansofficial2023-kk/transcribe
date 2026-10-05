@@ -1,0 +1,31 @@
+{
+  "score": 100,
+  "missing_concepts": [],
+  "preserved_concepts": [
+    "Ohm's law",
+    "voltage",
+    "current",
+    "resistance",
+    "electric circuit",
+    "directly proportional",
+    "temperature remains constant",
+    "V equals I times R",
+    "volts",
+    "amperes",
+    "ohms",
+    "12 volts",
+    "4 ohms",
+    "3 amperes",
+    "series",
+    "total resistance",
+    "R equals R1 plus R2 plus R3",
+    "parallel connection",
+    "reciprocal of the total resistance",
+    "sum of the reciprocals of each resistance",
+    "same current through every resistor",
+    "same voltage across each branch",
+    "non-ohmic devices",
+    "diodes",
+    "graph of voltage against current"
+  ]
+}

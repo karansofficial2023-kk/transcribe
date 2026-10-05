@@ -1,0 +1,85 @@
+[
+  {
+    "rowId": "1.1",
+    "approved": true,
+    "issue": "",
+    "template": "title_card",
+    "visualType": "title_card",
+    "heading": "Ohms Law and Resistor Circuits",
+    "visualSubject": "Sharp 1920x1080 realistic educational background directly representing Ohms Law and Resistor Circuits, subject-matter accurate, natural lighting, clear subject separation, empty central margins with a calm uncluttered central area, no embedded text",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Sharp 1920x1080 realistic educational background directly representing Ohms Law and Resistor Circuits, subject-matter accurate, natural lighting, clear subject separation, empty central margins with a calm uncluttered central area, no embedded text. Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. No generated text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Introduces the topic of Ohm's Law and its relevance to electrical circuits Title-card guard: visualSubject is background guidance only and must not be rendered as visible text.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "2.1",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Ohm's Law Proportionality",
+    "visualSubject": "Conductor with voltage source and ammeter showing current flow; labeled components including resistor, battery, and meter; camera angle: medium shot focusing on the circuit diagram",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover Ohm's Law proportionality, current-voltage relationship, and temperature constancy as per curriculum",
+    "formulaLines": [
+      "I = V/R"
+    ]
+  },
+  {
+    "rowId": "3.1",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Ohm's Law Formula Representation",
+    "visualSubject": "Mathematical equation of Ohm's Law with labeled variables V, I, R on a clean educational background",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the definition of Ohm's Law and the units for voltage, current, and resistance as per the narration",
+    "formulaLines": [
+      "V = I × R"
+    ]
+  },
+  {
+    "rowId": "4.1",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Ohm's Law Calculation Example",
+    "visualSubject": "A simple electrical circuit with a battery, resistor, and current flow; labeled components including voltage, resistance, and current; realistic lighting and depth of field",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover Ohm's Law formula, voltage, resistance, and current calculation as per the narration.",
+    "formulaLines": [
+      "V = IR"
+    ]
+  },
+  {
+    "rowId": "5.1",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Series Circuit Resistance Calculation Formula",
+    "visualSubject": "Electrical circuit with labeled resistors in series; clean background with white text on black band; 42px font, centered alignment; horizontal margin 120, bottom margin 55",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover total resistance calculation, individual resistances, and their addition in a series circuit.",
+    "formulaLines": [
+      "R = R1 + R2 + R3"
+    ]
+  }
+]

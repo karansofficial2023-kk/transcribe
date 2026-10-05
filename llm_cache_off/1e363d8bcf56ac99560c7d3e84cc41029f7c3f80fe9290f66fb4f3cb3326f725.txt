@@ -1,0 +1,10 @@
+{
+  "score": 100,
+  "hallucinations": [],
+  "supported_corrections_or_additions": [
+    "The paraphrased text uses synonyms and rephrases the original content without introducing any new or unsupported information.",
+    "All scientific terms (e.g., self-pollination, homogamy, clistogamy, protandry, protogyny, harkogamy, heterostyly) are used correctly and consistently with the source.",
+    "The examples provided (Ixora, wood sorrel, papaya, sunflower, custard apple, pansies, orchids, primrose, bee orchid) align with the original text and are not fabricated or altered."
+  ],
+  "severity": "low"
+}

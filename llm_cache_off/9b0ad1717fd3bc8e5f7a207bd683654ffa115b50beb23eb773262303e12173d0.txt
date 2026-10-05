@@ -1,0 +1,58 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది",
+        "visualSubject": "స్థిరమైన క్లిప్, విషయాలు అంతర్గతం చేయబడిన బ్యాక్‌గ్రౌండ్, ప్రముఖత వివరించే సైన్ అలాంటి స్థిరమైన క్లిప్",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "స్థిరమైన క్లిప్ అందించడానికి, వివరణ కోసం స్థిరమైన క్లిప్ ఉపయోగించబడుతుంది",
+        "visualAnimation": "కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది అని స్థిరమైన క్లిప్ లో వివరించబడింది",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean, professional title card with the text 'కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది' in bold, sans-serif font",
+            "A title card with a dark background and light text for high contrast"
+        ],
+        "motion": "static",
+        "subtitle": "కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "comfy_image",
+        "assetQualityNotes": "generated still, no text, clean background",
+        "comfyPrompt": "A clean, professional title card with the text 'కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది' in bold, sans-serif font on a dark background with light text for high contrast",
+        "coverageNotes": "ఈ సీన్ కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది అని వివరిస్తుంది",
+        "shot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది",
+            "prompt": "A cinematic title card with the text 'కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది' in bold, sans-serif font on a dark background with light text for high contrast",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous title card with smooth transition"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది",
+            "prompt": "A cinematic title card with the text 'కిరణజన్య సంయోగక్రియ మానవ జీవనానికి అత్యంత ప్రముఖమైనది' in bold, sans-serif font on a dark background with light text for high contrast",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous title card with smooth transition"
+        }
+    }
+]

@@ -1,0 +1,362 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "The internal resistances of these two sources are given as R1 and R2 respectively, with the information that R2 is greater than R1.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Internal Resistances of Two Sources",
+        "visualSubject": "Two voltage sources with internal resistances labeled as R1 and R2, R2 larger than R1, placed side by side on a circuit diagram background",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6.5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration, no cutaway or loop",
+        "visualAnimation": "Two voltage sources with internal resistances labeled as R1 and R2, R2 larger than R1, placed side by side on a circuit diagram background",
+        "localAnimation": "Label R1 and R2 with arrows pointing to their respective resistors",
+        "labels": [
+            "R1 | Internal resistance of first source | ",
+            "R2 | Internal resistance of second source | "
+        ],
+        "labelPlacements": [
+            "R1 | Internal resistance of first source | COORDINATES_PENDING_APPROVED_IMAGE",
+            "R2 | Internal resistance of second source | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [
+            "Label R1 with an arrow pointing to its resistor",
+            "Label R2 with an arrow pointing to its resistor"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Two voltage sources with internal resistances labeled as R1 and R2, R2 larger than R1",
+            "Circuit diagram showing two EMF sources with internal resistances"
+        ],
+        "motion": "Static image with labels",
+        "subtitle": "Internal resistances of the two sources are R1 and R2, with R2 greater than R1",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with labeled resistors",
+        "comfyPrompt": "Two voltage sources with internal resistances labeled as R1 and R2, R2 larger than R1, on a clean educational background",
+        "coverageNotes": "Visualizes the given parameters of two EMF sources with their respective internal resistances",
+        "shot": {
+            "template": "video",
+            "heading": "Internal Resistances of Two Sources",
+            "prompt": "Two voltage sources with internal resistances labeled as R1 and R2, R2 larger than R1, placed side by side on a circuit diagram background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Internal Resistances of Two Sources",
+            "prompt": "Two voltage sources with internal resistances labeled as R1 and R2, R2 larger than R1, placed side by side on a circuit diagram background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "If the potential difference across the source with internal resistance R2 is zero, what can be concluded from this?",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Potential Difference Across R2",
+        "visualSubject": "Circuit diagram showing two EMF sources and an external resistor, with a highlighted section indicating zero potential difference across R2",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5.5,
+        "recommendedClipSeconds": 7,
+        "timingNotes": "Hold for full duration, no cutaway or loop",
+        "visualAnimation": "Circuit diagram showing two EMF sources and an external resistor, with a highlighted section indicating zero potential difference across R2",
+        "localAnimation": "Highlight the area around R2 to indicate zero potential difference",
+        "labels": [
+            "R1 | Internal resistance of first source | ",
+            "R2 | Internal resistance of second source | "
+        ],
+        "labelPlacements": [
+            "R1 | Internal resistance of first source | COORDINATES_PENDING_APPROVED_IMAGE",
+            "R2 | Internal resistance of second source | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [
+            "Highlight the area around R2 to indicate zero potential difference"
+        ],
+        "highlights": [
+            "Area around R2 indicating zero potential difference"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Circuit diagram showing two EMF sources and an external resistor, with a highlighted section indicating zero potential difference across R2",
+            "Circuit diagram with labeled components and highlighted area for zero potential"
+        ],
+        "motion": "Static image with highlights",
+        "subtitle": "Potential difference across the source with internal resistance R2 is zero",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with highlighted area for zero potential",
+        "comfyPrompt": "Circuit diagram showing two EMF sources and an external resistor, with a highlighted section indicating zero potential difference across R2",
+        "coverageNotes": "Visualizes the condition of zero potential difference across R2 in the circuit",
+        "shot": {
+            "template": "video",
+            "heading": "Potential Difference Across R2",
+            "prompt": "Circuit diagram showing two EMF sources and an external resistor, with a highlighted section indicating zero potential difference across R2",
+            "negativePrompt": "",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Potential Difference Across R2",
+            "prompt": "Circuit diagram showing two EMF sources and an external resistor, with a highlighted section indicating zero potential difference across R2",
+            "negativePrompt": "",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration"
+        }
+    },
+    {
+        "segmentNumber": 3,
+        "sentence": "Let's attempt to visualize the circuit.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "Visualizing the Circuit",
+        "visualSubject": "Animated transition from a blank screen to a labeled circuit diagram showing two EMF sources and an external resistor",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 4.0,
+        "recommendedClipSeconds": 4,
+        "timingNotes": "Use a smooth transition to the circuit diagram",
+        "visualAnimation": "Animated transition from a blank screen to a labeled circuit diagram showing two EMF sources and an external resistor",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Animated transition from a blank screen to a labeled circuit diagram showing two EMF sources and an external resistor",
+            "Circuit diagram with animated transition"
+        ],
+        "motion": "Smooth transition to the circuit diagram",
+        "subtitle": "Visualizing the circuit configuration of two EMF sources and an external resistor",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "ltx_video",
+        "assetQualityNotes": "Use LTX clip for smooth transition to the circuit diagram",
+        "comfyPrompt": "",
+        "coverageNotes": "Visualizes the circuit configuration of two EMF sources and an external resistor",
+        "shot": {
+            "template": "video",
+            "heading": "Visualizing the Circuit",
+            "prompt": "Animated transition from a blank screen to a labeled circuit diagram showing two EMF sources and an external resistor",
+            "negativePrompt": "",
+            "durationSeconds": 4,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "No join required"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Visualizing the Circuit",
+            "prompt": "Animated transition from a blank screen to a labeled circuit diagram showing two EMF sources and an external resistor",
+            "negativePrompt": "",
+            "durationSeconds": 4,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "No join required"
+        }
+    },
+    {
+        "segmentNumber": 4,
+        "sentence": "Since the current in the circuit is not zero, it indicates that E1 is in the associative mode with E2.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Current and Associative Mode",
+        "visualSubject": "Circuit diagram showing two EMF sources connected in series with an external resistor, current flowing through the circuit",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6.0,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration, no cutaway or loop",
+        "visualAnimation": "Circuit diagram showing two EMF sources connected in series with an external resistor, current flowing through the circuit",
+        "localAnimation": "Label the current direction and indicate associative mode of E1 and E2",
+        "labels": [
+            "E1 | First EMF source | ",
+            "E2 | Second EMF source | "
+        ],
+        "labelPlacements": [
+            "E1 | First EMF source | COORDINATES_PENDING_APPROVED_IMAGE",
+            "E2 | Second EMF source | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [
+            "Label E1 and E2 with arrows pointing to their respective positions in the circuit"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Circuit diagram showing two EMF sources connected in series with an external resistor, current flowing through the circuit",
+            "Circuit diagram with labeled EMF sources and current direction"
+        ],
+        "motion": "Static image with labels",
+        "subtitle": "Current in the circuit is not zero, indicating E1 and E2 are in associative mode",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with labeled EMF sources and current direction",
+        "comfyPrompt": "Circuit diagram showing two EMF sources connected in series with an external resistor, current flowing through the circuit",
+        "coverageNotes": "Visualizes the associative mode of E1 and E2 based on non-zero current",
+        "shot": {
+            "template": "video",
+            "heading": "Current and Associative Mode",
+            "prompt": "Circuit diagram showing two EMF sources connected in series with an external resistor, current flowing through the circuit",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Current and Associative Mode",
+            "prompt": "Circuit diagram showing two EMF sources connected in series with an external resistor, current flowing through the circuit",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration"
+        }
+    },
+    {
+        "segmentNumber": 5,
+        "sentence": "You can represent EMF1 as having an internal resistance of R1 and another EMF (E2) with an internal resistance of R2.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "EMF Sources with Internal Resistances",
+        "visualSubject": "Circuit diagram showing two EMF sources with their respective internal resistances labeled as R1 and R2",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6.0,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration, no cutaway or loop",
+        "visualAnimation": "Circuit diagram showing two EMF sources with their respective internal resistances labeled as R1 and R2",
+        "localAnimation": "Label the internal resistances of E1 and E2 with arrows pointing to them",
+        "labels": [
+            "R1 | Internal resistance of first source | ",
+            "R2 | Internal resistance of second source | "
+        ],
+        "labelPlacements": [
+            "R1 | Internal resistance of first source | COORDINATES_PENDING_APPROVED_IMAGE",
+            "R2 | Internal resistance of second source | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [
+            "Label R1 and R2 with arrows pointing to their respective resistors"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Circuit diagram showing two EMF sources with their respective internal resistances labeled as R1 and R2",
+            "Circuit diagram with labeled internal resistances of E1 and E2"
+        ],
+        "motion": "Static image with labels",
+        "subtitle": "EMF1 has an internal resistance of R1, and EMF2 has an internal resistance of R2",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with labeled internal resistances",
+        "comfyPrompt": "Circuit diagram showing two EMF sources with their respective internal resistances labeled as R1 and R2",
+        "coverageNotes": "Visualizes the representation of EMF sources with their internal resistances",
+        "shot": {
+            "template": "video",
+            "heading": "EMF Sources with Internal Resistances",
+            "prompt": "Circuit diagram showing two EMF sources with their respective internal resistances labeled as R1 and R2",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "EMF Sources with Internal Resistances",
+            "prompt": "Circuit diagram showing two EMF sources with their respective internal resistances labeled as R1 and R2",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full duration"
+        }
+    },
+    {
+        "segmentNumber": 6,
+        "sentence": "This is how the setup appears. They are both in the associative mode because they are of equal values, and it's given that the current in them is not zero, the circuit is not zero, and they are connected across an external resistance that is R over here.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Circuit Configuration with External Resistance",
+        "visualSubject": "Circuit diagram showing two EMF sources in associative mode, connected in series with an external resistor labeled as R",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 9.0,
+        "recommendedClipSeconds": 12,
+        "timingNotes": "Hold for full duration, no cutaway or loop",
+        "visualAnimation": "Circuit diagram showing two EMF sources in associative mode, connected in series with an external resistor labeled as R",
+        "localAnimation": "Label the external resistance R and indicate the current flow through the circuit",
+        "labels": [
+            "R | External resistance | ",
+            "Current | Flow of current through the circuit | "
+        ],
+        "labelPlacements": [
+            "R | External resistance | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Current | Flow of current through the circuit | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [
+            "Label R with an arrow pointing to its resistor",
+            "Indicate the direction of current flow in the circuit"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Circuit diagram showing two EMF sources in associative mode, connected in series with an external resistor labeled as R",
+            "Circuit diagram with labeled external resistance and current flow"
+        ],
+        "motion": "Static image with labels",
+        "subtitle": "Two EMF sources are in associative mode, connected in series with an external resistance R",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with labeled external resistance and current flow",
+        "comfyPrompt": "Circuit diagram showing two EMF sources in associative mode, connected in series with an external resistor labeled as R",
+        "coverageNotes": "Visualizes the complete circuit configuration with two EMF sources in associative mode and an external resistance R"
+    }
+]

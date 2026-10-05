@@ -1,0 +1,60 @@
+[
+  {
+    "rowId": "1.2",
+    "labels": [
+      "Function f(x) = x + 1/x",
+      "x-axis label",
+      "y-axis label",
+      "Minimum Value Point"
+    ],
+    "labelPlacements": [
+      "Function f(x) = x + 1/x | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "x-axis label | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "y-axis label | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Minimum Value Point | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "Function f(x) = x + 1/x - A mathematical function graphed on a coordinate plane",
+      "x-axis label - The horizontal axis representing the independent variable",
+      "y-axis label - The vertical axis representing the dependent variable",
+      "Minimum Value Point - The lowest point on the curve of the function"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A graph of the function f(x) = x + 1/x with labeled axes, a highlighted minimum point, and a clear visual representation of the optimization problem",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition with every semantic target unobscured with sufficient overlay margins. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A clean, high-contrast title card with a dark background and light text, featuring a mathematical expression for the function f(x) = x + 1/x in bold sans-serif font.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition with every semantic target unobscured with sufficient overlay margins. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.2",
+    "labels": [
+      "x"
+    ],
+    "labelPlacements": [
+      "x | The variable representing the number to be optimized | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "x - A mathematical variable representing the number to be optimized"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A clean, high-contrast image of a mathematical expression with a black band at the bottom and white text centered, displaying 'Let the given number be x.'",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition with every semantic target unobscured with sufficient overlay margins. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

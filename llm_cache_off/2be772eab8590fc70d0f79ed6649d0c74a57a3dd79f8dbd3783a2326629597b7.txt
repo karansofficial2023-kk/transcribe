@@ -1,0 +1,17 @@
+{
+  "inferredTopic": "Calculating Resistance After Length and Cross-sectional Area Changes",
+  "filenameTopic": "Conceptual Problem on Resistance and Resistivity",
+  "topicMatch": false,
+  "confidence": 0.95,
+  "safeStoryboardTitle": "Resistance After Stretching a Wire",
+  "subject": "Physics",
+  "academicLevel": "High School",
+  "intendedLearners": "Students studying electrical resistance and material properties",
+  "learningObjectives": [
+    "Understand how resistance changes with variations in length and cross-sectional area.",
+    "Apply the formula for resistance $ R = \rho \frac{L}{A} $ to calculate new resistance after dimensional changes.",
+    "Recognize that resistivity $ \rho $ is a material property and remains constant."
+  ],
+  "smeRole": "Electrical Engineering Educator",
+  "warning": "The filename topic is too narrow and does not fully capture the specific focus on calculating resistance after length and area changes. A more accurate title was selected for the storyboard."
+}

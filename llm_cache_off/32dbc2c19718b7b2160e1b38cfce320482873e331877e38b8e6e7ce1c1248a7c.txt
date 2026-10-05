@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "A battery connected to a cathode, which is a keychain, with electrons flowing from the battery toward the keychain. The setup is in a lab environment with natural lighting. The keychain is visible and has a negative charge.",
+      "image_requirement": "Viewer must see the flow of electrons from the battery to the keychain (cathode).",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "You can see electrons moving from the battery toward the cathode, which is actually the keychain being electroplated, giving it a negative charge.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Electrons Flow to Cathode"
+    },
+    {
+      "shot_id": "4.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "A silver ion in solution is attracted to the negative electrode, which is visible as a keychain. The setup shows the movement of positive ions toward the cathode with natural lighting.",
+      "image_requirement": "Viewer must see the attraction of silver ions to the negative electrode (keychain).",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The positive silver ions are drawn to the negative electrode.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Silver Ions Attracted to Cathode"
+    },
+    {
+      "shot_id": "4.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "A silver ion in solution with an empty spot in its outermost shell is shown, attracting an electron into this position. The setup is in a lab environment with natural lighting.",
+      "image_requirement": "Viewer must see the silver ion's empty shell and the attraction of an electron to it.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Notice that the silver ion has an empty spot in its outermost shell, and it attracts an electron into this position.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Silver Ion Gains Electron"
+    }
+  ]
+}

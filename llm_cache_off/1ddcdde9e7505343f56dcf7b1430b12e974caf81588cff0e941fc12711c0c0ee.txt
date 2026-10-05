@@ -1,0 +1,48 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "process_steps",
+      "image_prompt": "A leaf releasing oxygen bubbles into the air during photosynthesis, with sunlight shining through the leaves.",
+      "image_requirement": "Viewer must see oxygen bubbles escaping from a leaf.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Oxygen released through stomata",
+        "Gas escapes into atmosphere",
+        "Light energy fuels reaction"
+      ],
+      "panels": [],
+      "narration_en": "During this process, oxygen is released.",
+      "formula_lines": [],
+      "explain_steps": [
+        "Stomata release oxygen gas",
+        "Oxygen moves into the air",
+        "Sunlight provides energy for reaction"
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with tiny pores called stomata visible on its surface, under natural light.",
+      "image_requirement": "Viewer must see stomata on the leaf surface.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The small areas in leaves are called stomata.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

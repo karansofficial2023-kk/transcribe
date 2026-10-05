@@ -1,0 +1,87 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Two batteries with internal resistances R1 and R2, labeled as such; one battery is larger than the other to indicate R2 > R1; batteries are placed side by side on a table under natural light.",
+      "image_requirement": "Viewer must see two batteries with labels R1 and R2, where R2 is visibly larger than R1.",
+      "labels": [
+        "R1 - internal resistance of the first battery",
+        "R2 - internal resistance of the second battery"
+      ],
+      "label_placement": [
+        "R1 - on the side of the first battery",
+        "R2 - on the side of the second battery"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The internal resistances of these two sources are given as R1 and R2 respectively, with the information that R2 is greater than R1.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Internal Resistances of Two Sources"
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Potential difference across R2 is zero",
+        "Current through R2 must be zero",
+        "EMF of source equals voltage drop across R2",
+        "R2 is in open circuit"
+      ],
+      "panels": [],
+      "narration_en": "If the potential difference across the source with internal resistance R2 is zero, what can be concluded from this?",
+      "formula_lines": [],
+      "explain_steps": [
+        "Potential difference across R2 is zero",
+        "Current through R2 must be zero",
+        "EMF of source equals voltage drop across R2",
+        "R2 is in open circuit"
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Potential Difference Across R2"
+    },
+    {
+      "shot_id": "2.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "Two batteries connected in series with resistors R1 and R2; one battery is labeled as EMF1, the other as EMF2; resistors are placed between the batteries; circuit diagram on a table under natural light.",
+      "image_requirement": "Viewer must see two batteries connected in series with resistors R1 and R2, showing the configuration of the circuit.",
+      "labels": [
+        "EMF1 - electromotive force of first battery",
+        "EMF2 - electromotive force of second battery",
+        "R1 - internal resistance of first source",
+        "R2 - internal resistance of second source"
+      ],
+      "label_placement": [
+        "EMF1 - on the side of the first battery",
+        "EMF2 - on the side of the second battery",
+        "R1 - between EMF1 and R2",
+        "R2 - at the end of the circuit"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Let's attempt to visualize the circuit.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Circuit Configuration"
+    }
+  ]
+}

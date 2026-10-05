@@ -1,0 +1,74 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "In a series configuration, the current remains constant throughout all components, whereas in a parallel setup, the voltage across each branch is identical.",
+        "template": "split_screen",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Series vs. Parallel Circuit Behavior",
+        "visualSubject": "Two distinct electrical circuits: one series with labeled current flow and components; one parallel with labeled voltage across branches",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 10,
+        "recommendedClipSeconds": 12,
+        "timingNotes": "Split into two 4-second LTX clips for each circuit, with a 3-second hold on the final frame to emphasize key concepts.",
+        "visualAnimation": "Side-by-side split screen showing series and parallel circuits. Series circuit has consistent current flow through all components; parallel circuit shows equal voltage across each branch.",
+        "localAnimation": "Use arrows to highlight current path in series, and voltage labels in parallel branches. Zoom in on the key differences between the two configurations.",
+        "labels": [
+            "Current",
+            "Voltage",
+            "Series Circuit",
+            "Parallel Circuit"
+        ],
+        "labelPlacements": [
+            "Current | Current flow through all components | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Voltage | Voltage across each branch | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Series Circuit | Left side of split screen | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Parallel Circuit | Right side of split screen | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [
+            "Current path in series circuit",
+            "Voltage across each branch in parallel circuit"
+        ],
+        "highlights": [
+            "Constant current through all components",
+            "Equal voltage across branches"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Series circuit with labeled current flow and components",
+            "Parallel circuit with labeled voltage across each branch"
+        ],
+        "motion": "Split screen transition with a smooth camera pan from series to parallel configuration",
+        "subtitle": "Current is constant in series; voltage is equal in parallel.",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use reviewed diagram for clarity and accuracy. Labels must be visible and correctly placed.",
+        "comfyPrompt": "Clean educational background with two distinct circuits: series on left, parallel on right; no text or labels in the image",
+        "coverageNotes": "Visuals cover current constancy in series and voltage equality in parallel, aligning with core curriculum concepts.",
+        "shot": {
+            "template": "video",
+            "heading": "Series vs. Parallel Circuit Behavior",
+            "prompt": "Cinematic split screen showing a series circuit on the left with consistent current flow through all components, and a parallel circuit on the right with equal voltage across each branch; smooth camera pan from series to parallel configuration",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join the three LTX clips in sequence: first series circuit, then parallel circuit, and finally a hold on the final frame to emphasize key concepts."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Series vs. Parallel Circuit Behavior",
+            "prompt": "Cinematic split screen showing a series circuit on the left with consistent current flow through all components, and a parallel circuit on the right with equal voltage across each branch; smooth camera pan from series to parallel configuration",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join the three LTX clips in sequence: first series circuit, then parallel circuit, and finally a hold on the final frame to emphasize key concepts."
+        }
+    }
+]

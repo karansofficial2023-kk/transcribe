@@ -30,6 +30,7 @@ public class SceneStoryboardGenerator {
     
     private static final Logger logger = LoggerFactory.getLogger(SceneStoryboardGenerator.class);
     private final OllamaClient ollama;
+    private VisualDirector visualDirector;
     private final boolean animationEnabled;
     private final String videoProvider;
     private final boolean curriculumEnrichmentEnabled;
@@ -45,6 +46,9 @@ public class SceneStoryboardGenerator {
     private static final String PENDING_COORDINATES = "COORDINATES_PENDING_APPROVED_IMAGE";
     private static final String BLOCK_FINAL_RENDER = "BLOCK_FINAL_RENDER_UNTIL_LABEL_COORDINATES_ARE_VERIFIED";
     private static final int REVIEW_BATCH_SIZE = 5;
+    private static final int FINAL_REPAIR_ATTEMPTS = 3;
+    private static final Pattern STORYBOARD_ROW_ISSUE = Pattern.compile(
+        "Storyboard row (\\d+)\\.(\\d+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern DEFINED_MECHANISM = Pattern.compile(
         "\\b([\\p{L}][\\p{L}-]{3,})\\s+(?:means|occurs|involves|refers\\s+to|describes|is\\s+defined\\s+as)\\b",
         Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
@@ -552,7 +556,7 @@ public class SceneStoryboardGenerator {
         logger.info("Generating scene storyboard from text ({} chars)...", storyboardText.length());
         String languageInstruction = buildLanguageInstruction(storyboardText);
         String projectContext = buildProjectContext(materials);
-        TopicCheck topicCheck = verifyTopic(storyboardText, baseName, languageInstruction, projectContext);
+        TopicCheck topicCheck = inLessonLanguage(verifyTopic(storyboardText, baseName, languageInstruction, projectContext), storyboardText);
         
         // Step 1: Split into logical scenes
         List<Scene> scenes = splitIntoScenes(storyboardText, languageInstruction, topicCheck, projectContext);
@@ -568,9 +572,7 @@ public class SceneStoryboardGenerator {
         repairAndValidateLabelPlans(scenes, storyboardText, languageInstruction, topicCheck, projectContext);
         reviewVisualPlansWithSme(scenes, storyboardText, languageInstruction, topicCheck, projectContext);
         recordDiscoveryReviewNotes(scenes, topicCheck);
-        enforceFinalProductionContract(scenes, topicCheck.safeStoryboardTitle());
-        rebuildSceneNarrationFromSegments(scenes);
-        
+
         StoryboardDocument doc = new StoryboardDocument();
         doc.setTitle(topicCheck.safeStoryboardTitle());
         doc.setSubject(topicCheck.subject());
@@ -579,6 +581,11 @@ public class SceneStoryboardGenerator {
         doc.setSourceText(storyboardText);
         doc.setScenes(scenes);
         doc.setGeneratedAt(java.time.Instant.now().toString());
+        // Editorial visual planning (prompts, labels, formulas, graphs) happens BEFORE the contract is enforced and validated.
+        runVisualDirector(doc);
+        enforceFinalProductionContract(scenes, topicCheck.safeStoryboardTitle());
+        rebuildSceneNarrationFromSegments(scenes);
+        repairProductionContractUntilValid(doc, topicCheck.safeStoryboardTitle());
         
         logger.info("Storyboard generated with {} scenes", scenes.size());
         return doc;
@@ -596,7 +603,7 @@ public class SceneStoryboardGenerator {
         }
         String languageInstruction = buildLanguageInstruction(storyboardText);
         String projectContext = buildProjectContext(materials);
-        TopicCheck topicCheck = verifyTopic(storyboardText, baseName, languageInstruction, projectContext);
+        TopicCheck topicCheck = inLessonLanguage(verifyTopic(storyboardText, baseName, languageInstruction, projectContext), storyboardText);
         repairAndValidateLabelPlans(doc.getScenes(), storyboardText, languageInstruction,
             topicCheck, projectContext);
         enforceFinalProductionContract(doc.getScenes(), topicCheck.safeStoryboardTitle());
@@ -606,7 +613,52 @@ public class SceneStoryboardGenerator {
         doc.setTopic(topicCheck.inferredTopic());
         doc.setSmeRole(topicCheck.smeRole());
         doc.setGeneratedAt(java.time.Instant.now().toString());
+        runVisualDirector(doc);
+        repairProductionContractUntilValid(doc, topicCheck.safeStoryboardTitle());
         return doc;
+    }
+
+    private String languageHint;
+
+    /** The ASR language code of the lesson ("mr", "ta"). Scripts are shared (Marathi and Hindi are both Devanagari), so the text alone cannot say. */
+    public void setLanguageHint(String code) {
+        this.languageHint = code;
+    }
+
+    /** Installs the editorial visual director that plans prompts, labels, formulas and graphs before final validation. */
+    public void setVisualDirector(VisualDirector director) {
+        this.visualDirector = director;
+    }
+
+    private void runVisualDirector(StoryboardDocument doc) {
+        if (visualDirector != null) {
+            int directed = visualDirector.direct(doc);
+            logger.info("Visual director re-planned {} shot(s)", directed);
+        }
+        demoteFormulaShotsWithoutFormulas(doc);
+    }
+
+    /** A formula shot must carry exact formula lines; otherwise it is an ordinary photographed shot (never prose-as-formula). */
+    private void demoteFormulaShotsWithoutFormulas(StoryboardDocument doc) {
+        for (Scene scene : doc.getScenes()) {
+            if (scene.getSegments() == null) continue;
+            for (SceneSegment segment : scene.getSegments()) {
+                boolean formulaShot = "formula".equals(segment.getTemplate()) || "manim".equals(segment.getTool());
+                if (!formulaShot || (segment.getFormulaLines() != null && !segment.getFormulaLines().isEmpty())) continue;
+                segment.setTemplate("photo");
+                segment.setVisualType("realistic_image");
+                segment.setMediaType("photo");
+                segment.setMotionType("static_image");
+                segment.setTool("comfyui");
+                segment.setLocalAnimation("Use only renderer-controlled overlays supported by the narration.");
+                segment.setMotion(defaultMotion("photo"));
+                segment.setSteps(List.of());
+                segment.setExplainSteps(List.of());
+                segment.setLabels(List.of());
+                segment.setLabelPlacements(List.of());
+                segment.setComfyPrompt(ensureProductionImagePrompt(segment));
+            }
+        }
     }
 
     /** Apply deterministic production guards without calling an LLM or changing narration. */
@@ -614,9 +666,199 @@ public class SceneStoryboardGenerator {
         if (doc == null || doc.getScenes() == null || doc.getScenes().isEmpty()) {
             throw new IllegalArgumentException("Storyboard draft has no scenes");
         }
+        runVisualDirector(doc);
         enforceFinalProductionContract(doc.getScenes(), doc.getTitle());
         rebuildSceneNarrationFromSegments(doc.getScenes());
+        repairProductionContractUntilValid(doc, doc.getTitle());
         return doc;
+    }
+
+    /**
+     * Repair production metadata only. Exact source narration and sentence order are
+     * deliberately immutable here.
+     */
+    private void repairProductionContractUntilValid(StoryboardDocument doc, String lessonTitle) {
+        for (int attempt = 1; attempt <= FINAL_REPAIR_ATTEMPTS; attempt++) {
+            enforceFinalProductionContract(doc.getScenes(), lessonTitle);
+            rebuildSceneNarrationFromSegments(doc.getScenes());
+            List<String> issues = StoryboardQualityGate.inspect(doc);
+            if (issues.isEmpty()) return;
+
+            logger.warn("Storyboard production validation attempt {}/{} found {} issue(s): {}",
+                attempt, FINAL_REPAIR_ATTEMPTS, issues.size(), issues);
+            boolean repaired = repairReportedProductionIssues(doc, issues, lessonTitle);
+            if (!repaired) break;
+        }
+
+        List<String> remaining = StoryboardQualityGate.inspect(doc);
+        if (!remaining.isEmpty()) {
+            throw new IllegalStateException("Storyboard production repair could not satisfy the final contract: "
+                + String.join(" | ", remaining));
+        }
+    }
+
+    private boolean repairReportedProductionIssues(StoryboardDocument doc, List<String> issues,
+            String lessonTitle) {
+        boolean changed = false;
+        for (String issue : issues) {
+            Matcher matcher = STORYBOARD_ROW_ISSUE.matcher(issue);
+            if (!matcher.find()) continue;
+            int sceneNumber = Integer.parseInt(matcher.group(1));
+            int segmentNumber = Integer.parseInt(matcher.group(2));
+            SceneSegment segment = findSegment(doc.getScenes(), sceneNumber, segmentNumber);
+            if (segment == null) continue;
+
+            String context = lessonTitleFor(doc, lessonTitle, sceneNumber);
+            if (issue.contains("formula content") || issue.contains("formula shot")) {
+                enforceFormulaRouting(segment);
+            } else if (isLabelContractIssue(issue)) {
+                repairIncompleteLabelContract(segment);
+            } else if (issue.contains("process_steps")) {
+                List<String> steps = deterministicTeachingSteps(segment.getSentence());
+                if (steps.size() >= 2) {
+                    segment.setSteps(steps);
+                } else {
+                    applySourceFaithfulFallback(segment, context);
+                }
+            } else {
+                applySourceFaithfulFallback(segment, context);
+            }
+            segment.setCoverageNotes(appendNote(sanitizeCoverageNotes(segment),
+                "Automatic production repair: rebuilt unsafe visual metadata from the exact source sentence."));
+            changed = true;
+        }
+
+        if (issues.stream().anyMatch(value -> value.contains("title_card"))) {
+            repairTitleCardPlacement(doc.getScenes(), lessonTitle);
+            changed = true;
+        }
+        if (issues.stream().anyMatch(value -> value.contains("lacks visual variety"))) {
+            changed |= addDeterministicVisualVariety(doc.getScenes());
+        }
+        return changed;
+    }
+
+    private String lessonTitleFor(StoryboardDocument doc, String lessonTitle, int sceneNumber) {
+        String sceneTitle = doc.getScenes().stream()
+            .filter(scene -> scene.getSceneNumber() == sceneNumber)
+            .map(Scene::getSceneTitle)
+            .filter(value -> value != null && !value.isBlank())
+            .findFirst().orElse("");
+        return java.util.stream.Stream.of(lessonTitle, sceneTitle)
+            .filter(value -> value != null && !value.isBlank())
+            .distinct().collect(java.util.stream.Collectors.joining(" - "));
+    }
+
+    private boolean isLabelContractIssue(String issue) {
+        String value = issue.toLowerCase(Locale.ROOT);
+        return value.contains("label") || value.contains("coordinate")
+            || value.contains("scientific arrows") || value.contains("stable overlays");
+    }
+
+    private void repairIncompleteLabelContract(SceneSegment segment) {
+        List<String> labels = sanitizeLabels(segment.getLabels(), segment).stream()
+            .filter(label -> !isTooGenericLabel(label) && !isCombinedLabel(label))
+            .filter(label -> labelSupportedBySentence(label, segment.getSentence()))
+            .toList();
+        if (labels.isEmpty()) {
+            clearUnsafeLabels(segment);
+            if (isLabeledVisual(segment)) downgradeToUnlabeledVisual(segment);
+            return;
+        }
+
+        List<String> supplied = segment.getLabelPlacements() == null
+            ? List.of() : segment.getLabelPlacements();
+        List<String> repaired = new ArrayList<>();
+        for (String label : labels) {
+            String existing = supplied.stream()
+                .filter(value -> placementMatchesLabel(value, label.toLowerCase(Locale.ROOT)))
+                .findFirst().orElse("");
+            String description = extractTargetDescription(existing, label);
+            if (description.isBlank()) {
+                description = "clearly visible " + label + " structure named in this narration";
+            }
+            if (hasReviewedAsset(segment) && hasNumericTarget(existing)) {
+                repaired.add(normalizeLabelPlacement(segment, label, existing));
+            } else {
+                repaired.add(label + " | " + description + " | " + PENDING_COORDINATES);
+            }
+        }
+        segment.setLabels(labels);
+        segment.setLabelPlacements(repaired);
+        segment.setTemplate("labeled_image");
+        segment.setVisualType("realistic_labeled_image");
+        segment.setMediaType("photo_with_labels");
+        segment.setMotionType("static_image");
+        segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
+            "Automatic label repair: retained source-supported physical labels and rebuilt pending semantic targets."));
+        enforceLabelContract(segment);
+    }
+
+    private void repairTitleCardPlacement(List<Scene> scenes, String storyboardTitle) {
+        boolean first = true;
+        for (Scene scene : scenes) {
+            if (scene.getSegments() == null) continue;
+            for (SceneSegment segment : scene.getSegments()) {
+                if (first) {
+                    segment.setTemplate("title_card");
+                    segment.setVisualType("title_card");
+                    segment.setHeading(storyboardTitle);
+                    segment.setSubtitle("");
+                    first = false;
+                } else if ("title_card".equals(segment.getVisualType())) {
+                    applySourceFaithfulFallback(segment, storyboardTitle + " - " + scene.getSceneTitle());
+                }
+            }
+        }
+    }
+
+    private boolean addDeterministicVisualVariety(List<Scene> scenes) {
+        // try every plain photo shot (not only one) until a sentence can be shown as steps; this must work in any language
+        List<SceneSegment> candidates = scenes.stream()
+            .flatMap(scene -> scene.getSegments() == null
+                ? java.util.stream.Stream.<SceneSegment>empty() : scene.getSegments().stream())
+            .filter(segment -> !"title_card".equals(segment.getVisualType()))
+            .filter(segment -> segment.getLabels() == null || segment.getLabels().isEmpty())
+            .skip(1)
+            .toList();
+        for (SceneSegment candidate : candidates) {
+            List<String> steps = deterministicTeachingSteps(candidate.getSentence());
+            if (steps.size() < 2) continue;
+            candidate.setTemplate("process");
+            candidate.setVisualType("process_steps");
+            candidate.setMediaType("animation");
+            candidate.setMotionType("local_animation");
+            candidate.setTool("pillow_opencv");
+            candidate.setSteps(steps);
+            candidate.setMotion("cross_dissolve; restrained_step_reveal");
+            candidate.setComfyPrompt("");
+            candidate.setCoverageNotes(appendNote(sanitizeCoverageNotes(candidate),
+                "Automatic layout repair: deterministic process frame adds readable visual variety."));
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Two to four readable steps from one sentence, in any language: split at phrase punctuation (comma, semicolon, colon,
+     * Devanagari danda); a sentence with no such break is cut once, near the middle, at a word boundary.
+     */
+    List<String> deterministicTeachingSteps(String sentence) {
+        if (sentence == null || sentence.isBlank()) return List.of();
+        String text = sentence.replaceAll("\\s+", " ").trim().replaceAll("[.!?\\u0964\\u06D4]+$", "");
+        List<String> steps = java.util.Arrays.stream(text.split("\\s*[;:,\\u060C\\u0964]\\s*"))
+            .map(String::trim)
+            .filter(value -> value.split("\\s+").length >= 2)
+            .distinct()
+            .limit(4)
+            .toList();
+        if (steps.size() >= 2) return steps;
+        String[] words = text.split(" ");
+        if (words.length < 6) return List.of();
+        int middle = words.length / 2;
+        String first = String.join(" ", java.util.Arrays.copyOfRange(words, 0, middle));
+        String second = String.join(" ", java.util.Arrays.copyOfRange(words, middle, words.length));
+        return List.of(first, second);
     }
 
     private String buildProjectContext(StoryboardProjectMaterials materials) {
@@ -736,6 +978,10 @@ public class SceneStoryboardGenerator {
                   Use abstract_or_nonpointable for mechanisms, classifications, relationships,
                   timing phases, behaviors, directions or currents, advantages, disadvantages,
                   laws, properties, outcomes, and other concepts that are not point targets.
+                - For visible_physical_target, pointTargetNames must begin with the exact label text,
+                  followed by a concise morphological or physical description. Example:
+                  "<Label> - <concise visible morphology of that structure>". This proves that the proposed
+                  physical target belongs to that label even when the descriptive wording differs.
                 - Prefer replacing an abstract candidate with the concrete visible structures that
                   demonstrate it. If that is impossible, retain the concept with
                   abstract_or_nonpointable so the renderer can move it to narration/subtitle rather
@@ -912,6 +1158,13 @@ public class SceneStoryboardGenerator {
                     continue;
                 }
                 if (getBooleanOrDefault(review, "approved", false)) continue;
+                String issue = getStringOrDefault(review, "issue", "visual plan corrected");
+                if (isSubjectMismatchIssue(issue)) {
+                    applySourceFaithfulFallback(segment);
+                    segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
+                        "SME guard: replaced an unrelated visual plan with a source-faithful fallback."));
+                    continue;
+                }
                 segment.setTemplate(getStringOrDefault(review, "template", segment.getTemplate()));
                 segment.setVisualType(getStringOrDefault(review, "visualType", segment.getVisualType()));
                 segment.setHeading(getStringOrDefault(review, "heading", segment.getHeading()));
@@ -925,7 +1178,7 @@ public class SceneStoryboardGenerator {
                 segment.setComfyPrompt(getStringOrDefault(review, "comfyPrompt", segment.getComfyPrompt()));
                 segment.setCoverageNotes(appendNote(
                     getStringOrDefault(review, "coverageNotes", segment.getCoverageNotes()),
-                    "SME correction: " + getStringOrDefault(review, "issue", "visual plan corrected")));
+                    "SME correction: " + issue));
                 segment.setFormulaLines(getStringList(review, "formulaLines"));
                 enforceStoryboardQuality(segment);
             }
@@ -939,6 +1192,50 @@ public class SceneStoryboardGenerator {
                     + "keeping existing SME-generated plans: {}", batchRowIds, e.getMessage());
             }
         }
+    }
+
+    private boolean isSubjectMismatchIssue(String issue) {
+        String value = issue == null ? "" : issue.toLowerCase(Locale.ROOT);
+        return containsAnyIgnoreCase(value,
+            "unrelated", "wrong subject", "different subject", "another lesson",
+            "does not match", "mismatch", "irrelevant to the narration");
+    }
+
+    private void applySourceFaithfulFallback(SceneSegment target) {
+        applySourceFaithfulFallback(target, "");
+    }
+
+    private void applySourceFaithfulFallback(SceneSegment target, String lessonContext) {
+        SceneSegment fallback = createSourceFallbackSegment(target.getSentence(), lessonContext);
+        target.setTemplate(fallback.getTemplate());
+        target.setVisualType(fallback.getVisualType());
+        target.setHeading(fallback.getHeading());
+        target.setVisualSubject(fallback.getVisualSubject());
+        target.setAssetPath(fallback.getAssetPath());
+        target.setMediaType(fallback.getMediaType());
+        target.setMotionType(fallback.getMotionType());
+        target.setEstimatedNarrationSeconds(fallback.getEstimatedNarrationSeconds());
+        target.setRecommendedClipSeconds(fallback.getRecommendedClipSeconds());
+        target.setTimingNotes(fallback.getTimingNotes());
+        target.setVisualAnimation(fallback.getVisualAnimation());
+        target.setLocalAnimation(fallback.getLocalAnimation());
+        target.setLabels(fallback.getLabels());
+        target.setLabelPlacements(fallback.getLabelPlacements());
+        target.setLabelStyle(fallback.getLabelStyle());
+        target.setArrows(fallback.getArrows());
+        target.setHighlights(fallback.getHighlights());
+        target.setFormulaLines(fallback.getFormulaLines());
+        target.setExplainSteps(fallback.getExplainSteps());
+        target.setSteps(fallback.getSteps());
+        target.setColumns(fallback.getColumns());
+        target.setImageRecommendations(fallback.getImageRecommendations());
+        target.setMotion(fallback.getMotion());
+        target.setSubtitle(fallback.getSubtitle());
+        target.setSubtitleStyle(fallback.getSubtitleStyle());
+        target.setTool(fallback.getTool());
+        target.setAssetQualityNotes(fallback.getAssetQualityNotes());
+        target.setComfyPrompt(fallback.getComfyPrompt());
+        target.setLtxShot(null);
     }
 
     private JsonObject buildSmeReviewSchema(Set<String> expectedRowIds) {
@@ -986,6 +1283,8 @@ public class SceneStoryboardGenerator {
             || "comparison".equals(segment.getTemplate())
             || "split_screen".equals(segment.getTemplate())
             || "process".equals(segment.getTemplate())
+            || "circuit".equals(segment.getTemplate())
+            || "graph".equals(segment.getTemplate())
             || "diagram_overlay".equals(segment.getVisualType())
             || "process_steps".equals(segment.getVisualType())
             || "split_screen".equals(segment.getVisualType());
@@ -994,6 +1293,8 @@ public class SceneStoryboardGenerator {
     private boolean canRemainSpecializedWithoutLabels(SceneSegment segment) {
         return "title_card".equals(segment.getTemplate())
             || "video_broll".equals(segment.getTemplate())
+            || "circuit".equals(segment.getTemplate())
+            || "graph".equals(segment.getTemplate())
             || "formula".equals(segment.getTemplate());
     }
 
@@ -1062,6 +1363,7 @@ public class SceneStoryboardGenerator {
             List<String> physicalPlacements = new ArrayList<>();
             for (int index = 0; index < labels.size(); index++) {
                 if ("visible_physical_target".equals(targetKinds.get(index))
+                        && hasSpecificPointTarget(pointTargetNames.get(index))
                         && labelNamesPointTarget(labels.get(index), pointTargetNames.get(index))
                         && labelSupportedBySentence(labels.get(index), segment.getSentence())) {
                     physicalLabels.add(labels.get(index));
@@ -1102,7 +1404,9 @@ public class SceneStoryboardGenerator {
         if (!seen.equals(expectedRowIds)) {
             Set<String> missing = new LinkedHashSet<>(expectedRowIds);
             missing.removeAll(seen);
-            throw new IllegalStateException("Label-planning review omitted rows " + missing);
+            logger.warn("Label-planning review omitted rows {}; preserving successful rows and "
+                + "applying the conservative fallback only to omitted rows", missing);
+            clearUnsafeLabelPlans(scenes, missing);
         }
     }
 
@@ -1120,13 +1424,9 @@ public class SceneStoryboardGenerator {
             SceneSegment segment = findSegment(scenes,
                 Integer.parseInt(keyParts[0]), Integer.parseInt(keyParts[1]));
             if (segment == null) continue;
-            segment.setLabels(List.of());
-            segment.setLabelPlacements(List.of());
-            segment.setArrows(List.of());
-            segment.setHighlights(List.of());
-            if (isLabeledVisual(segment)) downgradeToUnlabeledVisual(segment);
+            repairIncompleteLabelContract(segment);
             segment.setCoverageNotes(appendNote(segment.getCoverageNotes(),
-                "Label safety review failed twice; omitted all unverified scientific arrows."));
+                "Label specialist was unavailable; retained only source-supported physical labels with pending targets."));
         }
     }
 
@@ -1135,6 +1435,13 @@ public class SceneStoryboardGenerator {
         Set<String> targetWords = concreteWords(pointTargetName);
         labelWords.retainAll(targetWords);
         return !labelWords.isEmpty();
+    }
+
+    private static boolean hasSpecificPointTarget(String pointTargetName) {
+        if (pointTargetName == null) return false;
+        String value = pointTargetName.trim().toLowerCase(Locale.ROOT);
+        return value.length() >= 4
+            && !Set.of("object", "part", "area", "thing", "detail", "structure").contains(value);
     }
 
     static boolean labelSupportedBySentence(String label, String sentence) {
@@ -1147,7 +1454,7 @@ public class SceneStoryboardGenerator {
     private static Set<String> concreteWords(String value) {
         Set<String> words = new LinkedHashSet<>();
         if (value == null) return words;
-        for (String token : value.toLowerCase(Locale.ROOT).split("[^a-z0-9]+")) {
+        for (String token : value.toLowerCase(Locale.ROOT).split("[^\\p{L}\\p{M}\\p{N}]+")) {
             String word = singularizeToken(token);
             if (word.length() >= 3 && !Set.of("the", "with", "from", "into", "part", "area").contains(word)) {
                 words.add(word);
@@ -1211,6 +1518,16 @@ public class SceneStoryboardGenerator {
             Scene scene = scenes.get(sceneIndex);
             if (scene.getSegments() == null) continue;
             for (SceneSegment segment : scene.getSegments()) {
+                if (hasRecordedSubjectMismatch(segment)) {
+                    String lessonContext = String.join(" - ", java.util.stream.Stream.of(
+                            storyboardTitle, scene.getSceneTitle())
+                        .filter(value -> value != null && !value.isBlank())
+                        .distinct()
+                        .toList());
+                    applySourceFaithfulFallback(segment, lessonContext);
+                    segment.setCoverageNotes("SME guard: replaced an unrelated visual plan with a source-faithful fallback.");
+                }
+                segment.setCoverageNotes(sanitizeCoverageNotes(segment));
                 sanitizeAssetPath(segment);
                 enforceStoryboardQuality(segment);
                 finalizeLabelConsistency(segment);
@@ -1220,7 +1537,11 @@ public class SceneStoryboardGenerator {
             for (int segmentIndex = 0; segmentIndex < scene.getSegments().size(); segmentIndex++) {
                 SceneSegment segment = scene.getSegments().get(segmentIndex);
                 boolean openingTitle = sceneIndex == 0 && segmentIndex == 0;
-                segment.setHeading(openingTitle ? storyboardTitle : buildHeading(segment.getSentence()));
+                if (openingTitle) {
+                    segment.setHeading(storyboardTitle);
+                } else if (!segment.isHeadingFromDirector() || segment.getHeading() == null || segment.getHeading().isBlank()) {
+                    segment.setHeading(buildHeading(segment.getSentence()));
+                }
                 segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
                 segment.setSubtitle(openingTitle ? "" : buildSubtitle(segment.getSentence()));
                 if (!openingTitle) {
@@ -1235,6 +1556,44 @@ public class SceneStoryboardGenerator {
                 enforceLabelDuration(segment);
             }
         }
+    }
+
+    /** Remove model-authored visual claims that cannot be grounded in this row's narration. */
+    private String sanitizeCoverageNotes(SceneSegment segment) {
+        if (segment == null || segment.getCoverageNotes() == null
+                || segment.getCoverageNotes().isBlank()) return "";
+        List<String> kept = new ArrayList<>();
+        for (String clause : segment.getCoverageNotes().split("(?<=[.!?\\u0964\\u06D4\\u061F])\\s+|\\s*;\\s*")) {
+            String clean = clause.trim();
+            if (clean.isBlank()) continue;
+            boolean visualClaim = clean.matches(
+                "(?i)^(?:the image|this image|the visual|this visual)\\s+(?:shows|covers|depicts|demonstrates).*$");
+            if (!visualClaim || hasMeaningfulOverlap(segment.getSentence(), clean)) {
+                kept.add(clean);
+            } else {
+                logger.warn("Removed unsupported storyboard coverage claim for sentence '{}': {}",
+                    segment.getSentence(), clean);
+            }
+        }
+        return String.join("; ", kept);
+    }
+
+    private boolean hasRecordedSubjectMismatch(SceneSegment segment) {
+        String notes = segment == null ? "" : segment.getCoverageNotes();
+        if (containsAnyIgnoreCase(notes,
+            "subject and narration are unrelated", "wrong subject", "different subject",
+            "another lesson", "visual irrelevant", "mismatch makes the visual irrelevant")) {
+            return true;
+        }
+        if (!containsAnyIgnoreCase(notes,
+                "restored the exact narration sentence while preserving the ordered visual plan")) {
+            return false;
+        }
+        String productionPlan = String.join(" ", java.util.stream.Stream.of(
+                segment.getVisualSubject(), segment.getVisualAnimation(), segment.getComfyPrompt())
+            .filter(value -> value != null && !value.isBlank())
+            .toList());
+        return !hasMeaningfulOverlap(segment.getSentence(), productionPlan);
     }
 
     private SceneSegment findSegment(List<Scene> scenes, int sceneNumber, int segmentNumber) {
@@ -1437,13 +1796,13 @@ public class SceneStoryboardGenerator {
         Set<String> ignored = Set.of(
             "about", "and", "chapter", "class", "for", "introduction", "lesson", "of",
             "overview", "part", "the", "to", "types", "video");
-        List<String> topicWords = Arrays.stream(filenameTopic.toLowerCase(Locale.ROOT).split("[^\\p{L}\\p{N}]+"))
+        List<String> topicWords = Arrays.stream(filenameTopic.toLowerCase(Locale.ROOT).split("[^\\p{L}\\p{M}\\p{N}]+"))
             .filter(word -> word.length() >= 4 && !ignored.contains(word))
             .distinct()
             .toList();
         if (topicWords.isEmpty()) return false;
         String normalizedTranscript = " " + transcript.toLowerCase(Locale.ROOT)
-            .replaceAll("[^\\p{L}\\p{N}]+", " ") + " ";
+            .replaceAll("[^\\p{L}\\p{M}\\p{N}]+", " ") + " ";
         long matches = topicWords.stream()
             .filter(word -> normalizedTranscript.contains(" " + word + " "))
             .count();
@@ -1660,6 +2019,9 @@ public class SceneStoryboardGenerator {
             - For every ltxShot, set clipDurationSeconds = 4.0 and clipCount = ceil(durationSeconds / 4.0).
             - Write shot.prompt for Wan style: cinematic natural motion, stable subject anatomy, smooth camera, no text artifacts.
             - Write ltxShot.prompt for LTX style: realistic educational video, subject-matter accurate, one continuous action split into 4-second continuation clips, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.
+            - LTX runs as IMAGE-TO-VIDEO: the approved still of the row is brought to life (1080p, about 4 seconds), so a moving shot must be a picture that already works as a still. Describe only motion that is possible inside that picture (swaying, drifting, flowing, a slow camera push-in); never new objects, new scenes or cuts.
+            - The program itself animates the closing shot (see MotionPlanner), so make the last row's visual a calm, attractive wide scene of the lesson subject with natural movement potential, never a diagram, a close-up of labelled parts or text. The title card keeps a plain themed background.
+            - Motion never replaces teaching stills: a row that needs labels, arrows, steps or formulas stays a still, card or diagram.
             - Labels should be short, screen-ready text. Return [] when labels are not useful.
             """.formatted(languageInstruction, buildAnimationModeInstruction(),
                 buildVideoProviderInstruction(), buildCurriculumEnrichmentInstruction(),
@@ -1839,7 +2201,9 @@ public class SceneStoryboardGenerator {
             .replace('\u201C', '"').replace('\u201D', '"')
             .replace('\u2013', '-').replace('\u2014', '-')
             .replace('\u2026', '.').replace('\u00A0', ' ')
-            .replace('\uFFFD', '\'');
+            // A lost apostrophe inside an English word ("don?t") is repaired; a replacement character anywhere else (inside a Tamil or
+            // Hindi word, for instance) is real corruption and must stay so the quality gate can reject it.
+            .replaceAll("(?<=[A-Za-z])\\uFFFD(?=[A-Za-z])", "'");
     }
 
     private List<String> correctKnownTerms(List<String> values) {
@@ -1861,7 +2225,7 @@ public class SceneStoryboardGenerator {
         }
         return "Sharp 1920x1080 realistic educational background directly representing " + title
             + ", subject-matter accurate, natural lighting, clear subject separation, empty central margins "
-            + "for the renderer title, no embedded text";
+            + "with a calm uncluttered central area, no embedded text";
     }
 
     private void tagSceneSource(Scene scene, boolean transcriptScene) {
@@ -1950,6 +2314,10 @@ public class SceneStoryboardGenerator {
     }
 
     private SceneSegment createSourceFallbackSegment(String sentence) {
+        return createSourceFallbackSegment(sentence, "");
+    }
+
+    private SceneSegment createSourceFallbackSegment(String sentence, String lessonContext) {
         SceneSegment segment = new SceneSegment();
         // This is a provisional label candidate. The subject-aware label repair pass
         // decides whether visible-object labels are educationally necessary. If not,
@@ -1960,8 +2328,13 @@ public class SceneStoryboardGenerator {
         segment.setTemplate(labeled ? "labeled_image" : "photo");
         segment.setVisualType(labeled ? "realistic_labeled_image" : "realistic_image");
         segment.setHeading(buildHeading(sentence));
-        segment.setVisualSubject("Sharp 1920x1080 frame whose exact subject and visible action are stated in this approved narration: "
-            + sentence + "; subject centered with clear separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.");
+        String context = lessonContext == null || lessonContext.isBlank()
+            ? sentence
+            : lessonContext;
+        segment.setVisualSubject("Sharp 1920x1080 realistic documentary image for " + context
+            + "; depict the concrete subject or visible action described by: " + sentence
+            + "; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, "
+            + "eye-level camera, neutral natural lighting, and no unrelated elements.");
         segment.setAssetPath("");
         segment.setMediaType(labeled ? "photo_with_labels" : "photo");
         segment.setMotionType("static_image");
@@ -2017,13 +2390,13 @@ public class SceneStoryboardGenerator {
         }
     }
 
-    private List<String> splitSentences(String text) {
+    List<String> splitSentences(String text) {
         List<String> sentences = new ArrayList<>();
         if (text == null || text.isBlank()) {
             return sentences;
         }
         String normalized = text.replaceAll("[\\r\\n]+", " ").replaceAll("\\s+", " ").trim();
-        String[] parts = normalized.split("(?<=[.!?।])\\s+");
+        String[] parts = normalized.split("(?<=[.!?\\u0964\\u06D4\\u061F])\\s+");
         for (String part : parts) {
             String sentence = part.trim();
             if (!sentence.isBlank()) {
@@ -2062,7 +2435,7 @@ public class SceneStoryboardGenerator {
             return "";
         }
         return text.toLowerCase(Locale.ROOT)
-            .replaceAll("[^\\p{L}\\p{N}]+", " ")
+            .replaceAll("[^\\p{L}\\p{M}\\p{N}]+", " ")
             .replaceAll("\\s+", " ")
             .trim();
     }
@@ -2228,6 +2601,9 @@ public class SceneStoryboardGenerator {
     }
 
     void enforceNarrationVisualAlignment(SceneSegment segment) {
+        // Circuits, graphs and formulas are drawn from structured rows/lines, not from an image prompt, so there is no prompt to check.
+        if ("circuit".equals(segment.getTemplate()) || "graph".equals(segment.getTemplate())
+                || "formula".equals(segment.getTemplate())) return;
         List<String> mechanisms = definedMechanisms(segment.getSentence());
         if (mechanisms.size() < 2) return;
         String production = String.join(" ", List.of(
@@ -2353,7 +2729,7 @@ public class SceneStoryboardGenerator {
         return StoryboardRules.extractFormulaLines(sentence);
     }
 
-    private void enforceFormulaRouting(SceneSegment segment) {
+    public void enforceFormulaRouting(SceneSegment segment) {
         if (!StoryboardRules.requiresFormulaRenderer(segment)) return;
         segment.setTemplate("formula");
         segment.setVisualType("process_steps");
@@ -2373,6 +2749,11 @@ public class SceneStoryboardGenerator {
         segment.setMotion("formula_reveal: line_by_line; transition_in: fade; transition_out: crossfade");
         segment.setAssetQualityNotes(appendNote(segment.getAssetQualityNotes(),
             "Deterministic formula route: Manim draws all equations, symbols, units, and derivation steps; the generated image is background only."));
+    }
+
+    /** Completes a director-written prompt with the production still contract required by the quality gate. */
+    public String finishImagePrompt(String prompt) {
+        return ensureNoTextPrompt(prompt);
     }
 
     private String ensureNoTextPrompt(String prompt) {
@@ -2556,7 +2937,7 @@ public class SceneStoryboardGenerator {
         return switch (value) {
             case "title_card", "realistic_image", "realistic_labeled_image",
                  "realistic_background_with_labels", "diagram_overlay", "process_steps",
-                 "split_screen", "short_motion_clip" -> value;
+                 "split_screen", "short_motion_clip", "graph", "circuit" -> value;
             case "split_screen_comparison", "comparison" -> "split_screen";
             case "formula/derivation" -> "process_steps";
             default -> inferVisualType(segment);
@@ -2565,8 +2946,8 @@ public class SceneStoryboardGenerator {
 
     private String inferTemplate(SceneSegment segment) {
         String text = joinForFactCheck(segment.getSentence(), segment.getVisualAnimation(), segment.getLocalAnimation());
-        if (containsAnyIgnoreCase(text, "=", "formula", "law", "equation", "lambda", "Λ")) {
-            return "formula";
+        if (StoryboardRules.requiresFormulaRenderer(segment)) {
+            return "formula";          // exact formula lines or a written equation only - never vocabulary such as "law"
         }
         if (containsAnyIgnoreCase(text, "versus", " vs ", "compare", "comparison", "different", "whereas")) {
             return "comparison";
@@ -2574,7 +2955,8 @@ public class SceneStoryboardGenerator {
         if ("wan_video".equals(segment.getMediaType()) || "wan_video".equals(segment.getMotionType())) {
             return "video_broll";
         }
-        if (containsAnyIgnoreCase(text, "step", "first", "second", "then", "process")) {
+        if (segment.getSteps() != null && segment.getSteps().size() >= 2
+                && containsAnyIgnoreCase(text, "step", "first", "second", "then", "process")) {
             return "process";
         }
         if (segment.getLabels() != null && !segment.getLabels().isEmpty()) {
@@ -2609,7 +2991,7 @@ public class SceneStoryboardGenerator {
         return cleanSubtitleText(sentence);
     }
 
-    private String cleanSubtitleText(String value) {
+    String cleanSubtitleText(String value) {
         if (value == null) {
             return null;
         }
@@ -2618,8 +3000,8 @@ public class SceneStoryboardGenerator {
             .replaceAll("(?m)^\\s*[-*+]\\s+", "")
             .replaceAll("\\*\\*([^*]+)\\*\\*", "$1")
             .replaceAll("__([^_]+)__", "$1")
-            .replaceAll("\\*([^*]+)\\*", "$1")
-            .replaceAll("_([^_]+)_", "$1")
+            .replaceAll("\\*(\\p{L}[^*]*?\\p{L}|\\p{L})\\*", "$1")       // emphasis only: "2 * 3" keeps its sign
+            .replaceAll("(?<![\\p{L}\\p{N}])_(\\p{L}[^_]*?\\p{L}|\\p{L})_(?![\\p{L}\\p{N}])", "$1")     // not snake_case or x_1
             .replaceAll("`([^`]+)`", "$1")
             .replaceAll("#{1,6}\\s*", "")
             .replaceAll("\\s+", " ")
@@ -2745,19 +3127,39 @@ public class SceneStoryboardGenerator {
             "Asset guard: ignored an unverified or missing asset path; generate or select the visual normally."));
     }
 
-    private String buildHeading(String sentence) {
+    private static final java.util.Set<String> DANGLING_WORDS = java.util.Set.of("a", "an", "the", "to", "of", "in", "on", "at", "for",
+        "by", "with", "from", "into", "and", "or", "but", "that", "which", "who", "is", "are", "was", "were", "as", "so", "if", "then");
+
+    String buildHeading(String sentence) {
         if (sentence == null || sentence.isBlank()) {
             return "Main Concept";
         }
-        String heading = sentence.replaceAll("[\\r\\n]+", " ").trim();
-        if (heading.length() > 54) {
-            heading = heading.substring(0, 54).trim();
-            int lastSpace = heading.lastIndexOf(' ');
-            if (lastSpace > 20) {
-                heading = heading.substring(0, lastSpace);
+        String heading = sentence.replaceAll("\\s+", " ").trim();
+        if (heading.length() <= 54) {
+            return heading.replaceAll("[\\s:;,\\-\\u2013\\u2014]+$", "");
+        }
+        // prefer a natural clause break inside the first 54 characters ("..., while ...", "...: ...")
+        String window = heading.substring(0, 54);
+        int clause = -1;
+        for (int i = window.length() - 1; i >= 18; i--) {
+            char c = window.charAt(i);
+            if (c == ',' || c == ';' || c == ':' || c == '—' || (c == '–' && i > 0 && window.charAt(i - 1) == ' ')) {
+                clause = i;
+                break;
             }
         }
-        return heading;
+        if (clause > 0) {
+            return heading.substring(0, clause).trim();
+        }
+        int lastSpace = window.lastIndexOf(' ');
+        String cut = lastSpace > 20 ? window.substring(0, lastSpace) : window.trim();
+        // never end on a dangling word ("... journey to")
+        String[] words = cut.split(" ");
+        int keep = words.length;
+        while (keep > 3 && DANGLING_WORDS.contains(words[keep - 1].toLowerCase(java.util.Locale.ROOT).replaceAll("[^\\p{L}]", ""))) {
+            keep--;
+        }
+        return String.join(" ", java.util.Arrays.copyOf(words, keep)).replaceAll("[\\s:;,\\-]+$", "");
     }
 
     private String buildVisualSubject(SceneSegment segment) {
@@ -2942,6 +3344,10 @@ public class SceneStoryboardGenerator {
         if (animationEnabled) {
             return;
         }
+        // Circuits and graphs are drawn deterministically from structured rows; "animation disabled" concerns generated animation only.
+        if ("circuit".equals(segment.getTemplate()) || "graph".equals(segment.getTemplate())) {
+            return;
+        }
 
         if ("diagram".equals(segment.getMediaType())
                 || "animation".equals(segment.getMediaType())
@@ -2986,14 +3392,36 @@ public class SceneStoryboardGenerator {
             + ". Avoid blank cards, slide boxes, synthetic sequence panels, and diagram-only layouts.";
     }
 
+    private static boolean isLatinText(String text) {
+        return text != null && !text.isBlank()
+            && com.video.transcribe.LanguageSupport.scriptShare(text, com.video.transcribe.LanguageSupport.byCode("en").orElseThrow()) >= 0.8;
+    }
+
+    /**
+     * What the image and video models are told to show. They only understand English, so for a lesson in another language the English
+     * planning fields are used (the planned video prompt, the visual-subject line, the animation note); the narration sentence is used
+     * only when it is itself Latin script. Never the native-script sentence.
+     */
+    String englishVisualBase(SceneSegment segment) {
+        String[] candidates = {
+            segment.getShot() != null ? segment.getShot().getPrompt() : null,
+            segment.getVisualAnimation(), segment.getVisualSubject(), segment.getSentence()};
+        for (String candidate : candidates) {
+            if (isLatinText(candidate)) {
+                return candidate.replaceAll("(?i),?\\s*designed for .*$", "").replaceAll("[\\s.]+$", "");
+            }
+        }
+        return "the subject described in this lesson";
+    }
+
     private String buildRealHdPrompt(SceneSegment segment) {
-        String base = segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence();
+        String base = englishVisualBase(segment);
         return "Realistic HD educational background image, " + base
             + ", strong subject placement, natural lighting, sharp detail, documentary style, accurate subject, shallow depth of field where useful, clear negative space for later overlay labels, no blank cards, no slide layout, no white empty panel, no text-heavy graphic panels, no embedded text, no generated labels, no generated arrows";
     }
 
     private String buildRealisticWanPrompt(SceneSegment segment) {
-        String base = segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence();
+        String base = englishVisualBase(segment);
         return "Realistic HD educational Wan video, " + base
             + ", natural motion, documentary style, sharp detail, accurate subject, seamless continuation, no blank cards, no slide layout";
     }
@@ -3012,7 +3440,7 @@ public class SceneStoryboardGenerator {
     }
 
     private String buildRealisticLtxPrompt(SceneSegment segment) {
-        String base = segment.getVisualAnimation() != null ? segment.getVisualAnimation() : segment.getSentence();
+        String base = englishVisualBase(segment);
         return "LTX video, realistic HD educational footage, " + base
             + ", split into 4-second continuation clips if needed, one continuous clear action from beginning to end, simple camera movement, stable subject, accurate educational detail, no abrupt final-frame freeze, no text artifacts, no slide layout";
     }
@@ -3301,7 +3729,7 @@ public class SceneStoryboardGenerator {
         return text.substring(0, Math.min(50, text.length())) + "...";
     }
 
-    private String titleFromBaseName(String baseName) {
+    String titleFromBaseName(String baseName) {
         if (baseName == null || baseName.isBlank()) {
             return "";
         }
@@ -3313,7 +3741,7 @@ public class SceneStoryboardGenerator {
             .replace('_', ' ')
             .replaceAll("\\s+", " ")
             .trim();
-        if (title.matches(".*[A-Za-z].*")) {
+        if (title.matches(".*\\p{L}.*")) {
             return title;
         }
         return "";
@@ -3334,6 +3762,41 @@ public class SceneStoryboardGenerator {
             }
         }
         return cleaned;
+    }
+
+    /**
+     * A lesson in another language must carry a title in that language: the title card is shown on screen. When the model's title (or
+     * the filename fallback) is not in the lesson's script, a short title is requested in the lesson's language and validated; if that
+     * also fails, the first sentence is shortened into a heading.
+     */
+    String lessonLanguageTitle(String currentTitle, String text) {
+        com.video.transcribe.LanguageSupport.Language language = com.video.transcribe.LanguageSupport.detect(text, languageHint);
+        if ("en".equals(language.code())) return currentTitle;
+        if (currentTitle != null && com.video.transcribe.LanguageSupport.scriptShare(currentTitle, language) >= 0.5) return currentTitle;
+        if (ollama != null) {
+            try {
+                String raw = ollama.generate("You write short lesson titles. Reply with the title only, no quotes, no explanation.",
+                    "Write a title of 3 to 8 words, in " + language.name() + " (" + language.nativeName() + "), for the lesson below. "
+                        + "Use words that appear in the text.\n\n" + text.substring(0, Math.min(700, text.length())));
+                String title = raw == null ? "" : raw.strip().split("\\R")[0].replaceAll("^[\"'\\u201C\\u2018\\s]+|[\"'\\u201D\\u2019\\s.:]+$", "");
+                if (!title.isBlank() && title.split("\\s+").length <= 10 && title.length() <= 70
+                        && com.video.transcribe.LanguageSupport.scriptShare(title, language) >= 0.7) {
+                    return title;
+                }
+            } catch (Exception e) {
+                logger.warn("Could not write a {} title: {}", language.name(), e.getMessage());
+            }
+        }
+        String firstSentence = text.strip().split("(?<=[.!?\\u0964\\u06D4])\\s+")[0];
+        String heading = buildHeading(firstSentence);
+        return com.video.transcribe.LanguageSupport.scriptShare(heading, language) >= 0.7 ? heading : currentTitle;
+    }
+
+    private TopicCheck inLessonLanguage(TopicCheck check, String text) {
+        String title = lessonLanguageTitle(check.safeStoryboardTitle(), text);
+        if (java.util.Objects.equals(title, check.safeStoryboardTitle())) return check;
+        return new TopicCheck(check.inferredTopic(), check.filenameTopic(), check.topicMatch(), check.confidence(), title, check.subject(),
+            check.academicLevel(), check.intendedLearners(), check.learningObjectives(), check.smeRole(), check.warning());
     }
 
     private record TopicCheck(
@@ -3361,28 +3824,7 @@ public class SceneStoryboardGenerator {
     }
 
     private String buildLanguageInstruction(String text) {
-        if (containsRange(text, '\u0B80', '\u0BFF')) {
-            return "The transcript is Tamil. Write every storyboard field in Tamil, except established scientific/technical terms may stay in English when the transcript uses them.";
-        }
-        if (containsRange(text, '\u0900', '\u097F')) {
-            return "The transcript uses Devanagari script. Write every storyboard field in that same language/script, except established technical terms may stay in English when the transcript uses them.";
-        }
-        if (containsRange(text, '\u0C00', '\u0C7F')) {
-            return "The transcript is Telugu. Write every storyboard field in Telugu, except established technical terms may stay in English when the transcript uses them.";
-        }
-        if (containsRange(text, '\u0D00', '\u0D7F')) {
-            return "The transcript is Malayalam. Write every storyboard field in Malayalam, except established technical terms may stay in English when the transcript uses them.";
-        }
-        if (containsRange(text, '\u0C80', '\u0CFF')) {
-            return "The transcript is Kannada. Write every storyboard field in Kannada, except established technical terms may stay in English when the transcript uses them.";
-        }
-        if (containsRange(text, '\u0980', '\u09FF')) {
-            return "The transcript is Bengali. Write every storyboard field in Bengali, except established technical terms may stay in English when the transcript uses them.";
-        }
-        if (containsRange(text, '\u0A80', '\u0AFF')) {
-            return "The transcript is Gujarati. Write every storyboard field in Gujarati, except established technical terms may stay in English when the transcript uses them.";
-        }
-        return "Default to English. Write every storyboard field in English unless the transcript itself is clearly in another language. Do not translate English transcript content into Tamil or any other language.";
+        return com.video.transcribe.LanguageSupport.writeInstruction(com.video.transcribe.LanguageSupport.detect(text, languageHint));
     }
 
     private boolean containsRange(String text, char start, char end) {

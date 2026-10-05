@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Papaya plant with male and female flowers on separate branches, close-up view showing distinct flower structures in natural sunlight.",
+      "image_requirement": "Viewer must see male and female flowers on separate papaya plants.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Cross-pollination Papaya is a unisexual, dioecious plant.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Papaya Plant Structure"
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "Two separate papaya plants, one with male flowers and the other with female flowers, in a natural setting with sunlight.",
+      "image_requirement": "Viewer must see male and female flowers on separate plants.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Male and female flowers grow on separate plants and typically undergo average cross-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Cross-Pollination in Papaya"
+    },
+    {
+      "shot_id": "3.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "Sunflower with both male and female flowers on the same plant, close-up showing stamens and pistils in natural light.",
+      "image_requirement": "Viewer must see bisexual flowers on a single sunflower plant.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "However, sunflowers have bisexual flowers.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Bisexual Flowers in Sunflowers"
+    }
+  ]
+}

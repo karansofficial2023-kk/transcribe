@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a green leaf with sunlight shining through it, showing the veins and surface texture. The camera is at eye level, slightly angled down to capture the leaf's structure. Natural light from the sun creates a soft glow on the leaf.",
+      "image_requirement": "Viewer must see the leaf receiving sunlight to understand the process of photosynthesis.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In the process of photosynthesis, plants obtain energy from sunlight.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a green leaf with visible stomata and oxygen bubbles rising from the surface, showing sunlight hitting the leaf. The camera is slightly angled down to capture both the leaf structure and the gas release.",
+      "image_requirement": "Viewer must see the oxygen bubbles to understand the production of oxygen during photosynthesis.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This process also produces oxygen, which is essential for life.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

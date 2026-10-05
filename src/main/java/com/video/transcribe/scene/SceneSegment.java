@@ -34,6 +34,8 @@ public class SceneSegment {
 	private String assetQualityNotes;
 	private String comfyPrompt;
 	private String coverageNotes;
+	private boolean headingFromDirector;
+	private boolean animate;
 	private Shot shot;
 	private Shot ltxShot;
 
@@ -299,5 +301,23 @@ public class SceneSegment {
 
 	public void setLtxShot(Shot ltxShot) {
 		this.ltxShot = ltxShot;
+	}
+
+	/** True when the heading is a topic title written by the visual director (kept as is); false for the sentence-prefix fallback. */
+	public boolean isHeadingFromDirector() {
+		return headingFromDirector;
+	}
+
+	public void setHeadingFromDirector(boolean headingFromDirector) {
+		this.headingFromDirector = headingFromDirector;
+	}
+
+	/** The approved picture of this shot should be brought to life (LTX image-to-video); set by {@link MotionPlanner}. */
+	public boolean isAnimate() {
+		return animate;
+	}
+
+	public void setAnimate(boolean animate) {
+		this.animate = animate;
 	}
 }

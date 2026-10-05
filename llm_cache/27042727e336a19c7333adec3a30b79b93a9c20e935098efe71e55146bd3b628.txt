@@ -1,0 +1,68 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Statins function by inhibiting an enzyme involved in cholesterol production in the liver, thereby reducing low-density lipoprotein (LDL) cholesterol levels in the bloodstream.",
+        "template": "video_broll",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Liver Enzyme Inhibition",
+        "visualSubject": "A detailed 1920x1083 realistic image of a human liver with labeled structures, including the enzyme HMG-CoA reductase, showing its location and function in cholesterol synthesis.",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 9,
+        "recommendedClipSeconds": 12,
+        "timingNotes": "Hold the shot for full narration duration, then transition to a labeled diagram of cholesterol synthesis.",
+        "visualAnimation": "A close-up of the liver with HMG-CoA reductase enzyme highlighted in red. The enzyme is shown as part of a metabolic pathway leading to cholesterol production.",
+        "localAnimation": "Highlight the enzyme with a red arrow and label it as 'HMG-CoA reductase'. Show a brief animation of the enzyme being inhibited by statins, represented by a small molecule blocking its active site.",
+        "labels": [
+            "HMG-CoA reductase",
+            "Cholesterol synthesis pathway"
+        ],
+        "labelPlacements": [
+            "HMG-CoA reductase | Enzyme in liver responsible for cholesterol production | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Cholesterol synthesis pathway | Metabolic steps leading to cholesterol formation | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Pharmacology and Medical Biology Specialist",
+        "arrows": [
+            "HMG-CoA reductase | Enzyme in liver responsible for cholesterol production | (0.3, 0.5)"
+        ],
+        "highlights": [
+            "Enzyme inhibition by statins"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Human liver with labeled enzyme and metabolic pathway",
+            "Detailed view of HMG-CoA reductase in cholesterol synthesis"
+        ],
+        "motion": "Zoom into the enzyme, then show a small statin molecule blocking its active site.",
+        "subtitle": "Statins inhibit an enzyme in the liver that produces cholesterol, lowering LDL levels in the blood.",
+        "subtitleStyle": "Pharmacology and Medical Biology Specialist",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use a reviewed diagram with labeled structures. Generated stills may be used if no approved asset is available.",
+        "comfyPrompt": "A realistic image of the human liver with HMG-CoA reductase enzyme highlighted, showing its role in cholesterol synthesis. Clean background, sharp details, educational style.",
+        "coverageNotes": "Visual covers the inhibition of HMG-CoA reductase and its role in reducing LDL cholesterol levels.",
+        "shot": {
+            "template": "video",
+            "heading": "Liver Enzyme Inhibition",
+            "prompt": "A close-up of a human liver with HMG-CoA reductase enzyme highlighted. The enzyme is shown as part of a metabolic pathway leading to cholesterol production. A small statin molecule blocks the active site, showing inhibition.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips: first showing the enzyme, second showing statin inhibition, third showing the effect on cholesterol production."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Liver Enzyme Inhibition",
+            "prompt": "A close-up of a human liver with HMG-CoA reductase enzyme highlighted. The enzyme is shown as part of a metabolic pathway leading to cholesterol production. A small statin molecule blocks the active site, showing inhibition.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips: first showing the enzyme, second showing statin inhibition, third showing the effect on cholesterol production."
+        }
+    }
+]

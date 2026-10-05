@@ -1,0 +1,58 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with small bubbles rising from its surface, showing oxygen gas being released into the air under natural daylight.",
+      "image_requirement": "Viewer must see oxygen bubbles rising from the leaf to understand the process.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "During this process, oxygen is released.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "1.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf's surface showing tiny pores called stomata, visible under natural light with detailed texture.",
+      "image_requirement": "Viewer must see the small pores on the leaf surface to understand the structure.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The small areas on the surface of the leaves are called stomata.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "1.7",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with glucose being transported through the plant, showing energy transfer and storage in natural light.",
+      "image_requirement": "Viewer must see glucose transport and storage to understand the process.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Glucose provides energy to the plant, with the remainder stored as starch.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

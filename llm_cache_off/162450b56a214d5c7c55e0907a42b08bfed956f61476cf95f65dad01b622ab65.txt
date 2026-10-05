@@ -1,0 +1,27 @@
+[
+  {
+    "rowId": "7.1",
+    "labels": ["Current", "Voltage", "Series Circuit", "Parallel Circuit"],
+    "labelPlacements": [
+      "Current | Current flow through all components | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Voltage | Voltage across each branch | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Series Circuit | Left side of split screen | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Parallel Circuit | Right side of split screen | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "Current - Flow through all components in a series circuit",
+      "Voltage - Voltage across each branch in a parallel circuit",
+      "Series Circuit - Left side of split screen with labeled current flow",
+      "Parallel Circuit - Right side of split screen with labeled voltage across branches"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Two distinct electrical circuits: one series with labeled current flow and components; one parallel with labeled voltage across branches",
+    "comfyPrompt": "A split-screen image showing a series circuit on the left with labeled current flow through all components and a parallel circuit on the right with labeled voltage across each branch. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

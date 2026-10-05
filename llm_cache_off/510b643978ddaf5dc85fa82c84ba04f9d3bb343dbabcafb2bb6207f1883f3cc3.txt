@@ -1,0 +1,7 @@
+Can you imagine your life without a mobile phone? We understand—this is unimaginable. Smartphones have become essential in our daily lives, and so has the powerful battery that keeps them running. But what exactly powers these batteries, and how are they made? Exploring this inside a phone could be quite fascinating. Most modern mobile devices rely on lithium-ion batteries. These use solid electrolytes that allow ions to travel from the negative electrode to the positive electrode during discharge and return when charging. Lithium-ion cells can be recharged many times and are categorized as secondary cells.
+
+The dry cell in your wall clock or your toys, which die after long use, are primary cells. Batteries using lead storage or nickel cadmium also run out of power after a long use but can be recharged again. However, the chemistry behind each of these is not as simple as it looks on the surface.
+
+When the cylinder and the graphite rod are connected by a conducting wire, zinc acts as an anode and the graphite rod, which is in contact with MnO₂, acts as a cathode. So, what kind of battery does your watch have? If it's not a smartwatch, then it probably has a button cell. Same as the one used in calculators. They are durable and long-lasting.
+
+With innovations in technology and increasing use of devices, different kinds of batteries are here to stay. Keep observing the devices around you and keep surprising your friends by telling them what you think about the battery they are using.

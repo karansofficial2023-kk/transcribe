@@ -1,0 +1,322 @@
+[
+  {
+    "segmentNumber": 1,
+    "sentence": "In plants such as Ixora, the anther and the stigma reach maturity at the same time.",
+    "template": "labeled_image",
+    "visualType": "realistic_labeled_image",
+    "heading": "Ixora Flower Anatomy",
+    "visualSubject": "A high-resolution image of an Ixora flower with visible anthers and stigmas, showing their position and structure in a natural setting.",
+    "assetPath": "",
+    "mediaType": "local diagram",
+    "motionType": "static_image",
+    "estimatedNarrationSeconds": 6,
+    "recommendedClipSeconds": 8,
+    "timingNotes": "Hold for full narration duration to allow detailed observation of the flower anatomy.",
+    "visualAnimation": "A close-up image of an Ixora flower with clear anthers and stigmas, showing their simultaneous maturity.",
+    "localAnimation": "Highlight the anther and stigma with arrows and labels to emphasize their synchronized development.",
+    "labels": [
+      "Anther",
+      "Stigma"
+    ],
+    "labelPlacements": [
+      "Anther | visible pollen-producing structure at the flower's base | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma | receptive surface for pollen reception | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelStyle": "Types of Pollination in Plants",
+    "arrows": [
+      "Anther to stigma | arrow pointing from anther to stigma showing pollen transfer potential"
+    ],
+    "highlights": [],
+    "formulaLines": [],
+    "explainSteps": [],
+    "steps": [],
+    "columns": [],
+    "imageRecommendations": [
+      "Ixora flower with clearly visible anthers and stigmas in natural light",
+      "Close-up of Ixora flower showing anther and stigma positions"
+    ],
+    "motion": "Static image with labeled structures for clarity.",
+    "subtitle": "Ixora flowers have mature anthers and stigmas at the same time.",
+    "subtitleStyle": "Plant Biology Educator",
+    "tool": "pillow_opencv",
+    "assetQualityNotes": "Use a reviewed diagram or generated still for accurate anatomy labeling.",
+    "comfyPrompt": "A high-resolution image of an Ixora flower with clear anthers and stigmas, natural lighting, sharp focus on structures, no text or labels, 1920x1080",
+    "coverageNotes": "Visualizes the simultaneous maturity of anther and stigma in Ixora as a key feature for self-pollination.",
+    "shot": {
+      "template": "video",
+      "heading": "Ixora Flower Anatomy",
+      "prompt": "A close-up image of an Ixora flower with clear anthers and stigmas, natural lighting, sharp focus on structures, no text or labels, 1920x1080",
+      "negativePrompt": "",
+      "durationSeconds": 8,
+      "clipDurationSeconds": 4.0,
+      "clipCount": 2,
+      "joinInstructions": "Join two 4-second clips to cover the full narration duration without abrupt freeze."
+    },
+    "ltxShot": {
+      "template": "video",
+      "heading": "Ixora Flower Anatomy",
+      "prompt": "A close-up image of an Ixora flower with clear anthers and stigmas, natural lighting, sharp focus on structures, no text or labels, 1920x1080",
+      "negativePrompt": "",
+      "durationSeconds": 8,
+      "clipDurationSeconds": 4.0,
+      "clipCount": 2,
+      "joinInstructions": "Join two 4-second clips to cover the full narration duration without abrupt freeze."
+    }
+  },
+  {
+    "segmentNumber": 2,
+    "sentence": "This simultaneous maturation of the anther and the stigma facilitates self-pollination, a process known as homogamy.",
+    "template": "labeled_image",
+    "visualType": "realistic_labeled_image",
+    "heading": "Homogamy in Ixora",
+    "visualSubject": "A diagram showing pollen transfer from anther to stigma within the same flower, labeled with 'homogamy'.",
+    "assetPath": "",
+    "mediaType": "local diagram",
+    "motionType": "static_image",
+    "estimatedNarrationSeconds": 6,
+    "recommendedClipSeconds": 8,
+    "timingNotes": "Hold for full narration duration to allow detailed observation of the pollen transfer process.",
+    "visualAnimation": "A labeled diagram showing pollen moving from anther to stigma within a flower, with 'homogamy' as the label.",
+    "localAnimation": "Highlight the pollen movement and label 'homogamy' clearly on the diagram.",
+    "labels": [
+      "Homogamy",
+      "Pollen Transfer"
+    ],
+    "labelPlacements": [
+      "Homogamy | process of self-pollination within a flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Pollen Transfer | movement of pollen from anther to stigma | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelStyle": "Types of Pollination in Plants",
+    "arrows": [
+      "Anther to stigma | arrow pointing from anther to stigma showing pollen transfer"
+    ],
+    "highlights": [],
+    "formulaLines": [],
+    "explainSteps": [],
+    "steps": [],
+    "columns": [],
+    "imageRecommendations": [
+      "Diagram of pollen transfer in a flower labeled 'homogamy'",
+      "Close-up of anther and stigma with pollen movement"
+    ],
+    "motion": "Static image with labeled structures for clarity.",
+    "subtitle": "Homogamy is self-pollination within the same flower.",
+    "subtitleStyle": "Plant Biology Educator",
+    "tool": "pillow_opencv",
+    "assetQualityNotes": "Use a reviewed diagram or generated still for accurate anatomy labeling.",
+    "comfyPrompt": "A labeled diagram showing pollen transfer from anther to stigma in a flower, with 'homogamy' as the label, 1920x1080",
+    "coverageNotes": "Visualizes homogamy as self-pollination within the same flower, emphasizing the process.",
+    "shot": {
+      "template": "video",
+      "heading": "Homogamy in Ixora",
+      "prompt": "A labeled diagram showing pollen transfer from anther to stigma in a flower, with 'homogamy' as the label, 1920x1080",
+      "negativePrompt": "",
+      "durationSeconds": 8,
+      "clipDurationSeconds": 4.0,
+      "clipCount": 2,
+      "joinInstructions": "Join two 4-second clips to cover the full narration duration without abrupt freeze."
+    },
+    "ltxShot": {
+      "template": "video",
+      "heading": "Homogamy in Ixora",
+      "prompt": "A labeled diagram showing pollen transfer from anther to stigma in a flower, with 'homogamy' as the label, 1920x1080",
+      "negativePrompt": "",
+      "durationSeconds": 8,
+      "clipDurationSeconds": 4.0,
+      "clipCount": 2,
+      "joinInstructions": "Join two 4-second clips to cover the full narration duration without abrupt freeze."
+    }
+  },
+  {
+    "segmentNumber": 3,
+    "sentence": "Some plants, like wood sorrel during late summer, produce small and unnoticeable flowers that lack fragrance.",
+    "template": "labeled_image",
+    "visualType": "realistic_labeled_image",
+    "heading": "Wood Sorrel Flowers",
+    "visualSubject": "A close-up image of a small, unnoticeable wood sorrel flower with no visible fragrance.",
+    "assetPath": "",
+    "mediaType": "local diagram",
+    "motionType": "static_image",
+    "estimatedNarrationSeconds": 6,
+    "recommendedClipSeconds": 8,
+    "timingNotes": "Hold for full narration duration to allow detailed observation of the flower's small size and lack of fragrance.",
+    "visualAnimation": "A close-up image of a small, unnoticeable wood sorrel flower with no visible fragrance.",
+    "localAnimation": "Highlight the small size and lack of fragrance with labels and arrows.",
+    "labels": [
+      "Small Flowers",
+      "Lack Fragrance"
+    ],
+    "labelPlacements": [
+      "Small Flowers | tiny, unnoticeable flowers on the plant | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Lack Fragrance | no visible scent or fragrance | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelStyle": "Types of Pollination in Plants",
+    "arrows": [
+      "Flower size | arrow pointing to small flower size"
+    ],
+    "highlights": [],
+    "formulaLines": [],
+    "explainSteps": [],
+    "steps": [],
+    "columns": [],
+    "imageRecommendations": [
+      "Close-up of a small wood sorrel flower with no visible fragrance",
+      "Image showing the tiny, unnoticeable flowers on a plant"
+    ],
+    "motion": "Static image with labeled structures for clarity.",
+    "subtitle": "Wood sorrel has small, unnoticeable flowers without fragrance.",
+    "subtitleStyle": "Plant Biology Educator",
+    "tool": "pillow_opencv",
+    "assetQualityNotes": "Use a reviewed diagram or generated still for accurate anatomy labeling.",
+    "comfyPrompt": "A close-up image of a small wood sorrel flower with no visible fragrance, natural lighting, sharp focus on structures, 1920x1080",
+    "coverageNotes": "Visualizes the small size and lack of fragrance in wood sorrel flowers as key features.",
+    "shot": {
+      "template": "video",
+      "heading": "Wood Sorrel Flowers",
+      "prompt": "A close-up image of a small wood sorrel flower with no visible fragrance, natural lighting, sharp focus on structures, 1920x1080",
+      "negativePrompt": "",
+      "durationSeconds": 8,
+      "clipDurationSeconds": 4.0,
+      "clipCount": 2,
+      "joinInstructions": "Join two 4-second clips to cover the full narration duration without abrupt freeze."
+    },
+    "ltxShot": {
+      "template": "video",
+      "heading": "Wood Sorrel Flowers",
+      "prompt": "A close-up image of a small wood sorrel flower with no visible fragrance, natural lighting, sharp focus on structures, 1920x1080",
+      "negativePrompt": "",
+      "durationSeconds": 8,
+      "clipDurationSeconds": 4.0,
+      "clipCount": 2,
+      "joinInstructions": "Join two 4-second clips to cover the full narration duration without abrupt freeze."
+    }
+  },
+  {
+    "segmentNumber": 4,
+    "sentence": "These bisexual flowers remain closed. The occurrence of self-pollination and fertilization within an unopened flower is called clistogamy.",
+    "template": "labeled_image",
+    "visualType": "realistic_labeled_image",
+    "heading": "Clistogamy in Flowers",
+    "visualSubject": "A diagram showing a closed, bisexual flower with pollen on the stigma and fertilization occurring within.",
+    "assetPath": "",
+    "mediaType": "local diagram",
+    "motionType": "static_image",
+    "estimatedNarrationSeconds": 6,
+    "recommendedClipSeconds": 8,
+    "timingNotes": "Hold for full narration duration to allow detailed observation of the closed flower and internal fertilization.",
+    "visualAnimation": "A labeled diagram showing a closed, bisexual flower with pollen on the stigma and fertilization occurring within.",
+    "localAnimation": "Highlight the closed flower and label 'clistogamy' clearly on the diagram.",
+    "labels": [
+      "Clistogamy",
+      "Fertilization"
+    ],
+    "labelPlacements": [
+      "Clistogamy | self-pollination and fertilization within an unopened flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Fertilization | process of pollen germination and zygote formation | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelStyle": "Types of Pollination in Plants",
+    "arrows": [
+      "Flower closure | arrow pointing to closed flower structure"
+    ],
+    "highlights": [],
+    "formulaLines": [],
+    "explainSteps": [],
+    "steps": [],
+    "columns": [],
+    "imageRecommendations": [
+      "Diagram of a closed, bisexual flower with pollen on the stigma and fertilization occurring within",
+      "Close-up of a closed flower showing internal fertilization"
+    ],
+    "motion": "Static image with labeled structures for clarity.",
+    "subtitle": "Clistogamy is self-pollination and fertilization in an unopened flower.",
+    "subtitleStyle": "Plant Biology Educator",
+    "tool": "pillow_opencv",
+    "assetQualityNotes": "Use a reviewed diagram or generated still for accurate anatomy labeling.",
+    "comfyPrompt": "A labeled diagram showing a closed, bisexual flower with pollen on the stigma and fertilization occurring within, 1920x1080",
+    "coverageNotes": "Visualizes clistogamy as self-pollination and fertilization in an unopened flower, emphasizing internal processes.",
+    "shot": {
+      "template": "video",
+      "heading": "Clistogamy in Flowers",
+      "prompt": "A labeled diagram showing a closed, bisexual flower with pollen on the stigma and fertilization occurring within, 1920x1080",
+      "negativePrompt": "",
+      "durationSeconds": 8,
+      "clipDurationSeconds": 4.0,
+      "clipCount": 2,
+      "joinInstructions": "Join two 4-second clips to cover the full narration duration without abrupt freeze."
+    },
+    "ltxShot": {
+      "template": "video",
+      "heading": "Clistogamy in Flowers",
+      "prompt": "A labeled diagram showing a closed, bisexual flower with pollen on the stigma and fertilization occurring within, 1920x1080",
+      "negativePrompt": "",
+      "durationSeconds": 8,
+      "clipDurationSeconds": 4.0,
+      "clipCount": 2,
+      "joinInstructions": "Join two 4-second clips to cover the full narration duration without abrupt freeze."
+    }
+  },
+  {
+    "segmentNumber": 5,
+    "sentence": "In such plants, the pollen grain is already distributed on the stigma of the same flower to enable self-pollination.",
+    "template": "labeled_image",
+    "visualType": "realistic_labeled_image",
+    "heading": "Pollen Distribution in Flowers",
+    "visualSubject": "A diagram showing pollen grains on the stigma of a closed flower, indicating self-pollination readiness.",
+    "assetPath": "",
+    "mediaType": "local diagram",
+    "motionType": "static_image",
+    "estimatedNarrationSeconds": 6,
+    "recommendedClipSeconds": 8,
+    "timingNotes": "Hold for full narration duration to allow detailed observation of pollen on the stigma and self-pollination readiness.",
+    "visualAnimation": "A labeled diagram showing pollen grains on the stigma of a closed flower, indicating self-pollination readiness.",
+    "localAnimation": "Highlight the pollen on the stigma and label 'self-pollination' clearly on the diagram.",
+    "labels": [
+      "Pollen Grains",
+      "Self-Pollination"
+    ],
+    "labelPlacements": [
+      "Pollen Grains | visible pollen grains on the stigma | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Self-Pollination | process of pollination within the same flower | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelStyle": "Types of Pollination in Plants",
+    "arrows": [
+      "Pollen on stigma | arrow pointing to pollen grains on the stigma"
+    ],
+    "highlights": [],
+    "formulaLines": [],
+    "explainSteps": [],
+    "steps": [],
+    "columns": [],
+    "imageRecommendations": [
+      "Diagram of a closed flower with pollen grains on the stigma indicating self-pollination readiness",
+      "Close-up of a flower showing pollen on the stigma"
+    ],
+    "motion": "Static image with labeled structures for clarity.",
+    "subtitle": "Pollen is already on the stigma to enable self-pollination in these flowers.",
+    "subtitleStyle": "Plant Biology Educator",
+    "tool": "pillow_opencv",
+    "assetQualityNotes": "Use a reviewed diagram or generated still for accurate anatomy labeling.",
+    "comfyPrompt": "A labeled diagram showing pollen grains on the stigma of a closed flower, indicating self-pollination readiness, 1920x1080",
+    "coverageNotes": "Visualizes the presence of pollen on the stigma as a key feature enabling self-pollination in these flowers.",
+    "shot": {
+      "template": "video",
+      "heading": "Pollen Distribution in Flowers",
+      "prompt": "A labeled diagram showing pollen grains on the stigma of a closed flower, indicating self-pollination readiness, 1920x1080",
+      "negativePrompt": "",
+      "durationSeconds": 8,
+      "clipDurationSeconds": 4.0,
+      "clipCount": 2,
+      "joinInstructions": "Join two 4-second clips to cover the full narration duration without abrupt freeze."
+    },
+    "ltxShot": {
+      "template": "video",
+      "heading": "Pollen Distribution in Flowers",
+      "prompt": "A labeled diagram showing pollen grains on the stigma of a closed flower, indicating self-pollination readiness, 1920x1080",
+      "negativePrompt": "",
+      "durationSeconds": 8,
+      "clipDurationSeconds": 4.0,
+      "clipCount": 2,
+      "joinInstructions": "Join two 4-second clips to cover the full narration duration without abrupt freeze."
+    }
+  }
+]

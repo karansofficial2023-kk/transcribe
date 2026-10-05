@@ -1,0 +1,64 @@
+{
+  "shots": [
+    {
+      "shot_id": "7.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A laboratory setup with a galvanic cell, anode made of silver, cathode made of copper, and a solution of silver nitrate in a beaker. The camera is at medium distance, slightly angled down to show the apparatus. Natural lighting from a window illuminates the workspace with warm tones.",
+      "image_requirement": "Viewer must see the anode, cathode, and electrolyte solution in the setup.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Now let's explore some more about the variables involved in this process.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Variables in Electroplating"
+    },
+    {
+      "shot_id": "7.2",
+      "visual_type": "graph",
+      "image_prompt": "A photorealistic graph with a line showing the mass of silver deposited on the y-axis and time on the x-axis. The graph is displayed on a whiteboard in a lab setting, illuminated by natural light from a window.",
+      "image_requirement": "Viewer must see the plotted line representing the relationship between mass and time.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Observe the graph showing the relationship between the mass of silver deposited and the time for which current was passed through the circuit.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [
+        "Mass: 0.5 g",
+        "Time: 10 minutes"
+      ],
+      "graph_note": "Mass of silver deposited in grams over time in minutes",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Mass vs Time in Electroplating"
+    },
+    {
+      "shot_id": "7.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a silver cathode with a thin layer of deposited silver, illuminated by natural light from a window. The camera is at a medium distance, slightly angled to show the surface texture of the cathode. Warm tones highlight the metallic sheen.",
+      "image_requirement": "Viewer must see the silver cathode with visible deposits over time.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "As the current is turned on, you can see that the mass of silver deposited increases over time.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Silver Deposition Over Time"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "shots": [
+    {
+      "shot_id": "7.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "Bee orchid with yellow and black striped petals mimicking a female bee, facing the camera in full bloom, medium distance, slightly angled up to show detail, natural daylight, warm tones.",
+      "image_requirement": "Viewer must see the bee orchid's petal coloration resembling a female bee.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "A flower known as the bee orchid resembles a female bee.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Bee Orchid Mimicry"
+    },
+    {
+      "shot_id": "7.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "Male bee hovering near bee orchid, wings in motion, medium distance, slightly angled to show interaction, natural daylight, warm tones.",
+      "image_requirement": "Viewer must see the male bee interacting with the flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This flower attracts male bees seeking a mate.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Pollinator Attraction"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి తమకు ఆహారాన్ని సృష్టించుకునే ప్రక్రియ.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు",
+        "visualSubject": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి తమకు ఆహారాన్ని సృష్టించుకునే ప్రక్రియ",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Title card with full narration, no cutaways or loops.",
+        "visualAnimation": "A title card showing the concept of photosynthesis in green plants using a clean educational design with bold text and minimal background.",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean title card with the text 'కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి తమకు ఆహారాన్ని సృష్టించుకునే ప్రక్రియ' in bold, sans-serif font on a light background.",
+            "A title card with the same text but with a dark border and white text for high contrast."
+        ],
+        "motion": "Static title card with no camera movement.",
+        "subtitle": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి తమకు ఆహారాన్ని సృష్టించుకునే ప్రక్రియ",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background, no text or labels.",
+        "comfyPrompt": "A title card showing the concept of photosynthesis in green plants using a clean educational design with bold text and minimal background. Text: 'కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి తమకు ఆహారాన్ని సృష్టించుకునే ప్రక్రియ', sans-serif font, light background, high contrast.",
+        "coverageNotes": "Introduces the concept of photosynthesis in green plants using a title card for clarity and focus.",
+        "shot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు",
+            "prompt": "A cinematic title card showing the concept of photosynthesis in green plants using a clean educational design with bold text and minimal background. Text: 'కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి తమకు ఆహారాన్ని సృష్టించుకునే ప్రక్రియ', sans-serif font, light background, high contrast.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form the full title card with smooth transition."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు",
+            "prompt": "A cinematic title card showing the concept of photosynthesis in green plants using a clean educational design with bold text and minimal background. Text: 'కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి తమకు ఆహారాన్ని సృష్టించుకునే ప్రక్రియ', sans-serif font, light background, high contrast.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form the full title card with smooth transition."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "ఈ ప్రక్రియలో, మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ ను మరియు నేల నుండి నీటిని గ్రహిస్తాయి.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం",
+        "visualSubject": "A realistic image of green plants absorbing carbon dioxide from the air and water from the soil, with labeled structures such as leaves, roots, and stomata.",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Static image with labels for clarity. No motion or cutaways.",
+        "visualAnimation": "A realistic image of green plants absorbing carbon dioxide from the air and water from the soil, showing leaves, roots, and stomata.",
+        "localAnimation": "Label each structure: leaves, roots, stomata, with arrows pointing to them and brief explanations in subtitles.",
+        "labels": [
+            "కార్బన్ డయాక్సైడ్",
+            "నీటి గ్రహణం",
+            "తలుపులు"
+        ],
+        "labelPlacements": [
+            "కార్బన్ డయాక్సైడ్ | వాయువు నుండి గ్రహించబడిన కార్బన్ డయాక్సైడ్ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీటి గ్రహణం | మొక్కలు నేల నుండి నీటిని గ్రహిస్తాయి | COORDINATES_PENDING_APPROVED_IMAGE",
+            "తలుపులు | వాయువులో కార్బన్ డయాక్సైడ్ గ్రహించడానికి ఉపయోగించే విస్తారం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [
+            "కార్బన్ డయాక్సైడ్ | వాయువు నుండి గ్రహించబడిన కార్బన్ డయాక్సైడ్ | (0.3, 0.7)"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A realistic image of green plants absorbing carbon dioxide from the air and water from the soil, with labeled structures such as leaves, roots, and stomata.",
+            "A detailed diagram showing a plant's root system taking in water and leaves absorbing carbon dioxide through stomata."
+        ],
+        "motion": "Static image with labels and arrows for clarity.",
+        "subtitle": "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ మరియు నేల నుండి నీటిని గ్రహిస్తాయి",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with labeled structures and arrows for educational clarity.",
+        "comfyPrompt": "A realistic image of green plants absorbing carbon dioxide from the air and water from the soil, showing leaves, roots, and stomata. Clean background, no text or labels.",
+        "coverageNotes": "Explains how plants absorb carbon dioxide from the air and water from the soil through their structures like leaves and roots.",
+        "shot": {
+            "template": "video",
+            "heading": "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం",
+            "prompt": "A realistic image of green plants absorbing carbon dioxide from the air and water from the soil, showing leaves, roots, and stomata. Clean background, no text or labels.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form the full image with smooth transition."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం",
+            "prompt": "A realistic image of green plants absorbing carbon dioxide from the air and water from the soil, showing leaves, roots, and stomata. Clean background, no text or labels.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form the full image with smooth transition."
+        }
+    }
+]

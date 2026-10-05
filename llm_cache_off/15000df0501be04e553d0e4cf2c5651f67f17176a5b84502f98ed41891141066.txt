@@ -1,0 +1,50 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "We are asked to find the value of $ x $.",
+      "formula_lines": [
+        "S = x + 1/x"
+      ],
+      "explain_steps": [
+        "Sum S is defined as x plus reciprocal of x."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Sum of a Number and Its Reciprocal"
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Let the given number be $ x $.",
+      "formula_lines": [
+        "x > 0"
+      ],
+      "explain_steps": [
+        "Assume x is a positive real number."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Given Number as x"
+    }
+  ]
+}

@@ -78,7 +78,7 @@ class StoryboardDocxExporterTest {
             assertTrue(placementRow.getCell(1).getText().contains("target=(0.350,0.420)"));
             assertFalse(placementRow.getCell(1).getText().contains("COORDINATES_PENDING"));
             assertTrue(styleRow.getCell(1).getText().contains("28px_minimum_font"));
-            assertEquals(17, table.getRows().size());
+            assertEquals(19, table.getRows().size());   // 17 original fields + heading + animate
         }
     }
 }

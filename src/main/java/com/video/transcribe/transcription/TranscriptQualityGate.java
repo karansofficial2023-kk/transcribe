@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import com.video.transcribe.model.TranscriptData;
 
@@ -21,6 +22,22 @@ public final class TranscriptQualityGate {
             .replaceAll("[\\[\\](){}.,!?।]+", " ")
             .replaceAll("\\s+", " ").trim();
         if (List.of("music", "applause", "noise", "silence").contains(markerCheck)) return false;
+
+        List<String> lexicalTokens = List.of(text.toLowerCase(Locale.ROOT)
+            .replaceAll("[^\\p{L}\\p{M}\\p{N}]+", " ")
+            .trim()
+            .split("\\s+"));
+        Set<String> meaningful = new java.util.HashSet<>();
+        int meaningfulCount = 0;
+        for (String token : lexicalTokens) {
+            if (token.length() >= 3 && !token.chars().allMatch(Character::isDigit)) {
+                meaningful.add(token);
+                meaningfulCount++;
+            }
+        }
+        if (meaningful.size() <= 1 && meaningfulCount <= 3 && lexicalTokens.size() <= 12) {
+            return false;
+        }
 
         List<TranscriptData.Segment> segments = transcript.getSegments();
         if (segments == null || segments.isEmpty()) {
@@ -48,13 +65,13 @@ public final class TranscriptQualityGate {
 
         if (wordCount < 4) return false;
         double duration = Math.max(1.0, transcript.getDuration());
-        double averageProbability = probabilityCount == 0 ? 1.0 : probabilityTotal / probabilityCount;
+        double averageProbability = probabilityCount == 0 ? 0.0 : probabilityTotal / probabilityCount;
         double wordsPerSecond = wordCount / duration;
         double activeSpeechRatio = speechSeconds / duration;
         int dominantCount = repeatedSegments.values().stream().mapToInt(Integer::intValue).max().orElse(0);
         double dominantRatio = segments.isEmpty() ? 0.0 : dominantCount / (double) segments.size();
-        boolean repetitive = segments.size() >= 4
-            && repeatedSegments.size() <= Math.max(2, segments.size() / 4)
+        boolean repetitive = segments.size() >= 2
+            && repeatedSegments.size() <= Math.max(1, segments.size() / 4)
             && dominantRatio >= 0.60;
 
         if (repetitive && averageProbability < 0.45) return false;
@@ -66,7 +83,7 @@ public final class TranscriptQualityGate {
     private static String normalize(String value) {
         if (value == null) return "";
         return value.toLowerCase(Locale.ROOT)
-            .replaceAll("[^\\p{L}\\p{N}]+", " ")
+            .replaceAll("[^\\p{L}\\p{M}\\p{N}]+", " ")
             .replaceAll("\\s+", " ").trim();
     }
 }

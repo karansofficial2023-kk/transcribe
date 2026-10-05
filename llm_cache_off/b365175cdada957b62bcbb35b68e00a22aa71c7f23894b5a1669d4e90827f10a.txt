@@ -1,0 +1,58 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.11",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with sunlight passing through it, showing chloroplasts inside the leaf cells, green in color, natural lighting from above, photorealistic.",
+      "image_requirement": "Viewer must see the leaf and chloroplasts to understand photosynthesis.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "These absorb sunlight, combine carbon dioxide with water to produce glucose and oxygen.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "1.12",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a plant leaf with sunlight hitting it, showing the structure of the leaf and chloroplasts inside, green in color, natural lighting from above, photorealistic.",
+      "image_requirement": "Viewer must see the leaf structure and chloroplasts to understand photosynthesis.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "When learning about photosynthesis, we can also learn about the importance of plants and the oxygen produced.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "1.13",
+      "visual_type": "realistic_image",
+      "image_prompt": "A wide shot of a forest with sunlight filtering through the trees, green leaves and blue sky in the background, natural lighting, photorealistic.",
+      "image_requirement": "Viewer must see the forest and sunlight to understand how Earth supports life.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Photosynthesis is the only way for organisms to receive oxygen, allowing Earth to support life.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

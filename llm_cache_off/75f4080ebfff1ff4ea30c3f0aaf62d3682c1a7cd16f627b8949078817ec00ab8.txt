@@ -1,0 +1,47 @@
+[
+  {
+    "rowId": "7.2",
+    "approved": true,
+    "issue": "",
+    "template": "labeled_image",
+    "visualType": "realistic_labeled_image",
+    "heading": "కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది",
+    "visualSubject": "కిరణజన్య సంయోగక్రియ లేకుండా, జీవితం అసాధ్యమైనది",
+    "mediaType": "photo_with_labels",
+    "motionType": "static_image",
+    "tool": "pillow_opencv",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. కిరణజన్య సంయోగక్రియ లేకుండా, జీవితం అసాధ్యమైనది. కెమేరా వీక్షణ సుదూర అంగీకరణలో ప్రక్రియ చిత్రం ఉండాలి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. కిరణజన్య సంయోగక్రియ లేకుండా జీవితం అసాధ్యమైనది వివరణ కోసం చిత్రం ఉపయోగించబడింది",
+    "formulaLines": []
+  },
+  {
+    "rowId": "8.1",
+    "approved": true,
+    "issue": "",
+    "template": "labeled_image",
+    "visualType": "realistic_labeled_image",
+    "heading": "ప్రకృతిలో జీవజాలం అభివృద్ధి",
+    "visualSubject": "Source-faithful visible subject and action: దీని కారణంగా ప్రకృతిలో ఉన్న జీవజాలం అభివృద్ధి చెందుతుంది. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x10,80 frame.",
+    "mediaType": "photo_with_labels",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A realistic image of a forest ecosystem with visible plants, leaves, roots, and water sources. Include sunlight, carbon dioxide, oxygen, and glucose as labeled elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visual covers the concept of ecosystem development due to natural processes Repeated-title guard: render this concept as a content visual, not another presentation title card. Label safety review: abstract or non-pointable concepts remain in narration/subtitles; no scientific arrows are drawn to them.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "8.2",
+    "approved": false,
+    "issue": "మ్మ్ మ్మ్ మ్మ్ అనేది వివరణ కోసం ఉపయోగించబడిన నాటకీయ విలువ, ఈ విషయం బాయాలాజీ శాస్త్రవేత్త పరిధిలోకి రాదు. ఈ విషయం కొన్ని నిర్దిష్ట పరిస్థితులలో జరుగుతుంది అనే వాక్యం నుండి తీసుకోబడింది. కాబట్టి, ఈ విలువను తొలగించాలి.",
+    "template": "video_broll",
+    "visualType": "short_motion_clip",
+    "heading": "జీవజాలం అభివృద్ధి చెందడం",
+    "visualSubject": "జీవజాలం అభివృద్ధి చెందడం కారణంగా ప్రకృతిలో ఉన్న జీవజాలం",
+    "mediaType": "wan_video",
+    "motionType": "wan_video",
+    "tool": "ltx_video",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visual covers the concept of ecosystem development due to natural processes Generated-video guard: do not draw exact labels/arrows on this moving shot; use subtitles only or cut to a separate labeled still/diagram.",
+    "formulaLines": []
+  }
+]

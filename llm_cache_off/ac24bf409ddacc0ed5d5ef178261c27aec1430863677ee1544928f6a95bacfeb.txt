@@ -1,0 +1,277 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Now, considering the additional information provided: the potential drop across battery 2 is zero.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Understanding Potential Drop Condition",
+        "visualSubject": "Title card with text 'Understanding Potential Drop Condition' in sans-serif font, dark text on light background, thin colored border, and centered alignment",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration to introduce the topic clearly",
+        "visualAnimation": "Title card with centered text in sans-serif font, dark text on light background, thin colored border, and no additional elements",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Title card with centered text in sans-serif font, dark text on light background, thin colored border",
+            "Educational title card for physics lesson on potential drop condition"
+        ],
+        "motion": "Static title card",
+        "subtitle": "Understanding Potential Drop Condition",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Generated still with clean background, no text or labels",
+        "comfyPrompt": "Title card with centered text 'Understanding Potential Drop Condition' in sans-serif font, dark text on light background, thin colored border, no additional elements",
+        "coverageNotes": "Introduces the topic of potential drop condition and sets context for the lesson",
+        "shot": {
+            "template": "video",
+            "heading": "Understanding Potential Drop Condition",
+            "prompt": "Title card with centered text 'Understanding Potential Drop Condition' in sans-serif font, dark text on light background, thin colored border, no additional elements",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second title card"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Understanding Potential Drop Condition",
+            "prompt": "Title card with centered text 'Understanding Potential Drop Condition' in sans-serif font, dark text on light background, thin colored border, no additional elements",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second title card"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "From this, we can infer that the EMF across battery 2 should be equal to the current in the circuit times its internal resistance, because only then do we know that V is always equal to E - IR, where R represents the internal resistance of the battery.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "EMF and Internal Resistance Relationship",
+        "visualSubject": "Realistic background with a circuit diagram showing two batteries, current flow, and labeled internal resistance and EMF",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 8,
+        "recommendedClipSeconds": 9,
+        "timingNotes": "Use local animation to reveal the formula step-by-step with labels and arrows",
+        "visualAnimation": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and a derivation of V = E - IR",
+        "localAnimation": "Step-by-step reveal of the formula V = E - IR using arrows and labels to highlight each component",
+        "labels": [
+            "EMF (E)",
+            "Internal Resistance (R)",
+            "Current (I)",
+            "Voltage Drop (V)"
+        ],
+        "labelPlacements": [
+            "EMF | EMF of battery 2 | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Internal Resistance | Internal resistance of battery 2 | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Current | Current in the circuit | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Voltage Drop | Voltage drop across battery 2 | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [
+            "Arrow from EMF to Voltage Drop showing the relationship V = E - IR"
+        ],
+        "highlights": [],
+        "formulaLines": ["V = E - IR"],
+        "explainSteps": [
+            "Step 1: Identify the EMF of battery 2",
+            "Step 2: Determine the internal resistance of battery 2",
+            "Step 3: Calculate the current in the circuit",
+            "Step 4: Apply the formula V = E - IR"
+        ],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Circuit diagram with two batteries, current flow, and labeled internal resistance and EMF",
+            "Physics diagram showing the relationship between EMF, internal resistance, and voltage drop in a circuit"
+        ],
+        "motion": "Step-by-step reveal of formula V = E - IR using arrows and labels",
+        "subtitle": "EMF equals current times internal resistance",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "manim",
+        "assetQualityNotes": "Manim animation with precise labels and formulas for educational clarity",
+        "comfyPrompt": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and a derivation of V = E - IR on clean background",
+        "coverageNotes": "Explains the relationship between EMF, internal resistance, and voltage drop using the formula V = E - IR",
+        "shot": {
+            "template": "video",
+            "heading": "EMF and Internal Resistance Relationship",
+            "prompt": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and a derivation of V = E - IR on clean background",
+            "negativePrompt": "",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips to form a 9-second animation of the formula derivation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "EMF and Internal Resistance Relationship",
+            "prompt": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and a derivation of V = E - IR on clean background",
+            "negativePrompt": "",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips to form a 9-second animation of the formula derivation"
+        }
+    },
+    {
+        "segmentNumber": 3,
+        "sentence": "Using this relationship, if the potential difference across battery 2 is zero, then we can directly apply this equation.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Applying the Formula to Zero Potential Drop",
+        "visualSubject": "Realistic background with a circuit diagram showing two batteries and labeled internal resistance and EMF, with potential drop across battery 2 set to zero",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 7,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Use local animation to show the application of the formula with a highlighted zero potential drop",
+        "visualAnimation": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and potential drop across battery 2 set to zero",
+        "localAnimation": "Highlight the zero potential drop across battery 2 and apply the formula V = E - IR",
+        "labels": [
+            "EMF (E)",
+            "Internal Resistance (R)",
+            "Current (I)",
+            "Voltage Drop (V)"
+        ],
+        "labelPlacements": [
+            "EMF | EMF of battery 2 | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Internal Resistance | Internal resistance of battery 2 | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Current | Current in the circuit | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Voltage Drop | Voltage drop across battery 2 | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [
+            "Arrow from EMF to Voltage Drop showing the relationship V = E - IR"
+        ],
+        "highlights": [],
+        "formulaLines": ["V = E - IR"],
+        "explainSteps": [
+            "Step 1: Identify the EMF of battery 2",
+            "Step 2: Determine the internal resistance of battery 2",
+            "Step 3: Calculate the current in the circuit",
+            "Step 4: Apply the formula V = E - IR"
+        ],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Circuit diagram with two batteries, current flow, and labeled internal resistance and EMF, with potential drop across battery 2 set to zero",
+            "Physics diagram showing the application of the formula V = E - IR when potential drop is zero"
+        ],
+        "motion": "Highlight the zero potential drop across battery 2 and apply the formula V = E - IR",
+        "subtitle": "Applying the formula when potential drop is zero",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "manim",
+        "assetQualityNotes": "Manim animation with precise labels and formulas for educational clarity",
+        "comfyPrompt": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and potential drop across battery 2 set to zero on clean background",
+        "coverageNotes": "Demonstrates the application of the formula V = E - IR when the potential difference across battery 2 is zero",
+        "shot": {
+            "template": "video",
+            "heading": "Applying the Formula to Zero Potential Drop",
+            "prompt": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and potential drop across battery 2 set to zero on clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form an 8-second animation of the formula application"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Applying the Formula to Zero Potential Drop",
+            "prompt": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and potential drop across battery 2 set to zero on clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form an 8-second animation of the formula application"
+        }
+    },
+    {
+        "segmentNumber": 4,
+        "sentence": "In such a case, it implies that the EMF of battery 2 equals the current times its internal resistance.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Final Relationship Between EMF and Internal Resistance",
+        "visualSubject": "Realistic background with a circuit diagram showing two batteries, current flow, and labeled internal resistance and EMF, with the final relationship V = E - IR highlighted",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 7,
+        "timingNotes": "Use local animation to highlight the final relationship between EMF and internal resistance",
+        "visualAnimation": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and the final relationship V = E - IR highlighted",
+        "localAnimation": "Highlight the final equation V = E - IR with a clear visual indicator",
+        "labels": [
+            "EMF (E)",
+            "Internal Resistance (R)",
+            "Current (I)",
+            "Voltage Drop (V)"
+        ],
+        "labelPlacements": [
+            "EMF | EMF of battery 2 | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Internal Resistance | Internal resistance of battery 2 | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Current | Current in the circuit | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Voltage Drop | Voltage drop across battery 2 | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [
+            "Arrow from EMF to Voltage Drop showing the relationship V = E - IR"
+        ],
+        "highlights": [],
+        "formulaLines": ["V = E - IR"],
+        "explainSteps": [
+            "Step 1: Identify the EMF of battery 2",
+            "Step 2: Determine the internal resistance of battery 2",
+            "Step 3: Calculate the current in the circuit",
+            "Step 4: Apply the formula V = E - IR"
+        ],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Circuit diagram with two batteries, current flow, and labeled internal resistance and EMF, with the final relationship V = E - IR highlighted",
+            "Physics diagram showing the final relationship between EMF, internal resistance, and voltage drop in a circuit"
+        ],
+        "motion": "Highlight the final equation V = E - IR with a clear visual indicator",
+        "subtitle": "Final relationship: EMF equals current times internal resistance",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "manim",
+        "assetQualityNotes": "Manim animation with precise labels and formulas for educational clarity",
+        "comfyPrompt": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and the final relationship V = E - IR on clean background",
+        "coverageNotes": "Concludes the lesson by highlighting the final relationship between EMF, internal resistance, and voltage drop in a circuit",
+        "shot": {
+            "template": "video",
+            "heading": "Final Relationship Between EMF and Internal Resistance",
+            "prompt": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and the final relationship V = E - IR on clean background",
+            "negativePrompt": "",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 7-second animation of the final relationship"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Final Relationship Between EMF and Internal Resistance",
+            "prompt": "Circuit diagram showing two batteries, current flow, internal resistance labeled as R, EMF labeled as E, and the final relationship V = E - IR on clean background",
+            "negativePrompt": "",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 7-second animation of the final relationship"
+        }
+    }
+]

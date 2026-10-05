@@ -1,0 +1,78 @@
+{
+  "shots": [
+    {
+      "shot_id": "7.4",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see a battery, silver ions in solution and an electrode.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Double battery current",
+        "Observe time for silver deposition"
+      ],
+      "panels": [],
+      "narration_en": "Let's now double the current produced by the battery and observe its effect on the time required to deposit the same amount of silver.",
+      "formula_lines": [],
+      "explain_steps": [
+        "Increase battery current to twice original value",
+        "Measure time needed for same silver mass"
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Doubling Battery Current in Electroplating"
+    },
+    {
+      "shot_id": "7.5",
+      "visual_type": "graph",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see a graph comparing time with current.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "As shown in the graph, it takes only half the time to achieve this.",
+      "formula_lines": [],
+      "explain_steps": [
+        "Time is inversely proportional to current"
+      ],
+      "graph_rows": [
+        "Current: 2 A",
+        "Time: 10 min"
+      ],
+      "graph_note": "Time in minutes for silver deposition",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Effect of Current on Electroplating Time"
+    },
+    {
+      "shot_id": "7.6",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see different metals in solution and electrodes.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Compare deposition times for different metals",
+        "Determine if metal type affects time"
+      ],
+      "panels": [],
+      "narration_en": "Next, does every metal take the same amount of time to deposit a specific mass of solid, or does it depend on the type of metal?",
+      "formula_lines": [],
+      "explain_steps": [
+        "Test different metals in electroplating",
+        "Compare time for same mass deposition"
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Metal Type and Electroplating Time"
+    }
+  ]
+}

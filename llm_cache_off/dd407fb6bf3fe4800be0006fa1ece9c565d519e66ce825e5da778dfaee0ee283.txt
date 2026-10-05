@@ -1,0 +1,130 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "అయినప్పటికీ, ఈ ప్రక్రియ కొన్ని నిర్దిష్ట పరిస్థితులలో జరుగుతుంది.",
+        "template": "process",
+        "visualType": "realistic_background_with_labels",
+        "heading": "ప్రక్రియ సంభవించడం",
+        "visualSubject": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుంది",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "నాటివ్ వీడియో క్లిప్ సృష్టించడానికి మరియు సందర్భం అనుగుణంగా క్లిప్ విభజన చేయడానికి",
+        "visualAnimation": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి స్థిరమైన వీడియో క్లిప్",
+        "localAnimation": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి స్థిరమైన వీడియో క్లిప్",
+        "labels": [
+            "సూర్యరశ్మి",
+            "నీరు",
+            "కార్బన్ డయాక్సైడ్"
+        ],
+        "labelPlacements": [
+            "సూర్యరశ్మి | సూర్య నుండి వచ్చే ప్రకాశం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీరు | తల్లిదండ్రుల నుండి వచ్చే పదార్థం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "కార్బన్ డయాక్సైడ్ | కలుషిత వాయువు నుండి వచ్చే పదార్థం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి స్థిరమైన వీడియో క్లిప్",
+            "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి స్థిరమైన వీడియో క్లిప్"
+        ],
+        "motion": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి స్థిరమైన వీడియో క్లిప్",
+        "subtitle": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుంది",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "manim",
+        "assetQualityNotes": "స్థిరమైన వీడియో క్లిప్ ఉపయోగించాలి, అది సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి వాడుతారు",
+        "comfyPrompt": "clean background, no text, no labels, no captions, no watermark, educational photography, realistic lighting, clear subject separation, sufficient empty overlay margins",
+        "coverageNotes": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని వివరించడానికి స్థిరమైన వీడియో క్లిప్",
+        "shot": {
+            "template": "video",
+            "heading": "ప్రక్రియ సంభవించడం",
+            "prompt": "A clear, cinematic video showing the process of photosynthesis with sunlight, water, and carbon dioxide present in a natural setting. The subject is clearly visible with realistic lighting and composition.",
+            "negativePrompt": "no text, no labels, no captions, no watermark, no slide layout, no presentation card",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to cover the full narration without freezing or losing continuity."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ప్రక్రియ సంభవించడం",
+            "prompt": "A realistic educational video showing the process of photosynthesis with sunlight, water, and carbon dioxide present in a natural setting. The subject is clearly visible with realistic lighting and composition.",
+            "negativePrompt": "no text, no labels, no captions, no watermark, no slide layout, no presentation card",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to cover the full narration without freezing or losing continuity."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "ఉదాహరణకు, సూర్యరశ్మి అవసరం, నీరు మరియు కార్బన్ డయాక్సైడ్ ఉపస్థితి.",
+        "template": "process",
+        "visualType": "realistic_background_with_labels",
+        "heading": "ఉదాహరణ పరిస్థితులు",
+        "visualSubject": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుంది",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "నాటివ్ వీడియో క్లిప్ సృష్టించడానికి మరియు సందర్భం అనుగుణంగా క్లిప్ విభజన చేయడానికి",
+        "visualAnimation": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి స్థిరమైన వీడియో క్లిప్",
+        "localAnimation": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి స్థిరమైన వీడియో క్లిప్",
+        "labels": [
+            "సూర్యరశ్మి",
+            "నీరు",
+            "కార్బన్ డయాక్సైడ్"
+        ],
+        "labelPlacements": [
+            "సూర్యరశ్మి | సూర్య నుండి వచ్చే ప్రకాశం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీరు | తల్లిదండ్రుల నుండి వచ్చే పదార్థం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "కార్బన్ డయాక్సైడ్ | కలుషిత వాయువు నుండి వచ్చే పదార్థం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి స్థిరమైన వీడియో క్లిప్",
+            "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి స్థిరమైన వీడియో క్లిప్"
+        ],
+        "motion": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి స్థిరమైన వీడియో క్లిప్",
+        "subtitle": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుంది",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "manim",
+        "assetQualityNotes": "స్థిరమైన వీడియో క్లిప్ ఉపయోగించాలి, అది సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని చెప్పడానికి వాడుతారు",
+        "comfyPrompt": "clean background, no text, no labels, no captions, no watermark, educational photography, realistic lighting, clear subject separation, sufficient empty overlay margins",
+        "coverageNotes": "సూర్యరశ్మి, నీరు, కార్బన్ డయాక్సైడ్ ఉపస్థితిలో ఉద్వికస్మ జరుగుతుందని వివరించడానికి స్థిరమైన వీడియో క్లిప్",
+        "shot": {
+            "template": "video",
+            "heading": "ఉదాహరణ పరిస్థితులు",
+            "prompt": "A clear, cinematic video showing the process of photosynthesis with sunlight, water, and carbon dioxide present in a natural setting. The subject is clearly visible with realistic lighting and composition.",
+            "negativePrompt": "no text, no labels, no captions, no watermark, no slide layout, no presentation card",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to cover the full narration without freezing or losing continuity."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ఉదాహరణ పరిస్థితులు",
+            "prompt": "A realistic educational video showing the process of photosynthesis with sunlight, water, and carbon dioxide present in a natural setting. The subject is clearly visible with realistic lighting and composition.",
+            "negativePrompt": "no text, no labels, no captions, no watermark, no slide layout, no presentation card",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to cover the full narration without freezing or losing continuity."
+        }
+    }
+]

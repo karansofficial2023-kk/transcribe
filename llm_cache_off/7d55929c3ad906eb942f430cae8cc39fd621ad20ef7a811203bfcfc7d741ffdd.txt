@@ -1,0 +1,188 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యరశ్మి ద్వారా ఆహారాన్ని తయారు చేసుకోవడానికి ఉపయోగించే ఒక ప్రక్రియ.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "కిరణజన్య సంయోగక్రియ పరిచయం",
+        "visualSubject": "కిరణజన్య సంయోగక్రియ ప్రక్రియ మొక్కల ఆహార ఉత్పత్తి విషయంలో సూర్యరశ్మి పాత్రను చూపే క్లిప్",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Title card with a slow fade in and hold for full narration duration.",
+        "visualAnimation": "కిరణజన్య సంయోగక్రియ ప్రక్రియ మొక్కల ఆహార ఉత్పత్తి విషయంలో సూర్యరశ్మి పాత్రను చూపే క్లిప్",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clear, high-resolution image of a green plant with sunlight shining on it.",
+            "A diagram showing the process of photosynthesis in plants."
+        ],
+        "motion": "Fade in and hold for full duration",
+        "subtitle": "కిరణజన్య సంయోగక్రియ మొక్కల ఆహార ఉత్పత్తి విషయంలో సూర్యరశ్మి పాత్రను చూపే క్లిప్",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background, no text or labels.",
+        "comfyPrompt": "A high-resolution image of a green plant receiving sunlight, realistic lighting, clear subject separation, 1920x1080 resolution, educational photography style, no text or labels.",
+        "coverageNotes": "Introduces the concept of photosynthesis and its role in plant nutrition using sunlight as the key energy source.",
+        "shot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ పరిచయం",
+            "prompt": "A cinematic shot of a green plant receiving sunlight, realistic lighting, clear subject separation, 1920x1080 resolution, educational photography style, no text or labels.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout, no presentation template",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to cover the full narration duration."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ పరిచయం",
+            "prompt": "A realistic educational video of a green plant receiving sunlight, clear subject separation, 1920x1080 resolution, cinematic motion, no text or labels.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout, no presentation template",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to cover the full narration duration."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "ఈ ప్రక్రియలో, మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ ను, నేల నుండి నీటిని గ్రహిస్తాయి.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం",
+        "visualSubject": "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ మరియు నేల నుండి నీటిని గ్రహిస్తున్నట్లు చూపే క్లిప్",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full narration duration with clear labels.",
+        "visualAnimation": "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ మరియు నేల నుండి నీటిని గ్రహిస్తున్నట్లు చూపే క్లిప్",
+        "localAnimation": "Arrows pointing to carbon dioxide and water labels, zoom in on the plant's root system for soil absorption.",
+        "labels": [
+            "కార్బన్ డయాక్సైడ్",
+            "నీరు"
+        ],
+        "labelPlacements": [
+            "కార్బన్ డయాక్సైడ్ | గాలి నుండి పొందిన వాయువు అంశం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీరు | నేల నుండి పొందిన నీరు | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [
+            "కార్బన్ డయాక్సైడ్ కు గాలి నుండి వచ్చిన దిశలో అర్థం",
+            "నీరు కు నేల నుండి వచ్చిన దిశలో అర్థం"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A diagram of a plant showing carbon dioxide absorption from the air and water uptake from the soil.",
+            "A labeled image of a plant with clear labels for carbon dioxide and water."
+        ],
+        "motion": "Static image with label placement and arrow directions",
+        "subtitle": "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ మరియు నేల నుండి నీటిని గ్రహిస్తాయి",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with clear labels and arrows for educational clarity.",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains the absorption of carbon dioxide from air and water from soil by plants during photosynthesis.",
+        "shot": {
+            "template": "video",
+            "heading": "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం",
+            "prompt": "A cinematic shot of a plant absorbing carbon dioxide from the air and water from the soil, with clear labels for both elements.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout, no presentation template",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to cover the full narration duration."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం",
+            "prompt": "A realistic educational video of a plant absorbing carbon dioxide from the air and water from the soil, with clear labels for both elements.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout, no presentation template",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to cover the full narration duration."
+        }
+    },
+    {
+        "segmentNumber": 3,
+        "sentence": "ఆకులలో ఉండే పత్రహరితం సూర్యరశ్మిని గ్రహిస్తుంది.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "పత్రహరితం మరియు సూర్యరశ్మి గ్రహణం",
+        "visualSubject": "ఆకులలో ఉండే పత్రహరితం సూర్యరశ్మిని గ్రహిస్తున్నట్లు చూపే క్లిప్",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full narration duration with clear labels.",
+        "visualAnimation": "ఆకులలో ఉండే పత్రహరితం సూర్యరశ్మిని గ్రహిస్తున్నట్లు చూపే క్లిప్",
+        "localAnimation": "Arrows pointing to chlorophyll and sunlight labels, zoom in on the leaf structure for clarity.",
+        "labels": [
+            "పత్రహరితం",
+            "సూర్యరశ్మి"
+        ],
+        "labelPlacements": [
+            "పత్రహరితం | ఆకులలో ఉన్న రంగు అంశం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "సూర్యరశ్మి | సూర్యుడి నుండి పొందిన వాయువు అంశం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [
+            "పత్రహరితం కు ఆకులలో ఉన్న దిశలో అర్థం",
+            "సూర్యరశ్మి కు సూర్యుడి నుండి వచ్చిన దిశలో అర్థం"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A diagram of a leaf showing chlorophyll and sunlight absorption.",
+            "A labeled image of a leaf with clear labels for chlorophyll and sunlight."
+        ],
+        "motion": "Static image with label placement and arrow directions",
+        "subtitle": "ఆకులలో ఉండే పత్రహరితం సూర్యరశ్మిని గ్రహిస్తుంది",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with clear labels and arrows for educational clarity.",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains the absorption of sunlight by chlorophyll in leaves during photosynthesis.",
+        "shot": {
+            "template": "video",
+            "heading": "పత్రహరితం మరియు సూర్యరశ్మి గ్రహణం",
+            "prompt": "A cinematic shot of a leaf absorbing sunlight through chlorophyll, with clear labels for both elements.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout, no presentation template",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to cover the full narration duration."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "పత్రహరితం మరియు సూర్యరశ్మి గ్రహణం",
+            "prompt": "A realistic educational video of a leaf absorbing sunlight through chlorophyll, with clear labels for both elements.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout, no presentation template",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to cover the full narration duration."
+        }
+    }
+]

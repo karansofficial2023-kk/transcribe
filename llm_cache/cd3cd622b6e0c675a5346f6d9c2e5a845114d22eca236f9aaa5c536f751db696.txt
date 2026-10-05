@@ -1,0 +1,42 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a sunflower stamen with curled filaments, pollen grains visible on the anther, and a female stigma nearby in natural light.",
+      "image_requirement": "Viewer must see the curled stamen and pollen on the stigma to understand pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The male stamen curls inward to deposit pollen onto the sticky female stigma.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Pollination in Sunflowers"
+    },
+    {
+      "shot_id": "1.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a sunflower with pollen grains on the stigma, showing the transfer from stamen to stigma without external agents.",
+      "image_requirement": "Viewer must see pollen moving from stamen to stigma to understand self-pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This process is referred to as self-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Self-Pollination in Sunflowers"
+    }
+  ]
+}

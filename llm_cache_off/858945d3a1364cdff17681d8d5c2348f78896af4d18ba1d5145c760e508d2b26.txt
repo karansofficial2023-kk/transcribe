@@ -1,0 +1,32 @@
+{
+  "score": 95,
+  "missing_concepts": ["dry cell", "lead storage", "nickel cadmium"],
+  "preserved_concepts": [
+    "mobile phone",
+    "smartphone",
+    "battery",
+    "lithium-ion batteries",
+    "solid electrolytes",
+    "ions",
+    "negative electrode",
+    "positive electrode",
+    "discharge",
+    "charging",
+    "recharged multiple times",
+    "secondary cells",
+    "primary cells",
+    "cylinder",
+    "graphite rod",
+    "conducting wire",
+    "zinc",
+    "anode",
+    "MnO₂",
+    "cathode",
+    "button cell",
+    "calculators",
+    "durable",
+    "long-lasting",
+    "innovations in technology",
+    "devices"
+  ]
+}

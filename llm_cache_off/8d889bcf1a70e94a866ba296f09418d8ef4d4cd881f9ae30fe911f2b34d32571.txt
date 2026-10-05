@@ -1,0 +1,66 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "An electrolytic cell with silver nitrate solution in a transparent container, light source from the top left, clear liquid with dissolved silver ions, visible glassware and electrodes.",
+      "image_requirement": "Viewer must see the silver nitrate solution in the electrolytic cell.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This is an electrolytic cell containing a solution of silver nit,rate.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Electrolytic Cell with Silver Nitrate"
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Interact with highlighted equipment",
+        "Assemble components step by step",
+        "Connect wires to battery terminals",
+        "Use switch to complete circuit"
+      ],
+      "panels": [],
+      "narration_en": "Let's interact with each highlighted piece of equipment one by one to assemble everything and carry out the electroplating process.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Assembling Electroplating Setup"
+    },
+    {
+      "shot_id": "2.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "A battery with red and blue wires connected to electrodes, red wire on positive terminal, blue wire on negative terminal through a switch, light source from top left.",
+      "image_requirement": "Viewer must see the red and blue wires connected to battery terminals with a switch in between.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The red wire is connected to the positive terminal of the battery, while the blue wire is connected to the negative terminal through a switch.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Wiring Electroplating Setup"
+    }
+  ]
+}

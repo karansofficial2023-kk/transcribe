@@ -1,0 +1,37 @@
+[
+  {
+    "sceneNumber": 1,
+    "sceneTitle": "Introduction to Pollination",
+    "sentenceNumbers": [37, 38, 39, 40, 41, 42, 43]
+  },
+  {
+    "sceneNumber": 2,
+    "sceneTitle": "Definition of Pollination",
+    "sentenceNumbers": [1]
+  },
+  {
+    "sceneNumber": 3,
+    "sceneTitle": "Types of Pollination Overview",
+    "sentenceNumbers": [1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+  },
+  {
+    "sceneNumber": 4,
+    "sceneTitle": "Self-Pollination Mechanisms",
+    "sentenceNumbers": [4, 5, 6, 7, 8, 10, 11, 12, 25, 26, 27, 28]
+  },
+  {
+    "sceneNumber": 5,
+    "sceneTitle": "Cross-Pollination and Adaptations",
+    "sentenceNumbers": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 33, 34, 35, 36]
+  },
+  {
+    "sceneNumber": 6,
+    "sceneTitle": "Pollinator Attraction and Adaptations",
+    "sentenceNumbers": [37, 38, 39, 40, 41, 42, 43]
+  },
+  {
+    "sceneNumber": 7,
+    "sceneTitle": "Comparison of Pollination Types",
+    "sentenceNumbers": [37, 38, 39, 40, 41, 42, 43, 44, 45, 46]
+  }
+]

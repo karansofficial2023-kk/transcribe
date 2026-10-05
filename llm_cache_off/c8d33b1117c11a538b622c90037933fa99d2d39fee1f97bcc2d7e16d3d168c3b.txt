@@ -1,0 +1,42 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This means we are adding 1/x to x.",
+      "formula_lines": ["f(x) = x + 1/x"],
+      "explain_steps": ["The function f(x) is defined as x plus one over x."],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Function of a Number and Its Reciprocal"
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Let us denote this sum as a function f(x).",
+      "formula_lines": ["f(x) = x + 1/x"],
+      "explain_steps": ["The function f(x) is defined as x plus one over x."],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Function Definition"
+    }
+  ]
+}

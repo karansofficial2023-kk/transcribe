@@ -1,0 +1,42 @@
+{
+  "shots": [
+    {
+      "shot_id": "8.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "A male insect approaching a flower, wings visible, body partially obscured by petals, camera at medium distance from the insect, slight angle up to show the insect's interaction with the flower, natural daylight with soft shadows, warm tones.",
+      "image_requirement": "Viewer must see the male insect interacting with the flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Keep learning.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Male Insect Interaction with Flower"
+    },
+    {
+      "shot_id": "8.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "A male insect approaching a flower, wings visible, body partially obscured by petals, camera at medium distance from the insect, slight angle up to show the insect's interaction with the flower, natural daylight with soft shadows, warm tones.",
+      "image_requirement": "Viewer must see the male insect interacting with the flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "We believe in you.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Male Insect Interaction with Flower"
+    }
+  ]
+}

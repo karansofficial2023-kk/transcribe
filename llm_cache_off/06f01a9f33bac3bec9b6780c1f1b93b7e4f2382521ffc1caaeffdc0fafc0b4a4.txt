@@ -1,0 +1,6 @@
+{
+  "score": 100,
+  "hallucinations": [],
+  "supported_corrections_or_additions": [],
+  "severity": "low"
+}

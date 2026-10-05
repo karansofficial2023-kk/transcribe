@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "Wood sorrel flower with closed petals, green stem and leaves in natural light, medium distance, slightly angled to show the closed structure.",
+      "image_requirement": "Viewer must see the closed bisexual flowers of wood sorrel.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Wood sorrel has bisexual flowers that remain closed.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Closed Bisexual Flowers"
+    },
+    {
+      "shot_id": "5.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "Close-up of a closed wood sorrel flower with stamen and pistil visible inside, natural light, macro shot from above.",
+      "image_requirement": "Viewer must see the internal structures of a closed flower during self-pollination.",
+      "labels": ["stamen", "pistil"],
+      "label_placement": ["stamen - center of the flower, yellow and filamentous", "pistil - center of the flower, green and swollen"],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The occurrence of self-pollination and fertilization within a closed flower is known as clistogamy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Clistogamy in Closed Flowers"
+    },
+    {
+      "shot_id": "5.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "Wood sorrel flower with open petals, stamen and pistil visible, natural light, medium distance, slightly angled.",
+      "image_requirement": "Viewer must see the open flowers of wood sorrel for cross-pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Cross-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Cross-Pollination in Wood Sorrel"
+    }
+  ]
+}

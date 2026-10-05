@@ -1,0 +1,120 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "இச்செயல்முறையின் போது, ஆக்சிஜன் வெளியேற்றப்படுகிறது.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "உயிரியல் ஆசிரியர் - வானிலை மற்றும் தாவரங்களின் உணவு உற்பத்தி",
+        "visualSubject": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உணவு உற்பத்தி, ஆக்சிஜன் வெளியேற்றம்",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "நாடகீகரனின் பேச்சு வேகத்தில், குறிப்பிட்ட நேரம் முழுவதும் காண்பிக்கப்பட வேண்டும். 4-வது செகண்டில் தொடர்ந்து காண்பிக்கப்பட வேண்டும்.",
+        "visualAnimation": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உணவு உற்பத்தி போன்ற நிகழ்வில், ஆக்சிஜன் வெளியேற்றம் எப்படி நடக்கும் என்பதை தொடர்ந்து காண்பிக்கவும். தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள் மற்றும் அதன் வெளியேற்றம் பற்றி காண்பிக்கவும்.",
+        "localAnimation": "ஆக்சிஜன் வெளியேற்றம் எப்படி நடக்கும் என்பதை தொடர்ந்து காண்பிக்கவும். தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள் மற்றும் அதன் வெளியேற்றம் பற்றி காண்பிக்கவும்.",
+        "labels": ["ஆக்சிஜன்", "இலைத்துறைகள்"],
+        "labelPlacements": [
+            "ஆக்சிஜன் | வாயு மற்றும் உணவு உற்பத்தி | COORDINATES_PENDING_APPROVED_IMAGE",
+            "இலைத்துறைகள் | இலைகளில் உள்ள சிறிய துறைகள் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உணவு உற்பத்தி",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உணவு உற்பத்தி பற்றி விளக்கும் தாவரங்களின் இலைகளில் ஆக்சிஜன் வெளியேற்றம்",
+            "தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள் மற்றும் அதன் வெளியேற்றம்"
+        ],
+        "motion": "ஆக்சிஜன் வெளியேற்றம் எப்படி நடக்கும் என்பதை தொடர்ந்து காண்பிக்கவும். தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள் மற்றும் அதன் வெளியேற்றம் பற்றி காண்பிக்கவும்.",
+        "subtitle": "இச்செயல்முறையின் போது, ஆக்சிஜன் வெளியேற்றப்படுகிறது",
+        "subtitleStyle": "உயிரியல் ஆசிரியர்",
+        "tool": "ltx_video",
+        "assetQualityNotes": "LTX b-roll, curriculum-safe, no generated labels",
+        "comfyPrompt": "clean background, educational documentary style, realistic lighting, shallow depth of field, strong subject placement, enough negative space for overlays",
+        "coverageNotes": "ஆக்சிஜன் வெளியேற்றம் மற்றும் தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள் பற்றி விளக்கப்பட்டுள்ளது",
+        "shot": {
+            "template": "video",
+            "heading": "உயிரியல் ஆசிரியர் - வானிலை மற்றும் தாவரங்களின் உணவு உற்பத்தி",
+            "prompt": "Realistic educational video, subject-matter accurate, one continuous action split into 4-second continuation clips, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.",
+            "negativePrompt": "no text, no labels, no captions, no watermark, no slide or presentation-card layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split and join the LTX clips in order without changing narration, losing curriculum coverage, or freezing the last frame."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "உயிரியல் ஆசிரியர் - வானிலை மற்றும் தாவரங்களின் உணவு உற்பத்தி",
+            "prompt": "Realistic educational video, subject-matter accurate, one continuous action split into 4-second continuation clips, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.",
+            "negativePrompt": "no text, no labels, no captions, no watermark, no slide or presentation-card layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split and join the LTX clips in order without changing narration, losing curriculum coverage, or freezing the last frame."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "இலைகளில் உள்ள சிறிய துறைகள் இலைத்துறைகள் என்று அழைக்கப்படுகின்றன.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "உயிரியல் ஆசிரியர் - வானிலை மற்றும் தாவரங்களின் உணவு உற்பத்தி",
+        "visualSubject": "தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள், இலைத்துறைகள்",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "நாடகீகரனின் பேச்சு வேகத்தில், குறிப்பிட்ட நேரம் முழுவதும் காண்பிக்கப்பட வேண்டும்.",
+        "visualAnimation": "தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள் மற்றும் அதன் வெளியேற்றம் பற்றி காண்பிக்கவும். இலைத்துறைகள் என்று அழைக்கப்படுகின்றன என்பதை விளக்கவும்.",
+        "localAnimation": "இலைத்துறைகள் என்று அழைக்கப்படுகின்றன என்பதை விளக்கவும். இலைகளில் உள்ள சிறிய துறைகள் மற்றும் அதன் வெளியேற்றம் பற்றி காண்பிக்கவும்.",
+        "labels": ["இலைத்துறைகள்", "சிறிய துறைகள்"],
+        "labelPlacements": [
+            "இலைத்துறைகள் | இலைகளில் உள்ள சிறிய துறைகள் | COORDINATES_PENDING_APPROVED_IMAGE",
+            "சிறிய துறைகள் | இலைகளில் உள்ள சிறிய துறைகள் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உணவு உற்பத்தி",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள், இலைத்துறைகள்",
+            "இலைத்துறைகள் என்று அழைக்கப்படுகின்றன என்பதை விளக்கும் தாவரங்களின் இலைகளில் உள்ள சிறிய துறைகள்"
+        ],
+        "motion": "இலைத்துறைகள் என்று அழைக்கப்படுகின்றன என்பதை விளக்கவும். இலைகளில் உள்ள சிறிய துறைகள் மற்றும் அதன் வெளியேற்றம் பற்றி காண்பிக்கவும்.",
+        "subtitle": "இலைகளில் உள்ள சிறிய துறைகள் இலைத்துறைகள் என்று அழைக்கப்படுகின்றன",
+        "subtitleStyle": "உயிரியல் ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "local diagram, curriculum-safe, no generated labels",
+        "comfyPrompt": "clean background, educational documentary style, realistic lighting, shallow depth of field, strong subject placement, enough negative space for overlays",
+        "coverageNotes": "இலைத்துறைகள் என்று அழைக்கப்படுகின்றன என்பதும், இலைகளில் உள்ள சிறிய துறைகள் மற்றும் அதன் வெளியேற்றம் பற்றி விளக்கப்பட்டுள்ளது",
+        "shot": {
+            "template": "video",
+            "heading": "உயிரியல் ஆசிரியர் - வானிலை மற்றும் தாவரங்களின் உணவு உற்பத்தி",
+            "prompt": "Realistic educational video, subject-matter accurate, one continuous action split into 4-second continuation clips, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.",
+            "negativePrompt": "no text, no labels, no captions, no watermark, no slide or presentation-card layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split and join the LTX clips in order without changing narration, losing curriculum coverage, or freezing the last frame."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "உயிரியல் ஆசிரியர் - வானிலை மற்றும் தாவரங்களின் உணவு உற்பத்தி",
+            "prompt": "Realistic educational video, subject-matter accurate, one continuous action split into 4-second continuation clips, clear start-to-end motion, no abrupt final-frame freeze, simple camera path, enough visual detail for the full narration duration.",
+            "negativePrompt": "no text, no labels, no captions, no watermark, no slide or presentation-card layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split and join the LTX clips in order without changing narration, losing curriculum coverage, or freezing the last frame."
+        }
+    }
+]

@@ -1,0 +1,74 @@
+[
+    {
+        "rowId": "1.2",
+        "labels": ["కార్బన్ డయాక్సైడ్", "నీటి గ్రహణం"],
+        "labelPlacements": [
+            "కార్బన్ డయాక్సైడ్ | గాలి నుండి పొందిన కార్బన్ డయాక్సైడ్ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీటి గ్రహణం | నేల నుండి పొందిన నీటి గ్రహణం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "కార్బన్ డయాక్సైడ్ - గాలి నుండి పొందిన కార్బన్ డయాక్సైడ్ అణువులు",
+            "నీటి గ్రహణం - నేల నుండి పొందిన నీరు"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ ను మరియు నేల నుండి నీటిని గ్రహిస్తాయి. కార్బన్ డయాక్సైడ్ మరియు నీరు పొందిన వస్తువులు చిత్రంలో స్పష్టంగా కనిపిస్తాయి.",
+        "comfyPrompt": "మొక్కలు, గాలి నుండి కార్బన్ డయాక్సైడ్ అణువులు, నేల నుండి నీరు. కార్బన్ డయాక్సైడ్ మరియు నీరు పొందిన వస్తువులు చిత్రంలో స్పష్టంగా కనిపిస్తాయి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "2.1",
+        "labels": ["పత్రహరితం", "ఆకులలో ఉండే రసాయన విస్తారణ"],
+        "labelPlacements": [
+            "పత్రహరితం | ఆకులలో ఉండే రసాయన విస్తారణ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": [
+            "పత్రహరితం - ఆకులలో ఉండే రసాయన విస్తారణ అంశం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "ఆకులలో ఉండే పత్రహరితం సూర్యకిరణాలను గ్రహిస్తుంది. పత్రహరితం ఆకులలో స్పష్టంగా కనిపిస్తుంది.",
+        "comfyPrompt": "ఆకులలో ఉండే పత్రహరితం, సూర్యకిరణాలను గ్రహిస్తుంది. పత్రహరితం ఆకులలో స్పష్టంగా కనిపిస్తుంది. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "2.2",
+        "labels": ["కార్బన్ డయాక్సైడ్", "ఆకులలో ఉండే రసాయన విస్తారణ", "నీరు", "గ్లూకోజ్"],
+        "labelPlacements": [
+            "కార్బన్ డయాక్సైడ్ | ఆకులలో ఉండే రసాయన విస్తారణ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీరు | ఆకులలో ఉండే రసాయన విస్తారణ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "గ్లూకోజ్ | ఆకులలో ఉండే రసాయన విస్తారణ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "కార్బన్ డయాక్సైడ్ - ఆకులలో ఉండే రసాయన విస్తారణ అంశం",
+            "నీరు - ఆకులలో ఉండే రసాయన విస్తారణ అంశం",
+            "గ్లూకోజ్ - ఆకులలో ఉండే రసాయన విస్తారణ అంశం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "శక్తి సహాయంతో, కార్బన్ డయాక్సైడ్ మరియు నీరు కలిసి గ్లూకోజ్ ఏర్పడుతుంది. కార్బన్ డయాక్సైడ్, నీరు, గ్లూకోజ్ చిత్రంలో స్పష్టంగా కనిపిస్తాయి.",
+        "comfyPrompt": "కార్బన్ డయాక్సైడ్, నీరు, గ్లూకోజ్ అణువులు. కార్బన్ డయాక్సైడ్ మరియు నీరు కలిసి గ్లూకోజ్ ఏర్పడుతుంది. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "3.2",
+        "labels": ["పత్రరంధ్రం"],
+        "labelPlacements": [
+            "పత్రరంధ్రం | ఆకుల ఉపరితలం మీద చిన్న రంధ్రం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": [
+            "పత్రరంధ్రం - ఆకుల ఉపరితలం మీద చిన్న రంధ్రం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "ఆకుల ఉపరితలంపై ఉండే చిన్న రంధ్రాలను పత్రరంధ్రాలు అంటారు. పత్రరంధ్రం ఆకుల ఉపరితలం మీద స్పష్టంగా కనిపిస్తుంది.",
+        "comfyPrompt": "ఆకుల ఉపరితలం మీద చిన్న రంధ్రం, పత్రరంధ్రం. పత్రరంధ్రం ఆకుల ఉపరితలం మీద స్పష్టంగా కనిపిస్తుంది. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "4.1",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "no_labels",
+        "visualSubject": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది. గ్లూకోజ్ అణువులు మొక్కకు శక్తిని ఇస్తుంది.",
+        "comfyPrompt": "గ్లూకోజ్ అణువులు, మొక్కకు శక్తిని ఇస్తుంది. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

@@ -1,0 +1,5 @@
+{
+  "anode": "pure silver rod",
+  "cathode": "antique copper keychain",
+  "electrolyte": "silver nitrate solution"
+}

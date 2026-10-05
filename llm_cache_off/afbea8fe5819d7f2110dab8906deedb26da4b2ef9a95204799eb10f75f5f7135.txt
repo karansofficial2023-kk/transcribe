@@ -1,0 +1,58 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A plant with roots in soil, reaching up towards sunlight. The camera is at a medium distance, slightly angled down to show the plant's stem and leaves. Natural daylight illuminates the scene with warm tones. The plant has green leaves and brown stems.",
+      "image_requirement": "Viewer must see the plant taking in carbon dioxide from the air and water from the soil.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In this process, plants take in carbon dioxide from the air and water from the soil.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "1.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with chlorophyll visible under natural light. The camera is at a shallow distance, angled slightly to the side to capture the texture and color of the leaf. Bright sunlight highlights the green pigments.",
+      "image_requirement": "Viewer must see the chlorophyll in the leaves absorbing sunlight.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The chlorophyll in the leaves absorbs sunlight.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "1.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with sunlight shining through it, showing the process of photosynthesis. The camera is at a medium distance, angled slightly to show the light interacting with the leaf's surface. Natural daylight illuminates the scene with green and yellow tones.",
+      "image_requirement": "Viewer must see the formation of glucose from carbon dioxide and water using sunlight energy.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Using light energy, carbon dioxide and water combine to form glucose.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

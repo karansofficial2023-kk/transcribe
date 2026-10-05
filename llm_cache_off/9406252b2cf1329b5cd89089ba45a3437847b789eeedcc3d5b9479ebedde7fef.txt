@@ -1,0 +1,19 @@
+{
+  "score": 100,
+  "missing_concepts": [],
+  "preserved_concepts": [
+    "AIEEE 2002",
+    "applications of derivatives",
+    "parametric equations",
+    "x equals a sin t minus (b sin at)/b",
+    "y equals a cos t minus (b cos at)/b",
+    "maximum distance from the origin",
+    "OA²",
+    "sin²t + cos²t = 1",
+    "cosine function range (-1 to 1)",
+    "cos(α) = -1",
+    "OA = √(a² + b² + 2ab)",
+    "OA = a + b",
+    "correct answer is the second option: a + b"
+  ]
+}

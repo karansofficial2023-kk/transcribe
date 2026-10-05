@@ -14,6 +14,14 @@ public record StoryboardProjectMaterials(String promptContext, List<Path> approv
         return new StoryboardProjectMaterials("", List.of());
     }
 
+    /**
+     * True when at least one text document (notes, script, PDF, slides ...) was supplied. Only text evidence can justify adding
+     * content to a lesson; images and videos alone are visual candidates and prove no fact.
+     */
+    public boolean hasTextEvidence() {
+        return promptContext.contains("[PRIORITY ");
+    }
+
     public boolean isEmpty() {
         return promptContext.isBlank() && approvedAssets.isEmpty();
     }

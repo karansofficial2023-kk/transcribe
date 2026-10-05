@@ -1,0 +1,70 @@
+[
+  {
+    "rowId": "7.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with centered text, dark background, white text, no borders or logos",
+    "comfyPrompt": "Title card with centered text, dark background, white text, no borders or logos. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.2",
+    "labels": ["Nectar", "Scent"],
+    "labelPlacements": [
+      "Nectar | Nectar glands at the base of the stamen | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Scent | Petal surface emitting fragrance | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Nectar - Nectar glands at the base of the stamen",
+      "Scent - Petal surface emitting fragrance"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of a flower with visible petals, stamen, and nectar droplets; camera angle: medium close-up; lighting: natural daylight; composition: focus on the flower’s center",
+    "comfyPrompt": "Close-up of a flower with visible petals, stamen, and nectar droplets; camera angle: medium close-up; lighting: natural daylight; composition: focus on the flower’s center. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.3",
+    "labels": ["Female bee mimicry", "Bee orchid"],
+    "labelPlacements": [
+      "Female bee mimicry | Petal shape resembling a female bee | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Bee orchid | Flower species name at top center | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Female bee mimicry - Petal shape resembling a female bee",
+      "Bee orchid - Flower species name at top center"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of a bee orchid with visible petal shapes resembling a female bee; camera angle: medium close-up; lighting: natural daylight; composition: focus on the flower’s center",
+    "comfyPrompt": "Close-up of a bee orchid with visible petal shapes resembling a female bee; camera angle: medium close-up; lighting: natural daylight; composition: focus on the flower’s center. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.4",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for A flower known as the bee orchid resembles a female bee.; depict the concrete subject or visible action described by: A flower known as the bee orchid resembles a female bee.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "Sharp 1920x1080 realistic documentary image for A flower known as the bee orchid resembles a female bee.; depict the concrete subject or visible action described by: A flower known as the bee orchid resembles a female bee.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.5",
+    "labels": ["Male bee", "Mate-seeking behavior"],
+    "labelPlacements": [
+      "Male bee | Pollinator attracted to mimicry | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Mate-seeking behavior | Behavior of male bees | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "abstract_or_nonpointable"],
+    "pointTargetNames": [
+      "Male bee - Pollinator attracted to mimicry",
+      ""
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of a bee orchid with visible petal shapes resembling a female bee; camera angle: medium close-up; lighting: natural daylight; composition: focus on the flower’s center",
+    "comfyPrompt": "Close-up of a bee orchid with visible petal shapes resembling a female bee; camera angle: medium close-up; lighting: natural daylight; composition: focus on the flower’s center. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

@@ -1,0 +1,44 @@
+[
+  {
+    "rowId": "4.2",
+    "labels": ["గ్లూకోజ్", "పిండి పదార్థం"],
+    "labelPlacements": [
+      "గ్లూకోజ్ | గ్లూకోజ్ అణువులు | COORDINATES_PENDING_APPROVED_IMAGE",
+      "పిండి పదార్థం | పిండి పదార్థం నిల్వ అవుతున్న సూచిక | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "గ్లూకోజ్ - గ్లూకోజ్ అణువులు ఉన్న స్థానం",
+      "పిండి పదార్థం - నిల్వ అవుతున్న పిండి పదార్థం సూచిక"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "మొక్క, గ్లూకోజ్ అణువులు, పిండి పదార్థం నిల్వ అవుతున్న సూచిక",
+    "comfyPrompt": "మొక్క, గ్లూకోజ్ అణువులు, పిండి పదార్థం నిల్వ అవుతున్న సూచిక. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Source-faithful visible subject and action: కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+    "comfyPrompt": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.2",
+    "labels": ["ఆక్సిజన్", "కిరణజన్య సంయోగక్రియ"],
+    "labelPlacements": [
+      "ఆక్సిజన్ | ఆక్సిజన్ ఉత్పత్తి | COORDINATES_PENDING_APPROVED_IMAGE",
+      "కిరణజన్య సంయోగక్రియ | కిరణజన్య సంయోగక్రియ ప్రక్రియ | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "ఆక్సిజన్ - ఆక్సిజన్ ఉత్పత్తి చేసే సూచిక",
+      "కిరణజన్య సంయోగక్రియ - కిరణజన్య సంయోగక్రియ ప్రక్రియ సూచిక"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "మనకు అవసరమైన ఆక్సిజన్ కిరణజన్య సంయోగక్రియ ద్వారా ఉత్పత్తి",
+    "comfyPrompt": "మనకు అవసరమైన ఆక్సిజన్ కిరణజన్య సంయోగక్రియ ద్వారా ఉత్పత్తి. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

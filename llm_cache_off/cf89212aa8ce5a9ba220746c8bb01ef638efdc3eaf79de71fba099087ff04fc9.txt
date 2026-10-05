@@ -1,0 +1,106 @@
+[
+  {
+    "rowId": "1.8",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with animated text and background image of a lab setup",
+    "comfyPrompt": "A title card with animated text reading 'Starting the Electroplating Process' over a background image of a lab setup. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.1",
+    "labels": ["Electrolytic Cell", "Silver Nitrate Solution"],
+    "labelPlacements": [
+      "Electrolytic Cell | Electrolytic cell apparatus with electrodes and wires | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Silver Nitrate Solution | Clear solution in beaker with visible ions | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "Electrolytic Cell - Electrolytic cell apparatus with electrodes and wires",
+      "Silver Nitrate Solution - Clear solution in beaker with visible ions"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electrolytic cell with silver nitrate solution in beaker, clear glass container, visible electrodes and wires",
+    "comfyPrompt": "An electrolytic cell with a clear glass container holding a silver nitrate solution. Visible electrodes and wires are present. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.2",
+    "labels": ["Battery", "Switch", "Keychain", "Silver Rod"],
+    "labelPlacements": [
+      "Battery | Power source connected to positive terminal | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Switch | Control for circuit connection | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Keychain | Object to be electroplated | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Silver Rod | Electrode for silver deposition | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "Battery - Power source connected to positive terminal",
+      "Switch - Control for circuit connection",
+      "Keychain - Object to be electroplated",
+      "Silver Rod - Electrode for silver deposition"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electrolytic cell setup with labeled components, electrodes, wires, battery, switch, keychain, and silver rod",
+    "comfyPrompt": "An electrolytic cell setup showing labeled components including a battery, switch, keychain, and silver rod. Electrodes and wires are visible. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.3",
+    "labels": ["Red Wire", "Blue Wire", "Battery", "Switch"],
+    "labelPlacements": [
+      "Red Wire | Connected to positive terminal | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Blue Wire | Connected to negative terminal through switch | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Battery | Power source with terminals | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Switch | Control for circuit connection | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "Red Wire - Connected to positive terminal",
+      "Blue Wire - Connected to negative terminal through switch",
+      "Battery - Power source with terminals",
+      "Switch - Control for circuit connection"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electrolytic cell with labeled red and blue wires connected to positive and negative terminals, battery, and switch",
+    "comfyPrompt": "An electrolytic cell showing a red wire connected to the positive terminal and a blue wire connected to the negative terminal through a switch. The battery is visible with its terminals. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.4",
+    "labels": ["Keychain", "Silver Rod", "Negative Terminal", "Positive Terminal"],
+    "labelPlacements": [
+      "Keychain | Object to be electroplated | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Silver Rod | Electrode for silver deposition | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Negative Terminal | Connected to keychain | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Positive Terminal | Connected to silver rod | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "Keychain - Object to be electroplated",
+      "Silver Rod - Electrode for silver deposition",
+      "Negative Terminal - Connected to keychain",
+      "Positive Terminal - Connected to silver rod"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electrolytic cell with keychain attached to negative terminal and silver rod on positive terminal",
+    "comfyPrompt": "An electrolytic cell showing a keychain attached to the negative terminal and a silver rod connected to the positive terminal. The terminals are clearly labeled. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

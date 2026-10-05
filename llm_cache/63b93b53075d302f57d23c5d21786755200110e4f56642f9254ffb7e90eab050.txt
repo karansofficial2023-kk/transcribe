@@ -1,0 +1,8 @@
+{
+  "score": 95,
+  "hallucinations": [
+    "Statins function by inhibiting an enzyme involved in cholesterol production in the liver, thereby reducing low-density lipoprotein (LDL) cholesterol levels in the bloodstream. This class of drugs is commonly prescribed for individuals at risk of cardiovascular disease due to their effectiveness and relatively mild side effects."
+  ],
+  "supported_corrections_or_additions": [],
+  "severity": "medium"
+}

@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a bee transferring pollen between flowers on a plant, natural sunlight highlighting the fine details of the flower and bee.",
+      "image_requirement": "Viewer must see a bee carrying pollen between two flowers to understand cross-pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Cross-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Pollination by Insects"
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a papaya plant with male and female flowers on separate branches, natural lighting showing the distinct structures of each flower.",
+      "image_requirement": "Viewer must see separate male and female flowers on different plants to understand unisexual dioecious reproduction.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Papaya is a unisexual, dioecious plant.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Dioecious Papaya Plant"
+    },
+    {
+      "shot_id": "3.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "A wide shot of a papaya field with male and female plants, natural lighting showing the distribution of flowers and pollinators in the environment.",
+      "image_requirement": "Viewer must see separate male and female plants to understand cross-pollination levels in papaya.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Its male and female flowers grow on separate plants, leading to average levels of cross-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Cross-Pollination in Papaya"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+[
+    {
+        "rowId": "3.1",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "point_labels",
+        "visualSubject": "గ్లూకోజ్ మొక్కలో శక్తిని ఇస్తుంది, పచ్చ రంగు మొక్క అందుబాటులో ఉండాలి",
+        "comfyPrompt": "పచ్చ రంగు మొక్క, గ్లూకోజ్ స్థానం, శక్తి విభవం. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "3.2",
+        "labels": ["గ్లూకోజ్", "పిండి పదార్థం"],
+        "labelPlacements": [
+            "గ్లూకోజ్ | మొక్కలో ఉన్న శక్తి సమృద్ధి | COORDINATES_PENDING_APPROVED_IMAGE",
+            "పిండి పదార్థం | మొక్కలో నిల్వ అవుతున్న పదార్థం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": [
+            "visible_physical_target",
+            "visible_physical_target"
+        ],
+        "pointTargetNames": [
+            "గ్లూకోజ్ - మొక్కలో శక్తిని ఇస్తున్న పదార్థం",
+            "పిండి పదార్థం - మొక్కలో నిల్వ అవుతున్న పదార్థం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "గ్లూకోజ్ మొక్కలో పిండి పదార్థంగా నిల్వ అవుతుంది, చిన్న మొక్క కనిపిస్తుంది",
+        "comfyPrompt": "చిన్న మొక్క, గ్లూకోజ్ స్థానం, పిండి పదార్థం స్థానం. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "4.1",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "point_labels",
+        "visualSubject": "భూమిపై జీవం ఉనికి విషయం, కిరణజన్య సంయోగక్రియ లేకుండా జీవం అసాధ్యమైన విషయం",
+        "comfyPrompt": "జీవం ఉనికి, కిరణజన్య సంయోగక్రియ లేకుండా జీవం అసాధ్యమైన విషయం. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "4.2",
+        "labels": ["ఆక్సిజన్", "కిరణజన్య సంయోగక్రియ"],
+        "labelPlacements": [
+            "ఆక్సిజన్ | ఆక్సిజన్ ఉత్పత్తి విషయం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "కిరణజన్య సంయోగక్రియ | కిరణజన్య సంయోగక్రియ ద్వారా ఆక్సిజన్ ఉత్పత్తి | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": [
+            "visible_physical_target",
+            "visible_physical_target"
+        ],
+        "pointTargetNames": [
+            "ఆక్సిజన్ - ఆక్సిజన్ ఉత్పత్తి చేసే పదార్థం",
+            "కిరణజన్య సంయోగక్రియ - ఆక్సిజన్ ఉత్పత్తి చేసే ప్రక్రియ"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "పుట్టిన ఆక్సిజన్, కిరణజన్య సంయోగక్రియ ద్వారా ఉత్పత్తి",
+        "comfyPrompt": "ఆక్సిజన్ ఉత్పత్తి, కిరణజన్య సంయోగక్రియ ప్రక్రియ. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "5.1",
+        "labels": ["కిరణజన్య సంయోగక్రియ", "సూర్యరశ్మి", "శక్తి"],
+        "labelPlacements": [
+            "కిరణజన్య సంయోగక్రియ | కిరణజన్య సంయోగక్రియ ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "సూర్యరశ్మి | సూర్యరశ్మి ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "శక్తి | శక్తి సేకరణ ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": [
+            "visible_physical_target",
+            "visible_physical_target",
+            "visible_physical_target"
+        ],
+        "pointTargetNames": [
+            "కిరణజన్య సంయోగక్రియ - కిరణజన్య సంయోగక్రియ ప్రక్రియ వివరణ",
+            "సూర్యరశ్మి - సూర్యరశ్మి ప్రక్రియ వివరణ",
+            "శక్తి - శక్తి సేకరణ ప్రక్రియ వివరణ"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "మొక్క, సూర్యరశ్మి, ప్రక్రియ చిత్రం, కెమేరా వీక్షణ సుదూర అంగీకరణ",
+        "comfyPrompt": "మొక్క, సూర్యరశ్మి, కిరణజన్య సంయోగక్రియ ప్రక్రియ. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

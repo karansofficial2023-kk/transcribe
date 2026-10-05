@@ -1,0 +1,72 @@
+[
+    {
+        "rowId": "1.2",
+        "labels": ["కార్బన్ డయాక్సైడ్", "నీటి గ్రహణం", "తలుపులు"],
+        "labelPlacements": [
+            "కార్బన్ డయాక్సైడ్ | వాయువు నుండి గ్రహించబడిన కార్బన్ డయాక్సైడ్ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీటి గ్రహణం | మొక్కలు నేల నుండి నీటిని గ్రహిస్టాయి | COORDINATES_PENDING_APPROVED_IMAGE",
+            "తలుపులు | వాయువులో కార్బన్ డయాక్సైడ్ గ్రహించడానికి ఉపయోగించే విస్తారం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "కార్బన్ డయాక్సైడ్ - వాయువులో ఉండే గ్రహించబడిన పదార్థం",
+            "నీటి గ్రహణం - నేల నుండి గ్రహించబడిన పదార్థం",
+            "తలుపులు - వాయువులో కార్బన్ డయాక్సైడ్ గ్రహించడానికి ఉపయోగించే విస్తారం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "A realistic image of green plants absorbing carbon dioxide from the air and water from the soil, with labeled structures such as leaves, roots, and stomata.",
+        "comfyPrompt": "A detailed labeled image showing a plant with visible roots, leaves, and stomata. Carbon dioxide is absorbed through the stomata from the air, and water is absorbed through the roots from the soil. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "2.1",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "no_labels",
+        "visualSubject": "A close-up image of a leaf with chlorophyll, showing sunlight absorption.",
+        "comfyPrompt": "A detailed image of a leaf with visible chlorophyll absorbing sunlight. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "2.2",
+        "labels": ["కార్బన్ డయాక్సైడ్", "నీరు", "గ్లూకోజ్"],
+        "labelPlacements": [
+            "కార్బన్ డయాక్సైడ్ | ఆకులలో ఉన్న కార్బన్ డయాక్సైడ్ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీరు | ఆకులలో ఉన్న నీరు | COORDINATES_PENDING_APPROVED_IMAGE",
+            "గ్లూకోజ్ | ఆకులలో ఏర్పడే గ్లూకోజ్ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "కార్బన్ డయాక్సైడ్ - ఆకులలో ఉన్న గ్రహించబడిన పదార్థం",
+            "నీరు - ఆకులలో ఉన్న గ్రహించబడిన పదార్థం",
+            "గ్లూకోజ్ - ఆకులలో ఏర్పడే ఉత్పత్తి"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "A realistic labeled image showing carbon dioxide, water, and glucose in the leaves during photosynthesis.",
+        "comfyPrompt": "A detailed labeled image of a leaf with visible carbon dioxide, water, and glucose. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "3.2",
+        "labels": ["పత్రరంధ్రాలు"],
+        "labelPlacements": [
+            "పత్రరంధ్రాలు | ఆకుల ఉపరితలంపై చిన్న రంధ్రాల | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": [
+            "పత్రరంధ్రాలు - ఆకుల ఉపరితలంపై చిన్న రంధ్రాల"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "A realistic labeled image showing stomata on the surface of leaves, with oxygen release.",
+        "comfyPrompt": "A detailed labeled image of a leaf with visible stomata and oxygen release. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "4.1",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "no_labels",
+        "visualSubject": "A realistic image showing glucose providing energy to the plant.",
+        "comfyPrompt": "A detailed image of a leaf with visible glucose providing energy. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

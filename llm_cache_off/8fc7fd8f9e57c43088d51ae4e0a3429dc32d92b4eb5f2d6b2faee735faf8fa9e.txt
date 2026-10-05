@@ -1,0 +1,14 @@
+{
+  "score": 100,
+  "missing_topics": [],
+  "covered_topics": [
+    "Ohm's law describes the relationship between voltage, current, and resistance in an electric circuit",
+    "Current is directly proportional to voltage when temperature is constant",
+    "Mathematical expression V = I × R with units for each variable",
+    "Example calculation: 12 volts across 4 ohms results in 3 amperes of current",
+    "Series resistors: total resistance is the sum of individual resistances (R = R1 + R2 + R3)",
+    "Parallel resistors: reciprocal of total resistance equals sum of reciprocals of individual resistances",
+    "Comparison between series and parallel circuits (current vs. voltage behavior)",
+    "Non-ohmic devices like diodes do not follow Ohm's law, as their V-I graph is nonlinear"
+  ]
+}

@@ -1,0 +1,120 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు",
+        "visualSubject": "భూమిపై జీవం ఉనికి విషయం, కిరణజన్య సంయోగక్రియ లేకుండా జీవం అసాధ్యమైన విషయం",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Title card with a slow fade in, hold for full duration",
+        "visualAnimation": "భూమిపై జీవం ఉనికి విషయం, కిరణజన్య సంయోగక్రియ లేకుండా జీవం అసాధ్యమైన విషయం",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "భూమిపై జీవం ఉనికి విషయం, కిరణజన్య సంయోగక్రియ లేకుండా జీవం అసాధ్యమైన విషయం",
+            "భూమిపై జీవం ఉనికి విషయం, కిరణజన్య సంయోగక్రియ లేకుండా జీవం అసాధ్యమైన విషయం"
+        ],
+        "motion": "slow fade in",
+        "subtitle": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "comfy_image",
+        "assetQualityNotes": "generated still, clean background, no text or labels",
+        "comfyPrompt": "A clean educational image of Earth with a title card stating 'కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు', dark text on light background, sans-serif font, 28px minimum font size",
+        "coverageNotes": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం అసాధ్యమని వివరించడం",
+        "shot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు",
+            "prompt": "A cinematic shot of Earth with a title card stating 'కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు', dark text on light background, sans-serif font, 28px minimum font size",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to form a continuous title card"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు",
+            "prompt": "A cinematic shot of Earth with a title card stating 'కిరణజన్య సంయోగక్రియ లేకుండా భూమిపై జీవం సాధ్యం కాదు', dark text on light background, sans-serif font, 28px minimum font size",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to form a continuous title card"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "ఎందుకంটే అది మనకు అవసరమైన ఆక్సిజన్ ఇస్తుంది.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "ఆక్సిజన్ ఉత్పత్తి కిరణజన్య సంయోగక్రియ ద్వారా",
+        "visualSubject": "పుట్టిన ఆక్సిజన్, కిరణజన్య సంయోగక్రియ ద్వారా ఉత్పత్తి",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration, no motion",
+        "visualAnimation": "పుట్టిన ఆక్సిజన్, కిరణజన్య సంయోగక్రియ ద్వారా ఉత్పత్తి",
+        "localAnimation": "Label the oxygen production process with arrows and labels",
+        "labels": [
+            "ఆక్సిజన్",
+            "కిరణజన్య సంయోగక్రియ"
+        ],
+        "labelPlacements": [
+            "ఆక్సిజన్ | ఆక్సిజన్ ఉత్పత్తి విషయం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "కిరణజన్య సంయోగక్రియ | కిరణజన్య సంయోగక్రియ ద్వారా ఆక్సిజన్ ఉత్పత్తి | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ఆక్సిజన్ ఉత్పత్తి విషయం, కిరణజన్య సంయోగక్రియ ద్వారా ఆక్సిజన్ ఉత్పత్తి",
+            "ఆక్సిజన్ ఉత్పత్తి విషయం, కిరణజన్య సంయోగక్రియ ద్వారా ఆక్సిజన్ ఉత్పత్తి"
+        ],
+        "motion": "static",
+        "subtitle": "కిరణజన్య సంయోగక్రియ ఆక్సిజన్ ఉత్పత్తి చేస్తుంది",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "local diagram, labeled image with precise labels and placements",
+        "comfyPrompt": "",
+        "coverageNotes": "కిరణజన్య సంయోగక్రియ ఆక్సిజన్ ఉత్పత్తి చేస్తుందని వివరించడం",
+        "shot": {
+            "template": "video",
+            "heading": "ఆక్సిజన్ ఉత్పత్య కిరణజన్య సంయోగక్రియ ద్వారా",
+            "prompt": "A labeled diagram showing oxygen production through photosynthesis, with clear labels and arrows indicating the process",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to form a continuous labeled diagram"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ఆక్సిజన్ ఉత్పత్తి కిరణజన్య సంయోగక్రియ ద్వారా",
+            "prompt": "A labeled diagram showing oxygen production through photosynthesis, with clear labels and arrows indicating the process",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips seamlessly to form a continuous labeled diagram"
+        }
+    }
+]

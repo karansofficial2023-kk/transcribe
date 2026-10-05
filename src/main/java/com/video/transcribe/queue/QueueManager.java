@@ -52,7 +52,7 @@ public class QueueManager {
 		}
 
 		// Add existing videos
-		File[] files = folder.listFiles((dir, name) -> name.matches(".*\\.(mp4|mov|avi|mkv|wmv|webm|flv)$"));
+		File[] files = folder.listFiles((dir, name) -> isVideoFile(name));
 
 		if (files != null) {
 			for (File f : files) {
@@ -88,6 +88,34 @@ public class QueueManager {
 	/**
 	 * Start folder watcher (new files auto-added to queue)
 	 */
+	/** Videos already queued from the folder watcher (one copy raises several file-system events). */
+	private final java.util.Set<String> announced = java.util.concurrent.ConcurrentHashMap.newKeySet();
+
+	static boolean isVideoFile(String name) {
+		return name != null && name.toLowerCase(java.util.Locale.ROOT).matches(".*\\.(mp4|mov|avi|mkv|wmv|webm|flv)$");
+	}
+
+	/** A file that is still being copied keeps growing: wait until its size has been stable for a few seconds (at most 30 minutes). */
+	private boolean waitUntilCopied(Path file) throws InterruptedException {
+		long last = -1;
+		int stable = 0;
+		for (int i = 0; i < 1800 && watching; i++) {
+			long size;
+			try {
+				size = java.nio.file.Files.size(file);
+			} catch (IOException e) {
+				size = -1;
+			}
+			stable = size > 0 && size == last ? stable + 1 : 0;
+			if (stable >= 3) {
+				return true;
+			}
+			last = size;
+			Thread.sleep(1000);
+		}
+		return false;
+	}
+
 	private void startWatching(String folderPath) throws Exception {
 		watchService = FileSystems.getDefault().newWatchService();
 		Path path = Paths.get(folderPath);
@@ -105,20 +133,27 @@ public class QueueManager {
 					if (key == null)
 						continue;
 
-					for (WatchEvent<?> event : key.pollEvents()) {
-						Path fileName = (Path) event.context();
-						String fullPath = folderPath + "/" + fileName;
-
-						if (fileName.toString().matches(".*\\.(mp4|mov|avi|mkv|wmv|webm|flv)$")) {
-							// Wait a moment for file to finish copying
-							Thread.sleep(2000);
+					try {
+						for (WatchEvent<?> event : key.pollEvents()) {
+							if (event.kind() == StandardWatchEventKinds.OVERFLOW || !(event.context() instanceof Path)) {
+								continue;               // the OS dropped events: nothing to read, and the watcher must keep running
+							}
+							Path fileName = (Path) event.context();
+							String fullPath = folderPath + "/" + fileName;
+							if (!isVideoFile(fileName.toString()) || !announced.add(fullPath)) {
+								continue;               // not a video, or this copy already produced a queue entry (CREATE + MODIFY...)
+							}
+							if (!waitUntilCopied(Paths.get(fullPath))) {
+								announced.remove(fullPath);
+								continue;
+							}
 							queue.enqueue(new LocalFileSource(fullPath));
 							logger.info("New video detected and queued: {}", fileName);
 						}
+					} finally {
+						key.reset();                    // always, or this folder is never watched again
 					}
-
-					key.reset();
-
+					continue;
 				} catch (Exception e) {
 					logger.error("Watch error: {}", e.getMessage());
 				}

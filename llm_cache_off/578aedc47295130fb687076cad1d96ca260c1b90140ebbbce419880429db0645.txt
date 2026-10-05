@@ -1,0 +1,76 @@
+[
+  {
+    "rowId": "3.4",
+    "labels": ["Electrolyte"],
+    "labelPlacements": [
+      "Electrolyte | solution inside the electrolytic cell | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Electrolyte - solution inside the electrolytic cell"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electroplating setup with labeled electrolyte solution, visible in cell",
+    "comfyPrompt": "A clear electrolytic cell with a labeled solution showing the electrolyte. The solution is clearly visible and unobscured. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.2",
+    "labels": ["Silver Ion", "Chloride Ion"],
+    "labelPlacements": [
+      "Silver Ion | positively charged silver ion in solution | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Chloride Ion | negatively charged chloride ion in solution | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Silver Ion - positively charged silver ion in solution",
+      "Chloride Ion - negatively charged chloride ion in solution"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electrolytic cell with labeled silver and chloride ions in solution, clear ion representation",
+    "comfyPrompt": "An electrolytic cell showing clearly labeled silver and chloride ions in the solution. The ions are visible and unobscured. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.4",
+    "labels": ["Cathode", "Electron Flow"],
+    "labelPlacements": [
+      "Cathode | keychain being electroplated at negative electrode | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Electron Flow | path of electrons from battery to cathode | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Cathode - keychain being electroplated at negative electrode",
+      "Electron Flow - path of electrons from battery to cathode"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electrolytic cell with labeled cathode and electron flow path, keychain electroplating",
+    "comfyPrompt": "An electrolytic cell showing the cathode (keychain being electroplated) and the path of electron flow from battery to cathode. All elements are clearly visible and unobscured. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.5",
+    "labels": ["Silver Ion"],
+    "labelPlacements": [
+      "Silver Ion | positive silver ion moving toward negative electrode | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Silver Ion - positive silver ion moving toward negative electrode"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electrolytic cell with labeled silver ions moving toward cathode, clear ion representation",
+    "comfyPrompt": "An electrolytic cell showing labeled silver ions moving toward the cathode. The ions are clearly visible and unobscured. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.6",
+    "labels": ["Silver Ion", "Electron", "Neutral Silver Atom"],
+    "labelPlacements": [
+      "Silver Ion | positive silver ion with empty outermost shell | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Electron | electron attracted to silver ion's outermost shell | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Neutral Silver Atom | neutral atom formed by electron capture | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Silver Ion - positive silver ion with empty outermost shell",
+      "Electron - electron attracted to silver ion's outermost shell",
+      "Neutral Silver Atom - neutral atom formed by electron capture"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electrolytic cell with labeled silver ion capturing electron, forming neutral atom and depositing onto keychain",
+    "comfyPrompt": "An electrolytic cell showing the process of a silver ion capturing an electron to form a neutral silver atom, which then deposits onto the keychain. All elements are clearly visible and unobscured. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

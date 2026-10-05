@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Ixora flower with anther and stigma visible, close-up view showing mature structures, natural lighting highlighting the pollen-bearing anther and receptive stigma, colors of yellow and red.",
+      "image_requirement": "Viewer must see both anther and stigma in the same flower to understand simultaneous maturation.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In plants such as Ixora, the anther and the stigma reach maturity at the same time.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Anther and Stigma Maturation"
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "Ixora flower with anther releasing pollen and stigma receiving it, close-up view showing the transfer of pollen between structures, natural lighting highlighting the process, colors of yellow and red.",
+      "image_requirement": "Viewer must see pollen transfer between anther and stigma to understand homogamy.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This simultaneous maturation of both structures supports self-pollination and is known as homogamy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Homogamy in Ixora"
+    },
+    {
+      "shot_id": "2.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "Wood sorrel flower with small, inconspicuous petals, close-up view showing lack of fragrance and minimal visual cues, natural lighting highlighting the simple structure, colors of green and white.",
+      "image_requirement": "Viewer must see the small, unfragrant flowers to understand the lack of pollinator attraction.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Some plants, like wood sorrel during late summer, produce small, inconspicuous flowers that lack fragrance.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Inconspicuous Flowers of Wood Sorrel"
+    }
+  ]
+}

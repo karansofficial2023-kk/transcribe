@@ -1,0 +1,47 @@
+[
+  {
+    "rowId": "6.1",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Parallel Resistance Formula",
+    "visualSubject": "A clean white background with a schematic diagram of two resistors in parallel, labeled R1 and R2, connected to a voltage source. The formula for parallel resistance is shown as 1/R_total = 1/R1 + 1/R2.",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "A clean white background with a schematic diagram of two resistors in parallel, labeled R1 and R2, connected to a voltage source. The formula for parallel resistance is shown as 1/R_total = 1/R1 + 1/R2.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the formula for parallel resistance and the concept that total resistance is less than any individual resistor value.",
+    "formulaLines": ["1/R_total = 1/R1 + 1/R2"]
+  },
+  {
+    "rowId": "7.1",
+    "approved": true,
+    "issue": "",
+    "template": "split_screen",
+    "visualType": "realistic_background_with_labels",
+    "heading": "Series vs. Parallel Circuit Behavior",
+    "visualSubject": "Two distinct electrical circuits: one series with labeled current flow and components; one parallel with labeled voltage across branches",
+    "mediaType": "photo",
+    "motionType": "local_animation",
+    "tool": "pillow_opencv",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A split-screen image showing a series circuit on the left with labeled current flow through all components and a parallel circuit on the right with labeled voltage across each branch. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover current constancy in series and voltage equality in parallel, aligning with core curriculum concepts.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "8.1",
+    "approved": true,
+    "issue": "",
+    "template": "video_broll",
+    "visualType": "short_motion_clip",
+    "heading": "Non-Ohmic Behavior of Diodes",
+    "visualSubject": "A 3D animated diode with a curved I-V curve overlay, showing voltage and current axes in a Cartesian plane; camera slowly zooms out to show the non-linear relationship",
+    "mediaType": "wan_video",
+    "motionType": "wan_video",
+    "tool": "ltx_video",
+    "comfyPrompt": "A clean educational background with a 3D animated diode and I-V curve, no text or labels, high detail, realistic lighting",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals explain the non-linear behavior of diodes through an I-V curve, reinforcing that Ohm's Law does not apply to non-ohmic devices. Generated-video guard: do not draw exact labels/arrows on this moving shot; use subtitles only or cut to a separate labeled still/diagram.",
+    "formulaLines": []
+  }
+]

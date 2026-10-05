@@ -1,6 +1,7 @@
 package com.video.transcribe.scene;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
@@ -8,6 +9,34 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class StoryboardQualityGateTest {
+
+    @Test
+    void rejectsWrittenEquationThatWasRoutedAsAStillImage() {
+        SceneSegment segment = segment("photo", "realistic_image", "photo");
+        segment.setSentence("The relationship is written as V = I R in every circuit.");
+        segment.setTool("comfy_image");
+
+        assertThrows(IllegalStateException.class,
+            () -> StoryboardQualityGate.validate(storyboard(segment)));
+    }
+
+    @Test
+    void calculationVocabularyAloneDoesNotForceTheFormulaRenderer() {
+        SceneSegment segment = segment("photo", "realistic_image", "photo");
+        segment.setSentence("Researchers add the samples together and record the sum of the observations.");
+        segment.setTool("comfy_image");
+
+        assertFalse(StoryboardRules.requiresFormulaRenderer(segment));
+    }
+
+    @Test
+    void titleCardMayContainTheWordFormulaWithoutBecomingAManimShot() {
+        SceneSegment segment = segment("title_card", "title_card", "photo");
+        segment.setSentence("Formula methods in physical science");
+        segment.setTool("pillow_opencv");
+
+        assertFalse(StoryboardRules.requiresFormulaRenderer(segment));
+    }
     @Test
     void acceptsUnlabeledPhoto() {
         SceneSegment segment = segment("photo", "realistic_image", "photo");

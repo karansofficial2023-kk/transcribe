@@ -1,0 +1,122 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "ఆకులలో ఉండే పత్రహరితం సూర్యకిరణాలను గ్రహిస్తుంది.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "పత్రహరితం సూర్యకిరణాలను గ్రహిస్తుంది",
+        "visualSubject": "ఆకులలో ఉండే పత్రహరితం, సూర్యకిరణాలు, ఆకు విస్తారం",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Title card with fade-in and hold for full narration duration",
+        "visualAnimation": "ఆకులలో ఉండే పత్రహరితం, సూర్యకిరణాలను గ్రహిస్తుంది. ఆకు విస్తారం మరియు పత్రహరితం ఉనికి చెందిన భాగం కనిపిస్తుంది.",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ఆకుల విస్తారం, పత్రహరితం ఉనికి చెందిన భాగం",
+            "సూర్యకిరణాలు ఆకుల మీద పడే విధం"
+        ],
+        "motion": "Fade-in title card with static image",
+        "subtitle": "ఆకులలో ఉండే పత్రహరితం సూర్యకిరణాలను గ్రహిస్తుంది",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for title card with clean background and clear subject",
+        "comfyPrompt": "A close-up of a leaf with chlorophyll, sunlight rays hitting the leaf surface, high contrast, dark text on light background, thin colored border, 1920x1080 resolution, educational documentary style",
+        "coverageNotes": "Visual covers the concept of chlorophyll absorbing sunlight in leaves",
+        "shot": {
+            "template": "video",
+            "heading": "పత్రహరితం సూర్యకిరణాలను గ్రహిస్తుంది",
+            "prompt": "A close-up of a leaf with chlorophyll, sunlight rays hitting the leaf surface, high contrast, dark text on light background, thin colored border, 1920x1080 resolution, educational documentary style",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full narration duration with smooth transition"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "పత్రహరితం సూర్యకిరణాలను గ్రహిస్తుంది",
+            "prompt": "A close-up of a leaf with chlorophyll, sunlight rays hitting the leaf surface, high contrast, dark text on light background, thin colored border, 1920x1080 resolution, educational documentary style",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full narration duration with smooth transition"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "శక్తి సహాయంతో, కార్బన్ డయాక్సైడ్ మరియు నీరు కలిసి గ్లూకోజ్ ఏర్పడుతుంది.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "కార్బన్ డయాక్సైడ్, నీరు మరియు గ్లూకోజ్ ఏర్పడుతుంది",
+        "visualSubject": "ఆకులలో ఉన్న కార్బన్ డయాక్సైడ్, నీరు, గ్లూకోజ్ ఏర్పడుతుంది",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration with label reveal animation",
+        "visualAnimation": "ఆకులలో ఉన్న కార్బన్ డయాక్సైడ్, నీరు, గ్లూకోజ్ ఏర్పడుతుంది. ఆకు విస్తారం మరియు పత్రహరితం ఉనికి చెందిన భాగం కనిపిస్తుంది.",
+        "localAnimation": "Reveal labels in order: carbon dioxide, water, glucose",
+        "labels": [
+            "కార్బన్ డయాక్సైడ్",
+            "నీరు",
+            "గ్లూకోజ్"
+        ],
+        "labelPlacements": [
+            "కార్బన్ డయాక్సైడ్ | ఆకులలో ఉన్న కార్బన్ డయాక్సైడ్ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీరు | ఆకులలో ఉన్న నీరు | COORDINATES_PENDING_APPROVED_IMAGE",
+            "గ్లూకోజ్ | ఆకులలో ఏర్పడే గ్లూకోజ్ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ఆకులలో ఉన్న కార్బన్ డయాక్సైడ్, నీరు, గ్లూకోజ్",
+            "పత్రహరితం ఉనికి చెందిన భాగం"
+        ],
+        "motion": "Static image with label reveal animation",
+        "subtitle": "కార్బన్ డయాక్సైడ్, నీరు కలిసి గ్లూకోజ్ ఏర్పడుతుంది",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with labels for carbon dioxide, water, and glucose",
+        "comfyPrompt": "A close-up of a leaf with chlorophyll, sunlight rays hitting the leaf surface, high contrast, dark text on light background, thin colored border, 1920x1080 resolution, educational documentary style",
+        "coverageNotes": "Visual covers the process of carbon dioxide and water combining to form glucose in leaves",
+        "shot": {
+            "template": "video",
+            "heading": "కార్బన్ డయాక్సైడ్, నీరు మరియు గ్లూకోజ్ ఏర్పడుతుంది",
+            "prompt": "A close-up of a leaf with chlorophyll, sunlight rays hitting the leaf surface, high contrast, dark text on light background, thin colored border, 1920x1080 resolution, educational documentary style",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full narration duration with smooth transition"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కార్బన్ డయాక్సైడ్, నీరు మరియు గ్లూకోజ్ ఏర్పడుతుంది",
+            "prompt": "A close-up of a leaf with chlorophyll, sunlight rays hitting the leaf surface, high contrast, dark text on light background, thin colored border, 1920x1080 resolution, educational documentary style",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full narration duration with smooth transition"
+        }
+    }
+]

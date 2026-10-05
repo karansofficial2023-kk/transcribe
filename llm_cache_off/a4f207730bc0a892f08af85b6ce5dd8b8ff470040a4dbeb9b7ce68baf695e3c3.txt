@@ -1,0 +1,22 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.14",
+      "visual_type": "realistic_image",
+      "image_prompt": "A group of international leaders in a conference hall, seated at long tables with name tags, natural daylight streaming through large windows, realistic details of clothing and expressions.",
+      "image_requirement": "The viewer must be able to see the leaders' faces and their seating arrangement to understand the narration.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Leaders from various countries in India participated in this event.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

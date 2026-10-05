@@ -1,0 +1,17 @@
+{
+  "inferredTopic": "Finding the minimum value of the function f(x) = x + 1/x using calculus",
+  "filenameTopic": "A Simple Question Based on Minima of a Function",
+  "topicMatch": true,
+  "confidence": 0.95,
+  "safeStoryboardTitle": "Minimizing f(x) = x + 1/x Using Calculus",
+  "subject": "Mathematics",
+  "academicLevel": "High School",
+  "intendedLearners": "Students studying calculus and optimization problems",
+  "learningObjectives": [
+    "Understand how to find the minimum value of a function using derivatives.",
+    "Apply the first and second derivative tests to determine minima and maxima.",
+    "Solve optimization problems involving functions like f(x) = x + 1/x."
+  ],
+  "smeRole": "Calculus educator with expertise in optimization problems",
+  "warning": "The filename topic is sufficiently aligned with the transcript content for a storyboard title. No mismatch detected."
+}

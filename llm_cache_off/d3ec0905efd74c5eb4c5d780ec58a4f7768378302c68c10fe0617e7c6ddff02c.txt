@@ -1,0 +1,122 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+        "visualSubject": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది. గ్లూకోజ్ మొక్క వృద్ధికి అవసరమైన శక్తిని అందిస్తుంది.",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Title card with clear, bold text. Hold for full narration duration.",
+        "visualAnimation": "A title card displaying the sentence in large, readable Telugu script with a clean white background and dark border.",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean white background with large, readable Telugu text for title card.",
+            "A simple educational title card layout with dark border and light text."
+        ],
+        "motion": "Static display of the title card.",
+        "subtitle": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for title card. No labels or text in image.",
+        "comfyPrompt": "A clean white background with large, readable Telugu script text: 'గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది', dark border, sans-serif font, 28px minimum font size.",
+        "coverageNotes": "Visual confirms the main topic of the lesson: glucose provides energy to the plant.",
+        "shot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+            "prompt": "A cinematic shot of a plant with glucose providing energy, natural lighting, shallow depth of field focusing on the plant and glucose molecules.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout.",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second narration."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+            "prompt": "A realistic educational video showing glucose providing energy to a plant, with smooth camera movement and natural lighting.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout.",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second narration."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "మిగిలిన గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+        "visualSubject": "గ్లూకోజ్ మొక్క వృద్ధికి అవసరమైన శక్తిని అందిస్తుంది. మిగిలిన గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది.",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full narration duration. Use labels to explain glucose storage as starch.",
+        "visualAnimation": "A labeled image of a plant with glucose being stored as starch, showing the process in detail.",
+        "localAnimation": "Arrows pointing to glucose molecules and starch granules, with labels explaining the conversion.",
+        "labels": [
+            "గ్లూకోజ్",
+            "పిండి పదార్థం"
+        ],
+        "labelPlacements": [
+            "గ్లూకోజ్ | గ్లూకోజ్ మొక్క వృద్ధికి అవసరమైన శక్తిని అందిస్తుంది | target=(0.25, 0.65)",
+            "పిండి పదార్థం | మిగిలిన గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది | target=(0.65, 0.65)"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [
+            "గ్లూకోజ్ → పిండి పదార్థం"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A realistic image of a plant with glucose molecules and starch granules labeled.",
+            "A detailed diagram showing the conversion of glucose to starch in a plant."
+        ],
+        "motion": "Static display of the labeled image with arrows pointing to key structures.",
+        "subtitle": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with precise labels and arrows for educational clarity.",
+        "comfyPrompt": "A clean white background with a realistic image of a plant showing glucose molecules and starch granules labeled in Telugu script.",
+        "coverageNotes": "Visual confirms the storage of excess glucose as starch, which is a key concept in plant biology.",
+        "shot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+            "prompt": "A cinematic shot of a plant with glucose molecules and starch granules labeled, showing the process in detail.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout.",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 8-second narration."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+            "prompt": "A realistic educational video showing glucose being stored as starch in a plant, with smooth camera movement and natural lighting.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout.",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 8-second narration."
+        }
+    }
+]

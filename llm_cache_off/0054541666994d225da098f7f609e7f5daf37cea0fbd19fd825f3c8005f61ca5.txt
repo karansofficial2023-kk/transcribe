@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Custard apple flower with yellow stigma visible at the center, surrounded by white petals and green sepals, medium distance, slightly angled up to show the mature stigma, natural daylight, warm tones.",
+      "image_requirement": "Viewer must see the mature stigma of a custard apple flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "On the other hand, in custard apple, the stigma matures first, a process referred to as protogyny.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Stigma Maturity in Custard Apple"
+    },
+    {
+      "shot_id": "4.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "Pansy flower with a hood-like structure covering the stigma, purple petals and green sepals, close-up view from above, natural light, cool tones.",
+      "image_requirement": "Viewer must see the hood covering the stigma of a pansy flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Some flowers, such as pansies, have a hood that covers the stigma.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Hooded Stigma in Pansy"
+    },
+    {
+      "shot_id": "4.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "Close-up of pansy flower with a hood-like structure labeled as harkogamy, purple petals and green sepals, medium distance, angled to show the hood covering the stigma, natural light, cool tones.",
+      "image_requirement": "Viewer must see the hooded structure labeled as harkogamy in a pansy flower.",
+      "labels": ["harkogamy"],
+      "label_placement": ["harkogamy - above the hood, white text on dark background"],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This structural feature is called harkogamy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Harkogamy in Pansy"
+    }
+  ]
+}

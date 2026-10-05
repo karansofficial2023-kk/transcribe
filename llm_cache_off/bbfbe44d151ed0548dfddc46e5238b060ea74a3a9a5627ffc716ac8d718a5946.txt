@@ -1,0 +1,138 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "దీని కొరకు, మొక్కలు పత్రరంధ్రాల ద్వారా గాలిని గ్రహిస్తాయి.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "పత్రరంధ్రాల ద్వారా గాలి గ్రహించడం",
+        "visualSubject": "మొక్క పత్రరంధ్రం, గాలి సేకరణ వ్యవస్థ, కార్బన్ డయాక్సైడ్ ప్రవేశం",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "నాటికల్ సీక్వెన్స్ కు అనుగుణంగా విలోమ పరిష్కారం చేయడం",
+        "visualAnimation": "మొక్క పత్రరంధ్రం ద్వారా గాలి ప్రవేశం చేయడం, కార్బన్ డయాక్సైడ్ వస్తుతో అది ప్రవేశించడం",
+        "localAnimation": "పత్రరంధ్రం ద్వారా గాలి ప్రవేశం చేయడం, కార్బన్ డయాక్సైడ్ వస్తుతో అది ప్రవేశించడం",
+        "labels": [
+            "పత్రరంధ్రం | మొక్క యొక్క వాయు సేకరణ కేంద్రం | పత్రరంధ్రం",
+            "గాలి | వాయు సేకరణ ద్వారా మొక్క గాలిని పొందడం | గాలి"
+        ],
+        "labelPlacements": [
+            "పత్రరంధ్రం | మొక్క యొక్క వాయు సేకరణ కేంద్రం | target=(0.35, 0.65)",
+            "గాలి | వాయు సేకరణ ద్వారా మొక్క గాలిని పొందడం | target=(0.45, 0.75)"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [
+            "పత్రరంధ్రం నుండి గాలి ప్రవేశం | arrow=(0.3, 0.5) to (0.4, 0.6)"
+        ],
+        "highlights": [
+            "గాలి ప్రవేశం | highlight=(0.3, 0.5) radius=0.1"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "మొక్క పత్రరంధ్రం ద్వారా గాలి ప్రవేశం చేయడం",
+            "గాలి సేకరణ కు మొక్క యొక్క వాయు ప్రవేశం"
+        ],
+        "motion": "arrow_draw_then_label_fade",
+        "subtitle": "మొక్కలు పత్రరంధ్రాల ద్వారా గాలిని సేకరిస్తాయి",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "దృఢమైన వాయు సేకరణ చిత్రం, పత్రరంధ్రం అందించడం",
+        "comfyPrompt": "A high contrast image of a plant leaf with visible stomata, dark text on light background, thin colored border, and a colored target dot. The subject is clearly focused with 1920x1080 resolution, realistic lighting, and no embedded text or labels.",
+        "coverageNotes": "పత్రరంధ్రాల ద్వారా గాలి సేకరణ విషయంలో మొక్క యొక్క వాయు ప్రవేశం కు సంబంధించిన విషయాలను తెలియజేస్తుంది",
+        "shot": {
+            "template": "video",
+            "heading": "పత్రరంధ్రాల ద్వారా గాలి గ్రహించడం",
+            "prompt": "A cinematic shot of a plant leaf with visible stomata, showing the process of air intake. The camera slowly zooms in on the stomata as air enters through them.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows the leaf and stomata, second clip zooms in on the air intake process."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "పత్రరంధ్రాల ద్వారా గాలి గ్రహించడం",
+            "prompt": "A realistic educational video showing a plant leaf with visible stomata, the process of air intake through them. The camera slowly zooms in on the stomata as air enters through them.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows the leaf and stomata, second clip zooms in on the air intake process."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "ఈ రంధ్రాలు మొక్కలకు కార్బన్ డయాక్సైడ్ ను గ్రహించడానికి మరియు ఆక్సిజన్ విడుదల అవ్వడానికి సహాయపడతాయి.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "రంధ్రాల ద్వారా కార్బన్ డయాక్సైడ్ గ్రహించడం",
+        "visualSubject": "మొక్క పత్రరంధ్రం, కార్బన్ డయాక్సైడ్ ప్రవేశం, ఆక్సిజన్ విడుదల",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "నాటికల్ సీక్వెన్స్ కు అనుగుణంగా విలోమ పరిష్కారం చేయడం",
+        "visualAnimation": "మొక్క పత్రరంధ్రం ద్వారా కార్బన్ డయాక్సైడ్ ప్రవేశం, ఆక్సిజన్ విడుదల",
+        "localAnimation": "పత్రరంధ్రం ద్వారా కార్బన్ డయాక్సైడ్ ప్రవేశం, ఆక్సిజన్ విడుదల",
+        "labels": [
+            "పత్రరంధ్రం | మొక్క యొక్క వాయు సేకరణ కేంద్రం | పత్రరంధ్రం",
+            "కార్బన్ డయాక్సైడ్ | వాయు సేకరణ ద్వారా మొక్క గాలిని పొందడం | కార్బన్ డయాక్సైడ్",
+            "ఆక్సిజన్ | వాయు విడుదల ద్వారా మొక్క ఆక్సిజన్ విడుదల చేయడం | ఆక్సిజన్"
+        ],
+        "labelPlacements": [
+            "పత్రరంధ్రం | మొక్క యొక్క వాయు సేకరణ కేంద్రం | target=(0.35, 0.65)",
+            "కార్బన్ డయాక్సైడ్ | వాయు సేకరణ ద్వారా మొక్క గాలిని పొందడం | target=(0.45, 0.75)",
+            "ఆక్సిజన్ | వాయు విడుదల ద్వారా మొక్క ఆక్సిజన్ విడుదల చేయడం | target=(0.55, 0.85)"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [
+            "కార్బన్ డయాక్సైడ్ ప్రవేశం | arrow=(0.3, 0.5) to (0.4, 0.6)",
+            "ఆక్సిజన్ విడుదల | arrow=(0.5, 0.8) to (0.6, 0.9)"
+        ],
+        "highlights": [
+            "కార్బన్ డయాక్సైడ్ ప్రవేశం | highlight=(0.3, 0.5) radius=0.1",
+            "ఆక్సిజన్ విడుదల | highlight=(0.5, 0.8) radius=0.1"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "మొక్క పత్రరంధ్రం ద్వారా కార్బన్ డయాక్సైడ్ ప్రవేశం",
+            "ఆక్సిజన్ విడుదల ద్వారా మొక్క ఆక్సిజన్ విడుదల చేయడం"
+        ],
+        "motion": "arrow_draw_then_label_fade",
+        "subtitle": "రంధ్రాలు మొక్కలకు కార్బన్ డయాక్సైడ్ ను గ్రహించడానికి మరియు ఆక్సిజన్ విడుదల అవ్వడానికి సహాయపడతాయి",
+        "subtitleStyle": "బాహ్య శాస్త్ర శిక్షణ నిపుణుడు",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "దృఢమైన వాయు సేకరణ చిత్రం, పత్రరంధ్రం అందించడం",
+        "comfyPrompt": "A high contrast image of a plant leaf with visible stomata, dark text on light background, thin colored border, and a colored target dot. The subject is clearly focused with 1920x10,80 resolution, realistic lighting, and no embedded text or labels.",
+        "coverageNotes": "కార్బన్ డయాక్సైడ్ గ్రహించడం మరియు ఆక్సిజన్ విడుదల కు సంబంధించిన విషయాలను తెలియజేస్తుంది",
+        "shot": {
+            "template": "video",
+            "heading": "రంధ్రాల ద్వారా కార్బన్ డయాక్సైడ్ గ్రహించడం",
+            "prompt": "A cinematic shot of a plant leaf with visible stomata, showing the process of carbon dioxide intake and oxygen release. The camera slowly zooms in on the stomata as air enters through them.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows the leaf and stomata, second clip zooms in on the air intake process."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "రంధ్రాల ద్వారా కార్బన్ డయాక్సైడ్ గ్రహించడం",
+            "prompt": "A realistic educational video showing a plant leaf with visible stomata, the process of carbon dioxide intake and oxygen release. The camera slowly zooms in on the stomata as air enters through them.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows the leaf and stomata, second clip zooms in on the air intake process."
+        }
+    }
+]

@@ -1,0 +1,22 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A green plant with leaves exposed to sunlight, taking in carbon dioxide from the air and water from the soil, placed on a windowsill with natural daylight illuminating the scene.",
+      "image_requirement": "The viewer must be able to see the plant's leaves absorbing light, roots drawing water from the soil, and stomata opening to take in carbon dioxide.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In this process, plants take in carbon dioxide from the air and water from the soil.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

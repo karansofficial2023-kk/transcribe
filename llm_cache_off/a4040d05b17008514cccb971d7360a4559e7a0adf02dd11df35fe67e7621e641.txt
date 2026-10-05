@@ -1,0 +1,22 @@
+[
+  {
+    "sceneNumber": 1,
+    "sceneTitle": "Introduction to Optimization Problem",
+    "sentenceNumbers": [2, 3, 4, 5, 6, 7]
+  },
+  {
+    "sceneNumber": 2,
+    "sceneTitle": "Setting Up the Function",
+    "sentenceNumbers": [8]
+  },
+  {
+    "sceneNumber": 3,
+    "sceneTitle": "Finding Critical Points",
+    "sentenceNumbers": [9]
+  },
+  {
+    "sceneNumber": 4,
+    "sceneTitle": "Analyzing Critical Points with Second Derivative",
+    "sentenceNumbers": [10, 11, 12, 13]
+  }
+]

@@ -1,0 +1,130 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Therefore, $ f(x) = x + \frac{1}{x} $.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Function Definition",
+        "visualSubject": "Mathematical function f(x) defined as x plus 1 over x on a whiteboard with dark text and light background",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 3,
+        "recommendedClipSeconds": 5,
+        "timingNotes": "Hold for full duration, no cutaway or loop",
+        "visualAnimation": "A clean whiteboard with dark text showing the function f(x) = x + 1/x in large font",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A whiteboard showing the function f(x) = x + 1/x in large dark text on a light background",
+            "Mathematical notation written clearly with high contrast and legible font"
+        ],
+        "motion": "Static image, no camera movement",
+        "subtitle": "Function definition: f(x) equals x plus one over x",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for clean background and text clarity",
+        "comfyPrompt": "A whiteboard showing the function f(x) = x + 1/x in large dark text on a light background, high contrast, clear font, no watermarks or labels",
+        "coverageNotes": "Visualizes the function definition clearly for student understanding",
+        "shot": {
+            "template": "video",
+            "heading": "Function Definition",
+            "prompt": "A whiteboard showing the function f(x) = x + 1/x in large dark text on a light background, high contrast, clear font, no watermarks or labels",
+            "negativePrompt": "",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 5-second duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Function Definition",
+            "prompt": "A whiteboard showing the function f(x) = x + 1/x in large dark text on a light background, high contrast, clear font, no watermarks or labels",
+            "negativePrompt": "",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 5-second duration"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "To find the maximum or minimum values of this function, we take its derivative and set it equal to zero.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Derivative Calculation",
+        "visualSubject": "Mathematical process showing f'(x) = 1 - 1/x² with labels for each step on a whiteboard",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration, no cutaway or loop",
+        "visualAnimation": "A whiteboard showing the derivative of f(x) = x + 1/x step-by-step with labels and highlights",
+        "localAnimation": "Step-by-step animation of the derivative calculation using Manim, highlighting each term and operation",
+        "labels": [
+            "Derivative of x",
+            "Derivative of 1/x",
+            "Simplified expression"
+        ],
+        "labelPlacements": [
+            "Label name | Derivative of x | target=(0.25,0.75)",
+            "Label name | Derivative of 1/x | target=(0.25,0.65)",
+            "Label name | Simplified expression | target=(0.25,0.55)"
+        ],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [
+            "Highlight the term 1 - 1/x²"
+        ],
+        "formulaLines": [
+            "f'(x) = 1 - 1/x²"
+        ],
+        "explainSteps": [
+            "Step 1: Differentiate x",
+            "Step 2: Differentiate 1/x",
+            "Step 3: Combine terms and simplify"
+        ],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Whiteboard showing the derivative of f(x) = x + 1/x with step-by-step labels",
+            "Mathematical notation written clearly with high contrast and legible font"
+        ],
+        "motion": "Static image, no camera movement",
+        "subtitle": "Find maximum or minimum by taking the derivative and setting it to zero",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "manim",
+        "assetQualityNotes": "Manim animation for precise formula derivation and labeling",
+        "comfyPrompt": "",
+        "coverageNotes": "Visualizes the process of finding critical points using calculus",
+        "shot": {
+            "template": "video",
+            "heading": "Derivative Calculation",
+            "prompt": "A whiteboard showing the derivative of f(x) = x + 1/x step-by-step with labels and highlights, high contrast, clear font, no watermarks or labels",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 8-second duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Derivative Calculation",
+            "prompt": "A whiteboard showing the derivative of f(x) = x + 1/x step-by-step with labels and highlights, high contrast, clear font, no watermarks or labels",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 8-second duration"
+        }
+    }
+]

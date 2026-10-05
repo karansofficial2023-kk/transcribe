@@ -1,0 +1,4 @@
+{
+  "score": 98,
+  "reason": "The paraphrased text preserves the meaning of the original text with minimal changes. The only minor difference is a spelling correction in 'புரிஞ்சுகிறது' to 'புறங்கிறது', which appears to be a correction of a possible transcript error while maintaining the same concept. Otherwise, both texts convey identical information about photosynthesis."
+}

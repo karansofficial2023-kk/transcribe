@@ -1,0 +1,39 @@
+Let's work through this problem that appeared in AIEEE 2002 and involves the application of derivatives. We are given a curve defined by the parametric equations x equals a sin t minus (b sin at)/b, and y equals a cos t minus (b cos at)/b. Our goal is to determine the maximum distance from the origin to any point on this curve.
+
+Let’s denote the coordinates of a general point on the curve as (x, y), and the origin as O(0, 0). The square of the distance OA can be expressed as:
+
+OA² = [a sin t - (b sin at)/b]² + [a cos t - (b cos at)/b]².
+
+Expanding this expression gives:
+
+OA² = a² sin²t + a² cos²t + (b² sin²(at)/b²) + (b² cos²(at)/b²) - 2ab[sin t * sin(at)/b + cos t * cos(at)/b].
+
+Simplifying further, we get:
+
+OA² = a²(sin²t + cos²t) + b²[(sin²(at)/b²) + (cos²(at)/b²)] - 2ab [sin t * sin(at)/b + cos t * cos(at)/b].
+
+Using the identity sin²θ + cos²θ = 1, this becomes:
+
+OA² = a² + b²[ (sin²(at) + cos²(at))/b² ] - 2ab [ (sin t sin(at) + cos t cos(at)) / b ].
+
+This simplifies to:
+
+OA² = a² + b²/b² [sin²(at) + cos²(at)] - 2a [sin t sin(at) + cos t cos(at)].
+
+Since sin²θ + cos²θ = 1, we have:
+
+OA² = a² + 1 - 2a [cos(t - at/b)].
+
+This can be rewritten as:
+
+OA² = a² + b² - 2ab cos(α), where α = t - (at)/b.
+
+We know that the cosine function has a range from -1 to 1. Therefore, OA² will be maximized when cos(α) is minimized, which occurs when cos(α) = -1.
+
+Substituting this value into the equation:
+
+OA² = a² + b² - 2ab(-1) = a² + b² + 2ab.
+
+Taking the square root of both sides gives OA = √(a² + b² + 2ab) = √[(a + b)²] = a + b.
+
+Therefore, the maximum distance from the origin to any point on the curve is a + b. The correct answer is the second option: a + b.

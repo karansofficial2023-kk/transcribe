@@ -1,0 +1,54 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Now, the new resistance R' is calculated as ρ × (L'/A'), or ρ × (1.1L₀/(A₀/1.1)).",
+      "formula_lines": [
+        "R' = \\rho \\times \\frac{L'}{A'}",
+        "R' = \\rho \\times \\frac{1.1L_0}{\\frac{A_0}{1.1}}"
+      ],
+      "explain_steps": [
+        "Resistance is resistivity multiplied by length over area.",
+        "Length increases by 10%, area decreases by 10%."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Resistance After Stretching a Wire"
+    },
+    {
+      "shot_id": "4.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This simplifies to 1.21 × ρ × (L₀/A₀), which is 1.21R₀.",
+      "formula_lines": [
+        "R' = 1.21 \\rho \\times \\frac{L_0}{A_0}",
+        "R' = 1.21 R_0"
+      ],
+      "explain_steps": [
+        "Resistivity and (L₀/A₀) remain constant.",
+        "New resistance is 1.21 times original resistance."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Resistance After Stretching a Wire"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "sceneNumber": 1,
+    "sceneTitle": "Introduction to Ohm's Law",
+    "sentenceNumbers": [1]
+  },
+  {
+    "sceneNumber": 2,
+    "sceneTitle": "Ohm's Law Definition and Proportionality",
+    "sentenceNumbers": [2]
+  },
+  {
+    "sceneNumber": 3,
+    "sceneTitle": "Mathematical Expression of Ohm's Law",
+    "sentenceNumbers": [3]
+  },
+  {
+    "sceneNumber": 4,
+    "sceneTitle": "Example Application of Ohm's Law",
+    "sentenceNumbers": [4]
+  },
+  {
+    "sceneNumber": 5,
+    "sceneTitle": "Series Circuit Resistance Calculation",
+    "sentenceNumbers": [5]
+  },
+  {
+    "sceneNumber": 6,
+    "sceneTitle": "Parallel Circuit Resistance Calculation",
+    "sentenceNumbers": [6]
+  },
+  {
+    "sceneNumber": 7,
+    "sceneTitle": "Current and Voltage Behavior in Series vs. Parallel Circuits",
+    "sentenceNumbers": [7]
+  },
+  {
+    "sceneNumber": 8,
+    "sceneTitle": "Limitations of Ohm's Law: Non-Ohmic Devices",
+    "sentenceNumbers": [8]
+  }
+]

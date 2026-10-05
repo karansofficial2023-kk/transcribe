@@ -1,0 +1,32 @@
+[
+  {
+    "sceneNumber": 1,
+    "sceneTitle": "Introduction to the Problem",
+    "sentenceNumbers": [1, 2, 3]
+  },
+  {
+    "sceneNumber": 2,
+    "sceneTitle": "Circuit Configuration and Given Parameters",
+    "sentenceNumbers": [4, 5, 6, 7, 8, 9, 10]
+  },
+  {
+    "sceneNumber": 3,
+    "sceneTitle": "Understanding the Potential Drop Condition",
+    "sentenceNumbers": [11, 12, 13, 14]
+  },
+  {
+    "sceneNumber": 4,
+    "sceneTitle": "Calculating Current in the Circuit",
+    "sentenceNumbers": [15, 16]
+  },
+  {
+    "sceneNumber": 5,
+    "sceneTitle": "Simplifying and Solving for Resistance",
+    "sentenceNumbers": [17, 18]
+  },
+  {
+    "sceneNumber": 6,
+    "sceneTitle": "Conclusion and Final Answer",
+    "sentenceNumbers": [19]
+  }
+]

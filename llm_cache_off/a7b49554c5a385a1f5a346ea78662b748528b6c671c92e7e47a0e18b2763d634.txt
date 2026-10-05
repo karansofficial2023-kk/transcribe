@@ -1,0 +1,17 @@
+{
+  "inferredTopic": "Finding the minimum value of the function f(x) = x + 1/x using calculus",
+  "filenameTopic": "A Simple Question Based on Minima of a Function",
+  "topicMatch": true,
+  "confidence": 0.95,
+  "safeStoryboardTitle": "Minimizing the Sum of a Number and Its Reciprocal",
+  "subject": "Mathematics",
+  "academicLevel": "High School",
+  "intendedLearners": "Students studying calculus and optimization problems",
+  "learningObjectives": [
+    "Understand how to find minima and maxima of functions using derivatives.",
+    "Apply the second derivative test to determine the nature of critical points.",
+    "Solve optimization problems involving real numbers and their reciprocals."
+  ],
+  "smeRole": "Calculus educator with expertise in optimization problems",
+  "warning": "The filename topic is sufficiently aligned with the transcript content for a storyboard title. No mismatch detected."
+}

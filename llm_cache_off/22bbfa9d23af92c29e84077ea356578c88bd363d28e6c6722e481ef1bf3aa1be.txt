@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a green leaf with sunlight passing through it, casting a bright glow on the surface. The camera is at eye level, slightly angled down to show the texture of the leaf and the light refracting through it. Natural daylight illuminates the leaf in vibrant green tones.",
+      "image_requirement": "Viewer must see the leaf and sunlight interacting to understand energy transfer.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Glucose provides energy to the plant.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a plant's stem with visible starch granules inside the cells, captured under natural light. The camera is at a slight angle to show the internal structure of the cell and the stored starch particles. The lighting highlights the texture and color of the starch.",
+      "image_requirement": "Viewer must see the starch granules within the plant cells to understand storage.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Remaining glucose is stored as starch.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

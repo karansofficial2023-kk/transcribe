@@ -1,0 +1,9 @@
+{
+  "score": 100,
+  "hallucinations": [],
+  "supported_corrections_or_additions": [
+    "The paraphrased text uses slightly different phrasing but maintains the same scientific accuracy and terminology as the original source.",
+    "No invented names, examples, mechanisms, numbers, or claims are present that cannot be supported by the source or established subject knowledge."
+  ],
+  "severity": "low"
+}

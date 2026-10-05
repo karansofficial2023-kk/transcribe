@@ -1,0 +1,72 @@
+[
+  {
+    "rowId": "5.3",
+    "labels": ["Homogamy"],
+    "labelPlacements": [
+      "Homogamy - simultaneous maturation of anther and stigma | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Homogamy - simultaneous maturation of anther and stigma"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Title card with centered text 'This process is called homogamy.' on a dark background with white text and thin black border",
+    "comfyPrompt": "Title card with centered text 'This process is called homogamy.' on a dark background with white text and thin black border. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.4",
+    "labels": ["Sepal", "Petals", "Stamen", "Pistil"],
+    "labelPlacements": [
+      "Sepal | sepal of Wood Sorrel flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Petals | petals of Wood Sorrel flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stamen | stamen of Wood Sorrel flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Pistil | pistil of Wood Sorrel flower | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Sepal - sepal of Wood Sorrel flower",
+      "Petals - petals of Wood Sorrel flower",
+      "Stamen - stamen of Wood Sorrel flower",
+      "Pistil - pistil of Wood Sorrel flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of Wood Sorrel flower with labeled sepals, petals, stamen, and pistil in focus, dark background with white text labels",
+    "comfyPrompt": "Close-up of Wood Sorrel flower with labeled sepals, petals, stamen, and pistil in focus, dark background with white text labels. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.5",
+    "labels": ["Clistogamy"],
+    "labelPlacements": [
+      "Clistogamy - self-pollination and fertilization within a closed flower | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Clistogamy - self-pollination and fertilization within a closed flower"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Title card with centered text 'The occurrence of self-pollination and fertilization within a closed flower is known as clistogamy.' on a dark background with white text and thin black border",
+    "comfyPrompt": "Title card with centered text 'The occurrence of self-pollination and fertilization within a closed flower is known as clistogamy.' on a dark background with white text and thin black border. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with centered text 'Cross-pollination.' on a dark background with white text and thin black border",
+    "comfyPrompt": "Title card with centered text 'Cross-pollination.' on a dark background with white text and thin black border. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.1",
+    "labels": ["Male Flower", "Female Flower"],
+    "labelPlacements": [
+      "Male Flower | male flower of papaya plant | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Female Flower | female flower of papaya plant | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Male Flower - male flower of papaya plant",
+      "Female Flower - female flower of papaya plant"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of papaya plant with clear separation between male and female flowers; natural lighting, shallow depth of field, 16:9 composition",
+    "comfyPrompt": "Close-up of papaya plant with clear separation between male and female flowers; natural lighting, shallow depth of field, 16:9 composition. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

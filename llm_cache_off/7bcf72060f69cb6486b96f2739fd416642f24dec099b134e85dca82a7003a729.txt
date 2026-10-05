@@ -1,0 +1,128 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Let us work through this problem, which was presented in AIEEE 2003 and involves determining the continuity and differentiability of a function at $ x = a $.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Lesson Introduction: Continuity and Differentiability",
+        "visualSubject": "A title card with a black background, white text, centered alignment, 42px font size, max 2 lines of text, no borders or logos",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "A title card with the exact sentence text, centered and aligned as specified in the topic parameters",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Calculus educator with expertise in optimization problems",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A black background with white text centered, no borders or logos",
+            "A title card with a clean, professional look for educational content"
+        ],
+        "motion": "Static image",
+        "subtitle": "Lesson Introduction: Continuity and Differentiability",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still using ComfyUI for clean background",
+        "comfyPrompt": "A black background, white text centered, 42px font size, max 2 lines of text, no borders or logos",
+        "coverageNotes": "Introduces the lesson topic and context from AIEEE 2003",
+        "shot": {
+            "template": "video",
+            "heading": "Lesson Introduction: Continuity and Differentiability",
+            "prompt": "A title card with the exact sentence text, centered and aligned as specified in the topic parameters",
+            "negativePrompt": "No text artifacts, no borders, no logos",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second title card"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Lesson Introduction: Continuity and Differentiability",
+            "prompt": "A title card with the exact sentence text, centered and aligned as specified in the topic parameters",
+            "negativePrompt": "No text artifacts, no borders, no logos",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second title card"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "The question states that for a real number $ x $, when it is added to its reciprocal, the sum reaches its minimum value.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Function Definition and Optimization Goal",
+        "visualSubject": "A graph of the function f(x) = x + 1/x with labeled axes, a highlighted minimum point, and a clear visual representation of the optimization problem",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "A graph of the function f(x) = x + 1/x with labeled axes, a highlighted minimum point, and a clear visual representation of the optimization problem",
+        "localAnimation": "Arrows pointing to the minimum value, labels on the x and y axes, and a highlighted point at the minimum",
+        "labels": [
+            "Function f(x) = x + 1/x",
+            "x-axis label",
+            "y-axis label",
+            "Minimum Value Point"
+        ],
+        "labelPlacements": [
+            "Function f(x) = x + 1/x | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "x-axis label | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "y-axis label | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Minimum Value Point | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Finding the minimum value of the function f(x) = x + 1/x using calculus",
+        "arrows": [
+            "Arrow pointing to the minimum point on the graph"
+        ],
+        "highlights": [
+            "Highlight the minimum point on the graph"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A graph of f(x) = x + 1/x with labeled axes and a highlighted minimum point",
+            "A clear visual representation of the optimization problem"
+        ],
+        "motion": "Static image",
+        "subtitle": "Function Definition and Optimization Goal",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram using Pillow/OpenCV for precise labeling",
+        "comfyPrompt": "",
+        "coverageNotes": "Visualizes the function f(x) = x + 1/x and highlights its minimum value as the optimization goal",
+        "shot": {
+            "template": "video",
+            "heading": "Function Definition and Optimization Goal",
+            "prompt": "A graph of the function f(x) = x + 1/x with labeled axes, a highlighted minimum point, and a clear visual representation of the optimization problem",
+            "negativePrompt": "No text artifacts, no borders, no logos",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second visual"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Function Definition and Optimization Goal",
+            "prompt": "A graph of the function f(x) = x + 1/x with labeled axes, a highlighted minimum point, and a clear visual representation of the optimization problem",
+            "negativePrompt": "No text artifacts, no borders, no logos",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second visual"
+        }
+    }
+]

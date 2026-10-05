@@ -1,0 +1,76 @@
+[
+  {
+    "rowId": "2.1",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther - visible pollen-producing structure at the flower's base | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma - receptive surface for pollen reception | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - visible pollen-producing structure at the flower's base",
+      "Stigma - receptive surface for pollen reception"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A high-resolution image of an Ixora flower with visible anthers and stigmas, showing their position and structure in a natural setting.",
+    "comfyPrompt": "Sharp 1920x1080 realistic documentary image for Ixora Flower Anatomy; depict the concrete subject or visible action described by: In plants such as Ixora, the anther and the stigma reach maturity at the same time.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.2",
+    "labels": ["Homogamy", "Pollen Transfer"],
+    "labelPlacements": [
+      "Homogamy - process of self-pollination within a flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Pollen Transfer - movement of pollen from anther to stigma | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["abstract_or_nonpointable", "visible_physical_target"],
+    "pointTargetNames": [
+      "",
+      "Pollen Transfer - movement of pollen from anther to stigma"
+    ],
+    "presentationMode": "focused_frames",
+    "visualSubject": "A diagram showing pollen transfer from anther to stigma within the same flower, labeled with 'homogamy'.",
+    "comfyPrompt": "Sharp 1920x1080 realistic documentary image for Homogamy in Ixora; depict the concrete subject or visible action described by: This simultaneous maturation of the anther and the stigma facilitates self-pollination, a process known as homogamy.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.3",
+    "labels": ["Small Flowers", "Lack Fragrance"],
+    "labelPlacements": [
+      "Small Flowers - tiny, unnoticeable flowers on the plant | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Lack Fragrance - no visible scent or fragrance | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "abstract_or_nonpointable"],
+    "pointTargetNames": [
+      "Small Flowers - tiny, unnoticeable flowers on the plant",
+      ""
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up image of a small, unnoticeable wood sorrel flower with no visible fragrance.",
+    "comfyPrompt": "Sharp 1920x1080 realistic documentary image for Wood Sorrel Flowers; depict the concrete subject or visible action described by: Some plants, like wood sorrel during late summer, produce small and unnoticeable flowers that lack fragrance.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.4",
+    "labels": ["Clistogamy", "Fertilization"],
+    "labelPlacements": [
+      "Clistogamy - self-pollination and fertilization within an unopened flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Fertilization - process of pollen germination and zygote formation | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["abstract_or_nonpointable", "visible_physical_target"],
+    "pointTargetNames": [
+      "",
+      "Fertilization - process of pollen germination and zygote formation"
+    ],
+    "presentationMode": "focused_frames",
+    "visualSubject": "A diagram showing a closed, bisexual flower with pollen on the stigma and fertilization occurring within.",
+    "comfyPrompt": "Sharp 1920x1080 realistic documentary image for Clistogamy in Flowers; depict the concrete subject or visible action described by: These bisexual flowers remain closed.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.5",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for The occurrence of self-pollination and fertilization within an unopened flower is called clistogamy; depict the concrete subject or visible action described by: The occurrence of self-pollination and fertilization within an unopened flower is called clistogamy.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "Sharp 1920x1080 realistic documentary image for The occurrence of self-pollination and fertilization within an unopened flower is called clistogamy; depict the concrete subject or visible action described by: The occurrence of self-pollination and fertilization within an unopened flower is called clistogamy.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

@@ -55,7 +55,7 @@ public final class StoryboardProjectMaterialsLoader {
             if (!isRelevantToProject(file, baseName)) {
                 continue;
             }
-            if (isUnapprovedGeneratedStoryboard(file)) {
+            if (isUnapprovedGeneratedStoryboard(file) || isPipelineOutput(file, baseName) || isOwnSource(file, baseName) || isGlossary(file)) {
                 continue;
             }
             String extension = extension(file);
@@ -76,6 +76,32 @@ public final class StoryboardProjectMaterialsLoader {
             context.append(section);
         }
         return new StoryboardProjectMaterials(context.toString().trim(), assets);
+    }
+
+    /**
+     * Files this pipeline writes about a lesson: {@code <lesson>_transcript.txt} and the like. They are derived from the lesson, so they
+     * can never serve as independent evidence. A teacher's own {@code narration_transcript.txt} (different prefix) still counts.
+     */
+    static boolean isPipelineOutput(Path file, String baseName) {
+        if (baseName == null || baseName.isBlank()) return false;
+        String name = file.getFileName().toString().toLowerCase(Locale.ROOT);
+        String prefix = baseName.toLowerCase(Locale.ROOT);
+        for (String suffix : new String[] {"_transcript.", "_paraphrased.", "_validation.", "_manifest.", "_contract.", "_audit.",
+                "_grounding.", "_glossary_candidates.", "_curriculum_enriched.", "_translation_review.", "_storyboard.draft."}) {
+            if (name.startsWith(prefix + suffix)) return true;
+            // translated outputs: <lesson>_<code>_contract.json
+            if (name.startsWith(prefix + "_") && name.matches(".*_[a-z]{2}" + java.util.regex.Pattern.quote(suffix) + ".*")) return true;
+        }
+        return false;
+    }
+
+    /** The lesson's own source recording is the thing being taught, not a reference for it. */
+    static boolean isOwnSource(Path file, String baseName) {
+        if (baseName == null || baseName.isBlank()) return false;
+        String name = file.getFileName().toString();
+        String extension = extension(file);
+        if (!ASSET_EXTENSIONS.contains(extension) || !Set.of("mp4", "mov", "mkv", "avi", "webm").contains(extension)) return false;
+        return normalizeKey(name.substring(0, name.length() - extension.length() - 1)).equals(normalizeKey(baseName));
     }
 
     private static boolean isUnapprovedGeneratedStoryboard(Path file) {
@@ -144,21 +170,43 @@ public final class StoryboardProjectMaterialsLoader {
         if (baseName == null || baseName.isBlank()) {
             return true;
         }
-        String fileName = file.getFileName().toString();
-        String fileKey = normalizeKey(fileName);
-        String pathKey = normalizeKey(file.toString());
-        String baseKey = normalizeKey(baseName);
-        if (!baseKey.isBlank() && (pathKey.contains(baseKey)
-                || fileKey.contains(baseKey)
-                || baseKey.contains(stripExtensionKey(fileKey)))) {
+        // The lesson name must appear as whole words in the path: "Lesson 1" must not pull in "Lesson 10 teacher correction.docx".
+        if (containsWords(file.toString(), baseName)) {
             return true;
         }
-
+        String fileName = file.getFileName().toString();
         int priority = priority(file);
         String lowerName = fileName.toLowerCase(Locale.ROOT);
         boolean likelyLessonSpecific = containsAny(lowerName,
             "storyboard", "transcript", "paraphrase", "narration", "script", "lesson");
         return priority <= 5 && !likelyLessonSpecific;
+    }
+
+    /** True when {@code needle}'s words occur in {@code haystack} as a run of whole words (case-insensitive, any script). */
+    static boolean containsWords(String haystack, String needle) {
+        java.util.List<String> hay = words(haystack);
+        java.util.List<String> want = words(needle);
+        if (want.isEmpty()) return false;
+        outer:
+        for (int start = 0; start + want.size() <= hay.size(); start++) {
+            for (int i = 0; i < want.size(); i++) {
+                if (!hay.get(start + i).equals(want.get(i))) continue outer;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private static java.util.List<String> words(String text) {
+        java.util.List<String> words = new ArrayList<>();
+        java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("[\\p{L}\\p{M}\\p{N}]+").matcher(text == null ? "" : text.toLowerCase(Locale.ROOT));
+        while (matcher.find()) words.add(matcher.group());
+        return words;
+    }
+
+    /** Glossaries are spelling corrections for the recogniser, not statements about the subject. */
+    static boolean isGlossary(Path file) {
+        return file.getFileName().toString().toLowerCase(Locale.ROOT).contains("glossary");
     }
 
     private static String stripExtensionKey(String key) {
@@ -170,7 +218,7 @@ public final class StoryboardProjectMaterialsLoader {
             return "";
         }
         return value.toLowerCase(Locale.ROOT)
-            .replaceAll("[^\\p{L}\\p{N}]+", "")
+            .replaceAll("[^\\p{L}\\p{M}\\p{N}]+", "")
             .trim();
     }
 

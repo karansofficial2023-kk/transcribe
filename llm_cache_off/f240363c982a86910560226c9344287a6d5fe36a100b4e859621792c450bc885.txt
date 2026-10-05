@@ -1,0 +1,122 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "The new cross-sectional area $ A' $ can be calculated as the original volume divided by the new length.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Formula for Cross-Sectional Area Calculation",
+        "visualSubject": "A clean, high-contrast white background with a centered black band at the bottom. The text is in white, 42px font size, two lines max, centered horizontally and vertically. The formula $ A' = \frac{A_0 \times L_0}{L'} $ is displayed.",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration to allow visual absorption of the formula.",
+        "visualAnimation": "A clean, high-contrast white background with a centered black band at the bottom. The text is in white, 42px font size, two lines max, centered horizontally and vertically. The formula $ A' = \frac{A_0 \times L_0}{L'} $ is displayed.",
+        "localAnimation": "No animation required; static display of the formula with clear labels.",
+        "labels": ["Cross-sectional Area", "Original Volume", "New Length"],
+        "labelPlacements": [
+            "Cross-sectional Area | new cross-sectional area A' | target=(0.35, 0.75)",
+            "Original Volume | original volume A₀ × L₀ | target=(0.35, 0.65)",
+            "New Length | new length L' | target=(0.35, 0.55)"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": ["A' = (A₀ × L₀) / L'"],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "White background with centered black band and formula text",
+            "High-contrast educational diagram showing cross-sectional area calculation"
+        ],
+        "motion": "Static display of the formula on a clean white background.",
+        "subtitle": "New cross-sectional area is original volume divided by new length",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background and clear formula text. No labels in image, only overlays.",
+        "comfyPrompt": "A white background with a centered black band at the bottom. The text is in white, 42px font size, two lines max, centered horizontally and vertically. The formula $ A' = \frac{A_0 \times L_0}{L'} $ is displayed.",
+        "coverageNotes": "Visualizes the formula for calculating new cross-sectional area based on original volume and new length.",
+        "shot": {
+            "template": "video",
+            "heading": "Formula Display",
+            "prompt": "Static display of the formula $ A' = \frac{A_0 \times L_0}{L'} $ on a clean white background with centered black band at bottom. No text artifacts, clear and readable.",
+            "negativePrompt": "No watermarks, no slide layout, no embedded text",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to display the full formula with clear readability."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Formula Display",
+            "prompt": "Static display of the formula $ A' = \frac{A_0 \times L_0}{L'} $ on a clean white background with centered black band at bottom. No text artifacts, clear and readable.",
+            "negativePrompt": "No watermarks, no slide layout, no embedded text",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to display the full formula with clear readability."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Since the original volume is $ A_0 \times L_0 $, dividing this by the new length $ L' = 1.1L_0 $ gives us $ A' = \frac{A_0 \times L_0}{1.1L_0} $, which simplifies to $ \frac{A_0}{1.1} $.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Simplification of Cross-Sectional Area Formula",
+        "visualSubject": "A clean, high-contrast white background with a centered black band at the bottom. The text is in white, 42px font size, two lines max, centered horizontally and vertically. The formula $ A' = \frac{A_0}{1.1} $ is displayed.",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 8,
+        "recommendedClipSeconds": 10,
+        "timingNotes": "Hold for full duration to allow visual absorption of the simplified formula.",
+        "visualAnimation": "A clean, high-contrast white background with a centered black band at the bottom. The text is in white, 42px font size, two lines max, centered horizontally and vertically. The formula $ A' = \frac{A_0}{1.1} $ is displayed.",
+        "localAnimation": "No animation required; static display of the simplified formula with clear labels.",
+        "labels": ["Cross-sectional Area", "Original Cross-Sectional Area", "Scaling Factor"],
+        "labelPlacements": [
+            "Cross-sectional Area | new cross-sectional area A' | target=(0.35, 0.75)",
+            "Original Cross-Sectional Area | original cross-sectional area A₀ | target=(0.35, 0.65)",
+            "Scaling Factor | scaling factor of 1/1.1 | target=(0.35, 0.55)"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": ["A' = A₀ / 1.1"],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "White background with centered black band and simplified formula text",
+            "High-contrast educational diagram showing cross-sectional area simplification"
+        ],
+        "motion": "Static display of the simplified formula on a clean white background.",
+        "subtitle": "Simplified cross-sectional area is original area divided by 1.1",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background and clear formula text. No labels in image, only overlays.",
+        "comfyPrompt": "A white background with a centered black band at the bottom. The text is in white, 42px font size, two lines max, centered horizontally and vertically. The formula $ A' = \frac{A_0}{1.1} $ is displayed.",
+        "coverageNotes": "Visualizes the simplified formula for calculating new cross-sectional area based on original area and scaling factor.",
+        "shot": {
+            "template": "video",
+            "heading": "Simplified Formula Display",
+            "prompt": "Static display of the formula $ A' = \frac{A_0}{1.1} $ on a clean white background with centered black band at bottom. No text artifacts, clear and readable.",
+            "negativePrompt": "No watermarks, no slide layout, no embedded text",
+            "durationSeconds": 10,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips to display the full formula with clear readability."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Simplified Formula Display",
+            "prompt": "Static display of the formula $ A' = \frac{A_0}{1.1} $ on a clean white background with centered black band at bottom. No text artifacts, clear and readable.",
+            "negativePrompt": "No watermarks, no slide layout, no embedded text",
+            "durationSeconds": 10,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips to display the full formula with clear readability."
+        }
+    }
+]

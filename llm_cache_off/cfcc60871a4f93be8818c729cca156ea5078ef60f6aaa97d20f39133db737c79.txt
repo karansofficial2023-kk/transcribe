@@ -1,0 +1,62 @@
+[
+  {
+    "rowId": "3.5",
+    "labels": ["Anthers (Mature First)", "Stigma (Maturing Later)"],
+    "labelPlacements": [
+      "Anthers (Mature First) | Anthers on the sunflower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma (Maturing Later) | Stigma on the sunflower | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anthers (Mature First) - Pollen-producing structures",
+      "Stigma (Maturing Later) - Sticky receptive surface"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A realistic image of a sunflower with anthers and stigma clearly visible; camera angle: medium shot, lighting: natural daylight",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a sunflower with anthers and stigma clearly visible; camera angle: medium shot, lighting: natural daylight. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with bold, centered text on a dark background; no image or diagram",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a title card with bold, centered text on a dark background; no image or diagram. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with text 'Protogyny: Stigma Matures First in Custard Apple' on dark background, light text, thin border, no logo or subtitle area",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a title card with text 'Protogyny: Stigma Matures First in Custard Apple' on dark background, light text, thin border, no logo or subtitle area. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.2",
+    "labels": ["Harkogamy"],
+    "labelPlacements": [
+      "Harkogamy | Hood covering stigma | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": [
+      "Harkogamy - Hood covering stigma"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of pansy flower with labeled hood covering stigma, dark background, light text, thin border, no logo or subtitle area",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a close-up of pansy flower with hood covering stigma; dark background, light text, thin border, no logo or subtitle area. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.3",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for This structural feature is called harkogamy.; depict the concrete subject or visible action described by: This structural feature is called harkogamy.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a realistic documentary image for This structural feature is called harkogamy; depict the concrete subject or visible action described by: This structural feature is called harkogamy; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

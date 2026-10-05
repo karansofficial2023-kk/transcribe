@@ -1,0 +1,32 @@
+[
+  {
+    "sceneNumber": 1,
+    "sceneTitle": "Introduction to Resistance Calculation",
+    "sentenceNumbers": [1, 2, 3]
+  },
+  {
+    "sceneNumber": 2,
+    "sceneTitle": "Length and Area Changes",
+    "sentenceNumbers": [4, 5, 6]
+  },
+  {
+    "sceneNumber": 3,
+    "sceneTitle": "New Resistance Calculation",
+    "sentenceNumbers": [7, 8, 9]
+  },
+  {
+    "sceneNumber": 4,
+    "sceneTitle": "Clarification and Confirmation",
+    "sentenceNumbers": [10, 15]
+  },
+  {
+    "sceneNumber": 5,
+    "sceneTitle": "Understanding Specific Resistance",
+    "sentenceNumbers": [11, 12, 13]
+  },
+  {
+    "sceneNumber": 6,
+    "sceneTitle": "Conclusion and Final Verification",
+    "sentenceNumbers": [14]
+  }
+]

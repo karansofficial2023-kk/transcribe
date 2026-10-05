@@ -1,0 +1,78 @@
+[
+  {
+    "rowId": "1.2",
+    "labels": ["stamen", "stigma"],
+    "labelPlacements": [
+      "stamen - male reproductive organ | target=(0.000,0.000)",
+      "stigma - female receptive structure | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "stamen - male reproductive organ",
+      "stigma - female receptive structure"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Detailed close-up of sunflower petals and central disk with visible stamen and stigma",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of sunflower petals and central disk with visible stamen and stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.3",
+    "labels": ["bees", "stamen", "stigma"],
+    "labelPlacements": [
+      "bees - pollinators | target=(0.000,0.000)",
+      "stamen - male reproductive organ | target=(0.000,0.000)",
+      "stigma - female receptive structure | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "bees - pollinators",
+      "stamen - male reproductive organ",
+      "stigma - female receptive structure"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Sunflower with bees visiting the central disk, visible stamen and stigma",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of sunflower with bees visiting the central disk, visible stamen and stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.4",
+    "labels": ["stamen", "stigma"],
+    "labelPlacements": [
+      "stamen - male reproductive organ | target=(0.000,0.000)",
+      "stigma - female receptive structure | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "stamen - male reproductive organ",
+      "stigma - female receptive structure"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Sunflower with stamen curling inward and pollen depositing on stigma",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of sunflower with stamen curling inward and pollen depositing on stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.5",
+    "labels": ["stamen", "stigma"],
+    "labelPlacements": [
+      "stamen - male reproductive organ | target=(0.000,0.000)",
+      "stigma - female receptive structure | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "stamen - male reproductive organ",
+      "stigma - female receptive structure"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Sunflower with stamen curling inward and pollen transfer to stigma",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of sunflower with stamen curling inward and pollen transfer to stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Text overlay with definition of self-pollination on sunflower image",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of text overlay with definition of self-pollination on sunflower image. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

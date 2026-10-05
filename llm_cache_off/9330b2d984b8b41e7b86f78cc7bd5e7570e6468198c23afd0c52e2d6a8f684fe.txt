@@ -1,0 +1,372 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Let's now simulate the chemical reaction taking place within the solution.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "Simulate Chemical Reaction in Electrolytic Cell",
+        "visualSubject": "Electrolytic cell with ions moving, animated simulation of electron flow and ion movement",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Use seamless loop motion for continuous simulation; extend with cutaway if needed.",
+        "visualAnimation": "A dynamic, cinematic view of an electrolytic cell in action, showing ions moving through the solution and electrons flowing from the battery to the cathode.",
+        "localAnimation": "Camera slowly zooms into the solution, highlighting ion movement and electron flow with subtle motion blur for clarity.",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Dynamic electrolytic cell simulation with ion movement and electron flow",
+            "Animated view of ions in solution moving toward electrodes"
+        ],
+        "motion": "Camera slowly zooms into the solution, highlighting ion movement and electron flow with subtle motion blur for clarity.",
+        "subtitle": "Simulate chemical reaction in the electrolytic cell solution",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "ltx_video",
+        "assetQualityNotes": "Use LTX clip for natural cinematic motion; no labels or formulas required.",
+        "comfyPrompt": "Clean background, electrolytic cell with ions moving in solution, realistic lighting, educational documentary style",
+        "coverageNotes": "Visuals simulate the chemical reaction within the solution as described in narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Simulate Chemical Reaction in Electrolytic Cell",
+            "prompt": "Dynamic view of an electrolytic cell with ions moving through the solution, showing electron flow from battery to cathode. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous simulation of ion movement and electron flow."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Simulate Chemical Reaction in Electrolytic Cell",
+            "prompt": "Dynamic view of an electrolytic cell with ions moving through the solution, showing electron flow from battery to cathode. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous simulation of ion movement and electron flow."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Remember, in this case, the electrolyte contains positively charged silver ions and negatively charged chloride ions.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Electrolyte Composition in Electrolytic Cell",
+        "visualSubject": "Electrolytic cell with labeled silver and chloride ions in solution, clear ion representation",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration; no motion required.",
+        "visualAnimation": "A labeled image of an electrolytic cell with silver and chloride ions clearly represented in the solution, showing their charges and positions.",
+        "localAnimation": "Static image with clear labels on each ion type, using arrows to point to their locations in the solution.",
+        "labels": [
+            "Silver Ion",
+            "Chloride Ion"
+        ],
+        "labelPlacements": [
+            "Silver Ion | positively charged silver ion in solution | target=(0.35, 0.65)",
+            "Chloride Ion | negatively charged chloride ion in solution | target=(0.65, 0.65)"
+        ],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [
+            "Silver Ion -> (0.35, 0.65)"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Electrolytic cell with labeled silver and chloride ions in solution",
+            "Clear diagram of electrolyte composition showing positive and negative ions"
+        ],
+        "motion": "Static image with clear labels on each ion type, using arrows to point to their locations in the solution.",
+        "subtitle": "Electrolyte contains positively charged silver ions and negatively charged chloride ions",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with precise labels for ion types; no generated video required.",
+        "comfyPrompt": "Clean background, electrolytic cell with labeled silver and chloride ions in solution, realistic lighting, educational documentary style",
+        "coverageNotes": "Visuals clearly label the composition of the electrolyte as described in narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Electrolyte Composition in Electrolytic Cell",
+            "prompt": "Labeled image of an electrolytic cell with silver and chloride ions clearly represented in the solution, showing their charges and positions. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous labeled image of ion composition."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Electrolyte Composition in Electrolytic Cell",
+            "prompt": "Labeled image of an electrolytic cell with silver and chloride ions clearly represented in the solution, showing their charges and positions. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous labeled image of ion composition."
+        }
+    },
+    {
+        "segmentNumber": 3,
+        "sentence": "Let's turn on the power supply.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "Power Supply Activation in Electrolytic Cell",
+        "visualSubject": "Electrolytic cell with power supply turned on, showing electron flow and ion movement",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 3.5,
+        "recommendedClipSeconds": 4,
+        "timingNotes": "Use seamless loop motion for continuous simulation; extend with cutaway if needed.",
+        "visualAnimation": "A dynamic, cinematic view of an electrolytic cell with the power supply turned on, showing electrons flowing from the battery to the cathode and ions moving in response.",
+        "localAnimation": "Camera slowly zooms into the solution, highlighting electron flow and ion movement with subtle motion blur for clarity.",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Dynamic electrolytic cell simulation with power supply turned on, showing electron flow and ion movement",
+            "Animated view of ions in solution moving toward electrodes"
+        ],
+        "motion": "Camera slowly zooms into the solution, highlighting electron flow and ion movement with subtle motion blur for clarity.",
+        "subtitle": "Power supply activated, showing electron flow and ion movement",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "ltx_video",
+        "assetQualityNotes": "Use LTX clip for natural cinematic motion; no labels or formulas required.",
+        "comfyPrompt": "Clean background, electrolytic cell with power supply turned on, realistic lighting, educational documentary style",
+        "coverageNotes": "Visuals show the activation of the power supply and its effect on electron flow and ion movement as described in narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Power Supply Activation in Electrolytic Cell",
+            "prompt": "Dynamic view of an electrolytic cell with power supply turned on, showing electrons flowing from battery to cathode. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 4,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "Single 4-second clip showing power supply activation and electron flow."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Power Supply Activation in Electrolytic Cell",
+            "prompt": "Dynamic view of an electrolytic cell with power supply turned on, showing electrons flowing from battery to cathode. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 4,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "Single 4-second clip showing power supply activation and electron flow."
+        }
+    },
+    {
+        "segmentNumber": 4,
+        "sentence": "You can see electrons moving from the battery toward the cathode, which is actually the keychain being electroplated, giving it a negative charge.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Electron Flow to Cathode in Electrolytic Cell",
+        "visualSubject": "Electrolytic cell with labeled cathode and electron flow path, keychain electroplating",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration; no motion required.",
+        "visualAnimation": "A labeled image of an electrolytic cell with the cathode clearly marked as the keychain being electroplated, showing electron flow from battery to cathode and its negative charge.",
+        "localAnimation": "Static image with clear labels on the cathode and electron path, using arrows to point to their locations in the solution.",
+        "labels": [
+            "Cathode",
+            "Electron Flow"
+        ],
+        "labelPlacements": [
+            "Cathode | keychain being electroplated at negative electrode | target=(0.5, 0.7)",
+            "Electron Flow | path of electrons from battery to cathode | target=(0.3, 0.4)"
+        ],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [
+            "Electron Flow -> (0.3, 0.4)"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Electrolytic cell with labeled cathode and electron flow path to keychain",
+            "Clear diagram of electron movement from battery to cathode"
+        ],
+        "motion": "Static image with clear labels on the cathode and electron path, using arrows to point to their locations in the solution.",
+        "subtitle": "Electrons move from battery to cathode, giving it a negative charge",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with precise labels for electron flow and cathode; no generated video required.",
+        "comfyPrompt": "Clean background, electrolytic cell with labeled cathode and electron flow path to keychain, realistic lighting, educational documentary style",
+        "coverageNotes": "Visuals clearly label the cathode as the keychain being electroplated and show electron flow as described in narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Electron Flow to Cathode in Electrolytic Cell",
+            "prompt": "Labeled image of an electrolytic cell with cathode clearly marked as keychain, showing electron flow from battery to cathode. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous labeled image of electron flow and cathode."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Electron Flow to Cathode in Electrolytic Cell",
+            "prompt": "Labeled image of an electrolytic cell with cathode clearly marked as keychain, showing electron flow from battery to cathode. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous labeled image of electron flow and cathode."
+        }
+    },
+    {
+        "segmentNumber": 5,
+        "sentence": "The positive silver ions are drawn to the negative electrode.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Silver Ions Moving Toward Cathode in Electrolytic Cell",
+        "visualSubject": "Electrolytic cell with labeled silver ions moving toward cathode, clear ion representation",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration; no motion required.",
+        "visualAnimation": "A labeled image of an electrolytic cell with silver ions clearly represented in the solution, showing their movement toward the cathode.",
+        "localAnimation": "Static image with clear labels on each ion type, using arrows to point to their locations in the solution.",
+        "labels": [
+            "Silver Ion"
+        ],
+        "labelPlacements": [
+            "Silver Ion | positive silver ion moving toward negative electrode | target=(0.65, 0.65)"
+        ],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [
+            "Silver Ion -> (0.65, 0.65)"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Electrolytic cell with labeled silver ions moving toward cathode",
+            "Clear diagram of ion movement in solution"
+        ],
+        "motion": "Static image with clear labels on each ion type, using arrows to point to their locations in the solution.",
+        "subtitle": "Positive silver ions move toward the negative electrode",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with precise labels for ion movement; no generated video required.",
+        "comfyPrompt": "Clean background, electrolytic cell with labeled silver ions moving toward cathode, realistic lighting, educational documentary style",
+        "coverageNotes": "Visuals clearly label the movement of positive silver ions toward the negative electrode as described in narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Silver Ions Moving Toward Cathode in Electrolytic Cell",
+            "prompt": "Labeled image of an electrolytic cell with silver ions moving toward cathode. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous labeled image of ion movement."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Silver Ions Moving Toward Cathode in Electrolytic Cell",
+            "prompt": "Labeled image of an electrolytic cell with silver ions moving toward cathode. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous labeled image of ion movement."
+        }
+    },
+    {
+        "segmentNumber": 6,
+        "sentence": "Notice that the silver ion has an empty spot in its outermost shell, and it attracts an electron into this position. This creates a neutral silver atom, which then deposits onto the keychain.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Silver Ion Electron Capture and Deposition on Keychain",
+        "visualSubject": "Electrolytic cell with labeled silver ion capturing electron, forming neutral atom and depositing onto keychain",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 7,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration; no motion required.",
+        "visualAnimation": "A labeled image of an electrolytic cell with a silver ion clearly represented, showing its empty outermost shell and the electron being attracted to it, forming a neutral atom that deposits onto the keychain.",
+        "localAnimation": "Static image with clear labels on each ion type, using arrows to point to their locations in the solution.",
+        "labels": [
+            "Silver Ion",
+            "Electron",
+            "Neutral Silver Atom"
+        ],
+        "labelPlacements": [
+            "Silver Ion | positive silver ion with empty outermost shell | target=(0.65, 0.65)",
+            "Electron | electron attracted to silver ion's outermost shell | target=(0.6, 0.75)",
+            "Neutral Silver Atom | neutral atom formed by electron capture | target=(0.5, 0.8)"
+        ],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [
+            "Silver Ion -> (0.65, 0.65)",
+            "Electron -> (0.6, 0.75)",
+            "Neutral Silver Atom -> (0.5, 0.8)"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Electrolytic cell with labeled silver ion capturing electron and forming neutral atom",
+            "Clear diagram of electron capture and deposition on keychain"
+        ],
+        "motion": "Static image with clear labels on each ion type, using arrows to point to their locations in the solution.",
+        "subtitle": "Silver ion captures an electron, forms a neutral atom, and deposits onto the keychain",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with precise labels for electron capture and deposition; no generated video required.",
+        "comfyPrompt": "Clean background, electrolytic cell with labeled silver ion capturing electron and forming neutral atom, realistic lighting, educational documentary style",
+        "coverageNotes": "Visuals clearly label the process of silver ion capturing an electron to form a neutral atom that deposits onto the keychain as described in narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Silver Ion Electron Capture and Deposition on Keychain",
+            "prompt": "Labeled image of an electrolytic cell with silver ion capturing electron, forming neutral atom. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous labeled image of electron capture and deposition."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Silver Ion Electron Capture and Deposition on Keychain",
+            "prompt": "Labeled image of an electrolytic cell with silver ion capturing electron, forming neutral atom. Realistic lighting and educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous labeled image of electron capture and deposition."
+        }
+    }
+]

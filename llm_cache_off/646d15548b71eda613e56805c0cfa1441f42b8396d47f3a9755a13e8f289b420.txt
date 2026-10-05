@@ -1,0 +1,72 @@
+[
+  {
+    "rowId": "2.5",
+    "labels": ["Electrolytic Cell", "Ready for Electroplating"],
+    "labelPlacements": [
+      "Electrolytic Cell | Complete setup with all components connected | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Ready for Electroplating | All connections made, process can begin | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Electrolytic Cell - Complete setup with all components connected",
+      "Ready for Electroplating - All connections made, process can begin"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electrolytic cell with all components connected, ready for electroplating",
+    "comfyPrompt": "Sharp 1920x1080 realistic labeled image of electrolytic cell with all components connected, ready for electroplating. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for Let's proceed.; depict the concrete subject or visible action described by: Let's proceed.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "Sharp 1920x1080 realistic documentary image for Let's proceed.; depict the concrete subject or visible action described by: Let's proceed.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with centered white text on black band at bottom of screen, 42px font size, max 2 lines",
+    "comfyPrompt": "Sharp 1920x1080 realistic image of title card with centered white text on black band at bottom of screen, 42px font size, max 2 lines. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.2",
+    "labels": ["Anode", "Cathode", "Electrolyte"],
+    "labelPlacements": [
+      "Anode | Terminal connected to positive side of battery | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Cathode | Terminal connected to negative side of battery | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Electrolyte | Silver nitrate solution in electrolytic cell | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anode - Terminal connected to positive side of battery",
+      "Cathode - Terminal connected to negative side of battery",
+      "Electrolyte - Silver nitrate solution in electrolytic cell"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electroplating setup with labeled boxes for anode and cathode, electrolyte solution visible",
+    "comfyPrompt": "Sharp 1920x1080 realistic labeled image of electroplating setup with labeled boxes for anode and cathode, electrolyte solution visible. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.3",
+    "labels": ["Anode", "Cathode"],
+    "labelPlacements": [
+      "Anode | Terminal connected to positive side of battery | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Cathode | Terminal connected to negative side of battery | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anode - Terminal connected to positive side of battery",
+      "Cathode - Terminal connected to negative side of battery"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Electroplating setup with labeled anode and cathode, battery connections visible",
+    "comfyPrompt": "Sharp 1920x1080 realistic labeled image of electroplating setup with labeled anode and cathode, battery connections visible. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

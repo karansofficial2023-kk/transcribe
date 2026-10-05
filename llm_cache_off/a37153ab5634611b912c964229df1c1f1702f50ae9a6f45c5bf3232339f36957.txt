@@ -1,0 +1,33 @@
+{
+  "shots": [
+    {
+      "shot_id": "8.1",
+      "visual_type": "formula",
+      "image_prompt": "A diode with voltage and current labels showing non-linear relationship",
+      "image_requirement": "Viewer must see the diode and its voltage-current curve",
+      "labels": [
+        "Voltage - left side of diode",
+        "Current - right side of diode"
+      ],
+      "label_placement": [
+        "Voltage - top of diode, white text",
+        "Current - bottom of diode, white text"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Ohm's law does not hold true for non-ohmic devices like diodes, where the relationship between voltage and current does not form a straight line on a graph.",
+      "formula_lines": [
+        "I = f(V) for diode"
+      ],
+      "explain_steps": [
+        "Current through a diode is a function of voltage"
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Non-Ohmic Behavior in Diodes"
+    }
+  ]
+}

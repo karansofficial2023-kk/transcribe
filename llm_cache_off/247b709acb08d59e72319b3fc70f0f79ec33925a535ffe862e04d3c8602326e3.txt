@@ -1,0 +1,58 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Therefore, based on our analysis and calculations, it becomes evident that the correct answer is option D.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Conclusion and Final Answer",
+        "visualSubject": "Final conclusion screen with clear text overlay, dark background, white text, centered alignment, no borders or logos",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration to emphasize the conclusion",
+        "visualAnimation": "Final answer screen with centered text, dark background, white text, no borders or logos",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Analysis of Circuit with Two EMF Sources and External Resistance",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Dark background with centered white text, no borders or logos",
+            "Clear, readable text on dark background for final answer"
+        ],
+        "motion": "Static image with centered text",
+        "subtitle": "Final Answer: Option D is correct based on analysis and calculations",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for clean background, no labels or text in prompt",
+        "comfyPrompt": "Dark background with centered white text: 'Option D is correct based on analysis and calculations', 1920x1080, sharp focus, realistic lighting, no borders or logos",
+        "coverageNotes": "Visual confirms the conclusion of the analysis and highlights the final answer as option D",
+        "shot": {
+            "template": "video",
+            "heading": "Final Answer Screen",
+            "prompt": "Dark background with centered white text: 'Option D is correct based on analysis and calculations', 1920x1080, sharp focus, realistic lighting, no borders or logos",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full 8-second duration without freezing the last frame"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Final Answer Screen",
+            "prompt": "Dark background with centered white text: 'Option D is correct based on analysis and calculations', 1920x1080, sharp focus, realistic lighting, no borders or logos",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full 8-second duration without freezing the last frame"
+        }
+    }
+]

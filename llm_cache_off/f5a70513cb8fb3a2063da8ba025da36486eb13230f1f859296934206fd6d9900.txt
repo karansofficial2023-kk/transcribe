@@ -1,0 +1,13 @@
+{
+  "score": 95,
+  "missing_facts": [
+    "The original text mentions that the two sources are connected to an external resistance R over here, but this is not explicitly stated in the paraphrased version.",
+    "The original text refers to 'EMFE' as another EMF source, which is not clearly mentioned in the paraphrased version."
+  ],
+  "changed_facts": [
+    "In the original text, it says 'E1 is in the associative mode with E2,' but the paraphrased version changes this to 'E1 is in the associative mode with E2' without clarifying what 'associative mode' means. This may be a minor change in phrasing but could imply a conceptual shift if not properly defined."
+  ],
+  "added_facts": [
+    "The paraphrased version adds the phrase 'it's given that the current in them is not zero, the circuit is not zero,' which was not explicitly stated in the original text. While this may be inferred from context, it is an added fact."
+  ]
+}

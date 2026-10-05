@@ -1,0 +1,88 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.1",
+      "visual_type": "formula",
+      "image_prompt": "Photorealistic electrolytic cell with silver ions and chloride ions in solution, showing the chemical reaction occurring at the electrodes.",
+      "image_requirement": "Viewer must see the chemical reaction taking place within the solution.",
+      "labels": [
+        "Ag⁺(aq) - Silver ions in solution",
+        "Cl⁻(aq) - Chloride ions in solution"
+      ],
+      "label_placement": [
+        "Ag⁺(aq) - Top left, dissolved in liquid",
+        "Cl⁻(aq) - Bottom right, dissolved in liquid"
+      ],
+      "steps": [
+        "Silver ions move toward cathode",
+        "Chloride ions move toward anode",
+        "Reduction occurs at cathode",
+        "Oxidation occurs at anode"
+      ],
+      "panels": [],
+      "narration_en": "Let's now simulate the chemical reaction taking place within the solution.",
+      "formula_lines": [
+        "Ag⁺(aq) + e⁻ → Ag(s)"
+      ],
+      "explain_steps": [
+        "Silver ions gain electrons to form solid silver."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Chemical Reaction in Electrolytic Cell"
+    },
+    {
+      "shot_id": "4.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "Photorealistic electrolyte solution with silver ions and chloride ions visible, showing the charged particles in a clear liquid container.",
+      "image_requirement": "Viewer must see positively charged silver ions and negatively charged chloride ions in the solution.",
+      "labels": [
+        "Silver ions - Ag⁺(aq)",
+        "Chloride ions - Cl⁻(aq)"
+      ],
+      "label_placement": [
+        "Silver ions - Top left, dissolved in liquid",
+        "Chlor,ide ions - Bottom right, dissolved in liquid"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Remember, in this case, the electrolyte contains positively charged silver ions and negatively charged chloride ions.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Electrolyte Composition"
+    },
+    {
+      "shot_id": "4.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "Photorealistic power supply connected to an electrolytic cell with silver ions and chloride ions in solution, showing the device turned on.",
+      "image_requirement": "Viewer must see the power supply turned on and connected to the electrolytic cell.",
+      "labels": [
+        "Power Supply - On",
+        "Electrolytic Cell - Active"
+      ],
+      "label_placement": [
+        "Power Supply - Top center, showing switch in 'on' position",
+        "Electrolytic Cell - Bottom center, with electrodes submerged in solution"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Let's turn on the power supply.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Power Supply Activation"
+    }
+  ]
+}

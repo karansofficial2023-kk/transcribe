@@ -1,0 +1,4 @@
+{
+  "score": 98,
+  "reason": "The paraphrased text preserves the meaning of the original text with minimal changes, using synonyms and rephrasing sentence structures without altering the scientific concepts. The only minor differences are stylistic (e.g., 'favourite' vs. 'favorite', 'trickery' vs. 'deception'), and some slight reordering of phrases for clarity. No significant information is lost or misrepresented."
+}

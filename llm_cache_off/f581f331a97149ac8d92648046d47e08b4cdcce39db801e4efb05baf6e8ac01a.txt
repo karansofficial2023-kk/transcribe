@@ -1,0 +1,85 @@
+[
+    {
+        "rowId": "1.2",
+        "labels": ["கார்பன் டை ஆக்சைடு", "நீர்"],
+        "labelPlacements": [
+            "கார்பன் டை ஆக்சைடு | காற்றிலிருந்து எடுத்துக் கொள்ளப்படும் பொருள் | COORDINATES_PENDING_APPROVED_IMAGE",
+            "நீர் | மண்ணிலிருந்து எடுத்துக் கொள்ளப்படும் பொருள் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": [
+            "visible_physical_target",
+            "visible_physical_target"
+        ],
+        "pointTargetNames": [
+            "கார்பன் டை ஆக்சைடு - காற்றிலிருந்து எடுத்துக் கொள்ளப்படும் பொருள்",
+            "நீர் - மண்ணிலிருந்து எடுத்துக் கொள்ளப்படும் பொருள்"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: தாவரங்கள் காற்றிலிருந்து கார்பன் டை ஆக்சைடு, மண்ணிலிருந்து நீரை எடுத்துக் கொள்கின்றன. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "தாவரங்கள் காற்றிலிருந்து கார்பன் டை ஆக்சைடு, மண்ணிலிருந்து நீரை எடுத்துக் கொள்கின்றன. இந்த பொருட்கள் தாவரங்களின் உயிர்ப்பொருட்களாக செயல்படுகின்றன. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.3",
+        "labels": ["பச்சையம்"],
+        "labelPlacements": [
+            "பச்சையம் | இலைகளில் உள்ள பச்சையம் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": [
+            "visible_physical_target"
+        ],
+        "pointTargetNames": [
+            "பச்சையம் - இலைகளில் உள்ள பச்சையம்"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: இலைகளில் உள்ள பச்சையம் சூரிய ஒளியை புறங்கிறது. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "இலைகளில் உள்ள பச்சையம் சூரிய ஒளியை புறங்கிறது. இந்த பச்சையம் ஒளிச்சேர்க்கை முக்கிய பகுதியாக செயல்படுகிறது. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.4",
+        "labels": ["குளுக்கோஸ்"],
+        "labelPlacements": [
+            "குளுக்கோஸ் | ஒளி ஆற்றலின் உதவியால் உருவாகும் பொருள் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": [
+            "visible_physical_target"
+        ],
+        "pointTargetNames": [
+            "குளுக்கோஸ் - ஒளி ஆற்றலின் உதவியால் உருவாகும் பொருள்"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: ஒளி ஆற்றலின் உதவியால், கார்பன் டை ஆக்சைடும், நீரும் சேர்ந்து குளுக்கோஸ் உருவாகிறது. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "ஒளி ஆற்றலின் உதவியால், கார்பன் டை ஆக்சைடும், நீரும் சேர்ந்து குளுக்கோஸ் உருவாகிறது. இந்த பொருள் தாவரங்களுக்கு ஆற்றலை வழங்குகிறது. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.5",
+        "labels": ["ஆக்சிஜன்"],
+        "labelPlacements": [
+            "ஆக்சிஜன் | வாழ்வு ஆற்றல் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": [
+            "visible_physical_target"
+        ],
+        "pointTargetNames": [
+            "ஆக்சிஜன் - வாழ்வு ஆற்றலை வழங்கும் பொருள்"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: இந்த செயல்முறையின் போது, ஆக்சிஜன் வெளியிடப்படுகிறது. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "இந்த செயல்முறையின் போது, ஆக்சிஜன் வெளியிடப்படுகிறது. இந்த பொருள் உயிர்களுக்கு ஆக்சிஜனை வழங்குகிறது. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.6",
+        "labels": ["இலைத்துறை"],
+        "labelPlacements": [
+            "இலைத்துறை | இலைகளின் மேற்பரப்பில் உள்ள சிறிய துறைகள் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": [
+            "visible_physical_target"
+        ],
+        "pointTargetNames": [
+            "இலைத்துறை - இலைகளின் மேற்பரப்பில் உள்ள சிறிய துறைகள்"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: இலைகளின் மேற்பரப்பில் உள்ள சிறிய துறைகள், இலைத்துறைகள் என்று அழைக்கப்படுகின்றன. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "இலைகளின் மேற்பரப்பில் உள்ள சிறிய துறைகள், இலைத்துறைகள் என்று அழைக்கப்படுகின்றன. இந்த துறைகள் ஒளிச்சேர்க்கையில் முக்கிய பங்கு வகிக்கின்றன. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

@@ -1,0 +1,15 @@
+{
+  "score": 100,
+  "missing_topics": [],
+  "covered_topics": [
+    "Formula for resistance (R = ρL/A)",
+    "Original length and area of the wire (L₀, A₀)",
+    "Calculation of original resistance (R₀ = ρL₀/A₀)",
+    "New length after a 10% increase (L' = 1.1L₀)",
+    "Calculation of new cross-sectional area using volume conservation (A' = A₀/1.1)",
+    "Derivation of new resistance (R' = 1.21R₀)",
+    "Explanation that specific resistance (ρ) is a material-dependent constant",
+    "Clarification that ρ remains unchanged despite changes in length or area",
+    "Conclusion that the new resistance is 1.21 times the original resistance"
+  ]
+}

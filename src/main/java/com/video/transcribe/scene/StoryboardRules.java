@@ -7,25 +7,30 @@ import java.util.regex.Pattern;
 /** Shared deterministic storyboard classification rules. */
 final class StoryboardRules {
     private static final Pattern EQUATION = Pattern.compile(
-        "(?:[\\p{L}\\p{N}ΔΛλμρσκΩ°_^{}()\\[\\].,+\\-/* ]+)"
+        "(?:[\\p{L}\\p{M}\\p{N}ΔΛλμρσκΩ°_^{}()\\[\\].,+\\-/* ]+)"
             + "(?:=|≈|≃|∝|≤|≥|→|⇌)"
-            + "(?:[\\p{L}\\p{N}ΔΛλμρσκΩ°_^{}()\\[\\].,+\\-/* ]+)");
+            + "(?:[\\p{L}\\p{M}\\p{N}ΔΛλμρσκΩ°_^{}()\\[\\].,+\\-/* ]+)");
     private static final Pattern CALCULATION_LANGUAGE = Pattern.compile(
-        "(?i)\\b(formula|equation|derive|derivation|substitut(?:e|ion)|calculate|solve for|"
-            + "simplif(?:y|ication)|therefore|hence)\\b");
+        "(?i)\\b(formula|equation|derive|derivation|substitut(?:e|ion)|calculate|calculating|"
+            + "calculation|solve for|simplif(?:y|ication)|add(?:ing|ition)?|subtract(?:ing|ion)?|"
+            + "sum of|difference between|product of|ratio of|therefore|hence)\\b");
 
     private StoryboardRules() {
     }
 
     static boolean requiresFormulaRenderer(SceneSegment segment) {
         if (segment == null) return false;
+        if ("title_card".equals(segment.getTemplate())
+                || "title_card".equals(segment.getVisualType())) return false;
         if (segment.getFormulaLines() != null && !segment.getFormulaLines().isEmpty()) return true;
-        String text = String.join(" ", List.of(
-            safe(segment.getSentence()), safe(segment.getHeading()),
-            safe(segment.getVisualAnimation()), safe(segment.getLocalAnimation()))).trim();
+        // Classification must come from approved lesson content. Production metadata
+        // often mentions symbols, formulas, or rendering instructions generically and
+        // must not turn unrelated documentary shots into equation scenes.
+        String text = safe(segment.getSentence()).trim();
         if (text.isEmpty()) return false;
-        return EQUATION.matcher(text).find()
-            || (CALCULATION_LANGUAGE.matcher(text).find() && containsMathSignal(text));
+        // Only an equation written in the narration itself (or formula lines planned by the visual director) routes a shot
+        // to the formula renderer. Calculation vocabulary alone ("sum of", "add") is ordinary prose in every subject.
+        return EQUATION.matcher(text).find();
     }
 
     static List<String> extractFormulaLines(String sentence) {
@@ -37,8 +42,8 @@ final class StoryboardRules {
             value = value.replaceFirst("(?i)^.*?(?:equation|formula|gives|is|becomes)\\s*:?\\s+(?=[^=]{1,80}=)", "");
             if (!value.isBlank()) matches.add(value);
         }
-        if (!matches.isEmpty()) return List.copyOf(matches);
-        return CALCULATION_LANGUAGE.matcher(sentence).find() ? List.of(sentence.trim()) : List.of();
+        // No equation notation in the sentence: never fall back to prose (formula_lines hold formula syntax only).
+        return List.copyOf(matches);
     }
 
     private static boolean containsMathSignal(String text) {

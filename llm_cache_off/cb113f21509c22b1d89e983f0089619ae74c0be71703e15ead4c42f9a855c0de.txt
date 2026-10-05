@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "7.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A leaf with visible chloroplasts under a microscope, placed on a white lab bench, medium distance, slightly angled up to show the leaf's surface texture and chloroplast structure, natural light from the side highlighting the green pigments.",
+      "image_requirement": "Viewer must see the leaf and its chloroplasts under microscopic view.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Similarly, leaves must contain chlorophyll.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "7.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a plant cell with chloroplasts, mitochondria, and nucleus visible under a microscope on a lab table, low angle to emphasize the cellular structures, natural light from above.",
+      "image_requirement": "Viewer must see the plant cell with chloroplasts and other organelles.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Without photosynthesis, life would be impossible.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "formula",
+      "image_prompt": "Silver ions reduced at cathode, photorealistic lab setup with silver nitrate solution and copper electrode.",
+      "image_requirement": "Viewer must see silver ions being reduced at the cathode.",
+      "labels": [
+        "Ag^+(aq) - Silver ions in solution",
+        "Cu(s) - Copper cathode",
+        "e^- - Electrons flowing into cathode"
+      ],
+      "label_placement": [
+        "Ag^+(aq) - Top left, dissolved in blue liquid",
+        "Cu(s) - Bottom right, solid metallic electrode",
+        "e^- - Flowing from top to bottom near cathode"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Can you now identify what reaction took place at the cathode?",
+      "formula_lines": [
+        "Ag^+(aq) + e^- -> Ag(s)"
+      ],
+      "explain_steps": [
+        "Silver ions gain electrons to form solid silver."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Reduction at Cathode"
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "Cathode with electrons flowing into it, photorealistic lab setup showing reduction process.",
+      "image_requirement": "Viewer must see electrons entering the cathode during reduction.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Electrons flow to cathode",
+        "Reduction occurs at cathode"
+      ],
+      "panels": [],
+      "narration_en": "Well, gaining electrons is referred to as reduction.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Reduction Process"
+    },
+    {
+      "shot_id": "5.3",
+      "visual_type": "formula",
+      "image_prompt": "Silver ions in solution, photorealistic lab setup with silver nitrate and copper electrode.",
+      "image_requirement": "Viewer must see silver ions in solution before and after reduction.",
+      "labels": [
+        "Ag^+(aq) - Silver ions in solution",
+        "Cu(s) - Copper cathode"
+      ],
+      "label_placement": [
+        "Ag^+(aq) - Top left, dissolved in blue liquid",
+        "Cu(s) - Bottom right, solid metallic electrode"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Will this lead to a decrease in the concentration of silver ions in the solution?",
+      "formula_lines": [
+        "Ag^+(aq) + e^- -> Ag(s)"
+      ],
+      "explain_steps": [
+        "Silver ions are consumed during reduction, decreasing their concentration."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Concentration Change"
+    }
+  ]
+}

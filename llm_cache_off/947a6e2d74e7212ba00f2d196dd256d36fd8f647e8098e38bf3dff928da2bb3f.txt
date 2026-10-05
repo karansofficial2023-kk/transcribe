@@ -1,0 +1,21 @@
+{
+  "score": 95,
+  "missing_concepts": [
+    "associative mode"
+  ],
+  "preserved_concepts": [
+    "IEEE 2005 examination",
+    "current electricity",
+    "electric current",
+    "EMF",
+    "internal resistances R1 and R2",
+    "R2 is greater than R1",
+    "potential difference across the source with internal resistance R2 is zero",
+    "series configuration",
+    "voltage (V) = E - IR",
+    "total electromotive force 2E",
+    "total resistance R + R1 + R2",
+    "R equals R2 minus R1",
+    "option D"
+  ]
+}

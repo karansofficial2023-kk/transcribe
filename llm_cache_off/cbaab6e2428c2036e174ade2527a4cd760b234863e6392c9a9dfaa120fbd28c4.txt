@@ -1,0 +1,16 @@
+[
+  {
+    "rowId": "8.1",
+    "labels": [
+      "Right? - A centered white text label on a dark background"
+    ],
+    "labelPlacements": [
+      "Label name | A centered white text label on a dark background | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["abstract_or_nonpointable"],
+    "pointTargetNames": [""],
+    "presentationMode": "no_labels",
+    "visualSubject": "A clean, dark background with a centered white text label reading 'Right?' in sans-serif font, size 42px, max two lines, aligned center, horizontal margin 120, bottom margin 55",
+    "comfyPrompt": "A clean, dark background with a centered white text label reading 'Right?' in sans-serif font, size 42px, max two lines, aligned center, horizontal margin 120, bottom margin 55. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

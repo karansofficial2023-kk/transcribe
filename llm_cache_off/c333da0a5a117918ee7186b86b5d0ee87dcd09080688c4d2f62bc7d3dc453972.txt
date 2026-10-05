@@ -1,0 +1,4 @@
+{
+  "score": 95,
+  "reason": "The paraphrased text preserves the original meaning, structure, and key information accurately. It uses different phrasing and sentence structures while maintaining the same concepts, explanations, and examples. There are no significant deviations in content or intent. Minor differences in wording do not affect semantic similarity."
+}

@@ -1,0 +1,31 @@
+{
+  "score": 100,
+  "missing_concepts": [],
+  "preserved_concepts": [
+    "electroplating",
+    "antique copper keychain",
+    "silver",
+    "Vivaan's birthday",
+    "electrolytic cell",
+    "silver nitrate solution",
+    "positive terminal",
+    "negative terminal",
+    "switch",
+    "keychain to be electroplated",
+    "pure silver rod",
+    "anode",
+    "cathode",
+    "electrolyte",
+    "silver ions",
+    "chloride ions",
+    "current",
+    "reduction",
+    "oxidation",
+    "redox reaction",
+    "mass of silver deposited versus time",
+    "intensity of current",
+    "time for which it is passed",
+    "metal chosen for deposition",
+    "gold"
+  ]
+}

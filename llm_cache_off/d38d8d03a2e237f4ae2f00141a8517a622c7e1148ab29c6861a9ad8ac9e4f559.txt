@@ -1,0 +1,56 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Now evaluating at $ x = -1 $: $$ f''(-1) = \\frac{2}{(-1)^3} = \\frac{2}{-1} = -2 < 0 $$ Since the second derivative is negative, the function has a local maximum at $ x = -1 $.",
+      "formula_lines": [
+        "f''(-1) = 2/((-1)^3)",
+        "2/((-1)^3) = 2/-1",
+        "2/-1 = -2",
+        "-2 < 0"
+      ],
+      "explain_steps": [
+        "Second derivative at x equals negative one is two over negative one cubed.",
+        "Two over negative one cubed simplifies to two over negative one.",
+        "Two over negative one equals negative two.",
+        "Negative two is less than zero."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Second Derivative at x = -1"
+    },
+    {
+      "shot_id": "6.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Therefore, the minimum value of the sum occurs when $ x = 1 $.",
+      "formula_lines": [
+        "Minimum value occurs at x = 1"
+      ],
+      "explain_steps": [
+        "The minimum value of the sum happens when x equals one."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Minimum Value at x = 1"
+    }
+  ]
+}

@@ -7,6 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -65,6 +68,8 @@ public class VideoParaphrasePipeline {
 	private final FFmpegAudioExtractor audioExtractor;
 	private final LocalWhisperTranscriber whisper;
 	private final OllamaClient ollama;
+	private final OllamaClient fastOllama;
+	private volatile String detectedLanguage = "";
 	private final ExecutorService executor;
 	private final AppConfig config;
 	private final TTSProvider tts;
@@ -73,8 +78,8 @@ public class VideoParaphrasePipeline {
 	private final StoryboardDocxExporter docxExporter;
 
 	/**
-	 * Initialize pipeline with configuration.
-	 * TTS provider is auto-selected based on tts.provider property.
+	 * Initialize pipeline with configuration. TTS is optional because the
+	 * production storyboard workflow normally stops after DOCX export.
 	 */
 	public VideoParaphrasePipeline(AppConfig config) {
 		this.config = config;
@@ -82,15 +87,19 @@ public class VideoParaphrasePipeline {
 		this.whisper = new LocalWhisperTranscriber(config);
 		this.ollama = new OllamaClient(config);
 		this.validator = new AccuracyValidator(ollama);
+		this.fastOllama = new OllamaClient(config, config.getOllamaFastModel());
 		this.sceneGenerator = new SceneStoryboardGenerator(
-				ollama,
+				fastOllama,
 				config.isStoryboardAnimationEnabled(),
 				config.getStoryboardVideoProvider(),
 				config.isStoryboardCurriculumEnrichmentEnabled());
+		if (config.isStoryboardVisualDirectorEnabled()) {
+			this.sceneGenerator.setVisualDirector(new com.video.transcribe.scene.VisualDirector(
+				fastOllama, sceneGenerator::finishImagePrompt, sceneGenerator::enforceFormulaRouting));
+		}
 		this.docxExporter = new StoryboardDocxExporter(config.getStoryboardVideoProvider());
 
-		// Create TTS provider based on config (piper or edge)
-		this.tts = TTSEngineFactory.createProvider(config);
+		this.tts = config.isTtsEnabled() ? TTSEngineFactory.createProvider(config) : null;
 
 		int threads = config.isSequential() ? 1 : config.getThreads();
 		this.executor = Executors.newFixedThreadPool(threads);
@@ -102,7 +111,7 @@ public class VideoParaphrasePipeline {
 				threads,
 				config.isSequential() ? "sequential" : "parallel",
 				config.getWhisperDevice(),
-				tts.getName());
+				config.isTtsEnabled() ? tts.getName() : "disabled (storyboard-only mode)");
 		logger.info("Storyboard video provider: {}", config.getStoryboardVideoProvider());
 		logger.info("Storyboard curriculum enrichment: {}", config.isStoryboardCurriculumEnrichmentEnabled());
 	}
@@ -125,8 +134,27 @@ public class VideoParaphrasePipeline {
 		logger.info("=== PHASE 2: Transcribing ===");
 
 		Path transcriptJson = Paths.get(config.getOutputDir(), baseName + "_transcript.json");
-		TranscriptData transcript = whisper.transcribe(audioPath, language, transcriptJson);
+		ollama.unload();                      // one heavy model at a time on a 12 GB card
+		fastOllama.unload();
+		java.util.List<String> hotwords = com.video.transcribe.transcription.Glossary
+			.load(language, config.getStoryboardMaterialsDir(), baseName).hotwords();
+		TranscriptData transcript = whisper.transcribe(audioPath, language, transcriptJson, hotwords);
+		if (transcript != null && transcript.getLanguage() != null) {
+			detectedLanguage = transcript.getLanguage();
+			logger.info("Detected source language: {}", detectedLanguage);
+		}
 
+		if (transcript != null && transcript.getFullText() != null) {
+			transcript.setText(com.video.transcribe.transcription.TranscriptPunctuator.restore(transcript.getFullText(), fastOllama));
+		}
+
+		if (transcript == null || transcript.getFullText() == null) {
+			throw new IOException("Transcription produced no text for " + baseName);
+		}
+		String coverageProblem = com.video.transcribe.transcription.SpeechCoverage.problem(transcript, transcript.getDuration());
+		if (coverageProblem != null) {
+			throw new IOException("No usable narration in " + baseName + ": " + coverageProblem);
+		}
 		// Save plain text transcript
 		Path textPath = Paths.get(config.getOutputDir(), baseName + "_transcript.txt");
 		Files.writeString(textPath, transcript.getFullText());
@@ -190,6 +218,55 @@ public class VideoParaphrasePipeline {
 	// PHASE 3c: Generate Scene Storyboard
 	// ============================================
 
+	/** Writes the finished storyboard in the extra languages from storyboard.target.languages (translation only; no re-planning). */
+	private void localizeStoryboard(StoryboardDocument storyboard, String baseName) {
+		String wanted = config.getStoryboardTargetLanguages();
+		if (wanted == null || wanted.isBlank()) return;
+		try {
+			ollama.unload();
+			fastOllama.unload();
+			com.video.transcribe.LanguageSupport.Language source = com.video.transcribe.LanguageSupport.detect(
+				StoryboardLocalizer.joinedNarration(storyboard), detectedLanguage);
+			new StoryboardLocalizer(config, ollama).localize(storyboard, baseName, source,
+				StoryboardLocalizer.parseTargets(wanted), Paths.get(config.getOutputDir()));
+		} catch (Exception e) {
+			// not a warning to scroll past: the job asked for these languages, so leave a marker file next to the outputs
+			logger.error("Additional storyboard languages '{}' were NOT written: {}", wanted, e.getMessage());
+			try {
+				Files.writeString(Paths.get(config.getOutputDir(), baseName + "_localization_FAILED.txt"),
+					"Requested languages: " + wanted + System.lineSeparator() + "Error: " + e.getMessage() + System.lineSeparator()
+						+ "Re-run just the translation with StoryboardTranslatorRunner (see docs/LANGUAGES_AND_VERIFICATION.md)." + System.lineSeparator());
+			} catch (IOException ignored) {
+				// the error is already logged
+			}
+		}
+	}
+
+	/** Source tracing: marks shots whose key terms or numbers appear in no source, and writes <base>_grounding.json. */
+	private void traceClaimsToSources(StoryboardDocument storyboard, String baseName, String paraphrasedText,
+			StoryboardProjectMaterials materials) {
+		try {
+			// The only sources are what the lecturer actually said (the transcript) and approved reference materials. The paraphrase and
+			// the enriched narration are deliberately NOT sources: whatever they added must show up as unsupported for a person to judge.
+			StringBuilder sources = new StringBuilder();
+			Path transcriptFile = Paths.get(config.getOutputDir(), baseName + "_transcript.txt");
+			if (Files.isRegularFile(transcriptFile)) sources.append(Files.readString(transcriptFile)).append("\n");
+			if (sources.length() == 0 && paraphrasedText != null) sources.append(paraphrasedText);
+			if (materials != null && materials.promptContext() != null) sources.append(materials.promptContext());
+			com.video.transcribe.scene.ClaimGrounding.Report report =
+				com.video.transcribe.scene.ClaimGrounding.check(storyboard, sources.toString());
+			com.video.transcribe.scene.ClaimGrounding.annotate(storyboard, report);
+			Files.writeString(Paths.get(config.getOutputDir(), baseName + "_grounding.json"),
+				new com.google.gson.GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create().toJson(report.toMap()));
+			logger.info("Source tracing: {} supported, {} partly supported, {} need expert review",
+				report.count(com.video.transcribe.scene.ClaimGrounding.Status.SUPPORTED),
+				report.count(com.video.transcribe.scene.ClaimGrounding.Status.PARTLY_SUPPORTED),
+				report.count(com.video.transcribe.scene.ClaimGrounding.Status.UNSUPPORTED));
+		} catch (Exception e) {
+			logger.warn("Source tracing skipped: {}", e.getMessage());
+		}
+	}
+
 	public StoryboardDocument generateStoryboard(String paraphrasedText, String baseName) throws Exception {
 		StoryboardProjectMaterials materials = loadStoryboardMaterials(baseName);
 		return generateStoryboard(paraphrasedText, baseName, materials);
@@ -202,21 +279,80 @@ public class VideoParaphrasePipeline {
 			logger.info("Loaded storyboard project materials: {} approved/reference assets",
 				materials.approvedAssets().size());
 		}
+		sceneGenerator.setLanguageHint(detectedLanguage);
 		StoryboardDocument storyboard = sceneGenerator.generateStoryboard(
 			paraphrasedText, baseName, materials);
+		// Keep a diagnostic draft even when the quality gate rejects the storyboard.
+		Files.writeString(Paths.get(config.getOutputDir(), baseName + "_storyboard.draft.json"), gson.toJson(storyboard));
 		StoryboardQualityGate.validate(storyboard);
+		validateStoryboardIdentity(storyboard, baseName, paraphrasedText);
+
+		// The exporter separates formula lines from prose before writing the DOCX and contract. Do it first, so the saved
+		// _storyboard.json, the DOCX, the contract and any translation all describe the same storyboard.
+		com.video.transcribe.scene.StoryboardContractAudit.separateFormulaProse(storyboard);
+		traceClaimsToSources(storyboard, baseName, paraphrasedText, materials);
 
 		// Save as JSON
 		Path storyboardJson = Paths.get(config.getOutputDir(), baseName + "_storyboard.json");
 		Files.writeString(storyboardJson, gson.toJson(storyboard));
 		logger.info("Storyboard JSON saved: {}", storyboardJson);
 
+		docxExporter.withLanguage(StoryboardContract.LanguagePackage.forWhisperCode(detectedLanguage));
 		// Export as Word document
 		Path docxPath = Paths.get(config.getOutputDir(), baseName + "_storyboard.docx");
 		docxExporter.export(storyboard, docxPath.toString());
 		logger.info("Storyboard DOCX saved: {}", docxPath);
 
+		localizeStoryboard(storyboard, baseName);
 		return storyboard;
+	}
+
+	private void validateStoryboardIdentity(StoryboardDocument storyboard, String baseName, String sourceText) {
+		String title = storyboard == null ? "" : storyboard.getTitle();
+		String evidence = (baseName == null ? "" : baseName) + " " + (sourceText == null ? "" : sourceText);
+		if (!titleMatchesEvidence(title, evidence)) {
+			throw new IllegalStateException(
+				"Storyboard topic does not match the input filename or usable transcript; refusing cross-topic export."
+			);
+		}
+	}
+
+	/**
+	 * A title belongs to its source when they share at least one significant word. Words are compared by their first five letters so
+	 * "Minimizing" in the title matches "minimum" in the transcript (an exact match rejected a correct calculus storyboard).
+	 */
+	static boolean titleMatchesEvidence(String title, String evidence) {
+		Set<String> titleTerms = stems(significantTermsOf(title));
+		if (titleTerms.isEmpty()) {
+			return true;
+		}
+		Set<String> evidenceTerms = stems(significantTermsOf(evidence));
+		return titleTerms.stream().anyMatch(evidenceTerms::contains);
+	}
+
+	private static Set<String> stems(Set<String> terms) {
+		Set<String> result = new HashSet<>();
+		for (String term : terms) {
+			result.add(term.substring(0, Math.min(5, term.length())));
+		}
+		return result;
+	}
+
+	private Set<String> significantTerms(String value) {
+		return significantTermsOf(value);
+	}
+
+	private static Set<String> significantTermsOf(String value) {
+		Set<String> ignored = Set.of(
+			"storyboard", "lesson", "video", "introduction", "application", "applications",
+			"type", "types", "about", "using", "with", "from", "into", "that", "this"
+		);
+		Set<String> result = new HashSet<>();
+		for (String token : (value == null ? "" : value).toLowerCase(Locale.ROOT)
+			.split("[^\\p{L}\\p{M}\\p{N}]+")) {
+			if (token.length() >= 4 && !ignored.contains(token)) result.add(token);
+		}
+		return result;
 	}
 
 	// ============================================
@@ -228,6 +364,10 @@ public class VideoParaphrasePipeline {
 	// ============================================
 
 	public Path generateAudio(String paraphrasedText, String baseName) throws Exception {
+		if (!config.isTtsEnabled() || tts == null) {
+			logger.info("=== PHASE 4: TTS skipped (storyboard-only mode) ===");
+			return null;
+		}
 		logger.info("=== PHASE 4: TTS ({}) ===", tts.getName());
 
 		Path ttsOutputDir = Paths.get(config.getOutputDir());
@@ -244,13 +384,51 @@ public class VideoParaphrasePipeline {
 		String baseName = getBaseName(videoPath);
 		long startTime = System.currentTimeMillis();
 
-		try {
-			// Phase 1: Extract audio from video
-			Path audioPath = extractAudio(videoPath);
+		detectedLanguage = language;        // never inherit the previous queue item's language
+		try (GpuLease gpu = GpuLease.acquire("transcribe", java.time.Duration.ofHours(4))) {
+			// Phase 0: immutable job identity; identical media reuses the saved transcript
+			TranscriptData transcript = null;
+			try {
+				Path media = Paths.get(videoPath);
+				Path outDir = Paths.get(config.getOutputDir());
+				java.util.Map<String, Object> manifest = JobManifest.build(media, videoPath, language, config.getFfprobePath());
+				String duplicateOf = JobManifest.findDuplicate(outDir, (String) manifest.get("sha256"));
+				if (duplicateOf != null) {
+					Path saved = outDir.resolve(duplicateOf + "_transcript.json");
+					transcript = reusableTranscript(saved, outDir.resolve(duplicateOf + "_transcript.txt"), language);
+					if (transcript != null) {
+						logger.info("Duplicate media fingerprint (same as '{}'): reusing transcript {}", duplicateOf, saved);
+						manifest.put("duplicate_of", duplicateOf);
+						Files.copy(saved, outDir.resolve(baseName + "_transcript.json"),
+							java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+						Files.writeString(outDir.resolve(baseName + "_transcript.txt"), transcript.getFullText());
+					} else {
+						transcript = null;
+					}
+				}
+				manifest.put("asr", whisper.scriptInfo());
+				JobManifest.write(outDir, baseName, manifest);
+			} catch (Exception e) {
+				logger.warn("Job manifest step skipped: {}", e.getMessage());
+				transcript = null;
+			}
 
-			// Phase 2: Transcribe audio → JSON + TXT
-			TranscriptData transcript = transcribeAudio(audioPath, language, baseName);
+			if (transcript == null) {
+				// Phase 1: Extract audio from video
+				Path audioPath = extractAudio(videoPath);
+
+				// Phase 2: Transcribe audio → JSON + TXT
+				transcript = transcribeAudio(audioPath, language, baseName);
+			}
+			if (transcript.getLanguage() != null && !transcript.getLanguage().isBlank()) {
+				detectedLanguage = transcript.getLanguage();      // also when the transcript was reused from an identical earlier job
+			}
 			String originalText = transcript.getFullText();
+			com.video.transcribe.transcription.Glossary glossary = com.video.transcribe.transcription.Glossary.load(
+				detectedLanguage, config.getStoryboardMaterialsDir(), baseName);
+			if (glossary.size() > 0) {
+				originalText = glossary.apply(originalText);          // fix known ASR mis-spellings before any LLM sees the text
+			}
 			if (!TranscriptQualityGate.hasUsableSpeech(transcript)) {
 				logSkippedVideo(videoPath, baseName, "No speech detected or only music/background audio");
 				logger.warn("Skipping video with no usable speech: {}", videoPath);
@@ -265,17 +443,21 @@ public class VideoParaphrasePipeline {
 			String paraphrased = maybeEnrichParaphrase(originalText, paraphraseValidation.paraphrasedText,
 				style, baseName, materials);
 			paraphrased = factCheckNarration(paraphrased, materials);
-			ValidationResult validation = validateParaphrase(originalText, paraphrased, baseName);
-			if (!validation.isPassed()) {
-				throw new IOException("Final narration failed the production accuracy gate: "
-					+ formatValidationIssues(validation));
-			}
+			ParaphraseValidation finalNarration = finalizeNarrationUntilValid(
+				originalText,
+				paraphrased,
+				style,
+				baseName,
+				materials
+			);
+			paraphrased = finalNarration.paraphrasedText;
+			ValidationResult validation = finalNarration.validation;
 			saveParaphrase(paraphrased, baseName);
 
 			// Phase 3c: Generate scene storyboard
 			StoryboardDocument storyboard = generateStoryboard(paraphrased, baseName, materials);
 
-			// Phase 4: TTS from paraphrased text → Audio
+			// Phase 4 is disabled in storyboard-only production mode.
 			Path audioOutput = generateAudio(paraphrased, baseName);
 
 			// Cleanup temp if configured
@@ -335,15 +517,19 @@ public class VideoParaphrasePipeline {
 			}
 
 			validation = validateParaphrase(originalText, paraphrased, baseName);
-			if (validation.isPassed()
-					&& validation.getOverallScore() >= config.getValidationThreshold()) {
+			List<String> failedGates = AccuracyValidator.failedQualityGates(
+				validation,
+				config.getValidationThreshold()
+			);
+			if (validation.isPassed() && failedGates.isEmpty()) {
 				logger.info("Paraphrase accepted with validation score {}/100 on attempt {}",
 					validation.getOverallScore(), attempt);
 				return new ParaphraseValidation(paraphrased, validation);
 			}
 
-			logger.warn("Paraphrase score {}/100 below threshold {}; retrying if attempts remain",
-				validation.getOverallScore(), config.getValidationThreshold());
+			logger.warn("Paraphrase failed production quality gates: {}. Overall score: {}/100; retrying if attempts remain",
+				failedGates.isEmpty() ? "validator returned passed=false" : String.join("; ", failedGates),
+				validation.getOverallScore());
 		}
 
 		if (validation != null && isAcceptableAfterRetries(validation)) {
@@ -352,8 +538,33 @@ public class VideoParaphrasePipeline {
 			return new ParaphraseValidation(paraphrased, validation);
 		}
 
+		String failedGateSummary = validation == null
+			? "validation result unavailable"
+			: String.join("; ", AccuracyValidator.failedQualityGates(
+				validation,
+				config.getValidationThreshold()
+			));
 		throw new IOException("Paraphrase validation failed after " + maxAttempts
-			+ " attempts. Last score: " + (validation != null ? validation.getOverallScore() : "none"));
+			+ " attempts. Last score: " + (validation != null ? validation.getOverallScore() : "none")
+			+ ". Failed gates: " + failedGateSummary);
+	}
+
+	/**
+	 * The saved transcript of identical media, or null when it cannot stand in for a fresh one: unreadable, empty, or made in
+	 * another language than the one requested now. The JSON holds the raw recogniser text; the punctuated text the first job
+	 * produced sits in the .txt next to it and replaces it.
+	 */
+	static TranscriptData reusableTranscript(Path json, Path punctuatedText, String language) throws IOException {
+		TranscriptData saved = gson.fromJson(Files.readString(json), TranscriptData.class);
+		if (saved == null || saved.getFullText() == null || saved.getFullText().isBlank()) return null;
+		boolean otherLanguage = language != null && !language.isBlank() && saved.getLanguage() != null
+			&& !saved.getLanguage().equalsIgnoreCase(language);
+		if (otherLanguage) return null;
+		if (Files.isRegularFile(punctuatedText)) {
+			String text = Files.readString(punctuatedText);
+			if (!text.isBlank()) saved.setText(text);
+		}
+		return saved;
 	}
 
 	private boolean isAcceptableAfterRetries(ValidationResult validation) {
@@ -362,6 +573,58 @@ public class VideoParaphrasePipeline {
 			&& validation.getScientificAccuracyScore() >= 85.0
 			&& validation.getTopicCoverageScore() >= 70.0
 			&& validation.getHallucinationScore() >= 85.0;
+	}
+
+	private ParaphraseValidation finalizeNarrationUntilValid(
+			String originalText,
+			String candidate,
+			String style,
+			String baseName,
+			StoryboardProjectMaterials materials) throws Exception {
+		String narration = candidate;
+		ValidationResult validation = null;
+		int maxAttempts = Math.max(1, config.getValidationMaxRetries());
+
+		for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+			logger.info("Final narration validation attempt {}/{}", attempt, maxAttempts);
+			if (attempt > 1) {
+				String repaired = ollama.repairParaphrase(
+					originalText,
+					narration,
+					formatValidationIssues(validation),
+					style
+				);
+				repaired = cleanGeneratedNarration(repaired);
+				if (repaired.isBlank()) {
+					logger.warn("Final narration repair returned blank text; retaining the previous candidate");
+				} else {
+					narration = repaired;
+				}
+				try {
+					narration = ollama.proofreadEducationalTerminology(narration);
+				} catch (IOException e) {
+					logger.warn("Final terminology proofread could not be applied: {}", e.getMessage());
+				}
+				narration = factCheckNarration(narration, materials);
+			}
+
+			validation = validateParaphrase(originalText, narration, baseName);
+			List<String> failedGates = AccuracyValidator.failedQualityGates(
+				validation,
+				config.getValidationThreshold()
+			);
+			if (validation.isPassed() && failedGates.isEmpty()) {
+				logger.info("Final narration accepted with validation score {}/100 on attempt {}",
+					validation.getOverallScore(), attempt);
+				return new ParaphraseValidation(narration, validation);
+			}
+
+			logger.warn("Final narration failed production quality gates: {}. Repairing if attempts remain",
+				failedGates.isEmpty() ? "validator returned passed=false" : String.join("; ", failedGates));
+		}
+
+		throw new IOException("Final narration failed the production accuracy gate after "
+			+ maxAttempts + " attempts:\n" + formatValidationIssues(validation));
 	}
 
 	private String formatValidationIssues(ValidationResult validation) {
@@ -413,6 +676,12 @@ public class VideoParaphrasePipeline {
 		if (!config.isStoryboardCurriculumEnrichmentEnabled()) {
 			return validatedParaphrase;
 		}
+		if ((materials == null || !materials.hasTextEvidence()) && !config.getBoolean("storyboard.curriculum.enrichment.allow_model_knowledge", false)) {
+			// Production rule: added content must be traceable to approved project materials, never to the model's memory.
+			logger.info("Curriculum enrichment skipped: no approved project materials (set "
+				+ "storyboard.curriculum.enrichment.allow_model_knowledge=true to allow unsourced additions)");
+			return validatedParaphrase;
+		}
 		logger.info("=== PHASE 3b.5: Curriculum Enrichment ===");
 		try {
 			String enriched = ollama.enrichParaphraseForCurriculum(
@@ -456,7 +725,12 @@ public class VideoParaphrasePipeline {
 				materials == null ? "" : materials.promptContext());
 			corrected = cleanGeneratedNarration(corrected);
 			if (!corrected.isBlank()) {
-				return corrected;
+				String problem = factCheckProblem(narration, corrected);
+				if (problem == null) {
+					return corrected;
+				}
+				logger.warn("Factual audit rewrite rejected ({}); keeping the narration as it was", problem);
+				return narration;
 			}
 			logger.warn("Factual audit returned blank text; keeping the enriched narration");
 		} catch (IOException e) {
@@ -464,6 +738,20 @@ public class VideoParaphrasePipeline {
 				e.getMessage());
 		}
 		return narration;
+	}
+
+	/**
+	 * A fact-check rewrite may fix wording, never numbers or scope: every number of the original must still be there and the text must
+	 * stay about the same length. Returns the reason to reject the rewrite, or null to accept it.
+	 */
+	static String factCheckProblem(String original, String corrected) {
+		java.util.Set<String> kept = com.video.transcribe.scene.ClaimGrounding.digitNumbers(corrected);
+		for (String number : com.video.transcribe.scene.ClaimGrounding.digitNumbers(original)) {
+			if (!kept.contains(number)) return "the number " + number + " was lost";
+		}
+		double ratio = original.isBlank() ? 1.0 : (double) corrected.length() / original.length();
+		if (ratio < 0.75 || ratio > 1.35) return "the length changed by " + Math.round((ratio - 1) * 100) + "%";
+		return null;
 	}
 
 	private String cleanGeneratedNarration(String value) {
@@ -500,7 +788,7 @@ public class VideoParaphrasePipeline {
 			return "";
 		}
 		return value.toLowerCase()
-			.replaceAll("[^\\p{L}\\p{N}]+", " ")
+			.replaceAll("[^\\p{L}\\p{M}\\p{N}]+", " ")
 			.replaceAll("\\s+", " ")
 			.trim();
 	}

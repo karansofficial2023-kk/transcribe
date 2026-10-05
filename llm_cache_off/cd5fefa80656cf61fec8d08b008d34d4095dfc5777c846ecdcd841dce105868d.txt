@@ -1,0 +1,58 @@
+[
+  {
+    "rowId": "2.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for This is how the setup appears.; depict the concrete subject or visible action described by: This is how the setup appears.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "A diagram of two electromotive force sources connected in series with an external resistor. The internal resistances are labeled as R1 and R2, with R2 greater than R1. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.7",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for They are both in the associative mode because they are of equal values, and it's given that the current in them is not zero, the circuit is not zero, and they are connected across an external resistance that is R over here.; depict the concrete subject or visible action described by: They are both in the associative mode because they are of equal values, and it's given that the current in them is not zero, the circuit is not zero, and they are connected across an external resistance that is R over here.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "A diagram of two EMF sources in series with an external resistor. The internal resistances are labeled as R1 and R2, with R2 greater than R1. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.1",
+    "labels": [
+      "Battery 2"
+    ],
+    "labelPlacements": [
+      "Label name | Battery 2 | target=(0.45,0.6)"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "Battery 2 - cylindrical battery with labeled internal resistance R2"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Title card with text 'Understanding Potential Drop Condition' in sans-serif font, dark text on light background, thin colored border, and centered alignment.",
+    "comfyPrompt": "A diagram of two EMF sources connected to an external resistor. Battery 2 is highlighted with a label indicating its internal resistance R2. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.1",
+    "labels": [
+      "Option D"
+    ],
+    "labelPlacements": [
+      "Label name | Option D | target=(0.5,0.5)"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "Option D - text label on a final answer screen with dark background and white text"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Final conclusion screen with clear text overlay, dark background, white text, centered alignment, no borders or logos.",
+    "comfyPrompt": "A final answer screen displaying the correct option 'D' in white text on a dark background. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

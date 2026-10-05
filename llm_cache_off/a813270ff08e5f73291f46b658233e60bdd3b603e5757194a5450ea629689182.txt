@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "8.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Male insect approaching a flower, wings beating, body touching stamen, natural sunlight, green and yellow tones.",
+      "image_requirement": "Viewer must see the male insect interacting with the flower's stamen.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "When the males attempt to mate with the flower, they end up pollinating it.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Male Insect Pollinating Flower"
+    },
+    {
+      "shot_id": "8.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "Close-up of a flower with pollen grains on its stamen, natural lighting, yellow and white tones.",
+      "image_requirement": "Viewer must see the pollen grains on the stamen to understand pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Fascinating, isn't it?",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Pollen on Flower Stamen"
+    },
+    {
+      "shot_id": "8.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a flower with pollen grains on its stamen, natural lighting, yellow and white tones.",
+      "image_requirement": "Viewer must see the pollen grains on the stamen to understand pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Keep exploring to learn more.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Pollination Process"
+    }
+  ]
+}

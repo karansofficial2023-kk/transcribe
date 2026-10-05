@@ -7,6 +7,7 @@ import com.video.transcribe.VideoParaphrasePipeline;
 import com.video.transcribe.VideoParaphrasePipeline.PipelineResult;
 import com.video.transcribe.config.AppConfig;
 import com.video.transcribe.queue.VideoQueue.QueueItem;
+import com.video.transcribe.util.Sleeper;
 
 /**
  * Worker that processes videos ONE BY ONE from the queue
@@ -20,6 +21,9 @@ public class QueueWorker implements Runnable {
     private final VideoParaphrasePipeline pipeline;
     private final String language;
     private final String style;
+    private final String outputDir;
+    private static final int MAX_ATTEMPTS = Integer.getInteger("queue.item.attempts", 3);
+    private static final long RETRY_PAUSE_MILLIS = Long.getLong("queue.item.retry-pause-ms", 15000L);
     private volatile boolean running = true;
     private volatile boolean paused = false;
     
@@ -28,6 +32,7 @@ public class QueueWorker implements Runnable {
         this.pipeline = new VideoParaphrasePipeline(config);
         this.language = config.getLanguage();
         this.style = config.getParaphraseStyle();
+        this.outputDir = config.getOutputDir();
     }
     
     @Override
@@ -53,25 +58,43 @@ public class QueueWorker implements Runnable {
                 try {
                     java.nio.file.Path videoPath = item.getSource().getVideoPath();
                     
-                    PipelineResult result = pipeline.processVideo(
-                        videoPath.toString(), 
-                        language, 
-                        style
-                    );
-                    
-                    if (result.success) {
+                    // A transient fault (Ollama restart, ffmpeg/Whisper hiccup) gets another attempt; the quality gates' own
+                    // verdicts are final. Whatever happens, this item ends in a status file and the queue moves on.
+                    PipelineResult[] holder = new PipelineResult[1];
+                    ItemRetry.Outcome outcome = ItemRetry.run(MAX_ATTEMPTS, RETRY_PAUSE_MILLIS, Sleeper.REAL, attempt -> {
+                        if (attempt > 1) {
+                            logger.warn("Retrying {} (attempt {} of {})", item.getSource().getFileName(), attempt, MAX_ATTEMPTS);
+                        }
+                        holder[0] = pipeline.processVideo(videoPath.toString(), language, style);
+                        return new ItemRetry.Outcome(holder[0].success, holder[0].error, FailureKind.isFinal(holder[0].error), attempt);
+                    });
+                    PipelineResult result = holder[0];
+                    String fileName = String.valueOf(item.getSource().getFileName());
+                    int dot = fileName.lastIndexOf('.');
+                    String baseName = dot > 0 ? fileName.substring(0, dot) : fileName;
+                    ItemStatusFile.write(outputDir, baseName, outcome.success() ? "completed" : "failed",
+                        outcome.attempts(), outcome.error(), outcome.finalFailure());
+                    if (result == null) {
+                        throw new IllegalStateException(outcome.error());
+                    }
+
+                    if (outcome.success()) {
                         queue.markCompleted(item.getId());
                         long duration = System.currentTimeMillis() - startTime;
                         
                         logger.info("╔════════════════════════════════════════════════════╗");
                         logger.info("║ ✓ COMPLETED: {}", padRight(item.getSource().getFileName(), 36) + " ║");
                         logger.info("║ Time: {}", padRight(formatDuration(duration), 41) + " ║");
-                        logger.info("║ Audio: {}", padRight(result.audioOutput.toString(), 39) + " ║");
+                        if (result.audioOutput != null) {
+                            logger.info("║ Audio: {}", padRight(result.audioOutput.toString(), 39) + " ║");
+                        } else {
+                            logger.info("║ Audio: {}", padRight("disabled (storyboard-only mode)", 39) + " ║");
+                        }
                         logger.info("╚════════════════════════════════════════════════════╝");
                     } else {
-                        queue.markFailed(item.getId(), result.error);
-                        logger.error("✗ FAILED: {} - {}", 
-                            item.getSource().getFileName(), result.error);
+                        queue.markFailed(item.getId(), outcome.error());
+                        logger.error("✗ FAILED: {} - {}",
+                            item.getSource().getFileName(), outcome.error());
                     }
                     
                 } catch (Exception e) {

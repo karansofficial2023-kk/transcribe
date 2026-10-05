@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A person studying with a notebook and pen, sitting at a desk under natural light, facing a blank page.",
+      "image_requirement": "Viewer must see the person studying to understand the context of memory reliance.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This question relies entirely on memory.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Memory Reliance in Question"
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A person struggling to recall information, looking frustrated at a textbook with a pen in hand, under natural light.",
+      "image_requirement": "Viewer must see the person struggling to recall information to understand the difficulty.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "If you cannot recall the correct commercial agent for lowering blood cholesterol, it will be difficult to answer this question correctly.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Difficulty in Recall"
+    },
+    {
+      "shot_id": "3.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "A person confidently reading from a textbook, with a pen and notebook on the desk, under natural light.",
+      "image_requirement": "Viewer must see the person confidently recalling information to understand the ease of answering.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "However, if you remember the information, this is a straightforward question.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Ease of Answering"
+    }
+  ]
+}

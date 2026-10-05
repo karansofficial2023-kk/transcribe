@@ -1,0 +1,60 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Hence, the correct answer is $ x = 1 $.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Final Answer Confirmation",
+        "visualSubject": "A clean white background with a centered black text box containing the equation x = 1 in large white font, surrounded by a thin colored border and a colored target dot at the center of the text.",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration to emphasize final result",
+        "visualAnimation": "A clean white background with a centered black text box containing the equation x = 1 in large white font, surrounded by a thin colored border and a colored target dot at the center of the text.",
+        "localAnimation": "",
+        "labels": ["x = 1"],
+        "labelPlacements": [
+            "x = 1 | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Finding the minimum value of the function f(x) = x + 1/x using calculus",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A clean white background with a centered black text box containing the equation x = 1 in large white font, surrounded by a thin colored border and a colored target dot at the center of the text.",
+            "A high-contrast educational diagram showing the final result of an optimization problem with clear visual focus on the solution."
+        ],
+        "motion": "Static image",
+        "subtitle": "Final answer confirmed: x equals one",
+        "subtitleStyle": "Calculus educator with expertise in optimization problems",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for clean background asset only",
+        "comfyPrompt": "A clean white background with a centered black text box containing the equation x = 1 in large white font, surrounded by a thin colored border and a colored target dot at the center of the text. High contrast, no text artifacts, sharp 1920x1080 resolution.",
+        "coverageNotes": "Visual confirmation of final answer using high-contrast formatting for clarity",
+        "shot": {
+            "template": "video",
+            "heading": "Final Answer Confirmation",
+            "prompt": "A clean white background with a centered black text box containing the equation x = 1 in large white font, surrounded by a thin colored border and a colored target dot at the center of the text. High contrast, no text artifacts, sharp 1920x1080 resolution.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second duration of the narration."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Final Answer Confirmation",
+            "prompt": "A clean white background with a centered black text box containing the equation x = 1 in large white font, surrounded by a thin colored border and a colored target dot at the center of the text. High contrast, no text artifacts, sharp 1920x1080 resolution.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second duration of the narration."
+        }
+    }
+]

@@ -1,0 +1,23 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A classroom with students seated at desks, a teacher standing at the front, natural daylight streaming through windows, warm tones.",
+      "image_requirement": "Viewer must see students and a teacher in a classroom setting.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Thank you students.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Classroom Conclusion"
+    }
+  ]
+}

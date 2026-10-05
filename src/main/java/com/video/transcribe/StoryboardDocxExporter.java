@@ -20,6 +20,7 @@ import org.openxmlformats.schemas.wordprocessingml.x2006.main.STPageOrientation;
 
 import com.video.transcribe.scene.Scene;
 import com.video.transcribe.scene.SceneSegment;
+import com.video.transcribe.scene.StoryboardContractAudit;
 import com.video.transcribe.scene.StoryboardDocument;
 
 /** Exports a storyboard as one exact two-column production record per shot. */
@@ -34,7 +35,64 @@ public class StoryboardDocxExporter {
         this.videoProvider = normalizeVideoProvider(videoProvider);
     }
     
+    private StoryboardContract.LanguagePackage language = StoryboardContract.LanguagePackage.defaults();
+    private boolean languageSet;
+
+    public StoryboardDocxExporter withLanguage(StoryboardContract.LanguagePackage language) {
+        if (language != null) {
+            this.language = language;
+            this.languageSet = true;
+        }
+        return this;
+    }
+
+    /**
+     * The language package written into the contract. When the caller did not say, it is read from the narration itself: an exporter used
+     * by a re-plan or regeneration tool must never turn a Tamil storyboard into an English ("en-IN") contract.
+     */
+    StoryboardContract.LanguagePackage languageFor(StoryboardDocument storyboard) {
+        if (languageSet) return language;
+        StringBuilder text = new StringBuilder();
+        if (storyboard.getScenes() != null) {
+            for (Scene scene : storyboard.getScenes()) {
+                if (scene.getSegments() == null) continue;
+                for (SceneSegment segment : scene.getSegments()) {
+                    if (segment.getSentence() != null) text.append(segment.getSentence()).append(' ');
+                }
+            }
+        }
+        return StoryboardContract.LanguagePackage.forWhisperCode(LanguageSupport.detect(text.toString()).code());
+    }
+
     public void export(StoryboardDocument storyboard, String outputPath) throws IOException {
+        StoryboardContractAudit.separateFormulaProse(storyboard);
+        exportDocx(storyboard, outputPath);
+        writeContractFiles(storyboard, outputPath);
+    }
+
+    /** Writes <base>_contract.json (schema 2.0) and <base>_audit.json next to the DOCX. */
+    private void writeContractFiles(StoryboardDocument storyboard, String outputPath) throws IOException {
+        java.nio.file.Path docx = java.nio.file.Paths.get(outputPath);
+        String name = docx.getFileName().toString().replaceFirst("(?i)\\.docx$", "")
+            .replaceFirst("_storyboard$", "");
+        java.nio.file.Path dir = docx.toAbsolutePath().getParent();
+        com.google.gson.Gson gson = new com.google.gson.GsonBuilder().setPrettyPrinting()
+            .disableHtmlEscaping().create();
+        java.nio.file.Files.writeString(dir.resolve(name + "_contract.json"),
+            gson.toJson(StoryboardContract.toContract(storyboard, languageFor(storyboard))), java.nio.charset.StandardCharsets.UTF_8);
+        List<java.util.Map<String, Object>> issues = new ArrayList<>();
+        for (StoryboardContractAudit.Issue issue : StoryboardContractAudit.inspect(storyboard)) {
+            issues.add(issue.toMap());
+        }
+        java.util.Map<String, Object> audit = new java.util.LinkedHashMap<>();
+        audit.put("schema_version", StoryboardContract.SCHEMA_VERSION);
+        audit.put("issue_count", issues.size());
+        audit.put("issues", issues);
+        java.nio.file.Files.writeString(dir.resolve(name + "_audit.json"), gson.toJson(audit),
+            java.nio.charset.StandardCharsets.UTF_8);
+    }
+
+    private void exportDocx(StoryboardDocument storyboard, String outputPath) throws IOException {
         try (XWPFDocument document = new XWPFDocument()) {
             
             // Set document margins
@@ -43,6 +101,9 @@ public class StoryboardDocxExporter {
             // Title
             addTitle(document, "Storyboard: " + storyboard.getTitle());
             
+            // Which shots move (opening, closing, planned natural motion) is decided once, here and in the JSON contract
+            com.video.transcribe.scene.MotionPlanner.plan(storyboard.getScenes());
+
             // Process each scene
             for (Scene scene : storyboard.getScenes()) {
                 addScene(document, scene);
@@ -134,24 +195,20 @@ public class StoryboardDocxExporter {
         header.setColor("000000");
 
         List<String[]> fields = new ArrayList<>();
-        fields.add(new String[] {"shot_id", sceneNumber + "." + segment.getSegmentNumber()});
-        fields.add(new String[] {"narration", safe(segment.getSentence())});
-        fields.add(new String[] {"duration", segment.getRecommendedClipSeconds() + " sec"});
-        fields.add(new String[] {"visual_type", safe(segment.getVisualType())});
-        fields.add(new String[] {"media_type", productionMediaType(segment)});
-        fields.add(new String[] {"image_requirement", safe(segment.getVisualSubject())});
-        fields.add(new String[] {"image_prompt", safe(segment.getComfyPrompt())});
-        fields.add(new String[] {"labels", formatList(segment.getLabels())});
-        fields.add(new String[] {"label_placement", formatList(segment.getLabelPlacements())});
-        fields.add(new String[] {"label_style", safe(segment.getLabelStyle())});
-        fields.add(new String[] {"motion", safe(segment.getMotion())});
-        fields.add(new String[] {"subtitle", safe(segment.getSubtitle())});
-        fields.add(new String[] {"subtitle_style", safe(segment.getSubtitleStyle())});
-        fields.add(new String[] {"asset_path", safe(segment.getAssetPath())});
-        fields.add(new String[] {"wan_video_prompt", shotPrompt(segment.getShot())});
-        fields.add(new String[] {"ltx_video_prompt", shotPrompt(segment.getLtxShot())});
-        fields.add(new String[] {"review_notes", joinNonBlank(
-            safe(segment.getCoverageNotes()), safe(segment.getAssetQualityNotes()))});
+        for (java.util.Map.Entry<String, Object> entry : StoryboardContract.shotRecord(sceneNumber, segment).entrySet()) {
+            String name = entry.getKey();
+            Object value = entry.getValue();
+            String text;
+            if (value instanceof List<?> items) {
+                text = items.stream().map(String::valueOf).collect(java.util.stream.Collectors.joining("\n"));
+                if (text.isBlank() && StoryboardContract.OPTIONAL_LIST_FIELDS.contains(name)) continue;
+            } else if (value instanceof Double seconds) {
+                text = seconds + " sec";
+            } else {
+                text = String.valueOf(value);
+            }
+            fields.add(new String[] {name, text});
+        }
 
         XWPFTable table = doc.createTable(fields.size(), 2);
         table.setWidth("100%");

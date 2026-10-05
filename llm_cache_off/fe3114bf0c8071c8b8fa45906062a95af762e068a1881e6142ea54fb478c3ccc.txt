@@ -1,0 +1,122 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+        "visualSubject": "పచ్చ మొక్క, గ్లూకోజ్ అణువులు, శక్తి వినియోగం సూచించే క్రమం",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Title card with a short hold for the first sentence.",
+        "visualAnimation": "A close-up of a green plant with glucose molecules being used as energy, shown in a clean educational documentary style.",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Photosynthesis Telugu",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A close-up of a green plant with glucose molecules being used as energy, shown in a clean educational documentary style.",
+            "A diagram showing glucose as an energy source for plants."
+        ],
+        "motion": "Static image with no camera movement",
+        "subtitle": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+        "subtitleStyle": "REVIEW_REQUIRED: subject and academic level could not be established reliably curriculum specialist with domain expertise in Photosynthesis Telugu",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for title card, no labels or text.",
+        "comfyPrompt": "A close-up of a green plant with glucose molecules being used as energy, shown in a clean educational documentary style. No text, no labels, no watermarks. 1920x1080 resolution, realistic lighting, clear subject separation, sufficient empty overlay margins.",
+        "coverageNotes": "Visuals cover the concept of glucose providing energy to plants.",
+        "shot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+            "prompt": "A close-up of a green plant with glucose molecules being used as energy, shown in a clean educational documentary style. No text, no labels, no watermarks. 1920x1080 resolution, realistic lighting, clear subject separation, sufficient empty overlay margins.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split the clip into two 4-second segments for smooth transition."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ మొక్కకు శక్తిని ఇస్తుంది",
+            "prompt": "A close-up of a green plant with glucose molecules being used as energy, shown in a clean educational documentary style. No text, no labels, no watermarks. 1920x1080 resolution, realistic lighting, clear subject separation, sufficient empty overlay margins.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split the clip into two 4-second segments for smooth transition."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "మిగిలిన గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+        "visualSubject": "మొక్క, గ్లూకోజ్ అణువులు, పిండి పదార్థం నిల్వ అవుతున్న సూచిక",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration to show the storage process.",
+        "visualAnimation": "A close-up of a plant with glucose molecules being stored as starch, shown in a clean educational documentary style.",
+        "localAnimation": "Show arrows pointing to glucose molecules and label them as 'గ్లూకోజ్' and 'పిండి పదార్థం'.",
+        "labels": [
+            "గ్లూకోజ్",
+            "పిండి పదార్థం"
+        ],
+        "labelPlacements": [
+            "గ్లూకోజ్ | గ్లూకోజ్ అణువులు | COORDINATES_PENDING_APPROVED_IMAGE",
+            "పిండి పదార్థం | పిండి పదార్థం నిల్వ అవుతున్న సూచిక | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Photosynthesis Telugu",
+        "arrows": [
+            "గ్లూకోజ్ అణువులు పిండి పదార్థంగా మారే వరకు సూచించే వీధి"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A close-up of a plant with glucose molecules being stored as starch, shown in a clean educational documentary style.",
+            "A diagram showing glucose being converted into starch for storage."
+        ],
+        "motion": "Static image with no camera movement",
+        "subtitle": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+        "subtitleStyle": "REVIEW_REQUIRED: subject and academic level could not be established reliably curriculum specialist with domain expertise in Photosynthesis Telugu",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram for labeled image, includes glucose and starch labels.",
+        "comfyPrompt": "",
+        "coverageNotes": "Visuals cover the concept of glucose being stored as starch in plants.",
+        "shot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+            "prompt": "A close-up of a plant with glucose molecules being stored as starch, shown in a clean educational documentary style. No text, no labels, no watermarks. 1920x1080 resolution, realistic lighting, clear subject separation, sufficient empty overlay margins.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split the clip into two 4-second segments for smooth transition."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది",
+            "prompt": "A close-up of a plant with glucose molecules being stored as starch, shown in a clean educational documentary style. No text, no labels, no watermarks. 1920x1080 resolution, realistic lighting, clear subject separation, sufficient empty overlay margins.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split the clip into two 4-second segments for smooth transition."
+        }
+    }
+]

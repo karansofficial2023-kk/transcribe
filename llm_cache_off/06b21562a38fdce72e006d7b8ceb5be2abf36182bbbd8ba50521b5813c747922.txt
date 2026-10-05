@@ -1,0 +1,58 @@
+[
+  {
+    "rowId": "5.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "point_labels",
+    "visualSubject": "Title card with centered text and dark background, white font, no borders or logos",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a title card with centered text 'Resistance Calculation Summary' on a dark background. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.2",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for Clear?; depict the concrete subject or visible action described by: Clear?; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a person facing the camera with a questioning expression. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "point_labels",
+    "visualSubject": "Title card with text 'Specific Resistance ρ' in sans-serif font, dark text on light background, thin colored border, and a colored target dot at the bottom band",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a title card with centered text 'Segment 1: Specific Resistance ρ' on a light background with a thin colored border. A colored target dot is placed at the bottom band. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.2",
+    "labels": ["Material Property ρ"],
+    "labelPlacements": ["Material Property ρ | Material property of resistance | COORDINATES_PENDING_APPROVED_IMAGE"],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Material Property ρ - Resistivity symbol on resistor"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Realistic image of a resistor with labeled components, including material property ρ, and a colored target dot at the bottom band",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a realistic resistor with a resistivity symbol ρ clearly visible on its surface. A colored target dot is placed at the bottom band. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.1",
+    "labels": ["Resistivity Symbol", "Resistivity value (ρ) of copper", "Original Length", "Original dimension of the wire before stretching"],
+    "labelPlacements": [
+      "Resistivity Symbol | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Original Length | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Resistivity Symbol - Resistivity symbol on copper wire",
+      "Original Length - Original length of the wire before stretching"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A copper wire with a resistivity symbol ρ labeled near the wire, showing both original and stretched dimensions with clear labels for length and cross-sectional area",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a copper wire with a resistivity symbol ρ clearly visible. The wire is shown in both its original and stretched dimensions with clear labels for length and cross-sectional area. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

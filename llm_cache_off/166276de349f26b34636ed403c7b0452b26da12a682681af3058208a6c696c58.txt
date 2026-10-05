@@ -1,0 +1,22 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A green plant with leaves facing the sun, roots in soil, water droplets on leaves, natural daylight, vibrant green and earthy tones.",
+      "image_requirement": "Viewer must see the plant absorbing carbon dioxide from the air and water from the soil through its roots.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In this process, plants absorb carbon dioxide from the air and water from the soil.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

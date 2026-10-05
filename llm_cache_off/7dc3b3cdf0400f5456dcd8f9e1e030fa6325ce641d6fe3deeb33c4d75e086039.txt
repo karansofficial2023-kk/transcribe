@@ -1,0 +1,6 @@
+{
+  "score": 100,
+  "missing_facts": [],
+  "changed_facts": [],
+  "added_facts": []
+}

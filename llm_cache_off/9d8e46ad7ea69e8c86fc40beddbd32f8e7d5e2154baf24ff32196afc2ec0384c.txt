@@ -1,0 +1,13 @@
+{
+  "inferredTopic": "AIDS Causes and Symptoms",
+  "filenameTopic": "AIDS Causes and Symptoms",
+  "topicMatch": true,
+  "confidence": 1.0,
+  "safeStoryboardTitle": "Understanding AIDS: Causes and Symptoms",
+  "subject": "Health Education",
+  "academicLevel": "REVIEW_REQUIRED",
+  "intendedLearners": "REVIEW_REQUIRED",
+  "learningObjectives": [],
+  "smeRole": "Public Health Educator",
+  "warning": ""
+}

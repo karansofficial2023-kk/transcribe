@@ -1,0 +1,80 @@
+[
+  {
+    "rowId": "6.2",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Redox Reaction in Electroplating",
+    "visualSubject": "electrochemical cell with labeled cathode (reduction) and anode (oxidation), showing electron flow and redox reaction summary",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the reduction at cathode, oxidation at anode, and overall redox reaction in electroplating",
+    "formulaLines": [
+      "Redox reaction: Ag⁺ + e⁻ → Ag (reduction at cathode)",
+      "Oxidation: Ag → Ag⁺ + e⁻ (oxidation at anode)"
+    ]
+  },
+  {
+    "rowId": "6.3",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Since reduction occurs at the cathode and oxidation takes place at the anode, the overall reaction is a redox reaction.",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for Since reduction occurs at the cathode and oxidation takes place at the anode, the overall reaction is a redox reaction.; depict the concrete subject or visible action described by: Since reduction occurs at the cathode and oxidation takes place at the anode, the overall reaction is a redox reaction.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "pillow_opencv",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A close-up view of an electroplating setup showing the cathode (keychain) and anode (silver rod), with a redox reaction occurring in the solution. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Source-coverage guard: generated because the LLM omitted this narration sentence. Strict label-readiness guard: rendered without labels because exact reviewed targets and coordinates were unavailable.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "7.1",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Variables in Electroplating Process",
+    "visualSubject": "Title card with bold, centered text on dark background",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A title card with the text 'Variables in Electroplating Process' in a dark background, white text, and sans-serif font. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Introduces the topic of variables affecting electroplating Repeated-title guard: render this concept as a content visual, not another presentation title card.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "7.2",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Mass vs. Time Graph for Silver Deposition",
+    "visualSubject": "Graph with axes labeled 'Time (s)' and 'Mass of Silver (g)', showing linear increase over time",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "pillow_opencv",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A graph displaying the relationship between mass of silver deposited and time, with clear axis labels. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visualizes the relationship between mass and time in electroplating Strict label-readiness guard: rendered without labels because exact reviewed targets and coordinates were unavailable.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "7.3",
+    "approved": true,
+    "issue": "",
+    "template": "video_broll",
+    "visualType": "short_motion_clip",
+    "heading": "Silver Deposition Over Time",
+    "visualSubject": "Animated graph showing increasing mass of silver with time",
+    "mediaType": "wan_video",
+    "motionType": "wan_video",
+    "tool": "ltx_video",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Demonstrates the time-dependent increase in mass of silver deposited Generated-video guard: do not draw exact labels/arrows on this moving shot; use subtitles only or cut to a separate labeled still/diagram.",
+    "formulaLines": []
+  }
+]

@@ -31,6 +31,12 @@ class TranscriptQualityGateTest {
         assertTrue(TranscriptQualityGate.hasUsableSpeech(transcript));
     }
 
+    @Test
+    void rejectsShortRepeatedGibberishFromSilentVideo() {
+        TranscriptData transcript = transcript(12.0, 3, "1-2-3 nd nd nd Vypom", 0.0, 3.0);
+        assertFalse(TranscriptQualityGate.hasUsableSpeech(transcript));
+    }
+
     private TranscriptData transcript(double duration, int segmentCount, String text,
             double probability, double spacing) {
         TranscriptData transcript = new TranscriptData();

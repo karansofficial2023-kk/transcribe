@@ -1,0 +1,11 @@
+{
+  "score": 95,
+  "missing_facts": [
+    "Digging into the phone to find this out is going to be damn interesting."
+  ],
+  "changed_facts": [
+    "The original text says 'the dry cell in your wall clock or your toys which die after long use are primary cells.' The paraphrased version changes it to 'the dry cell found in your wall clock or toys, which eventually stop working after extended use, are classified as primary cells.' This is a minor rephrasing but not a factual change.",
+    "The original text says 'When the cylinder and the graphite rod are connected by a conducting wire, zinc acts as an anode and graphite rod which is in contact with MnO2 acts as a cathode.' The paraphrased version says 'When a cylinder and graphite rod are connected by a conducting wire, zinc acts as the anode, and the graphite rod, which is in contact with MnO₂, acts as the cathode.' This is a minor rephrasing but not a factual change."
+  ],
+  "added_facts": []
+}

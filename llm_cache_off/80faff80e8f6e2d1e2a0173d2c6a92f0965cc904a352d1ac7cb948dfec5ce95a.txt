@@ -1,0 +1,48 @@
+[
+    {
+        "rowId": "7.1",
+        "labels": ["పత్రరంధ్రం", "గాలి", "కార్బన్ డయాక్సైడ్"],
+        "labelPlacements": [
+            "పత్రరంధ్రం | మొక్క యొక్క వాయు సేకరణ కేంద్రం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "గాలి | వాయు సేకరణ ద్వారా మొక్క గాలిని పొందడం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "కార్బన్ డయాక్సైడ్ | వాయు సేకరణ ద్వారా మొక్క గాలిని పొందడం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "పత్రరంధ్రం - మొక్క యొక్క వాయు సేకరణ కేంద్రం",
+            "గాలి - వాయు సేకరణ ద్వారా మొక్క గాలిని పొందడం",
+            "కార్బన్ డయాక్సైడ్ - వాయు సేకరణ ద్వారా మొక్క గాలిని పొందడం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "మొక్క పత్రరంధ్రం, గాలి సేకరణ వ్యవస్థ, కార్బన్ డయాక్సైడ్ ప్రవేశం",
+        "comfyPrompt": "మొక్క పత్రరంధ్రం, గాలి సేకరణ వ్యవస్థ, కార్బన్ డయాక్సైడ్ ప్రవేశం. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "7.2",
+        "labels": ["పత్రరంధ్రం", "కార్బన్ డయాక్సైడ్", "ఆక్సిజన్"],
+        "labelPlacements": [
+            "పత్రరంధ్రం | మొక్క యొక్క వాయు సేకరణ కేంద్రం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "కార్బన్ డయాక్సైడ్ | వాయు సేకరణ ద్వారా మొక్క గాలిని పొందడం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "ఆక్సిజన్ | వాయు విడుదల ద్వారా మొక్క ఆక్సిజన్ విడుదల చేయడం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "పత్రరంధ్రం - మొక్క యొక్క వాయు సేకరణ కేంద్రం",
+            "కార్బన్ డయాక్సైడ్ - వాయు సేకరణ ద్వారా మొక్క గాలిని పొందడం",
+            "ఆక్సిజన్ - వాయు విడుదల ద్వారా మొక్క ఆక్సిజన్ విడుదల చేయడం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "మొక్క పత్రరంధ్రం, కార్బన్ డయాక్సైడ్ ప్రవేశం, ఆక్సిజన్ విడుదల",
+        "comfyPrompt": "మొక్క పత్రరంధ్రం, కార్బన్ డయాక్సైడ్ ప్రవేశం, ఆక్సిజన్ విడుదల. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "8.1",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "no_labels",
+        "visualSubject": "స్థిరమైన క్లిప్, విషయాలు అంతర్గతం చేయబడిన బ్యాక్‌గ్రౌండ్, ప్రముఖత వివరించే సైన్ అలాంటి స్థిరమైన క్లిప్",
+        "comfyPrompt": "స్థిరమైన క్లిప్, విషయాలు అంతర్గతం చేయబడిన బ్యాక్‌గ్రౌండ్, ప్రముఖత వివరించే సైన్ అలాంటి స్థిరమైన క్లిప్. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

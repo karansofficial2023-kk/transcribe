@@ -1,0 +1,48 @@
+[
+  {
+    "rowId": "8.1",
+    "labels": [
+      "కిరణజన్య సంయోగక్రియ - జీవజాలం అభివృద్ధి కారణం",
+      "జీవజాలం",
+      "ఆకుపచ్చ మొక్కలు",
+      "పత్రరంధ్రాలు",
+      "నీరు",
+      "కార్బన్ డయాక్సైడ్",
+      "ఆక్సిజన్",
+      "గ్లూకోజ్"
+    ],
+    "labelPlacements": [
+      "కిరణజన్య సంయోగక్రియ - జీవజాలం అభివృద్ధి కారణం | పత్రరంధ్రాలు=(0.15,0.25)",
+      "జీవజాలం | ఆకుపచ్చ మొక్కలు=(0.35,0.45)",
+      "ఆకుపచ్చ మొక్కలు | పత్రరంధ్రాలు=(0.65,0.75)",
+      "పత్రరంధ్రాలు | నీరు=(0.20,0.30)",
+      "నీరు | కార్బన్ డయాక్సైడ్=(0.40,0.50)",
+      "కార్బన్ డయాక్సైడ్ | ఆక్సిజన్=(0.60,0.70)",
+      "ఆక్సిజన్ | గ్లూకోజ్=(0.80,0.90)",
+      "గ్లూకోజ్ | ఆకుపచ్చ మొక్కలు=(0.10,0.20)"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "కిరణజన్య సంయోగక్రియ - జీవజాలం అభివృద్ధి కారణం - పత్రరంధ్రాలు",
+      "జీవజాలం - ఆకుపచ్చ మొక్కలు",
+      "ఆకుపచ్చ మొక్కలు - పత్రరంధ్రాలు",
+      "పత్రరంధ్రాలు - నీరు",
+      "నీరు - కార్బన్ డయాక్సైడ్",
+      "కార్బన్ డయాక్సైడ్ - ఆక్సిజన్",
+      "ఆక్సిజన్ - గ్లూకోజ్",
+      "గ్లూకోజ్ - ఆకుపచ్చ మొక్కలు"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Source-faithful visible subject and action: దీని కారణంగా ప్రకృతిలో ఉన్న జీవజాలం అభివృద్ధి చెందుతుంది. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x10,80 frame.",
+    "comfyPrompt": "A realistic image of a forest ecosystem with visible plants, leaves, roots, and water sources. Include sunlight, carbon dioxide, oxygen, and glucose as labeled elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

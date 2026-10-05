@@ -1,0 +1,91 @@
+[
+  {
+    "rowId": "1.2",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with dark background and white text, centered at the top of the screen",
+    "comfyPrompt": "Title card with dark background and white text, centered at the top of the screen. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.3",
+    "labels": ["EMF Source 1", "EMF Source 2", "External Resistance R"],
+    "labelPlacements": [
+      "EMF Source 1 | Left EMF source in the circuit diagram | COORDINATES_PENDING_APPROVED_IMAGE",
+      "EMF Source 2 | Right EMF source in the circuit diagram | COORDINATES_PENDING_APPROVED_IMAGE",
+      "External Resistance R | Resistor symbol at the end of the circuit | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "EMF Source 1 - Left EMF source in the circuit diagram",
+      "EMF Source 2 - Right EMF source in the circuit diagram",
+      "External Resistance R - Resistor symbol at the end of the circuit"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Realistic image of a circuit diagram showing two equal EMF sources connected in series to an external resistor, labeled with EMF and R",
+    "comfyPrompt": "Realistic image of a circuit diagram showing two equal EMF sources connected in series to an external resistor, labeled with EMF and R. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.1",
+    "labels": ["R1", "Internal resistance of first source", "R2", "Internal resistance of second source"],
+    "labelPlacements": [
+      "R1 | Internal resistance of first source | COORDINATES_PENDING_APPROVED_IMAGE",
+      "R2 | Internal resistance of second source | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "R1 - Internal resistance of first source",
+      "R2 - Internal resistance of second source"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Two voltage sources with internal resistances labeled as R1 and R2, R2 larger than R1, placed side by side on a circuit diagram background",
+    "comfyPrompt": "Two voltage sources with internal resistances labeled as R1 and R2, R2 larger than R1, placed side by side on a circuit diagram background. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.4",
+    "labels": ["E1", "First EMF source", "E2", "Second EMF source"],
+    "labelPlacements": [
+      "E1 | First EMF source | COORDINATES_PENDING_APPROVED_IMAGE",
+      "E2 | Second EMF source | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "E1 - First EMF source",
+      "E2 - Second EMF source"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Circuit diagram showing two EMF sources connected in series with an external resistor, current flowing through the circuit",
+    "comfyPrompt": "Circuit diagram showing two EMF sources connected in series with an external resistor, current flowing through the circuit. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.5",
+    "labels": ["R1", "Internal resistance of first source", "R2", "Internal resistance of second source"],
+    "labelPlacements": [
+      "R1 | Internal resistance of first source | COORDINATES_PENDING_APPROVED_IMAGE",
+      "R2 | Internal resistance of second source | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "R1 - Internal resistance of first source",
+      "R2 - Internal resistance of second source"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Circuit diagram showing two EMF sources with their respective internal resistances labeled as R1 and R2",
+    "comfyPrompt": "Circuit diagram showing two EMF sources with their respective internal resistances labeled as R1 and R2. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

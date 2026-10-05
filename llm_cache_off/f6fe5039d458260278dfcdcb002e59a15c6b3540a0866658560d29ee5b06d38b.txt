@@ -1,0 +1,254 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "As we explore the world of electroplating, we've learned about the roles of anode and cathode, the processes of reduction and oxidation, and the various factors that influence the deposition of metals.",
+        "template": "video_broll",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Electroplating Overview Recap",
+        "visualSubject": "A 16:9 educational documentary-style shot of a lab setup with electroplating equipment, including anode and cathode electrodes, a power source, and metal ions in solution. The camera is at eye level, slightly angled to show the entire apparatus.",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 10,
+        "recommendedClipSeconds": 12,
+        "timingNotes": "Hold for full narration duration, then transition to next segment with a fade-out.",
+        "visualAnimation": "A lab setup showing anode and cathode electrodes in a solution. The camera slowly pans from the power source to the metal ions in solution, highlighting each component with subtle zooms and labels.",
+        "localAnimation": "Zoom on anode and cathode, then pan to solution with ion particles. Use arrows to point to each labeled structure.",
+        "labels": [
+            "Anode | Electrode where oxidation occurs |",
+            "Cathode | Electrode where reduction occurs |",
+            "Power Source | Provides electrical energy for the process |",
+            "Metal Ions in Solution | Ions that are reduced at the cathode |"
+        ],
+        "labelPlacements": [
+            "Anode | exact semantic target description | target=(0.35, 0.65)",
+            "Cathode | exact semantic target description | target=(0.65, 0.65)",
+            "Power Source | exact semantic target description | target=(0.45, 0.85)",
+            "Metal Ions in Solution | exact semantic target description | target=(0.25, 0.35)"
+        ],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [
+            "Anode to power source | arrow from anode to power source | style=blue",
+            "Cathode to power source | arrow from cathode to power source | style=blue"
+        ],
+        "highlights": [
+            "Anode | highlight color=yellow",
+            "Cathode | highlight color=yellow"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Educational lab setup with electroplating equipment, clear labeling of anode and cathode, realistic lighting",
+            "Close-up of metal ions in solution with labeled electrodes"
+        ],
+        "motion": "Smooth pan from power source to solution with zooms on key components",
+        "subtitle": "Overview of Electroplating Components and Processes",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with reviewed labels, no generated text or labels in image",
+        "comfyPrompt": "A clean educational lab setup with anode and cathode electrodes, power source, and metal ions in solution. No text, no labels, realistic lighting.",
+        "coverageNotes": "Visuals cover the roles of anode and cathode, reduction and oxidation processes, and factors influencing metal deposition as per curriculum standards.",
+        "shot": {
+            "template": "video",
+            "heading": "Electroplating Overview Recap",
+            "prompt": "A lab setup showing anode and cathode electrodes in a solution. The camera slowly pans from the power source to the metal ions in solution, highlighting each component with subtle zooms and labels.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join clips in sequence: first pan to power source, second zoom on anode and cathode, third focus on ion solution."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Electroplating Overview Recap",
+            "prompt": "A lab setup showing anode and cathode electrodes in a solution. The camera slowly pans from the power source to the metal ions in solution, highlighting each component with subtle zooms and labels.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join clips in sequence: first pan to power source, second zoom on anode and cathode, third focus on ion solution."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "But our journey doesn't end here.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Next Chapter: Practical Applications of Electroplating",
+        "visualSubject": "A title card with the text 'Next Chapter: Practical Applications of Electroplating' in a dark background, white text, and sans-serif font.",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 4,
+        "recommendedClipSeconds": 5,
+        "timingNotes": "Hold for full duration, then transition to next segment with a fade-out.",
+        "visualAnimation": "A title card with the text 'Next Chapter: Practical Applications of Electroplating' in a dark background, white text, and sans-serif font.",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Title card with dark background, white text, and sans-serif font for 'Next Chapter: Practical Applications of Electroplating'",
+            "Clean title card with no distractions"
+        ],
+        "motion": "Static image",
+        "subtitle": "Next Chapter: Practical Applications of Electroplating",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Use generated still for title card, no text or labels in image",
+        "comfyPrompt": "A clean title card with the text 'Next Chapter: Practical Applications of Electroplating' on a dark background. No text, no labels, no watermarks.",
+        "coverageNotes": "Visuals cover the transition to practical applications and artistic potential of electroplating as per curriculum standards.",
+        "shot": {
+            "template": "video",
+            "heading": "Next Chapter: Practical Applications of Electroplating",
+            "prompt": "A title card with the text 'Next Chapter: Practical Applications of Electroplating' on a dark background. No text, no labels, no watermarks.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join clips in sequence: first frame with title card, second frame with fade-out."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Next Chapter: Practical Applications of Electroplating",
+            "prompt": "A title card with the text 'Next Chapter: Practical Applications of Electroplating' on a dark background. No text, no labels, no watermarks.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join clips in sequence: first frame with title card, second frame with fade-out."
+        }
+    },
+    {
+        "segmentNumber": 3,
+        "sentence": "Stay with us for the next chapter, where we will examine the practical applications and artistic potential of electroplating.",
+        "template": "video_broll",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Practical Applications of Electroplating",
+        "visualSubject": "A 16:9 educational documentary-style shot of a modern electroplating facility, showing metal objects being coated with a thin layer of another metal. The camera is at eye level, slightly angled to show the entire process.",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 10,
+        "recommendedClipSeconds": 12,
+        "timingNotes": "Hold for full narration duration, then transition to next segment with a fade-out.",
+        "visualAnimation": "A modern electroplating facility showing metal objects being coated. The camera slowly pans from the coating process to finished products, highlighting each step with subtle zooms and labels.",
+        "localAnimation": "Zoom on coating process, then pan to finished products. Use arrows to point to labeled structures.",
+        "labels": [
+            "Electroplating Facility | Modern industrial setup for metal coating |",
+            "Metal Objects Being Coated | Items undergoing electroplating process |",
+            "Finished Products | Electroplated items ready for use |"
+        ],
+        "labelPlacements": [
+            "Electroplating Facility | exact semantic target description | target=(0.45, 0.85)",
+            "Metal Objects Being Coated | exact semantic target description | target=(0.25, 0.65)",
+            "Finished Products | exact semantic target description | target=(0.65, 0.35)"
+        ],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [
+            "Metal Objects Being Coated to Finished Products | arrow from coating process to finished products | style=blue"
+        ],
+        "highlights": [
+            "Electroplating Facility | highlight color=yellow"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Modern electroplating facility with labeled metal objects and finished products",
+            "Close-up of coating process with labeled components"
+        ],
+        "motion": "Smooth pan from coating process to finished products with zooms on key components",
+        "subtitle": "Practical Applications and Artistic Potential of Electroplating",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with reviewed labels, no generated text or labels in image",
+        "comfyPrompt": "A clean educational electroplating facility setup with metal objects being coated. No text, no labels, realistic lighting.",
+        "coverageNotes": "Visuals cover the practical applications and artistic potential of electroplating as per curriculum standards.",
+        "shot": {
+            "template": "video",
+            "heading": "Practical Applications of Electroplating",
+            "prompt": "A modern electroplating facility showing metal objects being coated. The camera slowly pans from the coating process to finished products, highlighting each component with subtle zooms and labels.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join clips in sequence: first pan to coating process, second zoom on key components, third focus on finished products."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Practical Applications of Electroplating",
+            "prompt": "A modern electroplating facility showing metal objects being coated. The camera slowly pans from the coating process to finished products, highlighting each component with subtle zooms and labels.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join clips in sequence: first pan to coating process, second zoom on key components, third focus on finished products."
+        }
+    },
+    {
+        "segmentNumber": 4,
+        "sentence": "We believe in you.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Encouragement and Final Words",
+        "visualSubject": "A title card with the text 'We believe in you.' in a dark background, white text, and sans-serif font.",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 4,
+        "recommendedClipSeconds": 5,
+        "timingNotes": "Hold for full duration, then transition to next segment with a fade-out.",
+        "visualAnimation": "A title card with the text 'We believe in you.' on a dark background, white text, and sans-serif font.",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Electrochemistry Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Title card with dark background, white text, and sans-serif font for 'We believe in you.'",
+            "Clean title card with no distractions"
+        ],
+        "motion": "Static image",
+        "subtitle": "Encouragement and Final Words",
+        "subtitleStyle": "Electrochemistry Educator",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Use generated still for title card, no text or labels in image",
+        "comfyPrompt": "A clean title card with the text 'We believe in you.' on a dark background. No text, no labels, no watermarks.",
+        "coverageNotes": "Visuals cover the encouragement and final words as per curriculum standards.",
+        "shot": {
+            "template": "video",
+            "heading": "Encouragement and Final Words",
+            "prompt": "A title card with the text 'We believe in you.' on a dark background. No text, no labels, no watermarks.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join clips in sequence: first frame with title card, second frame with fade-out."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Encouragement and Final Words",
+            "prompt": "A title card with the text 'We believe in you.' on a dark background. No text, no labels, no watermarks.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join clips in sequence: first frame with title card, second frame with fade-out."
+        }
+    }
+]

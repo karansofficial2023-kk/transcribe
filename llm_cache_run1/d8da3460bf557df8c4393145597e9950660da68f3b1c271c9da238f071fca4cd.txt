@@ -1,0 +1,68 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "The options provided are cyclosporine A, statin, streptokinase, and lipases.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Question Overview - Drug Options List",
+        "visualSubject": "Text overlay on dark background with white text, centered horizontally and vertically, displaying the four drug names in a clear, readable font",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration to ensure clarity and readability of the text",
+        "visualAnimation": "Text overlay on dark background with white text, centered horizontally and vertically, displaying the four drug names in a clear, readable font",
+        "localAnimation": "",
+        "labels": [
+            "cyclosporine A",
+            "statin",
+            "streptokinase",
+            "lipases"
+        ],
+        "labelPlacements": [
+            "cyclosporine A | drug name | COORDINATES_PENDING_APPROVED_IMAGE",
+            "statin | drug name | COORDINATES_PENDING_APPROVED_IMAGE",
+            "streptokinase | drug name | COORDINATES_PENDING_APPROVED_IMAGE",
+            "lipases | drug name | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Identification of Commercial Blood Cholesterol-Lowering Agents",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "White text on black background with centered drug names in a clear sans-serif font",
+            "Dark text on light background with centered drug names in a clear sans-serif font"
+        ],
+        "motion": "Static image with no camera movement",
+        "subtitle": "List of four drug options provided for the question",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Generated still using text overlay on dark background, no labels or formulas included in the image",
+        "comfyPrompt": "Dark background with white text, centered horizontally and vertically, displaying the four drug names in a clear, readable sans-serif font. No labels, no captions, no watermarks.",
+        "coverageNotes": "Visuals cover the identification of the four drug options listed in the question, reinforcing their names for clarity",
+        "shot": {
+            "template": "video",
+            "heading": "Question Overview - Drug Options List",
+            "prompt": "Static image with white text on black background, centered horizontally and vertically, displaying the four drug names in a clear, readable sans-serif font. No labels, no captions, no watermarks.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second duration of the narration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Question Overview - Drug Options List",
+            "prompt": "Static image with white text on black background, centered horizontally and vertically, displaying the four drug names in a clear, readable sans-serif font. No labels, no captions, no watermarks.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second duration of the narration"
+        }
+    }
+]

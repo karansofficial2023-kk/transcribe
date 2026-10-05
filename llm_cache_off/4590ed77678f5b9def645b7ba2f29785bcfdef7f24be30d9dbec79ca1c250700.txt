@@ -1,0 +1,8 @@
+{
+  "score": 95,
+  "hallucinations": [
+    "When a cylinder and graphite rod are connected by a conducting wire, zinc acts as the anode, and the graphite rod, which is in contact with MnO₂, acts as the cathode."
+  ],
+  "supported_corrections_or_additions": [],
+  "severity": "medium"
+}

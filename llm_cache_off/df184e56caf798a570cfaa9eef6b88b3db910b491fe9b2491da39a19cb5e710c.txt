@@ -1,0 +1,67 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "A keychain attached to a negative terminal of an electrolytic cell, with a pure silver rod connected to the positive terminal. The setup is on a lab bench under natural daylight. The keychain hangs freely near the silver rod.",
+      "image_requirement": "Viewer must see the keychain and silver rod connected to opposite terminals.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The keychain that will be electroplated is attached to the negative terminal, and a pure silver rod is connected to the positive terminal.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Electroplating Setup"
+    },
+    {
+      "shot_id": "2.5",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Attach keychain to negative terminal",
+        "Connect silver rod to positive terminal"
+      ],
+      "panels": [],
+      "narration_en": "We are now ready to start the process.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Electroplating Readiness"
+    },
+    {
+      "shot_id": "2.6",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Activate power source",
+        "Begin electroplating process"
+      ],
+      "panels": [],
+      "narration_en": "Let's proceed.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Electroplating Initiation"
+    }
+  ]
+}

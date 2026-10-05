@@ -1,0 +1,47 @@
+[
+  {
+    "rowId": "6.1",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Evaluating the Second Derivative at x = -1",
+    "visualSubject": "A clean, dark background with a centered white title card displaying 'Evaluating the Second Derivative at x = -1' in bold sans-serif font.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A dark background with a centered white title card displaying 'Evaluating the Second Derivative at x = -1' in bold sans-serif font. No text artifacts, clean background. No generated text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Introduces the evaluation point for the second derivative Repeated-title guard: render this concept as a content visual, not another presentation title card.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "6.2",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Conclusion: Minimum Value at x = 1",
+    "visualSubject": "A clean, dark background with a centered white title card displaying 'Conclusion: Minimum Value at x = 1' in bold sans-serif font.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A dark background with a centered white title card displaying 'Conclusion: Minimum Value at x = 1' in bold sans-serif font. No text artifacts, clean background. No generated text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Concludes the lesson by identifying the minimum value of the function Repeated-title guard: render this concept as a content visual, not another presentation title card.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "7.1",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Correct Answer Confirmation",
+    "visualSubject": "A clean, high-contrast title card with a centered white text on black background, displaying the equation $ x = 1 $ in bold, sans-serif font.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "A high-contrast title card with centered white text on black background, displaying the equation $ x = 1 $ in bold, sans-serif font. Clean background, no text artifacts, sharp 1920x1080 resolution. Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. No generated text. No embedded text.  No generated labels. No generated arrows. No captions. No watermark. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text. No slide or presentation-card layout.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visual confirmation of the final answer to the question using a clear, high-contrast title card with centered white text on black background. Repeated-title guard: render this concept as a content visual, not another presentation title card.",
+    "formulaLines": []
+  }
+]

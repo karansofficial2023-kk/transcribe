@@ -1,0 +1,44 @@
+{
+  "shots": [
+    {
+      "shot_id": "8.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A dense forest with tall trees, sunlight filtering through the canopy, creating a dappled light effect on the forest floor. The camera is at eye level, slightly angled upwards to show the tree tops and the light patterns below.",
+      "image_requirement": "Viewer must see sunlight passing through leaves and casting shadows on the ground.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Due to this, the existing ecosystem in nature develops.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "8.2",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Molecular interactions occur in the environment.",
+        "Energy transfer happens between organisms and their surroundings.",
+        "Ecosystems evolve through natural processes."
+      ],
+      "panels": [],
+      "narration_en": "Mmm mmm mmm",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

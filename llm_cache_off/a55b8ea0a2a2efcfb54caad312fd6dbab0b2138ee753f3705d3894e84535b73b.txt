@@ -1,0 +1,27 @@
+{
+  "shots": [
+    {
+      "shot_id": "7.1",
+      "visual_type": "formula",
+      "image_prompt": "A whiteboard with the equation x + 1/x = 2, solved for x = 1.",
+      "image_requirement": "The viewer must be able to see the equation x + 1/x = 2 and the solution x = 1.",
+      "labels": ["x", "1/x", "2"],
+      "label_placement": [
+        "x - left side of the equation",
+        "1/x - right side of the equation",
+        "2 - result of the equation"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This means that the correct answer to the question is $ x = 1 $.",
+      "formula_lines": ["x + 1/x = 2"],
+      "explain_steps": ["The minimum value of x + 1/x occurs at x = 1."],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Correct Answer to the Question"
+    }
+  ]
+}

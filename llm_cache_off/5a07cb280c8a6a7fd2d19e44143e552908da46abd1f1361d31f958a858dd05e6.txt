@@ -1,0 +1,23 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The question states that for a real number $ x $, when it is added to its reciprocal, the sum reaches its minimum value.",
+      "formula_lines": ["f(x) = x + 1/x"],
+      "explain_steps": ["Define the function as the sum of a number and its reciprocal."],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Function Definition"
+    }
+  ]
+}

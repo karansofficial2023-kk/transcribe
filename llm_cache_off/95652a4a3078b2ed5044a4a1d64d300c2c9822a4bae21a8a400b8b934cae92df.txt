@@ -1,0 +1,12 @@
+[
+  {
+    "rowId": "8.4",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A title card with the text 'We believe in you.' in a dark background, white text, and sans-serif font.",
+    "comfyPrompt": "A title card with the text 'We believe in you.' in a dark background, white text, and sans-serif font. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

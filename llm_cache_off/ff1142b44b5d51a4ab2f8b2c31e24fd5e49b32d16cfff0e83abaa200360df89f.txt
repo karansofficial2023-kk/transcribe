@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with visible glucose molecules forming in the chloroplasts, natural sunlight filtering through the canopy, green and yellow tones.",
+      "image_requirement": "Viewer must see glucose molecules forming within the leaf's chloroplasts.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Glucose provides energy to plants.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "4.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a plant's root system storing nutrients in the soil, natural lighting from above, earthy tones with visible nutrient-rich soil.",
+      "image_requirement": "Viewer must see stored nutrients in the root system and surrounding soil.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Remaining nutrients are stored.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

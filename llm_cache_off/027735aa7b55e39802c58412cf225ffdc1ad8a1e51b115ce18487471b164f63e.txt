@@ -1,0 +1,42 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A whiteboard with the equation f(x) = x + 1/x written in black chalk, visible on a wooden classroom desk under natural daylight.",
+      "image_requirement": "The viewer must be able to see the equation f(x) = x + 1/x written on the whiteboard.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This means we are adding $ \\frac{1}{x} $ to $ x $.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Function f(x) = x + 1/x"
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A whiteboard with the equation f(x) = x + 1/x written in black chalk, visible on a wooden classroom desk under natural daylight.",
+      "image_requirement": "The viewer must be able to see the equation f(x) = x + 1/x written on the whiteboard.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Let us denote this sum as $ f(x) $.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Function f(x) = x + 1/x"
+    }
+  ]
+}

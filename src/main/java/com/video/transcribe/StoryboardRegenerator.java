@@ -34,7 +34,7 @@ public final class StoryboardRegenerator {
         Files.createDirectories(outputDir);
 
         AppConfig config = new AppConfig();
-        OllamaClient ollama = new OllamaClient(config);
+        OllamaClient ollama = new OllamaClient(config, config.getOllamaFastModel());
         if (!ollama.isAvailable()) {
             throw new IllegalStateException("Ollama is unavailable at " + config.getOllamaUrl());
         }
@@ -70,6 +70,10 @@ public final class StoryboardRegenerator {
             config.isStoryboardAnimationEnabled(),
             config.getStoryboardVideoProvider(),
             config.isStoryboardCurriculumEnrichmentEnabled());
+        if (config.isStoryboardVisualDirectorEnabled()) {
+            generator.setVisualDirector(new com.video.transcribe.scene.VisualDirector(
+                ollama, generator::finishImagePrompt, generator::enforceFormulaRouting));
+        }
         StoryboardDocument storyboard = generator.generateStoryboard(narration, baseName, materials);
         Path jsonPath = outputDir.resolve(baseName + "_storyboard.json");
         Path docxPath = outputDir.resolve(baseName + "_storyboard.docx");

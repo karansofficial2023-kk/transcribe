@@ -1,0 +1,122 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "ఈ ప్రక్రియలో ఆక్సిజన్ విడుదల అవుతుంది.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "ఆక్సిజన్ విడుదల",
+        "visualSubject": "ఆక్సిజన్ విడుదల ప్రక్రియ అందించే ఆకుల ఉపరితలం, పత్రరంధ్రాల స్థానం",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "ప్రక్రియ స్థానంలో ఆక్సిజన్ విడుదల చేసే కొత్త ప్రక్రియ అందించే మెరుగైన స్థానంలో వీడియో క్లిప్ ఉండాలి",
+        "visualAnimation": "ఆకుల ఉపరితలం మీద ఆక్సిజన్ విడుదల చేయడం కోసం పత్రరంధ్రాల స్థానం అవుతుంది",
+        "localAnimation": "ఆక్సిజన్ విడుదల చేయడం కోసం పత్రరంధ్రాల స్థానం అవుతుంది",
+        "labels": [
+            "ఆక్సిజన్"
+        ],
+        "labelPlacements": [
+            "ఆక్సిజన్ | ఆక్సిజన్ విడుదల చేయడం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Photosynthesis Telugu",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ఆకుల ఉపరితలం మీద ఆక్సిజన్ విడుదల చేయడం కోసం పత్రరంధ్రాల స్థానం",
+            "ఆక్సిజన్ విడుదల చేయడం కోసం పత్రరంధ్రాల స్థానం"
+        ],
+        "motion": "ఆక్సిజన్ విడుదల చేయడం కోసం పత్రరంధ్రాల స్థానం అవుతుంది",
+        "subtitle": "ఈ ప్రక్రియలో ఆక్సిజన్ విడుదల అవుతుంది",
+        "subtitleStyle": "REVIEW_REQUIRED: subject and academic level could not be established reliably curriculum specialist with domain expertise in Photosynthesis Telugu",
+        "tool": "ltx_video",
+        "assetQualityNotes": "LTX b-roll, no upscale required",
+        "comfyPrompt": "clean background, educational photography, realistic lighting, 1920x1080 resolution, no text or labels, no watermarks",
+        "coverageNotes": "ఆక్సిజన్ విడుదల ప్రక్రియ అవుతుంది",
+        "shot": {
+            "template": "video",
+            "heading": "ఆక్సిజన్ విడుదల",
+            "prompt": "A close-up of a leaf surface showing the release of oxygen through stomata, with natural lighting and educational documentary style",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to show the full process of oxygen release through stomata"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ఆక్సిజన్ విడుదల",
+            "prompt": "A close-up of a leaf surface showing the release of oxygen through stomata, with natural lighting and educational documentary style. The camera slowly zooms in on the stomata as oxygen is released.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to show the full process of oxygen release through stomata"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "ఆకుల ఉపరితలంపై ఉండే చిన్న రంధ్రాలను పత్రరంధ్రాలు అంటారు.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "పత్రరంధ్రాలు",
+        "visualSubject": "ఆకుల ఉపరితలం మీద చిన్న రంధ్రాల స్థానం, ఆక్సిజన్ విడుదల కోసం పత్రరంధ్రాల స్థానం",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "పత్రరంధ్రాల స్థానం అవుతుంది",
+        "visualAnimation": "ఆకుల ఉపరితలం మీద చిన్న రంధ్రాల స్థానం, ఆక్సిజన్ విడుదల కోసం పత్రరంధ్రాల స్థానం",
+        "localAnimation": "ఆకుల ఉపరితలం మీద చిన్న రంధ్రాల స్థానం, ఆక్సిజన్ విడుదల కోసం పత్రరంధ్రాల స్థానం",
+        "labels": [
+            "పత్రరంధ్రం"
+        ],
+        "labelPlacements": [
+            "పత్రరంధ్రం | ఆకుల ఉపరితలం మీద చిన్న రంధ్రం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Photosynthesis Telugu",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ఆకుల ఉపరితలం మీద చిన్న రంధ్రాల స్థానం, ఆక్సిజన్ విడుదల కోసం పత్రరంధ్రాల స్థానం",
+            "ఆకుల ఉపరితలం మీద చిన్న రంధ్రాల స్థానం, ఆక్సిజన్ విడుదల కోసం పత్రరంధ్రాల స్థానం"
+        ],
+        "motion": "ఆకుల ఉపరితలం మీద చిన్న రంధ్రాల స్థానం, ఆక్సిజన్ విడుదల కోసం పత్రరంధ్రాల స్థానం",
+        "subtitle": "ఆకుల ఉపరితలంపై ఉండే చిన్న రంధ్రాలను పత్రరంధ్రాలు అంటారు",
+        "subtitleStyle": "REVIEW_REQUIRED: subject and academic level could not be established reliably curriculum specialist with domain expertise in Photosynthesis Telugu",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "deterministic diagram, no upscale required",
+        "comfyPrompt": "clean background, educational photography, realistic lighting, 1920x1080 resolution, no text or labels, no watermarks",
+        "coverageNotes": "పత్రరంధ్రాల స్థానం అవుతుంది",
+        "shot": {
+            "template": "video",
+            "heading": "పత్రరంధ్రాలు",
+            "prompt": "A close-up of a leaf surface showing the small pores called stomata, with natural lighting and educational documentary style",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to show the full process of oxygen release through stomata"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "పత్రరంధ్రాలు",
+            "prompt": "A close-up of a leaf surface showing the small pores called stomata, with natural lighting and educational documentary style. The camera slowly zooms in on the stomata as oxygen is released.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to show the full process of oxygen release through stomata"
+        }
+    }
+]

@@ -1,0 +1,23 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A pharmacist handing over a statin pill bottle to a patient in a clinic. The pill bottle is labeled 'Atorvastatin' with a white background and blue text. The pharmacist is wearing a white coat, and the patient is holding the bottle with a concerned expression.",
+      "image_requirement": "Viewer must see the statin pill bottle labeled 'Atorvastatin' to understand the correct answer.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The correct answer is statin, as it is widely used as a commercial medication to lower blood cholesterol levels.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Correct Answer and Explanation"
+    }
+  ]
+}

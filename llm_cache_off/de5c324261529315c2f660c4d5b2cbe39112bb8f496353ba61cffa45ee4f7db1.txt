@@ -1,0 +1,28 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.7",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see two EMF sources connected in a circuit with an external resistance.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Two EMF sources of equal value are connected",
+        "Sources are in associative mode due to equal values",
+        "Current through sources is non-zero",
+        "External resistance R is connected across the circuit"
+      ],
+      "panels": [],
+      "narration_en": "They are both in the associative mode because they are of equal values, and it's given that the current in them is not zero, the circuit is not zero, and they are connected across an external resistance that is R over here.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Circuit Configuration with Two EMF Sources"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "rowId": "1.2",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther | male reproductive structure producing pollen | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma | female receptive surface for pollen reception | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - elongated structure at the base of the stamen",
+      "Stigma - sticky, lobed surface at the center of the flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A high-quality, realistic image of a sunflower bloom with detailed structures including the central disk and surrounding petals, in natural lighting.",
+    "comfyPrompt": "Close-Up of a Sunflower Bloom. A high-quality, realistic image of a sunflower bloom with detailed structures including the central disk and surrounding petals, in natural lighting. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.3",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther | male reproductive structure producing pollen | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma | female receptive surface for pollen reception | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - elongated structure at the base of the stamen",
+      "Stigma - sticky, lobed surface at the center of the flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A high-quality, realistic image of a sunflower with a bee landing on its petals and anther, in natural lighting.",
+    "comfyPrompt": "Sunflower Pollination by Bees. A high-quality, realistic image of a sunflower with a bee landing on its petals and anther, in natural lighting. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.4",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther | male reproductive structure producing pollen | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma | female receptive surface for pollen reception | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - elongated structure at the base of the stamen",
+      "Stigma - sticky, lobed surface at the center of the flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A high-quality, realistic image of a sunflower with the anther curling inward and pollen depositing on the stigma, in natural lighting.",
+    "comfyPrompt": "Sunflower Self-Pollination Mechanism. A high-quality, realistic image of a sunflower with the anther curling inward and pollen depositing on the stigma, in natural lighting. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.5",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther | male reproductive structure producing pollen | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - elongated structure at the base of the stamen"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A high-quality, realistic image of a sunflower with the stamen curling inward to deposit pollen on the stigma, in natural lighting.",
+    "comfyPrompt": "Stamen Curling and Pollen Transfer. A high-quality, realistic image of a sunflower with the stamen curling inward to deposit pollen on the stigma, in natural lighting. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "1.6",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther | male reproductive structure producing pollen | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma | female receptive surface for pollen reception | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - elongated structure at the base of the stamen",
+      "St,"
+
+  ],
+  "presentationMode": "point_labels",
+  "visualSubject": "A high-quality, realistic image of a sunflower with the anther curling inward and pollen depositing on the stigma, in natural lighting.",
+  "comfyPrompt": "Definition of Self-Pollination. A high-quality, realistic image of a sunflower with the anther curling inward and pollen depositing on the stigma, in natural lighting. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+} ]

@@ -1,0 +1,11 @@
+{
+  "score": 75,
+  "incorrect_claims": [
+    "Lithium-ion cells use solid electrolytes that allow ions to travel from the negative electrode to the positive electrode during discharge and return when charging.",
+    "The dry cell in your wall clock or your toys, which die after long use, are primary cells. Batteries using lead storage or nickel cadmium also run out of power after a long use but can be recharged again."
+  ],
+  "uncertain_claims": [
+    "When the cylinder and the graphite rod are connected by a conducting wire, zinc acts as an anode and the graphite rod, which is in contact with MnO₂, acts as a cathode.",
+    "Same as the one used in calculators. They are durable and long-lasting."
+  ]
+}

@@ -1,0 +1,118 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Welcome students to the NEET 2019 question and answer solutions.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Lesson Introduction",
+        "visualSubject": "Title card with NEET 2019 logo, lesson title, and student welcome message in sans-serif font on light background",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 4.5,
+        "recommendedClipSeconds": 5,
+        "timingNotes": "Hold for full duration, no motion or cutaway",
+        "visualAnimation": "Title card with NEET 2019 logo and lesson title in white text on black background",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Black background with white text for title card, NEET 2019 logo in top left corner",
+            "Title card with sans-serif font and light background for educational clarity"
+        ],
+        "motion": "Static title card with no camera movement",
+        "subtitle": "Welcome students to the NEET 2019 question and answer solutions",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for clean background, no text or labels",
+        "comfyPrompt": "Black background with white text, NEET 2019 logo in top left corner, sans-serif font, light background, high contrast, educational style",
+        "coverageNotes": "Visual introduction to the lesson topic and context",
+        "shot": {
+            "template": "video",
+            "heading": "Lesson Introduction",
+            "prompt": "Title card with NEET 2019 logo and lesson title in white text on black background, sans-serif font, high contrast, educational style",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 5-second title card with NEET 2019 logo and lesson title"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Lesson Introduction",
+            "prompt": "Title card with NEET 2019 logo and lesson title in white text on black background, sans-serif font, high contrast, educational style",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 5-second title card with NEET 2019 logo and lesson title"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Let's now work through question number 176, which asks: Which of the following is a commercial blood cholesterol-lowering agent?",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Question Overview",
+        "visualSubject": "Black background with white text for question statement, sans-serif font, high contrast, educational style",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5.5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration, no motion or cutaway",
+        "visualAnimation": "Black background with white text for question statement, sans-serif font, high contrast, educational style",
+        "localAnimation": "",
+        "labels": [
+            "Question Statement"
+        ],
+        "labelPlacements": [
+            "Question Statement | Question number 176: Which of the following is a commercial blood cholesterol-lowering agent? | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Black background with white text for question statement, sans-serif font, high contrast, educational style",
+            "Question card with clear formatting and high contrast for readability"
+        ],
+        "motion": "Static image with no camera movement",
+        "subtitle": "Question number 176: Which of the following is a commercial blood cholesterol-lowering agent?",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for clean background, no text or labels",
+        "comfyPrompt": "Black background with white text, question number 176: Which of the following is a commercial blood cholesterol-lowering agent? in sans-serif font, high contrast, educational style",
+        "coverageNotes": "Visual representation of the question statement for clarity and context",
+        "shot": {
+            "template": "video",
+            "heading": "Question Overview",
+            "prompt": "Black background with white text for question statement, sans-serif font, high contrast, educational style",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second question card with clear formatting and high contrast"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Question Overview",
+            "prompt": "Black background with white text for question statement, sans-serif font, high contrast, educational style",
+            "negativePrompt": "No text artifacts, no labels, no watermarks, no slide layout",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second question card with clear formatting and high contrast"
+        }
+    }
+]

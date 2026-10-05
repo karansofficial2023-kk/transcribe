@@ -1,0 +1,29 @@
+{
+  "score": 100,
+  "missing_concepts": [],
+  "preserved_concepts": [
+    "Sunflowers",
+    "pollinated by bees",
+    "self-pollination",
+    "Ixora",
+    "anther and the stigma mature at the same time",
+    "homogamy",
+    "wood sorrel",
+    "small and inconspicuous flowers",
+    "clistogamy",
+    "cross-pollination",
+    "Papaya",
+    "unisexual, dioecious plant",
+    "protandry",
+    "custard apple",
+    "protogyny",
+    "pansies",
+    "harkogamy",
+    "orchids",
+    "pollen from the anther fails to germinate on the stigma of the same flower",
+    "Primrose",
+    "heterostyly",
+    "bee orchid",
+    "mimics the look of a female bee"
+  ]
+}

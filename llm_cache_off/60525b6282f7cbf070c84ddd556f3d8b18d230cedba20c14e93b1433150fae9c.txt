@@ -1,0 +1,418 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "The correct answer is statin, as it is widely used as a commercial medication to lower blood cholesterol levels.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Correct Answer and Explanation",
+        "visualSubject": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration to ensure clarity and emphasis on the correct answer",
+        "visualAnimation": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text",
+            "Educational title card with clear typography and visual hierarchy for pharmacology content"
+        ],
+        "motion": "Static title card with no camera movement",
+        "subtitle": "Correct Answer: Statin is used to lower blood cholesterol levels.",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for title card, clean background, no text or labels",
+        "comfyPrompt": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text, educational style, high contrast, sharp focus, 1920x1080 resolution",
+        "coverageNotes": "Visual covers the correct answer and its purpose in lowering blood cholesterol levels as stated in the narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Correct Answer and Explanation",
+            "prompt": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 8,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration without cutaways or transitions"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Correct Answer and Explanation",
+            "prompt": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips with smooth transition between the title card and the next visual"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "The correct answer is statin, as it is widely used as a commercial medication to lower blood cholesterol levels.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Statin Medication and Cholesterol Lowering",
+        "visualSubject": "Realistic image of a statin pill with label 'Statin' on the bottle, showing its use in lowering blood cholesterol levels",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration to ensure clarity and emphasis on the correct answer",
+        "visualAnimation": "Realistic image of a statin pill with label 'Statin' on the bottle, showing its use in lowering blood cholesterol levels",
+        "localAnimation": "Label 'Statin' appears on the bottle, highlighting its role in lowering blood cholesterol levels",
+        "labels": [
+            "Statin"
+        ],
+        "labelPlacements": [
+            "Statin | Statin medication label on pill bottle | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Realistic image of a statin pill with label 'Statin' on the bottle, showing its use in lowering blood cholesterol levels",
+            "Educational diagram of a statin medication with clear labeling for pharmacology content"
+        ],
+        "motion": "Static labeled image with no camera movement",
+        "subtitle": "Statin is a commercial medication used to lower blood cholesterol levels.",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram for statin pill and label, clean background, no text or labels in image",
+        "comfyPrompt": "Realistic image of a statin pill with label 'Statin' on the bottle, showing its use in lowering blood cholesterol levels, educational style, high contrast, sharp focus, 1920x1080 resolution",
+        "coverageNotes": "Visual covers the correct answer and its purpose in lowering blood cholesterol levels as stated in the narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Statin Medication and Cholesterol Lowering",
+            "prompt": "Realistic image of a statin pill with label 'Statin' on the bottle, showing its use in lowering blood cholesterol levels, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 8,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration without cutaways or transitions"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Statin Medication and Cholesterol Lowering",
+            "prompt": "Realistic image of a statin pill with label 'Statin' on the bottle, showing its use in lowering blood cholesterol levels, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips with smooth transition between the statin pill and the next visual"
+        }
+    },
+    {
+        "segmentNumber": 3,
+        "sentence": "The correct answer is statin, as it is widely used as a commercial medication to lower blood cholesterol levels.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Cholesterol Lowering Mechanism of Statins",
+        "visualSubject": "Realistic image of the human liver with labeled statin molecule interacting with HMG-CoA reductase enzyme, showing its role in lowering cholesterol levels",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration to ensure clarity and emphasis on the correct answer",
+        "visualAnimation": "Realistic image of the human liver with labeled statin molecule interacting with HMG-CoA reductase enzyme, showing its role in lowering cholesterol levels",
+        "localAnimation": "Label 'HMG-CoA reductase' appears near the enzyme, highlighting its interaction with the statin molecule",
+        "labels": [
+            "HMG-CoA reductase"
+        ],
+        "labelPlacements": [
+            "HMG-CoA reductase | HMG-CoA reductase enzyme in liver | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Realistic image of the human liver with labeled statin molecule interacting with HMG-CoA reductase enzyme, showing its role in lowering cholesterol levels",
+            "Educational diagram of a statin medication with clear labeling for pharmacology content"
+        ],
+        "motion": "Static labeled image with no camera movement",
+        "subtitle": "Statin lowers blood cholesterol by inhibiting the HMG-CoA reductase enzyme.",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram for statin molecule and enzyme interaction, clean background, no text or labels in image",
+        "comfyPrompt": "Realistic image of the human liver with labeled statin molecule interacting with HMG-CoA reductase enzyme, showing its role in lowering cholesterol levels, educational style, high contrast, sharp focus, 1920x1080 resolution",
+        "coverageNotes": "Visual covers the correct answer and its purpose in lowering blood cholesterol levels as stated in the narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Cholesterol Lowering Mechanism of Statins",
+            "prompt": "Realistic image of the human liver with labeled statin molecule interacting with HMG-CoA reductase enzyme, showing its role in lowering cholesterol levels, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 8,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration without cutaways or transitions"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Cholesterol Lowering Mechanism of Statins",
+            "prompt": "Realistic image of the human liver with labeled statin molecule interacting with HMG-CoA reductase enzyme, showing its role in lowering cholesterol levels, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips with smooth transition between the statin molecule and the next visual"
+        }
+    },
+    {
+        "segmentNumber": 4,
+        "sentence": "The correct answer is statin, as it is widely used as a commercial medication to lower blood cholesterol levels.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Clinical Use of Statins in Cholesterol Management",
+        "visualSubject": "Realistic image of a doctor prescribing statin medication, showing its use in managing high cholesterol levels",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration to ensure clarity and emphasis on the correct answer",
+        "visualAnimation": "Realistic image of a doctor prescribing statin medication, showing its use in managing high cholesterol levels",
+        "localAnimation": "Label 'Doctor' appears near the physician, highlighting their role in prescribing statins for cholesterol management",
+        "labels": [
+            "Doctor"
+        ],
+        "labelPlacements": [
+            "Doctor | Doctor prescribing statin medication | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Realistic image of a doctor prescribing statin medication, showing its use in managing high cholesterol levels",
+            "Educational diagram of a doctor and patient interaction for pharmacology content"
+        ],
+        "motion": "Static labeled image with no camera movement",
+        "subtitle": "Statin is prescribed by doctors to manage high cholesterol levels.",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram for doctor and patient interaction, clean background, no text or labels in image",
+        "comfyPrompt": "Realistic image of a doctor prescribing statin medication, showing its use in managing high cholesterol levels, educational style, high contrast, sharp focus, 1920x1080 resolution",
+        "coverageNotes": "Visual covers the correct answer and its purpose in lowering blood cholesterol levels as stated in the narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Clinical Use of Statins in Cholesterol Management",
+            "prompt": "Realistic image of a doctor prescribing statin medication, showing its use in managing high cholesterol levels, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 8,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration without cutaways or transitions"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Clinical Use of Statins in Cholesterol Management",
+            "prompt": "Realistic image of a doctor prescribing statin medication, showing its use in managing high cholesterol levels, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips with smooth transition between the doctor and the next visual"
+        }
+    },
+    {
+        "segmentNumber": 5,
+        "sentence": "The correct answer is statin, as it is widely used as a commercial medication to lower blood cholesterol levels.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Statin's Role in Cardiovascular Health",
+        "visualSubject": "Realistic image of a heart with labeled statin molecule reducing plaque buildup, showing its role in cardiovascular health",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration to ensure clarity and emphasis on the correct answer",
+        "visualAnimation": "Realistic image of a heart with labeled statin molecule reducing plaque buildup, showing its role in cardiovascular health",
+        "localAnimation": "Label 'Plaque' appears near the artery walls, highlighting its reduction due to statin use",
+        "labels": [
+            "Plaque"
+        ],
+        "labelPlacements": [
+            "Plaque | Plaque buildup in arteries | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Realistic image of a heart with labeled statin molecule reducing plaque buildup, showing its role in cardiovascular health",
+            "Educational diagram of a heart and artery interaction for pharmacology content"
+        ],
+        "motion": "Static labeled image with no camera movement",
+        "subtitle": "Statin reduces plaque buildup in arteries, improving cardiovascular health.",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram for heart and plaque reduction, clean background, no text or labels in image",
+        "comfyPrompt": "Realistic image of a heart with labeled statin molecule reducing plaque buildup, showing its role in cardiovascular health, educational style, high contrast, sharp focus, 1920x1080 resolution",
+        "coverageNotes": "Visual covers the correct answer and its purpose in lowering blood cholesterol levels as stated in the narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Statin's Role in Cardiovascular Health",
+            "prompt": "Realistic image of a heart with labeled statin molecule reducing plaque buildup, showing its role in cardiovascular health, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 8,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration without cutaways or transitions"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Statin's Role in Cardiovascular Health",
+            "prompt": "Realistic image of a heart with labeled statin molecule reducing plaque buildup, showing its role in cardiovascular health, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips with smooth transition between the heart and the next visual"
+        }
+    },
+    {
+        "segmentNumber": 6,
+        "sentence": "The correct answer is statin, as it is widely used as a commercial medication to lower blood cholesterol levels.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Statin's Effect on Blood Cholesterol Levels",
+        "visualSubject": "Realistic image of a blood test report with labeled statin use and reduced LDL cholesterol levels, showing its effect on blood cholesterol",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration to ensure clarity and emphasis on the correct answer",
+        "visualAnimation": "Realistic image of a blood test report with labeled statin use and reduced LDL cholesterol levels, showing its effect on blood cholesterol",
+        "localAnimation": "Label 'LDL' appears near the cholesterol level reading, highlighting its reduction due to statin use",
+        "labels": [
+            "LDL"
+        ],
+        "labelPlacements": [
+            "LDL | Low-density lipoprotein (LDL) cholesterol levels | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Realistic image of a blood test report with labeled statin use and reduced LDL cholesterol levels, showing its effect on blood cholesterol",
+            "Educational diagram of a blood test report for pharmacology content"
+        ],
+        "motion": "Static labeled image with no camera movement",
+        "subtitle": "Statin reduces LDL cholesterol levels in the blood, improving cardiovascular health.",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram for blood test report and LDL reduction, clean background, no text or labels in image",
+        "comfyPrompt": "Realistic image of a blood test report with labeled statin use and reduced LDL cholesterol levels, showing its effect on blood cholesterol, educational style, high contrast, sharp focus, 1920x1080 resolution",
+        "coverageNotes": "Visual covers the correct answer and its purpose in lowering blood cholesterol levels as stated in the narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Statin's Effect on Blood Cholesterol Levels",
+            "prompt": "Realistic image of a blood test report with labeled statin use and reduced LDL cholesterol levels, showing its effect on blood cholesterol, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 8,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration without cutaways or transitions"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Statin's Effect on Blood Cholesterol Levels",
+            "prompt": "Realistic image of a blood test report with labeled statin use and reduced LDL cholesterol levels, showing its effect on blood cholesterol, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips with smooth transition between the blood test report and the next visual"
+        }
+    },
+    {
+        "segmentNumber": 7,
+        "sentence": "The correct answer is statin, as it is widely used as a commercial medication to lower blood cholesterol levels.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Statin's Clinical Outcomes and Safety Profile",
+        "visualSubject": "Realistic image of a patient with labeled statin use and improved cardiovascular outcomes, showing its safety and efficacy",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration to ensure clarity and emphasis on the correct answer",
+        "visualAnimation": "Realistic image of a patient with labeled statin use and improved cardiovascular outcomes, showing its safety and efficacy",
+        "localAnimation": "Label 'Cardiovascular Outcomes' appears near the patient, highlighting their improvement due to statin use",
+        "labels": [
+            "Cardiovascular Outcomes"
+        ],
+        "labelPlacements": [
+            "Cardiovascular Outcomes | Cardiovascular outcomes of statin use | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Realistic image of a patient with labeled statin use and improved cardiovascular outcomes, showing its safety and efficacy",
+            "Educational diagram of a patient and doctor interaction for pharmacology content"
+        ],
+        "motion": "Static labeled image with no camera movement",
+        "subtitle": "Statin improves cardiovascular outcomes and is generally safe when used as prescribed.",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram for patient and cardiovascular outcomes, clean background, no text or labels in image",
+        "comfyPrompt": "Realistic image of a patient with labeled statin use and improved cardiovascular outcomes, showing its safety and efficacy, educational style, high contrast, sharp focus, 1920x1080 resolution",
+        "coverageNotes": "Visual covers the correct answer and its purpose in lowering blood cholesterol levels as stated in the narration.",
+        "shot": {
+            "template": "video",
+            "heading": "Statin's Clinical Outcomes and Safety Profile",
+            "prompt": "Realistic image of a patient with labeled statin use and improved cardiovascular outcomes, showing its safety and efficacy, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 8,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration without cutaways or transitions"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Statin's Clinical Outcomes and Safety Profile",
+            "prompt": "Realistic image of a patient with labeled statin use and improved cardiovascular outcomes, showing its safety and efficacy, cinematic style, high contrast, sharp focus, 1920x1080 resolution",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips with smooth transition between the patient and the next visual"
+        }
+    }
+]

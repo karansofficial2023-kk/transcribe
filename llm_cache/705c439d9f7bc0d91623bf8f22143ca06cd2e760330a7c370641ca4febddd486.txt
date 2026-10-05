@@ -1,0 +1,17 @@
+{
+  "score": 95,
+  "missing_concepts": [],
+  "preserved_concepts": [
+    "NEET 2019",
+    "question and answer solutions",
+    "question number 176",
+    "commercial blood cholesterol lowering agents",
+    "cyclosporine A",
+    "statin",
+    "streptokinase",
+    "lipases",
+    "memory based",
+    "blood cholesterol agent",
+    "answer is statin"
+  ]
+}

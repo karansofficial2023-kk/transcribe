@@ -1,0 +1,71 @@
+Let's work through this problem that appeared in AIEEE 2002 and involves the application of derivatives. We are given a curve defined by the parametric equations $ x = a \sin t - \frac{b \sin(at)}{b} $, and $ y = a \cos t - \frac{b \cos(at)}{b} $. Our goal is to determine the maximum distance from the origin to any point on this curve.
+
+Let’s denote the coordinates of a general point on the curve as $ (x, y) $, and the origin as $ O(0, 0) $. The square of the distance $ OA $ can be expressed as:
+
+$$
+OA^2 = \left(a \sin t - \frac{b \sin(at)}{b}\right)^2 + \left(a \cos t - \frac{b \cos(at)}{b}\right)^2.
+$$
+
+Simplifying the expressions inside the parentheses, we get:
+
+$$
+x = a \sin t - \sin(at), \quad y = a \cos t - \cos(at).
+$$
+
+Substituting these into the distance formula gives:
+
+$$
+OA^2 = (a \sin t - \sin(at))^2 + (a \cos t - \cos(at))^2.
+$$
+
+Expanding both terms, we have:
+
+$$
+OA^2 = a^2 \sin^2 t - 2a \sin t \sin(at) + \sin^2(at) + a^2 \cos^2 t - 2a \cos t \cos(at) + \cos^2(at).
+$$
+
+Grouping like terms:
+
+$$
+OA^2 = a^2 (\sin^2 t + \cos^2 t) + (\sin^2(at) + \cos^2(at)) - 2a [\sin t \sin(at) + \cos t \cos(at)].
+$$
+
+Using the Pythagorean identity $ \sin^2\theta + \cos^2\theta = 1 $, this simplifies to:
+
+$$
+OA^2 = a^2 (1) + 1 - 2a [\sin t \sin(at) + \cos t \cos(at)].
+$$
+
+Recognizing the trigonometric identity for cosine of difference:
+
+$$
+\sin t \sin(at) + \cos t \cos(at) = \cos(t - at).
+$$
+
+Thus, we can write:
+
+$$
+OA^2 = a^2 + 1 - 2a \cos(t - at).
+$$
+
+Let $ \alpha = t - at $. Then the expression becomes:
+
+$$
+OA^2 = a^2 + 1 - 2a \cos(\alpha).
+$$
+
+We know that the cosine function has a range from $-1$ to $1$. Therefore, $ OA^2 $ will be maximized when $ \cos(\alpha) $ is minimized, which occurs when $ \cos(\alpha) = -1 $.
+
+Substituting this value into the equation:
+
+$$
+OA^2 = a^2 + 1 - 2a(-1) = a^2 + 1 + 2a.
+$$
+
+Taking the square root of both sides gives:
+
+$$
+OA = \sqrt{a^2 + 2a + 1} = \sqrt{(a + 1)^2} = a + 1.
+$$
+
+Therefore, the maximum distance from the origin to any point on the curve is $ a + 1 $. The correct answer is the second option: $ a + 1 $.

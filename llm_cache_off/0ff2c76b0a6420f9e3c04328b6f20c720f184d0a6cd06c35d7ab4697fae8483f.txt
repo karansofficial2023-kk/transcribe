@@ -1,0 +1,70 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "In series circuits, the total resistance is calculated by adding up all individual resistances, represented as R equals R1 plus R2 plus R3.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Series Circuit Resistance Calculation Formula",
+        "visualSubject": "Electrical circuit with labeled resistors in series; clean background with white text on black band; 42px font, centered alignment; horizontal margin 120, bottom margin 55",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 8,
+        "recommendedClipSeconds": 9,
+        "timingNotes": "Hold the final frame for 3 seconds to emphasize the formula; use a slow zoom into the equation for clarity.",
+        "visualAnimation": "A clean, dark background with a black band at the bottom. The text 'R = R1 + R2 + R3' is centered and clearly visible in white font. The resistors are shown as colored boxes connected in series.",
+        "localAnimation": "Start with a static image of the circuit; animate the equation to appear, then zoom into the formula for emphasis.",
+        "labels": [
+            "R",
+            "R1",
+            "R2",
+            "R3"
+        ],
+        "labelPlacements": [
+            "Resistance | total resistance in series circuit | target=(0.45, 0.65)",
+            "R1 | first resistor value | target=(0.25, 0.75)",
+            "R2 | second resistor value | target=(0.35, 0.85)",
+            "R3 | third resistor value | target=(0.45, 0.95)"
+        ],
+        "labelStyle": "Ohm's Law and Resistor Circuits",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "R = R1 + R2 + R3"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Electrical circuit diagram with resistors in series",
+            "Text overlay of Ohm's Law formula on a dark background"
+        ],
+        "motion": "Zoom into the equation from the center of the screen, then hold for 3 seconds.",
+        "subtitle": "Total resistance in series circuits is the sum of individual resistances.",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "manim",
+        "assetQualityNotes": "Use a reviewed diagram with clear labels and formula; avoid generated text or labels in the image.",
+        "comfyPrompt": "A clean, dark background with a black band at the bottom. White text centered on the screen: 'R = R1 + R2 + R3'. Resistors shown as colored boxes connected in series. No text, no labels, no watermarks.",
+        "coverageNotes": "Visuals cover total resistance calculation, individual resistances, and their addition in a series circuit.",
+        "shot": {
+            "template": "video",
+            "heading": "Series Circuit Resistance Calculation Formula",
+            "prompt": "A clean, dark background with a black band at the bottom. White text centered on the screen: 'R = R1 + R2 + R3'. Resistors shown as colored boxes connected in series.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join the three 4-second clips to form a continuous zoom into the formula."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Series Circuit Resistance Calculation Formula",
+            "prompt": "A clean, dark background with a black band at the bottom. White text centered on the screen: 'R = R1 + R2 + R3'. Resistors shown as colored boxes connected in series. Camera slowly zooms into the formula from the center of the screen.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join the three 4-second clips to form a continuous zoom into the formula."
+        }
+    }
+]

@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A tree with green leaves under sunlight, showing the process of photosynthesis in a natural setting. The camera is at eye level, slightly angled upwards to capture the canopy. Natural daylight illuminates the scene with warm tones.",
+      "image_requirement": "Viewer must see a tree with green leaves and sunlight to understand the narration.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Photosynthesis is essential for life on Earth.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A human lung with oxygen-rich air flowing in, showing the respiratory system in action. The camera is at a close distance, slightly angled to show the airflow and structure of the lungs. Natural lighting highlights the internal anatomy.",
+      "image_requirement": "Viewer must see a human lung with visible airflow to understand the narration.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "It provides the oxygen we need to survive.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

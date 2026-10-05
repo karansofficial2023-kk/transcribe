@@ -1,0 +1,23 @@
+{
+  "shots": [
+    {
+      "shot_id": "8.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "A person holding a polished metal object, standing in a workshop with tools and materials on a table. The lighting is natural, highlighting the subject's determined expression.",
+      "image_requirement": "The viewer must be able to see the person's confident posture and the polished metal object they are holding.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "We believe in you.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Confidence in Electroplating"
+    }
+  ]
+}

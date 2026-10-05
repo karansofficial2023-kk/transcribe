@@ -1,0 +1,21 @@
+{
+  "score": 75,
+  "missing_concepts": [
+    "AIEEE 2002",
+    "x as a sin t minus b sin at upon b",
+    "y as a cos t minus b cos at by b",
+    "OA square",
+    "alpha is equal to t minus at upon b",
+    "a plus b"
+  ],
+  "preserved_concepts": [
+    "applications of derivatives",
+    "parametric equations",
+    "maximum distance from the origin",
+    "origin O(0, 0)",
+    "distance formula",
+    "trigonometric identities",
+    "cosine function range (-1 to 1)",
+    "OA^2 expression"
+  ]
+}

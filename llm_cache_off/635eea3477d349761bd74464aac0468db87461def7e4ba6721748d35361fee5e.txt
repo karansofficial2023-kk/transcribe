@@ -1,0 +1,780 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "ஒளிச்சேர்க்கை என்பது பச்சை தாவரங்கள் சூரிய ஒளியைப் பயன்படுத்தி உணவு தயாரிக்கும் செயல்முறை ஆகும்.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "பச்சை தாவரங்களின் ஒளிச்சேர்க்கை",
+        "visualSubject": "தாவரங்களின் முக்கியத்துவம், பச்சையம், சூரிய ஒளி வழியாக உணவு தயாரிப்பு",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Title card, hold for full narration duration",
+        "visualAnimation": "தாவரங்களின் பச்சையம், சூரிய ஒளி வழியாக உணவு தயாரிப்பு",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "தாவரங்களின் பச்சையம், சூரிய ஒளி வழியாக உணவு தயாரிப்பு",
+            "பச்சை தாவரங்களின் முக்கியத்துவம், ஒளிச்சேர்க்கை செயல்முறை"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "ஒளிச்சேர்க்கை என்பது தாவரங்கள் சூரிய ஒளியைப் பயன்படுத்தி உணவு தயாரிக்கும் செயல்முறை",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for title card, no labels required",
+        "comfyPrompt": "A clear educational image of a green plant with sunlight and photosynthesis process, 1920x1080, realistic lighting, no text or labels, clean background",
+        "coverageNotes": "Introduces the concept of photosynthesis as a process used by plants to create food using sunlight",
+        "shot": {
+            "template": "video",
+            "heading": "பச்சை தாவரங்களின் ஒளிச்சேர்க்கை",
+            "prompt": "A clear educational image of a green plant with sunlight and photosynthesis process, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "பச்சை தாவரங்களின் ஒளிச்சேர்க்கை",
+            "prompt": "A clear educational image of a green plant with sunlight and photosynthesis process, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "இந்த செயல்முறையில், தாவரங்கள் காற்றிலிருந்து கார்பன் டை ஆக்சைடையும், மண்ணிலிருந்து நீரையும் எடுத்துக் கொள்கின்றன.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "visualSubject": "காற்றிலிருந்து கார்பன் டை ஆக்சைடு, மண்ணிலிருந்து நீர்",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "தாவரங்கள் காற்றிலிருந்து கார்பன் டை ஆக்சைடு, மண்ணிலிருந்து நீர் எடுத்துக் கொள்கின்றன",
+        "localAnimation": "",
+        "labels": [
+            "கார்பன் டை ஆக்சைடு",
+            "நீர்"
+        ],
+        "labelPlacements": [
+            "காற்றிலிருந்து கார்பன் டை ஆக்சைடு | காற்றின் முக்கியத்துவம் | COORDINATES_PENDING_APPROVED_IMAGE",
+            "மண்ணிலிருந்து நீர் | மண்ணின் முக்கியத்துவம் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "தாவரங்களின் உயிர்ப்பொருட்கள், காற்றிலிருந்து கார்பன் டை ஆக்சைடு, மண்ணிலிருந்து நீர்",
+            "தாவரங்களின் உயிர்ப்பொருட்கள், காற்றும் மண்ணும்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "தாவரங்கள் காற்றிலிருந்து கார்பன் டை ஆக்சைடு, மண்ணிலிருந்து நீரை எடுத்துக் கொள்கின்றன",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with labels for carbon dioxide and water",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that plants take in carbon dioxide from the air and water from the soil",
+        "shot": {
+            "template": "video",
+            "heading": "தாவரங்களின் உயிர்ப்பொருட்கள்",
+            "prompt": "A clear educational image of a plant taking in carbon dioxide from the air and water from the soil, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "தாவரங்களின் உயிர்ப்பொருட்கள்",
+            "prompt": "A clear educational image of a plant taking in carbon dioxide from the air and water from the soil, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 3,
+        "sentence": "இலைகளில் உள்ள பச்சையம் சூரிய ஒளியை புறங்கிறது.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "இலைகளில் உள்ள பச்சையம்",
+        "visualSubject": "இலைகளில் உள்ள பச்சையம், சூரிய ஒளி",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "இலைகளில் உள்ள பச்சையம், சூரிய ஒளி வழியாக உணவு தயாரிப்பு",
+        "localAnimation": "",
+        "labels": [
+            "பச்சையம்"
+        ],
+        "labelPlacements": [
+            "இலைகளில் உள்ள பச்சையம் | இலைகளின் முக்கியத்துவம் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "இலைகளில் உள்ள பச்சையம், சூரிய ஒளி",
+            "தாவரங்களின் இலைகளில் உள்ள பச்சையம்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "இலைகளில் உள்ள பச்சையம், சூரிய ஒளி வழியாக உணவு தயாரிப்பு",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for chlorophyll",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that chlorophyll in leaves absorbs sunlight",
+        "shot": {
+            "template": "video",
+            "heading": "இலைகளில் உள்ள பச்சையம்",
+            "prompt": "A clear educational image of a leaf with chlorophyll absorbing sunlight, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "இலைகளில் உள்ள பச்சையம்",
+            "prompt": "A clear educational image of a leaf with chlorophyll absorbing sunlight, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 4,
+        "sentence": "ஒளி ஆற்றலின் உதவியால், கார்பன் டை ஆக்சைடும், நீரும் சேர்ந்து குளுக்கோஸ் உருவாகிறது.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "கார்பன் டை ஆக்சைடும், நீரும் சேர்ந்து குளுக்கோஸ்",
+        "visualSubject": "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ்",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ் உருவாகும்",
+        "localAnimation": "",
+        "labels": [
+            "குளுக்கோஸ்"
+        ],
+        "labelPlacements": [
+            "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர் | உணவு தயாரிப்பு | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ்",
+            "தாவரங்களின் உணவு தயாரிப்பு"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ் உருவாகும்",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for glucose",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that sunlight helps carbon dioxide and water form glucose",
+        "shot": {
+            "template": "video",
+            "heading": "கார்பன் டை ஆக்சைடும், நீரும் சேர்ந்து குளுக்கோஸ்",
+            "prompt": "A clear educational image of sunlight helping carbon dioxide and water form glucose, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "கார்பன் டை ஆக்சைடும், நீரும் சேர்ந்து குளுக்கோஸ்",
+            "prompt": "A clear educational image of sunlight helping carbon dioxide and water form glucose, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 5,
+        "sentence": "இந்த செயல்முறையின் போது, ஆக்சிஜன் வெளியிடப்படுகிறது.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "ஆக்சிஜன் வெளியிடப்படுகிறது",
+        "visualSubject": "ஆக்சிஜன், தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "ஆக்சிஜன், தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "localAnimation": "",
+        "labels": [
+            "ஆக்சிஜன்"
+        ],
+        "labelPlacements": [
+            "ஆக்சிஜன் | வாழ்வு ஆற்றல் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ஆக்சிஜன், தாவரங்களின் உயிர்ப்பொருட்கள்",
+            "தாவரங்களின் உயிர்ப்பொருட்கள், ஆக்சிஜன்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "ஆக்சிஜன், தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for oxygen",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that oxygen is released during the process",
+        "shot": {
+            "template": "video",
+            "heading": "ஆக்சிஜன் வெளியிடப்படுகிறது",
+            "prompt": "A clear educational image of oxygen being released by plants, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ஆக்சிஜன் வெளியிடப்படுகிறது",
+            "prompt": "A clear educational image of oxygen being released by plants, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 6,
+        "sentence": "இலைகளின் மேற்பரப்பில் உள்ள சிறிய துறைகள், இலைத்துறைகள் என்று அழைக்கப்படுகின்றன.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "இலைத்துறைகள்",
+        "visualSubject": "இலைகளின் மேற்பரப்பில் உள்ள சிறிய துறைகள்",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "இலைத்துறைகள், இலைகளின் மேற்பரப்பில் உள்ள சிறிய துறைகள்",
+        "localAnimation": "",
+        "labels": [
+            "இலைத்துறை"
+        ],
+        "labelPlacements": [
+            "இலைகளின் மேற்பரப்பில் உள்ள சிறிய துறைகள் | இலைத்துறைகள் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "இலைத்துறைகள், இலைகளின் மேற்பரப்பில் உள்ள சிறிய துறைகள்",
+            "தாவரங்களின் இலைத்துறைகள்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "இலைத்துறைகள், இலைகளின் மேற்பரப்பில் உள்ள சிறிய துறைகள்",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for stomata",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that the small openings on leaves are called stomata",
+        "shot": {
+            "template": "video",
+            "heading": "இலைத்துறைகள்",
+            "prompt": "A clear educational image of stomata on leaf surfaces, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "இலைத்துறைகள்",
+            "prompt": "A clear educational image of stomata on leaf surfaces, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 7,
+        "sentence": "குளுக்கோஸ் தாவரத்திற்கு ஆற்றலை வழங்குகிறது, மீதமுள்ளது சத்தாக சேமிக்கப்படுகிறது.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "குளுக்கோஸ் மற்றும் சத்தாக சேமிப்பு",
+        "visualSubject": "குளுக்கோஸ், ஆற்றல், சத்தாக சேமிப்பு",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "குளுக்கோஸ், ஆற்றல், சத்தாக சேமிப்பு",
+        "localAnimation": "",
+        "labels": [
+            "குளுக்கோஸ்"
+        ],
+        "labelPlacements": [
+            "குளுக்கோஸ் | ஆற்றல் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "குளுக்கோஸ், ஆற்றல், சத்தாக சேமிப்பு",
+            "தாவரங்களின் உயிர்ப்பொருட்கள்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "குளுக்கோஸ், ஆற்றல், சத்தாக சேமிப்பு",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for glucose and energy storage",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that glucose provides energy to the plant, and excess is stored as starch",
+        "shot": {
+            "template": "video",
+            "heading": "குளுக்கோஸ் மற்றும் சத்தாக சேமிப்பு",
+            "prompt": "A clear educational image of glucose providing energy and being stored as starch, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "குளுக்கோஸ் மற்றும் சத்தாக சேமிப்பு",
+            "prompt": "A clear educational image of glucose providing energy and being stored as starch, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 8,
+        "sentence": "ஒளிச்சேர்க்கை இல்லாமல், பூமியில் உயிர்கள் வாழ முடியாது. ஏனெனில், அது நமக்கு தேவையான ஆக்சிஜனை தருகிறது.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "ஆக்சிஜன் மற்றும் உயிர்கள்",
+        "visualSubject": "ஒளிச்சேர்க்கை, ஆக்சிஜன், உயிர்கள்",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 8,
+        "recommendedClipSeconds": 10,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "ஒளிச்சேர்க்கை, ஆக்சிஜன், உயிர்கள்",
+        "localAnimation": "",
+        "labels": [
+            "ஆக்சிஜன்"
+        ],
+        "labelPlacements": [
+            "ஒளிச்சேர்க்கை | ஆக்சிஜன் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ஒளிச்சேர்க்கை, ஆக்சிஜன், உயிர்கள்",
+            "தாவரங்களின் உயிர்ப்பொருட்கள்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "ஒளிச்சேர்க்கை, ஆக்சிஜன், உயிர்கள்",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for oxygen and its role in life",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that photosynthesis provides the necessary oxygen for life on Earth",
+        "shot": {
+            "template": "video",
+            "heading": "ஆக்சிஜன் மற்றும் உயிர்கள்",
+            "prompt": "A clear educational image of photosynthesis providing oxygen for life, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 10,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ஆக்சிஜன் மற்றும் உயிர்கள்",
+            "prompt": "A clear educational image of photosynthesis providing oxygen for life, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 10,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 9,
+        "sentence": "ஒளிச்சேர்க்கை பற்றி மேலும் அறிய, இலைத்துறைகளின் வேலை முறையை ஆழமாகப் பார்க்கலாம்.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "இலைத்துறைகளின் வேலை முறை",
+        "visualSubject": "இலைத்துறைகளின் வேலை முறை, சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர்",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "இலைத்துறைகளின் வேலை முறை, சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர்",
+        "localAnimation": "",
+        "labels": [
+            "இலைத்துறை"
+        ],
+        "labelPlacements": [
+            "இலைத்துறை | வேலை முறை | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "இலைத்துறைகளின் வேலை முறை, சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர்",
+            "தாவரங்களின் உயிர்ப்பொருட்கள்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "இலைத்துறைகளின் வேலை முறை, சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர்",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for stomata and their role in the process",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that understanding the stomata's role helps understand photosynthesis better",
+        "shot": {
+            "template": "video",
+            "heading": "இலைத்துறைகளின் வேலை முறை",
+            "prompt": "A clear educational image of stomata's role in photosynthesis, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "இலைத்துறைகளின் வேலை முறை",
+            "prompt": "A clear educational image of stomata's role in photosynthesis, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 10,
+        "sentence": "இவை சூரிய ஒளியை உறிஞ்சி, கார்பன் டை ஆக்சைடை நீருடன் சேர்த்து குளுக்கோஸ் மற்றும் ஆக்சிஜனை உருவாக்குகின்றன.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ், ஆக்சிஜன்",
+        "visualSubject": "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ், ஆக்சிஜன்",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ், ஆக்சிஜன்",
+        "localAnimation": "",
+        "labels": [
+            "குளுக்கோஸ்"
+        ],
+        "labelPlacements": [
+            "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர் | உணவு தயாரிப்பு | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ், ஆக்சிஜன்",
+            "தாவரங்களின் உயிர்ப்பொருட்கள்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ், ஆக்சிஜன்",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for glucose and oxygen production",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that plants use sunlight, carbon dioxide, and water to produce glucose and oxygen",
+        "shot": {
+            "template": "video",
+            "heading": "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ், ஆக்சிஜன்",
+            "prompt": "A clear educational image of sunlight, carbon dioxide, and water producing glucose and oxygen, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "சூரிய ஒளி, கார்பன் டை ஆக்சைடு, நீர், குளுக்கோஸ், ஆக்சிஜன்",
+            "prompt": "A clear educational image of sunlight, carbon dioxide, and water producing glucose and oxygen, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 11,
+        "sentence": "ஒளிச்சேர்க்கை பற்றி அறியும் போது, தாவரங்களின் முக்கியத்துவத்தையும், இதன் வழியாக உருவாகும் ஆக்சிஜன் பற்றி அறிந்து கொள்ளலாம்.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "தாவரங்களின் முக்கியத்துவம், ஆக்சிஜன்",
+        "visualSubject": "தாவரங்களின் முக்கியத்துவம், ஆக்சிஜன்",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "தாவரங்களின் முக்கியத்துவம், ஆக்சிஜன்",
+        "localAnimation": "",
+        "labels": [
+            "ஆக்சிஜன்"
+        ],
+        "labelPlacements": [
+            "தாவரங்களின் முக்கியத்துவம் | ஆக்சிஜன் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "தாவரங்களின் முக்கியத்துவம், ஆக்சிஜன்",
+            "தாவரங்களின் உயிர்ப்பொருட்கள்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "தாவரங்களின் முக்கியத்துவம், ஆக்சிஜன்",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for oxygen and its importance",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that understanding photosynthesis helps understand the importance of plants and oxygen production",
+        "shot": {
+            "template": "video",
+            "heading": "தாவரங்களின் முக்கியத்துவம், ஆக்சிஜன்",
+            "prompt": "A clear educational image of the importance of plants and oxygen production, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "தாவரங்களின் முக்கியத்துவம், ஆக்சிஜன்",
+            "prompt": "A clear educational image of the importance of plants and oxygen production, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 12,
+        "sentence": "ஒளிச்சேர்க்கை மட்டுமே உயிர்களுக்கு ஆக்சிஜனை வழங்குவதன் மூலம், பூமி உயிர்களுக்கு வாழ அனுமதிக்கிறது.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "ஆக்சிஜன், உயிர்கள், பூமி",
+        "visualSubject": "ஆக்சிஜன், உயிர்கள், பூமி",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "ஆக்சிஜன், உயிர்கள், பூமி",
+        "localAnimation": "",
+        "labels": [
+            "ஆக்சிஜன்"
+        ],
+        "labelPlacements": [
+            "ஆக்சிஜன் | உயிர்கள் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ஆக்சிஜன், உயிர்கள், பூமி",
+            "தாவரங்களின் உயிர்ப்பொருட்கள்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "ஆக்சிஜன், உயிர்கள், பூமி",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for oxygen and its role in life on Earth",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that photosynthesis provides the necessary oxygen for life on Earth",
+        "shot": {
+            "template": "video",
+            "heading": "ஆக்சிஜன், உயிர்கள், பூமி",
+            "prompt": "A clear educational image of oxygen providing life on Earth, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ஆக்சிஜன், உயிர்கள், பூமி",
+            "prompt": "A clear educational image of oxygen providing life on Earth, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    },
+    {
+        "segmentNumber": 13,
+        "sentence": "இந்தியாவில் உள்ள பல்வேறு நாடுகளின் தலைவர்களும் இதில் கலந்து கொண்டனர்.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "இந்தியாவின் தலைவர்கள், பல்வேறு நாடுகளின் தலைவர்கள்",
+        "visualSubject": "இந்தியாவின் தலைவர்கள், பல்வேறு நாடுகளின் தலைவர்கள்",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "இந்தியாவின் தலைவர்கள், பல்வேறு நாடுகளின் தலைவர்கள்",
+        "localAnimation": "",
+        "labels": [
+            "இந்தியாவின் தலைவர்"
+        ],
+        "labelPlacements": [
+            "இந்தியாவின் தலைவர் | பல்வேறு நாடுகளின் தலைவர்கள் | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "ஒளிச்சேர்க்கை மற்றும் தாவரங்களின் உயிர்ப்பொருட்கள்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "இந்தியாவின் தலைவர், பல்வேறு நாடுகளின் தலைவர்கள்",
+            "தாவரங்களின் உயிர்ப்பொருட்கள்"
+        ],
+        "motion": "Hold for full duration",
+        "subtitle": "இந்தியாவின் தலைவர்கள், பல்வேறு நாடுகளின் தலைவர்கள்",
+        "subtitleStyle": "விஜ்ஞானம் ஆசிரியர் / பள்ளி விஜ்ஞான ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with label for leaders of India and other countries",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains that leaders from various countries participated in this process",
+        "shot": {
+            "template": "video",
+            "heading": "இந்தியாவின் தலைவர்கள், பல்வேறு நாடுகளின் தலைவர்கள்",
+            "prompt": "A clear educational image of leaders from India and other countries participating in the process, 1920x1080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "இந்தியாவின் தலைவர்கள், பல்வேறு நாடுகளின் தலைவர்கள்",
+            "prompt": "A clear educational image of leaders from India and other countries participating in the process, 1920x080, realistic lighting, no text or labels, clean background",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover full duration"
+        }
+    }
+]

@@ -1,0 +1,121 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "இலைகளில் உள்ள பச்சையம், சூரிய ஒளியை மாற்றி ஆற்றலாக கொண்டுவருகின்றன.",
+        "template": "video_broll",
+        "visualType": "realistic_background_with_labels",
+        "heading": "இலைகளில் உள்ள பச்சையம்",
+        "visualSubject": "இலைகளின் வெளியே பச்சையான நிறத்துடன் சூரிய ஒளி விழுவது, அதனை மாற்றி ஆற்றலாக கொண்டுவரும் பச்சையம்",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "இலைகளில் பச்சையம் சூரிய ஒளியை ஆற்றலாக மாற்றுவதை காட்டும் இயற்கை உருவாக்கம். 4-வது வினாடி போக்கு முடிந்ததும், செல்லாமல் இயற்கை உருவாக்கத்தை தொடர்வது.",
+        "visualAnimation": "இலைகளின் மீது சூரிய ஒளி விழுகிறது. பச்சையம் அந்த ஒளியை ஆற்றலாக மாற்றுவதை காட்டும் இயற்கை உருவாக்கம்.",
+        "localAnimation": "சூரிய ஒளி விழுவது, பச்சையம் அதனை ஆற்றலாக மாற்றுவது. இலைகளின் நிலை காண்பிக்கப்படும்.",
+        "labels": ["சூரிய ஒளி", "பச்சையம்"],
+        "labelPlacements": [
+            "சூரிய ஒளி | இலைகளின் மீது விழுவது | COORDINATES_PENDING_APPROVED_IMAGE",
+            "பச்சையம் | ஆற்றலாக மாற்றுவது | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "உயிரியல் ஆசிரியர்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "இலைகளின் மீது சூரிய ஒளி விழுவது, பச்சையம் அதனை ஆற்றலாக மாற்றுவது",
+            "இலைகளின் நிலையில் சூரிய ஒளி விழுவது, பச்சையம் அதனை ஆற்றலாக மாற்றுவது"
+        ],
+        "motion": "இலைகளின் மீது சூர்ய ஒளி விழுவது, பச்சையம் அதனை ஆற்றலாக மாற்றுவது",
+        "subtitle": "இலைகளில் உள்ள பச்சையம், சூரிய ஒளியை ஆற்றலாக மாற்றுகின்றது",
+        "subtitleStyle": "உயிரியல் ஆசிரியர்",
+        "tool": "ltx_video",
+        "assetQualityNotes": "LTX b-roll, curriculum-safe, no labels or formulas",
+        "comfyPrompt": "A realistic image of leaves with chlorophyll absorbing sunlight, showing the process of converting light into energy. Clean background, high detail, educational style.",
+        "coverageNotes": "சூரிய ஒளி விழுவது, பச்சையம் ஆற்றலாக மாற்றுவது. இலைகளின் நிலை காண்பிக்கப்படும்.",
+        "shot": {
+            "template": "video",
+            "heading": "இலைகளில் உள்ள பச்சையம்",
+            "prompt": "A natural motion video of sunlight hitting leaves, showing chlorophyll converting light into energy. Cinematic style, educational documentary feel.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows sunlight hitting leaves, second clip shows chlorophyll converting light into energy."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "இலைகளில் உள்ள பச்சையம்",
+            "prompt": "A natural motion video of sunlight hitting leaves, showing chlorophyll converting light into energy. Cinematic style, educational documentary feel.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows sunlight hitting leaves, second clip shows chlorophyll converting light into energy."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "இந்த ஆற்றல் உதவியுடன், கார்பன் டை ஆக்சைடும் நீரும் ஒன்று சேர்ந்து குளுக்கோஸ் என்னும் உணவு பொருளாக மாறுகின்றன.",
+        "template": "video_broll",
+        "visualType": "realistic_background_with_labels",
+        "heading": "இலைகளில் உள்ள பச்சையம்",
+        "visualSubject": "இலைகளின் மீது கார்பன் டை ஆக்சைடு, நீர் விழுவது, அவற்றை குளுக்கோஸ் என்னும் உணவு பொருளாக மாற்றுவது",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 7,
+        "recommendedClipSeconds": 9,
+        "timingNotes": "இலைகளில் கார்பன் டை ஆக்சைடு, நீர் விழுவது, அவற்றை குளுக்கோஸ் என்னும் உணவு பொருளாக மாற்றுவதை காட்டும் இயற்கை உருவாக்கம். 4-வது வினாடி போக்கு முடிந்ததும், செல்லாமல் இயற்கை உருவாக்கத்தை தொடர்வது.",
+        "visualAnimation": "இலைகளின் மீது கார்பன் டை ஆக்சைடு, நீர் விழுவது. அவற்றை குளுக்கோஸ் என்னும் உணவு பொருளாக மாற்றுவது.",
+        "localAnimation": "கார்பன் டை ஆக்சைடு, நீர் விழுவது. அவற்றை குளுக்கோஸ் என்னும் உணவு பொருளாக மாற்றுவது.",
+        "labels": ["கார்பன் டை ஆக்சைடு", "நீர்", "குளுக்கோஸ்"],
+        "labelPlacements": [
+            "கார்பன் டை ஆக்சைடு | இலைகளின் மீது விழுவது | COORDINATES_PENDING_APPROVED_IMAGE",
+            "நீர் | இலைகளின் மீது விழுவது | COORDINATES_PENDING_APPROVED_IMAGE",
+            "குளுக்கோஸ் | உணவு பொருளாக மாறுவது | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "உயிரியல் ஆசிரியர்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "இலைகளின் மீது கார்பன் டை ஆக்சைடு, நீர் விழுவது, அவற்றை குளுக்கோஸ் என்னும் உணவு பொருளாக மாற்றுவது",
+            "இலைகளின் நிலையில் கார்பன் டை ஆக்சைடு, நீர் விழுவது, அவற்றை குளுக்கோஸ் என்னும் உணவு பொருளாக மாற்றுவது"
+        ],
+        "motion": "இலைகளின் மீது கார்பன் டை ஆக்சைடு, நீர் விழுவது. அவற்றை குளுக்கோஸ் என்னும் உணவு பொருளாக மாற்றுவது.",
+        "subtitle": "இலைகளில் உள்ள பச்சையம், கார்பன் டை ஆக்சைடும் நீரும் ஒன்று சேர்ந்து குளுக்கோஸ் என்னும் உணவு பொருளாக மாறுகின்றது",
+        "subtitleStyle": "உயிரியல் ஆசிரியர்",
+        "tool": "ltx_video",
+        "assetQualityNotes": "LTX b-roll, curriculum-safe, no labels or formulas",
+        "comfyPrompt": "A realistic image of leaves with carbon dioxide and water being absorbed, showing the process of converting them into glucose. Clean background, high detail, educational style.",
+        "coverageNotes": "கார்பன் டை ஆக்சைடு, நீர் விழுவது, அவற்றை குளுக்கோஸ் என்னும் உணவு பொருளாக மாற்றுவது. இலைகளின் நிலை காண்பிக்கப்படும்.",
+        "shot": {
+            "template": "video",
+            "heading": "இலைகளில் உள்ள பச்சையம்",
+            "prompt": "A natural motion video of carbon dioxide and water being absorbed by leaves, showing the process of converting them into glucose. Cinematic style, educational documentary feel.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "First clip shows carbon dioxide and water being absorbed by leaves, second clip shows the process of converting them into glucose."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "இலைகளில் உள்ள பச்சையம்",
+            "prompt": "A natural motion video of carbon dioxide and water being absorbed by leaves, showing the process of converting them into glucose. Cinematic style, educational documentary feel.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "First clip shows carbon dioxide and water being absorbed by leaves, second clip shows the process of converting them into glucose."
+        }
+    }
+]

@@ -1,0 +1,63 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.8",
+      "visual_type": "realistic_image",
+      "image_prompt": "A forest at sunrise with tall trees and sunlight filtering through the canopy, creating a warm golden light on the forest floor. The camera is at eye level, slightly angled upwards to show the interplay of light and shadow between the trees.",
+      "image_requirement": "Viewer must see sunlight passing through leaves to understand photosynthesis.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Photosynthesis is essential for life on Earth.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "1.9",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with visible veins and chlorophyll-rich green color, illuminated by natural light from the side. The camera is at a low angle to emphasize the texture and structure of the leaf.",
+      "image_requirement": "Viewer must see the green color of the leaf to understand oxygen production.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "It provides the oxygen we need to breathe.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "1.10",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Light energy absorbed by chlorophyll",
+        "Water and carbon dioxide taken in by the leaf",
+        "Oxygen released as a byproduct",
+        "Glucose produced for plant growth"
+      ],
+      "panels": [],
+      "narration_en": "To learn more about photosynthesis, let's examine how leaves work.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

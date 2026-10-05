@@ -1,0 +1,70 @@
+[
+  {
+    "rowId": "6.2",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a sunflower flower showing anthers and stigma with clear labeling",
+    "comfyPrompt": "A detailed, realistic image of a sunflower flower with visible anthers and stigma. The anthers are positioned above the stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.3",
+    "labels": ["Hood", "Stigma"],
+    "labelPlacements": [
+      "Hood | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "Hood - a hood-like structure covering the stigma",
+      "Stigma - a receptive surface at the center of the flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a pansy flower showing the hood over the stigma with clear labeling",
+    "comfyPrompt": "A detailed, realistic image of a pansy flower with visible hood and stigma. The hood is positioned above the stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.4",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with text 'Herkogamy in Flowers' on a dark background with light text and thin colored border",
+    "comfyPrompt": "A title card with the text 'Herkogamy in Flowers' on a dark background. The text is in light color with a thin colored border. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.5",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": [
+      "visible_physical_target",
+      "visible_physical_target"
+    ],
+    "pointTargetNames": [
+      "Anther - a pollen-producing structure at the top of the flower",
+      "Stigma - a receptive surface at the center of the flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a primrose flower showing anthers and stigma at different heights with clear labeling",
+    "comfyPrompt": "A detailed, realistic image of a primrose flower with visible anthers and stigma. The anthers are positioned above the stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with text 'Adaptations for Cross-Pollination' on a dark background with light text and thin colored border",
+    "comfyPrompt": "A title card with the text 'Adaptations for Cross-Pollination' on a dark background. The text is in light color with a thin colored border. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

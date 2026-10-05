@@ -1,0 +1,52 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The new cross-sectional area A' can be calculated as the original volume divided by the new length.",
+      "formula_lines": [
+        "A' = \\frac{A_0 \\times L_0}{L'}"
+      ],
+      "explain_steps": [
+        "New area equals original volume divided by new length."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Cross-sectional Area After Stretching"
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Since the original volume is $ A_0 \\times L_0 $, dividing this by the new length $ L' = 1.1L_0 $ gives us $ A' = \\frac{A_0 \\times L_0}{1.1L_0} $, which simplifies to $ \\frac{A_0}{1.1} $.",
+      "formula_lines": [
+        "A' = \\frac{A_0 \\times L_0}{1.1L_0}",
+        "A' = \\frac{A_0}{1.1}"
+      ],
+      "explain_steps": [
+        "New area equals original volume divided by 1.1 times original length.",
+        "Simplifies to original area divided by 1.1."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Simplified Cross-sectional Area"
+    }
+  ]
+}

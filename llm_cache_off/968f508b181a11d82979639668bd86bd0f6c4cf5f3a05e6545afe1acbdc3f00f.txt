@@ -1,0 +1,13 @@
+Once again, we come across an intriguing question from the IEEE 2005 examination. This particular question relates to current electricity and electric current. Let's begin by reading the question carefully. Two sources of equal electromotive force (EMF) are connected to an external resistance R. The internal resistances of these two sources are given as R1 and R2 respectively, with the information that R2 is greater than R1. If the potential difference across the source with internal resistance R2 is zero, what can be concluded from this?
+
+Let's attempt to visualize the circuit. Since the current in the circuit is not zero, it indicates that E1 is connected in a series configuration with E2. You can represent EMF1 as having an internal resistance of R1 and another EMF (E2) with an internal resistance of R2. This is how the setup appears. Both sources are connected in a series configuration due to their equal EMF values and similar resistances. It's also given that the current is not zero, the circuit is complete, and both sources are connected across an external resistance R.
+
+Now, considering the additional information provided: the potential drop across battery 2 is zero. From this, we can infer that the EMF of battery 2 must be equal to the product of the current in the circuit and zero, since voltage (V) is always given by V = E - IR, where R represents the internal resistance of the battery.
+
+Using this relationship, if the potential difference across battery 2 is zero, then we can directly apply this equation. In such a case, it implies that the EMF of battery 2 equals the current times its internal resistance. 
+
+To find the value of the current (I), we consider the total electromotive force in the circuit, which is 2E, and divide it by the total resistance, which includes R, R1, and R2. By applying these two equations together, we can deduce that E equals 2E times R2 divided by the sum of R, R1, and R2.
+
+Simplifying this equation further allows us to cancel out the EMF (E) from both sides, resulting in a simpler expression: R plus R1 plus R2 is equal to twice R2. From here, we can clearly deduce that R equals R2 minus R1.
+
+Therefore, based on our analysis and calculations, it becomes evident that the correct answer is option D.

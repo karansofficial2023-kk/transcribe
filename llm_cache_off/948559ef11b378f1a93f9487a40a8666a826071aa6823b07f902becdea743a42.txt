@@ -1,0 +1,125 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "When the males attempt to mate with the flower, they end up pollinating it.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "Mating Behavior and Pollination",
+        "visualSubject": "Close-up of male insect approaching a flower, focusing on the interaction between the insect's body and the flower's reproductive structures. Realistic lighting with shallow depth of field.",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Use a seamless loop to maintain continuity. Split into two 4-second LTX clips for smooth motion.",
+        "visualAnimation": "A male insect approaches a flower, its body brushing against the stamen and anther, transferring pollen in the process.",
+        "localAnimation": "Highlight the insect's body contact with the flower using arrows and labels to show pollen transfer.",
+        "labels": [
+            "Insect Body | Insect body interacting with flower structures",
+            "Stamen | Flower structure that produces pollen"
+        ],
+        "labelPlacements": [
+            "Insect Body | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Stamen | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Mechanisms of Pollination in Plants",
+        "arrows": [
+            "Insect body to stamen | Direction of pollen transfer"
+        ],
+        "highlights": [
+            "Insect body",
+            "Stamen"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Male insect approaching a flower with close-up focus on pollen transfer",
+            "Insect interacting with stamen and anther in natural setting"
+        ],
+        "motion": "Smooth camera movement from the insect's perspective to show the mating process",
+        "subtitle": "Mating behavior leads to pollination through physical contact",
+        "subtitleStyle": "Plant Biology Educator",
+        "tool": "ltx_video",
+        "assetQualityNotes": "Use LTX clip for natural motion. No generated labels or text.",
+        "comfyPrompt": "",
+        "coverageNotes": "Visuals show the physical interaction between insect and flower structures, demonstrating how mating leads to pollination.",
+        "shot": {
+            "template": "video",
+            "heading": "Mating Behavior and Pollination",
+            "prompt": "A male insect approaches a flower, its body brushing against the stamen and anther, transferring pollen in the process. Cinematic natural motion with smooth camera movement from the insect's perspective.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to maintain smooth motion and continuity of the insect's interaction with the flower."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Mating Behavior and Pollination",
+            "prompt": "A male insect approaches a flower, its body brushing against the stamen and anther, transferring pollen in the process. Cinematic natural motion with smooth camera movement from the insect's perspective.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to maintain smooth motion and continuity of the insect's interaction with the flower."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Fascinating, isn't it? Keep exploring to learn more. Keep learning. We believe in you.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Encouragement and Continued Learning",
+        "visualSubject": "Title card with text overlay on a dark background, featuring the phrase 'Fascinating, isn't it? Keep exploring to learn more. Keep learning. We believe in you.'",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full duration to allow the message to be absorbed.",
+        "visualAnimation": "Title card with motivational text overlay on a dark background, emphasizing the importance of continued learning.",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Mechanisms of Pollination in Plants",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Title card with motivational text on dark background",
+            "Educational title card emphasizing continued learning"
+        ],
+        "motion": "",
+        "subtitle": "Fascinating, isn't it? Keep exploring to learn more. Keep learning. We believe in you.",
+        "subtitleStyle": "Plant Biology Educator",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Use generated still for title card with motivational text overlay.",
+        "comfyPrompt": "Title card with motivational text on dark background, high contrast, sans-serif font, 28px minimum font size, no watermarks, no slide layout, educational documentary style.",
+        "coverageNotes": "Visual reinforces the importance of continued learning and engagement with the topic.",
+        "shot": {
+            "template": "video",
+            "heading": "Encouragement and Continued Learning",
+            "prompt": "Title card with motivational text on dark background, high contrast, sans-serif font, 28px minimum font size, no watermarks, no slide layout, educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 8.0,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration to allow the message to be absorbed."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Encouragement and Continued Learning",
+            "prompt": "Title card with motivational text on dark background, high contrast, sans-serif font, 28px minimum font size, no watermarks, no slide layout, educational documentary style.",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 8.0,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration to allow the message to be absorbed."
+        }
+    }
+]

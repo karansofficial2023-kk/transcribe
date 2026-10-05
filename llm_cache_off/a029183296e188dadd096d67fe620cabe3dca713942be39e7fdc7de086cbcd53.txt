@@ -1,0 +1,4 @@
+{
+  "score": 95,
+  "reason": "The paraphrased text preserves the meaning of the original text with minimal changes. It uses slightly different phrasing (e.g., 'ద్వారా' instead of 'ఉపయోగించి') and reorders some phrases, but the core information about photosynthesis remains unchanged. The only minor difference is the inclusion of a slight variation in sentence structure, which does not affect the overall meaning."
+}

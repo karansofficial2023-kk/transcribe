@@ -1,0 +1,107 @@
+{
+  "correctedNarration": "Welcome students to the NEET 2019 question and answer solutions. Let's now work through question number 176, which asks: Which of the following is a commercial blood cholesterol-lowering agent? The options provided are cyclosporine A, statin, streptokinase, and lipases. This question relies entirely on memory. If you are unable to recall the correct commercial agent for lowering blood cholesterol, you may find it challenging to answer. However, if you remember this information, the question becomes straightforward. The correct answer is statin, as it is widely recognized as a commercial medication used to lower blood cholesterol levels. Statins function by inhibiting an enzyme involved in cholesterol production in the liver, thereby reducing low-density lipoprotein (LDL) cholesterol levels in the bloodstream. This class of drugs is commonly prescribed for individuals at risk of cardiovascular disease due to their effectiveness and relatively mild side effects. Thank you students.",
+  "coverageComplete": false,
+  "issuesResolved": 0,
+  "coverageChecks": [
+    {
+      "requirementId": "R01",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R02",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R03",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R04",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R05",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R06",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R07",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R08",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R09",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R10",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R11",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R12",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R13",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R14",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R15",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R16",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R17",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R18",
+      "covered": false,
+      "evidenceQuote": ""
+    },
+    {
+      "requirementId": "R19",
+      "covered": false,
+      "evidenceQuote": ""
+    }
+  ],
+  "remainingConcerns": [
+    "The narration does not address any of the required curriculum concepts related to pollination, types of pollination, or mechanisms of self- and cross-pollination. It is entirely unrelated to the topic of pollination.",
+    "None of the required factual corrections or lesson coverage items are present in the narration.",
+    "The content is about a completely different subject (cholesterol-lowering agents) and does not align with the project materials provided."
+  ]
+}

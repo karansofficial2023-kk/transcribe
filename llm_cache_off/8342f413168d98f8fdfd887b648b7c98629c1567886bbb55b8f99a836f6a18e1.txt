@@ -1,0 +1,65 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.4",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Since the current in the circuit is not zero, it indicates that E1 is in the associative mode with E2.",
+      "formula_lines": [
+        "I ≠ 0 ⇒ E1 and E2 are in series"
+      ],
+      "explain_steps": [
+        "Non-zero current implies sources are connected in series."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Current Indicates Series Connection"
+    },
+    {
+      "shot_id": "2.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "Two batteries, E1 and E2, connected in series with resistors R1 and R2. E1 has a visible internal resistance labeled R1, and E2 has an internal resistance labeled R2. The setup is on a table under natural light.",
+      "image_requirement": "Viewer must see both EMF sources with their respective internal resistances clearly labeled.",
+      "labels": ["R1", "R2"],
+      "label_placement": ["<R1> - near E1's terminal, visible as a resistor", "<R2> - near E2's terminal, visible as a resistor"],
+      "steps": [],
+      "panels": [],
+      "narration_en": "You can represent EMF1 as having an internal resistance of R1 and another EMF (E2) with an internal resistance of R.2.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "EMF Sources with Internal Resistances"
+    },
+    {
+      "shot_id": "2.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "A circuit diagram on a whiteboard showing two EMF sources, E1 and E2, connected in series with resistors R1 and R2. The setup is under natural light.",
+      "image_requirement": "Viewer must see the complete circuit configuration with both EMF sources and their internal resistances.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This is how the setup appears.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Circuit Configuration Overview"
+    }
+  ]
+}

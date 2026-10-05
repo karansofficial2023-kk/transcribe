@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Papaya plant with separate male and female flowers, male flower at bottom, female flower above, natural sunlight, green leaves and yellow-orange flowers.",
+      "image_requirement": "Viewer must see separate male and female flowers on the same plant.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Papaya is a unisexual dioecious plant, which encourages cross-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Papaya Plant with Separate Flowers"
+    },
+    {
+      "shot_id": "6.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "Sunflower with bisexual flower, anthers at the center, stigma at the top, natural daylight, yellow petals and green leaves.",
+      "image_requirement": "Viewer must see anthers and stigma in the same flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Sunflowers have bisexual flowers where the anthers mature before the stigma.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Sunflower with Bisexual Flowers"
+    },
+    {
+      "shot_id": "6.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "Close-up of sunflower flower, anthers at the center, stigma at the top, natural light, yellow petals and green sepals.",
+      "image_requirement": "Viewer must see anthers and stigma in the same flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This process is termed protandry.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Protandry in Sunflowers"
+    }
+  ]
+}

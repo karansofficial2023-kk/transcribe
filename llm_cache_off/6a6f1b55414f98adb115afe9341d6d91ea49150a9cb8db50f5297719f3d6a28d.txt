@@ -1,0 +1,24 @@
+{
+  "score": 100,
+  "missing_concepts": [],
+  "preserved_concepts": [
+    "AIEEE 2003",
+    "continuity and differentiability",
+    "real number x",
+    "reciprocal",
+    "minimum value of the sum",
+    "f(x) = x + 1/x",
+    "maxima or minima",
+    "f'(x) = 1 - 1/x²",
+    "f'(x) = 0",
+    "x² = 1",
+    "x = ±1",
+    "second derivative",
+    "f''(x) = 2/x³",
+    "f''(1) = 2 > 0",
+    "local minimum at x = 1",
+    "f''(-1) = -2 < 0",
+    "local maximum at x = -1",
+    "minimum value occurs when x = 1"
+  ]
+}

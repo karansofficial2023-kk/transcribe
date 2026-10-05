@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "Pansy flower with hood covering stigma, close-up view showing the hood structure and hidden stigma, natural lighting on a sunny day, colors of purple and yellow.",
+      "image_requirement": "Viewer must see the hood covering the stigma to understand harkogamy.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Pansies have a hood that covers the stigma, which is a structural adaptation known as harkogamy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Harkogamy in Pansies"
+    },
+    {
+      "shot_id": "6.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "Primrose flower with stigma at a higher position than the anther, close-up view showing the height difference between stigma and anther, natural lighting on a sunny day, colors of yellow and green.",
+      "image_requirement": "Viewer must see the different height of stigma compared to anther to understand heterostyly.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Primrose shows heterostyly because the stigma is located at a different height compared to the anther.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Heterostyly in Primrose"
+    },
+    {
+      "shot_id": "6.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "Various flowers with different adaptations, including hooded pansies, primroses with height differences, and other flowers showing structural features for cross-pollination, natural lighting on a sunny day, colors of multiple hues.",
+      "image_requirement": "Viewer must see the variety of flower structures to understand adaptations for cross-pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "These are various adaptations in flowers that help with cross-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Adaptations for Cross-Pollination"
+    }
+  ]
+}

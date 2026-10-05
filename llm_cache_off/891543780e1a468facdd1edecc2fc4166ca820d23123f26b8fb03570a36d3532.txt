@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf on a plant, sunlight filtering through the leaves, showing chloroplast structures within the leaf cells, natural lighting with soft shadows, green and yellow tones.",
+      "image_requirement": "Viewer must see the leaf with visible chloroplasts under sunlight.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Although, this process occurs in certain specific conditions.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "6.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A diagrammatic representation of a plant with sunlight hitting the leaves, water droplets on the surface, and carbon dioxide molecules near the leaf, natural lighting with soft shadows, green and blue tones.",
+      "image_requirement": "Viewer must see the presence of sunlight, water, and carbon dioxide around the leaf.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "For example, sunlight is required, water and carbon dioxide presence.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A green plant with leaves facing the sunlight, roots in soil, stem holding up the leaves, camera at medium distance from the plant, slightly angled down to show the root system and soil, natural daylight illuminating the plant with green and earthy tones.",
+      "image_requirement": "Viewer must see the plant absorbing carbon dioxide and water from the air and soil.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In this process, plants take in carbon dioxide from the air and water from the soil.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "தாவரங்கள் ஒளிச்சேர்க்ஜை உற்பத்தி"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "correctedNarration": "Welcome students to the NEET 2019 question and answer solutions. Let's now work through question number 176, which asks: Which of the following is a commercial blood cholesterol-lowering agent? The options provided are cyclosporine A, statin, streptokinase, and lipases. This question is entirely based on memory. If you cannot recall the commercial agents used to lower blood cholesterol, you may find it difficult to answer. However, if you remember this information, the question becomes quite straightforward. The correct answer is statin, as it is a class of drugs commonly used in the treatment of high blood cholesterol levels. Thank you students.",
+  "coverageComplete": false,
+  "issuesResolved": 0,
+  "coverageChecks": [],
+  "remainingConcerns": [
+    "The narration does not provide explicit definitions or explanations for required lesson coverage items, such as 'statin' or 'blood cholesterol-lowering agents', which may be part of the required curriculum.",
+    "No checklist was provided to verify if all required coverage has been addressed."
+  ]
+}

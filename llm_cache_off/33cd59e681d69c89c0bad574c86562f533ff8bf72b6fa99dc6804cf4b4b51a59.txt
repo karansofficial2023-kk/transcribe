@@ -1,0 +1,373 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Cross-pollination.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Cross-Pollination Overview",
+        "visualSubject": "Title card with bold, centered text on a dark background; no image or diagram",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 2,
+        "recommendedClipSeconds": 3,
+        "timingNotes": "Hold for full duration of title card",
+        "visualAnimation": "Title card with centered, bold text in white on a dark background",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Mechanisms of Pollination in Plants",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A dark background with white, centered text 'Cross-pollination' in a sans-serif font",
+            "A title card with bold, large text on a black background"
+        ],
+        "motion": "Static title card",
+        "subtitle": "Cross-pollination is the transfer of pollen between different plants.",
+        "subtitleStyle": "Plant Biology Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Generated still for title card; no asset required",
+        "comfyPrompt": "",
+        "coverageNotes": "Introduces the topic and sets context for the lesson",
+        "shot": {
+            "template": "video",
+            "heading": "Cross-Pollination Overview",
+            "prompt": "A dark background with white, centered text 'Cross-pollination' in a sans-serif font, 28px minimum size, no other elements",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 3,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Cross-Pollination Overview",
+            "prompt": "A dark background with white, centered text 'Cross-pollination' in a sans-serif font, 28px minimum size, no other elements",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 3,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Papaya is a unisexual, dioecious plant.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Papaya Plant Anatomy",
+        "visualSubject": "A realistic image of a papaya plant with male and female flowers clearly visible; camera angle: medium shot, lighting: natural daylight",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 4,
+        "recommendedClipSeconds": 5,
+        "timingNotes": "Hold for full duration of narration",
+        "visualAnimation": "Realistic image of a papaya plant with male and female flowers clearly labeled",
+        "localAnimation": "Label the male and female flowers with arrows and text",
+        "labels": [
+            "Male Flower",
+            "Female Flower"
+        ],
+        "labelPlacements": [
+            "Male Flower | Male flower on the papaya plant | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Female Flower | Female flower on the papaya plant | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Mechanisms of Pollination in Plants",
+        "arrows": [
+            "Male Flower | Arrow pointing to male flower on the papaya plant"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A close-up of a papaya plant with clearly visible male and female flowers",
+            "A realistic image of a papaya plant showing both male and female flowers"
+        ],
+        "motion": "Static labeled image",
+        "subtitle": "Papaya is a unisexual, dioecious plant with separate male and female flowers.",
+        "subtitleStyle": "Plant Biology Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with precise labels for educational clarity",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains the unisexual and dioecious nature of papaya plants",
+        "shot": {
+            "template": "video",
+            "heading": "Papaya Plant Anatomy",
+            "prompt": "A realistic image of a papaya plant with male and female flowers clearly visible, camera angle: medium shot, lighting: natural daylight",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips for continuous motion"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Papaya Plant Anatomy",
+            "prompt": "A realistic image of a papaya plant with male and female flowers clearly visible, camera angle: medium shot, lighting: natural daylight",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips for continuous motion"
+        }
+    },
+    {
+        "segmentNumber": 3,
+        "sentence": "Its male and female flowers grow on separate plants, leading to average levels of cross-pollination.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Cross-Pollination in Papaya",
+        "visualSubject": "A realistic image of two separate papaya plants with male and female flowers clearly visible; camera angle: medium shot, lighting: natural daylight",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 7,
+        "timingNotes": "Hold for full duration of narration",
+        "visualAnimation": "Realistic image of two papaya plants with male and female flowers clearly labeled",
+        "localAnimation": "Label the male and female flowers on each plant with arrows and text",
+        "labels": [
+            "Male Flower (Plant 1)",
+            "Female Flower (Plant 2)"
+        ],
+        "labelPlacements": [
+            "Male Flower (Plant 1) | Male flower on Plant 1 | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Female Flower (Plant 2) | Female flower on Plant 2 | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Mechanisms of Pollination in Plants",
+        "arrows": [
+            "Male Flower (Plant 1) | Arrow pointing to male flower on Plant 1",
+            "Female Flower (Plant 2) | Arrow pointing to female flower on Plant 2"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A side-by-side view of two papaya plants with male and female flowers clearly visible",
+            "A realistic image of two separate papaya plants showing male and female flowers"
+        ],
+        "motion": "Static labeled image",
+        "subtitle": "Male and female flowers grow on separate plants, leading to average cross-pollination.",
+        "subtitleStyle": "Plant Biology Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with precise labels for educational clarity",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains the dioecious nature and resulting cross-pollination in papaya",
+        "shot": {
+            "template": "video",
+            "heading": "Cross-Pollination in Papaya",
+            "prompt": "A realistic image of two separate papaya plants with male and female flowers clearly visible, camera angle: medium shot, lighting: natural daylight",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips for continuous motion"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Cross-Pollination in Papaya",
+            "prompt": "A realistic image of two separate papaya plants with male and female flowers clearly visible, camera angle: medium shot, lighting: natural daylight",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips for continuous motion"
+        }
+    },
+    {
+        "segmentNumber": 4,
+        "sentence": "However, sunflowers have bisexual flowers.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Sunflower Flower Anatomy",
+        "visualSubject": "A realistic image of a sunflower with both male and female parts visible; camera angle: medium shot, lighting: natural daylight",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 4,
+        "recommendedClipSeconds": 5,
+        "timingNotes": "Hold for full duration of narration",
+        "visualAnimation": "Realistic image of a sunflower with male and female parts clearly labeled",
+        "localAnimation": "Label the stamen and pistil with arrows and text",
+        "labels": [
+            "Stamen (Male Part)",
+            "Pistil (Female Part)"
+        ],
+        "labelPlacements": [
+            "Stamen (Male Part) | Stamen on the sunflower | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Pistil (Female Part) | Pistil on the sunflower | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Mechanisms of Pollination in Plants",
+        "arrows": [
+            "Stamen (Male Part) | Arrow pointing to stamen on the sunflower",
+            "Pistil (Female Part) | Arrow pointing to pistil on the sunflower"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A close-up of a sunflower with clearly visible stamen and pistil",
+            "A realistic image of a sunflower showing both male and female parts"
+        ],
+        "motion": "Static labeled image",
+        "subtitle": "Sunflowers have bisexual flowers with both male and female parts.",
+        "subtitleStyle": "Plant Biology Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with precise labels for educational clarity",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains the bisexual nature of sunflowers in contrast to papaya",
+        "shot": {
+            "template": "video",
+            "heading": "Sunflower Flower Anatomy",
+            "prompt": "A realistic image of a sunflower with both male and female parts visible, camera angle: medium shot, lighting: natural daylight",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips for continuous motion"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Sunflower Flower Anatomy",
+            "prompt": "A realistic image of a sunflower with both male and female parts visible, camera angle: medium shot, lighting: natural daylight",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips for continuous motion"
+        }
+    },
+    {
+        "segmentNumber": 5,
+        "sentence": "In these flowers, the anthers mature before the stigma.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Sunflower Pollination Timing",
+        "visualSubject": "A realistic image of a sunflower with anthers and stigma clearly visible; camera angle: medium shot, lighting: natural daylight",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 4,
+        "recommendedClipSeconds": 5,
+        "timingNotes": "Hold for full duration of narration",
+        "visualAnimation": "Realistic image of a sunflower with anthers and stigma clearly labeled",
+        "localAnimation": "Label the anthers and stigma with arrows and text",
+        "labels": [
+            "Anthers (Mature First)",
+            "Stigma (Maturing Later)"
+        ],
+        "labelPlacements": [
+            "Anthers (Mature First) | Anthers on the sunflower | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Stigma (Maturing Later) | Stigma on the sunflower | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Mechanisms of Pollination in Plants",
+        "arrows": [
+            "Anthers (Mature First) | Arrow pointing to anthers on the sunflower",
+            "Stigma (Maturing Later) | Arrow pointing to stigma on the sunflower"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A close-up of a sunflower with clearly visible anthers and stigma",
+            "A realistic image of a sunflower showing the timing of anther and stigma maturation"
+        ],
+        "motion": "Static labeled image",
+        "subtitle": "In sunflowers, anthers mature before the stigma to prevent self-pollination.",
+        "subtitleStyle": "Plant Biology Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with precise labels for educational clarity",
+        "comfyPrompt": "",
+        "coverageNotes": "Explains the timing of anther and stigma maturation in sunflowers",
+        "shot": {
+            "template": "video",
+            "heading": "Sunflower Pollination Timing",
+            "prompt": "A realistic image of a sunflower with anthers and stigma clearly visible, camera angle: medium shot, lighting: natural daylight",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips for continuous motion"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Sunflower Pollination Timing",
+            "prompt": "A realistic image of a sunflower with anthers and stigma clearly visible, camera angle: medium shot, lighting: natural daylight",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split into two 4-second clips for continuous motion"
+        }
+    },
+    {
+        "segmentNumber": 6,
+        "sentence": "This process is known as protandry.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Protandry Definition",
+        "visualSubject": "Title card with bold, centered text on a dark background; no image or diagram",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 2,
+        "recommendedClipSeconds": 3,
+        "timingNotes": "Hold for full duration of title card",
+        "visualAnimation": "Title card with centered, bold text in white on a dark background",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Mechanisms of Pollination in Plants",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A dark background with white, centered text 'Protandry' in a sans-serif font",
+            "A title card with bold, large text on a black background"
+        ],
+        "motion": "Static title card",
+        "subtitle": "This process is known as protandry.",
+        "subtitleStyle": "Plant Biology Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Generated still for title card; no asset required",
+        "comfyPrompt": "",
+        "coverageNotes": "Defines the term 'protandry' and concludes the lesson",
+        "shot": {
+            "template": "video",
+            "heading": "Protandry Definition",
+            "prompt": "A dark background with white, centered text 'Protandry' in a sans-serif font, 28px minimum size, no other elements",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 3,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Protand,ry Definition",
+            "prompt": "A dark background with white, centered text 'Protandry' in a sans-serif font, 28px minimum size, no other elements",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 3,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 1,
+            "joinInstructions": "Hold for full duration"
+        }
+    }
+]

@@ -1,0 +1,47 @@
+[
+  {
+    "rowId": "3.3",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Segment 3: Straightforward Question",
+    "visualSubject": "A student confidently answering a question in a classroom setting with clear focus on memorized content",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A student confidently answering a question in a classroom setting with clear focus on memorized content. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visual emphasizes the simplicity of the question if information is recalled Repeated-title guard: render this concept as a content visual, not another presentation title card.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "4.1",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Correct Answer and Explanation",
+    "visualSubject": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visual covers the correct answer and its purpose in lowering blood cholesterol levels as stated in the narration. Repeated-title guard: render this concept as a content visual, not another presentation title card. Strict label-readiness guard: rendered without labels because exact reviewed targets and coordinates were unavailable.",
+    "formulaLines": []
+  },
+  {
+    "rowId": "5.1",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Final Acknowledgment",
+    "visualSubject": "Close-up of a teacher's face with a warm, sincere expression, looking directly at the camera in a classroom setting",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. Close-up of a teacher's face with a warm, sincere expression, looking directly at the camera in a classroom setting. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Acknowledges students' participation and concludes the lesson Repeated-title guard: render this concept as a content visual, not another presentation title card.",
+    "formulaLines": []
+  }
+]

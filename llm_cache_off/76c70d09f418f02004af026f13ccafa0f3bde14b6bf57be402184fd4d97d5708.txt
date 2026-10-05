@@ -1,0 +1,66 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "This relationship can be expressed mathematically as V equals I multiplied by R, where V represents voltage measured in volts, I stands for current measured in amperes, and R denotes resistance measured in ohms.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Ohm's Law Formula Representation",
+        "visualSubject": "Mathematical equation of Ohm's Law with labeled variables V, I, R on a clean educational background",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 10,
+        "recommendedClipSeconds": 12,
+        "timingNotes": "Hold the final frame for 3 seconds to allow full absorption of the formula and labels",
+        "visualAnimation": "A clean white background with a centered mathematical equation V = I × R, where each variable is labeled with its unit: volts (V), amperes (I), ohms (R). The equation is animated in a step-by-step fashion to emphasize each term.",
+        "localAnimation": "Step-by-step reveal of the formula and labels using arrows and fade-in effects. Highlight each label as it appears, ensuring clarity for visual learners.",
+        "labels": [
+            "Voltage | Voltage measured in volts",
+            "Current | Current measured in amperes",
+            "Resistance | Resistance measured in ohms"
+        ],
+        "labelPlacements": [
+            "Voltage | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Current | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Resistance | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Ohm's Law and Resistor Circuits",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": ["V = I × R"],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Mathematical equation of Ohm's Law with labeled variables V, I, R on a clean educational background",
+            "Whiteboard showing the formula V = I × R with each term clearly labeled"
+        ],
+        "motion": "Static reveal of the formula and labels in sequence",
+        "subtitle": "Ohm's Law: Voltage equals current multiplied by resistance",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "manim",
+        "assetQualityNotes": "Use deterministic Manim animation for precise label placement and formula clarity",
+        "comfyPrompt": "Clean white background, centered mathematical equation V = I × R with labeled variables V (volts), I (amperes), R (ohms). No text or labels in the image, only the equation structure.",
+        "coverageNotes": "Visuals cover the definition of Ohm's Law and the units for voltage, current, and resistance as per the narration",
+        "shot": {
+            "template": "video",
+            "heading": "Ohm's Law Formula Representation",
+            "prompt": "A clean white background with a centered mathematical equation V = I × R, where each variable is labeled with its unit: volts (V), amperes (I), ohms (R). The equation is animated in a step-by-step fashion to emphasize each term.",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join the three 4-second clips in sequence to cover the full formula and label animation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Ohm's Law Formula Representation",
+            "prompt": "A clean white background with a centered mathematical equation V = I × R, where each variable is labeled with its unit: volts (V), amperes (I), ohms (R). The equation is animated in a step-by-step fashion to emphasize each term.",
+            "negativePrompt": "No text artifacts, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join the three 4-second clips in sequence to cover the full formula and label animation"
+        }
+    }
+]

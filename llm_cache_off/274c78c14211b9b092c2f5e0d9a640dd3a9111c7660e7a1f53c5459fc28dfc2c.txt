@@ -1,0 +1,50 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "To find the value of the current (I), we consider the total electromotive force in the circuit, which is 2E, and divide it by the total resistance, which includes R, R1, and R2.",
+      "formula_lines": [
+        "I = 2E / (R + R1 + R2)"
+      ],
+      "explain_steps": [
+        "Current equals twice the electromotive force divided by the sum of resistances."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Current Calculation in Circuit"
+    },
+    {
+      "shot_id": "4.2",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "By applying these two equations together, we can deduce that E equals 2E times R2 divided by the sum of R, R.1, and R2.",
+      "formula_lines": [
+        "E = (2E * R2) / (R + R1 + R2)"
+      ],
+      "explain_steps": [
+        "Electromotive force equals twice E multiplied by R2 over total resistance."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "EMF Deduction in Circuit"
+    }
+  ]
+}

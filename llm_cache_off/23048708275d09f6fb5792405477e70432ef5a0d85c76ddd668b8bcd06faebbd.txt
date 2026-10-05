@@ -1,0 +1,32 @@
+[
+  {
+    "sceneNumber": 1,
+    "sceneTitle": "ప్రక్రియ నిర్వచనం",
+    "sentenceNumbers": [1]
+  },
+  {
+    "sceneNumber": 2,
+    "sceneTitle": "సామగ్రి గ్రహించడం",
+    "sentenceNumbers": [2, 3]
+  },
+  {
+    "sceneNumber": 3,
+    "sceneTitle": "పత్రరంధ్రాల పాత్ర",
+    "sentenceNumbers": [6]
+  },
+  {
+    "sceneNumber": 4,
+    "sceneTitle": "సంయోగక్రియ ముఖ్య అంశాలు",
+    "sentenceNumbers": [4, 5]
+  },
+  {
+    "sceneNumber": 5,
+    "sceneTitle": "గ్లూకోజ్ పాత్ర",
+    "sentenceNumbers": [7, 8]
+  },
+  {
+    "sceneNumber": 6,
+    "sceneTitle": "ప్రక్రియ ముఖ్యత",
+    "sentenceNumbers": [9, 10]
+  }
+]

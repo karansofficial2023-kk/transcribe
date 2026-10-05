@@ -1,0 +1,69 @@
+[
+  {
+    "rowId": "4.2",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Deriving Voltage from Current and Resistance",
+    "visualSubject": "Electrical circuit diagram with labeled components: two EMF sources (E), resistors (R, R1, R2), and current path. Clean background with white text on black band.",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover derived voltage equation (E = 2E * R2 / (R + R1 + R2)), total EMF and resistance, and the relationship between current and voltage in a circuit.",
+    "formulaLines": [
+      "E = 2E * R2 / (R + R1 + R2)"
+    ]
+  },
+  {
+    "rowId": "5.1",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Simplifying Equation with Two EMF Sources",
+    "visualSubject": "A clean, high-contrast white background with a black band at the bottom. A labeled electrical circuit diagram showing two EMF sources and resistors R, R1, and R2. The equation is written in large white text on the bottom band.",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the cancellation of EMF (E) from both sides and the simplified expression R + R1 + R2 = 2R2.",
+    "formulaLines": [
+      "R + R1 + R2 = 2R2"
+    ]
+  },
+  {
+    "rowId": "5.2",
+    "approved": true,
+    "issue": "",
+    "template": "formula",
+    "visualType": "process_steps",
+    "heading": "Solving for Resistance in the Circuit",
+    "visualSubject": "A clean, high-contrast white background with a black band at the bottom. A labeled electrical circuit diagram showing resistors R, R1, and R2. The equation is written in large white text on the bottom band.",
+    "mediaType": "animation",
+    "motionType": "local_animation",
+    "tool": "manim",
+    "comfyPrompt": "",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visuals cover the derivation of R = R2 - R1 from the simplified expression.",
+    "formulaLines": [
+      "R + R1 + R2 = 2R2",
+      "R = R2 - R1"
+    ]
+  },
+  {
+    "rowId": "6.1",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "Conclusion and Final Answer",
+    "visualSubject": "Final conclusion screen with clear text overlay, dark background, white text, centered alignment, no borders or logos.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "comfy_image",
+    "comfyPrompt": "Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. A final answer screen displaying the correct option 'D' in white text on a dark background. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Visual confirms the conclusion of the analysis and highlights the final answer as option D Repeated-title guard: render this concept as a content visual, not another presentation title card. Strict label-readiness guard: rendered without labels because exact reviewed targets and coordinates were unavailable.",
+    "formulaLines": []
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "Orchid flower with anther and stigma visible, pollen grains on anther not touching stigma, natural lighting, vibrant colors.",
+      "image_requirement": "Viewer must see orchid anther with pollen and stigma without contact to understand cross-pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In flowers like orchids, the pollen from the anther does not germinate on the stigma of the same flower.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Pollination in Orchids"
+    },
+    {
+      "shot_id": "4.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "Primrose flower with stigma at higher position and anther lower, natural lighting, detailed petals and stamen.",
+      "image_requirement": "Viewer must see primrose stigma positioned differently from anther to understand heterostyly.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Primrose exhibits heterostyly, where the stigma is located at a different height compared to the anther.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Heterostyly in Primrose"
+    },
+    {
+      "shot_id": "4.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "Various flowers with different adaptations, such as long stamens, deep corollas, and specialized shapes, natural lighting.",
+      "image_requirement": "Viewer must see diverse flower structures to understand cross-pollination adaptations.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "These are various adaptations in flowers that aid in cross-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Adaptations for Cross-Pollination"
+    }
+  ]
+}

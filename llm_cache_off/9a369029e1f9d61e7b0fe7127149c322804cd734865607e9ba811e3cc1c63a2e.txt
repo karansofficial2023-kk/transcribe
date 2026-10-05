@@ -1,0 +1,58 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Therefore, the new resistance $ R' $ is 1.21 times the original resistance $ R_0 $. Clear?",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Resistance Calculation Summary",
+        "visualSubject": "Title card with centered text and dark background, white font, no borders or logos",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration to allow student reflection and confirmation",
+        "visualAnimation": "Title card with centered text, dark background, white font, no borders or logos",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Dark background with white text, centered layout for mathematical expressions",
+            "Professional title card style with no distractions"
+        ],
+        "motion": "Static display",
+        "subtitle": "New resistance is 1.21 times original resistance",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Generated still for title card, no labels or diagrams required",
+        "comfyPrompt": "Dark background with white text, centered layout, professional title card style, no borders or logos",
+        "coverageNotes": "Visual confirms the mathematical relationship between new and original resistance",
+        "shot": {
+            "template": "video",
+            "heading": "Resistance Calculation Summary",
+            "prompt": "Title card with centered text, dark background, white font, no borders or logos",
+            "negativePrompt": "No text artifacts, no labels, no diagrams, no watermarks",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second title card with centered text"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Resistance Calculation Summary",
+            "prompt": "Title card with centered text, dark background, white font, no borders or logos",
+            "negativePrompt": "No text artifacts, no labels, no diagrams, no watermarks",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second title card with centered text"
+        }
+    }
+]

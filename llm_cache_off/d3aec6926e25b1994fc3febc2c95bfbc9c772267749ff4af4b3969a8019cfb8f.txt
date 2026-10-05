@@ -1,0 +1,70 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Ohm's law does not hold true for non-ohmic devices like diodes, where the relationship between voltage and current does not form a straight line on a graph.",
+        "template": "video_broll",
+        "visualType": "short_motion_clip",
+        "heading": "Non-Ohmic Behavior of Diodes",
+        "visualSubject": "A 3D animated diode with a curved I-V curve overlay, showing voltage and current axes in a Cartesian plane; camera slowly zooms out to show the non-linear relationship",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 10,
+        "recommendedClipSeconds": 12,
+        "timingNotes": "Use a slow zoom-out motion to emphasize the non-linear curve; split into two LTX clips for smooth continuity",
+        "visualAnimation": "A diode is shown with its I-V characteristic curve, where the curve bends and does not follow a straight line. The graph shows voltage on the x-axis and current on the y-axis.",
+        "localAnimation": "Start with a close-up of the diode's symbol, then transition to the I-V curve with animated points showing non-linear behavior. Use arrows to highlight the curved path.",
+        "labels": [
+            "Voltage",
+            "Current",
+            "Diode Symbol"
+        ],
+        "labelPlacements": [
+            "Voltage | Voltage axis label on x-axis | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Current | Current axis label on y-axis | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Diode Symbol | Diode symbol in the center of the graph | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Ohm's Law and Resistor Circuits",
+        "arrows": [
+            "Arrow from diode to I-V curve showing relationship"
+        ],
+        "highlights": [
+            "Highlight curved portion of I-V curve"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "3D animated diode with I-V curve overlay",
+            "Cartesian graph showing non-linear relationship between voltage and current for a diode"
+        ],
+        "motion": "Zoom out from diode symbol to full I-V curve, then pan left to show the curved path",
+        "subtitle": "Ohm's Law does not apply to diodes due to their non-linear I-V curve.",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "ltx_video",
+        "assetQualityNotes": "Use LTX clip for natural motion; avoid generated video for precise labels",
+        "comfyPrompt": "A clean educational background with a 3D animated diode and I-V curve, no text or labels, high detail, realistic lighting",
+        "coverageNotes": "Visuals explain the non-linear behavior of diodes through an I-V curve, reinforcing that Ohm's Law does not apply to non-ohmic devices.",
+        "shot": {
+            "template": "video",
+            "heading": "Non-Ohmic Behavior of Diodes",
+            "prompt": "A 3D animated diode with a curved I-V curve overlay, showing voltage and current axes in a Cartesian plane; camera slowly zooms out to show the non-linear relationship",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three LTX clips in sequence: first close-up of diode symbol, second transition to I-V curve with animated points, third pan left to show curved path"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Non-Ohmic Behavior of Diodes",
+            "prompt": "A 3D animated diode with a curved I-V curve overlay, showing voltage and current axes in a Cartesian plane; camera slowly zooms out to show the non-linear relationship",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three LTX clips in sequence: first close-up of diode symbol, second transition to I-V curve with animated points, third pan left to show curved path"
+        }
+    }
+]

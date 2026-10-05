@@ -1,0 +1,97 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.4",
+      "visual_type": "formula",
+      "image_prompt": "Silver ions depositing onto keychain in electroplating process.",
+      "image_requirement": "Viewer must see silver ions being deposited on the keychain.",
+      "labels": ["Ag+(aq)", "Keychain", "Electrons"],
+      "label_placement": [
+        "Ag+(aq) - floating above keychain, glowing faintly",
+        "Keychain - central object with metallic surface",
+        "Electrons - flowing from power source to keychain"
+      ],
+      "steps": [
+        "Silver ions move toward keychain",
+        "Electrons transfer to silver ions",
+        "Silver ions deposit on keychain"
+      ],
+      "panels": [],
+      "narration_en": "Yes, because more and more silver ions will be deposited onto the keychain.",
+      "formula_lines": [
+        "Ag(s) → Ag+(aq) + e^-"
+      ],
+      "explain_steps": [
+        "Silver atoms lose electrons to form ions."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Silver Ion Deposition on Keychain"
+    },
+    {
+      "shot_id": "5.5",
+      "visual_type": "formula",
+      "image_prompt": "Pure silver rod dissolving in solution with anode and cathode setup.",
+      "image_requirement": "Viewer must see pure silver rod dissolving into solution.",
+      "labels": ["Silver Rod", "Solution", "Anode"],
+      "label_placement": [
+        "Silver Rod - dissolving in solution, metallic",
+        "Solution - clear liquid with dissolved silver ions",
+        "Anode - labeled as pure silver rod"
+      ],
+      "steps": [
+        "Silver atoms lose electrons to form ions",
+        "Ions move into solution",
+        "Anode loses mass as silver dissolves"
+      ],
+      "panels": [],
+      "narration_en": "This causes the solution to extract silver atoms from the pure silver rod, which acts as the anode, and incorporate them into itself.",
+      "formula_lines": [
+        "Ag(s) → Ag+(aq) + e^-"
+      ],
+      "explain_steps": [
+        "Silver atoms lose electrons to form ions."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Anode Dissolution in Electroplating"
+    },
+    {
+      "shot_id": "5.6",
+      "visual_type": "formula",
+      "image_prompt": "Silver atom losing an electron to become Ag+ ion in electroplating.",
+      "image_requirement": "Viewer must see silver atom losing an electron and becoming a positive ion.",
+      "labels": ["Ag(s)", "e^-", "Ag+(aq)"],
+      "label_placement": [
+        "Ag(s) - metallic silver atom, neutral",
+        "e^- - flowing away from silver atom",
+        "Ag+(aq) - floating above silver atom, glowing faintly"
+      ],
+      "steps": [
+        "Silver atom loses an electron",
+        "Electron moves to cathode",
+        "Silver ion forms in solution"
+      ],
+      "panels": [],
+      "narration_en": "In this process, each silver atom loses an electron and becomes a Ag+ ion.",
+      "formula_lines": [
+        "Ag(s) → Ag+(aq) + e^-"
+      ],
+      "explain_steps": [
+        "Silver atoms lose electrons to form ions."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Oxidation of Silver Atom"
+    }
+  ]
+}

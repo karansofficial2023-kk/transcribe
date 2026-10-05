@@ -1,0 +1,64 @@
+[
+  {
+    "rowId": "1.2",
+    "labels": ["Question Statement"],
+    "labelPlacements": [
+      "Question Statement | Question number 176: Which of the following is a commercial blood cholesterol-lowering agent? | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": [
+      "Question Statement - Text on white background with black font"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Black background with white text for question statement, sans-serif font, high contrast, educational style",
+    "comfyPrompt": "A clear black background with white text displaying the question 'Question number 176: Which of the following is a commercial blood cholesterol-lowering agent?' in a sans-serif font. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "2.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Text overlay on a dark background with white text, centered horizontally and vertically, displaying the four drug names in a clear, readable font",
+    "comfyPrompt": "A dark background with white text overlay displaying the four drug names: cyclosporine A, statin, streptokinase, and lipases. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A student reviewing notes with a focus on memorization techniques and recall strategies in a classroom setting",
+    "comfyPrompt": "A student sitting at a desk, reviewing notes with a focus on memorization techniques and recall strategies in a classroom setting. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.2",
+    "labels": ["Statins", "PCSK9 Inhibitors", "Fibrates"],
+    "labelPlacements": [
+      "Statins - Pharmaceutical tablet with clear labeling for cholesterol-lowering agents | COORDINATES_PENDING_APPROVED_IMAGE",
+      "PCSK9 Inhibitors - Pharmaceutical tablet with clear labeling for cholesterol-lowering agents | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Fibrates - Pharmaceutical tablet with clear labeling for cholesterol-lowering agents | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Statins - Text on pharmaceutical tablet",
+      "PCSK9 Inhibitors - Text on pharmaceutical tablet",
+      "Fibrates - Text on pharmaceutical tablet"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "A realistic image of a pharmaceutical tablet with clear labeling for cholesterol-lowering agents, including statins and other lipid-lowering drugs",
+    "comfyPrompt": "A realistic image of a pharmaceutical tablet with clear labeling for cholesterol-lowering agents, including statins, PCSK9 Inhibitors, and Fibrates. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "3.3",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A student confidently answering a question in a classroom setting with clear focus on memorized content",
+    "comfyPrompt": "A student confidently answering a question in a classroom setting with clear focus on memorized content. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "inferredTopic": "Blood Cholesterol-Lowering Drugs",
+  "filenameTopic": "Basic Question on Blood Cholesterol Regulating Drugs",
+  "topicMatch": true,
+  "confidence": 0.95,
+  "safeStoryboardTitle": "Understanding Blood Cholesterol-Lowering Drugs",
+  "subject": "Biology",
+  "academicLevel": "Secondary/High School",
+  "intendedLearners": "Students preparing for NEET and other medical entrance exams",
+  "learningObjectives": [
+    "Identify common commercial drugs used to lower blood cholesterol.",
+    "Understand the mechanism of action of statins in reducing LDL cholesterol.",
+    "Recognize the role of statins in preventing cardiovascular diseases."
+  ],
+  "smeRole": "Pharmacology and Medical Biology Specialist",
+  "warning": "The filename topic is accurate and specific enough for a storyboard title. No mismatch detected."
+}

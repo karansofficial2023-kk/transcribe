@@ -1,0 +1,46 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see the equation relating new resistance to original resistance.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Therefore, the new resistance R' is 1.21 times the original resistance R_0.",
+      "formula_lines": [
+        "R' = 1.21 \\times R_0"
+      ],
+      "explain_steps": [
+        "New resistance equals 1.21 multiplied by original resistance."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Resistance After Stretching a Wire"
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A teacher standing in front of a classroom, holding a whiteboard marker, facing the class with a clear expression.",
+      "image_requirement": "Viewer must see the teacher to confirm understanding.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Clear?",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Confirmation of Understanding"
+    }
+  ]
+}

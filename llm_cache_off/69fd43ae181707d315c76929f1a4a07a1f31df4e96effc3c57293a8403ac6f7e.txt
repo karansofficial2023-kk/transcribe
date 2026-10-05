@@ -1,0 +1,130 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "కిరణజన్య సంయోగక్రియ ప్రక్రియలో మొక్కలు శక్తిని సూర్యరశ్మి నుండి పొందుతాయి.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "కిరణజన్య సంయోగక్రియ ప్రక్రియలో శక్తి విభవం",
+        "visualSubject": "మొక్క, సూర్యరశ్మి, ప్రక్రియ చిత్రం, కెమేరా వీక్షణ సుదూర అంగీకరణ",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "నాటివ్ సీక్వెన్స్ కు అనుగుణంగా చలన విభజన",
+        "visualAnimation": "మొక్క సూర్యరశ్మి నుండి శక్తిని పొందే విధానం చూపే స్థిర చిత్రం",
+        "localAnimation": "మొక్క కెమేరా వీక్షణలో సూర్యరశ్మి నుండి శక్తిని పొందే చిత్రం, అందులో సూర్యరశ్మి విభజన తో కెమేరా ప్రవేశం",
+        "labels": [
+            "కిరణజన్య సంయోగక్రియ",
+            "సూర్యరశ్మి",
+            "శక్తి"
+        ],
+        "labelPlacements": [
+            "కిరణజన్య సంయోగక్రియ | కిరణజన్య సంయోగక్రియ ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "సూర్యరశ్మి | సూర్యరశ్మి ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "శక్తి | శక్తి సేకరణ ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "మొక్క సూర్యరశ్మి నుండి శక్తిని పొందే విధానం",
+            "కిరణజన్య సంయోగక్రియ ప్రక్రియ చిత్రం"
+        ],
+        "motion": "కెమేరా వీక్షణలో సూర్యరశ్మి నుండి శక్తిని పొందే చిత్రం",
+        "subtitle": "మొక్కలు సూర్యరశ్మి నుండి శక్తిని పొందుతాయి",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "దృఢమైన చిత్రం, ప్రక్రియ వివరణలు ఉండాలి",
+        "comfyPrompt": "1920x1080 శాస్త్రీయ చిత్రం, మొక్క, సూర్యరశ్మి, ప్రక్రియ వివరణలు",
+        "coverageNotes": "కిరణజన్య సంయోగక్రియ ప్రక్రియలో శక్తి విభవం అదే కారణం",
+        "shot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ ప్రక్రియలో శక్తి విభవం",
+            "prompt": "1920x1080 చిత్రం, మొక్క, సూర్యరశ్మి, ప్రక్రియ వివరణలు",
+            "negativePrompt": "అనుమతి లేని చిత్రం, సృష్టి ప్రక్రియ వివరణలు",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "సూర్యరశ్మి నుండి శక్తిని పొందే విధానం కు అనుగుణంగా చలన విభజన"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ ప్రక్రియలో శక్తి విభవం",
+            "prompt": "1920x1080 చిత్రం, మొక్క, సూర్యరశ్మి, ప్రక్రియ వివరణలు",
+            "negativePrompt": "అనుమతి లేని చిత్రం, సృష్టి ప్రక్రియ వివరణలు",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "సూర్యరశ్మి నుండి శక్తిని పొందే విధానం కు అనుగుణంగా చలన విభజన"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "ఈ ప్రక్రియ జీవితానికి అవసరమైన ఆక్సిజన్ ను కూడా ఉత్పత్తి చేస్తుంది.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "కిరణజన్య సంయోగక్రియ ప్రక్రియలో ఆక్సిజన్ ఉత్పత్తి",
+        "visualSubject": "మొక్క, ఆక్సిజన్, ప్రక్రియ చిత్రం, కెమేరా వీక్షణ సుదూర అంగీకరణ",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "నాటివ్ సీక్వెన్స్ కు అనుగుణంగా చలన విభజన",
+        "visualAnimation": "మొక్క ఆక్సిజన్ ఉత్పత్తి విధానం చూపే స్థిర చిత్రం",
+        "localAnimation": "మొక్క కెమేరా వీక్షణలో ఆక్సిజన్ ఉత్పత్తి చిత్రం, అందులో ఆక్సిజన్ విభజన తో కెమేరా ప్రవేశం",
+        "labels": [
+            "కిరణజన్య సంయోగక్రియ",
+            "ఆక్సిజన్",
+            "ఉత్పత్తి"
+        ],
+        "labelPlacements": [
+            "కిరణజన్య సంయోగక్రియ | కిరణజన్య సంయోగక్రియ ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "ఆక్సిజన్ | ఆక్సిజన్ ఉత్పత్తి ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "ఉత్పత్తి | ఉత్పత్తి సేకరణ ప్రక్రియ వివరణ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "కిరణజన్య సంయోగక్రియ",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "మొక్క ఆక్సిజన్ ఉత్పత్తి విధానం",
+            "కిరణజన్య సంయోగక్రియ ప్రక్రియ చిత్రం"
+        ],
+        "motion": "కెమేరా వీక్షణలో ఆక్సిజన్ ఉత్పత్తి చిత్రం",
+        "subtitle": "ఈ ప్రక్రియ ఆక్సిజన్ ను కూడా ఉత్పత్తి చేస్తుంది",
+        "subtitleStyle": "బాయాలాజీ శాస్త్రవేత్త",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "దృఢమైన చిత్రం, ప్రక్రియ వివరణలు ఉండాలి",
+        "comfyPrompt": "1920x1080 శాస్త్రీయ చిత్రం, మొక్క, ఆక్సిజన్, ప్రక్రియ వివరణలు",
+        "coverageNotes": "కిరణజన్య సంయోగక్రియ ప్రక్రియలో ఆక్సిజన్ ఉత్పత్తి",
+        "shot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ ప్రక్రియలో ఆక్సిజన్ ఉత్పత్తి",
+            "prompt": "1920x1080 చిత్రం, మొక్క, ఆక్సిజన్, ప్రక్రియ వివరణలు",
+            "negativePrompt": "అనుమతి లేని చిత్రం, సృష్టి ప్రక్రియ వివరణలు",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "ఆక్సిజన్ ఉత్పత్తి విధానం కు అనుగుణంగా చలన విభజన"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ ప్రక్రియలో ఆక్సిజన్ ఉత్పత్తి",
+            "prompt": "1920x1080 చిత్రం, మొక్క, ఆక్సిజన్, ప్రక్రియ వివరణలు",
+            "negativePrompt": "అనుమతి లేని చిత్రం, సృష్టి ప్రక్రియ వివరణలు",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "ఆక్సిజన్ ఉత్పత్తి విధానం కు అనుగుణంగా చలన విభజన"
+        }
+    }
+]

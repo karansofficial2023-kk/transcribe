@@ -1,0 +1,42 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf showing chlorophyll, natural light highlighting the green color, camera angle slightly above the leaf, photorealistic.",
+      "image_requirement": "Viewer must see the green pigment in the leaf to understand photosynthesis.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The chlorophyll in leaves converts sunlight into energy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "இலைகளில் உள்ள பச்சையம்"
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with carbon dioxide and water molecules combining to form glucose, natural light highlighting the chemical process, camera angle slightly above the leaf, photorealistic.",
+      "image_requirement": "Viewer must see the combination of carbon dioxide and water forming glucose to understand photosynthesis.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This energy helps convert carbon dioxide and water into glucose, a food substance.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "உணவு உற்பத்தி"
+    }
+  ]
+}

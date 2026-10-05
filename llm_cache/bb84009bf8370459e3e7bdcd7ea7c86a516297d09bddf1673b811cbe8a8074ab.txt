@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Ixora plant with open flowers, anther releasing pollen, stigma receiving pollen, close-up view, natural light, warm tones.",
+      "image_requirement": "Viewer must see anther and stigma in the same flower to understand self-pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "To summarize, Self-pollination In plants like Ix, the anther and the stigma mature simultaneously.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Self-pollination in Ixora"
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "Ixora flower with anther and stigma clearly visible, close-up, natural light, warm tones.",
+      "image_requirement": "Viewer must see anther and stigma in the same flower to understand homogamy.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This process is known as homogamy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Homogamy in Ixora"
+    },
+    {
+      "shot_id": "5.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "Wood sorrel flower with closed petals, close-up view, natural light, green tones.",
+      "image_requirement": "Viewer must see closed flowers to understand bisexual flowers that remain closed.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Wood sorrel has bisexual flowers that remain closed.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Bisexual Flowers in Wood Sorrel"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a sunflower flower with both stamens and pistil visible, natural daylight, yellow petals, green sepals, and brown stem in the background.",
+      "image_requirement": "Viewer must see both stamens and pistil to understand bisexual flowers.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "However, sunflowers have bisexual flowers.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Bisexual Flowers in Sunflowers"
+    },
+    {
+      "shot_id": "3.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a sunflower flower with anthers visible at the center and stigma located higher up, natural daylight, yellow petals, green sepals, and brown stem in the background.",
+      "image_requirement": "Viewer must see mature anthers and immature stigma to understand timing of maturation.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In these flowers, the anthers mature before the stigma.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Anther and Stigma Maturation"
+    },
+    {
+      "shot_id": "3.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a sunflower flower with anthers at the center, stigma above, and pollen grains visible on the anthers, natural daylight, yellow petals, green sepals, and brown stem in the background.",
+      "image_requirement": "Viewer must see anthers and stigma to understand protandry.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This process is known as protandry.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Protandry in Sunflowers"
+    }
+  ]
+}

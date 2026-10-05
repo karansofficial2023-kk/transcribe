@@ -1,0 +1,27 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.4",
+      "visual_type": "formula",
+      "image_prompt": "Two batteries connected in a circuit with resistors and wires.",
+      "image_requirement": "Viewer must see the two batteries and the current flowing through the circuit.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In such a case, it implies that the EMF of battery 2 equals the current times its internal resistance.",
+      "formula_lines": [
+        "EMF_2 = I * r_2"
+      ],
+      "explain_steps": [
+        "The electromotive force of battery two is equal to the product of current and its internal resistance."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "EMF Potential Drop Condition"
+    }
+  ]
+}

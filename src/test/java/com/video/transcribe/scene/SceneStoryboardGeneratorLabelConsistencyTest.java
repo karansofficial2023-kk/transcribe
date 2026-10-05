@@ -198,6 +198,82 @@ class SceneStoryboardGeneratorLabelConsistencyTest {
     }
 
     @Test
+    void visibleTargetMayUseAPreciseMorphologicalDescription() {
+        SceneSegment segment = new SceneSegment();
+        segment.setSegmentNumber(1);
+        segment.setSentence("Pollen moves from the anther to the stigma.");
+        segment.setTemplate("photo");
+        segment.setVisualType("realistic_image");
+        segment.setMediaType("photo");
+        Scene scene = new Scene();
+        scene.setSceneNumber(2);
+        scene.setSegments(List.of(segment));
+
+        JsonObject repair = new JsonObject();
+        repair.addProperty("rowId", "2.1");
+        repair.add("labels", strings("Anther", "Stigma"));
+        repair.add("labelPlacements", strings(
+            "Anther | pollen-bearing terminal structure | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Stigma | receptive tip of the pistil | COORDINATES_PENDING_APPROVED_IMAGE"));
+        repair.add("labelTargetKinds", strings("visible_physical_target", "visible_physical_target"));
+        repair.add("pointTargetNames", strings(
+            "Anther - pollen-bearing terminal structure", "Stigma - receptive tip of the pistil"));
+        repair.addProperty("presentationMode", "point_labels");
+        repair.addProperty("visualSubject", "A flower interior with anther and stigma clearly visible.");
+        repair.addProperty("comfyPrompt", "A flower interior with anther and stigma clearly visible.");
+        JsonArray repairs = new JsonArray();
+        repairs.add(repair);
+
+        SceneStoryboardGenerator generator = new SceneStoryboardGenerator(null, false, "ltx", true);
+        generator.applyLabelPlanRepairs(List.of(scene), repairs, Set.of("2.1"));
+        generator.finalizeLabelConsistency(segment);
+
+        assertEquals(List.of("Anther", "Stigma"), segment.getLabels());
+        assertEquals(2, segment.getLabelPlacements().size());
+        assertEquals("labeled_image", segment.getTemplate());
+        assertEquals("realistic_labeled_image", segment.getVisualType());
+    }
+
+    @Test
+    void omittedReviewRowDoesNotEraseSuccessfulLabelPlans() {
+        SceneSegment reviewed = new SceneSegment();
+        reviewed.setSegmentNumber(1);
+        reviewed.setSentence("Pollen moves from the anther to the stigma.");
+        reviewed.setTemplate("photo");
+        reviewed.setVisualType("realistic_image");
+        reviewed.setMediaType("photo");
+        SceneSegment omitted = new SceneSegment();
+        omitted.setSegmentNumber(2);
+        omitted.setSentence("A pollinator approaches the flower.");
+        omitted.setTemplate("photo");
+        omitted.setVisualType("realistic_image");
+        omitted.setMediaType("photo");
+        Scene scene = new Scene();
+        scene.setSceneNumber(2);
+        scene.setSegments(List.of(reviewed, omitted));
+
+        JsonObject repair = new JsonObject();
+        repair.addProperty("rowId", "2.1");
+        repair.add("labels", strings("Anther"));
+        repair.add("labelPlacements", strings(
+            "Anther | pollen-bearing terminal structure | COORDINATES_PENDING_APPROVED_IMAGE"));
+        repair.add("labelTargetKinds", strings("visible_physical_target"));
+        repair.add("pointTargetNames", strings("Anther - pollen-bearing terminal structure"));
+        repair.addProperty("presentationMode", "point_labels");
+        repair.addProperty("visualSubject", "A flower interior with its anther clearly visible.");
+        repair.addProperty("comfyPrompt", "A flower interior with its anther clearly visible.");
+        JsonArray repairs = new JsonArray();
+        repairs.add(repair);
+
+        SceneStoryboardGenerator generator = new SceneStoryboardGenerator(null, false, "ltx", true);
+        assertDoesNotThrow(() -> generator.applyLabelPlanRepairs(
+            List.of(scene), repairs, Set.of("2.1", "2.2")));
+
+        assertEquals(List.of("Anther"), reviewed.getLabels());
+        assertTrue(omitted.getLabels().isEmpty());
+    }
+
+    @Test
     void conceptCannotBorrowDifferentPhysicalStructuresAsItsArrowTarget() {
         assertFalse(SceneStoryboardGenerator.labelNamesPointTarget(
             "spatial adaptation", "anthers and stigma"));

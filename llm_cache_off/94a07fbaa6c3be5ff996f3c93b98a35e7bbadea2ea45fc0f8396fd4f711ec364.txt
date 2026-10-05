@@ -1,0 +1,42 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A dark forest at dusk with no visible light, showing a lack of photosynthesis. Camera distance: medium, angle: slightly downward, natural lighting: dim moonlight, colors: deep blues and blacks.",
+      "image_requirement": "Viewer must see the absence of light in the forest to understand the lack of photosynthesis.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Without photosynthesis, life on Earth would not be possible.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "ஒளிச்சேர்க்கை இல்லாமல்"
+    },
+    {
+      "shot_id": "5.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A human lung with visible air sacs and oxygen exchange, camera distance: close, angle: slightly upward, natural lighting: soft white light, colors: pale pink and grey.",
+      "image_requirement": "Viewer must see the lungs and oxygen exchange to understand the production of oxygen by photosynthesis.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Because it produces the oxygen we need.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "ஆக்சிஜன் உற்பத்தி"
+    }
+  ]
+}

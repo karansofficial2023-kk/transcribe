@@ -1,0 +1,64 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "Papaya flower with yellow anthers at the center, green stigma at the base, close-up view showing mature anthers and immature stigma, natural lighting, warm tones.",
+      "image_requirement": "Viewer must see mature anthers and immature stigma in papaya flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "In these flowers, the anthers mature first, followed by the stigma.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Anther and Stigma Maturation in Papaya"
+    },
+    {
+      "shot_id": "3.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "Close-up of papaya flower showing anthers at the center, green stigma below, natural lighting, warm tones.",
+      "image_requirement": "Viewer must see mature anthers and immature stigma in papaya flower.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This process is known as protandry.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Protandry in Papaya Flowers"
+    },
+    {
+      "shot_id": "3.6",
+      "visual_type": "split_screen",
+      "image_prompt": "Papaya flower | Custard apple flower with stigma at the top and anther below, natural lighting, warm tones.",
+      "image_requirement": "Viewer must see papaya flower with mature anthers and immature stigma, and custard apple flower with mature stigma and immature anther.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [
+        "Papaya flower | Close-up showing yellow anthers at the center and green stigma below",
+        "Custard apple flower | Close-up showing green stigma at the top and yellow anther below"
+      ],
+      "narration_en": "On the other hand, in custard apple, the stigma matures before the anther.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Stigma and Anther Maturation in Papaya vs. Custard Apple"
+    }
+  ]
+}

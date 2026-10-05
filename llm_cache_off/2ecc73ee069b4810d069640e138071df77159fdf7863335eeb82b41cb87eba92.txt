@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A human holding a leaf, sunlight filtering through the leaves, close-up view from slightly above, natural daylight with green and yellow tones.",
+      "image_requirement": "Viewer must see a human and a leaf to understand the narration.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This process is not only for plants but also for humans. It is extremely important for us.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "6.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A clear blue sky with a green forest, sunlight passing through the canopy, wide-angle view from ground level, natural daylight with blue and green tones.",
+      "image_requirement": "Viewer must see a forest and sunlight to understand the narration.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Without this process, there would be too much oxygen in the atmosphere.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

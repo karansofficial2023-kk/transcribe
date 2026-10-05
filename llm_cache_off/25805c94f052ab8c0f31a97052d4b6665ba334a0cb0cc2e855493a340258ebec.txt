@@ -1,0 +1,62 @@
+[
+  {
+    "rowId": "4.4",
+    "labels": ["Self-Incompatibility"],
+    "labelPlacements": [
+      "Self-Incompatility - Pollen from anther does not germinate on stigma of same flower | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Self-Incompatibility - Pollen from anther does not germinate on stigma of same flower"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of orchid flower with labeled anther and stigma, dark background, light text, thin border, no logo or subtitle area",
+    "comfyPrompt": "Close-up of orchid flower with labeled anther and stigma, dark background, light text, thin border, no logo or subtitle area. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.5",
+    "labels": ["Heterostyly"],
+    "labelPlacements": [
+      "Heterostyly - Stigma located at different height than anther | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Heterostyly - Stigma located at different height than anther"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of primrose flower with labeled stigma and anther, dark background, light text, thin border, no logo or subtitle area",
+    "comfyPrompt": "Close-up of primrose flower with labeled stigma and anther, dark background, light text, thin border, no logo or subtitle area. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "4.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with text 'Adaptations for Cross-Pollination' on dark background, light text, thin border, no logo or subtitle area",
+    "comfyPrompt": "Title card with text 'Adaptations for Cross-Pollination' on dark background, light text, thin border, no logo or subtitle area. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with centered text 'To summarize, self-pollination.' on a dark background with white text and thin black border",
+    "comfyPrompt": "Title card with centered text 'To summarize, self-pollination.' on a dark background with white text and thin black border. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.2",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther - anther of Ixora flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma - stigma of Ixora flower | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - anther of Ixora flower",
+      "Stigma - stigma of Ixora flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of Ixora flower with labeled anther and stigma in focus, dark background with white text labels",
+    "comfyPrompt": "Close-up of Ixora flower with labeled anther and stigma in focus, dark background with white text labels. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

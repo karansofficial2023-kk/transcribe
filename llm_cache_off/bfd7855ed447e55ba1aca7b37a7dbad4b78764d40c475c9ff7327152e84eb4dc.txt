@@ -1,0 +1,142 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "We all know that the resistance $ R $ can be calculated as the specific resistance $ \rho $ multiplied by the length of the resistor and divided by its cross-sectional area $ A $.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Resistance Calculation Formula",
+        "visualSubject": "Electrical resistor with labeled components: specific resistance (ρ), length (L), cross-sectional area (A), and resistance (R) in a clear, realistic 1920x1080 educational diagram",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 7,
+        "recommendedClipSeconds": 9,
+        "timingNotes": "Hold the formula for full duration, with labels fading in sequentially.",
+        "visualAnimation": "A realistic resistor with clear labeling of ρ, L, A, and R. The formula is shown as a visual overlay on the resistor diagram.",
+        "localAnimation": "Fade-in labels: ρ (specific resistance), L (length), A (cross-sectional area), R (resistance). Arrows point to each labeled component. Formula appears in text form above the resistor.",
+        "labels": [
+            "specific resistance",
+            "length",
+            "cross-sectional area",
+            "resistance"
+        ],
+        "labelPlacements": [
+            "specific resistance | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "length | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "cross-sectional area | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "resistance | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Calculating Resistance After Length and Cross-sectional Area Changes",
+        "arrows": [
+            "specific resistance arrow",
+            "length arrow",
+            "cross-sectional area arrow",
+            "resistance arrow"
+        ],
+        "highlights": [],
+        "formulaLines": [
+            "R = ρ * L / A"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Realistic resistor with clear labeling of components",
+            "Educational diagram showing resistance formula in context"
+        ],
+        "motion": "Zoom into the resistor, then pan to show the formula above it.",
+        "subtitle": "Resistance is calculated using specific resistance, length, and cross-sectional area.",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with reviewed labels. No generated text or labels in the image itself.",
+        "comfyPrompt": "Clean background of a resistor with no text, no labels, no captions, no watermark, and no slide layout. Realistic lighting and subject separation.",
+        "coverageNotes": "Visuals cover the formula $ R = \rho L / A $, with labeled components for clarity.",
+        "shot": {
+            "template": "video",
+            "heading": "Resistance Calculation Formula",
+            "prompt": "A realistic resistor with clear labeling of ρ, L, A, and R. The formula is shown as a visual overlay on the resistor diagram. Smooth camera movement to emphasize each labeled component.",
+            "negativePrompt": "No text, no labels, no captions, no watermark, no slide layout",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Split the formula explanation into three 4-second clips: first showing ρ and L, second showing A and R, third showing the full formula with all labels."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Resistance Calculation Formula",
+            "prompt": "A realistic resistor with clear labeling of ρ, L, A, and R. The formula is shown as a visual overlay on the resistor diagram. Smooth camera movement to emphasize each labeled component.",
+            "negativePrompt": "No text, no labels, no captions, no watermark, no slide layout",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Split the formula explanation into three 4-second clips: first showing ρ and L, second showing A and R, third showing the full formula with all labels."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "Let's assume here that the original length and cross-sectional area of the wire are $ L_0 $ and $ A_0 $, respectively.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Wire Dimensions Before Change",
+        "visualSubject": "A realistic wire with labeled original length $ L_0 $ and cross-sectional area $ A_0 $ in a clear, educational 1920x1080 diagram",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold the labeled wire for full duration, with labels fading in sequentially.",
+        "visualAnimation": "A realistic wire with clear labeling of $ L_0 $ and $ A_0 $. The formula is shown as a visual overlay on the wire diagram.",
+        "localAnimation": "Fade-in labels: $ L_0 $ (original length), $ A_0 $ (original cross-sectional area). Arrows point to each labeled component. Formula appears in text form above the wire.",
+        "labels": [
+            "original length",
+            "original cross-sectional area"
+        ],
+        "labelPlacements": [
+            "original length | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE",
+            "original cross-sectional area | exact semantic target description | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Calculating Resistance After Length and Cross-sectional Area Changes",
+        "arrows": [
+            "original length arrow",
+            "original cross-sectional area arrow"
+        ],
+        "highlights": [],
+        "formulaLines": [
+            "R = ρ * L / A"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Realistic wire with clear labeling of original dimensions",
+            "Educational diagram showing wire dimensions in context"
+        ],
+        "motion": "Zoom into the wire, then pan to show the formula above it.",
+        "subtitle": "Original wire length and cross-sectional area are labeled as $ L_0 $ and $ A_0 $.",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with reviewed labels. No generated text or labels in the image itself.",
+        "comfyPrompt": "Clean background of a wire with no text, no labels, no captions, no watermark, and no slide layout. Realistic lighting and subject separation.",
+        "coverageNotes": "Visuals cover the original dimensions $ L_0 $ and $ A_0 $ for comparison in subsequent segments.",
+        "shot": {
+            "template": "video",
+            "heading": "Wire Dimensions Before Change",
+            "prompt": "A realistic wire with clear labeling of $ L_0 $ and $ A_0 $. The formula is shown as a visual overlay on the wire diagram. Smooth camera movement to emphasize each labeled component.",
+            "negativePrompt": "No text, no labels, no captions, no watermark, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split the wire explanation into two 4-second clips: first showing $ L_0 $, second showing $ A_0 $ and the full formula."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Wire Dimensions Before Change",
+            "prompt": "A realistic wire with clear labeling of $ L_0 $ and $ A_0 $. The formula is shown as a visual overlay on the wire diagram. Smooth camera movement to emphasize each labeled component.",
+            "negativePrompt": "No text, no labels, no captions, no watermark, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Split the wire explanation into two 4-second clips: first showing $ L_0 $, second showing $ A_0 $ and the full formula."
+        }
+    }
+]

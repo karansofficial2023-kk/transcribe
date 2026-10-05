@@ -1,0 +1,70 @@
+[
+  {
+    "rowId": "6.2",
+    "labels": ["Anther", "Stigma"],
+    "labelPlacements": [
+      "Anther - male reproductive organ at the base of the flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma - female receptive part at the top of the flower | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Anther - male reproductive organ at the base of the flower",
+      "Stigma - female receptive part at the top of the flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of sunflower flower with labeled anthers and stigma; natural lighting, shallow depth of field, 16:9 composition",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a close-up sunflower flower with unobscured anther and stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.3",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Text overlay with definition of protandry; clean background, centered text, 16:9 composition",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a text overlay with the definition of protandry on a clean background. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.4",
+    "labels": ["Hood", "Stigma"],
+    "labelPlacements": [
+      "Hood - protective structure covering the stigma | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Stigma - female receptive part of the flower | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Hood - protective structure covering the stigma",
+      "Stigma - female receptive part of the flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of pansy flower with labeled hood and stigma; natural lighting, shallow depth of field, 16:9 composition",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a close-up pansy flower with unobscured hood and stigma. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.5",
+    "labels": ["Stigma", "Anther"],
+    "labelPlacements": [
+      "Stigma - female receptive part at the top of the flower | COORDINATES_PENDING_APPROVED_IMAGE",
+      "Anther - male reproductive organ at the base of the flower | COORDINATES_PENDING_APPROVED_IMAGE"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Stigma - female receptive part at the top of the flower",
+      "Anther - male reproductive organ at the base of the flower"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Close-up of primrose flower with labeled stigma and anther; natural lighting, shallow depth of field, 16:9 composition",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a close-up primrose flower with unobscured stigma and anther. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Text overlay with summary of flower adaptations; clean background, centered text, 16:9 composition",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a text overlay with the summary of flower adaptations on a clean background. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

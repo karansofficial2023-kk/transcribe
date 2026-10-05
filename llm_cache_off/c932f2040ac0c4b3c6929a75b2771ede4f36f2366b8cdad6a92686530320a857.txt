@@ -1,0 +1,48 @@
+{
+  "shots": [
+    {
+      "shot_id": "3.1",
+      "visual_type": "process_steps",
+      "image_prompt": "A leaf undergoing photosynthesis, oxygen bubbles rising from the surface in a photorealistic scene.",
+      "image_requirement": "Viewer must see oxygen bubbles rising from the leaf surface to understand oxygen release.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Oxygen is produced during light-dependent reactions",
+        "Gas forms bubbles on leaf surface",
+        "Bubbles rise due to lower density"
+      ],
+      "panels": [],
+      "narration_en": "In this process, oxygen is released.",
+      "formula_lines": [],
+      "explain_steps": [
+        "Oxygen is produced during light-dependent reactions in photosynthesis.",
+        "Gas forms bubbles on the leaf surface as a byproduct.",
+        "Bubbles rise due to their lower density compared to water."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "3.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with tiny pores on its surface, showing the structure of stomata in a photorealistic scene.",
+      "image_requirement": "Viewer must see small pores on the leaf surface to understand stomata.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Stomata are the small pores on the surface of leaves.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "score": 95,
+  "reason": "The paraphrased text preserves the original meaning, structure, and key information accurately. It uses different phrasing and sentence structures while maintaining the same concepts, technical details, and examples. Minor differences in wording (e.g., 'we get it' vs. 'we understand') do not affect semantic similarity. No significant information is omitted or altered."
+}

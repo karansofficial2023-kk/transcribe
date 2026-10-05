@@ -1,0 +1,46 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf with chlorophyll visible, sunlight entering through the leaf's surface, natural lighting from above, green and yellow tones.",
+      "image_requirement": "Viewer must see chlorophyll in the leaf absorbing sunlight.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Chlorophyll in leaves absorbs sunlight.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Carbon dioxide combines with water",
+        "Energy helps form glucose"
+      ],
+      "panels": [],
+      "narration_en": "Power helps carbon dioxide and water combine to form glucose.",
+      "formula_lines": [],
+      "explain_steps": [
+        "Carbon dioxide and water mix with energy",
+        "Glucose is produced from the mixture"
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

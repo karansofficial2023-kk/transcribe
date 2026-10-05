@@ -1,0 +1,70 @@
+{
+  "shots": [
+    {
+      "shot_id": "6.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Silver atoms from a pure silver rod being deposited onto a keychain in an electroplating bath. The keychain is placed near the rod, with a clear liquid solution between them. Camera distance: medium, angle: slightly overhead. Natural lighting from a window, colors: metallic silver and light blue solution.",
+      "image_requirement": "Viewer must see silver atoms being deposited onto the keychain in an electroplating bath.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The process can be summarized as silver atoms from the pure silver rod being deposited onto the keychain.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Silver Deposition on Keychain"
+    },
+    {
+      "shot_id": "6.2",
+      "visual_type": "process_steps",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Answer the question provided in the text.",
+        "Identify key points from the electroplating process."
+      ],
+      "panels": [],
+      "narration_en": "Let's answer the given question.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Answering the Question"
+    },
+    {
+      "shot_id": "6.3",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Since reduction occurs at the cathode and oxidation takes place at the anode, the overall reaction is a redox reaction.",
+      "formula_lines": [
+        "Ag⁺(aq) + e⁻ → Ag(s) (reduction at cathode)",
+        "Ag(s) → Ag⁺(aq) + e⁻ (oxidation at anode)"
+      ],
+      "explain_steps": [
+        "Silver ions gain electrons at the cathode, forming solid silver.",
+        "Solid silver loses electrons at the anode, forming silver ions."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Redox Reaction in Electroplating"
+    }
+  ]
+}

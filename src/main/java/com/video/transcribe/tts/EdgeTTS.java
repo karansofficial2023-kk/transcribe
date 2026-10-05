@@ -243,15 +243,8 @@ public class EdgeTTS implements TTSProvider {
     }
 
     private String detectVoice(String text) {
-        if (containsRange(text, '\u0B80', '\u0BFF')) return "ta-IN-PallaviNeural";
-        if (containsRange(text, '\u0900', '\u097F')) return "hi-IN-SwaraNeural";
-        if (containsRange(text, '\u0C00', '\u0C7F')) return "te-IN-ShrutiNeural";
-        if (containsRange(text, '\u0D00', '\u0D7F')) return "ml-IN-SobhanaNeural";
-        if (containsRange(text, '\u0C80', '\u0CFF')) return "kn-IN-SapnaNeural";
-        if (containsRange(text, '\u0980', '\u09FF')) return "bn-IN-TanishaaNeural";
-        if (containsRange(text, '\u0A80', '\u0AFF')) return "gu-IN-DhwaniNeural";
-        if (containsRange(text, '\u0600', '\u06FF')) return "ur-IN-GulNeural";
-        return null;
+        com.video.transcribe.LanguageSupport.Language language = com.video.transcribe.LanguageSupport.detect(text);
+        return "en".equals(language.code()) || language.voice().isEmpty() ? null : language.voice();
     }
 
     private boolean containsRange(String text, char start, char end) {

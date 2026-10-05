@@ -1,0 +1,87 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.7",
+      "visual_type": "formula",
+      "image_prompt": "A chemical reaction showing electron transfer at an electrode.",
+      "image_requirement": "Viewer must see the anode and the direction of electron flow.",
+      "labels": [
+        "Anode - electrode where oxidation occurs",
+        "Electrons - negative charge moving away from the anode"
+      ],
+      "label_placement": [
+        "Anode - top left, labeled with 'Anode' in red text",
+        "Electrons - bottom right, labeled with 'Electrons' in blue text"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Can you determine which of the following reactions occurs at the anode?",
+      "formula_lines": [
+        "Cu^{2+}(aq) + 2e^- -> Cu(s)"
+      ],
+      "explain_steps": [
+        "Electrons are gained by copper ions to form solid copper."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Oxidation at the Anode"
+    },
+    {
+      "shot_id": "5.8",
+      "visual_type": "formula",
+      "image_prompt": "A chemical reaction showing electron loss at an electrode.",
+      "image_requirement": "Viewer must see the oxidation process and the loss of electrons.",
+      "labels": [
+        "Oxidation - loss of electrons from a substance"
+      ],
+      "label_placement": [
+        "Oxidation - bottom center, labeled with 'Oxidation' in red text"
+      ],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Losing electrons is known as oxidation.",
+      "formula_lines": [
+        "Zn(s) -> Zn^{2+}(aq) + 2e^-"
+      ],
+      "explain_steps": [
+        "Zinc atoms lose two electrons to form zinc ions in solution."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Oxidation Process"
+    },
+    {
+      "shot_id": "5.9",
+      "visual_type": "process_steps",
+      "image_prompt": "A circuit with a battery, wire, and rod showing electron flow.",
+      "image_requirement": "Viewer must see the path of electrons through the wire and back to the battery.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [
+        "Electrons move from anode to cathode",
+        "Current flows through the wire",
+        "Battery completes the circuit"
+      ],
+      "panels": [],
+      "narration_en": "These extra electrons now travel through the rod, along the wire, and back into the battery, completing the flow of current in the circuit.",
+      "formula_lines": [],
+      "explain_steps": [
+        "Electrons move from anode to cathode",
+        "Current flows through the wire",
+        "Battery completes the circuit"
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Electron Flow in Circuit"
+    }
+  ]
+}

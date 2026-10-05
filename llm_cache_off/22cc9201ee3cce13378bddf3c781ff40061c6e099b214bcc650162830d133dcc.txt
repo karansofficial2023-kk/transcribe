@@ -1,0 +1,122 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "குளுக்கோஸ், தாவரங்களுக்கு ஆற்றலை வழங்குகிறது.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "குளுக்கோஸ், தாவரங்களுக்கு ஆற்றலை வழங்குகிறது",
+        "visualSubject": "தாவரங்களின் உயிர் செயல்பாட்டு திட்டம், குளுக்கோஸ் மற்றும் ஆற்றல் வழங்குதல்",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Title card with full narration duration, no cutaway or loop",
+        "visualAnimation": "குளுக்கோஸ் தாவரங்களின் உயிர் செயல்பாட்டு திட்டத்தில் முக்கியமான பங்கு வழங்குவதைக் காட்டும் சிறந்த கற்பனை படம்",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "உயிரியல் ஆசிரியர்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A close-up of a plant cell with glucose molecules being transported through the cell membrane, showing energy transfer.",
+            "A diagram of photosynthesis in plants highlighting glucose as an energy source"
+        ],
+        "motion": "Static title card",
+        "subtitle": "குளுக்கோஸ் தாவரங்களின் ஆற்றலை வழங்கும் முக்கிய பங்கு",
+        "subtitleStyle": "உயிரியல் ஆசிரியர்",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still for title card, no labels or text",
+        "comfyPrompt": "A high-contrast educational diagram of a plant cell with glucose molecules being transported through the cell membrane, showing energy transfer. Clean background, realistic lighting, 1920x1080 resolution, no text or labels.",
+        "coverageNotes": "Visualizes the role of glucose in providing energy to plants as per the narration",
+        "shot": {
+            "template": "video",
+            "heading": "குளுக்கோஸ், தாவரங்களுக்கு ஆற்றலை வழங்குகிறது",
+            "prompt": "A cinematic shot of a plant cell with glucose molecules being transported through the cell membrane, showing energy transfer. Clean background, realistic lighting, 1920x1080 resolution, no text or labels.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second narration duration without freezing the last frame."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "குளுக்கோஸ், தாவரங்களுக்கு ஆற்றலை வழங்குகிறது",
+            "prompt": "A realistic educational video of a plant cell with glucose molecules being transported through the cell membrane, showing energy transfer. Clean background, realistic lighting, 1920x1080 resolution, no text or labels.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second narration duration without freezing the last frame."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "மீதமுள்ள சத்துக்கள் சேமிக்கப்படுகின்றன.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "சத்துக்கள் சேமிப்பு",
+        "visualSubject": "தாவரங்களின் உயிர் செயல்பாட்டு திட்டம், சத்துக்கள் மற்றும் சேமிப்பு",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 5,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Static image with labels, no cutaway or loop",
+        "visualAnimation": "தாவரங்களின் உயிர் செயல்பாட்டு திட்டத்தில் மீதமுள்ள சத்துக்கள் சேமிப்பு வழியில் காட்டப்படும் சிறந்த கற்பனை படம்",
+        "localAnimation": "Arrows pointing to stored nutrients, labels for each nutrient type",
+        "labels": [
+            "சத்துக்கள்",
+            "சேமிப்பு"
+        ],
+        "labelPlacements": [
+            "சத்துக்கள் | சத்துக்களின் வகைகள் | COORDINATES_PENDING_APPROVED_IMAGE",
+            "சேமிப்பு | சத்துக்கள் சேமிப்பு முறை | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "உயிரியல் ஆசிரியர்",
+        "arrows": [
+            "arrow from glucose to stored nutrients"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A diagram of a plant cell with labeled nutrients and storage structures, showing the process of nutrient storage.",
+            "An educational illustration of a plant storing excess nutrients in its cells"
+        ],
+        "motion": "Static image with labels",
+        "subtitle": "தாவரங்களின் உயிர் செயல்பாட்டு திட்டத்தில் மீதமுள்ள சத்துக்கள் சேமிக்கப்படுகின்றன",
+        "subtitleStyle": "உயிரியல் ஆசிரியர்",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Local diagram with labels and arrows for curriculum enrichment",
+        "comfyPrompt": "A high-contrast educational diagram of a plant cell with labeled nutrients and storage structures, showing the process of nutrient storage. Clean background, realistic lighting, 1920x1080 resolution, no text or labels.",
+        "coverageNotes": "Visualizes the storage of excess nutrients in plants as per the narration",
+        "shot": {
+            "template": "video",
+            "heading": "மீதமுள்ள சத்துக்கள் சேமிப்பு",
+            "prompt": "A cinematic shot of a plant cell with labeled nutrients and storage structures, showing the process of nutrient storage. Clean background, realistic lighting, 1920x1080 resolution, no text or labels.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second narration duration without freezing the last frame."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "மீதமுள்ள சத்துக்கள் சேமிப்பு",
+            "prompt": "A realistic educational video of a plant cell with labeled nutrients and storage structures, showing the process of nutrient storage. Clean background, realistic lighting, 1920x1080 resolution, no text or labels.",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 6-second narration duration without freezing the last frame."
+        }
+    }
+]

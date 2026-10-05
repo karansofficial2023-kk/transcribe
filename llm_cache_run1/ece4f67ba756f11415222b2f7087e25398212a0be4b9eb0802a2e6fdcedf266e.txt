@@ -1,0 +1,4 @@
+{
+  "score": 98,
+  "reason": "The paraphrased text preserves the original meaning, structure, and key information accurately. It uses different phrasing but maintains the same concepts, including the question number, options, explanation about memory-based recall, and the correct answer. There are no significant deviations in meaning or content."
+}

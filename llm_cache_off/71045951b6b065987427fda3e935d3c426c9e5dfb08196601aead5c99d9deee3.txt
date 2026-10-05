@@ -1,0 +1,126 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "ஒளிச்சேர்க்கை இல்லாமல், பூமியில் உயிர்கள் வாழ முடியாது.",
+        "template": "video_broll",
+        "visualType": "realistic_background_with_labels",
+        "heading": "ஒளிச்சேர்க்கை இல்லாமல்",
+        "visualSubject": "பூமி மண்டலத்தின் புகைப்படம், வானம், சூரியன், கோள்கள், உயிரினங்கள்",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "சூரியனின் செயல்பாடு மற்றும் உயிரினங்களின் வாழ்வு தொடர்பாக 4-வது நொடி க்ளிப்பில் செயல்பாட்டை தொடர்ந்து காட்டவும்",
+        "visualAnimation": "சூரியனின் ஒளி வெளியேறும் போது, பூமி மண்டலத்தில் உயிரினங்களின் வாழ்வு நிலவும் சூழலைக் காட்டும்",
+        "localAnimation": "சூரியனின் ஒளி பூமியில் தொடர்ந்து வெளியேறுவதைக் காட்டும், உயிரினங்களின் வாழ்வு மற்று, பூமி மண்டலத்தில் ஒளிச்சேர்க்கை இல்லாமல் உயிரினங்கள் வாழ முடியாது என்பதைக் காட்டும்",
+        "labels": [
+            "சூரியன் | ஒளி உற்பத்தி செய்யும் வட்டம் | மண்டலத்தின் மையத்தில்",
+            "பூமி | ஒளிச்சேர்க்கை நிகழும் பகுதி | மண்டலத்தின் வடக்கு பகுதி"
+        ],
+        "labelPlacements": [
+            "சூரியன் | ஒளி உற்பத்தி செய்யும் வட்டம் | target=(0.35, 0.65)",
+            "பூமி | ஒளிச்சேர்க்கை நிகழும் பகுதி | target=(0.45, 0.75)"
+        ],
+        "labelStyle": "உயிரியல் ஆசிரியர்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "பூமி மண்டலத்தின் புகைப்படம், சூரியன், கோள்கள்",
+            "உயிரினங்களின் வாழ்வு மற்றும் ஒளிச்சேர்க்கை பூமி மண்டலத்தில்"
+        ],
+        "motion": "சூரியனின் ஒளி வெளியேறும் போது, பூமி மண்டலத்தில் உயிரினங்களின் வாழ்வு நிலவும் சூழலைக் காட்டும்",
+        "subtitle": "ஒளிச்சேர்க்கை இல்லாமல், பூமி மண்டலத்தில் உயிரினங்கள் வாழ முடியாது",
+        "subtitleStyle": "உயிரியல் ஆசிரியர்",
+        "tool": "ltx_video",
+        "assetQualityNotes": "கற்பனை க்ளிப்பு, சூரியன் மற்றும் உயிரினங்களின் வாழ்வு தொடர்பாக",
+        "comfyPrompt": "clean background, realistic educational video, solar system with Earth and Sun, no text, no labels, no watermarks, high detail",
+        "coverageNotes": "சூரியன் மற்றும் பூமி மண்டலத்தில் ஒளிச்சேர்க்கை நிகழும் பகுதிகள், உயிரினங்களின் வாழ்வு",
+        "shot": {
+            "template": "video",
+            "heading": "ஒளிச்சேர்க்கை இல்லாமல்",
+            "prompt": "A realistic educational video showing the solar system with Earth and Sun, highlighting how life on Earth depends on sunlight. The camera slowly zooms out from the Sun to show Earth in its orbit.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows the Sun and Earth's orbit, second clip zooms out to show the solar system with Earth in its position."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ஒளிச்சேர்க்கை இல்லாமல்",
+            "prompt": "A realistic educational video showing the solar system with Earth and Sun, highlighting how life on Earth depends on sunlight. The camera slowly zooms out from the Sun to show Earth in its orbit.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows the Sun and Earth's orbit, second clip zooms out to show the solar system with Earth in its position."
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "ஏனெனில், அது நமக்கு தேவையான ஆக்சிஜனை உற்பத்தி செய்கிறது.",
+        "template": "video_broll",
+        "visualType": "realistic_background_with_labels",
+        "heading": "ஆக்சிஜன் உற்பத்தி",
+        "visualSubject": "ஒளிச்சேர்க்கை மற்றும் ஆக்சிஜன் உற்பத்தி, பூமி மண்டலம், வானம்",
+        "assetPath": "",
+        "mediaType": "LTX clip",
+        "motionType": "wan_video",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "ஆக்சிஜன் உற்பத்தி மற்றும் வானம் மூலம் நமக்கு தேவையான ஆக்சிஜன் எப்படி உற்பத்தி செய்யப்படுகிறது என்பதை 4-வது நொடி க்ளிப்பில் தொடர்ந்து காட்டவும்",
+        "visualAnimation": "ஆக்சிஜன் உற்பத்தி மற்றும் வானம் மூலம் நமக்கு தேவையான ஆக்சிஜன் எப்படி உற்பத்தி செய்யப்படுகிறது என்பதைக் காட்டும்",
+        "localAnimation": "ஆக்சிஜன் உற்பத்தி மற்றும் வானம் மூலம் நமக்கு தேவையான ஆக்சிஜன் எப்படி உற்பத்தி செய்யப்படுகிறது என்பதைக் காட்டும்",
+        "labels": [
+            "வானம் | ஒளிச்சேர்க்கை நிகழும் பகுதி | மண்டலத்தின் வடக்கு பகுதி",
+            "ஆக்சிஜன் | உற்பத்தி செய்யப்படும் பொருள் | மண்டலத்தின் வடக்கு பகுதி"
+        ],
+        "labelPlacements": [
+            "வானம் | ஒளிச்சேர்க்கை நிகழும் பகுதி | target=(0.35, 0.65)",
+            "ஆக்சிஜன் | உற்பத்தி செய்யப்படும் பொருள் | target=(0.45, 0.75)"
+        ],
+        "labelStyle": "உயிரியல் ஆசிரியர்",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "வானம், ஒளிச்சேர்க்கை மற்றும் ஆக்சிஜன் உற்பத்தி",
+            "ஆக்சிஜன் உற்பத்தி மற்றும் வானம்"
+        ],
+        "motion": "வானம் மூலம் ஆக்சிஜன் உற்பத்தி நிகழும் போது, பூமி மண்டலத்தில் ஒளிச்சேர்க்கை நிகழும் பகுதியைக் காட்டும்",
+        "subtitle": "ஆக்சிஜன் உற்பத்தி மற்றும் வானம் மூலம் நமக்கு தேவையான ஆக்சிஜன் எப்படி உற்பத்தி செய்யப்படுகிறது",
+        "subtitleStyle": "உயிரியல் ஆசிரியர்",
+        "tool": "ltx_video",
+        "assetQualityNotes": "கற்பனை க்ளிப்பு, வானம் மற்றும் ஆக்சிஜன் உற்பத்தி தொடர்பாக",
+        "comfyPrompt": "clean background, realistic educational video, solar system with Earth and Sun, no text, no labels, no watermarks, high detail",
+        "coverageNotes": "வானம் மற்றும் ஆக்சிஜன் உற்பத்தி, பூமி மண்டலத்தில் ஒளிச்சேர்க்கை நிகழும் பகுதி",
+        "shot": {
+            "template": "video",
+            "heading": "ஆக்சிஜன் உற்பத்தி",
+            "prompt": "A realistic educational video showing the solar system with Earth and Sun, highlighting how oxygen is produced through photosynthesis. The camera slowly zooms out from the Sun to show Earth in its orbit.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows the Sun and Earth's orbit, second clip zooms out to show the solar system with Earth in its position."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "ஆக்சிஜன் உற்பத்தி",
+            "prompt": "A realistic educational video showing the solar system with Earth and Sun, highlighting how oxygen is produced through photosynthesis. The camera slowly zooms out from the Sun to show Earth in its orbit.",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "First clip shows the Sun and Earth's orbit, second clip zooms out to show the solar system with Earth in its position."
+        }
+    }
+]

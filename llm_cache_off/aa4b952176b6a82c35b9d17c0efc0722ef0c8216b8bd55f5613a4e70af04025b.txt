@@ -1,0 +1,4 @@
+{
+  "score": 95,
+  "reason": "The paraphrased text preserves the core meaning of the original, explaining photosynthesis in plants with accurate details about carbon dioxide, water, glucose, and oxygen. It adds some additional context about conditions required for photosynthesis without altering the main message. Minor differences in phrasing and added information do not affect semantic similarity significantly."
+}

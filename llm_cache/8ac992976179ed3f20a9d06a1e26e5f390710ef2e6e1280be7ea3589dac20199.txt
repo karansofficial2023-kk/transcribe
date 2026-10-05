@@ -1,0 +1,23 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A pharmacist at a pharmacy counter, holding a bottle labeled 'Atorvastatin 10 mg', facing the camera with a neutral expression.",
+      "image_requirement": "The viewer must be able to see the label on the medication bottle to identify the cholesterol-lowering agent.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Let's now work through question number 176, which asks: Which of the following is a commercial blood cholesterol-lowering agent?",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Cholesterol-Lowering Medication Bottle"
+    }
+  ]
+}

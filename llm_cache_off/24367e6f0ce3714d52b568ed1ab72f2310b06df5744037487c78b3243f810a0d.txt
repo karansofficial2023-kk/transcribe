@@ -1,0 +1,17 @@
+[
+  {
+    "rowId": "8.5",
+    "approved": true,
+    "issue": "",
+    "template": "photo",
+    "visualType": "realistic_image",
+    "heading": "We believe in you.",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for 'We believe in you.'; depict the concrete subject or visible action described by: 'We believe in you.'; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "mediaType": "photo",
+    "motionType": "static_image",
+    "tool": "pillow_opencv",
+    "comfyPrompt": "Sharp 1920x1080 label-ready composition of a realistic documentary image for 'We believe in you.'; depict the concrete subject or visible action described by: 'We believe in you.'; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout. Premium educational documentary frame, sharp native 1920x1080 detail, full-frame visual coverage with no blank card panel, intentional foreground-background separation, camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays. No generated text. No logo. No border. No UI. No incorrect anatomy or technical structure. No duplicated or malformed objects. No irrelevant background elements. No decorative infographic text.",
+    "coverageNotes": "Source: transcript/paraphrase plus enabled curriculum enrichment/materials. Source-coverage guard: generated because the LLM omitted this narration sentence. Strict label-readiness guard: rendered without labels because exact reviewed targets and coordinates were unavailable.",
+    "formulaLines": []
+  }
+]

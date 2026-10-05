@@ -1,0 +1,17 @@
+{
+  "score": 85,
+  "missing_topics": [
+    "The original text does not mention the mechanism of action of statins, but this was added in the paraphrase. However, the original did not include this detail, so it is not a missing topic.",
+    "The original text does not provide any additional context or examples beyond identifying 'statin' as the correct answer. The paraphrase adds extra information about how statins work and their use in cardiovascular disease, which was not present in the original."
+  ],
+  "covered_topics": [
+    "Introduction to NEET 2019 question and answer solutions",
+    "Reference to question number 176",
+    "Restatement of the question: 'Which of the following is a commercial blood cholesterol-lowering agent?'",
+    "Listing of options: cyclosporine A, statin, streptokinase, and lipases",
+    "Mention that the question is memory-based",
+    "Explanation that without recalling the correct answer, it is difficult to attempt",
+    "Identification of 'statin' as the correct answer",
+    "Clarification that statin is a commercial blood cholesterol-lowering agent"
+  ]
+}

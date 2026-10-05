@@ -1,0 +1,31 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.1",
+      "visual_type": "formula",
+      "image_prompt": "",
+      "image_requirement": "Viewer must see the equation V = I R with values substituted.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "For instance, if a 12-volt battery is connected to a resistor with a value of 4 ohms, the resulting current would be 12 divided by 4, which equals 3 amperes.",
+      "formula_lines": [
+        "V = I R",
+        "12 V = I * 4 Ω",
+        "I = 12 V / 4 Ω"
+      ],
+      "explain_steps": [
+        "Voltage equals current multiplied by resistance.",
+        "Substitute values into the equation.",
+        "Solve for current by dividing voltage by resistance."
+      ],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Current Calculation Using Ohm's Law"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+[
+    {
+        "rowId": "4.2",
+        "labels": ["గ్లూకోజ్", "పిండి పదార్థం"],
+        "labelPlacements": [
+            "గ్లూకోజ్ | గ్లూకోజ్ మొక్క వృద్ధికి అవసరమైన శక్తిని అందిస్తుంది | COORDINATES_PENDING_APPROVED_IMAGE",
+            "పిండి పదార్థం | మిగిలిన గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "గ్లూకోజ్ - మొక్క వృద్ధికి అవసరమైన శక్తిని అందిస్తుంది",
+            "పిండి పదార్థం - మిగిలిన గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "గ్లూకోజ్ మొక్క వృద్ధికి అవసరమైన శక్తిని అందిస్తుంది. మిగిలిన గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది.",
+        "comfyPrompt": "గ్లూకోజ్ మొక్క వృద్ధికి అవసరమైన శక్తిని అందిస్తుంది. మిగిలిన గ్లూకోజ్ పిండి పదార్థంగా నిల్వ అవుతుంది. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "5.1",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "no_labels",
+        "visualSubject": "భూమిపై జీవం ఉనికి గురించి సంక్షిప్తంగా వివరించే కాలేజియన్ స్లైడ్",
+        "comfyPrompt": "భూమిపై జీవం ఉనికి గురించి సంక్షిప్తంగా వివరించే కాలేజియన్ స్లైడ్. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "5.2",
+        "labels": ["ఆక్సిజన్"],
+        "labelPlacements": [
+            "ఆక్సిజన్ | ఆక్సిజన్ ఉత్పత్తి గురించి వివరించే కాలేజియన్ స్లైడ్ | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": [
+            "ఆక్సిజన్ - ఆక్సిజన్ ఉత్పత్తి గురించి వివరించే కాలేజియన్ స్లైడ్"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "మనకు అవసరమైన ఆక్సిజన్ ఉత్పత్తి గురించి వివరించే కాలేజియన్ స్లైడ్",
+        "comfyPrompt": "మనకు అవసరమైన ఆక్సిజన్ ఉత్పత్తి గురించి వివరించే కాలేజియన్ స్లైడ్. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "6.1",
+        "labels": [],
+        "labelPlacements": [],
+        "labelTargetKinds": [],
+        "pointTargetNames": [],
+        "presentationMode": "no_labels",
+        "visualSubject": "Source-faithful visible subject and action: ఈ ప్రక్రియ జీవాలకు కేవలం మొక్కలకే కాకుండా, మనకు కూడా అత్యంత ప్రముఖం. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1030 frame.",
+        "comfyPrompt": "Source-faithful visible subject and action: ఈ ప్రక్రియ జీవాలకు కేవలం మొక్కలకే కాకుండా, మనకు కూడా అత్యంత ప్రముఖం. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "6.2",
+        "labels": ["చెల్లు పదార్థం", "ఆక్సిజన్ ఉత్పత్తి", "సూర్య శక్తి"],
+        "labelPlacements": [
+            "చెల్లు పదార్థం | మొక్క లోని రంగు వాటిని సూచించే భాగం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "ఆక్సిజన్ ఉత్పత్తి | మొక్క నుండి వచ్చే ఆక్సిజన్ ఉత్పత్తి భాగం | COORDINATES_PENDING_APPROVED_IMAGE",
+            "సూర్య శక్తి | మొక్క నుండి సూర్య శక్తి వాటిని సూచించే భాగం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+        "pointTargetNames": [
+            "చెల్లు పదార్థం - మొక్క లోని రంగు వాటిని సూచించే భాగం",
+            "ఆక్సిజన్ ఉత్పత్తి - మొక్క నుండి వచ్చే ఆక్సిజన్ ఉత్పత్తి భాగం",
+            "సూర్య శక్తి - మొక్క నుండి సూర్య శక్తి వాటిని సూచించే భాగం"
+        ],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: ఈ ప్రక్రియ లేకుండా, వాతావరణంలో ఆక్సిజన్ అధికంగా ఉండదు. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "Source-faithful visible subject and action: ఈ ప్రక్రియ లేకుండా, వాతావరణంలో ఆక్సిజన్ అధికంగా ఉండదు. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

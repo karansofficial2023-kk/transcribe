@@ -1,0 +1,72 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "It indicates that the current passing through a conductor is directly proportional to the voltage applied across it, as long as the temperature remains unchanged.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Ohm's Law Proportionality",
+        "visualSubject": "Conductor with voltage source and ammeter showing current flow; labeled components including resistor, battery, and meter; camera angle: medium shot focusing on the circuit diagram",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 10,
+        "recommendedClipSeconds": 12,
+        "timingNotes": "Hold for full duration; use local animation to reveal labels and arrows step-by-step",
+        "visualAnimation": "A circuit diagram with a resistor, battery, and ammeter. The current is shown as a flow of electrons through the conductor. Voltage is represented by the battery's electromotive force.",
+        "localAnimation": "Step 1: Show the resistor in the circuit. Step 2: Add the battery and label it as voltage source. Step 3: Insert the ammeter and label it as current measurement. Step 4: Draw an arrow showing the direction of electron flow. Step 5: Label 'Current' and 'Voltage' on respective components.",
+        "labels": [
+            "Current",
+            "Voltage",
+            "Resistor",
+            "Battery"
+        ],
+        "labelPlacements": [
+            "Current | current measurement device | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Voltage | electromotive force source | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Resistor | conductive material with resistance | COORDINATES_PENDING_APPROVED_IMAGE",
+            "Battery | voltage supply | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Ohm's Law and Resistor Circuits",
+        "arrows": [
+            "Electron flow from negative to positive terminal of battery through resistor"
+        ],
+        "highlights": [],
+        "formulaLines": [
+            "I = V/R"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Circuit diagram with labeled components: resistor, battery, ammeter",
+            "Electron flow visualization in a conductor with voltage source"
+        ],
+        "motion": "Zoom into the circuit diagram from a wide shot to a medium close-up focusing on the resistor and ammeter",
+        "subtitle": "Current is directly proportional to voltage across a conductor when temperature is constant.",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use local diagram with reviewed labels; avoid generated video for precise labeling",
+        "comfyPrompt": "Clean educational background with labeled circuit components, no text or labels in image",
+        "coverageNotes": "Visuals cover Ohm's Law proportionality, current-voltage relationship, and temperature constancy as per curriculum",
+        "shot": {
+            "template": "video",
+            "heading": "Ohm's Law Proportionality",
+            "prompt": "Cinematic shot of a circuit diagram with labeled resistor, battery, and ammeter; smooth camera movement from wide to close-up focusing on the components; no text or labels in the background",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips: first wide shot of the circuit, second medium close-up on resistor and battery, third detailed view of ammeter and electron flow"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Ohm's Law Proportionality",
+            "prompt": "Realistic educational video showing a conductor with voltage applied; current flows through the conductor as labeled; stable camera movement from wide to medium shot focusing on resistor and ammeter; no text or labels in the background",
+            "negativePrompt": "No text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 12,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips: first wide shot of the conductor and voltage source, second medium close-up on resistor and battery, third detailed view of ammeter and electron flow"
+        }
+    }
+]

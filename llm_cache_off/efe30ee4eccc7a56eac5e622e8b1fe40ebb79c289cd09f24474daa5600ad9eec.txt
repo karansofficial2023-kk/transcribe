@@ -1,0 +1,58 @@
+[
+  {
+    "rowId": "7.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with bold, centered text on dark background",
+    "comfyPrompt": "A title card with the text 'Variables in Electroplating Process' in a dark background, white text, and sans-serif font. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.2",
+    "labels": ["Mass of Silver (g)", "Time (s)"],
+    "labelPlacements": [
+      "Mass of Silver (g) - Lower right quadrant with a label box positioned near the y-axis, describing the vertical axis scale.",
+      "Time (s) - Upper right quadrant with a label box positioned near the x-axis, describing the horizontal axis scale."
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": [
+      "Mass of Silver (g) - Vertical axis scale",
+      "Time (s) - Horizontal axis scale"
+    ],
+    "presentationMode": "point_labels",
+    "visualSubject": "Graph with axes labeled 'Time (s)' and 'Mass of Silver (g)', showing linear increase over time",
+    "comfyPrompt": "A graph displaying the relationship between mass of silver deposited and time, with clear axis labels. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.6",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with bold, centered text on dark background",
+    "comfyPrompt": "A title card with the text 'Metal Type and Deposition Time' in a dark background, white text, and sans-serif font. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.8",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Title card with bold, centered text on dark background",
+    "comfyPrompt": "A title card with the text 'Summary of Electroplating Factors' in a dark background, white text, and sans-serif font. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "8.2",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A title card with the text 'Next Chapter: Practical Applications of Electroplating' in a dark background, white text, and sans-serif font.",
+    "comfyPrompt": "A title card with the text 'Next Chapter: Practical Applications of Electroplating' in a dark background, white text, and sans-serif font. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

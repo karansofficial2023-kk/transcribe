@@ -1,0 +1,15 @@
+{
+  "score": 100,
+  "missing_topics": [],
+  "covered_topics": [
+    "Introduction to NEET 2019 question and answer solutions",
+    "Reference to question number 176",
+    "Question content: identifying a commercial blood cholesterol-lowering agent",
+    "List of options provided (cyclosporine A, statin, streptokinase, lipases)",
+    "Statement that the question is memory-based",
+    "Explanation of difficulty if the answer cannot be recalled",
+    "Clarification that the question is easy if the information is remembered",
+    "Correct answer: statin",
+    "Explanation that statin is a commercial blood cholesterol-lowering agent"
+  ]
+}

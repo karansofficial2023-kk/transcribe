@@ -1,0 +1,122 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "The correct answer is statin, as it is widely recognized as a commercial medication used to lower blood cholesterol levels.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Correct Answer and Drug Class Overview",
+        "visualSubject": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Pharmacology and Medical Biology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Dark background with white text, centered title card design for educational use",
+            "Title card with black band at bottom and centered text for medical biology lesson"
+        ],
+        "motion": "Static title card",
+        "subtitle": "Correct Answer and Drug Class Overview",
+        "subtitleStyle": "Pharmacology and Medical Biology Specialist",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background, no text or labels",
+        "comfyPrompt": "Dark background, white text, centered title card design for educational use, 1920x1080 resolution, high contrast, no watermarks, no text artifacts",
+        "coverageNotes": "Visual covers the topic introduction and sets context for the lesson",
+        "shot": {
+            "template": "video",
+            "heading": "Correct Answer and Drug Class Overview",
+            "prompt": "Dark background with white text, centered title card design for educational use, 1920x1080 resolution, high contrast, no watermarks, no text artifacts",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Correct Answer and Drug Class Overview",
+            "prompt": "Dark background with white text, centered title card design for educational use, 1920x1080 resolution, high contrast, no watermarks, no text artifacts",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "The correct answer is statin, as it is widely recognized as a commercial medication used to lower blood cholesterol levels.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "Statin Drug Class Overview",
+        "visualSubject": "Realistic image of a statin medication pill with clear label showing 'Statin' and its function in lowering blood cholesterol levels",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 6,
+        "timingNotes": "Hold for full duration",
+        "visualAnimation": "Realistic image of a statin medication pill with clear label showing 'Statin' and its function in lowering blood cholesterol levels",
+        "localAnimation": "Label the pill with 'Statin' and add an arrow pointing to the label, then highlight the text 'lower blood cholesterol levels'",
+        "labels": [
+            "Statin"
+        ],
+        "labelPlacements": [
+            "Statin | Medication pill label showing the drug name | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Pharmacology and Medical Biology Specialist",
+        "arrows": [
+            "Label the pill with 'Statin' and add an arrow pointing to the label, then highlight the text 'lower blood cholesterol levels'"
+        ],
+        "highlights": [
+            "Highlight the text 'lower blood cholesterol levels'"
+        ],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Realistic image of a statin medication pill with clear label showing 'Statin' and its function in lowering blood cholesterol levels",
+            "Close-up shot of a statin pill with visible text and background indicating its use for lowering blood cholesterol"
+        ],
+        "motion": "Static labeled image",
+        "subtitle": "Statin Drug Class Overview",
+        "subtitleStyle": "Pharmacology and Medical Biology Specialist",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still with clean background, no text or labels",
+        "comfyPrompt": "Realistic image of a statin medication pill with clear label showing 'Statin' and its function in lowering blood cholesterol levels, 1920x1080 resolution, high contrast, no watermarks, no text artifacts",
+        "coverageNotes": "Visual covers the correct answer and its function as a commercial medication used to lower blood cholesterol levels",
+        "shot": {
+            "template": "video",
+            "heading": "Statin Drug Class Overview",
+            "prompt": "Realistic image of a statin medication pill with clear label showing 'Statin' and its function in lowering blood cholesterol levels, 1920x1080 resolution, high contrast, no watermarks, no text artifacts",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second labeled image of a statin medication pill with clear label showing 'Statin' and its function in lowering blood cholesterol levels"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Statin Drug Class Overview",
+            "prompt": "Realistic image of a statin medication pill with clear label showing 'Statin' and its function in lowering blood cholesterol levels, 1920x1080 resolution, high contrast, no watermarks, no text artifacts",
+            "negativePrompt": "",
+            "durationSeconds": 6,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a 6-second labeled image of a statin medication pill with clear label showing 'Statin' and its function in lowering blood cholesterol levels"
+        }
+    }
+]

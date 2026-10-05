@@ -1,0 +1,32 @@
+[
+  {
+    "sceneNumber": 1,
+    "sceneTitle": "Introduction to Blood Cholesterol-Lowering Drugs",
+    "sentenceNumbers": [1, 2]
+  },
+  {
+    "sceneNumber": 2,
+    "sceneTitle": "Understanding the Question",
+    "sentenceNumbers": [3, 4, 5, 6]
+  },
+  {
+    "sceneNumber": 3,
+    "sceneTitle": "Correct Answer and Drug Class Overview",
+    "sentenceNumbers": [7]
+  },
+  {
+    "sceneNumber": 4,
+    "sceneTitle": "Mechanism of Action: Statins",
+    "sentenceNumbers": [8]
+  },
+  {
+    "sceneNumber": 5,
+    "sceneTitle": "Clinical Use and Benefits of Statins",
+    "sentenceNumbers": [9]
+  },
+  {
+    "sceneNumber": 6,
+    "sceneTitle": "Conclusion and Summary",
+    "sentenceNumbers": [10]
+  }
+]

@@ -1,0 +1,4 @@
+{
+  "score": 98,
+  "reason": "The paraphrased text preserves the meaning of the original text accurately. It uses slightly different phrasing (e.g., 'సూర్యకిరణాలను' instead of 'సూర్యరశ్మి') but conveys the same scientific concepts without any loss of meaning. There are no significant differences in content or interpretation."
+}

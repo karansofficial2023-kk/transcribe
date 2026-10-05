@@ -1,0 +1,32 @@
+[
+    {
+        "rowId": "1.12",
+        "labels": ["ஆக்சிஜன்"],
+        "labelPlacements": ["ஆக்சிஜன் | தாவரங்களின் முக்கியத்துவம் | COORDINATES_PENDING_APPROVED_IMAGE"],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": ["ஆக்சிஜன் - இலைத்துறைகளில் உருவாகும் வாயு"],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: ஒளிச்சேர்க்கை பற்றி அறியும் போது, தாவரங்களின் முக்கியத்துவத்தையும், இதன் வழியாக உருவாகும் ஆக்சிஜன் பற்றி அறிந்து கொள்ளலாம். Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "தாவரங்களின் இலைகளில் உள்ள பச்சையம், சூரிய ஒளி புறங்கிறும் ஆக்சிஜன் வெளியிடப்படும் தொடர்பு. இலைத்துறைகளில் உள்ள கார்பன் டை ஆக்சைடும், நீரும் குளுக்கோஸ் மற்றும் ஆக்சிஜன் உருவாகும். No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.13",
+        "labels": ["ஆக்சிஜன்"],
+        "labelPlacements": ["ஆக்சிஜன் | உயிர்கள் | COORDINATES_PENDING_APPROVED_IMAGE"],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": ["ஆக்சிஜன் - வாழ்வுக்கு தேவையான வாயு"],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: ஒளிச்சேர்க்கை மட்டுமே உயிர்களுக்கு ஆக்சிஜனை வழங்குவதன் மூலம், பூமி உயிர்களுக்கு வாழ அனுமதிக்கிறது. Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "பூமி மேல் உயிர்கள் வாழ ஆக்சிஜனை பயன்படுத்துகின்றன. ஒளிச்சேர்க்கை மூலம் உருவாகும் ஆக்சிஜன் வாழ்வுக்கு தேவையான வாயு. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    },
+    {
+        "rowId": "1.14",
+        "labels": ["இந்தியாவின் தலைவர்"],
+        "labelPlacements": ["இந்தியாவின் தலைவர் | பல்வேறு நாடுகளின் தலைவர்கள் | COORDINATES_PENDING_APPROVED_IMAGE"],
+        "labelTargetKinds": ["visible_physical_target"],
+        "pointTargetNames": ["இந்தியாவின் தலைவர் - இந்தியாவில் உள்ள தலைவர்"],
+        "presentationMode": "point_labels",
+        "visualSubject": "Source-faithful visible subject and action: இந்தியாவின் தலைவர்களும், பல்வேறு நாடுகளின் தலைவர்களும் இதில் கலந்து கொண்டனர். Compose the principal evidence large, unobscured, and physically credible in a stable 1920x1080 frame.",
+        "comfyPrompt": "இந்தியாவின் தலைவரும், பல்வேறு நாடுகளின் தலைவர்களும் ஒளிச்சேர்க்கை பற்றி ஆய்வு செய்தனர். No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+    }
+]

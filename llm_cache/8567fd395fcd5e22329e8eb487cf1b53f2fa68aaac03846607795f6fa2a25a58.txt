@@ -1,0 +1,59 @@
+[
+  {
+    "rowId": "7.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A dark-themed title card with white text on the bottom band, centered and aligned for educational clarity.",
+    "comfyPrompt": "Dark background with white text at the bottom. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.2",
+    "labels": ["Anther", "Stigma", "Nectar"],
+    "labelPlacements": [
+      "Anther - Pollen-producing structure at the tip of the filament | target=(0.000,0.000)",
+      "Stigma - Sticky receptive surface at the base of the pistil | target=(0.000,0.000)",
+      "Nectar - Sweet liquid secreted by the flower | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "visible_physical_target", "visible_physical_target"],
+    "pointTargetNames": ["Anther - Pollen-producing structure at the tip of the filament", "Stigma - Sticky receptive surface at the base of the pistil", "Nectar - Sweet liquid secreted by the flower"],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a sunflower with visible nectar, labeled anther and stigma, realistic lighting and composition.",
+    "comfyPrompt": "Close-up of a sunflower showing anther, stigma, and nectar. Realistic lighting and composition. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.3",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A close-up of a bee orchid with visible mimicry features, labeled as female bee, realistic lighting and composition.",
+    "comfyPrompt": "Close-up of a bee orchid showing mimicry features. Realistic lighting and composition. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.4",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "Sharp 1920x1080 realistic documentary image for A flower known as the bee orchid mimics the appearance of a female bee.; depict the concrete subject or visible action described by: A flower known as the bee orchid mimics the appearance of a female bee.; principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements.",
+    "comfyPrompt": "Sharp 1920x1080 realistic documentary image of a bee orchid mimicking a female bee. Principal subject large and unobscured, clear foreground-background separation, safe overlay margins, eye-level camera, neutral natural lighting, and no unrelated elements. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "7.5",
+    "labels": ["Male Bee", "Pollination"],
+    "labelPlacements": [
+      "Male Bee - Insect attracted to the flower's mimicry | target=(0.000,0.000)",
+      "Pollination - Transfer of pollen from anther to stigma | target=(0.000,0.000)"
+    ],
+    "labelTargetKinds": ["visible_physical_target", "abstract_or_nonpointable"],
+    "pointTargetNames": ["Male Bee - Insect attracted to the flower's mimicry", ""],
+    "presentationMode": "point_labels",
+    "visualSubject": "A close-up of a bee orchid with visible mimicry features, labeled as female bee, realistic lighting and composition.",
+    "comfyPrompt": "Close-up of a bee orchid showing mimicry features. Realistic lighting and composition. No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

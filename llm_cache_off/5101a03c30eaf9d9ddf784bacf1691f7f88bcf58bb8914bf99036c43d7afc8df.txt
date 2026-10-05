@@ -1,0 +1,40 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf showing chlorophyll, with sunlight hitting the surface, natural lighting, green and yellow tones, photorealistic.",
+      "image_requirement": "Viewer must see chlorophyll in the leaf reacting to sunlight.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The chlorophyll in leaves converts sunlight into energy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    },
+    {
+      "shot_id": "2.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a leaf showing carbon dioxide and water molecules combining to form glucose, with sunlight present, natural lighting, green tones, photorealistic.",
+      "image_requirement": "Viewer must see carbon dioxide and water combining into glucose in the presence of light.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This energy helps carbon dioxide and water combine to form glucose, a food substance.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

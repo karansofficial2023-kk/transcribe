@@ -1,0 +1,23 @@
+{
+  "shots": [
+    {
+      "shot_id": "8.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A straight copper wire stretched slightly, lying on a table with a ruler next to it. The camera is at eye level, looking from the side. Natural daylight illuminates the wire and ruler. The wire shows slight elongation compared to its original length.",
+      "image_requirement": "The viewer must be able to see the stretched copper wire and the ruler beside it to understand the narration.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Right?",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Resistance After Stretching a Wire"
+    }
+  ]
+}

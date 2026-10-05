@@ -1,0 +1,169 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Now, the new resistance $ R' $ is calculated as $ \rho \times \frac{L'}{A'} $, or $ \rho \times \frac{1.1L_0}{\frac{A_0}{1.1}} $.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Resistance Calculation Formula",
+        "visualSubject": "Electrical resistance calculation with resistivity, length, and cross-sectional area variables; 3D resistor model with labeled components; camera angle: medium shot focusing on the formula and resistor diagram",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 6.5,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full calculation explanation; use step-by-step reveal of formula components",
+        "visualAnimation": "A 3D resistor model with labeled resistivity (ρ), length (L'), and cross-sectional area (A') is shown. The formula $ R' = \rho \times \frac{L'}{A'} $ is animated, with each variable appearing sequentially.",
+        "localAnimation": "Step-by-step reveal of the formula components using arrows and labels; highlight resistivity, length, and area variables",
+        "labels": [
+            "Resistivity (ρ)",
+            "Length (L')",
+            "Cross-sectional Area (A')"
+        ],
+        "labelPlacements": [
+            "Resistivity | Resistivity symbol ρ | target=(0.25, 0.65)",
+            "Length | Length variable L' | target=(0.45, 0.75)",
+            "Cross-sectional Area | Cross-sectional area A' | target=(0.65, 0.85)"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [
+            "Arrow from ρ to formula | Resistivity symbol ρ | target=(0.25, 0.65) -> (0.35, 0.75)",
+            "Arrow from L' to formula | Length variable L' | target=(0.45, 0.75) -> (0.55, 0.85)",
+            "Arrow from A' to formula | Cross-sectional area A' | target=(0.65, 0.85) -> (0.75, 0.95)"
+        ],
+        "highlights": [
+            "Resistivity symbol ρ",
+            "Length variable L'",
+            "Cross-sectional area A'"
+        ],
+        "formulaLines": [
+            "R' = ρ × (L') / (A')"
+        ],
+        "explainSteps": [
+            "Step 1: Resistivity is multiplied by the new length",
+            "Step 2: The result is divided by the new cross-sectional area"
+        ],
+        "steps": [
+            "Resistivity × New Length",
+            "Divide by New Cross-sectional Area"
+        ],
+        "columns": [],
+        "imageRecommendations": [
+            "3D resistor model with labeled resistivity, length, and cross-sectional area",
+            "Formula derivation with variable labels in a clean educational diagram"
+        ],
+        "motion": "Camera zooms in on the formula as it is revealed step-by-step",
+        "subtitle": "New resistance calculated using resistivity, new length, and new cross-sectional area",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "manim",
+        "assetQualityNotes": "Use deterministic diagram with labeled variables; no generated text or labels in the base image",
+        "comfyPrompt": "A clean educational background with a 3D resistor model and formula derivation, no text or labels, high contrast, dark text on light background, thin colored border, colored target dot, 3px leader line, sans-serif font, 28px minimum font size",
+        "coverageNotes": "Visuals cover resistivity, length, cross-sectional area, and their roles in resistance calculation",
+        "shot": {
+            "template": "video",
+            "heading": "Resistance Calculation Formula",
+            "prompt": "A 3D resistor model with labeled resistivity (ρ), length (L'), and cross-sectional area (A') is shown. The formula $ R' = \rho \times \frac{L'}{A'} $ is animated, with each variable appearing sequentially.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous animation of the formula derivation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Resistance Calculation Formula",
+            "prompt": "A 3D resistor model with labeled resistivity (ρ), length (L'), and cross-sectional area (A') is shown. The formula $ R' = \rho \times \frac{L'}{A'} $ is animated, with each variable appearing sequentially.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous animation of the formula derivation"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "This simplifies to $ 1.21 \times \rho \times \frac{L_0}{A_0} $, which is $ 1.21R_0 $.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Resistance Simplification",
+        "visualSubject": "Simplified resistance formula with original variables; 3D resistor model with labeled components; camera angle: medium shot focusing on the simplified formula and resistor diagram",
+        "assetPath": "",
+        "mediaType": "Manim animation",
+        "motionType": "local_animation",
+        "estimatedNarrationSeconds": 5.5,
+        "recommendedClipSeconds": 7,
+        "timingNotes": "Hold for full simplification explanation; use step-by-step reveal of simplified formula components",
+        "visualAnimation": "The simplified resistance formula $ R' = 1.21 \times \rho \times \frac{L_0}{A_0} $ is animated, with each component appearing sequentially. The original resistance $ R_0 $ is shown as a reference.",
+        "localAnimation": "Step-by-step reveal of the simplified formula components using arrows and labels; highlight the factor 1.21",
+        "labels": [
+            "Resistivity (ρ)",
+            "Original Length (L₀)",
+            "Original Cross-sectional Area (A₀)",
+            "Original Resistance (R₀)"
+        ],
+        "labelPlacements": [
+            "Resistivity | Resistivity symbol ρ | target=(0.25, 0.65)",
+            "Original Length | Original length L₀ | target=(0.45, 0.75)",
+            "Original Cross-sectional Area | Original cross-sectional area A₀ | target=(0.65, 0.85)",
+            "Original Resistance | Original resistance R₀ | target=(0.85, 0.95)"
+        ],
+        "labelStyle": "Electrical Engineering Educator",
+        "arrows": [
+            "Arrow from ρ to formula | Resistivity symbol ρ | target=(0.25, 0.65) -> (0.35, 0.75)",
+            "Arrow from L₀ to formula | Original length L₀ | target=(0.45, 0.75) -> (0.55, 0.85)",
+            "Arrow from A₀ to formula | Original cross-sectional area A₀ | target=(0.65, 0.85) -> (0.75, 0.95)",
+            "Arrow from R₀ to simplified formula | Original resistance R₀ | target=(0.85, 0.95) -> (0.95, 1.05)"
+        ],
+        "highlights": [
+            "Resistivity symbol ρ",
+            "Original length L₀",
+            "Original cross-sectional area A₀",
+            "Original resistance R₀"
+        ],
+        "formulaLines": [
+            "R' = 1.21 × ρ × (L₀ / A₀)",
+            "R' = 1.21R₀"
+        ],
+        "explainSteps": [
+            "Step 1: Resistivity is multiplied by the original length",
+            "Step 2: The result is divided by the original cross-sectional area",
+            "Step 3: Multiply by the factor 1.21 to get the new resistance"
+        ],
+        "steps": [
+            "Resistivity × Original Length",
+            "Divide by Original Cross-sectional Area",
+            "Multiply by Factor 1.21"
+        ],
+        "columns": [],
+        "imageRecommendations": [
+            "3D resistor model with labeled resistivity, original length, and cross-sectional area",
+            "Formula derivation with variable labels in a clean educational diagram"
+        ],
+        "motion": "Camera zooms in on the simplified formula as it is revealed step-by-step",
+        "subtitle": "Simplified resistance calculation using original variables and factor 1.21",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "manim",
+        "assetQualityNotes": "Use deterministic diagram with labeled variables; no generated text or labels in the base image",
+        "comfyPrompt": "A clean educational background with a 3D resistor model and formula derivation, no text or labels, high contrast, dark text on light background, thin colored border, colored target dot, 3px leader line, sans-serif font, 28px minimum font size",
+        "coverageNotes": "Visuals cover resistivity, original length, cross-sectional area, and the factor of 1.21 in resistance simplification",
+        "shot": {
+            "template": "video",
+            "heading": "Resistance Simplification",
+            "prompt": "A 3D resistor model with labeled resistivity (ρ), original length (L₀), and cross-sectional area (A₀) is shown. The simplified formula $ R' = 1.21 \times \rho \times \frac{L_0}{A_0} $ is animated, with each variable appearing sequentially.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous animation of the simplified formula derivation"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Resistance Simplification",
+            "prompt": "A 3D resistor model with labeled resistivity (ρ), original length (L₀), and cross-sectional area (A₀) is shown. The simplified formula $ R' = 1.21 \times \rho \times \frac{L_0}{A_0} $ is animated, with each variable appearing sequentially.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 7,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join the two 4-second clips to form a continuous animation of the simplified formula derivation"
+        }
+    }
+]

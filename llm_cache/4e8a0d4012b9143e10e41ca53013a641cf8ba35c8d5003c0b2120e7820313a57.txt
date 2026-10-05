@@ -1,0 +1,64 @@
+{
+  "shots": [
+    {
+      "shot_id": "5.4",
+      "visual_type": "realistic_image",
+      "image_prompt": "Close-up of an unopened Ixora flower with pollen grains visible on the stigma, natural lighting from the side, dark green petals and yellow stamen.",
+      "image_requirement": "Viewer must see an unopened flower with pollen on the stigma to understand clistogamy.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The occurrence of self-pollination and fertilization within an unopened flower is referred to as clistogamy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Clistogamy in Ixora Flowers"
+    },
+    {
+      "shot_id": "5.5",
+      "visual_type": "split_screen",
+      "image_prompt": "Left: Male papaya flower with stamen; Right: Female papaya flower with pistil.",
+      "image_requirement": "Viewer must see male and female flowers side by side to understand cross-pollination in papaya.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [
+        "Male Papaya Flower | Close-up of a male papaya flower with yellow stamen and no pistil",
+        "Female Papaya Flower | Close-up of a female papaya flower with a swollen ovary and stigma"
+      ],
+      "narration_en": "Cross-pollination Papaya is a unisexual dioecious plant, which encourages cross-pollination.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Cross-Pollination in Papaya"
+    },
+    {
+      "shot_id": "5.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "Close-up of a sunflower flower with both stamen and pistil visible, natural lighting from above, yellow center and green leaves.",
+      "image_requirement": "Viewer must see a bisexual flower with both male and female parts to understand sunflower pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Sunflowers have bisexual flowers.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Bisexual Flowers in Sunflowers"
+    }
+  ]
+}

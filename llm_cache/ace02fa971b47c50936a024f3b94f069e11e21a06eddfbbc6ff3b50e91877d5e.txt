@@ -1,0 +1,36 @@
+[
+  {
+    "rowId": "3.1",
+    "labels": ["Statin - Medication used to lower blood cholesterol levels"],
+    "labelPlacements": [
+      "Statin - Medication used to lower blood cholesterol levels | visible_physical_target | pointTargetNames: \"Statin - Medication used to lower blood cholesterol levels\" | presentationMode: point_labels"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Statin - Medication used to lower blood cholesterol levels"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Title card with centered text on dark background, white font, black band at bottom, 42px font size, max 2 lines of text",
+    "comfyPrompt": "A title card displaying the text 'The correct answer is statin, as it is widely recognized as a commercial medication used to lower blood cholesterol levels.' No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "5.1",
+    "labels": ["Statins - Class of drugs used for cardiovascular disease prevention"],
+    "labelPlacements": [
+      "Statins - Class of drugs used for cardiovascular disease prevention | visible_physical_target | pointTargetNames: \"Statins - Class of drugs used for cardiovascular disease prevention\" | presentationMode: point_labels"
+    ],
+    "labelTargetKinds": ["visible_physical_target"],
+    "pointTargetNames": ["Statins - Class of drugs used for cardiovascular disease prevention"],
+    "presentationMode": "point_labels",
+    "visualSubject": "Title card with centered text, dark background, white text, sans-serif font, 42px size, two lines max, horizontal margin 120, bottom margin 55",
+    "comfyPrompt": "A title card displaying the text 'This class of drugs is commonly prescribed for individuals at risk of cardiovascular disease due to their effectiveness and relatively mild side effects.' No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  },
+  {
+    "rowId": "6.1",
+    "labels": [],
+    "labelPlacements": [],
+    "labelTargetKinds": [],
+    "pointTargetNames": [],
+    "presentationMode": "no_labels",
+    "visualSubject": "A clean, dark-themed title card with a white text overlay on a light background. The text is centered at the bottom of the frame, with a thin colored border and a colored target dot.",
+    "comfyPrompt": "A title card displaying the text 'Thank you students.' No embedded text. No generated labels. No generated arrows. No captions. No watermark. No slide or presentation-card layout."
+  }
+]

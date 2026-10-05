@@ -53,6 +53,17 @@ public class AppConfig {
 			logger.warn("No application.properties found. Using defaults.");
 			loadDefaults();
 		}
+		applyRuntimeOverrides();
+	}
+
+	private void applyRuntimeOverrides() {
+		for (String key : props.stringPropertyNames()) {
+			String override = System.getProperty(key);
+			if (override != null && !override.isBlank()) {
+				props.setProperty(key, override.trim());
+				logger.info("Applied runtime override for {}", key);
+			}
+		}
 	}
 
 	private void loadDefaults() {
@@ -70,6 +81,7 @@ public class AppConfig {
 		props.setProperty("tool.whisper.device", "cuda");
 		props.setProperty("tool.ollama.url", "http://localhost:11434");
 		props.setProperty("tool.ollama.model", "qwen3:14b");
+		props.setProperty("tts.enabled", "false");
 		props.setProperty("tool.piper.path", "piper");
 		props.setProperty("storyboard.animation.enabled", "true");
 		props.setProperty("storyboard.video.provider", "wan");
@@ -113,6 +125,10 @@ public class AppConfig {
 		return getInt("validation.max.retries", 3);
 	}
 
+	public boolean isTtsEnabled() {
+		return getBoolean("tts.enabled", false);
+	}
+
 	public boolean isStoryboardAnimationEnabled() {
 		return getBoolean("storyboard.animation.enabled", true);
 	}
@@ -131,6 +147,38 @@ public class AppConfig {
 
 	public boolean isStoryboardCurriculumEnrichmentEnabled() {
 		return getBoolean("storyboard.curriculum.enrichment", false);
+	}
+
+	public boolean isStoryboardVisualDirectorEnabled() {
+		return getBoolean("storyboard.visual.director", true);
+	}
+
+	/** Extra storyboard languages written after the main one, e.g. "ta,te" (empty: none). The storyboard is translated, not re-planned. */
+	public String getStoryboardTargetLanguages() {
+		return getString("storyboard.target.languages", "");
+	}
+
+	/** Per-language recognition models, "ta=D:\models\ta-ct2;te=D:\models\te-ct2" (empty: general model only). */
+	public String getWhisperSpecialists() {
+		return getString("tool.whisper.specialists", "");
+	}
+
+	/** Translation engine: "madlad" (offline MADLAD-400 worker), "ollama" (local Qwen) or "auto" (madlad when installed, else ollama). */
+	public String getTranslationEngine() {
+		return getString("translation.engine", "auto");
+	}
+
+	public String getTranslateScript() {
+		return getString("tool.translate.script", "./translate_text.py");
+	}
+
+	public String getTranslateModelDir() {
+		return getString("tool.translate.model.dir", "D:\\AI\\models\\madlad400-3b-mt");
+	}
+
+	/** Folder for cached model answers ("" disables caching). Delete it to force fresh answers. */
+	public String getOllamaCacheDir() {
+		return getString("ollama.cache.dir", "");
 	}
 
 	public String getStoryboardMaterialsDir() {
@@ -224,6 +272,44 @@ public class AppConfig {
 		return getString("tool.ollama.model", "llama3.1:8b");
 	}
 
+	/** Qwen3 "thinking" tokens are hidden reasoning that makes every call ~4x slower; off by default. */
+	public boolean isOllamaThink() {
+		return getBoolean("ollama.think", false);
+	}
+
+	public double getOllamaTemperature() {
+		try {
+			return Double.parseDouble(getString("ollama.temperature", "0.2"));
+		} catch (NumberFormatException e) {
+			return 0.2;
+		}
+	}
+
+	public int getOllamaNumCtx() {
+		try {
+			return Integer.parseInt(getString("ollama.num_ctx", "12288"));
+		} catch (NumberFormatException e) {
+			return 12288;
+		}
+	}
+
+	public int getOllamaFastNumCtx() {
+		try {
+			return Integer.parseInt(getString("ollama.fast.num_ctx", "20480"));
+		} catch (NumberFormatException e) {
+			return 20480;
+		}
+	}
+
+	public String getOllamaKeepAlive() {
+		return getString("ollama.keep_alive", "20m");
+	}
+
+	/** Smaller model for structured scoring/planning passes; falls back to the main model when unset. */
+	public String getOllamaFastModel() {
+		return getString("tool.ollama.model.fast", getOllamaModel());
+	}
+
 	public String getPiperPath() {
 		return getString("tool.piper.path", "piper");
 	}
@@ -294,6 +380,7 @@ public class AppConfig {
 		System.out.println("  Ollama Model:   " + getOllamaModel());
 		System.out.println("  Ollama URL:     " + getOllamaUrl());
 		System.out.println("  Storyboard Enrich: " + isStoryboardCurriculumEnrichmentEnabled());
+		System.out.println("  TTS Enabled:     " + isTtsEnabled());
 		System.out.println("  Piper Model:    " + getPiperModel());
 
 		// Temp

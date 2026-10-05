@@ -1,0 +1,58 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "Thank you students.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "Final Acknowledgment",
+        "visualSubject": "Close-up of a teacher's face with a warm, sincere expression, looking directly at the camera in a classroom setting",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 3,
+        "recommendedClipSeconds": 5,
+        "timingNotes": "Hold for full duration of narration, no cutaways or transitions",
+        "visualAnimation": "A teacher with a warm and sincere expression, looking directly at the camera in a classroom setting",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Pharmacology Specialist",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "A teacher with a warm and sincere expression, looking directly at the camera in a classroom setting",
+            "Close-up of a teacher's face showing gratitude and engagement"
+        ],
+        "motion": "Static frame with no movement",
+        "subtitle": "Thank you students for your attention and participation.",
+        "subtitleStyle": "Pharmacology Specialist",
+        "tool": "comfy_image",
+        "assetQualityNotes": "Generated still, clean background, no text or labels",
+        "comfyPrompt": "A teacher with a warm and sincere expression, looking directly at the camera in a classroom setting. Clean background, realistic lighting, sharp focus on face. 1920x1080 resolution.",
+        "coverageNotes": "Acknowledges students' participation and concludes the lesson",
+        "shot": {
+            "template": "video",
+            "heading": "Final Acknowledgment",
+            "prompt": "A teacher with a warm and sincere expression, looking directly at the camera in a classroom setting. Clean background, realistic lighting, sharp focus on face. 1920x1080 resolution.",
+            "negativePrompt": "",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 5-second duration of the narration."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Final Acknowledgment",
+            "prompt": "A teacher with a warm and sincere expression, looking directly at the camera in a classroom setting. Clean background, realistic lighting, sharp focus on face. 1920x1080 resolution.",
+            "negativePrompt": "",
+            "durationSeconds": 5,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to cover the full 5-second duration of the narration."
+        }
+    }
+]

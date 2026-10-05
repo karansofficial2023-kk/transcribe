@@ -1,0 +1,51 @@
+Let us work through this problem, which was presented in AIEEE 2003 and involves determining the continuity and differentiability of a function at $ x = a $. The question states that for a real number $ x $, when it is added to its reciprocal, the sum reaches its minimum value. We are asked to find the value of $ x $.
+
+Let the given number be $ x $. This means we are adding $ \frac{1}{x} $ to $ x $. Let us denote this sum as a function $ f(x) $. Therefore, $ f(x) = x + \frac{1}{x} $.
+
+To find the maximum or minimum values of this function, we take its derivative and set it equal to zero. The first derivative is given by:
+
+$$
+f'(x) = 1 - \frac{1}{x^2}
+$$
+
+Setting $ f'(x) = 0 $, we get:
+
+$$
+1 - \frac{1}{x^2} = 0
+$$
+
+This simplifies to:
+
+$$
+\frac{1}{x^2} = 1
+$$
+
+From this, it follows that:
+
+$$
+x^2 = 1 \Rightarrow x = \pm 1
+$$
+
+To determine whether these points correspond to a minimum or maximum, we examine the second derivative. The second derivative of $ f(x) $ is:
+
+$$
+f''(x) = \frac{2}{x^3}
+$$
+
+Evaluating this at $ x = 1 $:
+
+$$
+f''(1) = \frac{2}{1^3} = 2 > 0
+$$
+
+Since the second derivative is positive, the function has a local minimum at $ x = 1 $.
+
+Now evaluating at $ x = -1 $:
+
+$$
+f''(-1) = \frac{2}{(-1)^3} = \frac{2}{-1} = -2 < 0
+$$
+
+Since the second derivative is negative, the function has a local maximum at $ x = -1 $.
+
+Therefore, the minimum value of the sum occurs when $ x = 1 $. This means that the correct answer to the question is $ x = 1 $.

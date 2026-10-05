@@ -1,0 +1,16 @@
+{
+  "inferredTopic": "Identification of Commercial Blood Cholesterol-Lowering Agents",
+  "filenameTopic": "Basic Question on Blood Cholesterol Regulating Drugs",
+  "topicMatch": true,
+  "confidence": 0.95,
+  "safeStoryboardTitle": "Identifying Blood Cholesterol-Lowering Medications",
+  "subject": "Biology",
+  "academicLevel": "Secondary/High School",
+  "intendedLearners": "Medical students, Biology students",
+  "learningObjectives": [
+    "Recall the names of commercial blood cholesterol-lowering agents.",
+    "Differentiate between various types of drugs used to regulate blood cholesterol levels."
+  ],
+  "smeRole": "Pharmacology Specialist",
+  "warning": "The filename topic is sufficiently aligned with the transcript content for storyboard creation. No mismatch detected."
+}

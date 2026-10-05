@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "4.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a flower with its stamen and pistil visible, showing pollen transfer between flowers in a natural setting with soft sunlight.",
+      "image_requirement": "Viewer must see the flower's reproductive structures to understand pollination.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This process is referred to as protogyny.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Protogyny in Pollination"
+    },
+    {
+      "shot_id": "4.2",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a pansy flower with its hood-like structure covering the stigma, showing pollen on the anthers and natural light.",
+      "image_requirement": "Viewer must see the hood covering the stigma to understand the structural adaptation.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Some flowers, such as pansies, have a hood that covers the stigma.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Hooded Stigma in Pansies"
+    },
+    {
+      "shot_id": "4.3",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a flower with its stigma and anthers clearly visible, showing the structural adaptation that prevents self-pollination.",
+      "image_requirement": "Viewer must see the flower's reproductive structures to understand the adaptation.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "This structural adaptation is called harkogamy.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Harkogamy in Flowers"
+    }
+  ]
+}

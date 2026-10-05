@@ -1,0 +1,68 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "When resistors are connected in parallel, the reciprocal of the total resistance is equal to the sum of the reciprocals of each resistor's value.",
+        "template": "formula",
+        "visualType": "realistic_background_with_labels",
+        "heading": "Parallel Resistance Formula",
+        "visualSubject": "A clean white background with a schematic diagram of two resistors in parallel, labeled R1 and R1, connected to a voltage source. The formula for parallel resistance is shown as 1/R_total = 1/R1 + 1/R2.",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 8,
+        "recommendedClipSeconds": 9,
+        "timingNotes": "Hold for full duration to allow formula absorption and visual reinforcement.",
+        "visualAnimation": "A schematic of two resistors in parallel with a voltage source. The formula is displayed at the bottom, centered, with clear labels for each resistor value.",
+        "localAnimation": "Static image with labeled resistors and formula overlay.",
+        "labels": [
+            "Total Resistance",
+            "Resistor 1 Value",
+            "Resistor 2 Value"
+        ],
+        "labelPlacements": [
+            "Total Resistance | Total resistance of the parallel combination | target=(0.35,0.65)",
+            "Resistor 1 Value | Resistance value of resistor R1 | target=(0.45,0.75)",
+            "Resistor 2 Value | Resistance value of resistor R2 | target=(0.55,0.85)"
+        ],
+        "labelStyle": "Ohm's Law and Resistor Circuits",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [
+            "1/R_total = 1/R1 + 1/R2"
+        ],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "Two resistors in parallel with a voltage source and formula displayed below",
+            "Schematic diagram of parallel resistors with labeled components and formula"
+        ],
+        "motion": "Static image with formula overlay",
+        "subtitle": "Parallel resistance is calculated using the reciprocal sum of individual resistor values.",
+        "subtitleStyle": "Electrical Engineering Educator",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "Use a deterministic diagram for clarity and curriculum accuracy. No generated labels or text in image generation.",
+        "comfyPrompt": "A schematic diagram of two resistors in parallel with a voltage source, clean white background, no text, no labels, no watermarks, high resolution 1920x1080",
+        "coverageNotes": "Visuals cover the formula for parallel resistance and the concept that total resistance is less than any individual resistor value.",
+        "shot": {
+            "template": "video",
+            "heading": "Parallel Resistance Formula",
+            "prompt": "A schematic of two resistors in parallel with a voltage source, labeled R1 and R2. The formula 1/R_total = 1/R1 + 1/R2 is displayed at the bottom center.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips to show the full formula and schematic with smooth transitions."
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "Parallel Resistance Formula",
+            "prompt": "A schematic of two resistors in parallel with a voltage source, labeled R1 and R2. The formula 1/R_total = 1/R1 + 1/R2 is displayed at the bottom center.",
+            "negativePrompt": "No text, no labels, no watermarks",
+            "durationSeconds": 9,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 3,
+            "joinInstructions": "Join three 4-second clips to show the full formula and schematic with smooth transitions."
+        }
+    }
+]

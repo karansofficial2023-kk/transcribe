@@ -1,0 +1,23 @@
+{
+  "shots": [
+    {
+      "shot_id": "2.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "Four drug pills on a white table: cyclosporine A, statin, streptokinase, and lipases. Close-up view from above, natural daylight, neutral colors.",
+      "image_requirement": "Viewer must be able to see the four drugs listed in the narration.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The options provided are cyclosporine A, statin, strept, and lipases.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Blood Cholesterol Drug Options"
+    }
+  ]
+}

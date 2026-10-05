@@ -1,0 +1,22 @@
+{
+  "shots": [
+    {
+      "shot_id": "8.1",
+      "visual_type": "realistic_image",
+      "image_prompt": "A person sitting in a sunny garden, sunlight filtering through leaves onto their face, surrounded by plants and flowers, medium distance, slightly angled to show the interaction between light and environment, natural daylight with warm tones.",
+      "image_requirement": "Viewer must see a person interacting with sunlight in a natural setting to understand the importance of photovoltaic processes in human life.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Photovoltaic processes are extremely important for human life.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": []
+    }
+  ]
+}

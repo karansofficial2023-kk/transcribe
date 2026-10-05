@@ -1,0 +1,12 @@
+{
+  "correctedNarration": "You're welcome for watching.",
+  "coverageComplete": false,
+  "issuesResolved": 0,
+  "coverageChecks": [],
+  "remainingConcerns": [
+    "No project materials were supplied, making it impossible to verify factual accuracy or ensure required coverage is met.",
+    "No machine-readable checklist was provided, preventing confirmation of explicit lesson requirements being addressed.",
+    "The narration contains only a single sentence with no educational content, examples, explanations, or definitions.",
+    "There is insufficient information to determine whether the narration aligns with any higher-priority materials or curriculum standards."
+  ]
+}

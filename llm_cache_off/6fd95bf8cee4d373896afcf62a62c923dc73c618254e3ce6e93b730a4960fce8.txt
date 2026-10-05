@@ -1,0 +1,122 @@
+[
+    {
+        "segmentNumber": 1,
+        "sentence": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి తమకు ఆహారాన్ని సృష్టించుకునే ప్రక్రియ.",
+        "template": "title_card",
+        "visualType": "title_card",
+        "heading": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు",
+        "visualSubject": "సూర్యకిరణాలను ఉపయోగించి ఆహారాన్ని సృష్టించుకునే ఆకుపచ్చ మొక్కల ప్రక్రియ",
+        "assetPath": "",
+        "mediaType": "generated still",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Title card with fade-in and hold for full narration duration",
+        "visualAnimation": "సూర్యకిరణాలను ఉపయోగించి ఆహారాన్ని సృష్టించుకునే ఆకుపచ్చ మొక్కల ప్రక్రియ కోసం స్థాయి వివరణ",
+        "localAnimation": "",
+        "labels": [],
+        "labelPlacements": [],
+        "labelStyle": "Photosynthesis Telugu",
+        "arrows": [],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి ఆహారాన్ని సృష్టించుకునే ప్రక్రియ",
+            "ఆకుపచ్చ మొక్కల కిరణజన్య సంయోగక్రియ వివరణ"
+        ],
+        "motion": "fade_in",
+        "subtitle": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి తమకు ఆహారాన్ని సృష్టించుకునే ప్రక్రియ",
+        "subtitleStyle": "REVIEW_REQUIRED: subject and academic level could not be established reliably curriculum specialist with domain expertise in Photosynthesis Telugu",
+        "tool": "comfy_image",
+        "assetQualityNotes": "generated still, no labels or text",
+        "comfyPrompt": "A clear educational image of a green plant undergoing photosynthesis, showing sunlight absorption and energy conversion, 1920x1080, realistic lighting, sharp focus, no text or labels",
+        "coverageNotes": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు సూర్యకిరణాలను ఉపయోగించి తమకు ఆహారాన్ని సృష్టించుకునే ప్రక్రియ",
+        "shot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు",
+            "prompt": "A cinematic shot of a green plant undergoing photosynthesis, showing sunlight absorption and energy conversion in a natural setting with realistic lighting and composition",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous 8-second shot of the plant undergoing photosynthesis"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కిరణజన్య సంయోగక్రియ అనేది ఆకుపచ్చ మొక్కలు",
+            "prompt": "A realistic educational video of a green plant undergoing photosynthesis, showing sunlight absorption and energy conversion in a natural setting with smooth camera movement and clear subject focus",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous 8-second shot of the plant undergoing photosynthesis"
+        }
+    },
+    {
+        "segmentNumber": 2,
+        "sentence": "ఈ ప్రక్రియలో, మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ ను మరియు నేల నుండి నీటిని గ్రహిస్తాయి.",
+        "template": "labeled_image",
+        "visualType": "realistic_labeled_image",
+        "heading": "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం",
+        "visualSubject": "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ ను మరియు నేల నుండి నీటిని గ్రహిస్తాయి",
+        "assetPath": "",
+        "mediaType": "local diagram",
+        "motionType": "static_image",
+        "estimatedNarrationSeconds": 6,
+        "recommendedClipSeconds": 8,
+        "timingNotes": "Hold for full narration duration with label fade-in",
+        "visualAnimation": "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ ను మరియు నేల నుండి నీటిని గ్రహిస్తాయి",
+        "localAnimation": "labels fade in with arrow pointing to carbon dioxide and water intake",
+        "labels": [
+            "కార్బన్ డయాక్సైడ్",
+            "నీటి గ్రహణం"
+        ],
+        "labelPlacements": [
+            "కార్బన్ డయాక్సైడ్ | గాలి నుండి పొందిన కార్బన్ డయాక్సైడ్ | COORDINATES_PENDING_APPROVED_IMAGE",
+            "నీటి గ్రహణం | నేల నుండి పొందిన నీటి గ్రహణం | COORDINATES_PENDING_APPROVED_IMAGE"
+        ],
+        "labelStyle": "Photosynthesis Telugu",
+        "arrows": [
+            "కార్బన్ డయాక్సైడ్ గ్రహణం | 0.3,0.5"
+        ],
+        "highlights": [],
+        "formulaLines": [],
+        "explainSteps": [],
+        "steps": [],
+        "columns": [],
+        "imageRecommendations": [
+            "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ ను మరియు నేల నుండి నీటిని గ్రహిస్తాయి",
+            "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం వివరణ"
+        ],
+        "motion": "label_fade_in",
+        "subtitle": "మొక్కలు గాలి నుండి కార్బన్ డయాక్సైడ్ ను మరియు నేల నుండి నీటిని గ్రహిస్తాయి",
+        "subtitleStyle": "REVIEW_REQUIRED: subject and academic level could not be established reliably curriculum specialist with domain expertise in Photosynthesis Telugu",
+        "tool": "pillow_opencv",
+        "assetQualityNotes": "local diagram, labeled image with precise labels",
+        "comfyPrompt": "",
+        "coverageNotes": "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం వివరణ",
+        "shot": {
+            "template": "video",
+            "heading": "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం",
+            "prompt": "A cinematic shot of a plant absorbing carbon dioxide from the air and water from the soil, showing clear labels for each process with smooth camera movement and realistic lighting",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous 8-second shot of the plant absorbing carbon dioxide and water"
+        },
+        "ltxShot": {
+            "template": "video",
+            "heading": "కార్బన్ డయాక్సైడ్ మరియు నీటి గ్రహణం",
+            "prompt": "A realistic educational video of a plant absorbing carbon dioxide from the air and water from the soil, showing clear labels for each process with smooth camera movement and realistic lighting",
+            "negativePrompt": "no text, no labels, no watermarks, no slide layout",
+            "durationSeconds": 8,
+            "clipDurationSeconds": 4.0,
+            "clipCount": 2,
+            "joinInstructions": "Join two 4-second clips to form a continuous 8-second shot of the plant absorbing carbon dioxide and water"
+        }
+    }
+]

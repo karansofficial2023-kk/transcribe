@@ -1,0 +1,61 @@
+{
+  "shots": [
+    {
+      "shot_id": "1.5",
+      "visual_type": "realistic_image",
+      "image_prompt": "An antique copper keychain lying on a wooden table, partially exposed to light from the window. The keychain has intricate designs and is centered in the frame with natural lighting highlighting its texture.",
+      "image_requirement": "Viewer must see the antique copper keychain to understand the subject.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "She already has an antique copper keychain that she plans to electroplate with silver herself.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Antique Copper Keychain"
+    },
+    {
+      "shot_id": "1.6",
+      "visual_type": "realistic_image",
+      "image_prompt": "Anita standing in a well-lit workshop, holding an antique copper keychain with one hand and pointing towards a workbench with the other. The background shows tools and materials for electroplating.",
+      "image_requirement": "Viewer must see Anita and the keychain to understand the subject.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "Let's help Anita complete this task.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Anita and the Keychain"
+    },
+    {
+      "shot_id": "1.7",
+      "visual_type": "realistic_image",
+      "image_prompt": "A close-up of a workbench with an electroplating setup: a battery, silver nitrate solution in a beaker, copper keychain submerged in the solution, and wires connected to electrodes. Natural lighting highlights the equipment.",
+      "image_requirement": "Viewer must see the electroplating setup to understand the subject.",
+      "labels": [],
+      "label_placement": [],
+      "steps": [],
+      "panels": [],
+      "narration_en": "The goal of this simulation is to understand the process of electroplating.",
+      "formula_lines": [],
+      "explain_steps": [],
+      "graph_rows": [],
+      "graph_note": "",
+      "graph_function": "",
+      "graph_range": "",
+      "circuit_rows": [],
+      "heading": "Electroplating Setup"
+    }
+  ]
+}
