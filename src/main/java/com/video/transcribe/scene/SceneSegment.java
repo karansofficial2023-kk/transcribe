@@ -36,6 +36,9 @@ public class SceneSegment {
 	private String coverageNotes;
 	private boolean headingFromDirector;
 	private boolean animate;
+	private String layout;
+	private List<String> tableRows;
+	private List<String> galleryItems;
 	private Shot shot;
 	private Shot ltxShot;
 
@@ -319,5 +322,30 @@ public class SceneSegment {
 
 	public void setAnimate(boolean animate) {
 		this.animate = animate;
+	}
+
+	/** How the shot is shown on the board (see {@link LayoutPlanner}). */
+	public String getLayout() {
+		return layout;
+	}
+
+	public void setLayout(String layout) {
+		this.layout = layout;
+	}
+
+	public List<String> getTableRows() {
+		return tableRows;
+	}
+
+	public void setTableRows(List<String> tableRows) {
+		this.tableRows = tableRows;
+	}
+
+	public List<String> getGalleryItems() {
+		return galleryItems;
+	}
+
+	public void setGalleryItems(List<String> galleryItems) {
+		this.galleryItems = galleryItems;
 	}
 }

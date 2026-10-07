@@ -293,6 +293,9 @@ public class VideoParaphrasePipeline {
 				Files.writeString(Paths.get(config.getOutputDir(), baseName + "_teacher_pass.json"), gson.toJson(pass));
 			}
 		}
+		if (config.getBoolean("storyboard.layout_plan", true)) {
+			com.video.transcribe.scene.LayoutPlanner.plan(storyboard, fastOllama::generate);       // how each shot is shown on the board
+		}
 		if (config.getBoolean("storyboard.formula_review", true)) {
 			// every equation that will be written on screen is checked by an independent reviewer (the accuracy gates check narration only)
 			List<com.video.transcribe.scene.FormulaReviewer.Finding> formulaFindings =

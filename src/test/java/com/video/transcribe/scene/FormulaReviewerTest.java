@@ -44,6 +44,9 @@ class FormulaReviewerTest {
             List.of("\\Lambda_m^\\circ(Electrolyte) = \\Lambda_m^\\circ(Cation) + \\Lambda_m^3(Anion)"),
             List.of("\\Lambda_m^\\circ = \\lambda_+^\\circ + \\lambda_-^\\circ"));
         List<FormulaReviewer.Finding> findings = FormulaReviewer.review(doc, (system, user) -> {
+            if (system.contains("second, independent")) {
+                return "{\"items\": [{\"id\": \"6.1#0\", \"answer\": \"wrong\"}, {\"id\": \"6.2#0\", \"answer\": \"wrong\"}]}";
+            }
             assertTrue(system.contains("did not write"));
             assertTrue(user.contains("6.1#0") && user.contains("6.3#0"));
             return "{\"items\": [{\"id\": \"6.1#0\", \"verdict\": \"remove\", \"formula\": \"\", \"reason\": \"strong minus strong is meaningless\"},"
@@ -55,6 +58,23 @@ class FormulaReviewerTest {
         assertEquals("\\Lambda_m^\\circ(Electrolyte) = \\Lambda_m^\\circ(Cation) + \\Lambda_m^\\circ(Anion)", shots.get(1).getFormulaLines().get(0));
         assertEquals("\\Lambda_m^\\circ = \\lambda_+^\\circ + \\lambda_-^\\circ", shots.get(2).getFormulaLines().get(0));
         assertEquals(List.of("removed", "fixed"), findings.stream().map(FormulaReviewer.Finding::verdict).toList());
+    }
+
+    @Test
+    void aCorrectLineIsKeptWhenTheSecondReviewerDisagrees() {
+        StoryboardDocument doc = lesson(List.of("R \\propto \\frac{l}{A}"), List.of("v = u + 2at"));
+        List<FormulaReviewer.Finding> findings = FormulaReviewer.review(doc, (system, user) -> {
+            if (system.contains("second, independent")) {
+                assertTrue(user.contains("claimed problem"));
+                return "{\"items\": [{\"id\": \"6.1#0\", \"answer\": \"correct\"}, {\"id\": \"6.2#0\", \"answer\": \"wrong\"}]}";
+            }
+            return "{\"items\": [{\"id\": \"6.1#0\", \"verdict\": \"fix\", \"formula\": \"R = \\\\rho \\\\frac{l}{A}\", \"reason\": \"prefer the equation\"},"
+                + "{\"id\": \"6.2#0\", \"verdict\": \"fix\", \"formula\": \"v = u + at\", \"reason\": \"wrong factor 2\"}]}";
+        });
+        List<SceneSegment> shots = doc.getScenes().get(0).getSegments();
+        assertEquals(List.of("R \\propto \\frac{l}{A}"), shots.get(0).getFormulaLines());      // correct proportionality kept
+        assertEquals(List.of("v = u + at"), shots.get(1).getFormulaLines());                  // a real error is still fixed
+        assertEquals(List.of("kept", "fixed"), findings.stream().map(FormulaReviewer.Finding::verdict).toList());
     }
 
     @Test

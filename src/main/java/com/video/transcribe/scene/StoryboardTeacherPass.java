@@ -96,6 +96,10 @@ public final class StoryboardTeacherPass {
                 boolean ownContent = notEmpty(segment.getFormulaLines()) || notEmpty(segment.getLabels()) || "title_card".equals(segment.getTemplate());
                 if (flagged.contains(id) && !ownContent && scene.getSegments().size() > 1) {
                     removed.add(id + " \"" + segment.getSentence() + "\"");
+                    String title = norm(scene.getSceneTitle());
+                    if (!title.isEmpty() && norm(segment.getSentence()).startsWith(title)) {
+                        scene.setSceneTitle("");          // the title came from the removed sentence: fixHeadings gives the scene a new one
+                    }
                     if (scene.getNarration() != null && segment.getSentence() != null) {
                         scene.setNarration(scene.getNarration().replace(segment.getSentence(), "").replaceAll("\\s{2,}", " ").trim());
                     }
@@ -150,7 +154,7 @@ public final class StoryboardTeacherPass {
                 }
             }
             String title = scene.getSceneTitle() == null ? "" : scene.getSceneTitle().trim();
-            if (!title.isEmpty() && sentenceLike(title, sentences)) {
+            if (title.isEmpty() || sentenceLike(title, sentences)) {
                 String good = !firstGood.isBlank() ? firstGood : scene.getSegments().stream().map(SceneSegment::getHeading)
                     .filter(h -> h != null && !h.isBlank() && !sentenceLike(h, sentences)).findFirst().orElse("");
                 if (!good.isBlank()) {

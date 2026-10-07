@@ -93,7 +93,9 @@ public final class FormulaReviewer {
                 + "decide: \"ok\" when it is correct textbook science/mathematics and matches its narration; \"fix\" when it is meant correctly "
                 + "but has an error (wrong sign, wrong term, wrong symbol, a digit where a degree sign or subscript belongs, unbalanced "
                 + "chemical equation) - give the corrected line in the same LaTeX style; \"remove\" when it is wrong and cannot be repaired "
-                + "from its narration. Never invent content the narration does not support. Return JSON {\"items\": [{\"id\": \"...\", "
+                + "from its narration. Equivalent forms, other standard notations, proportionality statements (R \\propto l), one step "
+                + "of a longer derivation and simplified school-level forms are \"ok\" - do not rewrite a correct line into your preferred "
+                + "style. Never invent content the narration does not support. Return JSON {\"items\": [{\"id\": \"...\", "
                 + "\"verdict\": \"ok|fix|remove\", \"formula\": \"corrected line or empty\", \"reason\": \"short\"}]}.", listing.toString());
         } catch (Exception e) {
             logger.warn("Formula review skipped (model unavailable): {}", e.getMessage());
@@ -112,16 +114,26 @@ public final class FormulaReviewer {
         Map<SceneSegment, List<String>> updated = new LinkedHashMap<>();
         byId.values().forEach(segment -> updated.putIfAbsent(segment, new ArrayList<>(segment.getFormulaLines())));
         Map<SceneSegment, List<Integer>> removals = new LinkedHashMap<>();
+        List<JsonObject> changes = new ArrayList<>();
         for (JsonElement element : items == null ? new JsonArray() : items) {
             if (!element.isJsonObject()) continue;
             JsonObject item = element.getAsJsonObject();
+            String verdict = text(item, "verdict").toLowerCase(Locale.ROOT);
+            if (byId.containsKey(text(item, "id")) && ("fix".equals(verdict) || "remove".equals(verdict))) changes.add(item);
+        }
+        Map<String, Boolean> confirmed = secondOpinion(storyboard, changes, byId, model);
+        for (JsonObject item : changes) {
             String key = text(item, "id");
             SceneSegment segment = byId.get(key);
-            if (segment == null) continue;
             int index = Integer.parseInt(key.substring(key.lastIndexOf('#') + 1));
             String verdict = text(item, "verdict").toLowerCase(Locale.ROOT);
             String original = updated.get(segment).get(index);
             String reason = text(item, "reason");
+            if (Boolean.FALSE.equals(confirmed.get(key))) {
+                // the second reviewer found the original line correct: it stays, the teacher sees both opinions
+                findings.add(new Finding(key, original, "kept", original, "first reviewer: " + verdict + " (" + reason + "); second reviewer: correct"));
+                continue;
+            }
             if ("fix".equals(verdict)) {
                 String corrected = repairSyntax(text(item, "formula"));
                 if (!corrected.isBlank() && !corrected.equals(original)) {
@@ -141,9 +153,49 @@ public final class FormulaReviewer {
             }
             entry.getKey().setFormulaLines(lines);
         }
-        long changed = findings.stream().filter(f -> !"syntax".equals(f.verdict())).count();
+        long changed = findings.stream().filter(f -> "fixed".equals(f.verdict()) || "removed".equals(f.verdict())).count();
         logger.info("Formula review: {} equation line(s) checked, {} fixed or removed", byId.size(), changed);
         return findings;
+    }
+
+    /**
+     * A change is applied only when a second, independent look agrees the ORIGINAL line is wrong: one over-strict verdict must not
+     * take a correct equation off the screen. Returns id -> true (agree: apply) / false (original is correct: keep). When the second
+     * look cannot run, the map is empty and the first verdict stands (an unchecked wrong equation is worse than a missing one).
+     */
+    private static Map<String, Boolean> secondOpinion(StoryboardDocument storyboard, List<JsonObject> changes, Map<String, SceneSegment> byId,
+                                                      Model model) {
+        Map<String, Boolean> result = new LinkedHashMap<>();
+        if (changes.isEmpty()) return result;
+        StringBuilder listing = new StringBuilder();
+        for (JsonObject item : changes) {
+            String key = text(item, "id");
+            SceneSegment segment = byId.get(key);
+            int index = Integer.parseInt(key.substring(key.lastIndexOf('#') + 1));
+            listing.append(key).append(" | narration: ").append(segment.getSentence())
+                .append(" | line on screen: ").append(segment.getFormulaLines().get(index))
+                .append(" | claimed problem: ").append(text(item, "reason")).append('\n');
+        }
+        String answer;
+        try {
+            answer = model.generate("You are a second, independent teacher checking another reviewer's objections to equations in a lesson "
+                + "titled '" + storyboard.getTitle() + "'. For EACH line answer \"wrong\" only if the line as written is really incorrect "
+                + "(wrong law, wrong sign, wrong symbol, unbalanced) or does not match its narration; answer \"correct\" if it is a correct "
+                + "textbook statement in any standard notation, an equivalent form, or a valid step. Return JSON {\"items\": [{\"id\": \"...\", "
+                + "\"answer\": \"wrong|correct\"}]}.", listing.toString());
+            int start = answer.indexOf('{');
+            JsonArray items = JsonParser.parseString(answer.substring(start, answer.lastIndexOf('}') + 1)).getAsJsonObject().getAsJsonArray("items");
+            for (JsonElement element : items == null ? new JsonArray() : items) {
+                if (!element.isJsonObject()) continue;
+                String id = text(element.getAsJsonObject(), "id");
+                String verdict = text(element.getAsJsonObject(), "answer").toLowerCase(Locale.ROOT);
+                if (verdict.startsWith("correct")) result.put(id, false);
+                else if (verdict.startsWith("wrong")) result.put(id, true);
+            }
+        } catch (Exception e) {
+            logger.warn("Formula second opinion skipped: {}", e.getMessage());
+        }
+        return result;
     }
 
     private static String id(Scene scene, SceneSegment segment) {

@@ -17,7 +17,7 @@ public final class StoryboardContract {
     public static final String SCHEMA_VERSION = "2.0";
     /** Fields rendered as DOCX rows only when non-empty. */
     public static final List<String> OPTIONAL_LIST_FIELDS =
-        List.of("formula_lines", "explain_steps", "steps", "columns");
+        List.of("formula_lines", "explain_steps", "steps", "columns", "table_rows", "gallery_items");
 
     private StoryboardContract() {
     }
@@ -71,7 +71,10 @@ public final class StoryboardContract {
         f.put("asset_path", text(segment.getAssetPath()));
         f.put("wan_video_prompt", segment.getShot() == null ? "" : text(segment.getShot().getPrompt()));
         f.put("ltx_video_prompt", segment.getLtxShot() == null ? "" : text(segment.getLtxShot().getPrompt()));
-        f.put("animate", segment.isAnimate() ? "yes" : "no");     // bring the approved picture to life (LTX image-to-video); see MotionPlanner
+        f.put("animate", segment.isAnimate() ? "yes" : "no");
+        f.put("layout", text(segment.getLayout()));                  // board layout (LayoutPlanner)
+        f.put("table_rows", list(segment.getTableRows()));
+        f.put("gallery_items", list(segment.getGalleryItems()));     // bring the approved picture to life (LTX image-to-video); see MotionPlanner
         f.put("formula_lines", list(segment.getFormulaLines()));
         f.put("explain_steps", list(segment.getExplainSteps()));
         f.put("steps", list(segment.getSteps()));
