@@ -141,7 +141,8 @@ class LessonInputsTest {
         String draft = (LESSON + " ").repeat(4).trim();
         LessonScriptWriter writer = new LessonScriptWriter((system, user) -> {
             systems.add(system);
-            if (systems.size() == 1) return "## Script\n" + draft;
+            if (system.contains("EXTENDING")) return draft;                 // nothing added: the draft stays as it is
+            if (!system.contains("did not write")) return "## Script\n" + draft;
             return "{\"corrected_script\": " + com.google.gson.JsonParser.parseString("\"" + draft.replace("glucose", "glucose (a sugar)")
                 + "\"") + ", \"corrections\": [\"glucose explained\"], \"doubtful_claims\": []}";
         });
@@ -152,7 +153,26 @@ class LessonInputsTest {
         assertEquals(List.of("glucose explained"), result.corrections());
         assertTrue(result.reviewRequired(), "no approved materials: always a teacher review");
         assertTrue(systems.get(0).contains("Class 7 Biology"));
-        assertTrue(systems.get(1).contains("did not write"));        // the reviewer is a separate role
+        assertTrue(systems.get(systems.size() - 1).contains("did not write"));        // the reviewer is a separate role
+    }
+
+    @Test
+    void aShortScriptIsExtendedBeforeTheFactReview() throws IOException {
+        String shortDraft = (LESSON + " ").repeat(2).trim();
+        String longDraft = (LESSON + " ").repeat(5).trim();
+        List<String> reviewed = new ArrayList<>();
+        LessonScriptWriter writer = new LessonScriptWriter((system, user) -> {
+            if (system.contains("did not write")) {
+                reviewed.add(user);
+                return "no json";
+            }
+            return system.contains("EXTENDING") ? longDraft : shortDraft;
+        });
+        TopicRequest request = TopicRequest.parse("{\"topic\": \"Photosynthesis\", \"minutes\": 2}", "p.topic.json");
+        assertTrue(LessonScriptWriter.words(shortDraft) < request.targetWords() * LessonScriptWriter.MIN_LENGTH_SHARE);
+        LessonScriptWriter.Result result = writer.write(request, "");
+        assertEquals(longDraft, result.script());                              // the extended draft is used
+        assertTrue(reviewed.get(0).contains(longDraft));                       // and it is the one the reviewer checks
     }
 
     @Test

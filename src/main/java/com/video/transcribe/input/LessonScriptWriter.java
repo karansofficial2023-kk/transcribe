@@ -53,6 +53,7 @@ public final class LessonScriptWriter {
             throw new IOException("Lesson script for '" + request.topic() + "' came back empty or too short (" + words(draft) + " words)");
         }
         logger.info("Lesson script drafted: {} words for '{}' ({})", words(draft), request.topic(), request.level());
+        draft = lengthen(request, grounded, materials, draft);
 
         String answer = model.generate(reviewerPrompt(request, grounded),
             "TOPIC: " + request.topic() + "\nAUDIENCE: " + request.level() + "\n"
@@ -69,6 +70,36 @@ public final class LessonScriptWriter {
         }
         logger.info("Fact review: {} correction(s), {} doubtful claim(s)", corrections.size(), doubtful.size());
         return new Result(corrected, draft, doubtful, corrections, grounded);
+    }
+
+    static final double MIN_LENGTH_SHARE = 0.85;     // a script below 85% of the requested words is extended
+    static final int LENGTHEN_ROUNDS = 2;
+
+    /**
+     * Models write about 70% of the words asked for, so a "3 minute" lesson came out at 2 minutes. A short draft is extended (up
+     * to two rounds) by keeping every sentence and adding depth: a worked step, the meaning of each symbol, a second everyday
+     * example, a check-your-understanding question. The longer draft is used only if it really is longer and not padded past
+     * 130% of the target; the independent fact review then checks the whole script as before.
+     */
+    String lengthen(TopicRequest request, boolean grounded, String materials, String draft) {
+        int target = request.targetWords();
+        for (int round = 0; round < LENGTHEN_ROUNDS && words(draft) < target * MIN_LENGTH_SHARE; round++) {
+            String longer;
+            try {
+                longer = clean(model.generate(writerPrompt(request, grounded)
+                    + "\nYou are EXTENDING your own draft: keep every sentence of it, in order, and add explanation where a student "
+                    + "needs more: a worked step, what each symbol means, a second everyday example, a short check-your-understanding "
+                    + "question with its answer. Same level, same facts, no new numbers, names or statistics.",
+                    userPrompt(request, materials) + "\nTARGET: about " + target + " words (now " + words(draft) + ")\nDRAFT:\n" + draft));
+            } catch (IOException e) {
+                logger.warn("Lesson script could not be extended ({}); keeping {} words", e.getMessage(), words(draft));
+                break;
+            }
+            if (words(longer) <= words(draft) || words(longer) > target * 1.3) break;
+            logger.info("Lesson script extended: {} -> {} words (target {})", words(draft), words(longer), target);
+            draft = longer;
+        }
+        return draft;
     }
 
     static String writerPrompt(TopicRequest request, boolean grounded) {

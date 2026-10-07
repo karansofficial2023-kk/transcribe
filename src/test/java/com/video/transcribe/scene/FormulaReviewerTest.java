@@ -94,6 +94,25 @@ class FormulaReviewerTest {
     }
 
     @Test
+    void oneQuantityGetsOneSymbolInTheWholeLesson() {
+        StoryboardDocument doc = lesson(
+            List.of("Λ₀ = Λ⁺ + Λ⁻"),
+            List.of("Λm°(CH3COOH) = Λm°(H+) + Λm°(CH3COO-)"),
+            List.of("\\Lambda^0_{CH_3COOH} = \\lambda^0_{H^+} + \\lambda^0_{CH_3COO^-}"),
+            List.of("\\Lambda_m = \\kappa / c", "\\Delta G^\\circ = -nFE^\\circ"));
+        List<FormulaReviewer.Finding> findings = new ArrayList<>();
+        FormulaReviewer.unifyNotation(doc, findings);
+        List<SceneSegment> shots = doc.getScenes().get(0).getSegments();
+        assertEquals("\\Lambda_m^\\circ = Λ⁺ + Λ⁻", shots.get(0).getFormulaLines().get(0));
+        assertEquals("\\Lambda_m^\\circ(CH3COOH) = \\Lambda_m^\\circ(H+) + \\Lambda_m^\\circ(CH3COO-)", shots.get(1).getFormulaLines().get(0));
+        assertTrue(shots.get(2).getFormulaLines().get(0).startsWith("\\Lambda_m^\\circ(CH_3COOH) = "));   // never two subscripts
+        assertTrue(shots.get(2).getFormulaLines().get(0).contains("\\lambda^0_{H^+}"));          // ions keep lowercase lambda
+        assertEquals(List.of("\\Lambda_m = \\kappa / c", "\\Delta G^\\circ = -nFE^\\circ"), shots.get(3).getFormulaLines());
+        assertEquals(3, findings.size());
+        assertTrue(findings.stream().allMatch(f -> "notation".equals(f.verdict())));
+    }
+
+    @Test
     void anUnavailableReviewKeepsTheLinesAndAsksForATeacher() {
         StoryboardDocument doc = lesson(List.of("v = u + a t"));
         List<FormulaReviewer.Finding> findings = FormulaReviewer.review(doc, (s, u) -> { throw new java.io.IOException("Ollama down"); });

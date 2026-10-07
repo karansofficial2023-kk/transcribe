@@ -84,7 +84,10 @@ public final class FormulaReviewer {
                 }
             }
         }
-        if (byId.isEmpty() || model == null) return findings;
+        if (byId.isEmpty() || model == null) {
+            unifyNotation(storyboard, findings);
+            return findings;
+        }
 
         String answer;
         try {
@@ -103,6 +106,7 @@ public final class FormulaReviewer {
         } catch (Exception e) {
             logger.warn("Formula review skipped (model unavailable): {}", e.getMessage());
             findings.add(new Finding("all", "", "not_reviewed", "", "the equation review could not run; a teacher must check every equation"));
+            unifyNotation(storyboard, findings);
             return findings;
         }
         JsonArray items;
@@ -112,6 +116,7 @@ public final class FormulaReviewer {
             items = json.getAsJsonArray("items");
         } catch (RuntimeException e) {
             findings.add(new Finding("all", "", "not_reviewed", "", "the equation review returned no usable answer; check every equation"));
+            unifyNotation(storyboard, findings);
             return findings;
         }
         Map<SceneSegment, List<String>> updated = new LinkedHashMap<>();
@@ -165,6 +170,7 @@ public final class FormulaReviewer {
             }
             entry.getKey().setFormulaLines(lines);
         }
+        unifyNotation(storyboard, findings);
         long changed = findings.stream().filter(f -> "fixed".equals(f.verdict()) || "removed".equals(f.verdict())).count();
         logger.info("Formula review: {} equation line(s) checked, {} fixed or removed", byId.size(), changed);
         return findings;
@@ -217,6 +223,79 @@ public final class FormulaReviewer {
         } catch (Exception e) {
             logger.warn("Formula second opinion skipped: {}", e.getMessage());
         }
+    }
+
+    /** A capital Greek letter with a "limiting / standard" mark (degree, circ, zero), optionally with the molar subscript m. */
+    private static final Pattern LIMITING_SYMBOL = Pattern.compile(
+        "(\\\\(?:Lambda|Delta|Omega|Phi|Psi|Sigma|Gamma|Theta|Pi)|[ΛΔΩΦΨΣΓΘΠ])"
+        + "((?:_\\{?m\\}?|m(?![A-Za-z])|ₘ|\\^\\{?(?:0|\\\\circ)\\}?|_\\{?0\\}?|[°⁰₀])+)");
+    private static final Map<String, String> GREEK_LATEX = Map.of("Λ", "\\Lambda", "Δ", "\\Delta", "Ω", "\\Omega",
+        "Φ", "\\Phi", "Ψ", "\\Psi", "Σ", "\\Sigma", "Γ", "\\Gamma", "Θ", "\\Theta", "Π", "\\Pi");
+
+    /**
+     * One quantity, one symbol, as a teacher writes it: within a lesson the different spellings of the same limiting quantity
+     * (Λ₀, Λ°, Λm°, \Lambda_m^\circ, \Lambda^0) become one textbook form - \Lambda_m^\circ when any line uses the molar subscript,
+     * else \Lambda^\circ. Only symbols carrying a zero/degree mark are touched: plain Λm (at a concentration), lowercase λ (ions) and
+     * ΔG° written with a letter in between stay as they are. Deterministic, so it does not depend on the review model.
+     */
+    static void unifyNotation(StoryboardDocument storyboard, List<Finding> findings) {
+        if (storyboard.getScenes() == null) return;
+        Map<String, java.util.Set<String>> spellings = new LinkedHashMap<>();
+        Map<String, Boolean> molar = new LinkedHashMap<>();
+        for (Scene scene : storyboard.getScenes()) {
+            if (scene.getSegments() == null) continue;
+            for (SceneSegment segment : scene.getSegments()) {
+                for (String line : segment.getFormulaLines() == null ? List.<String>of() : segment.getFormulaLines()) {
+                    Matcher m = LIMITING_SYMBOL.matcher(line);
+                    while (m.find()) {
+                        if (!isLimiting(m.group(2))) continue;
+                        String base = GREEK_LATEX.getOrDefault(m.group(1), m.group(1));
+                        spellings.computeIfAbsent(base, b -> new java.util.LinkedHashSet<>()).add(m.group());
+                        if (hasMolar(m.group(2))) molar.put(base, true);
+                    }
+                }
+            }
+        }
+        for (Scene scene : storyboard.getScenes()) {
+            if (scene.getSegments() == null) continue;
+            for (SceneSegment segment : scene.getSegments()) {
+                List<String> lines = segment.getFormulaLines();
+                if (lines == null || lines.isEmpty()) continue;
+                List<String> out = new ArrayList<>();
+                for (String line : lines) {
+                    Matcher m = LIMITING_SYMBOL.matcher(line);
+                    StringBuilder sb = new StringBuilder();
+                    while (m.find()) {
+                        String base = GREEK_LATEX.getOrDefault(m.group(1), m.group(1));
+                        String replacement = m.group();
+                        if (isLimiting(m.group(2)) && spellings.getOrDefault(base, java.util.Set.of()).size() > 1) {
+                            replacement = base + (molar.getOrDefault(base, false) ? "_m^\\circ" : "^\\circ");
+                            // \circ directly followed by a letter would read as one command (\circx): keep them apart
+                            if (m.end() < line.length() && Character.isLetter(line.charAt(m.end()))) replacement += " ";
+                        }
+                        m.appendReplacement(sb, Matcher.quoteReplacement(replacement));
+                    }
+                    m.appendTail(sb);
+                    // "\Lambda_m^\circ_{CH_3COOH}" would carry two subscripts: the species moves into brackets, as in textbooks
+                    String unified = sb.toString()
+                        .replaceAll("(\\\\[A-Za-z]+_m\\^\\\\circ)_\\{((?:[^{}]|\\{[^{}]*\\})*)\\}", "$1($2)")
+                        .replaceAll("(\\\\[A-Za-z]+_m\\^\\\\circ)_([A-Za-z0-9])", "$1($2)");
+                    if (!unified.equals(line)) {
+                        findings.add(new Finding(id(scene, segment), line, "notation", unified, "one symbol for the same quantity in the whole lesson"));
+                    }
+                    out.add(unified);
+                }
+                segment.setFormulaLines(out);
+            }
+        }
+    }
+
+    private static boolean isLimiting(String marks) {
+        return marks.matches(".*(\\^\\{?(?:0|\\\\circ)\\}?|_\\{?0\\}?|[°⁰₀]).*");
+    }
+
+    private static boolean hasMolar(String marks) {
+        return marks.matches(".*(_\\{?m\\}?|m|ₘ).*");
     }
 
     private static String id(Scene scene, SceneSegment segment) {
