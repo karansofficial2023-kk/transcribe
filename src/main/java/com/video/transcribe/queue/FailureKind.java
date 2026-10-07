@@ -20,7 +20,10 @@ public final class FailureKind {
         "transcription produced no text",
         "video file not found",
         "no such file",
-        "unsupported");
+        "unsupported",
+        "topic file invalid",                          // a wrong field value in a .topic.json: the file must be corrected first
+        "topic file has no topic",
+        "input text is empty or too short");
 
     private FailureKind() {
     }

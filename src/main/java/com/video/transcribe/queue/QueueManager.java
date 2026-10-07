@@ -52,7 +52,7 @@ public class QueueManager {
 		}
 
 		// Add existing videos
-		File[] files = folder.listFiles((dir, name) -> isVideoFile(name));
+		File[] files = folder.listFiles((dir, name) -> isLessonInput(name));      // videos, transcripts/notes and topic requests
 
 		if (files != null) {
 			for (File f : files) {
@@ -60,7 +60,7 @@ public class QueueManager {
 			}
 		}
 
-		logger.info("Added {} existing videos from: {}", files != null ? files.length : 0, folderPath);
+		logger.info("Added {} existing lesson inputs (videos, texts, topics) from: {}", files != null ? files.length : 0, folderPath);
 
 		// Watch for new files
 		if (watchForNew) {
@@ -90,6 +90,11 @@ public class QueueManager {
 	 */
 	/** Videos already queued from the folder watcher (one copy raises several file-system events). */
 	private final java.util.Set<String> announced = java.util.concurrent.ConcurrentHashMap.newKeySet();
+
+	/** Anything the queue can turn into a lesson: a video, a transcript/notes file (.txt .docx .pdf) or a topic request (.topic.json). */
+	static boolean isLessonInput(String name) {
+		return com.video.transcribe.source.InputKind.of(name) != null;
+	}
 
 	static boolean isVideoFile(String name) {
 		return name != null && name.toLowerCase(java.util.Locale.ROOT).matches(".*\\.(mp4|mov|avi|mkv|wmv|webm|flv)$");
@@ -140,7 +145,7 @@ public class QueueManager {
 							}
 							Path fileName = (Path) event.context();
 							String fullPath = folderPath + "/" + fileName;
-							if (!isVideoFile(fileName.toString()) || !announced.add(fullPath)) {
+							if (!isLessonInput(fileName.toString()) || !announced.add(fullPath)) {
 								continue;               // not a video, or this copy already produced a queue entry (CREATE + MODIFY...)
 							}
 							if (!waitUntilCopied(Paths.get(fullPath))) {

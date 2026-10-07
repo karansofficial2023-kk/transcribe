@@ -286,11 +286,30 @@ public class VideoParaphrasePipeline {
 		Files.writeString(Paths.get(config.getOutputDir(), baseName + "_storyboard.draft.json"), gson.toJson(storyboard));
 		StoryboardQualityGate.validate(storyboard);
 		validateStoryboardIdentity(storyboard, baseName, paraphrasedText);
+		if (config.getBoolean("storyboard.teacher_pass", true)) {
+			com.video.transcribe.scene.StoryboardTeacherPass.Report pass =
+				com.video.transcribe.scene.StoryboardTeacherPass.apply(storyboard, fastOllama::generate);
+			if (!pass.removed().isEmpty() || !pass.renamed().isEmpty()) {
+				Files.writeString(Paths.get(config.getOutputDir(), baseName + "_teacher_pass.json"), gson.toJson(pass));
+			}
+		}
+		if (config.getBoolean("storyboard.formula_review", true)) {
+			// every equation that will be written on screen is checked by an independent reviewer (the accuracy gates check narration only)
+			List<com.video.transcribe.scene.FormulaReviewer.Finding> formulaFindings =
+				com.video.transcribe.scene.FormulaReviewer.review(storyboard, ollama::generate);
+			if (!formulaFindings.isEmpty()) {
+				Files.writeString(Paths.get(config.getOutputDir(), baseName + "_formula_review.json"), gson.toJson(formulaFindings));
+			}
+		}
 
 		// The exporter separates formula lines from prose before writing the DOCX and contract. Do it first, so the saved
 		// _storyboard.json, the DOCX, the contract and any translation all describe the same storyboard.
 		com.video.transcribe.scene.StoryboardContractAudit.separateFormulaProse(storyboard);
 		traceClaimsToSources(storyboard, baseName, paraphrasedText, materials);
+
+		if (requestedSubject != null && !requestedSubject.isBlank()) {
+			storyboard.setSubject(requestedSubject);          // a topic request names its subject; it steers the video generator's visuals
+		}
 
 		// Save as JSON
 		Path storyboardJson = Paths.get(config.getOutputDir(), baseName + "_storyboard.json");
@@ -381,6 +400,10 @@ public class VideoParaphrasePipeline {
 	// ============================================
 
 	public PipelineResult processVideo(String videoPath, String language, String style) {
+		com.video.transcribe.source.InputKind kind = com.video.transcribe.source.InputKind.of(new File(videoPath).getName());
+		if (kind == com.video.transcribe.source.InputKind.TEXT || kind == com.video.transcribe.source.InputKind.TOPIC) {
+			return processLessonText(videoPath, kind, language, style);
+		}
 		String baseName = getBaseName(videoPath);
 		long startTime = System.currentTimeMillis();
 
@@ -420,58 +443,167 @@ public class VideoParaphrasePipeline {
 				// Phase 2: Transcribe audio → JSON + TXT
 				transcript = transcribeAudio(audioPath, language, baseName);
 			}
-			if (transcript.getLanguage() != null && !transcript.getLanguage().isBlank()) {
-				detectedLanguage = transcript.getLanguage();      // also when the transcript was reused from an identical earlier job
-			}
-			String originalText = transcript.getFullText();
-			com.video.transcribe.transcription.Glossary glossary = com.video.transcribe.transcription.Glossary.load(
-				detectedLanguage, config.getStoryboardMaterialsDir(), baseName);
-			if (glossary.size() > 0) {
-				originalText = glossary.apply(originalText);          // fix known ASR mis-spellings before any LLM sees the text
-			}
-			if (!TranscriptQualityGate.hasUsableSpeech(transcript)) {
-				logSkippedVideo(videoPath, baseName, "No speech detected or only music/background audio");
-				logger.warn("Skipping video with no usable speech: {}", videoPath);
-				return new PipelineResult(false, null, transcript, null,
-						null, null, System.currentTimeMillis() - startTime,
-						"Skipped: no speech detected or only music/background audio");
-			}
-
-			// Phase 3 + 3b: Paraphrase, validate, and retry until content coverage passes
-			ParaphraseValidation paraphraseValidation = paraphraseUntilValid(originalText, style, baseName);
-			StoryboardProjectMaterials materials = loadStoryboardMaterials(baseName);
-			String paraphrased = maybeEnrichParaphrase(originalText, paraphraseValidation.paraphrasedText,
-				style, baseName, materials);
-			paraphrased = factCheckNarration(paraphrased, materials);
-			ParaphraseValidation finalNarration = finalizeNarrationUntilValid(
-				originalText,
-				paraphrased,
-				style,
-				baseName,
-				materials
-			);
-			paraphrased = finalNarration.paraphrasedText;
-			ValidationResult validation = finalNarration.validation;
-			saveParaphrase(paraphrased, baseName);
-
-			// Phase 3c: Generate scene storyboard
-			StoryboardDocument storyboard = generateStoryboard(paraphrased, baseName, materials);
-
-			// Phase 4 is disabled in storyboard-only production mode.
-			Path audioOutput = generateAudio(paraphrased, baseName);
-
-			// Cleanup temp if configured
-			if (config.cleanupTempAudio()) {
-				cleanupTemp(baseName);
-			}
-
-			return new PipelineResult(true, audioOutput, transcript, paraphrased,
-					storyboard, validation, System.currentTimeMillis() - startTime, null);
+			return finishLesson(transcript, videoPath, baseName, style, startTime);
 
 		} catch (Exception e) {
 			logger.error("Pipeline failed: {}", e.getMessage(), e);
 			return new PipelineResult(false, null, null, null,
 					null, null, System.currentTimeMillis() - startTime, e.getMessage());
+		}
+	}
+
+	/** Everything after the source text exists, shared by the three inputs: narration, accuracy gates, storyboard, contract. */
+	private PipelineResult finishLesson(TranscriptData transcript, String videoPath, String baseName, String style, long startTime)
+			throws Exception {
+		if (transcript.getLanguage() != null && !transcript.getLanguage().isBlank()) {
+			detectedLanguage = transcript.getLanguage();      // also when the transcript was reused from an identical earlier job
+		}
+		String originalText = transcript.getFullText();
+		com.video.transcribe.transcription.Glossary glossary = com.video.transcribe.transcription.Glossary.load(
+			detectedLanguage, config.getStoryboardMaterialsDir(), baseName);
+		if (glossary.size() > 0) {
+			originalText = glossary.apply(originalText);          // fix known ASR mis-spellings before any LLM sees the text
+		}
+		if (!TranscriptQualityGate.hasUsableSpeech(transcript)) {
+			logSkippedVideo(videoPath, baseName, "No speech detected or only music/background audio");
+			logger.warn("Skipping video with no usable speech: {}", videoPath);
+			return new PipelineResult(false, null, transcript, null,
+					null, null, System.currentTimeMillis() - startTime,
+					"Skipped: no speech detected or only music/background audio");
+		}
+
+		// Phase 3 + 3b: Paraphrase, validate, and retry until content coverage passes
+		ParaphraseValidation paraphraseValidation = paraphraseUntilValid(originalText, style, baseName);
+		StoryboardProjectMaterials materials = loadStoryboardMaterials(baseName);
+		String paraphrased = maybeEnrichParaphrase(originalText, paraphraseValidation.paraphrasedText,
+			style, baseName, materials);
+		paraphrased = factCheckNarration(paraphrased, materials);
+		ParaphraseValidation finalNarration = finalizeNarrationUntilValid(
+			originalText,
+			paraphrased,
+			style,
+			baseName,
+			materials
+		);
+		paraphrased = finalNarration.paraphrasedText;
+		ValidationResult validation = finalNarration.validation;
+		saveParaphrase(paraphrased, baseName);
+
+		// Phase 3c: Generate scene storyboard
+		StoryboardDocument storyboard = generateStoryboard(paraphrased, baseName, materials);
+
+		// Phase 4 is disabled in storyboard-only production mode.
+		Path audioOutput = generateAudio(paraphrased, baseName);
+
+		// Cleanup temp if configured
+		if (config.cleanupTempAudio()) {
+			cleanupTemp(baseName);
+		}
+
+		return new PipelineResult(true, audioOutput, transcript, paraphrased,
+				storyboard, validation, System.currentTimeMillis() - startTime, null);
+	}
+
+	/** Subject named by a topic request for the lesson being processed (null for videos and texts). */
+	private String requestedSubject;
+
+	/**
+	 * Transcript/notes (.txt .docx .pdf) and topic requests (.topic.json): the source text is read or written first, then the lesson
+	 * follows exactly the same narration, accuracy and storyboard steps as a video. A topic lesson without approved materials is
+	 * labelled "AI-written, teacher review required" in the manifest, the contract and a note next to the DOCX.
+	 */
+	PipelineResult processLessonText(String inputPath, com.video.transcribe.source.InputKind kind, String language, String style) {
+		String baseName = getBaseName(inputPath);
+		long startTime = System.currentTimeMillis();
+		detectedLanguage = language;
+		requestedSubject = null;
+		try (GpuLease gpu = GpuLease.acquire("transcribe", java.time.Duration.ofHours(4))) {
+			Path input = Paths.get(inputPath);
+			Path outDir = Paths.get(config.getOutputDir());
+			Files.createDirectories(outDir);
+			java.util.Map<String, Object> manifest = new java.util.LinkedHashMap<>();
+			manifest.put("input_kind", kind.name().toLowerCase(Locale.ROOT));
+			manifest.put("source", inputPath);
+			manifest.put("sha256", JobManifest.sha256(input));
+			manifest.put("created", java.time.Instant.now().toString());
+
+			String text;
+			com.video.transcribe.input.LessonScriptWriter.Result script = null;
+			if (kind == com.video.transcribe.source.InputKind.TOPIC) {
+				com.video.transcribe.input.TopicRequest request = com.video.transcribe.input.TopicRequest.read(input);
+				logger.info("=== PHASE 1: Writing lesson script for topic '{}' ({}, {} min, {}) ===",
+					request.topic(), request.level(), request.minutes(), request.languageName());
+				StoryboardProjectMaterials materials = loadStoryboardMaterials(baseName);
+				String evidence = materials != null && materials.hasTextEvidence() ? materials.promptContext() : "";
+				script = new com.video.transcribe.input.LessonScriptWriter(ollama).write(request, evidence);
+				text = script.script();
+				detectedLanguage = request.language();
+				requestedSubject = request.subject().isBlank() || "General".equals(request.subject()) ? null : request.subject();
+				Files.writeString(outDir.resolve(baseName + "_topic_script.txt"), text);
+				java.util.Map<String, Object> review = new java.util.LinkedHashMap<>();
+				review.put("request", request);
+				review.put("grounded_in_materials", script.grounded());
+				review.put("corrections", script.corrections());
+				review.put("doubtful_claims", script.doubtfulClaims());
+				review.put("draft", script.draft());
+				Files.writeString(outDir.resolve(baseName + "_fact_review.json"), gson.toJson(review));
+				manifest.put("topic_request", request);
+				manifest.put("ai_written", true);
+				manifest.put("teacher_review_required", script.reviewRequired());
+			} else {
+				logger.info("=== PHASE 1: Reading lesson text from {} ===", input.getFileName());
+				text = com.video.transcribe.input.TextInputReader.read(input);
+				Files.writeString(outDir.resolve(baseName + "_source_text.txt"), text);
+			}
+			LanguageSupport.Language lang = LanguageSupport.detect(text, detectedLanguage);
+			detectedLanguage = lang.code();
+			manifest.put("language", detectedLanguage);
+			JobManifest.write(outDir, baseName, manifest);
+
+			TranscriptData transcript = new TranscriptData();
+			transcript.setText(text);
+			transcript.setLanguage(detectedLanguage);
+			transcript.setDuration(text.split("\s+").length / 2.2);          // ~130 spoken words a minute
+			Files.writeString(outDir.resolve(baseName + "_transcript.txt"), text);
+
+			PipelineResult result = finishLesson(transcript, inputPath, baseName, style, startTime);
+			if (result.success && script != null) {
+				labelTopicLesson(outDir, baseName, script);
+			}
+			return result;
+		} catch (Exception e) {
+			logger.error("Pipeline failed: {}", e.getMessage(), e);
+			return new PipelineResult(false, null, null, null,
+					null, null, System.currentTimeMillis() - startTime, e.getMessage());
+		} finally {
+			requestedSubject = null;
+		}
+	}
+
+	/** Marks an AI-written lesson in its contract and next to its DOCX, with the claims the teacher has to check. */
+	private void labelTopicLesson(Path outDir, String baseName, com.video.transcribe.input.LessonScriptWriter.Result script) {
+		try {
+			Path contract = outDir.resolve(baseName + "_contract.json");
+			if (Files.isRegularFile(contract)) {
+				com.google.gson.JsonObject json = com.google.gson.JsonParser.parseString(Files.readString(contract)).getAsJsonObject();
+				json.addProperty("input_kind", "topic");
+				json.addProperty("ai_written", true);
+				json.addProperty("review_required", script.reviewRequired());
+				json.add("doubtful_claims", gson.toJsonTree(script.doubtfulClaims()));
+				Files.writeString(contract, gson.toJson(json));
+			}
+			if (script.reviewRequired()) {
+				String note = "AI-WRITTEN LESSON - TEACHER REVIEW REQUIRED BEFORE PUBLISHING\n\n"
+					+ (script.grounded() ? "" : "No approved materials were found for this lesson; every fact comes from the language model.\n\n")
+					+ "Claims to double-check:\n" + (script.doubtfulClaims().isEmpty() ? "  (none flagged; still check all facts)\n"
+						: "  - " + String.join("\n  - ", script.doubtfulClaims()) + "\n")
+					+ "\nCorrections made by the automatic review:\n" + (script.corrections().isEmpty() ? "  (none)\n"
+						: "  - " + String.join("\n  - ", script.corrections()) + "\n");
+				Files.writeString(outDir.resolve(baseName + "_TEACHER_REVIEW_REQUIRED.txt"), note);
+				logger.warn("AI-written lesson '{}': teacher review required ({} doubtful claim(s))", baseName, script.doubtfulClaims().size());
+			}
+		} catch (Exception e) {
+			logger.warn("Could not label the AI-written lesson {}: {}", baseName, e.getMessage());
 		}
 	}
 
@@ -801,9 +933,7 @@ public class VideoParaphrasePipeline {
 	}
 
 	private String getBaseName(String path) {
-		String name = new File(path).getName();
-		int dot = name.lastIndexOf('.');
-		return dot > 0 ? name.substring(0, dot) : name;
+		return com.video.transcribe.source.InputKind.baseName(new File(path).getName());      // "X.topic.json" -> "X"
 	}
 
 	public void shutdown() {

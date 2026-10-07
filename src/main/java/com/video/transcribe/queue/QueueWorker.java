@@ -69,9 +69,7 @@ public class QueueWorker implements Runnable {
                         return new ItemRetry.Outcome(holder[0].success, holder[0].error, FailureKind.isFinal(holder[0].error), attempt);
                     });
                     PipelineResult result = holder[0];
-                    String fileName = String.valueOf(item.getSource().getFileName());
-                    int dot = fileName.lastIndexOf('.');
-                    String baseName = dot > 0 ? fileName.substring(0, dot) : fileName;
+                    String baseName = com.video.transcribe.source.InputKind.baseName(String.valueOf(item.getSource().getFileName()));
                     ItemStatusFile.write(outputDir, baseName, outcome.success() ? "completed" : "failed",
                         outcome.attempts(), outcome.error(), outcome.finalFailure());
                     if (result == null) {
