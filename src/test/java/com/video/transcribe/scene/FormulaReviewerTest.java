@@ -78,6 +78,22 @@ class FormulaReviewerTest {
     }
 
     @Test
+    void aWrongCorrectionOfAWrongLineRemovesTheLine() {
+        StoryboardDocument doc = lesson(
+            List.of("\\Lambda(weak) = \\Lambda(strong) - \\Lambda(strong)_{corrected}"),
+            List.of("\\Lambda(CH_3COOH) = \\Lambda(CH_3COONa) + \\Lambda(HCl) - \\Lambda(NaCl)"));
+        FormulaReviewer.review(doc, (system, user) -> {
+            if (system.contains("second, independent")) {
+                assertTrue(user.contains("ALL EQUATIONS") && user.contains("CH_3COONa") && user.contains("proposed correction"));
+                return "{\"items\": [{\"id\": \"6.1#0\", \"answer\": \"wrong\", \"correction_ok\": false}]}";
+            }
+            return "{\"items\": [{\"id\": \"6.1#0\", \"verdict\": \"fix\", \"formula\": \"\\\\Lambda(weak) = \\\\Lambda(strong_1) - \\\\Lambda(strong_2)\", \"reason\": \"undefined term\"}]}";
+        });
+        assertTrue(doc.getScenes().get(0).getSegments().get(0).getFormulaLines().isEmpty());     // neither version is shown
+        assertEquals(1, doc.getScenes().get(0).getSegments().get(1).getFormulaLines().size());
+    }
+
+    @Test
     void anUnavailableReviewKeepsTheLinesAndAsksForATeacher() {
         StoryboardDocument doc = lesson(List.of("v = u + a t"));
         List<FormulaReviewer.Finding> findings = FormulaReviewer.review(doc, (s, u) -> { throw new java.io.IOException("Ollama down"); });

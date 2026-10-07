@@ -17,7 +17,17 @@ class MotionPlannerTest {
         s.setTemplate(template);
         s.setVisualType(visualType);
         s.setLabels(labels);
+        s.setSentence("Bees carry pollen from flower to flower.");
         return s;
+    }
+
+    @Test
+    void aOneWordRemarkNeverBecomesAClip() {
+        SceneSegment title = shot(1, "title_card", "title_card", List.of());
+        SceneSegment remark = shot(2, "photo", "short_motion_clip", List.of());
+        remark.setSentence("Clear?");
+        MotionPlanner.plan(lesson(title, remark));
+        assertFalse(remark.isAnimate());
     }
 
     private static List<Scene> lesson(SceneSegment... segments) {

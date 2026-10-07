@@ -35,9 +35,12 @@ public final class StoryboardTeacherPass {
     public record Report(List<String> removed, List<String> renamed) {
     }
 
-    private static final Set<String> STOP = Set.of(("a an the of and or to in on at for from with by as is are was were be this that these those it its "
+    private static final Set<String> STOP = Set.copyOf(java.util.Arrays.asList(("a an the of and or to in on at for from with by as is are was were be this that these those it its "
         + "their his her our your we you they he she can will would may might should must do does did has have had not no so if then than "
-        + "also just only very such into about over under after before which what when where who how why let let's us here there now").split(" "));
+        + "also just only very such into about over under after before which what when where who how why let let's us here there now "
+        // words that never name a topic: "this option is indeed the correct one" has no title in it
+        + "correct right wrong option options answer answers indeed one ones thing things way really actually clear okay yes see look "
+        + "going get got say said like well know quite simply").split(" ")));
 
     private StoryboardTeacherPass() {
     }
@@ -109,6 +112,15 @@ public final class StoryboardTeacherPass {
             }
             for (int i = 0; i < kept.size(); i++) kept.get(i).setSegmentNumber(i + 1);
             scene.setSegments(kept);
+        }
+        // a scene whose every shot was off-topic ("Stay tuned for our next video") goes as a whole; the others are renumbered
+        List<Scene> scenes = new ArrayList<>();
+        for (Scene scene : storyboard.getScenes()) {
+            if (scene.getSegments() != null && !scene.getSegments().isEmpty()) scenes.add(scene);
+        }
+        if (!scenes.isEmpty() && scenes.size() < storyboard.getScenes().size()) {
+            for (int i = 0; i < scenes.size(); i++) scenes.get(i).setSceneNumber(i + 1);
+            storyboard.setScenes(scenes);
         }
         return removed;
     }

@@ -52,4 +52,14 @@ class LayoutPlannerTest {
         assertEquals(List.of("Paints", "Varnishes", "Perfumes"), uses.getGalleryItems());
         assertEquals("bullets", other.getLayout());
     }
+
+    @Test
+    void onlyARealRecapGetsTheSummaryLayout() {
+        SceneSegment remark = shot(1, "Therefore rho remains constant at the new length.", List.of());
+        SceneSegment recap = shot(2, "To summarize, the new resistance is 1.21 times the old one.", List.of());
+        LayoutPlanner.plan(lesson(remark, recap), (system, user) -> "{\"shots\": [{\"id\": \"1.1\", \"layout\": \"summary\"},"
+            + "{\"id\": \"1.2\", \"layout\": \"summary\"}]}");
+        assertEquals("bullets", remark.getLayout());
+        assertEquals("summary", recap.getLayout());
+    }
 }

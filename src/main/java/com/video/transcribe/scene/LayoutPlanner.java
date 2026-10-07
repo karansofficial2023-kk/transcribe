@@ -95,6 +95,10 @@ public final class LayoutPlanner {
                 if (segment == null) continue;
                 String layout = text(shot, "layout").toLowerCase(Locale.ROOT);
                 boolean hasFormula = segment.getFormulaLines() != null && !segment.getFormulaLines().isEmpty();
+                String sentence = segment.getSentence() == null ? "" : segment.getSentence();
+                if ("summary".equals(layout) && !SUMMARY.matcher(sentence).find()) {
+                    continue;                  // "Right?" or "Therefore rho stays constant" is not a recap: no "Summary" heading on the board
+                }
                 if (LAYOUTS.contains(layout) && !hasFormula && !"derivation".equals(layout)) {      // equations always stay a derivation
                     segment.setLayout(layout);
                     refined++;

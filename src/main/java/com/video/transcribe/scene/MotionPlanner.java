@@ -54,6 +54,8 @@ public final class MotionPlanner {
                 || notEmpty(segment.getSteps()) || notEmpty(segment.getColumns())) return false;
         if (segment.getAssetPath() != null && !segment.getAssetPath().isBlank()) return false;     // a supplied image is evidence
         if ("manim".equals(segment.getTool())) return false;
+        String sentence = segment.getSentence() == null ? "" : segment.getSentence().trim();
+        if (sentence.split("\\s+").length < 5) return false;          // "Clear?" / "Right?" is merged into its neighbour, never a clip
         String template = segment.getTemplate();
         String type = segment.getVisualType();
         boolean pictureTemplate = "photo".equals(template) || "video_broll".equals(template);       // a title card is plain colour: nothing to animate

@@ -50,6 +50,30 @@ class StoryboardTeacherPassTest {
     }
 
     @Test
+    void aSceneThatWasOnlyAGoodbyeIsDroppedAndTheRestRenumbered() {
+        StoryboardDocument doc = board("Kohlrausch's Law",
+            shot(1, "A", "Kohlrausch's law adds the ionic conductivities."), shot(2, "B", "Acetic acid is a weak electrolyte."),
+            shot(3, "C", "Strong electrolytes give the needed values."), shot(4, "D", "Sodium acetate is a strong electrolyte."),
+            shot(5, "E", "Hydrochloric acid is a strong electrolyte."), shot(6, "F", "Sodium chloride is subtracted."));
+        Scene goodbye = new Scene();
+        goodbye.setSceneNumber(8);
+        goodbye.setSceneTitle("Closing");
+        goodbye.setSegments(new ArrayList<>(List.of(shot(1, "Q", "Do you think there are other applications?"),
+            shot(2, "S", "Stay tuned for our upcoming videos to learn more."))));
+        doc.getScenes().add(goodbye);
+        StoryboardTeacherPass.apply(doc, (s, u) -> "{\"off_topic\": [\"8.1\", \"8.2\"]}");
+        assertEquals(1, doc.getScenes().size());                        // no empty scene reaches the contract
+        assertEquals(1, doc.getScenes().get(0).getSceneNumber());
+        assertEquals(6, doc.getScenes().get(0).getSegments().size());
+    }
+
+    @Test
+    void aSentenceWithoutATopicGetsThePreviousHeadingNotAVagueOne() {
+        assertEquals("", StoryboardTeacherPass.keyPhrase("So, this option is indeed the correct one."));
+        assertEquals("Limiting Molar Conductivity", StoryboardTeacherPass.keyPhrase("So the limiting molar conductivity is right."));
+    }
+
+    @Test
     void anOverEagerModelRemovesNothing() {
         StoryboardDocument doc = board("Topic", shot(1, "A", "One idea about ions."), shot(2, "B", "Another idea about ions."),
             shot(3, "C", "A third idea about ions."), shot(4, "D", "A fourth idea about ions."));
