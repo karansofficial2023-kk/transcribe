@@ -82,21 +82,28 @@ public class FFmpegAudioExtractor {
         logger.info("Extracting audio: {} → {}", videoPath, audioPath);
         
         Process process = pb.start();
-        
+
+        boolean noAudioTrack = false;
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 logger.debug("FFmpeg: {}", line);
+                if (line.contains("does not contain any stream") || line.contains("matches no streams")) noAudioTrack = true;
             }
         }
-        
+
         boolean finished = process.waitFor(timeoutMinutes, TimeUnit.MINUTES);
         if (!finished) {
             process.destroyForcibly();
             throw new IOException("FFmpeg timeout after " + timeoutMinutes + " minutes");
         }
-        
+
         if (process.exitValue() != 0) {
+            if (noAudioTrack) {
+                // a video without any sound track is not a fault to retry: say so in words the teacher understands (final failure)
+                throw new IOException("No usable narration in " + baseName + ": the video has no audio track at all (picture only). "
+                    + "Add a narrated video or give the lesson as a transcript (.txt/.docx/.pdf) or topic file.");
+            }
             throw new IOException("FFmpeg failed with code: " + process.exitValue());
         }
         

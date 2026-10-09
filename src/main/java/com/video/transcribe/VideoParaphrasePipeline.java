@@ -151,7 +151,16 @@ public class VideoParaphrasePipeline {
 		if (transcript == null || transcript.getFullText() == null) {
 			throw new IOException("Transcription produced no text for " + baseName);
 		}
-		String coverageProblem = com.video.transcribe.transcription.SpeechCoverage.problem(transcript, transcript.getDuration());
+		double seconds = transcript.getDuration();
+		if (seconds <= 0) {
+			// a transcript without its length (e.g. reused from an older run) would make every video look "too short to check"
+			try {
+				seconds = audioExtractor.getDuration(audioPath.toString());
+			} catch (Exception e) {
+				logger.warn("Could not measure the audio length for the speech check: {}", e.getMessage());
+			}
+		}
+		String coverageProblem = com.video.transcribe.transcription.SpeechCoverage.problem(transcript, seconds);
 		if (coverageProblem != null) {
 			throw new IOException("No usable narration in " + baseName + ": " + coverageProblem);
 		}

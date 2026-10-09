@@ -39,10 +39,17 @@ public final class SpeechCoverage {
         return null;
     }
 
+    /** What speech recognition "hears" in music or silence (well-known Whisper hallucinations); never counted as narration. */
+    private static final java.util.regex.Pattern PHANTOM = java.util.regex.Pattern.compile(
+        "(?i)\\b(thank you (so much )?for watching|thanks for watching|please (like and )?subscribe( to (my|our|the) channel)?|"
+            + "subscribe to (my|our|the) channel|see you (in the )?next (time|video)|subtitles? by [^.!?]*|amara\\.org[^.!?]*|"
+            + "\\[?music\\]?|\\(music\\)|\\[applause\\])\\b[.!?]*");
+
     static int countWords(String text) {
         if (text == null || text.isBlank()) {
             return 0;
         }
-        return text.trim().split("\\s+").length;
+        String spoken = PHANTOM.matcher(text).replaceAll(" ").trim();
+        return spoken.isEmpty() ? 0 : spoken.split("\\s+").length;
     }
 }

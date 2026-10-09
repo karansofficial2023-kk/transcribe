@@ -1,5 +1,6 @@
 package com.video.transcribe.transcription;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -37,5 +38,13 @@ class SpeechCoverageTest {
     @Test
     void emptyTranscriptOfLongVideoIsRejected() {
         assertNotNull(SpeechCoverage.problem("", 600));
+    }
+
+    @Test
+    void phantomPhrasesAreNotSpeechEvenInAShortClip() {
+        assertNotNull(SpeechCoverage.problem("Thank you for watching.", 12));          // nothing real was said
+        assertNotNull(SpeechCoverage.problem(" Music  Music ", 20));
+        assertNull(SpeechCoverage.problem("Thank you for watching. Today you will learn about osmosis.", 12));
+        assertEquals(6, SpeechCoverage.countWords("Can you see the cell wall?"));     // a real "you" still counts
     }
 }

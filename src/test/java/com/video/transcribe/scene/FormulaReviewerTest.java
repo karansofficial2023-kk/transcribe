@@ -113,6 +113,18 @@ class FormulaReviewerTest {
     }
 
     @Test
+    void ionQuantitiesWithACargeAreNeverTurnedIntoTheMolarSymbol() {
+        // real line from the Kohlrausch lesson: Λ°⁺ / Λ°⁻ are the ions' limiting conductivities (became an unrenderable "Λm°⁺")
+        StoryboardDocument doc = lesson(List.of("Λ° = Λ°⁺ + Λ°⁻"),
+            List.of("\\Lambda_m^0 = \\Lambda_+^0 + \\Lambda_-^0"), List.of("Λ°(CH₃COOH) = Λ°(HCl) - Λ°(NaCl)"));
+        FormulaReviewer.unifyNotation(doc, new ArrayList<>());
+        List<SceneSegment> shots = doc.getScenes().get(0).getSegments();
+        assertEquals("\\Lambda_m^\\circ = Λ°⁺ + Λ°⁻", shots.get(0).getFormulaLines().get(0));
+        assertEquals("\\Lambda_m^\\circ = \\Lambda_+^0 + \\Lambda_-^0", shots.get(1).getFormulaLines().get(0));
+        assertTrue(shots.get(2).getFormulaLines().get(0).startsWith("\\Lambda_m^\\circ(CH"));
+    }
+
+    @Test
     void anUnavailableReviewKeepsTheLinesAndAsksForATeacher() {
         StoryboardDocument doc = lesson(List.of("v = u + a t"));
         List<FormulaReviewer.Finding> findings = FormulaReviewer.review(doc, (s, u) -> { throw new java.io.IOException("Ollama down"); });

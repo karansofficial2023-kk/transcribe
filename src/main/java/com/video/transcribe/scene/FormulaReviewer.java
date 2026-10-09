@@ -248,7 +248,7 @@ public final class FormulaReviewer {
                 for (String line : segment.getFormulaLines() == null ? List.<String>of() : segment.getFormulaLines()) {
                     Matcher m = LIMITING_SYMBOL.matcher(line);
                     while (m.find()) {
-                        if (!isLimiting(m.group(2))) continue;
+                        if (!isLimiting(m.group(2)) || ionic(line, m.end())) continue;
                         String base = GREEK_LATEX.getOrDefault(m.group(1), m.group(1));
                         spellings.computeIfAbsent(base, b -> new java.util.LinkedHashSet<>()).add(m.group());
                         if (hasMolar(m.group(2))) molar.put(base, true);
@@ -268,7 +268,7 @@ public final class FormulaReviewer {
                     while (m.find()) {
                         String base = GREEK_LATEX.getOrDefault(m.group(1), m.group(1));
                         String replacement = m.group();
-                        if (isLimiting(m.group(2)) && spellings.getOrDefault(base, java.util.Set.of()).size() > 1) {
+                        if (isLimiting(m.group(2)) && !ionic(line, m.end()) && spellings.getOrDefault(base, java.util.Set.of()).size() > 1) {
                             replacement = base + (molar.getOrDefault(base, false) ? "_m^\\circ" : "^\\circ");
                             // \circ directly followed by a letter would read as one command (\circx): keep them apart
                             if (m.end() < line.length() && Character.isLetter(line.charAt(m.end()))) replacement += " ";
@@ -288,6 +288,12 @@ public final class FormulaReviewer {
                 segment.setFormulaLines(out);
             }
         }
+    }
+
+    /** A charge or further superscript right after the symbol (Λ₀⁺, \Lambda^0_+ , Λ°^{-}) marks an ionic quantity: not the molar one. */
+    private static boolean ionic(String line, int end) {
+        String rest = line.substring(end);
+        return rest.matches("(?s)^\\s*(?:[⁺⁻₊₋]|\\^|_\\{?[+-]|[+-]\\s*[=)]).*");
     }
 
     private static boolean isLimiting(String marks) {
