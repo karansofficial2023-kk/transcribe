@@ -14,8 +14,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 /**
- * Flags narration lines that look like garbled speech recognition ("Stop imbibing", or an unrelated line about tomatoes inside a
- * reproductive-system lesson). The narration is never changed or deleted: a flagged shot gets a note in its review notes and is listed
+ * Flags narration lines that look garbled or off-topic ("Stop imbibing", or an unrelated aside about tomatoes inside a
+ * reproductive-system lesson: the source video really says it, so speech recognition is not always the cause). The narration is never
+ * changed or deleted: a flagged shot gets a note in its review notes and is listed
  * in the narration review file, so the subject-matter expert decides.
  * <ol>
  * <li>Deterministic signals (no model): a tiny fragment without a verb, a sentence repeating the one before it, a sentence sharing no
@@ -42,15 +43,31 @@ public final class NarrationSanityCheck {
     private static final Set<String> VERB_WORDS = Set.of("is", "are", "was", "were", "be", "am", "has", "have", "had", "do", "does", "did",
         "can", "may", "will", "shall", "must", "might", "could", "would", "should", "make", "take", "give", "form", "show", "occur",
         "divide", "grow", "move", "flow", "react", "mean", "means", "need", "use", "see", "get", "go", "come", "become", "remember");
-    private static final Set<String> DANGLING = Set.of("and", "or", "but", "the", "a", "an", "of", "to", "with", "because", "which", "that",
-        "in", "on", "for", "by", "as", "if", "so", "than", "then", "from", "at", "is", "are", "was", "were");
+    // words a finished sentence cannot end on ("... referring to?" and "... these changes are." are fine, so to/in/on/is/are are not here)
+    private static final Set<String> DANGLING = Set.of("and", "or", "but", "the", "a", "an", "of", "with", "because", "which", "that", "than");
     private static final Pattern WORD = Pattern.compile("\\p{L}+");
+    /** Conversational transitions and encouragement: they carry no topic word by design and are never flagged for that. */
+    private static final Pattern FILLER = Pattern.compile("(?i)^\\W*(?:but\\s+|so\\s+|now\\s+|and\\s+)?(?:why\\s+is\\s+this|we\\s+believe\\s+in\\s+you"
+        + "|this\\s+is\\s+(?:definitely\\s+)?something\\s+we\\s+(?:need|want)\\s+to|let'?s\\b|are\\s+you\\s+ready|keep\\s+(?:learning|going|exploring)"
+        + "|happy\\s+learning|thank\\s+you|that'?s\\s+it|see\\s+you|stay\\s+tuned|hello\\b|hi\\b|hey\\b|welcome\\b|okay\\b|wow\\b|amazing\\b"
+        + "|in\\s+this\\s+video|i\\s+didn'?t|i\\s+had\\s+no\\s+idea|that\\s+was\\s+quite|it'?s\\s+amazing|in\\s+fact,?\\s+they'?re)");
 
     private NarrationSanityCheck() {
     }
 
-    /** Step 1 for one sentence of a scene; returns the signals that fired (empty = fine). Conservative by design. */
+    /** Step 1 for one sentence of a scene (scene-wide context); returns the signals that fired (empty = fine). Conservative by design. */
     public static List<String> signals(String lessonTitle, String sceneTitle, List<String> sceneSentences, int index) {
+        return signals(lessonTitle, sceneTitle, sceneSentences, index, sceneSentences, index);
+    }
+
+    /**
+     * Step 1 with the whole lesson as context: a sentence is "off-topic" only when none of its content words occurs in the lesson title,
+     * the scene title or any other sentence of the LESSON (scenes are often two or three sentences, too little context). The two sentences
+     * next to it do not count unless they share a word with the titles: an off-topic aside cannot vouch for the line after it
+     * ("Did you know the vagina shares a trait with tomatoes? Both are acidic.").
+     */
+    public static List<String> signals(String lessonTitle, String sceneTitle, List<String> sceneSentences, int index,
+                                       List<String> lessonSentences, int lessonIndex) {
         List<String> out = new ArrayList<>();
         if (sceneSentences == null || index < 0 || index >= sceneSentences.size()) return out;
         String sentence = sceneSentences.get(index) == null ? "" : sceneSentences.get(index).strip();
@@ -62,36 +79,39 @@ public final class NarrationSanityCheck {
             out.add("repeats the previous sentence");
         }
 
-        if (words.size() > 0 && words.size() <= 12 && isLatin(sentence)) {
-            Set<String> context = new LinkedHashSet<>(contentWords(lessonTitle));
-            context.addAll(contentWords(sceneTitle));
-            for (int i = 0; i < sceneSentences.size(); i++) {
-                if (i != index) context.addAll(contentWords(sceneSentences.get(i)));
+        boolean filler = FILLER.matcher(sentence).find() || (sentence.endsWith("?") && words.size() <= 7);   // transitions and encouragement carry no topic word on purpose
+        Set<String> own = contentWords(sentence);
+        if (!own.isEmpty() && words.size() <= 12 && isLatin(sentence) && !filler) {
+            Set<String> titleWords = new LinkedHashSet<>(contentWords(lessonTitle));
+            titleWords.addAll(contentWords(sceneTitle));
+            Set<String> context = new LinkedHashSet<>(titleWords);
+            for (int i = 0; i < lessonSentences.size(); i++) {
+                if (i == lessonIndex) continue;
+                Set<String> theirs = contentWords(lessonSentences.get(i));
+                if (Math.abs(i - lessonIndex) == 1 && titleWords.size() >= 2 && !FILLER.matcher(lessonSentences.get(i)).find()
+                        && !sharesWord(theirs, titleWords)) continue;
+                context.addAll(theirs);
             }
-            Set<String> own = contentWords(sentence);
-            boolean shares = false;
-            for (String w : own) {
-                for (String c : context) {
-                    if (sameStem(w, c)) {
-                        shares = true;
-                        break;
-                    }
-                }
-                if (shares) break;
-            }
-            if (context.size() >= 3 && !shares) {
+            if (context.size() >= 3 && !sharesWord(own, context)) {
                 boolean verb = words.stream().anyMatch(NarrationSanityCheck::verbLike);
                 if (words.size() <= 3 && !verb) out.add("very short fragment without a verb");
-                if (!own.isEmpty()) out.add("shares no topic word with the lesson or its scene");
+                out.add("shares no topic word with the lesson");
             }
         }
 
-		if (sentence.endsWith("-")) {
+        String last = lastToken(sentence);
+        if (sentence.endsWith("-")) {
             out.add("ends mid-word");
-        } else if (!words.isEmpty() && words.size() >= 3 && DANGLING.contains(words.get(words.size() - 1).toLowerCase(Locale.ROOT))) {
-            out.add("ends on a dangling connective");
+        } else if (words.size() >= 3 && last.length() > 1 && last.matches("\\p{L}+") && DANGLING.contains(last.toLowerCase(Locale.ROOT))) {
+            out.add("ends on a dangling connective");      // a sentence ending in a number or a formula is not dangling
         }
         return out;
+    }
+
+    private static String lastToken(String sentence) {
+        String trimmed = sentence.replaceAll("[\\p{Punct}\\s]+$", "");
+        int cut = trimmed.lastIndexOf(' ');
+        return cut < 0 ? trimmed : trimmed.substring(cut + 1);
     }
 
     /** Runs both steps over the storyboard; notes go to the segments' review notes, narration text is untouched. */
@@ -99,17 +119,25 @@ public final class NarrationSanityCheck {
         List<Finding> findings = new ArrayList<>();
         if (storyboard == null || storyboard.getScenes() == null) return findings;
         boolean modelUp = model != null;
+        List<String> lessonSentences = new ArrayList<>();
+        for (Scene scene : storyboard.getScenes()) {              // the whole lesson is the context of every sentence
+            if (scene.getSegments() == null) continue;
+            for (SceneSegment segment : scene.getSegments()) lessonSentences.add(segment.getSentence() == null ? "" : segment.getSentence());
+        }
+        int offset = 0;
         for (Scene scene : storyboard.getScenes()) {
             if (scene.getSegments() == null) continue;
             List<String> sentences = new ArrayList<>();
             for (SceneSegment segment : scene.getSegments()) sentences.add(segment.getSentence() == null ? "" : segment.getSentence());
+            int before = offset;
+            offset += sentences.size();
             for (int i = 0; i < scene.getSegments().size(); i++) {
                 SceneSegment segment = scene.getSegments().get(i);
                 String sentence = sentences.get(i);
                 if (segment.getHeading() != null && segment.getHeading().strip().equalsIgnoreCase(sentence.strip())) continue;
                 List<String> signals;
                 try {
-                    signals = signals(storyboard.getTitle(), scene.getSceneTitle(), sentences, i);
+                    signals = signals(storyboard.getTitle(), scene.getSceneTitle(), sentences, i, lessonSentences, before + i);
                 } catch (RuntimeException e) {
                     continue;
                 }
@@ -168,6 +196,15 @@ public final class NarrationSanityCheck {
             if (lower.length() >= 4 && !STOP.contains(lower)) out.add(lower);
         }
         return out;
+    }
+
+    private static boolean sharesWord(Set<String> words, Set<String> others) {
+        for (String w : words) {
+            for (String o : others) {
+                if (sameStem(w, o)) return true;
+            }
+        }
+        return false;
     }
 
     private static boolean sameStem(String a, String b) {

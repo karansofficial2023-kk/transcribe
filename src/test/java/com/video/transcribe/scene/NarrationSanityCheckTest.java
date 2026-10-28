@@ -34,6 +34,30 @@ class NarrationSanityCheckTest {
     }
 
     @Test
+    void theWholeLessonIsTheContextAndAnOffTopicNeighbourCannotVouchForALine() {
+        String lesson = "Female Reproductive Anatomy";
+        List<String> all = List.of("The uterus receives the egg.", "The ovaries release an egg each month.", "The vagina leads to the cervix.",
+            "Did you know that the cervix shares a trait with tomatoes?", "Both are acidic.", "The uterus is a muscular organ.");
+        // "uterus" occurs far away in the lesson, so an ordinary short sentence in a tiny scene is fine
+        assertTrue(NarrationSanityCheck.signals(lesson, "Organs", List.of("The uterus is a muscular organ."), 0, all, 5).isEmpty());
+        // "Both are acidic" shares "acidic" with nothing except the tomato aside next to it, and that aside does not count
+        assertFalse(NarrationSanityCheck.signals(lesson, "Organs", List.of("Both are acidic."), 0, all, 4).isEmpty());
+    }
+
+    @Test
+    void transitionsAndSentencesEndingInANumberOrAVariableAreNotFlagged() {
+        List<String> scene = List.of("The testes produce sperm.", "Hello!", "But why is this the case?", "We believe in you.");
+        for (int i = 1; i < scene.size(); i++) {
+            assertTrue(NarrationSanityCheck.signals(LESSON, SCENE, scene, i).isEmpty(), scene.get(i));
+        }
+        // a sentence that ends in a number or in a variable letter does not end on a dangling "and" / "a"
+        List<String> ends = List.of("Puberty begins in girls between 8 and 13 and in boys between 9 and 14.", "Resistance equals Rho times L divided by area A.");
+        for (int i = 0; i < ends.size(); i++) {
+            assertFalse(NarrationSanityCheck.signals(LESSON, SCENE, ends, i).contains("ends on a dangling connective"), ends.get(i));
+        }
+    }
+
+    @Test
     void repeatedAndDanglingSentencesAreFlagged() {
         List<String> scene = List.of("Sperm are made in the testes.", "Sperm are made in the testes.", "They mature in the epididymis and");
         assertTrue(NarrationSanityCheck.signals(LESSON, SCENE, scene, 1).contains("repeats the previous sentence"));
