@@ -259,6 +259,7 @@ public final class VisualDirector {
         boolean labeled = !split && "realistic_labeled_image".equals(type) && validLabels(labels, placements, narration);
         boolean process = "process_steps".equals(type) && validSteps(steps, narration);
 
+        prompt = safePrompt(prompt, narration + " " + gloss + " " + scene.getSceneTitle());
         String requirement = text(plan, "image_requirement");
         segment.setVisualSubject(requirement.length() >= 48 ? requirement : prompt);
         segment.setComfyPrompt(promptFinisher.apply(prompt));
@@ -587,6 +588,34 @@ public final class VisualDirector {
             value = value.substring(label.length()).replaceFirst("^\\s*[-:|]\\s*", "");
         }
         return value.replaceAll("\\s*\\|.*$", "").trim();
+    }
+
+    private static final Pattern SENSITIVE_TOPIC = Pattern.compile("(?i)\\b(?:bod(?:y|ies)|reproduct\\w*|puberty|pubescen\\w*|adolescen\\w*|hormon\\w*"
+        + "|menstrua\\w*|menses|period pain|genital\\w*|sperm\\w*|testes|testis|testic\\w*|ovar(?:y|ies)|ovulat\\w*|uterus|uterine|womb|vagin\\w*"
+        + "|penis|prostate|semen|fertili[sz]\\w*|pregnan\\w*|foetus|fetus|embryo\\w*|sexual\\w*|breast\\w*|anatom\\w*)\\b");
+    private static final Pattern PEOPLE_PHOTO = Pattern.compile("(?i)\\b(?:(?:a|an|the|some)\\s+)?(?:(?:realistic|candid|documentary|stock)\\s+)?"
+        + "(?:photographs?|photos?|portraits?|photoshoots?)\\s+of\\s+(?:(?:a|an|the|some|young|real|adult|human)\\s+)*"
+        + "(?:person|people|persons|man|men|woman|women|boys?|girls?|child|children|teenagers?|students?|humans?)\\b");
+    private static final Pattern BODY_WORDS = Pattern.compile("(?i)\\b(?:human\\s+(?:body|bodies|figures?|torso|anatomy)|(?:male|female)\\s+(?:body|bodies|figures?|torso)"
+        + "|body|bodies|torsos?|abdomen|abdominal|pelvis|pelvic|silhouettes?|outlines?|figures?|persons?|people|man|men|woman|women|boys?|girls?"
+        + "|skin|naked|nude|shirtless|bare|chest|hips?|thighs?|waist|breasts?|nipples?|buttocks)\\b");
+
+    /**
+     * Image models draw a body whenever the prompt says "body", "torso" or "silhouette". For lessons on the human body, reproduction,
+     * puberty or hormones those words (and requests for photographs of people) are removed before the prompt is stored; the stylised
+     * organ, molecule or diagram wording stays. Other lessons, and prompts that would become empty, are returned unchanged.
+     */
+    static String safePrompt(String prompt, String narrationAndTitle) {
+        if (prompt == null || prompt.isBlank() || narrationAndTitle == null || !SENSITIVE_TOPIC.matcher(narrationAndTitle).find()) return prompt;
+        String cleaned = PEOPLE_PHOTO.matcher(prompt).replaceAll(" ");
+        cleaned = BODY_WORDS.matcher(cleaned).replaceAll(" ");
+        cleaned = cleaned.replaceAll("\\s+([,.;:])", "$1")
+            .replaceAll("(?:,\\s*){2,}", ", ")
+            .replaceAll("^[\\s,;:.]+", "")
+            .replaceAll("[\\s,;:]+$", "")
+            .replaceAll("[ \\t]{2,}", " ")
+            .strip();
+        return cleaned.isEmpty() || !cleaned.matches("(?s).*\\p{L}{3,}.*") ? prompt : cleaned;
     }
 
     static boolean validPrompt(String prompt, String narrationContext) {

@@ -302,6 +302,18 @@ public class VideoParaphrasePipeline {
 				Files.writeString(Paths.get(config.getOutputDir(), baseName + "_teacher_pass.json"), gson.toJson(pass));
 			}
 		}
+		if (config.getBoolean("storyboard.narration_check", true)) {
+			// garbled speech recognition ("Stop imbibing") is flagged for the SME, never edited or deleted
+			try {
+				List<com.video.transcribe.scene.NarrationSanityCheck.Finding> narrationFindings =
+					com.video.transcribe.scene.NarrationSanityCheck.check(storyboard, fastOllama::generate);
+				if (!narrationFindings.isEmpty()) {
+					Files.writeString(Paths.get(config.getOutputDir(), baseName + "_narration_review.json"), gson.toJson(narrationFindings));
+				}
+			} catch (RuntimeException e) {
+				logger.warn("Narration check skipped: {}", e.getMessage());
+			}
+		}
 		if (config.getBoolean("storyboard.layout_plan", true)) {
 			com.video.transcribe.scene.LayoutPlanner.plan(storyboard, fastOllama::generate);       // how each shot is shown on the board
 		}

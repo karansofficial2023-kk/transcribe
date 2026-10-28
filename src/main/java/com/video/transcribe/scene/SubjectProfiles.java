@@ -21,7 +21,9 @@ final class SubjectProfiles {
         String key = subject == null ? "" : subject.toLowerCase(Locale.ROOT);
         String body;
         if (has(key, "bio", "life", "botany", "zoology", "जीव", "உயிர", "జీవ", "জীব", "જીવ", "ಜೀವ", "ജീവ")) {
-            body = "Biology: prefer photographs of real organisms, specimens and microscope views; label only structures that are "
+            body = "Biology: prefer photographs of real organisms, specimens and microscope views; for lessons about the human body, "
+                + "reproduction, puberty or hormones the visuals are stylised organ models, microscopic views, molecules, diagrams or "
+                + "timelines, never photographs of people; label only structures that are "
                 + "clearly visible and named in the narration; use split_screen for comparisons of named organisms or structures; "
                 + "use process_steps for mechanisms, cycles and sequences.";
         } else if (has(key, "chem", "रसायन", "வேதி", "రసాయన", "রসায়ন", "રસાયણ", "ರಸಾಯನ", "രസതന്ത്ര")) {
