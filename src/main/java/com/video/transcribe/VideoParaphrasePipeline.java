@@ -322,6 +322,9 @@ public class VideoParaphrasePipeline {
 		if (requestedSubject != null && !requestedSubject.isBlank()) {
 			storyboard.setSubject(requestedSubject);          // a topic request names its subject; it steers the video generator's visuals
 		}
+		if (requestedTitle != null && !requestedTitle.isBlank()) {
+			applyTopicTitle(storyboard, requestedTitle);    // a topic lesson is titled by its topic, not by the file name
+		}
 
 		// Save as JSON
 		Path storyboardJson = Paths.get(config.getOutputDir(), baseName + "_storyboard.json");
@@ -518,6 +521,23 @@ public class VideoParaphrasePipeline {
 
 	/** Subject named by a topic request for the lesson being processed (null for videos and texts). */
 	private String requestedSubject;
+	private String requestedTitle;
+
+	/** "Ohms_Law_Test.topic.json" must not put "Ohms Law Test" on the title card: the lesson and its title card take the topic. */
+	static void applyTopicTitle(com.video.transcribe.scene.StoryboardDocument storyboard, String topic) {
+		String old = storyboard.getTitle() == null ? "" : storyboard.getTitle().trim();
+		storyboard.setTitle(topic.trim());
+		if (storyboard.getScenes() == null) return;
+		for (com.video.transcribe.scene.Scene scene : storyboard.getScenes()) {
+			if (scene.getSegments() == null) continue;
+			for (com.video.transcribe.scene.SceneSegment segment : scene.getSegments()) {
+				String heading = segment.getHeading() == null ? "" : segment.getHeading().trim();
+				if ("title_card".equals(segment.getTemplate()) && (heading.isEmpty() || heading.equalsIgnoreCase(old))) {
+					segment.setHeading(topic.trim());
+				}
+			}
+		}
+	}
 
 	/**
 	 * Transcript/notes (.txt .docx .pdf) and topic requests (.topic.json): the source text is read or written first, then the lesson
@@ -529,6 +549,7 @@ public class VideoParaphrasePipeline {
 		long startTime = System.currentTimeMillis();
 		detectedLanguage = language;
 		requestedSubject = null;
+		requestedTitle = null;
 		try (GpuLease gpu = GpuLease.acquire("transcribe", java.time.Duration.ofHours(4))) {
 			Path input = Paths.get(inputPath);
 			Path outDir = Paths.get(config.getOutputDir());
@@ -551,6 +572,7 @@ public class VideoParaphrasePipeline {
 				text = script.script();
 				detectedLanguage = request.language();
 				requestedSubject = request.subject().isBlank() || "General".equals(request.subject()) ? null : request.subject();
+				requestedTitle = request.topic();
 				Files.writeString(outDir.resolve(baseName + "_topic_script.txt"), text);
 				java.util.Map<String, Object> review = new java.util.LinkedHashMap<>();
 				review.put("request", request);
@@ -589,6 +611,7 @@ public class VideoParaphrasePipeline {
 					null, null, System.currentTimeMillis() - startTime, e.getMessage());
 		} finally {
 			requestedSubject = null;
+			requestedTitle = null;
 		}
 	}
 

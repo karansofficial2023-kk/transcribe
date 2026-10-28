@@ -157,6 +157,15 @@ public final class VisualDirector {
         return """
             You are the visual director of a photorealistic educational video. For every shot decide how it is shown.
             Use ONLY facts stated in that shot's narration (the scene title may give context). Rules:
+            - SAFETY (absolute, applies to image_prompt, panels and every motion): this is a school-student educational video.
+              Never request or describe nudity, bare or partly undressed bodies, shirtless people, swimwear or underwear, breasts,
+              genitals, sexual, suggestive or adult content, blood or gore. When the topic is the human body, reproduction or
+              puberty, show isolated organs, cells, models or simple diagrams, or people fully and modestly clothed. Describe such
+              a picture as a stylised false-colour 3D medical animation model of ONE organ, gland, cell cluster or molecule,
+              glowing on a dark background, never as a photograph and never with a human figure, skin or body outline. Ideas
+              the reference lessons use: a microscopic view (sperm, egg, follicle, cells), a hormone molecule, a labelled
+              single organ, a gland in the head or abdomen, a timeline or graph of hormone levels (process_steps or graph),
+              a flowchart of hormone types, an everyday object (a calendar, a medicine pack) instead of a body.
             - image_prompt: 40-70 words. Name the concrete subject, its visible action, spatial layout, camera distance and
               angle, natural lighting and colours. Photorealistic. Never request text, letters, labels, arrows, diagrams,
               collages, split screens or watermarks. Never add species, places or objects the narration does not mention.
