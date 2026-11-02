@@ -139,6 +139,15 @@ public final class StoryboardQualityGate {
         return result.isEmpty() ? List.of(normalized) : result;
     }
 
+    /** A mathematical ellipsis continues a list ("2, 5, 8, 11, ..." or "1, 2, ..., n"); any other "..." marks text that was cut off. */
+    static boolean isTruncated(String subtitle) {
+        if (subtitle == null) return false;
+        subtitle = subtitle.replace("…", "...");
+        if (!subtitle.contains("...")) return false;
+        String withoutMathEllipsis = subtitle.replaceAll("(?:\\d+[a-zA-Z]?|\\b[a-zA-Z]\\b|[)\\]])\\s*,\\s*\\.\\.\\.", "");
+        return withoutMathEllipsis.contains("...");
+    }
+
     private static void validateSegment(Scene scene, SceneSegment segment) {
         List<String> labels = segment.getLabels() == null ? List.of() : segment.getLabels();
         List<String> placements = segment.getLabelPlacements() == null
@@ -159,8 +168,7 @@ public final class StoryboardQualityGate {
                 throw new IllegalStateException("Storyboard row " + id
                     + " must have a concise Shot heading");
             }
-            if (segment.getSubtitle() == null || segment.getSubtitle().isBlank()
-                    || segment.getSubtitle().contains("...")) {
+            if (segment.getSubtitle() == null || segment.getSubtitle().isBlank() || isTruncated(segment.getSubtitle())) {
                 throw new IllegalStateException("Storyboard row " + id + " has an incomplete subtitle");
             }
         }
@@ -445,7 +453,7 @@ public final class StoryboardQualityGate {
     private static boolean looksTruncated(String value) {
         if (value == null || value.isBlank()) return true;
         String clean = value.replaceAll("[\\r\\n]+", " ").replaceAll("\\s+", " ").trim();
-        if (clean.contains("...") || clean.endsWith("\u2026")) return true;
+        if (isTruncated(clean)) return true;       // a sequence continued with "..." ("2, 5, 8, ...") is mathematics, not cut-off text
         String tail = clean.replaceAll("[,:;-]+$", "").trim().toLowerCase(Locale.ROOT);
         return tail.matches(".*\\b(?:and|or|but|because|while|when|with|from|into|of|the|a|an|to|for|in|on|by)$");
     }

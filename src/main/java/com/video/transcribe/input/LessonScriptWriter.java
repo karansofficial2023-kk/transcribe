@@ -137,7 +137,11 @@ public final class LessonScriptWriter {
         if (value.startsWith("```")) value = value.replaceAll("^```\\w*\\s*|```\\s*$", "");
         return value.replaceAll("(?m)^\\s*#+\\s*.*$", "")
             .replaceAll("(?m)^\\s*(?:[-*•]|\\d+[.)])\\s+", "")
-            .replaceAll("\\*\\*?([^*]+)\\*\\*?", "$1")
+            // markdown emphasis only: "**bold**" and "*italic*" hugging their text. A multiplication sign ("2*10", "(n - 1) * d") is never
+            // emphasis: it has a word character before it or a space after it, so it is kept (and written as the times sign)
+            .replaceAll("\\*\\*(?=\\S)([^*\\n]+?)(?<=\\S)\\*\\*", "$1")
+            .replaceAll("(?<![\\w*])\\*(?=[^\\s*])([^*\\n]+?)(?<=[^\\s*])\\*(?![\\w*])", "$1")
+            .replaceAll("(?<=[\\d)\\]\\w])\\s*\\*\\s*(?=[\\d(\\[\\w])", " × ")
             .replaceAll("(?m)^\\s*(?:narrator|teacher|script)\\s*:\\s*", "")
             .replaceAll("[ \\t]+", " ")
             .replaceAll("\\n{3,}", "\n\n")
