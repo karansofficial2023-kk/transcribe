@@ -1,6 +1,8 @@
 package com.video.transcribe.scene;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SceneSegment {
 	private int segmentNumber;
@@ -41,6 +43,10 @@ public class SceneSegment {
 	private List<String> galleryItems;
 	private Shot shot;
 	private Shot ltxShot;
+	private String reasoningNote;
+	private Map<String, String> pronunciations = new LinkedHashMap<>();
+	private String manimCode;
+	private String mermaidCode;
 
 	public int getSegmentNumber() {
 		return segmentNumber;
@@ -347,5 +353,37 @@ public class SceneSegment {
 
 	public void setGalleryItems(List<String> galleryItems) {
 		this.galleryItems = galleryItems;
+	}
+
+	public String getReasoningNote() {
+		return reasoningNote;
+	}
+
+	public void setReasoningNote(String reasoningNote) {
+		this.reasoningNote = reasoningNote;
+	}
+
+	public Map<String, String> getPronunciations() {
+		return pronunciations;
+	}
+
+	public void setPronunciations(Map<String, String> pronunciations) {
+		this.pronunciations = pronunciations != null ? pronunciations : new LinkedHashMap<>();
+	}
+
+	public String getManimCode() {
+		return manimCode;
+	}
+
+	public void setManimCode(String manimCode) {
+		this.manimCode = manimCode;
+	}
+
+	public String getMermaidCode() {
+		return mermaidCode;
+	}
+
+	public void setMermaidCode(String mermaidCode) {
+		this.mermaidCode = mermaidCode;
 	}
 }

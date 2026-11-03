@@ -27,6 +27,24 @@ import com.video.transcribe.scene.StoryboardDocument;
 
 class StoryboardContractRoundTripTest {
 
+    @Test
+    void shotRecordIncludesReasoningAndPronunciations() {
+        SceneSegment s = labelled();
+        s.setReasoningNote("Directly demonstrates current limitation in the circuit");
+        s.setPronunciations(Map.of("IR", "I times R", "V", "voltage"));
+        s.setManimCode("class Derivation(Scene): pass");
+        s.setMermaidCode("graph TD; A-->B");
+        Map<String, Object> record = StoryboardContract.shotRecord(1, s);
+        assertEquals("Directly demonstrates current limitation in the circuit", record.get("reasoning"));
+        assertNotNull(record.get("pronunciations"));
+        assertEquals("class Derivation(Scene): pass", record.get("manim_code"));
+        assertEquals("graph TD; A-->B", record.get("mermaid_code"));
+        @SuppressWarnings("unchecked")
+        Map<String, String> prons = (Map<String, String>) record.get("pronunciations");
+        assertEquals("I times R", prons.get("IR"));
+        assertTrue(record.get("review_notes").toString().contains("Directly demonstrates"));
+    }
+
     private static SceneSegment labelled() {
         SceneSegment s = new SceneSegment();
         s.setSegmentNumber(1);

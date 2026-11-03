@@ -39,8 +39,9 @@ public final class VisualDirector {
 
     private static final JsonObject SCHEMA = JsonParser.parseString("""
         {"type":"object","properties":{"shots":{"type":"array","items":{"type":"object","properties":{
+          "reasoning":{"type":"string"},
           "shot_id":{"type":"string"},
-          "visual_type":{"type":"string","enum":["realistic_image","realistic_labeled_image","process_steps","split_screen","formula","graph","circuit"]},
+          "visual_type":{"type":"string","enum":["realistic_image","realistic_labeled_image","process_steps","split_screen","formula","graph","circuit","math_animation","mermaid_diagram"]},
           "image_prompt":{"type":"string"},
           "image_requirement":{"type":"string"},
           "labels":{"type":"array","items":{"type":"string"}},
@@ -55,8 +56,11 @@ public final class VisualDirector {
           "graph_function":{"type":"string"},
           "graph_range":{"type":"string"},
           "circuit_rows":{"type":"array","items":{"type":"string"}},
-          "heading":{"type":"string"}
-        },"required":["shot_id","visual_type","image_prompt","image_requirement","labels","label_placement","steps","panels","narration_en","formula_lines","explain_steps","graph_rows","graph_note","graph_function","graph_range","circuit_rows","heading"]}}},
+          "heading":{"type":"string"},
+          "pronunciations":{"type":"object"},
+          "manim_code":{"type":"string"},
+          "mermaid_code":{"type":"string"}
+        },"required":["reasoning","shot_id","visual_type","image_prompt","image_requirement","labels","label_placement","steps","panels","narration_en","formula_lines","explain_steps","graph_rows","graph_note","graph_function","graph_range","circuit_rows","heading"]}}},
         "required":["shots"]}
         """).getAsJsonObject();
 
@@ -201,9 +205,16 @@ public final class VisualDirector {
             - visual_type circuit also for an electrolysis or electroplating cell (a battery wired to two electrodes in an
               electrolyte). Give one row "<caption> | electrolysis: battery 6 V; anode <material>; cathode <object>; electrolyte
               <solution>" using exactly those four parts, with every material and solution named in the narration.
+            - visual_type math_animation ONLY when the narration describes dynamic mathematical proofs, 3D coordinate transformations,
+              vectors, calculus animation or dynamic geometry. In manim_code give concise Manim Python code or formula animation sequence.
+            - visual_type mermaid_diagram ONLY when the narration describes a scientific cycle, flowchart, biological pathway, or
+              chemical reaction cascade (e.g. nitrogen cycle, water cycle, Krebs cycle, reflex arc). In mermaid_code give the
+              clean Mermaid diagram text (e.g. "graph TD; A[Water] --> B[Evaporation]; ...").
             - heading: a short on-screen title for the shot - a noun phrase of 2 to 7 words naming the shot's topic (for example
               "Oxygen released by leaves"), written in the same language as the narration. Never copy the start of the sentence, never
               end on a connecting word, no punctuation at the end.
+            - reasoning: 10-25 words explaining why this visual_type and prompt are chosen based on the narration.
+            - pronunciations: optional JSON object mapping tricky terms, symbols or abbreviations to spoken words (e.g. {"CO2": "carbon dioxide"}).
             - narration_en: if the narration is not English, give an English translation (used only to check your prompts);
               otherwise repeat the narration. image_prompt is always written in English.
             - Otherwise (a concrete physical subject or scene can be photographed) visual_type realistic_image with empty labels, label_placement, steps and panels.
@@ -228,6 +239,30 @@ public final class VisualDirector {
     }
 
     boolean apply(SceneSegment segment, Scene scene, JsonObject plan) {
+        String reasoning = text(plan, "reasoning");
+        if (reasoning != null && !reasoning.isBlank()) {
+            segment.setReasoningNote(reasoning.strip());
+        }
+        String manim = text(plan, "manim_code");
+        if (manim != null && !manim.isBlank()) {
+            segment.setManimCode(manim.strip());
+        }
+        String mermaid = text(plan, "mermaid_code");
+        if (mermaid != null && !mermaid.isBlank()) {
+            segment.setMermaidCode(mermaid.strip());
+        }
+        if (plan.has("pronunciations") && plan.get("pronunciations").isJsonObject()) {
+            Map<String, String> prons = new LinkedHashMap<>();
+            JsonObject obj = plan.getAsJsonObject("pronunciations");
+            for (String key : obj.keySet()) {
+                if (!key.isBlank() && obj.get(key).isJsonPrimitive()) {
+                    prons.put(key.strip(), obj.get(key).getAsString().strip());
+                }
+            }
+            if (!prons.isEmpty()) {
+                segment.setPronunciations(prons);
+            }
+        }
         String narration = segment.getSentence() == null ? "" : segment.getSentence();
         String proposedHeading = text(plan, "heading");
         if (validHeading(proposedHeading, narration)) {
@@ -237,6 +272,25 @@ public final class VisualDirector {
         String prompt = text(plan, "image_prompt");
         String gloss = text(plan, "narration_en");
         String type = text(plan, "visual_type");
+        if ("math_animation".equals(type)) {
+            segment.setTemplate("formula");
+            segment.setVisualType("math_animation");
+            segment.setMediaType("animation");
+            segment.setMotionType("local_animation");
+            segment.setTool("manim");
+            if (manim != null && !manim.isBlank()) segment.setManimCode(manim.strip());
+            segment.setMotion("animation: manim_procedural; transition_in: fade; transition_out: crossfade");
+            return true;
+        }
+        if ("mermaid_diagram".equals(type)) {
+            segment.setTemplate("diagram");
+            segment.setVisualType("mermaid_diagram");
+            segment.setMediaType("diagram");
+            segment.setTool("mermaid");
+            if (mermaid != null && !mermaid.isBlank()) segment.setMermaidCode(mermaid.strip());
+            segment.setMotion("diagram: mermaid_reveal; transition_in: fade; transition_out: crossfade");
+            return true;
+        }
         boolean mathType = "formula".equals(type) || "graph".equals(type) || "circuit".equals(type);
         if (!mathType && !validPrompt(prompt, narration + " " + gloss + " " + scene.getSceneTitle())) return false;
         if ("formula".equals(type) && applyFormula(segment, plan, narration + " " + gloss)) return true;

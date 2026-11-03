@@ -79,8 +79,12 @@ public final class StoryboardContract {
         f.put("explain_steps", list(segment.getExplainSteps()));
         f.put("steps", list(segment.getSteps()));
         f.put("columns", list(segment.getColumns()));
+        f.put("reasoning", text(segment.getReasoningNote()));
+        f.put("pronunciations", segment.getPronunciations() != null ? segment.getPronunciations() : Map.of());
+        f.put("manim_code", text(segment.getManimCode()));
+        f.put("mermaid_code", text(segment.getMermaidCode()));
         // Never rendered on screen: QA notes, coverage and asset-quality remarks only.
-        f.put("review_notes", joinNonBlank(text(segment.getCoverageNotes()), text(segment.getAssetQualityNotes())));
+        f.put("review_notes", joinNonBlank(text(segment.getCoverageNotes()), text(segment.getAssetQualityNotes()), text(segment.getReasoningNote())));
         return f;
     }
 
@@ -117,6 +121,7 @@ public final class StoryboardContract {
     static String productionMediaType(SceneSegment segment) {
         if (segment.getAssetPath() != null && !segment.getAssetPath().isBlank()) return "supplied image";
         if ("manim".equals(segment.getTool())) return "Manim animation";
+        if ("mermaid".equals(segment.getTool()) || "mermaid_diagram".equals(segment.getVisualType())) return "Mermaid diagram";
         if ("short_motion_clip".equals(segment.getVisualType())) {
             if (segment.getLtxShot() != null || "ltx_video".equals(segment.getTool())) return "LTX clip";
             return "Wan clip";

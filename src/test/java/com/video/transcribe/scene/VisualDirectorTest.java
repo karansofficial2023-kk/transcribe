@@ -131,4 +131,35 @@ class VisualDirectorTest {
         assertFalse(VisualDirector.validCircuitRows(List.of(
             "Silver plating | electrolysis: battery 6 V; anode silver rod; cathode keychain"), plating));
     }
+
+    @Test
+    void acceptsMathAnimationAndMermaidDiagramProposals() {
+        SceneSegment mathSeg = segment();
+        boolean mathChanged = new VisualDirector(null).apply(mathSeg, scene(), plan("""
+            {"visual_type":"math_animation",
+             "manim_code":"class WaveTransform(Scene): pass",
+             "image_prompt":"Dynamic geometric curve animating across the axes, vector space proof",
+             "image_requirement":"Animated mathematical transform",
+             "labels":[],"label_placement":[],"steps":[],"panels":[],"narration_en":"The transform preserves distance.",
+             "formula_lines":[],"explain_steps":[],"graph_rows":[],"graph_note":"","graph_function":"","graph_range":"",
+             "circuit_rows":[],"heading":"Vector Transform"}"""));
+        assertTrue(mathChanged);
+        assertEquals("math_animation", mathSeg.getVisualType());
+        assertEquals("class WaveTransform(Scene): pass", mathSeg.getManimCode());
+        assertEquals("manim", mathSeg.getTool());
+
+        SceneSegment diagramSeg = segment();
+        boolean diagChanged = new VisualDirector(null).apply(diagramSeg, scene(), plan("""
+            {"visual_type":"mermaid_diagram",
+             "mermaid_code":"graph TD; A[Water]-->B[Vapour]; B-->C[Rain]",
+             "image_prompt":"Clean flow diagram of the water cycle",
+             "image_requirement":"Water cycle diagram",
+             "labels":[],"label_placement":[],"steps":[],"panels":[],"narration_en":"Water evaporates and falls as rain.",
+             "formula_lines":[],"explain_steps":[],"graph_rows":[],"graph_note":"","graph_function":"","graph_range":"",
+             "circuit_rows":[],"heading":"Water Cycle"}"""));
+        assertTrue(diagChanged);
+        assertEquals("mermaid_diagram", diagramSeg.getVisualType());
+        assertEquals("graph TD; A[Water]-->B[Vapour]; B-->C[Rain]", diagramSeg.getMermaidCode());
+        assertEquals("mermaid", diagramSeg.getTool());
+    }
 }

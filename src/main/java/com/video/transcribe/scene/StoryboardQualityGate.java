@@ -23,7 +23,8 @@ public final class StoryboardQualityGate {
     private static final List<String> VISUAL_TYPES = List.of(
         "title_card", "realistic_image", "realistic_labeled_image",
         "realistic_background_with_labels", "diagram_overlay", "process_steps",
-        "split_screen", "short_motion_clip", "graph", "circuit");
+        "split_screen", "short_motion_clip", "graph", "circuit",
+        "math_animation", "mermaid_diagram");
     private static final String NUMBER = "(0(?:\\.\\d+)?|1(?:\\.0+)?)";
     private static final Pattern NUMERIC_TARGET = Pattern.compile(
         "target=\\(\\s*" + NUMBER + "\\s*,\\s*" + NUMBER + "\\s*\\)",
