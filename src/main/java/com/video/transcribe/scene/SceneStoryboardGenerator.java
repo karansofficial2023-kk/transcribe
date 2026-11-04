@@ -1585,6 +1585,14 @@ public class SceneStoryboardGenerator {
                 if (!openingTitle) {
                     removeContentShotTitleCardWording(segment);
                 }
+                if (primaryLesson) {
+                    if ("process".equals(segment.getTemplate()) || "process_steps".equals(segment.getVisualType()) || "formula".equals(segment.getTemplate())) {
+                        segment.setTemplate("photo");
+                        segment.setVisualType("realistic_image");
+                        segment.setMediaType("image");
+                        segment.setTool("comfyui");
+                    }
+                }
                 if (usesGeneratedStill(segment)) {
                     segment.setComfyPrompt(ensureProductionImagePrompt(segment, primaryLesson));
                 } else if ("manim".equals(segment.getTool()) || hasReviewedAsset(segment)) {
