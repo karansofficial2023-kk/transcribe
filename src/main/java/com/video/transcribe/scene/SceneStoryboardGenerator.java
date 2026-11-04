@@ -52,10 +52,11 @@ public class SceneStoryboardGenerator {
     private static final Pattern DEFINED_MECHANISM = Pattern.compile(
         "\\b([\\p{L}][\\p{L}-]{3,})\\s+(?:means|occurs|involves|refers\\s+to|describes|is\\s+defined\\s+as)\\b",
         Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
-    private static final String PREMIUM_STILL_CONTRACT = "Premium educational documentary frame, sharp native 1920x1080 detail, "
+    private static final String PREMIUM_STILL_CONTRACT = "Premium educational documentary photograph, sharp native 1920x1080 detail, "
         + "full-frame visual coverage with no blank card panel, intentional foreground-background separation, "
-        + "camera distance and angle chosen to make the taught evidence clearly inspectable, controlled realistic lighting, "
-        + "natural color and contrast, stable professional composition, and sufficient uncluttered safe margins for renderer overlays.";
+        + "camera distance and angle chosen to make the taught evidence clearly inspectable, authentic laboratory or studio lighting, "
+        + "natural color and contrast, stable professional composition, photorealistic physical textures (brushed metal, polished alloy, tempered glass, true optical glow), "
+        + "no cartoon, no anime, no 3D CGI rendering, and sufficient uncluttered safe margins for renderer overlays.";
     private static final JsonObject TOPIC_SCHEMA = JsonParser.parseString("""
         {
           "type": "object",
@@ -2840,7 +2841,8 @@ public class SceneStoryboardGenerator {
             subject = narration;
         }
         return PREMIUM_STILL_CONTRACT + " Exact shot requirement: " + subject
-            + ". Depict only source-supported visible evidence and physically credible objects. "
+            + ". Depict only source-supported visible evidence, authentic physical objects, and scientifically accurate phenomena. "
+            + "High-fidelity documentary realism, crisp focus on the taught mechanism, cinematic illumination with subtle rim lighting. "
             + "Keep all required structures unobscured and large enough for inspection; reserve overlay-safe space without weakening the composition.";
     }
 
@@ -3585,6 +3587,11 @@ public class SceneStoryboardGenerator {
                 || containsIgnoreCase(segment.getLocalAnimation(), "label")) {
             return "animation_with_labels";
         }
+        String text = joinForFactCheck(segment.getSentence(), segment.getVisualAnimation(), segment.getLocalAnimation());
+        if (containsAnyIgnoreCase(text, "flame front", "propagation", "piston stroke", "combustion chamber",
+                "spark plug", "equivalence ratio", "ion migration", "electron flow", "redox reaction")) {
+            return "animation";
+        }
         if ("static_image".equals(segment.getMotionType())) {
             return "photo";
         }
@@ -3620,7 +3627,7 @@ public class SceneStoryboardGenerator {
     }
 
     private String defaultNegativePrompt() {
-        return "incorrect anatomy, wrong labels, unreadable text, watermark, blurry, distorted, fantasy, irrelevant objects";
+        return "text, letters, typography, labels, captions, watermark, logo, signature, diagram, infographic, chart, collage, grid, panels, border, blurry, distorted, cartoon, anime, 3d render, cgi, illustration, drawing, sketch, oversaturated";
     }
 
     private boolean containsIgnoreCase(String text, String needle) {
