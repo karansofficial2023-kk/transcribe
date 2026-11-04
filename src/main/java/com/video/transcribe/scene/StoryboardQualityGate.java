@@ -159,7 +159,7 @@ public final class StoryboardQualityGate {
             throw new IllegalStateException("Storyboard row " + id
                 + " has unsupported visual_type: " + segment.getVisualType());
         }
-        if (!SUBTITLE_STYLE.equals(segment.getSubtitleStyle())) {
+        if (!SUBTITLE_STYLE.equals(segment.getSubtitleStyle()) && !"primary_karaoke".equals(segment.getSubtitleStyle())) {
             throw new IllegalStateException("Storyboard row " + id + " has non-standard subtitle style");
         }
         boolean titleCard = "title_card".equals(segment.getVisualType());
@@ -188,7 +188,7 @@ public final class StoryboardQualityGate {
                     + " has a truncated image requirement");
             }
             if (!hasCleanImageContract(segment.getComfyPrompt())
-                    || !hasPremiumStillContract(segment.getComfyPrompt())) {
+                    || (!hasPremiumStillContract(segment.getComfyPrompt()) && !hasPrimaryGradeStillContract(segment.getComfyPrompt()))) {
                 throw new IllegalStateException("Storyboard row " + id
                     + " has an unsafe or low-detail image prompt");
             }
@@ -423,6 +423,13 @@ public final class StoryboardQualityGate {
             && value.contains("no ui")
             && value.contains("no duplicated or malformed objects")
             && value.contains("no slide or presentation-card layout");
+    }
+
+    private static boolean hasPrimaryGradeStillContract(String prompt) {
+        if (prompt == null) return false;
+        String value = prompt.toLowerCase(Locale.ROOT);
+        return value.contains("storybook illustration")
+            || (value.contains("children educational") && value.contains("cartoon"));
     }
 
     private static boolean hasPremiumStillContract(String prompt) {

@@ -52,6 +52,31 @@ public class SceneStoryboardGenerator {
     private static final Pattern DEFINED_MECHANISM = Pattern.compile(
         "\\b([\\p{L}][\\p{L}-]{3,})\\s+(?:means|occurs|involves|refers\\s+to|describes|is\\s+defined\\s+as)\\b",
         Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
+    public static final String PRIMARY_GRADE_STILL_CONTRACT = "High quality 1080p children educational storybook illustration, "
+        + "charming clean 3D Disney/Pixar cartoon storybook art style, bright warm cheerful lighting, soft natural shadows. "
+        + "Friendly cute Indian school children in neat blue and white uniform on the left side of frame gesturing warmly as learning guides, "
+        + "with clear open educational presentation space and colorful pedagogical concept elements on the right. "
+        + "Vibrant engaging educational visuals for young students, clean uncluttered layout, no realistic adult documentary, "
+        + "no scary elements, no distorted faces, no text, no watermarks, no captions.";
+
+    public static boolean isPrimaryGrade(String academicLevel, String intendedLearners, String subject, String title) {
+        String combined = ((academicLevel == null ? "" : academicLevel) + " "
+            + (intendedLearners == null ? "" : intendedLearners) + " "
+            + (subject == null ? "" : subject) + " "
+            + (title == null ? "" : title)).toLowerCase(Locale.ROOT);
+        if (combined.matches(".*\\b(class|std|grade|standard)\\s*([6-9]|1[0-2]|[6-9]th|1[0-2]th)\\b.*")
+                || combined.matches(".*\\b(6th|7th|8th|9th|10th|11th|12th)\\s*(std|grade|class|standard)\\b.*")
+                || combined.matches(".*\\b(middle\\s*school|high\\s*school|secondary|higher\\s*secondary|college|university|engineering|undergraduate|postgraduate)\\b.*")
+                || combined.matches(".*\\b(thermodynamics|combustion|electroplating|calculus|quantum|relativity)\\b.*")) {
+            return false;
+        }
+        return combined.matches(".*\\b(lkg|ukg|nursery|kindergarten|kg|pre-?k|preschool)\\b.*")
+                || combined.matches(".*\\b(class|std|grade|standard)\\s*([1-5]|1st|2nd|3rd|4th|5th)\\b.*")
+                || combined.matches(".*\\b(1st|2nd|3rd|4th|5th)\\s*(std|grade|class|standard)\\b.*")
+                || combined.matches(".*\\b(primary|elementary|lower\\s*primary)\\b.*")
+                || combined.matches(".*\\b(evs|environmental\\s*studies)\\b.*");
+    }
+
     private static final String PREMIUM_STILL_CONTRACT = "Premium educational documentary photograph, sharp native 1920x1080 detail, "
         + "full-frame visual coverage with no blank card panel, intentional foreground-background separation, "
         + "camera distance and angle chosen to make the taught evidence clearly inspectable, authentic laboratory or studio lighting, "
@@ -578,6 +603,8 @@ public class SceneStoryboardGenerator {
         doc.setTitle(topicCheck.safeStoryboardTitle());
         doc.setSubject(topicCheck.subject());
         doc.setTopic(topicCheck.inferredTopic());
+        doc.setAcademicLevel(topicCheck.academicLevel());
+        doc.setGradeLevel(topicCheck.intendedLearners());
         doc.setSmeRole(topicCheck.smeRole());
         doc.setSourceText(storyboardText);
         doc.setScenes(scenes);
@@ -612,6 +639,8 @@ public class SceneStoryboardGenerator {
         doc.setTitle(topicCheck.safeStoryboardTitle());
         doc.setSubject(topicCheck.subject());
         doc.setTopic(topicCheck.inferredTopic());
+        doc.setAcademicLevel(topicCheck.academicLevel());
+        doc.setGradeLevel(topicCheck.intendedLearners());
         doc.setSmeRole(topicCheck.smeRole());
         doc.setGeneratedAt(java.time.Instant.now().toString());
         runVisualDirector(doc);
@@ -1514,6 +1543,13 @@ public class SceneStoryboardGenerator {
         }
     }
 
+    private boolean isPrimaryGradeLesson(List<Scene> scenes, String storyboardTitle) {
+        SceneSegment first = (scenes != null && !scenes.isEmpty() && scenes.get(0).getSegments() != null && !scenes.get(0).getSegments().isEmpty())
+            ? scenes.get(0).getSegments().get(0) : null;
+        String notes = first != null && first.getCoverageNotes() != null ? first.getCoverageNotes() : "";
+        return isPrimaryGrade(notes, notes, "", storyboardTitle);
+    }
+
     private void enforceFinalProductionContract(List<Scene> scenes, String storyboardTitle) {
         for (int sceneIndex = 0; sceneIndex < scenes.size(); sceneIndex++) {
             Scene scene = scenes.get(sceneIndex);
@@ -1535,6 +1571,7 @@ public class SceneStoryboardGenerator {
             }
             normalizeTitleCards(scene,
                 sceneIndex == 0 ? storyboardTitle : scene.getSceneTitle(), sceneIndex == 0);
+            boolean primaryLesson = isPrimaryGradeLesson(scenes, storyboardTitle);
             for (int segmentIndex = 0; segmentIndex < scene.getSegments().size(); segmentIndex++) {
                 SceneSegment segment = scene.getSegments().get(segmentIndex);
                 boolean openingTitle = sceneIndex == 0 && segmentIndex == 0;
@@ -1543,13 +1580,13 @@ public class SceneStoryboardGenerator {
                 } else if (!segment.isHeadingFromDirector() || segment.getHeading() == null || segment.getHeading().isBlank()) {
                     segment.setHeading(buildHeading(segment.getSentence()));
                 }
-                segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
+                segment.setSubtitleStyle(primaryLesson ? "primary_karaoke" : PRO_SUBTITLE_STYLE);
                 segment.setSubtitle(openingTitle ? "" : buildSubtitle(segment.getSentence()));
                 if (!openingTitle) {
                     removeContentShotTitleCardWording(segment);
                 }
                 if (usesGeneratedStill(segment)) {
-                    segment.setComfyPrompt(ensureProductionImagePrompt(segment));
+                    segment.setComfyPrompt(ensureProductionImagePrompt(segment, primaryLesson));
                 } else if ("manim".equals(segment.getTool()) || hasReviewedAsset(segment)) {
                     segment.setComfyPrompt("");
                 }
@@ -2356,7 +2393,9 @@ public class SceneStoryboardGenerator {
         segment.setImageRecommendations(List.of("Sharp curriculum-accurate real HD visual for: " + sentence));
         segment.setMotion(defaultMotion(segment.getTemplate()));
         segment.setSubtitle(buildSubtitle(sentence));
-        segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
+        if (!"primary_karaoke".equals(segment.getSubtitleStyle())) {
+            segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
+        }
         segment.setTool("pillow_opencv");
         segment.setAssetQualityNotes("Fallback source-coverage visual requires subject-aware label review; use a reviewed asset when precise anatomy or apparatus is required.");
         segment.setComfyPrompt(ensureProductionImagePrompt(segment));
@@ -2757,15 +2796,16 @@ public class SceneStoryboardGenerator {
         return ensureNoTextPrompt(prompt);
     }
 
-    private String ensureNoTextPrompt(String prompt) {
+    private String ensureNoTextPrompt(String prompt, boolean primary) {
         if (prompt == null || prompt.isBlank()) {
             return prompt;
         }
+        String contract = primary ? PRIMARY_GRADE_STILL_CONTRACT : PREMIUM_STILL_CONTRACT;
         String result = prompt.trim();
         if (!containsIgnoreCase(result, "1920x1080")) {
-            result = PREMIUM_STILL_CONTRACT + " " + result;
+            result = contract + " " + result;
         }
-        result = appendPromptClause(result, PREMIUM_STILL_CONTRACT);
+        result = appendPromptClause(result, contract);
         result = appendPromptClause(result, "No generated text.");
         result = appendPromptClause(result, "No embedded text.");
         result = appendPromptClause(result, "No generated labels.");
@@ -2783,6 +2823,10 @@ public class SceneStoryboardGenerator {
         return result;
     }
 
+    private String ensureNoTextPrompt(String prompt) {
+        return ensureNoTextPrompt(prompt, false);
+    }
+
     private String appendPromptClause(String prompt, String clause) {
         String normalizedPrompt = prompt.toLowerCase(Locale.ROOT);
         String normalizedClause = clause.toLowerCase(Locale.ROOT)
@@ -2796,15 +2840,16 @@ public class SceneStoryboardGenerator {
     }
 
     private String ensureProductionImagePrompt(SceneSegment segment) {
-        return ensureProductionImagePrompt(segment, segment == null ? "" : segment.getComfyPrompt());
+        return ensureProductionImagePrompt(segment, false);
     }
 
-    private String ensureProductionImagePrompt(SceneSegment segment, String prompt) {
+    private String ensureProductionImagePrompt(SceneSegment segment, boolean primary) {
+        String prompt = segment == null ? "" : segment.getComfyPrompt();
         String candidate = prompt == null ? "" : prompt.trim();
         if (candidate.isBlank() || containsGenericImagePrompt(candidate)) {
-            candidate = buildSpecificImagePrompt(segment);
+            candidate = buildSpecificImagePrompt(segment, primary);
         }
-        return ensureNoTextPrompt(candidate);
+        return ensureNoTextPrompt(candidate, primary);
     }
 
     private boolean containsGenericImagePrompt(String prompt) {
@@ -2829,6 +2874,10 @@ public class SceneStoryboardGenerator {
     }
 
     private String buildSpecificImagePrompt(SceneSegment segment) {
+        return buildSpecificImagePrompt(segment, false);
+    }
+
+    private String buildSpecificImagePrompt(SceneSegment segment, boolean primary) {
         String requirement = segment == null ? "" : safePromptText(segment.getVisualSubject());
         String narration = segment == null ? "" : safePromptText(segment.getSentence());
         String heading = segment == null ? "" : safePromptText(segment.getHeading());
@@ -2839,6 +2888,12 @@ public class SceneStoryboardGenerator {
         }
         if (subject == null || subject.isBlank()) {
             subject = narration;
+        }
+        if (primary) {
+            return PRIMARY_GRADE_STILL_CONTRACT + " Exact shot requirement: " + subject
+                + ". Engaging colorful storybook pedagogical visual for children. "
+                + "Friendly cute Indian school children in neat blue uniform on the left gesturing as guides, concept elements clearly visible on the right. "
+                + "Bright cheerful natural illumination, soft shadows, clear visual margins.";
         }
         String engineCutawayStyle = "";
         if (containsAnyIgnoreCase(subject, "combustion", "engine", "piston", "cylinder", "spark plug", "air-fuel ratio", "four-stroke", "4-stroke", "crankshaft", "valves")) {
@@ -2930,7 +2985,9 @@ public class SceneStoryboardGenerator {
         } else {
             segment.setSubtitle(cleanSubtitleText(segment.getSubtitle()));
         }
-        segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
+        if (!"primary_karaoke".equals(segment.getSubtitleStyle())) {
+            segment.setSubtitleStyle(PRO_SUBTITLE_STYLE);
+        }
         if (segment.getTool() == null || segment.getTool().isBlank()) {
             segment.setTool(inferTool(segment));
         }

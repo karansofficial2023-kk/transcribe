@@ -20,7 +20,13 @@ final class SubjectProfiles {
     static String guidance(String subject) {
         String key = subject == null ? "" : subject.toLowerCase(Locale.ROOT);
         String body;
-        if (has(key, "bio", "life", "botany", "zoology", "जीव", "உயிர", "జీవ", "জীব", "જીવ", "ಜೀವ", "ജീവ")) {
+        if (has(key, "primary", "elementary", "lkg", "ukg", "std 1", "std 2", "std 3", "std 4", "std 5",
+                "class 1", "class 2", "class 3", "class 4", "class 5", "grade 1", "grade 2", "grade 3", "grade 4", "grade 5", "evs")) {
+            body = "Primary School (LKG - 5th Std): friendly educational visuals, charming 3D cartoon storybook art style, "
+                + "cute Indian school children in uniform on the left side of the frame as learning presenters, "
+                + "colorful concept cards and clear vignettes on the right side, word-by-word karaoke highlighting subtitles. "
+                + "No complex adult formulas, no harsh industrial documentary.";
+        } else if (has(key, "bio", "life", "botany", "zoology", "जीव", "உயிர", "జీవ", "জীব", "જીવ", "ಜೀವ", "ജീവ")) {
             body = "Biology: prefer photographs of real organisms, specimens and microscope views; for lessons about the human body, "
                 + "reproduction, puberty or hormones the visuals are stylised organ models, microscopic views, molecules, diagrams or "
                 + "timelines, never photographs of people; label only structures that are "

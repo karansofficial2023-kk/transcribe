@@ -6,6 +6,8 @@ public class StoryboardDocument {
 	private String title;
 	private String subject;
 	private String topic;
+	private String academicLevel;
+	private String gradeLevel;
 	private String smeRole;
 	private String sourceText;
 	private List<Scene> scenes;
@@ -33,6 +35,22 @@ public class StoryboardDocument {
 
 	public void setTopic(String topic) {
 		this.topic = topic;
+	}
+
+	public String getAcademicLevel() {
+		return academicLevel;
+	}
+
+	public void setAcademicLevel(String academicLevel) {
+		this.academicLevel = academicLevel;
+	}
+
+	public String getGradeLevel() {
+		return gradeLevel;
+	}
+
+	public void setGradeLevel(String gradeLevel) {
+		this.gradeLevel = gradeLevel;
 	}
 
 	public String getSmeRole() {

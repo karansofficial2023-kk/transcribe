@@ -95,6 +95,8 @@ public final class StoryboardContract {
         root.put("title", text(storyboard.getTitle()));
         root.put("subject", text(storyboard.getSubject()));
         root.put("topic", text(storyboard.getTopic()));
+        root.put("academic_level", text(storyboard.getAcademicLevel()));
+        root.put("grade_level", text(storyboard.getGradeLevel()));
         root.put("language", (language == null ? LanguagePackage.defaults() : language).toMap());
         List<Map<String, Object>> scenes = new ArrayList<>();
         com.video.transcribe.scene.MotionPlanner.plan(storyboard.getScenes());
