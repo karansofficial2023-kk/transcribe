@@ -2840,10 +2840,15 @@ public class SceneStoryboardGenerator {
         if (subject == null || subject.isBlank()) {
             subject = narration;
         }
+        String engineCutawayStyle = "";
+        if (containsAnyIgnoreCase(subject, "combustion", "engine", "piston", "cylinder", "spark plug", "air-fuel ratio", "four-stroke", "4-stroke", "crankshaft", "valves")) {
+            engineCutawayStyle = " Detailed cutaway view revealing precision internal mechanical components, metallic surfaces, real spark discharge, flame propagation wavefront, authentic automotive engineering inspection aesthetic.";
+        }
         return PREMIUM_STILL_CONTRACT + " Exact shot requirement: " + subject
             + ". Depict only source-supported visible evidence, authentic physical objects, and scientifically accurate phenomena. "
-            + "High-fidelity documentary realism, crisp focus on the taught mechanism, cinematic illumination with subtle rim lighting. "
-            + "Keep all required structures unobscured and large enough for inspection; reserve overlay-safe space without weakening the composition.";
+            + "High-fidelity documentary realism, crisp focus on the taught mechanism, cinematic illumination with subtle rim lighting."
+            + engineCutawayStyle
+            + " Keep all required structures unobscured and large enough for inspection; reserve overlay-safe space without weakening the composition.";
     }
 
     private String safePromptText(String value) {
@@ -3589,7 +3594,9 @@ public class SceneStoryboardGenerator {
         }
         String text = joinForFactCheck(segment.getSentence(), segment.getVisualAnimation(), segment.getLocalAnimation());
         if (containsAnyIgnoreCase(text, "flame front", "propagation", "piston stroke", "combustion chamber",
-                "spark plug", "equivalence ratio", "ion migration", "electron flow", "redox reaction")) {
+                "spark plug", "equivalence ratio", "ion migration", "electron flow", "redox reaction",
+                "four-stroke", "4-stroke", "intake stroke", "compression stroke", "power stroke", "exhaust stroke",
+                "engine cycle", "crankshaft", "air-fuel ratio", "afr", "stoichiometric 14.7", "spark plug condition")) {
             return "animation";
         }
         if ("static_image".equals(segment.getMotionType())) {
