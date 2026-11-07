@@ -10,10 +10,15 @@ param(
     [string]$GradeLevel = '5th standard',
     [string]$AcademicLevel = 'primary',
 
-    [string]$TargetLanguages = ''
+    [string]$TargetLanguages = '',
+
+    [switch]$AudioTranslationOnly
 )
 
 $ErrorActionPreference = 'Stop'
+if ($AudioTranslationOnly.IsPresent -and [string]::IsNullOrWhiteSpace($TargetLanguages)) {
+    throw '-AudioTranslationOnly requires -TargetLanguages, for example -TargetLanguages "hi".'
+}
 $projectRoot = $PSScriptRoot
 $inputPath = (Resolve-Path -LiteralPath $InputVideo).Path
 $outputPath = [System.IO.Path]::GetFullPath($OutputDir)
@@ -41,6 +46,7 @@ $overrides = @{
     TRANSCRIBE_TEMP_DIR = $tempDir
     TRANSCRIBE_EXIT_WHEN_COMPLETE = 'true'
     STORYBOARD_TARGET_LANGUAGES = $TargetLanguages
+    TRANSCRIBE_AUDIO_TRANSLATION_ONLY = [string]$AudioTranslationOnly.IsPresent
     JAVA_HOME = $javaHome
 }
 $previous = @{}

@@ -505,6 +505,18 @@ public class VideoParaphrasePipeline {
 					null, null, System.currentTimeMillis() - startTime,
 					"Skipped: no speech detected or only music/background audio");
 		}
+		if (config.isAudioTranslationOnly()
+				&& com.video.transcribe.source.InputKind.of(new File(videoPath).getName()) == com.video.transcribe.source.InputKind.VIDEO) {
+			List<LanguageSupport.Language> targets = StoryboardLocalizer.parseTargets(config.getStoryboardTargetLanguages());
+			if (targets.isEmpty()) throw new IllegalArgumentException("Audio translation-only mode requires STORYBOARD_TARGET_LANGUAGES, e.g. hi");
+			LanguageSupport.Language source = LanguageSupport.byCode(detectedLanguage).orElse(null);
+			if (source == null) source = LanguageSupport.detect(originalText, detectedLanguage);
+			new StoryboardLocalizer(config, ollama).localizeTranscriptForAudio(
+				transcript, baseName, config.getString("video.grade.level", ""), config.getString("video.academic.level", ""),
+				source, targets, Paths.get(config.getOutputDir()));
+			return new PipelineResult(true, null, transcript, originalText, null, null,
+				System.currentTimeMillis() - startTime, null);
+		}
 
 		// Phase 3 + 3b: Paraphrase, validate, and retry until content coverage passes
 		ParaphraseValidation paraphraseValidation = paraphraseUntilValid(originalText, style, baseName);

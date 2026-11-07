@@ -58,6 +58,10 @@ public final class StoryboardContract {
         f.put("heading", text(segment.getHeading()));          // on-screen title for title cards, concise topic for the others
         f.put("narration", text(segment.getSentence()));
         f.put("duration", segment.getRecommendedClipSeconds());
+        if (segment.getSourceEnd() > segment.getSourceStart()) {
+            f.put("source_start", segment.getSourceStart());
+            f.put("source_end", segment.getSourceEnd());
+        }
         f.put("visual_type", text(segment.getVisualType()));
         f.put("media_type", productionMediaType(segment));
         f.put("image_requirement", text(segment.getVisualSubject()));

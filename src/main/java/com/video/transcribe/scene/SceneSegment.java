@@ -16,6 +16,8 @@ public class SceneSegment {
 	private String motionType;
 	private double estimatedNarrationSeconds;
 	private double recommendedClipSeconds;
+	private double sourceStart;
+	private double sourceEnd;
 	private String timingNotes;
 	private String visualAnimation;
 	private String localAnimation;
@@ -131,6 +133,11 @@ public class SceneSegment {
 	public double getRecommendedClipSeconds() {
 		return recommendedClipSeconds;
 	}
+
+	public double getSourceStart() { return sourceStart; }
+	public void setSourceStart(double sourceStart) { this.sourceStart = sourceStart; }
+	public double getSourceEnd() { return sourceEnd; }
+	public void setSourceEnd(double sourceEnd) { this.sourceEnd = sourceEnd; }
 
 	public void setRecommendedClipSeconds(double recommendedClipSeconds) {
 		this.recommendedClipSeconds = recommendedClipSeconds;

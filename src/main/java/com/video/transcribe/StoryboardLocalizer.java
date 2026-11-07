@@ -23,6 +23,7 @@ import com.video.transcribe.scene.SceneSegment;
 import com.video.transcribe.scene.StoryboardDocument;
 import com.video.transcribe.scene.StoryboardTranslator;
 import com.video.transcribe.transcription.Glossary;
+import com.video.transcribe.model.TranscriptData;
 
 /**
  * Writes an existing storyboard in further languages: translate, trace numbers to the original, then export the same files the
@@ -102,6 +103,65 @@ public final class StoryboardLocalizer {
                 target.name(), result.strings(), result.retried(), result.flagged(), result.drifted(), (System.currentTimeMillis() - started) / 1000);
         }
         return exported;
+    }
+
+    /** Build target-language audio contracts directly from timed ASR segments; this deliberately skips paraphrasing and visual planning. */
+    public List<Path> localizeTranscriptForAudio(TranscriptData transcript, String baseName, String gradeLevel, String academicLevel,
+                                                 Language sourceLanguage, List<Language> targets, Path outputDir) throws Exception {
+        if (transcript.getSegments() == null || transcript.getSegments().isEmpty()) {
+            throw new IllegalStateException("Audio translation requires timestamped transcript segments");
+        }
+        Files.createDirectories(outputDir);
+        StoryboardDocument source = new StoryboardDocument();
+        source.setTitle(baseName);
+        source.setGradeLevel(gradeLevel);
+        source.setAcademicLevel(academicLevel);
+        source.setSourceText(transcript.getFullText());
+        List<Scene> scenes = new ArrayList<>();
+        int number = 0;
+        for (TranscriptData.Segment timed : transcript.getSegments()) {
+            if (timed.getText() == null || timed.getText().isBlank()) continue;
+            if (timed.getStart() < 0 || timed.getEnd() <= timed.getStart()) continue;
+            Scene scene = new Scene();
+            scene.setSceneNumber(++number);
+            scene.setSceneTitle("");
+            scene.setNarration(timed.getText().trim());
+            SceneSegment shot = new SceneSegment();
+            shot.setSegmentNumber(1);
+            shot.setSentence(timed.getText().trim());
+            shot.setSourceStart(timed.getStart());
+            shot.setSourceEnd(timed.getEnd());
+            shot.setRecommendedClipSeconds(timed.getEnd() - timed.getStart());
+            shot.setEstimatedNarrationSeconds(timed.getEnd() - timed.getStart());
+            shot.setSubtitle("");
+            scene.setSegments(List.of(shot));
+            scenes.add(scene);
+        }
+        if (scenes.isEmpty()) throw new IllegalStateException("Transcript has no valid timed speech segments");
+        source.setScenes(scenes);
+
+        List<Path> contracts = new ArrayList<>();
+        for (Language target : targets) {
+            if (target.code().equals(sourceLanguage.code())) continue;
+            Glossary glossary = Glossary.load(target.code(), config.getStoryboardMaterialsDir(), baseName);
+            StoryboardTranslator.Result result = translateWithEngine(source, sourceLanguage, target, glossary);
+            String name = baseName + "_" + target.code();
+            java.util.Map<String, Object> contract = StoryboardContract.toContract(
+                result.storyboard(), StoryboardContract.LanguagePackage.forWhisperCode(target.code()));
+            contract.put("audio_translation_only", true);
+            contract.put("timing_source", "whisper_asr_segments");
+            Path path = outputDir.resolve(name + "_contract.json");
+            Files.writeString(path, GSON.toJson(contract), StandardCharsets.UTF_8);
+            java.util.Map<String, Object> review = new java.util.LinkedHashMap<>();
+            review.put("translation_only", true);
+            review.put("translated_segments", result.strings());
+            review.put("review_items", result.reviews());
+            Files.writeString(outputDir.resolve(name + "_translation_review.json"), GSON.toJson(review), StandardCharsets.UTF_8);
+            contracts.add(path);
+            logger.info("Audio translation contract saved: {} ({} timed speech segments; no paraphrase or storyboard planning)", path, scenes.size());
+        }
+        if (contracts.isEmpty()) throw new IllegalStateException("No target-language contracts were written; check target and source language codes");
+        return contracts;
     }
 
     /** Chooses the offline MADLAD worker when it is installed (and requested or "auto"), otherwise the local Qwen model. */

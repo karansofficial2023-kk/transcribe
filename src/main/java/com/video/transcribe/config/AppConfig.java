@@ -83,6 +83,7 @@ public class AppConfig {
 		case "temp.dir" -> "TRANSCRIBE_TEMP_DIR";
 		case "transcribe.exit.when.complete" -> "TRANSCRIBE_EXIT_WHEN_COMPLETE";
 	case "storyboard.target.languages" -> "STORYBOARD_TARGET_LANGUAGES";
+	case "audio.translation.only" -> "TRANSCRIBE_AUDIO_TRANSLATION_ONLY";
 		default -> null;
 		};
 	}
@@ -180,6 +181,11 @@ public class AppConfig {
 	/** Extra storyboard languages written after the main one, e.g. "ta,te" (empty: none). The storyboard is translated, not re-planned. */
 	public String getStoryboardTargetLanguages() {
 		return getString("storyboard.target.languages", "");
+	}
+
+	/** When enabled, preserve the recognized utterances and localize only their text for audio dubbing. */
+	public boolean isAudioTranslationOnly() {
+		return getBoolean("audio.translation.only", false);
 	}
 
 	/** Per-language recognition models, "ta=D:\models\ta-ct2;te=D:\models\te-ct2" (empty: general model only). */
