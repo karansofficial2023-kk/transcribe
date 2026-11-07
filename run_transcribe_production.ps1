@@ -8,7 +8,9 @@ param(
     [string]$OutputDir,
 
     [string]$GradeLevel = '5th standard',
-    [string]$AcademicLevel = 'primary'
+    [string]$AcademicLevel = 'primary',
+
+    [string]$TargetLanguages = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -38,6 +40,7 @@ $overrides = @{
     TRANSCRIBE_MATERIALS_DIR = $materialsDir
     TRANSCRIBE_TEMP_DIR = $tempDir
     TRANSCRIBE_EXIT_WHEN_COMPLETE = 'true'
+    STORYBOARD_TARGET_LANGUAGES = $TargetLanguages
     JAVA_HOME = $javaHome
 }
 $previous = @{}

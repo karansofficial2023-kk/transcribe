@@ -82,6 +82,7 @@ public class AppConfig {
 		case "storyboard.materials.dir" -> "TRANSCRIBE_MATERIALS_DIR";
 		case "temp.dir" -> "TRANSCRIBE_TEMP_DIR";
 		case "transcribe.exit.when.complete" -> "TRANSCRIBE_EXIT_WHEN_COMPLETE";
+	case "storyboard.target.languages" -> "STORYBOARD_TARGET_LANGUAGES";
 		default -> null;
 		};
 	}
