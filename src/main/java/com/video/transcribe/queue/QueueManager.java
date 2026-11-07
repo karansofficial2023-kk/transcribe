@@ -76,6 +76,16 @@ public class QueueManager {
 		logger.info("Added URL to queue: {}", url);
 	}
 
+	/** Queue exactly one local input file without scanning or watching its parent folder. */
+	public void addFile(String filePath) throws IOException {
+		File file = new File(filePath);
+		if (!file.exists() || !file.isFile() || !isLessonInput(file.getName())) {
+			throw new IOException("Invalid lesson input file: " + filePath);
+		}
+		queue.enqueue(new LocalFileSource(file.getAbsolutePath()));
+		logger.info("Added one lesson input: {}", file.getAbsolutePath());
+	}
+
 	/**
 	 * Add multiple URLs
 	 */

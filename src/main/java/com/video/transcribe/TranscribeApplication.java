@@ -23,8 +23,11 @@ public class TranscribeApplication {
 
 		// Add videos based on config
 		String inputType = config.getInputType();
+		String singleInput = System.getenv("TRANSCRIBE_INPUT_FILE");
 
-		switch (inputType.toLowerCase()) {
+		if (singleInput != null && !singleInput.isBlank()) {
+			queueManager.addFile(singleInput.trim());
+		} else switch (inputType.toLowerCase()) {
 		case "folder" -> {
 			queueManager.addFolder(config.getInputFolder(), config.isWatchEnabled());
 		}
@@ -69,6 +72,20 @@ public class TranscribeApplication {
 		});
 		monitor.setDaemon(true);
 		monitor.start();
+
+		if (config.isExitWhenComplete()) {
+			while (true) {
+				Thread.sleep(2000);
+				var status = queueManager.getStatus();
+				if (status.totalSubmitted > 0
+						&& status.totalSubmitted == status.totalProcessed + status.totalFailed
+						&& status.queueSize == 0) {
+						queueManager.stop();
+						if (status.totalFailed > 0) System.exit(2);
+						return;
+					}
+			}
+		}
 
 		// Interactive console
 		System.out.println("\n" + "=".repeat(60));

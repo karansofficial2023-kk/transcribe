@@ -59,11 +59,31 @@ public class AppConfig {
 	private void applyRuntimeOverrides() {
 		for (String key : props.stringPropertyNames()) {
 			String override = System.getProperty(key);
-			if (override != null && !override.isBlank()) {
+			String environment = environmentName(key);
+			boolean fromEnvironment = false;
+			if (override == null && environment != null) {
+				override = System.getenv(environment);
+				fromEnvironment = override != null;
+			}
+			if (override != null && (!override.isBlank() || fromEnvironment)) {
 				props.setProperty(key, override.trim());
-				logger.info("Applied runtime override for {}", key);
+				logger.info("Applied {} override for {}", fromEnvironment ? "environment" : "runtime", key);
 			}
 		}
+	}
+
+	private static String environmentName(String key) {
+		return switch (key) {
+		case "video.input.folder" -> "TRANSCRIBE_INPUT_FOLDER";
+		case "video.output.dir" -> "TRANSCRIBE_OUTPUT_DIR";
+		case "video.input.watch" -> "TRANSCRIBE_WATCH_FOLDER";
+		case "video.grade.level" -> "TRANSCRIBE_GRADE_LEVEL";
+		case "video.academic.level" -> "TRANSCRIBE_ACADEMIC_LEVEL";
+		case "storyboard.materials.dir" -> "TRANSCRIBE_MATERIALS_DIR";
+		case "temp.dir" -> "TRANSCRIBE_TEMP_DIR";
+		case "transcribe.exit.when.complete" -> "TRANSCRIBE_EXIT_WHEN_COMPLETE";
+		default -> null;
+		};
 	}
 
 	private void loadDefaults() {
@@ -71,6 +91,9 @@ public class AppConfig {
 		props.setProperty("video.input.folder", "./videos");
 		props.setProperty("video.input.watch", "true");
 		props.setProperty("video.output.dir", "./output");
+		props.setProperty("video.grade.level", "");
+		props.setProperty("video.academic.level", "");
+		props.setProperty("transcribe.exit.when.complete", "false");
 		props.setProperty("video.processing.mode", "sequential");
 		props.setProperty("video.processing.threads", "1");
 		props.setProperty("tool.ffmpeg.path", "ffmpeg");
@@ -210,6 +233,18 @@ public class AppConfig {
 	// Output
 	public String getOutputDir() {
 		return getString("video.output.dir", "./output");
+	}
+
+	public String getGradeLevel() {
+		return getString("video.grade.level", "").trim();
+	}
+
+	public String getAcademicLevel() {
+		return getString("video.academic.level", "").trim();
+	}
+
+	public boolean isExitWhenComplete() {
+		return getBoolean("transcribe.exit.when.complete", false);
 	}
 
 	public boolean keepTranscript() {

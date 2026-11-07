@@ -289,8 +289,15 @@ public class VideoParaphrasePipeline {
 				materials.approvedAssets().size());
 		}
 		sceneGenerator.setLanguageHint(detectedLanguage);
+		sceneGenerator.setRequestedAudience(config.getGradeLevel(), config.getAcademicLevel());
 		StoryboardDocument storyboard = sceneGenerator.generateStoryboard(
 			paraphrasedText, baseName, materials);
+		if (!config.getGradeLevel().isBlank()) {
+			storyboard.setGradeLevel(config.getGradeLevel());
+		}
+		if (!config.getAcademicLevel().isBlank()) {
+			storyboard.setAcademicLevel(config.getAcademicLevel());
+		}
 		// Keep a diagnostic draft even when the quality gate rejects the storyboard.
 		Files.writeString(Paths.get(config.getOutputDir(), baseName + "_storyboard.draft.json"), gson.toJson(storyboard));
 		StoryboardQualityGate.validate(storyboard);

@@ -52,7 +52,7 @@ public class SceneStoryboardGenerator {
     private static final Pattern DEFINED_MECHANISM = Pattern.compile(
         "\\b([\\p{L}][\\p{L}-]{3,})\\s+(?:means|occurs|involves|refers\\s+to|describes|is\\s+defined\\s+as)\\b",
         Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE);
-    public static final String PRIMARY_GRADE_STILL_CONTRACT = "High quality 1080p children educational storybook illustration, "
+    public static final String PRIMARY_GRADE_STILL_CONTRACT = "High quality native 1920x1080 children educational storybook illustration, "
         + "charming clean 3D Disney/Pixar cartoon storybook art style, bright warm cheerful lighting, soft natural shadows. "
         + "Friendly cute Indian school children in neat blue and white uniform on the left side of frame gesturing warmly as learning guides, "
         + "with clear open educational presentation space and colorful pedagogical concept elements on the right. "
@@ -649,10 +649,18 @@ public class SceneStoryboardGenerator {
     }
 
     private String languageHint;
+    private String requestedGradeLevel = "";
+    private String requestedAcademicLevel = "";
 
     /** The ASR language code of the lesson ("mr", "ta"). Scripts are shared (Marathi and Hindi are both Devanagari), so the text alone cannot say. */
     public void setLanguageHint(String code) {
         this.languageHint = code;
+    }
+
+    /** Supplies the user-selected learner level before storyboard contract repair runs. */
+    public void setRequestedAudience(String gradeLevel, String academicLevel) {
+        this.requestedGradeLevel = gradeLevel == null ? "" : gradeLevel.trim();
+        this.requestedAcademicLevel = academicLevel == null ? "" : academicLevel.trim();
     }
 
     /** Installs the editorial visual director that plans prompts, labels, formulas and graphs before final validation. */
@@ -1427,8 +1435,9 @@ public class SceneStoryboardGenerator {
             }
             segment.setVisualSubject(sanitizeGeneratedProductionText(
                 repair.get("visualSubject").getAsString()));
-            segment.setComfyPrompt(ensureProductionImagePrompt(segment,
-                sanitizeGeneratedProductionText(repair.get("comfyPrompt").getAsString())));
+            segment.setComfyPrompt(sanitizeGeneratedProductionText(
+                repair.get("comfyPrompt").getAsString()));
+            segment.setComfyPrompt(ensureProductionImagePrompt(segment));
             enforceLabelContract(segment);
         }
         if (!seen.equals(expectedRowIds)) {
@@ -1544,6 +1553,9 @@ public class SceneStoryboardGenerator {
     }
 
     private boolean isPrimaryGradeLesson(List<Scene> scenes, String storyboardTitle) {
+        if (isPrimaryGrade(requestedAcademicLevel, requestedGradeLevel, "", storyboardTitle)) {
+            return true;
+        }
         SceneSegment first = (scenes != null && !scenes.isEmpty() && scenes.get(0).getSegments() != null && !scenes.get(0).getSegments().isEmpty())
             ? scenes.get(0).getSegments().get(0) : null;
         String notes = first != null && first.getCoverageNotes() != null ? first.getCoverageNotes() : "";
@@ -1600,6 +1612,34 @@ public class SceneStoryboardGenerator {
                 }
                 enforceLabelContract(segment);
                 enforceLabelDuration(segment);
+            }
+        }
+        enforceSingleOpeningTitleCard(scenes, storyboardTitle);
+    }
+
+    private void enforceSingleOpeningTitleCard(List<Scene> scenes, String storyboardTitle) {
+        if (scenes == null || scenes.isEmpty()) return;
+        Scene firstScene = scenes.get(0);
+        if (firstScene.getSegments() == null || firstScene.getSegments().isEmpty()) return;
+        SceneSegment opening = firstScene.getSegments().get(0);
+        opening.setTemplate("title_card");
+        opening.setVisualType("title_card");
+        opening.setHeading(storyboardTitle);
+        opening.setSubtitle("");
+        opening.setLabels(List.of());
+        opening.setLabelPlacements(List.of());
+        for (int si = 0; si < scenes.size(); si++) {
+            List<SceneSegment> segments = scenes.get(si).getSegments();
+            if (segments == null) continue;
+            for (int sj = 0; sj < segments.size(); sj++) {
+                if (si == 0 && sj == 0) continue;
+                SceneSegment segment = segments.get(sj);
+                if ("title_card".equals(segment.getVisualType()) || "title_card".equals(segment.getTemplate())) {
+                    boolean labeled = segment.getLabels() != null && !segment.getLabels().isEmpty();
+                    segment.setTemplate(labeled ? "labeled_image" : "photo");
+                    segment.setVisualType(labeled ? "realistic_labeled_image" : "realistic_image");
+                    segment.setMediaType(labeled ? "photo_with_labels" : "photo");
+                }
             }
         }
     }
