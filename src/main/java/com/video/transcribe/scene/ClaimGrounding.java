@@ -58,11 +58,11 @@ public final class ClaimGrounding {
     }
 
     private static final Pattern WORD = Pattern.compile("[\\p{L}\\p{M}\\p{N}]+");
-    private static final Pattern NUMBER = Pattern.compile("\\d{1,3}(?:,\\d{2,3})+(?:\\.\\d+)?(?!\\d)|\\d+(?:[.,]\\d+)?");
+    private static final Pattern NUMBER = Pattern.compile("\\d{1,3}(?:,\\d{2,3})+(?:\\.\\d+)?(?!\\d)|\\d+(?:\\.\\d+)?");
 
-    /** "1,00,000" and "1,000" are grouped thousands (value 100000 / 1000); "0,5" is a decimal comma. */
+    /** Preserve grouped thousands; bare commas delimit values or chemical locants such as 1,2-dibromoethane. */
     static String normaliseNumber(String raw) {
-        return raw.matches("\\d{1,3}(?:,\\d{2,3})+(?:\\.\\d+)?") ? raw.replace(",", "") : raw.replace(',', '.');
+        return raw.replace(",", "");
     }
     private static final double SUPPORTED_AT = 0.55;
     private static final double PARTLY_AT = 0.35;

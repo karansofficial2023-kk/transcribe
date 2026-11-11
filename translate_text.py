@@ -31,7 +31,7 @@ def order_by_length(texts):
     return sorted(range(len(texts)), key=lambda i: len(texts[i]))
 
 
-def batches(indices, texts, max_chars=1800, max_items=12):
+def batches(indices, texts, max_chars=600, max_items=4):
     """Groups of indices whose combined text stays small enough for one forward pass."""
     group, size = [], 0
     for index in indices:
@@ -72,7 +72,8 @@ class Translator:
         self.tokenizer = AutoTokenizer.from_pretrained(self.model_dir)
         # bfloat16: T5-family models overflow in float16; the RTX 30-series supports bfloat16 natively
         dtype = torch.bfloat16 if self.device == "cuda" else torch.float32
-        model = AutoModelForSeq2SeqLM.from_pretrained(self.model_dir, torch_dtype=dtype, tie_word_embeddings=False)
+        # Transformers 5 renamed torch_dtype to dtype; keep production logs clean on the pinned runtime.
+        model = AutoModelForSeq2SeqLM.from_pretrained(self.model_dir, dtype=dtype, tie_word_embeddings=False)
         restore_shared_embedding(model, self.model_dir)
         self.model = model.to(self.device).eval()
         self.torch = torch
@@ -81,15 +82,18 @@ class Translator:
         self.load()
         tag = tag_for(target)
         results = [""] * len(texts)
+        completed = 0
         for group in batches(order_by_length(texts), texts):
             prompts = [f"{tag} {texts[i]}" for i in group]
             inputs = self.tokenizer(prompts, return_tensors="pt", padding=True, truncation=True, max_length=512).to(self.device)
             longest = int(inputs["input_ids"].shape[1])
             with self.torch.no_grad():
-                generated = self.model.generate(**inputs, max_new_tokens=min(768, max(48, int(longest * 2.5))), num_beams=4,
+                generated = self.model.generate(**inputs, max_new_tokens=min(320, max(64, int(longest * 2.0))), num_beams=4,
                                                 early_stopping=True)
             for index, text in zip(group, self.tokenizer.batch_decode(generated, skip_special_tokens=True)):
                 results[index] = text.strip()
+            completed += len(group)
+            print(f"MADLAD {target}: {completed}/{len(texts)} lines translated", file=sys.stderr, flush=True)
         return results
 
     def unload(self):

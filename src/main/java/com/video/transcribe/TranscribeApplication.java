@@ -2,6 +2,9 @@ package com.video.transcribe;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,8 +27,21 @@ public class TranscribeApplication {
 		// Add videos based on config
 		String inputType = config.getInputType();
 		String singleInput = System.getenv("TRANSCRIBE_INPUT_FILE");
+		String inputManifest = System.getenv("TRANSCRIBE_INPUT_MANIFEST");
 
-		if (singleInput != null && !singleInput.isBlank()) {
+		if (inputManifest != null && !inputManifest.isBlank()) {
+			Path manifestPath = Path.of(inputManifest.trim());
+			if (!Files.isRegularFile(manifestPath)) {
+				throw new java.io.IOException("Input manifest does not exist: " + manifestPath);
+			}
+			List<String> inputFiles = Files.readAllLines(manifestPath, StandardCharsets.UTF_8).stream()
+					.map(String::trim).filter(line -> !line.isEmpty()).distinct().toList();
+			if (inputFiles.isEmpty()) {
+				throw new IllegalArgumentException("Input manifest contains no video paths: " + manifestPath);
+			}
+			for (String inputFile : inputFiles) queueManager.addFile(inputFile);
+			System.out.println("Loaded " + inputFiles.size() + " video paths from " + manifestPath);
+		} else if (singleInput != null && !singleInput.isBlank()) {
 			queueManager.addFile(singleInput.trim());
 		} else switch (inputType.toLowerCase()) {
 		case "folder" -> {

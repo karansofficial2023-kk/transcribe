@@ -1,0 +1,13 @@
+{
+  "acid": {"preferred": "अम्ल", "aliases": ["एसिड"], "subject": "chemistry"},
+  "base": {"preferred": "क्षार", "aliases": ["बेस"], "subject": "chemistry"},
+  "molecule": {"preferred": "अणु", "aliases": ["मॉलेक्यूल"], "subject": "chemistry"},
+  "atom": {"preferred": "परमाणु", "aliases": ["एटम"], "subject": "chemistry"},
+  "vinegar": {"preferred": "सिरका", "aliases": ["विनेगर"], "subject": "chemistry"},
+  "juice": {"preferred": "का रस", "aliases": ["जूस"], "subject": "chemistry"},
+  "concentrated sulphuric acid": {"preferred": "सांद्र सल्फ्यूरिक अम्ल", "aliases": ["संतृप्त सल्फर अम्ल", "संतृप्त सल्फ्यूरिक अम्ल"], "subject": "chemistry"},
+  "concentrated sulfuric acid": {"preferred": "सांद्र सल्फ्यूरिक अम्ल", "aliases": ["संतृप्त सल्फर अम्ल", "संतृप्त सल्फ्यूरिक अम्ल"], "subject": "chemistry"},
+  "bromine water": {"preferred": "ब्रोमीन जल", "aliases": ["ब्रोमाइड पानी", "ब्रोमीन पानी"], "subject": "chemistry"},
+  "ethene": {"preferred": "एथीन", "aliases": ["ईथेन", "इथेन", "एथेन"], "subject": "chemistry", "source_excludes": ["ethane"]},
+  "bromine atoms": {"preferred": "ब्रोमीन परमाणुओं", "aliases": ["ब्रोमाइड परमाणुओं"], "subject": "chemistry"}
+}

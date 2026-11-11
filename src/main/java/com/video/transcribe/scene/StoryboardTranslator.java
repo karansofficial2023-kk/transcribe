@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 import com.video.transcribe.LanguageSupport;
 import com.video.transcribe.LanguageSupport.Language;
+import com.video.transcribe.transcription.TerminologyGlossary;
 
 /**
  * Produces the same storyboard in another language without re-planning it.
@@ -51,6 +52,7 @@ public final class StoryboardTranslator {
     private final TextTranslator translator;
     private final int batchSize;
     private final boolean backCheck;
+    private final TerminologyGlossary terminology;
 
     public StoryboardTranslator(TextTranslator translator) {
         this(translator, 14, false);
@@ -62,9 +64,14 @@ public final class StoryboardTranslator {
 
     /** @param backCheck translate every result back to the source language and flag strings whose meaning drifted */
     public StoryboardTranslator(TextTranslator translator, int batchSize, boolean backCheck) {
+        this(translator, batchSize, backCheck, null);
+    }
+
+    public StoryboardTranslator(TextTranslator translator, int batchSize, boolean backCheck, TerminologyGlossary terminology) {
         this.translator = translator;
         this.batchSize = Math.max(1, batchSize);
         this.backCheck = backCheck;
+        this.terminology = terminology;
     }
 
     public Result translate(StoryboardDocument source, Language from, Language to) throws Exception {
@@ -91,10 +98,12 @@ public final class StoryboardTranslator {
             for (int i = 0; i < sources.size(); i++) {
                 String text = sources.get(i);
                 translated.set(i, cleanup(text, translated.get(i)));
+                if (terminology != null) translated.set(i, terminology.normalize(text, translated.get(i)));
                 String problem = problem(text, translated.get(i), to);
                 if (problem != null) {
                     retried++;
                     String again = cleanup(text, translator.translate(List.of(text), from, to).get(0));
+                    if (terminology != null) again = terminology.normalize(text, again);
                     if (problem(text, again, to) == null || translated.get(i) == null || translated.get(i).isBlank()) {
                         translated.set(i, again);              // a retry is only taken when it is clean (or the first answer was empty)
                     }
@@ -141,13 +150,35 @@ public final class StoryboardTranslator {
             List<String> group = originals.subList(start, Math.min(originals.size(), start + batchSize));
             List<String> back = translator.translate(group.stream().map(accepted::get).toList(), to, from);
             for (int i = 0; i < group.size(); i++) {
-                double kept = overlap(group.get(i), back.get(i));
+                String source = group.get(i);
+                String current = accepted.get(source);
+                double kept = overlap(source, back.get(i));
                 if (kept < DRIFT_BELOW) {
+                    // A single translation can drift on a technical term. Retry that timed line once, then
+                    // accept the retry only when mechanical checks pass and an independent back-translation
+                    // improves source-word coverage. We never merge cues or change their timestamps.
+                    String candidate = translator.translate(List.of(source), from, to).get(0);
+                    candidate = cleanup(source, candidate);
+                    if (terminology != null) candidate = terminology.normalize(source, candidate);
+                    String candidateBack = candidate == null || candidate.isBlank() ? ""
+                        : translator.translate(List.of(candidate), to, from).get(0);
+                    double candidateKept = overlap(source, candidateBack);
+                    if (problem(source, candidate, to) == null && candidateKept >= DRIFT_BELOW
+                            && candidateKept > kept + 0.02) {
+                        accepted.put(source, candidate.trim());
+                        for (Slot slot : byText.get(source)) slot.apply().accept(candidate.trim());
+                        reviews.add(review("auto_repair", source, candidate.trim(),
+                            "verified retry improved back-translation coverage from " + Math.round(kept * 100)
+                                + "% to " + Math.round(candidateKept * 100) + "%"));
+                        logger.info("Translation drift repaired and verified at {} ({}% -> {}%)",
+                            byText.get(source).get(0).where(), Math.round(kept * 100), Math.round(candidateKept * 100));
+                        continue;
+                    }
                     drifted++;
                     String note = "meaning may have drifted (back-translation keeps " + Math.round(kept * 100) + "% of the key words)";
                     for (Slot slot : byText.get(group.get(i))) {
                         flag(slot.segment(), slot.where() + ": " + note);
-                        reviews.add(review(slot.where(), group.get(i), accepted.get(group.get(i)), note));
+                        reviews.add(review(slot.where(), source, current, note));
                     }
                     logger.warn("Translation drift at {}: {}", byText.get(group.get(i)).get(0).where(), note);
                 }
@@ -157,7 +188,7 @@ public final class StoryboardTranslator {
     }
 
     /** Share of the original's key-word stems that survive in the back-translation. */
-    static double overlap(String original, String backTranslation) {
+    public static double overlap(String original, String backTranslation) {
         java.util.Set<String> a = ClaimGrounding.stems(original);
         if (a.isEmpty()) return 1;
         java.util.Set<String> b = ClaimGrounding.stems(backTranslation);
@@ -298,7 +329,7 @@ public final class StoryboardTranslator {
     // ------------------------------------------------------------------ validation
 
     /** Null when the translation is acceptable, otherwise a short reason. */
-    static String problem(String source, String translation, Language target) {
+    public static String problem(String source, String translation, Language target) {
         if (translation == null || translation.isBlank()) return "empty translation";
         long sourceLetters = source.codePoints().filter(Character::isLetter).count();
         long letters = translation.codePoints().filter(Character::isLetter).count();

@@ -7,6 +7,8 @@ import java.util.Map;
 public class SceneSegment {
 	private int segmentNumber;
 	private String sentence;
+	/** Original source-language utterance retained for formula/number QA before dubbing. */
+	private String sourceNarration;
 	private String template;
 	private String visualType;
 	private String heading;
@@ -65,6 +67,9 @@ public class SceneSegment {
 	public void setSentence(String sentence) {
 		this.sentence = sentence;
 	}
+
+	public String getSourceNarration() { return sourceNarration; }
+	public void setSourceNarration(String sourceNarration) { this.sourceNarration = sourceNarration; }
 
 	public String getTemplate() {
 		return template;
