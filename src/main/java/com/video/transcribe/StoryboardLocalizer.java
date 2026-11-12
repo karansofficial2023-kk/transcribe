@@ -141,12 +141,14 @@ public final class StoryboardLocalizer {
             shot.setSubtitle("");
             scene.setSegments(List.of(shot));
             scenes.add(scene);
-            double lowestConfidence = group.stream().filter(cue -> cue.getWords() != null)
-                .flatMap(cue -> cue.getWords().stream()).mapToDouble(TranscriptData.Word::getProbability)
-                .filter(value -> value > 0).min().orElse(1.0);
-            if (lowestConfidence < 0.25) {
-                sourceWarnings.put(number, "English ASR contains low-confidence words (minimum "
-                    + Math.round(lowestConfidence * 100) + "%); check source audio before approval");
+            var uncertainWords = group.stream().filter(cue -> cue.getWords() != null)
+                .flatMap(cue -> cue.getWords().stream())
+                .filter(word -> word.getProbability() > 0 && word.getProbability() < 0.25)
+                .map(word -> word.getWord().trim()).filter(word -> !word.isBlank()).distinct().toList();
+            if (!uncertainWords.isEmpty()) {
+                sourceWarnings.put(number, "English ASR needs source-audio verification at "
+                    + String.format(java.util.Locale.ROOT, "%.2f-%.2fs", first.getStart(), last.getEnd())
+                    + "; uncertain words: " + String.join(", ", uncertainWords));
             }
         }
         if (scenes.isEmpty()) throw new IllegalStateException("Transcript has no valid timed speech segments");
@@ -158,9 +160,15 @@ public final class StoryboardLocalizer {
             Glossary glossary = Glossary.load(target.code(), config.getStoryboardMaterialsDir(), baseName);
             TerminologyGlossary terminology = TerminologyGlossary.load(target.code(), config.getStoryboardMaterialsDir(), baseName);
             StoryboardTranslator.Result result = translateWithEngine(source, sourceLanguage, target, glossary, terminology);
-            repairAudioTranslationWithSecondModel(source, result, sourceLanguage, target, glossary, terminology);
-            auditAllAudioTranslationLines(source, result);
-            repairSemanticAuditFindings(source, result, target, terminology);
+            // MADLAD remains fully usable without Ollama.  Probe the optional second
+            // model once, instead of making every sentence wait through its retry loop.
+            if (ollama != null && ollama.isAvailable()) {
+                repairAudioTranslationWithSecondModel(source, result, sourceLanguage, target, glossary, terminology);
+                auditAllAudioTranslationLines(source, result);
+                repairSemanticAuditFindings(source, result, target, terminology);
+            } else {
+                logger.warn("Ollama bilingual audit is unavailable; continuing with offline translation and deterministic QA");
+            }
             for (var warning : sourceWarnings.entrySet()) {
                 var item = new java.util.LinkedHashMap<String, String>();
                 item.put("where", "scene " + warning.getKey() + ".1 source_asr");
@@ -189,7 +197,43 @@ public final class StoryboardLocalizer {
     }
 
     /** Translate complete spoken thoughts while retaining the original start/end of every grouped cue. */
-    private static List<List<TranscriptData.Segment>> audioTranslationGroups(List<TranscriptData.Segment> timed) {
+    static List<List<TranscriptData.Segment>> audioTranslationGroups(List<TranscriptData.Segment> timed) {
+        // Whisper chunk boundaries are decoder windows, not sentence boundaries. A
+        // chunk may contain several sentences or end halfway through a chemistry
+        // claim. Rebuild sentence cues from its word timestamps before translation.
+        var words = timed.stream().filter(cue -> cue.getWords() != null)
+            .flatMap(cue -> cue.getWords().stream())
+            .filter(word -> word.getWord() != null && !word.getWord().isBlank()
+                && word.getStart() >= 0 && word.getEnd() > word.getStart())
+            .toList();
+        if (!words.isEmpty()) {
+            List<List<TranscriptData.Segment>> sentences = new ArrayList<>();
+            List<TranscriptData.Word> pendingWords = new ArrayList<>();
+            for (var word : words) {
+                pendingWords.add(word);
+                String token = word.getWord().trim();
+                boolean sentenceEnd = token.matches("(?s).*[.!?।][\\\"')\\]]*$");
+                if (sentenceEnd || word.getEnd() - pendingWords.get(0).getStart() >= 60.0) {
+                    var cue = new TranscriptData.Segment();
+                    cue.setStart(pendingWords.get(0).getStart());
+                    cue.setEnd(word.getEnd());
+                    cue.setWords(new ArrayList<>(pendingWords));
+                    cue.setText(String.join(" ", pendingWords.stream().map(TranscriptData.Word::getWord).toList()));
+                    sentences.add(List.of(cue));
+                    pendingWords = new ArrayList<>();
+                }
+            }
+            if (!pendingWords.isEmpty()) {
+                var cue = new TranscriptData.Segment();
+                cue.setStart(pendingWords.get(0).getStart());
+                cue.setEnd(pendingWords.get(pendingWords.size() - 1).getEnd());
+                cue.setWords(pendingWords);
+                cue.setText(String.join(" ", pendingWords.stream().map(TranscriptData.Word::getWord).toList()));
+                sentences.add(List.of(cue));
+            }
+            return sentences;
+        }
+        // Older ASR contracts may not contain word timings.
         List<List<TranscriptData.Segment>> groups = new ArrayList<>();
         List<TranscriptData.Segment> pending = new ArrayList<>();
         for (TranscriptData.Segment cue : timed) {
@@ -207,6 +251,14 @@ public final class StoryboardLocalizer {
         }
         if (!pending.isEmpty()) groups.add(pending);
         return groups;
+    }
+
+    private static String neighboringEnglish(StoryboardDocument source, int index) {
+        var scenes = source.getScenes();
+        String previous = index > 0 ? scenes.get(index - 1).getSegments().get(0).getSentence() : "";
+        String next = index + 1 < scenes.size() ? scenes.get(index + 1).getSegments().get(0).getSentence() : "";
+        return "\nPrevious context (do not translate): " + previous
+            + "\nNext context (do not translate): " + next;
     }
 
     /** Qwen is loaded only after the MADLAD worker closes. A repaired line remains teacher-reviewable. */
@@ -240,7 +292,7 @@ public final class StoryboardLocalizer {
                 String candidate;
                 if (item.getOrDefault("problem", "").startsWith("number ")
                     || item.getOrDefault("problem", "").startsWith("formula or symbol")) {
-                    String prompt = "English source: " + original.getSentence() + "\nCurrent Hindi: "
+                    String prompt = "English source: " + original.getSentence() + neighboringEnglish(source, index) + "\nCurrent Hindi: "
                         + translated.getSentence() + "\nQA finding: " + item.get("problem")
                         + "\nWrite a complete faithful Hindi sentence. Include every exact number, unit and chemical formula "
                         + "from English; do not omit clauses. Return JSON only.";
@@ -248,7 +300,13 @@ public final class StoryboardLocalizer {
                         "You are a careful Grade 10 science translator. Preserve all source facts exactly.",
                         prompt, candidateSchema, 900)).getAsJsonObject().get("candidate").getAsString().trim();
                 } else {
-                    candidate = alternate.translate(List.of(original.getSentence()), from, to).get(0).trim();
+                    String prompt = "English source: " + original.getSentence() + neighboringEnglish(source, index)
+                        + "\nCurrent Hindi: " + translated.getSentence()
+                        + "\nTranslate only the English source as one complete Hindi thought. Context disambiguates terms; "
+                        + "do not include context facts. Return JSON only.";
+                    candidate = com.google.gson.JsonParser.parseString(ollama.generateStructured(
+                        "You translate Grade 10 science lessons faithfully from English to Hindi.",
+                        prompt, candidateSchema, 900)).getAsJsonObject().get("candidate").getAsString().trim();
                 }
                 if (terminology != null) candidate = terminology.normalize(original.getSentence(), candidate);
                 if (StoryboardTranslator.problem(original.getSentence(), candidate, to) != null) continue;
@@ -270,6 +328,7 @@ public final class StoryboardLocalizer {
                 review.put("where", item.get("where"));
                 review.put("source", original.getSentence());
                 review.put("translation", candidate);
+                review.put("resolution", "verified_repair");
                 review.put("problem", "second-model repair passed bilingual audit; teacher review still required");
                 result.reviews().add(review);
                 result.storyboard().getScenes().get(index).setNarration(candidate);
@@ -298,13 +357,19 @@ public final class StoryboardLocalizer {
                 pair.addProperty("id", index + 1);
                 pair.addProperty("english", source.getScenes().get(index).getSegments().get(0).getSentence());
                 pair.addProperty("hindi", result.storyboard().getScenes().get(index).getSegments().get(0).getSentence());
+                pair.addProperty("previous_english_context", index > 0
+                    ? source.getScenes().get(index - 1).getSegments().get(0).getSentence() : "");
+                pair.addProperty("next_english_context", index + 1 < count
+                    ? source.getScenes().get(index + 1).getSegments().get(0).getSentence() : "");
                 pairs.add(pair);
             }
             try {
                 var answer = com.google.gson.JsonParser.parseString(ollama.generateStructured(
                     "You are a strict bilingual Grade 10 science translation examiner. Compare each pair literally. "
                     + "Check entities, actions, negation, values, units, formulas and technical terms. "
-                    + "Judge only whether the Hindi preserves that English line, even if the English appears scientifically wrong. "
+                    + "Use adjacent English only to resolve ambiguous words. Judge only whether the Hindi preserves "
+                    + "its paired English line; facts in adjacent lines must not be required or credited. "
+                    + "If the paired English appears scientifically wrong, translate that evidence literally. "
                     + "Do not flag style, fluency, synonyms, or emotional nuance. Do not invent a correction. "
                     + "Mark faithful false only for a clear omission or factual change and quote the exact differing phrases in concern. "
                     + "If uncertain, mark faithful true. Return every id once as JSON findings.",
@@ -363,7 +428,7 @@ public final class StoryboardLocalizer {
             var original = source.getScenes().get(index).getSegments().get(0);
             var translated = result.storyboard().getScenes().get(index).getSegments().get(0);
             try {
-                String prompt = "English line: " + original.getSentence() + "\nCurrent Hindi: "
+                String prompt = "English line: " + original.getSentence() + neighboringEnglish(source, index) + "\nCurrent Hindi: "
                     + translated.getSentence() + "\nDetected concern: " + item.getOrDefault("problem", "")
                     + "\nProvide one faithful Hindi replacement for the exact English line. Preserve every "
                     + "chemical identity, agent, action, negation, formula, number and unit. "
@@ -388,6 +453,7 @@ public final class StoryboardLocalizer {
                 String narrationWhere = "scene " + (index + 1) + ".1 narration";
                 result.reviews().removeIf(review -> narrationWhere.equals(review.getOrDefault("where", "")));
                 item.put("translation", candidate);
+                item.put("resolution", "verified_repair");
                 item.put("problem", "semantic repair passed a separate bilingual audit; teacher review still required. Original concern: "
                     + item.getOrDefault("problem", ""));
                 logger.info("Semantic translation candidate accepted for teacher review at scene {}.1", index + 1);

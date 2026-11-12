@@ -343,7 +343,8 @@ public final class StoryboardTranslator {
         }
         java.util.Set<String> kept = ClaimGrounding.digitNumbers(translation);
         for (String number : ClaimGrounding.digitNumbers(source)) {
-            if (!kept.contains(number)) return "number " + number + " is missing";
+            if (!kept.contains(number) && !("hi".equals(target.code()) && hasSpokenHindiNumber(translation, number)))
+                return "number " + number + " is missing";
         }
         Matcher formula = FORMULA_TOKEN.matcher(source);
         while (formula.find()) {
@@ -354,6 +355,26 @@ public final class StoryboardTranslator {
             if (ratio < 0.35 || ratio > 3.5) return "length is implausible (" + String.format(Locale.ROOT, "%.1f", ratio) + "x the original)";
         }
         return null;
+    }
+
+    private static boolean hasSpokenHindiNumber(String translation, String number) {
+        String word = switch (number) {
+            case "0" -> "शून्य"; case "1" -> "एक"; case "2" -> "दो|दोनों";
+            case "3" -> "तीन"; case "4" -> "चार"; case "5" -> "पाँच|पांच";
+            case "6" -> "छह|छः"; case "7" -> "सात"; case "8" -> "आठ";
+            case "9" -> "नौ"; case "10" -> "दस"; case "11" -> "ग्यारह";
+            case "12" -> "बारह"; case "13" -> "तेरह"; case "14" -> "चौदह";
+            case "15" -> "पंद्रह|पन्द्रह"; case "16" -> "सोलह";
+            case "17" -> "सत्रह"; case "18" -> "अठारह";
+            case "19" -> "उन्नीस"; case "20" -> "बीस";
+            case "30" -> "तीस"; case "40" -> "चालीस"; case "50" -> "पचास";
+            case "60" -> "साठ"; case "70" -> "सत्तर"; case "80" -> "अस्सी";
+            case "90" -> "नब्बे";
+            default -> null;
+        };
+        return word != null && java.util.regex.Pattern.compile(
+            "(?<![\\p{L}\\p{M}])(?:" + word + ")(?![\\p{L}\\p{M}])")
+            .matcher(translation).find();
     }
 
     private static java.util.Map<String, String> review(String where, String source, String translation, String problem) {

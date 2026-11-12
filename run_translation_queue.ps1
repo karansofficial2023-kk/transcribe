@@ -9,12 +9,44 @@ param(
 
     [string]$GradeLevel = '10th standard',
     [string]$AcademicLevel = 'secondary',
-    [string]$TargetLanguages = 'hi'
+    [string]$TargetLanguages = 'hi',
+
+    [switch]$RequireOllamaAudit,
+    [string]$OllamaExe = 'C:\Users\User\AppData\Local\Programs\Ollama\ollama.exe'
 )
 
 $ErrorActionPreference = 'Stop'
 if ([string]::IsNullOrWhiteSpace($TargetLanguages)) {
     throw '-TargetLanguages is required, for example -TargetLanguages "hi".'
+}
+
+function Test-OllamaReady {
+    try {
+        $response = Invoke-WebRequest -UseBasicParsing -Uri 'http://127.0.0.1:11434/api/tags' -TimeoutSec 4
+        if ($response.StatusCode -ne 200) { return $false }
+        $names = @((($response.Content | ConvertFrom-Json).models | ForEach-Object { [string]$_.name }))
+        return $names -contains 'qwen3:14b' -and $names -contains 'qwen3:8b'
+    } catch { return $false }
+}
+
+function Ensure-OllamaAudit {
+    if (Test-OllamaReady) {
+        Write-Host 'OLLAMA_AUDIT_READY: local Qwen service and required models are available.'
+        return
+    }
+    if (-not (Test-Path -LiteralPath $OllamaExe -PathType Leaf)) {
+        throw "Ollama audit is required but ollama.exe was not found: $OllamaExe"
+    }
+    Write-Host 'OLLAMA_AUDIT_START: starting local Qwen service...'
+    Start-Process -FilePath $OllamaExe -ArgumentList 'serve' -WindowStyle Hidden
+    for ($attempt = 1; $attempt -le 12; $attempt++) {
+        Start-Sleep -Seconds 2
+        if (Test-OllamaReady) {
+            Write-Host 'OLLAMA_AUDIT_READY: local Qwen service and required models are available.'
+            return
+        }
+    }
+    throw 'Ollama audit is required but could not start, or qwen3:14b/qwen3:8b is missing. Run "ollama serve", then "ollama pull qwen3:14b" and "ollama pull qwen3:8b", and retry.'
 }
 
 $projectRoot = $PSScriptRoot
@@ -56,6 +88,7 @@ foreach ($name in $overrides.Keys) {
 $previousLocation = Get-Location
 
 try {
+    if ($RequireOllamaAudit.IsPresent) { Ensure-OllamaAudit }
     foreach ($name in $overrides.Keys) {
         [Environment]::SetEnvironmentVariable($name, [string]$overrides[$name], 'Process')
     }
