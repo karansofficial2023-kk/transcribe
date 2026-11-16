@@ -159,3 +159,22 @@ class ClosingWordsTest(unittest.TestCase):
         self.assertEqual(w.rescue_tail(object(), "no-such-file.wav", result, "en", None), 0)
         self.assertEqual(result["text"], "Hello.")
         self.assertEqual(result["tail_rescued_words"], 0)
+
+
+class SplitWordAndDecimalRepairs(unittest.TestCase):
+    def test_word_cut_by_a_segment_boundary_is_completed(self):
+        import whisper_transcribe as w
+        segments = [{"text": "Copper is alloyed with zinc to form bra."}, {"text": "brass. Copper is also alloyed."}]
+        fixed, count = w.repair_split_words(segments)
+        self.assertEqual(count, 1)
+        self.assertEqual(fixed[0]["text"], "Copper is alloyed with zinc to form brass.")
+
+    def test_new_sentence_or_whole_word_is_not_touched(self):
+        import whisper_transcribe as w
+        segments = [{"text": "It stops at the end."}, {"text": "Endless things follow."}, {"text": "We add the."}, {"text": "then stop."}]
+        _fixed, count = w.repair_split_words(segments)
+        self.assertEqual(count, 0)
+
+    def test_split_decimal_is_joined(self):
+        import whisper_transcribe as w
+        self.assertEqual(w.join_split_decimals("about 0 .5 % carbon and 4 % copper"), "about 0.5 % carbon and 4 % copper")

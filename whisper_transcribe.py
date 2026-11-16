@@ -267,6 +267,33 @@ STEM_VOCABULARY = ("AC motor, conducting loop ABCD, arm AB, arm CD, slip rings S
                    "carbonyl, aldehyde CHO, ketone, carboxylic acid COOH, amine NH2, alkane, IUPAC")
 
 
+def join_split_decimals(text):
+    """ASR often writes a decimal with a gap: "0 .5 %" -> "0.5 %" (the gap made the number check report a missing 0)."""
+    return re.sub(r"(?<=\d) \.(?=\d)", ".", text or "")
+
+
+_WHOLE_WORDS = set("the and for but are was not you all can her his its our out one two who how why now new old say see use any may got let put too yet nor off own per via few way".split())
+
+
+def repair_split_words(segments):
+    """A word cut by a segment boundary: "... to form bra." + "brass. ..." -> "... to form brass." + "brass. ...". The first segment ends in a
+    fragment that the next segment (starting lower-case, i.e. not a new sentence) begins with and completes. Returns (segments, count)."""
+    repaired = 0
+    for current, following in zip(segments, segments[1:]):
+        words = (current.get("text") or "").split()
+        nxt = (following.get("text") or "").split()
+        if not words or not nxt:
+            continue
+        tail = re.sub(r"[^A-Za-z]", "", words[-1])
+        head = re.sub(r"[^A-Za-z]", "", nxt[0])
+        if (len(tail) >= 3 and tail.lower() not in _WHOLE_WORDS and words[-1].endswith((".", ",")) and nxt[0][:1].islower()
+                and head.lower().startswith(tail.lower()) and 1 <= len(head) - len(tail) <= 3):
+            words[-1] = head + words[-1][len(re.sub(r"[.,]+$", "", words[-1])):]
+            current["text"] = " ".join(words)
+            repaired += 1
+    return segments, repaired
+
+
 def lesson_prompt(language, hotwords):
     """Base prompt plus the lesson vocabulary, so rare terms (Buckminsterfullerene) are biased in from the start."""
     base = initial_prompt(language) or ""
@@ -382,6 +409,7 @@ def run_faster_whisper(model, audio_path, language, prompt, hotwords, condition,
     foreign_removed = 0
     for segment in segments:
         text, removed = sanitize_script(segment.text.strip(), language or info.language)
+        text = join_split_decimals(text)
         foreign_removed += removed
         data = {"id": len(result["segments"]), "start": segment.start, "end": segment.end, "text": text, "words": []}
         for word in segment.words or []:
@@ -392,11 +420,16 @@ def run_faster_whisper(model, audio_path, language, prompt, hotwords, condition,
             # Whisper often gives digits/short tokens a zero-length span; keep them with a minimal duration so
             # downstream sentence rebuilding does not silently drop numbers.
             end = max(word.end, word.start + MIN_WORD_SECONDS)
+            if data["words"] and re.fullmatch(r"\.\d+%?", token) and re.search(r"\d$", data["words"][-1]["word"]):
+                data["words"][-1]["word"] += token            # "0" + ".5" is one number, 0.5
+                data["words"][-1]["end"] = end
+                continue
             data["words"].append({"word": token, "start": word.start, "end": end, "probability": word.probability})
         result["segments"].append(data)
         result["text"] += text + " "
     result["foreign_script_removed"] = foreign_removed
     result["segments"], dropped = drop_impossible_segments(result["segments"])
+    result["segments"], result["split_words_repaired"] = repair_split_words(result["segments"])
     result["text"] = " ".join(segment["text"] for segment in result["segments"]).strip()
     result["dropped_segments"] = dropped
     return result
