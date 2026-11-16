@@ -145,6 +145,7 @@ class StoryboardTranslatorTest {
         assertNotNull(StoryboardTranslator.problem("Anode", "Anode", TA));                       // a short label left in English is caught
         assertNotNull(StoryboardTranslator.problem("Electrolyte", "electrolyte", TA));
         assertNull(StoryboardTranslator.problem("Ag", "Ag", TA));                                // symbols are legitimately unchanged
+        assertNotNull(StoryboardTranslator.problem("The anode is positive.", "நேர்மின்வாய் 球 நேர்மறை முனையாகும்.", TA));   // stray CJK is caught
     }
 
     @Test

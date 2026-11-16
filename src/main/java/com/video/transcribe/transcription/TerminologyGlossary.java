@@ -77,6 +77,18 @@ public final class TerminologyGlossary {
         return result;
     }
 
+    /** "english = preferred" pairs for every glossary term the source line uses, to put in a translation prompt; empty when none. */
+    public String hints(String source) {
+        if (source == null) return "";
+        var parts = new java.util.LinkedHashSet<String>();
+        for (Term term : terms) {
+            if (!containsWord(source, term.source())) continue;
+            if (term.sourceExcludes().stream().anyMatch(excluded -> containsWord(source, excluded))) continue;
+            parts.add(term.source() + " = " + term.preferred());
+        }
+        return String.join("; ", parts);
+    }
+
     private static boolean containsWord(String text, String word) {
         return Pattern.compile("(?<![\\p{L}\\p{M}\\p{N}])" + Pattern.quote(word) + "(?![\\p{L}\\p{M}\\p{N}])", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE).matcher(text).find();
     }

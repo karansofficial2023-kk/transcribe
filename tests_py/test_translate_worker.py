@@ -76,3 +76,22 @@ class ProtocolTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ProtectedTokenTest(unittest.TestCase):
+    def test_labels_formulas_and_bonds_round_trip_through_placeholders(self):
+        import translate_text as t
+        text = "Arm CD touches slip ring S1; the group C=O, -COOH and H2SO4 stay."
+        masked, tokens = t.mask_protected(text)
+        self.assertEqual(tokens, ["CD", "S1", "C=O", "-COOH", "H2SO4"])
+        self.assertNotIn("CD", masked)
+        self.assertEqual(t.unmask_protected(masked, tokens), (text, True))
+
+    def test_plain_words_and_single_letters_are_not_masked(self):
+        import translate_text as t
+        self.assertEqual(t.mask_protected("A motor is HIS or NO. We use Brush."), ("A motor is HIS or NO. We use Brush.", []))
+
+    def test_a_lost_placeholder_is_detected(self):
+        import translate_text as t
+        self.assertEqual(t.unmask_protected("आर्म [1] हमेशा", ["CD", "S1"])[1], False)
+        self.assertEqual(t.unmask_protected("[1] [1] [2]", ["CD", "S1"])[1], False)

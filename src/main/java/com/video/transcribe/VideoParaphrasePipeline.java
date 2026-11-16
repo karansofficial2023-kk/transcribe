@@ -513,7 +513,8 @@ public class VideoParaphrasePipeline {
 			if (source == null) source = LanguageSupport.detect(originalText, detectedLanguage);
 			new StoryboardLocalizer(config, ollama).localizeTranscriptForAudio(
 				transcript, baseName, config.getString("video.grade.level", ""), config.getString("video.academic.level", ""),
-				source, targets, Paths.get(config.getOutputDir()));
+				source, targets, Paths.get(config.getOutputDir()),
+				glossary.size() > 0 ? glossary::apply : java.util.function.UnaryOperator.identity());
 			return new PipelineResult(true, null, transcript, originalText, null, null,
 				System.currentTimeMillis() - startTime, null);
 		}

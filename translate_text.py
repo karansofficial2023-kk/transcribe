@@ -11,12 +11,63 @@ The model is loaded once, on the first request, and kept for the lifetime of the
 """
 
 import argparse
+import re
 import json
 import sys
 from pathlib import Path
 
 # MADLAD selects the output language with a "<2xx>" prefix; xx is the ISO 639-1 code.
 SUPPORTED = {"en", "hi", "mr", "ta", "te", "ml", "kn", "bn", "gu", "pa", "or", "ur"}
+
+
+# Formulas, bonds, functional groups and diagram labels (AB, B1, S2, C=O, -COOH, H2SO4) must reach the output untouched. MADLAD
+# otherwise transliterates them ("CD" -> "सीडी") or invents text around them. They are swapped for "[n]" placeholders, which the
+# model keeps in place and translates around, and restored afterwards (checked on the real model: "आर्म [1] हमेशा स्लिप रिंग [2] ...").
+_ELEMENTS = set("H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo "
+                "Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Hf Ta W Re Os Ir Pt Au Hg "
+                "Tl Pb Bi Po At Rn Fr Ra Ac Th Pa U".split())
+_CAPS_WORDS = {"HIS", "HAS", "ALL", "ARE", "NOT", "THE", "AND", "BUT", "FOR", "CAN", "IT", "IS", "OK", "HE", "SO", "NO", "US", "IN", "AS", "AT", "BE", "OR", "AM", "AN", "ON", "TO", "OF", "IF", "ID", "TV", "UK"}
+_PROTECTED = re.compile(
+    r"(?<![A-Za-z0-9\[])(?:"
+    r"-?(?:[A-Z][a-z]?\d*)+(?:[=≡-](?:[A-Z][a-z]?\d*)+)+"                 # C=O, C≡N, R-OH, O-N-E
+    r"|-(?:COOH|CHO|OH|NH2|NO2)"                                               # -COOH
+    r"|(?:[A-Z][a-z]?\d*|\((?:[A-Z][a-z]?\d*)+\)\d*)+(?:\^?\d*[+-])?"          # H2SO4, NaCl, B1, ABCD, Ca2+
+    r")(?![A-Za-z0-9\]])")
+_PLACEHOLDER = re.compile(r"\[(\d+)\]")
+
+
+def _worth_protecting(token):
+    core = token.lstrip("-")
+    if any(op in token for op in "=≡") or token.startswith("-") or re.search(r"\d", core):
+        return True
+    if core.upper() in _CAPS_WORDS:
+        return False
+    if core.isupper():
+        return len(core) >= 2
+    chunks = re.findall(r"[A-Z][a-z]?", core)
+    return len(chunks) >= 2 and "".join(chunks) == core and all(chunk in _ELEMENTS for chunk in chunks)
+
+
+def mask_protected(text):
+    """Replace protected tokens by [1], [2] ... Returns (masked_text, [tokens])."""
+    tokens = []
+
+    def swap(match):
+        token = match.group()
+        if not _worth_protecting(token):
+            return token
+        tokens.append(token)
+        return f"[{len(tokens)}]"
+
+    return _PROTECTED.sub(swap, text), tokens
+
+
+def unmask_protected(text, tokens):
+    """Put the original tokens back. Returns (text, ok); ok is False when a placeholder was lost or duplicated."""
+    found = [int(n) for n in _PLACEHOLDER.findall(text)]
+    if sorted(found) != list(range(1, len(tokens) + 1)):
+        return text, False
+    return _PLACEHOLDER.sub(lambda m: tokens[int(m.group(1)) - 1], text), True
 
 
 def tag_for(target):
@@ -79,6 +130,26 @@ class Translator:
         self.torch = torch
 
     def translate(self, texts, target):
+        """Translate with formulas/labels protected; a line whose placeholders were lost is translated again unmasked."""
+        masked = [mask_protected(text) for text in texts]
+        results = self._translate_raw([m[0] for m in masked], target)
+        unsafe = []
+        for index, (_text, tokens) in enumerate(masked):
+            if not tokens:
+                continue
+            restored, ok = unmask_protected(results[index], tokens)
+            if ok:
+                results[index] = restored
+            else:
+                unsafe.append(index)
+        if unsafe:
+            print(f"MADLAD {target}: {len(unsafe)} line(s) lost a protected token; retranslating them unmasked",
+                  file=sys.stderr, flush=True)
+            for index, text in zip(unsafe, self._translate_raw([texts[i] for i in unsafe], target)):
+                results[index] = text
+        return results
+
+    def _translate_raw(self, texts, target):
         self.load()
         tag = tag_for(target)
         results = [""] * len(texts)

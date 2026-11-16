@@ -67,6 +67,19 @@ public final class OllamaTextTranslator implements StoryboardTranslator.TextTran
             + "4. The text is spoken narration or short on-screen text: keep it natural and about as long as the original; labels and "
             + "headings stay short.\n"
             + "5. Write in the " + target.name() + " script. Return JSON {\"translations\":[{\"id\":<same id>,\"text\":\"<translation>\"}]} "
-            + "with one entry per item.";
+            + "with one entry per item."
+            + "\n6. Diagram labels and points (AB, CD, B1, S2), bond notation (C=O, C≡N, -COOH) and IUPAC suffixes (-one, -al, -ol) are "
+            + "copied exactly as written. Never spell them in " + target.name() + " letters (CD must not become a transliteration) and "
+            + "never replace a suffix such as -one with a functional group."
+            + ("hi".equals(target.code()) ? HINDI_STEM_GLOSSARY : "");
     }
+
+    /** Standard NCERT physics/chemistry wording that literal translation gets wrong (wrong forms seen in real dubbing reports). */
+    static final String HINDI_STEM_GLOSSARY = "\n7. Mandatory Hindi science terms:\n"
+        + "   - arm AB / arm CD -> भुजा AB / भुजा CD (never हाथ AB)\n"
+        + "   - middle finger -> मध्यमा उंगली (never मध्य अंगूठी); first finger / forefinger -> तर्जनी उंगली; thumb -> अंगूठा\n"
+        + "   - slip ring -> स्लिप रिंग (never स्लीप अंगूठी); brush -> ब्रश; coil -> कुंडली; commutator -> कम्यूटेटर\n"
+        + "   - consists of / is made of -> से मिलकर बना होता है (never द्वारा बनाया गया); stationary part -> स्थिर भाग\n"
+        + "   - clockwise -> घड़ी की दिशा में; anticlockwise -> घड़ी की विपरीत दिशा में\n"
+        + "   - electric current -> विद्युत धारा; alkane -> ऐल्केन; carboxylic acid -> कार्बोक्सिलिक अम्ल";
 }

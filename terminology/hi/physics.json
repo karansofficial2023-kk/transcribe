@@ -1,0 +1,93 @@
+{
+  "current": {
+    "preferred": "धारा",
+    "aliases": [
+      "वर्तमान",
+      "करंट"
+    ],
+    "subject": "physics"
+  },
+  "electric current": {
+    "preferred": "विद्युत धारा",
+    "aliases": [
+      "इलेक्ट्रिक करंट"
+    ],
+    "subject": "physics"
+  },
+  "middle finger": {
+    "preferred": "मध्यमा उंगली",
+    "aliases": [
+      "मध्य अंगूठी",
+      "मध्य अंगूठा",
+      "मध्य उंगली",
+      "बीच की अंगूठी"
+    ],
+    "subject": "physics"
+  },
+  "first finger": {
+    "preferred": "तर्जनी उंगली",
+    "aliases": [
+      "पहली उंगली",
+      "पहली अंगुली",
+      "प्रथम उंगली",
+      "पहली अंगूठी"
+    ],
+    "subject": "physics"
+  },
+  "forefinger": {
+    "preferred": "तर्जनी उंगली",
+    "aliases": [
+      "अग्र उंगली",
+      "पहली उंगली"
+    ],
+    "subject": "physics"
+  },
+  "thumb": {
+    "preferred": "अंगूठा",
+    "aliases": [
+      "अंगूठी"
+    ],
+    "subject": "physics"
+  },
+  "slip ring": {
+    "preferred": "स्लिप रिंग",
+    "aliases": [
+      "स्लीप अंगूठी",
+      "स्लिप अंगूठी",
+      "स्लीप रिंग",
+      "फिसलन की अंगूठी"
+    ],
+    "subject": "physics"
+  },
+  "slip rings": {
+    "preferred": "स्लिप रिंग",
+    "aliases": [
+      "स्लीप अंगूठियां",
+      "स्लिप अंगूठियां",
+      "स्लीप रिंग्स"
+    ],
+    "subject": "physics"
+  },
+  "armature": {
+    "preferred": "आर्मेचर",
+    "aliases": [
+      "अर्मेचर",
+      "आर्मचर"
+    ],
+    "subject": "physics"
+  },
+  "commutator": {
+    "preferred": "कम्यूटेटर",
+    "aliases": [
+      "कम्युटेटर"
+    ],
+    "subject": "physics"
+  },
+  "brush": {
+    "preferred": "ब्रश",
+    "aliases": [
+      "ब्रस"
+    ],
+    "subject": "physics"
+  }
+}

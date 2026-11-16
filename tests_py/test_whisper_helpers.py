@@ -128,3 +128,34 @@ class SpecialistTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class V2DeepDiveTest(unittest.TestCase):
+    def test_foreign_script_is_removed_from_english_only(self):
+        self.assertEqual(w.sanitize_script("hollow .曹s molecule the球 we", "en"), ("hollow .s molecule the we", 2))
+        self.assertEqual(w.sanitize_script("हिंदी 球", "hi"), ("हिंदी 球", 0))
+
+    def test_lesson_vocabulary_is_added_to_the_english_prompt(self):
+        self.assertIn("Buckminsterfullerene", w.lesson_prompt("en", "Buckminsterfullerene graphite"))
+        self.assertEqual(w.lesson_prompt("hi", "x"), w.initial_prompt("hi"))
+
+    def test_doubtful_numbers_are_listed_separately(self):
+        segments = [{"text": "1 in 10", "words": [{"word": "I", "probability": 0.2}, {"word": "10", "probability": 0.3},
+                                                  {"word": "three", "probability": 0.95}]}]
+        self.assertEqual([item["heard"] for item in w.uncertain_numbers(segments)], ["10"])
+
+
+class ClosingWordsTest(unittest.TestCase):
+    def test_words_are_grouped_into_sentences_by_punctuation_and_pauses(self):
+        words = [{"word": "Confused?", "start": 1.0, "end": 1.5}, {"word": "Watch", "start": 2.0, "end": 2.3},
+                 {"word": "the", "start": 2.3, "end": 2.4}, {"word": "videos.", "start": 2.4, "end": 3.0},
+                 {"word": "Keep", "start": 6.0, "end": 6.3}, {"word": "imbibing", "start": 6.3, "end": 6.9}]
+        sentences = w._sentences_from_words(words)
+        self.assertEqual([s["text"] for s in sentences], ["Confused?", "Watch the videos.", "Keep imbibing"])
+        self.assertEqual(sentences[2]["start"], 6.0)
+
+    def test_the_tail_rescue_never_loses_the_main_transcript_when_it_fails(self):
+        result = {"segments": [{"id": 0, "start": 0.0, "end": 1.0, "text": "Hello.", "words": []}], "text": "Hello."}
+        self.assertEqual(w.rescue_tail(object(), "no-such-file.wav", result, "en", None), 0)
+        self.assertEqual(result["text"], "Hello.")
+        self.assertEqual(result["tail_rescued_words"], 0)

@@ -12,10 +12,15 @@ What it does beyond plain transcription:
 
 import argparse
 import json
+import os
 import re
+import shutil
+import subprocess
+import tempfile
 import sys
 import unicodedata
 import warnings
+import importlib.util
 from collections import Counter
 from pathlib import Path
 
@@ -68,6 +73,73 @@ def parse_specialists(value):
 
 def initial_prompt(language):
     return PROMPTS.get((language or "").split("-")[0].lower())
+
+
+_PROTECTED_FORMULA = re.compile(r"(?<![A-Za-z0-9])(?:[A-Z][a-z]?\d*)+(?![A-Za-z0-9])")
+_PROTECTED_NUMBER = re.compile(r"(?<![A-Za-z0-9])\d+(?:\.\d+)?(?![A-Za-z0-9])")
+
+
+def protected_tokens(text):
+    """Return formula/number tokens whose disagreement must never be auto-corrected."""
+    formulas = [token.upper() for token in _PROTECTED_FORMULA.findall(text or "")
+                if any(char.isdigit() for char in token) or len(token) >= 2]
+    numbers = _PROTECTED_NUMBER.findall(text or "")
+    return {"formulas": formulas, "numbers": numbers}
+
+
+def protected_evidence(primary_text, alternate_text):
+    """Two-ASR agreement gate. OCR confirmation is added later by visual_source_qa."""
+    primary, alternate = protected_tokens(primary_text), protected_tokens(alternate_text)
+    return {"method": "two_asr_or_ocr", "asr_agreement": primary == alternate,
+            "primary": primary, "alternate": alternate,
+            "requires_ocr_or_teacher_review": primary != alternate,
+            "ocr_confirmed": False}
+
+
+def _demucs_vocal_stem(audio_path, folder):
+    """Return an isolated vocal stem when Demucs is available; never modify the source audio."""
+    if os.environ.get("WHISPER_STEM_SEPARATION", "1") == "0":
+        return str(audio_path), {"requested": False, "used": False, "engine": "none"}
+    python = os.environ.get("DEMUCS_PYTHON", sys.executable)
+    if Path(python).resolve() == Path(sys.executable).resolve() and importlib.util.find_spec("demucs") is None:
+        return str(audio_path), {"requested": True, "used": False, "engine": "demucs/htdemucs",
+                                 "reason": "demucs_not_installed"}
+    out = Path(folder) / "stems"
+    command = [python, "-m", "demucs", "--two-stems=vocals", "-n",
+               os.environ.get("DEMUCS_MODEL", "htdemucs"), "--out", str(out), str(audio_path)]
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, timeout=1800, check=False)
+        candidates = list(out.rglob("vocals.wav"))
+        if result.returncode == 0 and candidates:
+            return str(candidates[0]), {"requested": True, "used": True, "engine": "demucs/htdemucs"}
+        reason = (result.stderr or result.stdout or "demucs produced no vocal stem")[-500:]
+    except (OSError, subprocess.TimeoutExpired) as error:
+        reason = str(error)
+    return str(audio_path), {"requested": True, "used": False, "engine": "demucs/htdemucs", "reason": reason}
+
+
+def prepare_asr_audio(audio_path):
+    """Isolate speech then normalize it for ASR, while retaining the untouched original as evidence."""
+    folder = tempfile.mkdtemp(prefix="asr_preprocessed_")
+    stem_audio, stem = _demucs_vocal_stem(audio_path, folder)
+    if os.environ.get("WHISPER_PREPROCESS", "1") == "0":
+        return stem_audio, folder, {**stem, "original_audio": str(Path(audio_path).resolve()),
+                                    "asr_audio": str(Path(stem_audio).resolve()), "normalized": False}
+    ffmpeg = os.environ.get("FFMPEG_PATH", "ffmpeg")
+    target = Path(folder) / "audio.wav"
+    command = [ffmpeg, "-v", "error", "-y", "-i", str(stem_audio), "-map", "0:a:0", "-vn",
+               "-af", "highpass=f=70,lowpass=f=7600,loudnorm=I=-18:TP=-2:LRA=11",
+               "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le", str(target)]
+    try:
+        result = subprocess.run(command, capture_output=True, text=True, timeout=300, check=False)
+        if result.returncode == 0 and target.is_file():
+            return str(target), folder, {**stem, "original_audio": str(Path(audio_path).resolve()),
+                                         "asr_audio": str(target.resolve()), "normalized": True}
+    except (OSError, subprocess.TimeoutExpired):
+        pass
+    return stem_audio, folder, {**stem, "original_audio": str(Path(audio_path).resolve()),
+                                "asr_audio": str(Path(stem_audio).resolve()), "normalized": False,
+                                "normalization_error": True}
 
 
 # Speech recognisers invent fluent sentences in trailing silence or noise ("thanks for watching", news-like lines). Such segments are
@@ -140,6 +212,22 @@ def uncertain_words(segments, threshold=0.85, limit=80):
     return ranked[:limit]
 
 
+def uncertain_numbers(segments, threshold=0.6, limit=40):
+    """Digits and number words the model doubted (a garbled "1 in 10" becomes "I in you"). Listed separately for review."""
+    spoken = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "hundred", "thousand"}
+    found = []
+    for segment in segments:
+        for word in segment.get("words", []):
+            token = _trim(word.get("word", ""))
+            probability = word.get("probability")
+            if probability is None or probability >= threshold or not token:
+                continue
+            if token.isdigit() or token.lower() in spoken:
+                found.append({"heard": token, "probability": round(probability, 3), "start": word.get("start"),
+                              "example": segment["text"]})
+    return sorted(found, key=lambda e: e["probability"])[:limit]
+
+
 def write_candidates(output_json, language, segments):
     if not output_json:
         return None
@@ -151,35 +239,193 @@ def write_candidates(output_json, language, segments):
         "language": language,
         "how_to_use": "Check each 'heard' word. For a wrong one, add {\"heard\": \"correct\"} to glossary/<lang>.json, to <materials>/glossary.json "
                       "or to <materials>/<lesson>_glossary.json; the correction is applied before paraphrasing and also biases recognition.",
-        "candidates": candidates}, ensure_ascii=False, indent=2), encoding="utf-8")
+        "candidates": candidates, "uncertain_numbers": uncertain_numbers(segments)}, ensure_ascii=False, indent=2), encoding="utf-8")
     return target
 
 
-def run_faster_whisper(model, audio_path, language, prompt, hotwords, condition, window=None):
+# Characters that can never belong in English lesson speech (CJK, Cyrillic, Arabic, Thai, Hangul ...). Whisper occasionally
+# emits them when it is unsure ("the球", "曹s"); they poison translation and dubbing, so they are removed and counted.
+_FOREIGN_FOR_LATIN = re.compile(
+    "[Ѐ-ӿ԰-֏֐-ࣿ฀-໿ᄀ-ᇿ⺀-⿟　-ヿ"
+    "㄀-ㄯ㆐-鿿ꥠ-꥿가-퟿豈-﫿︰-﹏＀-￯]")
+LATIN_LANGUAGES = {"en"}
+MIN_WORD_SECONDS = 0.04
+
+
+def sanitize_script(text, language):
+    """Remove stray foreign-script characters from Latin-script (English) ASR text. Returns (text, removed_count)."""
+    if (language or "").split("-")[0].lower() not in LATIN_LANGUAGES or not text:
+        return text, 0
+    cleaned, removed = _FOREIGN_FOR_LATIN.subn("", text)
+    return (re.sub(r"[ 	]{2,}", " ", cleaned).strip() if removed else text), removed
+
+
+# Terms real STEM lessons were misheard on (Buckminsterfullerene -> "Buck", hexagonal -> "Host", arm AB, slip ring S1 ...).
+# Used after the lesson's own glossary terms; set WHISPER_STEM_VOCAB=0 to switch off for a non-STEM batch.
+STEM_VOCABULARY = ("AC motor, conducting loop ABCD, arm AB, arm CD, slip rings S1 and S2, brushes B1 and B2, Fleming's left-hand rule, "
+                   "armature, commutator, allotropes of carbon, graphite, diamond, buckminsterfullerene, C60, hexagonal, pentagonal, "
+                   "carbonyl, aldehyde CHO, ketone, carboxylic acid COOH, amine NH2, alkane, IUPAC")
+
+
+def lesson_prompt(language, hotwords):
+    """Base prompt plus the lesson vocabulary, so rare terms (Buckminsterfullerene) are biased in from the start."""
+    base = initial_prompt(language) or ""
+    if (language or "").split("-")[0].lower() in LATIN_LANGUAGES:
+        vocabulary = (hotwords or "")[:400]
+        if os.environ.get("WHISPER_STEM_VOCAB", "1") != "0":
+            vocabulary = (vocabulary + " " + STEM_VOCABULARY).strip()
+        if vocabulary:
+            return (base + " Vocabulary: " + vocabulary).strip()
+    return base or None
+
+
+CLOSING_HINT = os.environ.get(
+    "WHISPER_CLOSING_HINT", "Watch the upcoming videos to find out. Keep imbibing, we believe in you.")
+TAIL_WINDOW_SECONDS = 18.0
+
+
+def _decode_tail_words(model, samples, offset, language, hint):
+    """Words of one tail decode, with absolute timestamps, after dropping segments Whisper itself doubts."""
+    segments, _info = model.transcribe(
+        samples[int(offset * 16000):], language=language, initial_prompt=hint, word_timestamps=True, beam_size=5,
+        vad_filter=True, vad_parameters=dict(threshold=0.25, min_silence_duration_ms=2500, speech_pad_ms=500),
+        condition_on_previous_text=False, hallucination_silence_threshold=2.0)
+    found = []
+    for segment in segments:
+        if segment.no_speech_prob > 0.6 and segment.avg_logprob < -1.0:
+            continue
+        for word in segment.words or []:
+            token, _removed = sanitize_script(word.word.strip(), language)
+            if token:
+                start = word.start + offset
+                found.append({"word": token, "start": start, "end": max(word.end + offset, start + MIN_WORD_SECONDS),
+                              "probability": word.probability})
+    return found
+
+
+def _sentences_from_words(words):
+    """Group words into sentence-sized segments (end punctuation or a pause of a second or more)."""
+    segments, current = [], []
+    for index, word in enumerate(words):
+        current.append(word)
+        pause = index + 1 < len(words) and words[index + 1]["start"] - word["end"] >= 1.0
+        if re.search(r"[.!?]$", word["word"]) or pause or index + 1 == len(words):
+            segments.append({"start": current[0]["start"], "end": current[-1]["end"],
+                             "text": " ".join(item["word"] for item in current), "words": current})
+            current = []
+    return segments
+
+
+def rescue_tail(model, audio_path, result, language, prompt):
+    """Recover the closing words of the lesson ("Keep imbibing, we believe in you").
+
+    They are spoken over music after the last sentence and the long main decode often drops or truncates them. The last
+    sentences are therefore decoded again on their own, with and without a hint of the series' closing line, and the fuller
+    result replaces the main decode of that stretch (only when it agrees with it, so a hallucination cannot overwrite real
+    text). Returns the number of words gained; stored as result["tail_rescued_words"].
+    """
+    result["tail_rescued_words"] = 0
+    try:
+        from difflib import SequenceMatcher
+        from faster_whisper.audio import decode_audio
+        samples = decode_audio(audio_path, sampling_rate=16000)
+        total = len(samples) / 16000.0
+        segments = result["segments"]
+        if not segments:
+            return 0
+        # Replace whole segments: begin at the first segment that ends inside the final window.
+        first = next((i for i, seg in enumerate(segments) if seg["end"] >= total - TAIL_WINDOW_SECONDS), len(segments) - 1)
+        offset = max(0.0, segments[first]["start"] - 0.2)
+        main_words = [w for seg in segments[first:] for w in seg.get("words", [])]
+        hints = [None] + ([CLOSING_HINT] if CLOSING_HINT and (language or "").split("-")[0].lower() in LATIN_LANGUAGES else [])
+        best = []
+        for hint in hints:
+            candidate = _decode_tail_words(model, samples, offset, language, hint)
+            if (len(candidate), candidate[-1]["end"] if candidate else 0.0) > (len(best), best[-1]["end"] if best else 0.0):
+                best = candidate
+        main_text = " ".join(w["word"] for w in main_words).lower()
+        best_text = " ".join(w["word"] for w in best).lower()
+        agrees = (not main_words) or SequenceMatcher(None, main_text, best_text, autojunk=False).ratio() >= 0.5
+        main_end = max((w["end"] for w in main_words), default=0.0)
+        if not best or not agrees or best[-1]["end"] < main_end - 0.5 or len(best) <= len(main_words):
+            return 0
+        gained = len(best) - len(main_words)
+        replacement = _sentences_from_words(best)
+        result["segments"] = segments[:first] + replacement
+        for number, seg in enumerate(result["segments"]):
+            seg["id"] = number
+        result["text"] = " ".join(seg["text"] for seg in result["segments"]).strip()
+        result["tail_rescued_words"] = gained
+        print(f"Tail rescue: closing stretch re-decoded, +{gained} word(s) (now ends {best[-1]['end']:.1f}s)", file=sys.stderr)
+        return gained
+    except Exception as error:                      # a rescue failure must never lose the main transcript
+        print(f"Tail rescue skipped: {error}", file=sys.stderr)
+        return 0
+
+
+def run_faster_whisper(model, audio_path, language, prompt, hotwords, condition, window=None,
+                       beam_size=5, min_silence_duration_ms=2500):
     segments, info = model.transcribe(
         audio_path,
         language=language,
         initial_prompt=prompt,
         hotwords=hotwords or None,
         word_timestamps=True,
-        beam_size=5,
+        beam_size=beam_size,
         vad_filter=True,                       # drop silence/music so ASR does not hallucinate text
-        vad_parameters=dict(min_silence_duration_ms=2500, speech_pad_ms=500),
+        vad_parameters=dict(min_silence_duration_ms=min_silence_duration_ms, speech_pad_ms=500),
         condition_on_previous_text=condition,
         hallucination_silence_threshold=2.0,        # skip silent stretches where the model starts inventing text
         **({"chunk_length": window} if window else {}),
     )
     result = {"text": "", "language": info.language, "duration": info.duration, "segments": []}
+    foreign_removed = 0
     for segment in segments:
-        data = {"id": len(result["segments"]), "start": segment.start, "end": segment.end, "text": segment.text.strip(), "words": []}
+        text, removed = sanitize_script(segment.text.strip(), language or info.language)
+        foreign_removed += removed
+        data = {"id": len(result["segments"]), "start": segment.start, "end": segment.end, "text": text, "words": []}
         for word in segment.words or []:
-            data["words"].append({"word": word.word.strip(), "start": word.start, "end": word.end, "probability": word.probability})
+            token, word_removed = sanitize_script(word.word.strip(), language or info.language)
+            foreign_removed += word_removed
+            if not token:
+                continue
+            # Whisper often gives digits/short tokens a zero-length span; keep them with a minimal duration so
+            # downstream sentence rebuilding does not silently drop numbers.
+            end = max(word.end, word.start + MIN_WORD_SECONDS)
+            data["words"].append({"word": token, "start": word.start, "end": end, "probability": word.probability})
         result["segments"].append(data)
-        result["text"] += segment.text + " "
+        result["text"] += text + " "
+    result["foreign_script_removed"] = foreign_removed
     result["segments"], dropped = drop_impossible_segments(result["segments"])
     result["text"] = " ".join(segment["text"] for segment in result["segments"]).strip()
     result["dropped_segments"] = dropped
     return result
+
+
+def _alternate_decode(model, audio_path, language, prompt, hotwords, window=None):
+    """Independent decode with stricter beam search and shorter VAD silence merging."""
+    return run_faster_whisper(model, audio_path, language, prompt, hotwords,
+                              condition=False, window=window, beam_size=8,
+                              min_silence_duration_ms=900)
+
+
+def _whisperx_decode(audio_path, language, model_size, device):
+    """Optional WhisperX pass. It is an evidence pass; it never silently overwrites formulas."""
+    try:
+        import whisperx
+    except ImportError:
+        return None
+    try:
+        compute = "float16" if device == "cuda" else "int8"
+        model = whisperx.load_model(model_size, device, compute_type=compute, language=language)
+        raw = model.transcribe(audio_path, batch_size=4, language=language)
+        result = {"text": raw.get("text", ""), "language": raw.get("language", language),
+                  "duration": 0, "segments": raw.get("segments", [])}
+        result["quality"] = {"engine": "whisperx", "alignment": False}
+        return result
+    except Exception as error:
+        print(f"WhisperX evidence pass skipped: {error}", file=sys.stderr)
+        return None
 
 
 def transcribe(audio_path, model_size="base", language=None, output_json=None, device="cuda", hotwords=None, specialists=None):
@@ -227,10 +473,17 @@ def transcribe(audio_path, model_size="base", language=None, output_json=None, d
                 model = WhisperModel(specialist, device=device, compute_type="int8_float16" if device == "cuda" else "int8")
                 model_size = specialist
 
-            prompt = initial_prompt(language)
+            prompt = lesson_prompt(language, hotwords)
             window = window_seconds(language)
             # short windows are decoded independently: conditioning on the previous window would only propagate its mistakes
-            result = run_faster_whisper(model, audio_path, language, prompt, hotwords, condition=window is None, window=window)
+            # v2: conditioning on previous text made Whisper repeat phrases across its internal 30 s windows ("made up of a
+            # number of atoms", "the carboxylic compound will be called as an acetyl"), collapse word timestamps and stop
+            # punctuating a 60 s stretch. Measured on real lessons: similarity to an independent pass rose 0.961 -> 0.987 and
+            # 0.967 -> 0.980 with it switched off, and phantom/collapsed segments went to 0. Set WHISPER_CONDITION=1 to restore.
+            condition = os.environ.get("WHISPER_CONDITION", "0") == "1" and window is None
+            prepared_audio, temp_audio_dir, audio_preparation = prepare_asr_audio(audio_path)
+            result = run_faster_whisper(model, prepared_audio, language, prompt, hotwords, condition=condition, window=window)
+            rescue_tail(model, audio_path, result, language, prompt)
             loops = repetition_loops(s["text"] for s in result["segments"])
             retried = False
             if loops:
@@ -239,10 +492,44 @@ def transcribe(audio_path, model_size="base", language=None, output_json=None, d
                 retried = True
                 if repetition_loops(s["text"] for s in second["segments"]) < loops:
                     result, loops = second, repetition_loops(s["text"] for s in second["segments"])
+            alternate = None
+            if os.environ.get("WHISPER_ALTERNATE", "1") != "0":
+                alternate = _alternate_decode(model, prepared_audio, language, prompt, hotwords, window)
+                # Preserve the primary transcript unless the alternate has materially more voiced words.
+                # Scientific tokens are reconciled later by the contract QA, never by this heuristic.
+                primary_words = [w for s in result["segments"] for w in s.get("words", [])]
+                alternate_words = [w for s in alternate["segments"] for w in s.get("words", [])]
+                primary_text = " ".join(s.get("text", "") for s in result.get("segments", []))
+                alternate_text = " ".join(s.get("text", "") for s in alternate.get("segments", []))
+                primary_score = sum(float(w.get("probability", 0.0)) for w in primary_words) / max(1, len(primary_words))
+                alternate_score = sum(float(w.get("probability", 0.0)) for w in alternate_words) / max(1, len(alternate_words))
+                result["alternate_asr"] = {"engine": "faster-whisper", "beam_size": 8,
+                                            "min_silence_duration_ms": 900,
+                                            "word_count": len(alternate_words),
+                                            "mean_probability": round(alternate_score, 4),
+                                            "agreement_word_count": len(primary_words),
+                                            "selected": alternate_score > primary_score + 0.03 and len(alternate_words) >= len(primary_words) - 3}
+                if result["alternate_asr"]["selected"]:
+                    result = alternate
+                    result["alternate_asr"] = {"engine": "faster-whisper", "selected": True,
+                                                "beam_size": 8, "min_silence_duration_ms": 900}
+                result["protected_evidence"] = protected_evidence(
+                    primary_text, alternate_text)
+            wx = _whisperx_decode(prepared_audio, language, model_size, device) if os.environ.get("WHISPERX_EVIDENCE", "1") != "0" else None
+            if wx is not None:
+                result["whisperx_evidence"] = {"text": wx.get("text", ""), "segment_count": len(wx.get("segments", [])),
+                                                "engine": "whisperx", "used_for_replacement": False}
+            if temp_audio_dir:
+                shutil.rmtree(temp_audio_dir, ignore_errors=True)
             result["quality"] = {"repetition_loops": loops, "retried_without_context": retried, "prompted": bool(prompt),
                                  "hotwords": bool(hotwords), "model": str(model_size), "window_seconds": window or 30,
-                                 "dropped_hallucinated_segments": result.get("dropped_segments", 0)}
-        except ImportError:
+                                 "dropped_hallucinated_segments": result.get("dropped_segments", 0),
+                                 "foreign_script_removed": result.get("foreign_script_removed", 0),
+                                 "tail_rescued_words": result.get("tail_rescued_words", 0), "condition_on_previous_text": condition}
+            result["audio_preparation"] = audio_preparation
+        except ImportError as import_error:
+            if "faster_whisper" not in str(getattr(import_error, "name", "") or import_error):
+                raise          # a broken dependency inside faster-whisper (e.g. a torch DLL) must not hide behind a silent fallback
             import whisper     # fallback to the reference implementation
 
             print(f"Using openai-whisper with model: {model_size}", file=sys.stderr)

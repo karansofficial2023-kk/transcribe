@@ -1,0 +1,9 @@
+{
+  "bacteria": {"preferred": "जीवाणु", "aliases": ["बैक्टीरिया"], "subject": "biology"},
+  "bacterium": {"preferred": "जीवाणु", "aliases": ["बैक्टीरियम", "बैक्टीरिया"], "subject": "biology"},
+  "virus": {"preferred": "विषाणु", "aliases": ["वायरस"], "subject": "biology"},
+  "viruses": {"preferred": "विषाणु", "aliases": ["वायरस", "विषाणुओं"], "subject": "biology"},
+  "cell": {"preferred": "कोशिका", "aliases": ["सेल"], "subject": "biology"},
+  "photosynthesis": {"preferred": "प्रकाश संश्लेषण", "aliases": ["फोटोसिंथेसिस"], "subject": "biology"},
+  "red cabbage": {"preferred": "लाल गोभी", "aliases": ["लाल खीरा", "लाल ककड़ी", "लाल पत्तागोभी", "रेड कैबेज"], "subject": "biology"}
+}

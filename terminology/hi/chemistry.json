@@ -1,13 +1,290 @@
 {
-  "acid": {"preferred": "अम्ल", "aliases": ["एसिड"], "subject": "chemistry"},
-  "base": {"preferred": "क्षार", "aliases": ["बेस"], "subject": "chemistry"},
-  "molecule": {"preferred": "अणु", "aliases": ["मॉलेक्यूल"], "subject": "chemistry"},
-  "atom": {"preferred": "परमाणु", "aliases": ["एटम"], "subject": "chemistry"},
-  "vinegar": {"preferred": "सिरका", "aliases": ["विनेगर"], "subject": "chemistry"},
-  "juice": {"preferred": "का रस", "aliases": ["जूस"], "subject": "chemistry"},
-  "concentrated sulphuric acid": {"preferred": "सांद्र सल्फ्यूरिक अम्ल", "aliases": ["संतृप्त सल्फर अम्ल", "संतृप्त सल्फ्यूरिक अम्ल"], "subject": "chemistry"},
-  "concentrated sulfuric acid": {"preferred": "सांद्र सल्फ्यूरिक अम्ल", "aliases": ["संतृप्त सल्फर अम्ल", "संतृप्त सल्फ्यूरिक अम्ल"], "subject": "chemistry"},
-  "bromine water": {"preferred": "ब्रोमीन जल", "aliases": ["ब्रोमाइड पानी", "ब्रोमीन पानी"], "subject": "chemistry"},
-  "ethene": {"preferred": "एथीन", "aliases": ["ईथेन", "इथेन", "एथेन"], "subject": "chemistry", "source_excludes": ["ethane"]},
-  "bromine atoms": {"preferred": "ब्रोमीन परमाणुओं", "aliases": ["ब्रोमाइड परमाणुओं"], "subject": "chemistry"}
+ "acid": {
+  "preferred": "अम्ल",
+  "aliases": [
+   "एसिड"
+  ],
+  "subject": "chemistry"
+ },
+ "base": {
+  "preferred": "क्षार",
+  "aliases": [
+   "बेस"
+  ],
+  "subject": "chemistry"
+ },
+ "molecule": {
+  "preferred": "अणु",
+  "aliases": [
+   "मॉलेक्यूल"
+  ],
+  "subject": "chemistry"
+ },
+ "atom": {
+  "preferred": "परमाणु",
+  "aliases": [
+   "एटम"
+  ],
+  "subject": "chemistry"
+ },
+ "vinegar": {
+  "preferred": "सिरका",
+  "aliases": [
+   "विनेगर"
+  ],
+  "subject": "chemistry"
+ },
+ "juice": {
+  "preferred": "रस",
+  "aliases": [
+   "जूस"
+  ],
+  "subject": "chemistry"
+ },
+ "concentrated sulphuric acid": {
+  "preferred": "सांद्र सल्फ्यूरिक अम्ल",
+  "aliases": [
+   "संतृप्त सल्फर अम्ल",
+   "संतृप्त सल्फ्यूरिक अम्ल"
+  ],
+  "subject": "chemistry"
+ },
+ "concentrated sulfuric acid": {
+  "preferred": "सांद्र सल्फ्यूरिक अम्ल",
+  "aliases": [
+   "संतृप्त सल्फर अम्ल",
+   "संतृप्त सल्फ्यूरिक अम्ल"
+  ],
+  "subject": "chemistry"
+ },
+ "bromine water": {
+  "preferred": "ब्रोमीन जल",
+  "aliases": [
+   "ब्रोमाइड पानी",
+   "ब्रोमीन पानी"
+  ],
+  "subject": "chemistry"
+ },
+ "ethene": {
+  "preferred": "एथीन",
+  "aliases": [
+   "ईथेन",
+   "इथेन",
+   "एथेन"
+  ],
+  "subject": "chemistry",
+  "source_excludes": [
+   "ethane"
+  ]
+ },
+ "bromine atoms": {
+  "preferred": "ब्रोमीन परमाणुओं",
+  "aliases": [
+   "ब्रोमाइड परमाणुओं"
+  ],
+  "subject": "chemistry"
+ },
+ "alkane": {
+  "preferred": "ऐल्केन",
+  "aliases": [
+   "अलकेन",
+   "अल्केन"
+  ],
+  "subject": "chemistry"
+ },
+ "alkanal": {
+  "preferred": "ऐल्केनल",
+  "aliases": [
+   "अलकनंदा",
+   "अलकनल"
+  ],
+  "subject": "chemistry"
+ },
+ "alkanoyl": {
+  "preferred": "ऐल्कनॉयल",
+  "aliases": [
+   "अलकनॉयल",
+   "अल्कनॉयल"
+  ],
+  "subject": "chemistry"
+ },
+ "allotrope": {
+  "preferred": "अपररूप",
+  "aliases": [
+   "समस्थिति",
+   "समरूप",
+   "समस्थानिक"
+  ],
+  "subject": "chemistry"
+ },
+ "allotropes": {
+  "preferred": "अपररूप",
+  "aliases": [
+   "समस्थिति",
+   "समरूपों",
+   "समरूप"
+  ],
+  "subject": "chemistry"
+ },
+ "fullerene": {
+  "preferred": "फुलरीन",
+  "aliases": [
+   "फुलेरीन",
+   "फुलेरिन"
+  ],
+  "subject": "chemistry"
+ },
+ "hydroxyl": {
+  "preferred": "हाइड्रॉक्सिल",
+  "aliases": [
+   "हाइड्रोक्लोरिक"
+  ],
+  "subject": "chemistry"
+ },
+ "nitrile": {
+  "preferred": "नाइट्राइल",
+  "aliases": [
+   "नाइट्राइड"
+  ],
+  "subject": "chemistry",
+  "source_excludes": [
+   "nitride"
+  ]
+ },
+ "nitriles": {
+  "preferred": "नाइट्राइल",
+  "aliases": [
+   "नाइट्राइड"
+  ],
+  "subject": "chemistry",
+  "source_excludes": [
+   "nitride"
+  ]
+ },
+ "functional group": {
+  "preferred": "कार्यात्मक समूह",
+  "aliases": [
+   "संकेतीय समूह",
+   "संकेतिय समूह"
+  ],
+  "subject": "chemistry"
+ },
+ "carbonyl": {
+  "preferred": "कार्बोनिल",
+  "aliases": [
+   "कार्बनाइल"
+  ],
+  "subject": "chemistry"
+ },
+ "aldehyde": {
+  "preferred": "ऐल्डिहाइड",
+  "aliases": [
+   "एल्डाइड",
+   "अल्डेहाइड"
+  ],
+  "subject": "chemistry"
+ },
+ "aldehydes": {
+  "preferred": "ऐल्डिहाइड",
+  "aliases": [
+   "एल्डाइड",
+   "अल्डेहाइड"
+  ],
+  "subject": "chemistry"
+ },
+ "alkanals": {
+  "preferred": "ऐल्केनल",
+  "aliases": [
+   "अलकनंदा",
+   "अलकनल"
+  ],
+  "subject": "chemistry"
+ },
+ "dilute": {
+  "preferred": "तनु",
+  "aliases": [
+   "तनक",
+   "तनुकृत",
+   "पतला",
+   "पतली"
+  ],
+  "subject": "chemistry"
+ },
+ "indicator": {
+  "preferred": "सूचक",
+  "aliases": [
+   "सूचकांक",
+   "संकेतक",
+   "इंडिकेटर"
+  ],
+  "subject": "chemistry"
+ },
+ "indicators": {
+  "preferred": "सूचक",
+  "aliases": [
+   "सूचकांक",
+   "संकेतकों",
+   "इंडिकेटर्स"
+  ],
+  "subject": "chemistry"
+ },
+ "olfactory": {
+  "preferred": "गंध",
+  "aliases": [
+   "गंधक",
+   "घ्राण"
+  ],
+  "subject": "chemistry"
+ },
+ "onion": {
+  "preferred": "प्याज",
+  "aliases": [
+   "प्याज़"
+  ],
+  "subject": "chemistry"
+ },
+ "alkali": {
+  "preferred": "क्षार",
+  "aliases": [
+   "अल्कली",
+   "क्षारक"
+  ],
+  "subject": "chemistry"
+ },
+ "litmus": {
+  "preferred": "लिटमस",
+  "aliases": [
+   "लिटमस"
+  ],
+  "subject": "chemistry"
+ },
+ "hydrochloric acid": {
+  "preferred": "हाइड्रोक्लोरिक अम्ल",
+  "aliases": [
+   "हाइड्रोक्लोरिक एसिड"
+  ],
+  "subject": "chemistry"
+ },
+ "amalgam": {
+  "preferred": "अमलगम",
+  "aliases": [],
+  "subject": "chemistry"
+ },
+ "alloy": {
+  "preferred": "मिश्रातु",
+  "aliases": [
+   "मिश्र धातु",
+   "मिश्रधातु"
+  ],
+  "subject": "chemistry"
+ },
+ "alloys": {
+  "preferred": "मिश्रातु",
+  "aliases": [
+   "मिश्र धातुएं",
+   "मिश्रधातुएं",
+   "मिश्र धातुओं"
+  ],
+  "subject": "chemistry"
+ }
 }

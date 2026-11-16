@@ -333,6 +333,10 @@ public final class StoryboardTranslator {
         if (translation == null || translation.isBlank()) return "empty translation";
         long sourceLetters = source.codePoints().filter(Character::isLetter).count();
         long letters = translation.codePoints().filter(Character::isLetter).count();
+        // Stray CJK/Hangul/Cyrillic/Arabic letters never belong in a translation into an Indian language or English.
+        if (translation.codePoints().anyMatch(StoryboardTranslator::isForeignScript)) {
+            return "contains foreign-script characters (CJK/Cyrillic/Arabic debris)";
+        }
         // Short labels and headings skip the script-share rule below, so an untranslated one ("Anode" on a Tamil video) needs its own check.
         if (sourceLetters >= 4 && translation.strip().equalsIgnoreCase(source.strip())
                 && !"en".equals(target.code()) && LanguageSupport.scriptShare(source, target) < 0.5) {
@@ -352,9 +356,22 @@ public final class StoryboardTranslator {
         }
         if (sourceLetters >= 12) {
             double ratio = (double) letters / sourceLetters;
+            int sentences = source.trim().split("(?<=[.!?])\\s+(?=[A-Z0-9])").length;
+            // two or more sentences cannot shrink to under half: that is a dropped sentence, not a terse translation
+            if (sentences >= 2 && ratio < 0.5) return "a sentence of the original is missing (" + String.format(Locale.ROOT, "%.1f", ratio) + "x the original)";
             if (ratio < 0.35 || ratio > 3.5) return "length is implausible (" + String.format(Locale.ROOT, "%.1f", ratio) + "x the original)";
         }
         return null;
+    }
+
+    /** True for letters of scripts that cannot appear in the supported target languages unless the target itself uses them. */
+    static boolean isForeignScript(int codePoint) {
+        Character.UnicodeScript script;
+        try { script = Character.UnicodeScript.of(codePoint); } catch (IllegalArgumentException e) { return false; }
+        return switch (script) {
+            case HAN, HIRAGANA, KATAKANA, HANGUL, CYRILLIC, THAI, ARMENIAN, HEBREW -> true;
+            default -> false;
+        };
     }
 
     private static boolean hasSpokenHindiNumber(String translation, String number) {

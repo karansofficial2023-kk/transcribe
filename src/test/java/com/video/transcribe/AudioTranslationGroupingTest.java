@@ -36,4 +36,18 @@ class AudioTranslationGroupingTest {
         assertEquals(6, groups.get(0).get(0).getEnd());
         assertEquals("Oxygen exists as O2.", groups.get(1).get(0).getText());
     }
+
+    @Test
+    void numberedListCuesAreNotSentenceEndsAndZeroLengthWordsAreKept() {
+        var cue = chunk(List.of(word("These", 1, 2), word("are", 2, 3), word("classified", 3, 4), word("as", 4, 5),
+            word("1.", 5, 5), word("Alkyl", 6, 7), word("amines.", 7, 8)));
+        var groups = StoryboardLocalizer.audioTranslationGroups(List.of(cue));
+        assertEquals(1, groups.size());
+        assertEquals("These are classified as 1. Alkyl amines.", groups.get(0).get(0).getText());
+        assertTrue(StoryboardLocalizer.isNonTerminalToken("2."));
+        assertTrue(StoryboardLocalizer.isNonTerminalToken("3)"));
+        assertTrue(StoryboardLocalizer.isNonTerminalToken("e.g."));
+        assertFalse(StoryboardLocalizer.isNonTerminalToken("amines."));
+        assertFalse(StoryboardLocalizer.isNonTerminalToken("H2O."));
+    }
 }
