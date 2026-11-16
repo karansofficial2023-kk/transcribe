@@ -34,7 +34,7 @@ import com.video.transcribe.model.TranscriptData;
 public final class StoryboardLocalizer {
     private static final Logger logger = LoggerFactory.getLogger(StoryboardLocalizer.class);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    public static final String ASR_PIPELINE_VERSION = "v2.3";
+    public static final String ASR_PIPELINE_VERSION = "v2.4";
 
     private final AppConfig config;
     private final OllamaClient ollama;
