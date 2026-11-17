@@ -343,7 +343,56 @@ def _sentences_from_words(words):
     return segments
 
 
+TAIL_GAP_SECONDS = 2.5
+
+
+def _append_closing_words(model, audio_path, result, language):
+    """Words spoken AFTER the last transcribed word (the sign-off over music), decoded on their own.
+
+    A long window can drop the sign-off (Flame, Carbonyl: the long decode ends before it although a decode of the last seconds finds
+    "Keep imbibing, we believe in you"), and picking a candidate by its word count threw the short, correct one away. This decodes only
+    the audio after the last word, with and without the series' closing hint, and APPENDS what is new. A hint alone cannot invent the
+    line: it is accepted only if the plain decode also heard speech there, or the hinted words are confident."""
+    try:
+        from faster_whisper.audio import decode_audio
+        samples = decode_audio(audio_path, sampling_rate=16000)
+        total = len(samples) / 16000.0
+        segments = result["segments"]
+        main_end = max((w["end"] for s in segments for w in s.get("words", [])), default=(segments[-1]["end"] if segments else 0.0))
+        if total - main_end < TAIL_GAP_SECONDS:
+            return 0
+        offset = max(0.0, main_end - 1.0)
+        plain = [w for w in _decode_tail_words(model, samples, offset, language, None) if w["start"] >= main_end - 0.15]
+        hinted = []
+        if CLOSING_HINT and (language or "").split("-")[0].lower() in LATIN_LANGUAGES:
+            hinted = [w for w in _decode_tail_words(model, samples, offset, language, CLOSING_HINT) if w["start"] >= main_end - 0.15]
+        confident = bool(hinted) and sum(w.get("probability", 0.0) for w in hinted) / len(hinted) >= 0.8
+        best = hinted if hinted and (plain or confident) and len(hinted) >= len(plain) else plain
+        if not best:
+            return 0
+        recent = [w["word"].lower().strip(".,!?") for s in segments[-2:] for w in s.get("words", [])][-6:]
+        while best and best[0]["word"].lower().strip(".,!?") in recent[-len(best):] and len(best) > 1 and best[0]["start"] < main_end + 0.3:
+            best = best[1:]                       # the decode merely repeated the end of the last sentence
+        new_segments = _sentences_from_words(best)
+        result["segments"] = segments + new_segments
+        for number, seg in enumerate(result["segments"]):
+            seg["id"] = number
+        result["text"] = " ".join(seg["text"] for seg in result["segments"]).strip()
+        result["tail_rescued_words"] = int(result.get("tail_rescued_words", 0)) + len(best)
+        print(f"Tail rescue: closing words after the last cue added, +{len(best)} word(s) (now ends {best[-1]['end']:.1f}s)", file=sys.stderr)
+        return len(best)
+    except Exception as error:                      # a rescue failure must never lose the main transcript
+        print(f"Closing-words rescue skipped: {error}", file=sys.stderr)
+        return 0
+
+
 def rescue_tail(model, audio_path, result, language, prompt):
+    """Window re-decode of the last sentences, then the closing words after the last cue (see _append_closing_words)."""
+    gained = _rescue_tail_window(model, audio_path, result, language, prompt)
+    return gained + _append_closing_words(model, audio_path, result, language)
+
+
+def _rescue_tail_window(model, audio_path, result, language, prompt):
     """Recover the closing words of the lesson ("Keep imbibing, we believe in you").
 
     They are spoken over music after the last sentence and the long main decode often drops or truncates them. The last

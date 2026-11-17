@@ -186,6 +186,14 @@ class StoryboardTranslatorTest {
     }
 
     @Test
+    void hindiVowelSignsCountAsLetters() {
+        // "वितरण" has 4 base letters + 1 vowel sign; Character.isLetter alone gave 4 and made one-word Hindi look 0.3x too short
+        assertTrue(StoryboardTranslator.letterCount("वितरण") == 5);
+        assertTrue(StoryboardTranslator.letterCount("distribution") == 12);
+        assertTrue(StoryboardTranslator.problem("distribution.", "वितरण", LanguageSupport.byCode("hi").orElseThrow()) == null);
+    }
+
+    @Test
     void sameLanguageIsRejected() {
         assertThrows(IllegalArgumentException.class, () -> new StoryboardTranslator(dictionary()).translate(document(), EN, EN));
     }

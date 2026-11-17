@@ -34,7 +34,7 @@ import com.video.transcribe.model.TranscriptData;
 public final class StoryboardLocalizer {
     private static final Logger logger = LoggerFactory.getLogger(StoryboardLocalizer.class);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-    public static final String ASR_PIPELINE_VERSION = "v2.4";
+    public static final String ASR_PIPELINE_VERSION = "v2.5";
 
     private final AppConfig config;
     private final OllamaClient ollama;
@@ -320,6 +320,8 @@ public final class StoryboardLocalizer {
             try {
                 String rejected = "";
                 String accepted = null;
+                String fallback = null;
+                double fallbackKept = 0.0;
                 for (int attempt = 0; attempt < 3 && accepted == null; attempt++) {
                     String candidate = switch (attempt) {
                         case 1 -> {
@@ -337,7 +339,9 @@ public final class StoryboardLocalizer {
                     if (bad != null) { rejected = bad; continue; }
                     String back = alternate.translate(List.of(candidate), to, from).get(0);
                     double kept = StoryboardTranslator.overlap(original.getSentence(), back);
-                    if (kept < 0.55) { rejected = "its back-translation kept only " + Math.round(kept * 100) + "% of the key words"; continue; }
+                    // The lexical back-translation overlap is a weak signal (synonyms: "pipe"/"tube"): it only rules out a line that is
+                    // plainly unrelated. The bilingual audit below decides faithfulness.
+                    if (kept < 0.25) { rejected = "its back-translation kept only " + Math.round(kept * 100) + "% of the key words"; continue; }
                     String prompt = "English source: " + original.getSentence() + "\nHindi candidate: " + candidate
                         + "\nCheck every scientific agent, action, object, negation, formula, number and unit. "
                         + "Mark faithful false if any claim is lost, invented, or changed. Return JSON only.";
@@ -351,8 +355,21 @@ public final class StoryboardLocalizer {
                             + audit.getAsJsonArray("added_or_changed_facts");
                         continue;
                     }
+                    if (kept < 0.40) {
+                        // the audit is satisfied but the words differ a lot: keep the best such candidate as a last resort
+                        if (fallback == null || kept > fallbackKept) { fallback = candidate; fallbackKept = kept; }
+                        rejected = "its back-translation kept only " + Math.round(kept * 100) + "% of the key words (audit passed)";
+                        continue;
+                    }
                     accepted = candidate;
                     logger.info("Re-translation from the English accepted at {} on attempt {}", item.get("where"), attempt + 1);
+                }
+                boolean lowOverlap = false;
+                if (accepted == null && fallback != null) {
+                    accepted = fallback;                       // better than speaking the invented line: the audit judged it faithful
+                    lowOverlap = true;
+                    logger.warn("Re-translation for {} accepted with low back-translation overlap ({}%); teacher review required",
+                        item.get("where"), Math.round(fallbackKept * 100));
                 }
                 if (accepted == null) {
                     logger.warn("No faithful re-translation found for {} (last rejection: {}); the line stays flagged", item.get("where"), rejected);
@@ -367,7 +384,9 @@ public final class StoryboardLocalizer {
                 review.put("source", original.getSentence());
                 review.put("translation", candidate);
                 review.put("resolution", "verified_repair");
-                review.put("problem", "second-model repair passed bilingual audit; teacher review still required");
+                review.put("problem", lowOverlap
+                    ? "second-model repair passed the bilingual audit but its back-translation overlap is low; teacher review required"
+                    : "second-model repair passed bilingual audit; teacher review still required");
                 result.reviews().add(review);
                 result.storyboard().getScenes().get(index).setNarration(candidate);
                 logger.info("Second-model candidate accepted for review at {}", item.get("where"));

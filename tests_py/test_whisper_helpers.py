@@ -178,3 +178,42 @@ class SplitWordAndDecimalRepairs(unittest.TestCase):
     def test_split_decimal_is_joined(self):
         import whisper_transcribe as w
         self.assertEqual(w.join_split_decimals("about 0 .5 % carbon and 4 % copper"), "about 0.5 % carbon and 4 % copper")
+
+
+class ClosingWordsAreAppended(unittest.TestCase):
+    def _run(self, plain, hinted, main_end=5.0, total=10.0):
+        import whisper_transcribe as w
+        import numpy as np, sys, types
+        fake = types.SimpleNamespace(decode_audio=lambda path, sampling_rate=16000: np.zeros(int(total * 16000), np.float32))
+        sys.modules["faster_whisper.audio"] = fake
+        original = w._decode_tail_words
+        w._decode_tail_words = lambda model, samples, offset, language, hint: hinted if hint else plain
+        try:
+            result = {"segments": [{"id": 0, "start": 0.0, "end": main_end, "text": "That was it.",
+                                    "words": [{"word": "That", "start": 4.0, "end": 4.3, "probability": 0.9},
+                                              {"word": "was", "start": 4.3, "end": 4.6, "probability": 0.9},
+                                              {"word": "it.", "start": 4.6, "end": main_end, "probability": 0.9}]}], "text": "That was it."}
+            added = w._append_closing_words(None, "x.wav", result, "en")
+        finally:
+            w._decode_tail_words = original
+        return added, result
+
+    def word(self, text, start, probability=0.9):
+        return {"word": text, "start": start, "end": start + 0.4, "probability": probability}
+
+    def test_hinted_tail_only_decode_is_appended_even_with_fewer_words(self):
+        plain = [self.word("Keep", 7.0), self.word("imbibing.", 7.5)]
+        hinted = [self.word("Keep", 7.0), self.word("imbibing,", 7.5), self.word("we", 8.0), self.word("believe", 8.3), self.word("in", 8.6), self.word("you.", 8.9)]
+        added, result = self._run(plain, hinted)
+        self.assertEqual(added, 6)
+        self.assertTrue(result["segments"][-1]["text"].endswith("believe in you."))
+
+    def test_a_hint_alone_cannot_invent_speech_over_music(self):
+        hinted = [self.word("Keep", 7.0, 0.3), self.word("imbibing.", 7.5, 0.3)]
+        added, result = self._run([], hinted)
+        self.assertEqual(added, 0)
+        self.assertEqual(len(result["segments"]), 1)
+
+    def test_nothing_to_add_when_the_transcript_reaches_the_end(self):
+        added, _ = self._run([self.word("x", 9.0)], [self.word("x", 9.0)], main_end=9.0, total=10.0)
+        self.assertEqual(added, 0)

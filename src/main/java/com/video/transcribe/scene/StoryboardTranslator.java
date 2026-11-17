@@ -328,11 +328,17 @@ public final class StoryboardTranslator {
 
     // ------------------------------------------------------------------ validation
 
+    /** Letters including the vowel signs of Indic scripts (Character.isLetter alone skips them, so Hindi looked a third too short). */
+    static long letterCount(String text) {
+        return text.codePoints().filter(cp -> Character.isLetter(cp)
+            || Character.getType(cp) == Character.NON_SPACING_MARK || Character.getType(cp) == Character.COMBINING_SPACING_MARK).count();
+    }
+
     /** Null when the translation is acceptable, otherwise a short reason. */
     public static String problem(String source, String translation, Language target) {
         if (translation == null || translation.isBlank()) return "empty translation";
-        long sourceLetters = source.codePoints().filter(Character::isLetter).count();
-        long letters = translation.codePoints().filter(Character::isLetter).count();
+        long sourceLetters = letterCount(source);
+        long letters = letterCount(translation);
         // Stray CJK/Hangul/Cyrillic/Arabic letters never belong in a translation into an Indian language or English.
         if (translation.codePoints().anyMatch(StoryboardTranslator::isForeignScript)) {
             return "contains foreign-script characters (CJK/Cyrillic/Arabic debris)";
